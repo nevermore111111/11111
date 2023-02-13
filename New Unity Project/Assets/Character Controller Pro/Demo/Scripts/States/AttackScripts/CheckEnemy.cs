@@ -9,7 +9,7 @@ public class CheckEnemy : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "enemy")
+        if (other.gameObject.CompareTag("enemy") & (!Attack.enemys.Contains(other.gameObject)))
         {
             Debug.Log("enter" + gameObject);
             Attack.enemys.Add(other.gameObject);
@@ -17,7 +17,7 @@ public class CheckEnemy : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "enemy")
+        if (other.gameObject.CompareTag("enemy") & Attack.enemys.Contains(other.gameObject))
         {
             Attack.enemys.Remove(other.gameObject);
         }

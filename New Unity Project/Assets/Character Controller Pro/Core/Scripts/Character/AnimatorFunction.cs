@@ -11,7 +11,6 @@ using UnityEngine;
 /// <summary>
 public class AnimatorFunction : Attack
 {
-
     public void Idle()
     {
         if (isJustEnter)
@@ -37,15 +36,20 @@ public class AnimatorFunction : Attack
     {
         isAttack=false;
         CharacterActor.Animator.SetBool("attack",false);
+        
     }
     public void AttackStart()
     {
+      
         isAttack = true;
         CharacterActor.Animator.SetBool("attack", true);
         canChangeState = false;
-        if(selectEnemy = null)
+        OnceAttack = false;
+        if (Attack.enemys.Count != 0)
         {
-
+            Attack.selectEnemy = HelpTools.FindClosest(CharacterActor.gameObject, Attack.enemys);
+            Vector3 Forward = (selectEnemy.transform.position - CharacterActor.transform.position).normalized;
+            CharacterActor.Forward = new(Forward.x,0,Forward.z);
         }
         else
         {
@@ -58,8 +62,12 @@ public class AnimatorFunction : Attack
     }
     public void CannotGetInput()
     {
-        combo = 0;
-        CharacterActor.Animator.SetInteger("combo",0);
+        if (!isAttack)
+        {
+            //这样在攻击中的时候，不会被上一次的CannotGetInput重置combo
+            combo = 0;
+            CharacterActor.Animator.SetInteger("combo", 0);
+        }
     }
     /// <summary>
     /// 在一个连招开始时执行，定义这个连招的最大连击数量。

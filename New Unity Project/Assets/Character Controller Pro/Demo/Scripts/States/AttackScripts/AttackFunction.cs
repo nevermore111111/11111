@@ -11,8 +11,12 @@ public class AttackFunction : Attack
     {
         if (other.gameObject.tag == "enemy")
         {
-            Debug.Log("¹¥»÷ÁË");
-            StartCoroutine(ChangeSpeed(0.01f,0.1f));
+            if (OnceAttack == false)
+            {
+                //ä»…ä»…åªä¼šæ‰§è¡Œä¸€æ¬¡å¡å¸§
+                OnceAttack = true;
+                StartCoroutine(ChangeSpeed(0.01f, 0.04f));
+            }
         }
     }
     public IEnumerator ChangeSpeed(float playSpeed, float timeStop)

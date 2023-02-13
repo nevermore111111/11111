@@ -100,6 +100,11 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+    <Compile Include="Assets\XWeaponTrail\Scripts\XWeaponTrailDemo.cs" />
+    <Compile Include="Assets\XWeaponTrail\Scripts\SplineControlPoint.cs" />
+    <Compile Include="Assets\XWeaponTrail\Scripts\Spline.cs" />
+    <Compile Include="Assets\XWeaponTrail\Scripts\XWeaponTrail.cs" />
+    <Compile Include="Assets\XWeaponTrail\Scripts\VertexPool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\FernNPRCore\Shader\ShaderLibrary\NPRBSDF.hlsl" />
@@ -130,11 +135,13 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\FernNPRCore\Shader\NPR Standard\FERNNPREye.shader" />
+    <None Include="Assets\XWeaponTrail\Shader\xft_displacement_screen.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\FernNPRCore\Shader\ShaderLibrary\DeclareDepthShadowTexture.hlsl" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\FernNPRCore\Shader\NPR Standard\FERNNPRHair.shader" />
     <None Include="Assets\FernNPRCore\Shader\NPR Standard\NPRStandardForwardPass.hlsl" />
+    <None Include="Assets\XWeaponTrail\readme.txt" />
     <None Include="Assets\animationClip\FemaleMovementAnimsetPro\HowToInstall.txt" />
     <None Include="Assets\FernNPRCore\Shader\NPR Standard\NPRStandardInput.hlsl" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />

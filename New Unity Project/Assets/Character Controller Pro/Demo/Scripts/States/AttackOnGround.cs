@@ -14,7 +14,7 @@ using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
 public class AttackOnGround :Attack
 {
     [Tooltip("角色的武器")]
-    public GameObject army;
+    public GameObject[] army= new GameObject[1];
     [Tooltip("进入攻击后，修改角色的高度和宽度，使其不会穿模")]
     public Vector2 HeighAndWidth = new (1f,1.58f) ;
     private Vector2 normalHeightAndWidth;
@@ -22,7 +22,8 @@ public class AttackOnGround :Attack
     protected override void Awake()
     {
         base.Awake();
-        army.SetActive(false);
+        army[0].SetActive(false);
+        army[1].SetActive(false);
     }
     protected override void Start()
     {
@@ -33,7 +34,8 @@ public class AttackOnGround :Attack
     {
         base.EnterBehaviour(dt, fromState);
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity,true,RootMotionRotationType.AddRotation);
-        army.SetActive(true);
+        army[0].SetActive(true);
+        army[1].SetActive(true);
         CharacterActor.CheckAndSetSize(HeighAndWidth,Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
     }
     public override void UpdateBehaviour(float dt)
@@ -75,7 +77,8 @@ public class AttackOnGround :Attack
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
         base.ExitBehaviour(dt, toState);
-        army.SetActive(false);
+        army[0].SetActive(false);
+        army[1].SetActive(false);
         CharacterActor.CheckAndSetSize(normalHeightAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
     }
 

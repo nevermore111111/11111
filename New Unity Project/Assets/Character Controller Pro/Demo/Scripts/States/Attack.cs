@@ -10,7 +10,7 @@ using UnityEngine;
 /// <summary>
 public class Attack : CharacterState
 {
-   
+
     protected static bool isAttack;
     protected static int combo;
     protected static bool canInput;
@@ -19,12 +19,17 @@ public class Attack : CharacterState
     protected static GameObject selectEnemy;
     public static int MaxCombo;
     //这个是范围内的敌人，利用一个球判定进入范围的敌人，进入了就添加在名单里面；
-    public static List<GameObject> enemys;
-    
+    public static List<GameObject> enemys = new List<GameObject>();
+    //这个onceAttack是用来判定每次攻击只执行一次动画减慢效果
+    public static bool OnceAttack;
+   
+
+
     protected override void Awake()
     {
-       
-        selectEnemy = null;
+        OnceAttack = false;
+        
+        Debug.Log("yijing");
         base.Awake();
         MaxCombo = 1;
         enemys = new List<GameObject>();
@@ -47,20 +52,20 @@ public class Attack : CharacterState
     {
         base.ExitBehaviour(dt, toState);
         isJustEnter = true;
-       // CharacterActor.SetSize(HeighAndWidth,)
+        // CharacterActor.SetSize(HeighAndWidth,)
     }
 
     public override void UpdateBehaviour(float dt)
     {
-        
+
     }
     public override void CheckExitTransition()
     {
         base.CheckExitTransition();
-        if(CharacterActions.jump.value)
+        if (CharacterActions.jump.value)
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-        
+
     }
 }

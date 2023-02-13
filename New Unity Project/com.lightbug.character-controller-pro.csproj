@@ -181,14 +181,14 @@
     <Compile Include="Assets\Character Controller Pro\Demo\Scripts\States\AttackOnGround.cs" />
     <Compile Include="Assets\Character Controller Pro\Utilities\Scripts\RigidbodyComponent2D.cs" />
     <Compile Include="Assets\Character Controller Pro\Demo\Scripts\AddTorque3D.cs" />
+    <Compile Include="Assets\Character Controller Pro\Demo\Scripts\States\AttackScripts\CheckEnemy.cs" />
     <Compile Include="Assets\Character Controller Pro\Core\Scripts\Character\Graphics\CharacterGraphics2DRotator.cs" />
     <Compile Include="Assets\Character Controller Pro\Demo\Scripts\HelpTools\HelpTools.cs" />
+    <Compile Include="Assets\Character Controller Pro\Demo\Scripts\States\AttackScripts\AttackFunction.cs" />
     <Compile Include="Assets\Character Controller Pro\Utilities\Scripts\HitInfoFilter.cs" />
     <Compile Include="Assets\Character Controller Pro\Core\Scripts\Character\Graphics\CharacterStepLerper.cs" />
     <Compile Include="Assets\Character Controller Pro\Demo\Scripts\States\Dash.cs" />
     <Compile Include="Assets\Character Controller Pro\Demo\Scripts\FpsCounter.cs" />
-    <Compile Include="Assets\Character Controller Pro\Demo\Scripts\States\AttackScripts\CheckEnemy.cs" />
-    <Compile Include="Assets\Character Controller Pro\Demo\Scripts\States\AttackScripts\AttackFunction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Character Controller Pro\OPEN ME\README.txt" />
