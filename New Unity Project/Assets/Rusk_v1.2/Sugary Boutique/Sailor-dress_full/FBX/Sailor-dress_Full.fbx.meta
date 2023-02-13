@@ -1,0 +1,943 @@
+fileFormatVersion: 2
+guid: 69291c6685f7f0144bc975de72f3a16e
+ModelImporter:
+  serializedVersion: 21202
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Armature
+  - first:
+      1: 100002
+    second: Chest
+  - first:
+      1: 100004
+    second: Hips
+  - first:
+      1: 100006
+    second: LeftFoot
+  - first:
+      1: 100008
+    second: LeftHand
+  - first:
+      1: 100010
+    second: LeftLowerArm
+  - first:
+      1: 100012
+    second: LeftLowerLeg
+  - first:
+      1: 100014
+    second: LeftShoulder
+  - first:
+      1: 100016
+    second: LeftToeBase
+  - first:
+      1: 100018
+    second: LeftToeBase_end
+  - first:
+      1: 100020
+    second: LeftUpperArm
+  - first:
+      1: 100022
+    second: LeftUpperLeg
+  - first:
+      1: 100024
+    second: Neck
+  - first:
+      1: 100026
+    second: Ribbon_A
+  - first:
+      1: 100028
+    second: Ribbon_B
+  - first:
+      1: 100030
+    second: Ribbon_L
+  - first:
+      1: 100032
+    second: Ribbon_L_end
+  - first:
+      1: 100034
+    second: Ribbon_R
+  - first:
+      1: 100036
+    second: Ribbon_R_end
+  - first:
+      1: 100038
+    second: Ribbon_root
+  - first:
+      1: 100040
+    second: RightFoot
+  - first:
+      1: 100042
+    second: RightHand
+  - first:
+      1: 100044
+    second: RightLowerArm
+  - first:
+      1: 100046
+    second: RightLowerLeg
+  - first:
+      1: 100048
+    second: RightShoulder
+  - first:
+      1: 100050
+    second: RightToeBase
+  - first:
+      1: 100052
+    second: RightToeBase_end
+  - first:
+      1: 100054
+    second: RightUpperArm
+  - first:
+      1: 100056
+    second: RightUpperLeg
+  - first:
+      1: 100058
+    second: //RootNode
+  - first:
+      1: 100060
+    second: Shoes
+  - first:
+      1: 100062
+    second: skirt_back_1
+  - first:
+      1: 100064
+    second: skirt_back_2
+  - first:
+      1: 100066
+    second: skirt_back_end
+  - first:
+      1: 100068
+    second: skirt_back_L_1
+  - first:
+      1: 100070
+    second: skirt_back_L_2
+  - first:
+      1: 100072
+    second: skirt_back_L_end
+  - first:
+      1: 100074
+    second: skirt_back_R_1
+  - first:
+      1: 100076
+    second: skirt_back_R_2
+  - first:
+      1: 100078
+    second: skirt_back_R_end
+  - first:
+      1: 100080
+    second: skirt_front_1
+  - first:
+      1: 100082
+    second: skirt_front_2
+  - first:
+      1: 100084
+    second: skirt_front_end
+  - first:
+      1: 100086
+    second: skirt_front_L_A_1
+  - first:
+      1: 100088
+    second: skirt_front_L_A_2
+  - first:
+      1: 100090
+    second: skirt_front_L_A_end
+  - first:
+      1: 100092
+    second: skirt_front_L_B_1
+  - first:
+      1: 100094
+    second: skirt_front_L_B_2
+  - first:
+      1: 100096
+    second: skirt_front_L_B_end
+  - first:
+      1: 100098
+    second: skirt_front_R_A_1
+  - first:
+      1: 100100
+    second: skirt_front_R_A_2
+  - first:
+      1: 100102
+    second: skirt_front_R_A_end
+  - first:
+      1: 100104
+    second: skirt_front_R_B_1
+  - first:
+      1: 100106
+    second: skirt_front_R_B_2
+  - first:
+      1: 100108
+    second: skirt_front_R_B_end
+  - first:
+      1: 100110
+    second: skirt_root
+  - first:
+      1: 100112
+    second: Spine
+  - first:
+      1: 100114
+    second: Suspenders
+  - first:
+      1: 100116
+    second: Wear
+  - first:
+      4: 400000
+    second: Armature
+  - first:
+      4: 400002
+    second: Chest
+  - first:
+      4: 400004
+    second: Hips
+  - first:
+      4: 400006
+    second: LeftFoot
+  - first:
+      4: 400008
+    second: LeftHand
+  - first:
+      4: 400010
+    second: LeftLowerArm
+  - first:
+      4: 400012
+    second: LeftLowerLeg
+  - first:
+      4: 400014
+    second: LeftShoulder
+  - first:
+      4: 400016
+    second: LeftToeBase
+  - first:
+      4: 400018
+    second: LeftToeBase_end
+  - first:
+      4: 400020
+    second: LeftUpperArm
+  - first:
+      4: 400022
+    second: LeftUpperLeg
+  - first:
+      4: 400024
+    second: Neck
+  - first:
+      4: 400026
+    second: Ribbon_A
+  - first:
+      4: 400028
+    second: Ribbon_B
+  - first:
+      4: 400030
+    second: Ribbon_L
+  - first:
+      4: 400032
+    second: Ribbon_L_end
+  - first:
+      4: 400034
+    second: Ribbon_R
+  - first:
+      4: 400036
+    second: Ribbon_R_end
+  - first:
+      4: 400038
+    second: Ribbon_root
+  - first:
+      4: 400040
+    second: RightFoot
+  - first:
+      4: 400042
+    second: RightHand
+  - first:
+      4: 400044
+    second: RightLowerArm
+  - first:
+      4: 400046
+    second: RightLowerLeg
+  - first:
+      4: 400048
+    second: RightShoulder
+  - first:
+      4: 400050
+    second: RightToeBase
+  - first:
+      4: 400052
+    second: RightToeBase_end
+  - first:
+      4: 400054
+    second: RightUpperArm
+  - first:
+      4: 400056
+    second: RightUpperLeg
+  - first:
+      4: 400058
+    second: //RootNode
+  - first:
+      4: 400060
+    second: Shoes
+  - first:
+      4: 400062
+    second: skirt_back_1
+  - first:
+      4: 400064
+    second: skirt_back_2
+  - first:
+      4: 400066
+    second: skirt_back_end
+  - first:
+      4: 400068
+    second: skirt_back_L_1
+  - first:
+      4: 400070
+    second: skirt_back_L_2
+  - first:
+      4: 400072
+    second: skirt_back_L_end
+  - first:
+      4: 400074
+    second: skirt_back_R_1
+  - first:
+      4: 400076
+    second: skirt_back_R_2
+  - first:
+      4: 400078
+    second: skirt_back_R_end
+  - first:
+      4: 400080
+    second: skirt_front_1
+  - first:
+      4: 400082
+    second: skirt_front_2
+  - first:
+      4: 400084
+    second: skirt_front_end
+  - first:
+      4: 400086
+    second: skirt_front_L_A_1
+  - first:
+      4: 400088
+    second: skirt_front_L_A_2
+  - first:
+      4: 400090
+    second: skirt_front_L_A_end
+  - first:
+      4: 400092
+    second: skirt_front_L_B_1
+  - first:
+      4: 400094
+    second: skirt_front_L_B_2
+  - first:
+      4: 400096
+    second: skirt_front_L_B_end
+  - first:
+      4: 400098
+    second: skirt_front_R_A_1
+  - first:
+      4: 400100
+    second: skirt_front_R_A_2
+  - first:
+      4: 400102
+    second: skirt_front_R_A_end
+  - first:
+      4: 400104
+    second: skirt_front_R_B_1
+  - first:
+      4: 400106
+    second: skirt_front_R_B_2
+  - first:
+      4: 400108
+    second: skirt_front_R_B_end
+  - first:
+      4: 400110
+    second: skirt_root
+  - first:
+      4: 400112
+    second: Spine
+  - first:
+      4: 400114
+    second: Suspenders
+  - first:
+      4: 400116
+    second: Wear
+  - first:
+      21: 2100000
+    second: Sailor-dress_wear
+  - first:
+      21: 2100002
+    second: Sailor-dress_shoes
+  - first:
+      43: 4300000
+    second: Wear
+  - first:
+      43: 4300002
+    second: Ribbon_A
+  - first:
+      43: 4300004
+    second: Ribbon_B
+  - first:
+      43: 4300006
+    second: Suspenders
+  - first:
+      43: 4300008
+    second: Shoes
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Ribbon_A
+  - first:
+      137: 13700002
+    second: Ribbon_B
+  - first:
+      137: 13700004
+    second: Shoes
+  - first:
+      137: 13700006
+    second: Suspenders
+  - first:
+      137: 13700008
+    second: Wear
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sailor-dress_shoes
+    second: {fileID: 2100000, guid: aebd1b24855b25f418e789c61400048b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sailor-dress_wear
+    second: {fileID: 2100000, guid: 4cf01c5f88a701241b97fce6b951cc20, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftFoot' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: skirt_back_L_1
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: skirt_back_R_1
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: skirt_back_L_2
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: skirt_back_R_2
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ribbon_root
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftUpperArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightUpperArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftLowerArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightLowerArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ribbon_L
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ribbon_R
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Sailor-dress_Full(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Wear
+      parentName: Sailor-dress_Full(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ribbon_A
+      parentName: Sailor-dress_Full(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ribbon_B
+      parentName: Sailor-dress_Full(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Suspenders
+      parentName: Sailor-dress_Full(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Shoes
+      parentName: Sailor-dress_Full(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature
+      parentName: Sailor-dress_Full(Clone)
+      position: {x: -0, y: 0, z: -0.0117}
+      rotation: {x: 0.008206902, y: 0, z: -0, w: 0.9999663}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hips
+      parentName: Armature
+      position: {x: -0, y: 0.7129525, z: -0.0000018692016}
+      rotation: {x: -0.0008070284, y: 0.000002207696, z: 0.0049344175, w: 0.99998754}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Spine
+      parentName: Hips
+      position: {x: 0.00009664165, y: 0.009792304, z: -0.00014494306}
+      rotation: {x: 0.04930452, y: 0.0000035448704, z: -0.009856715, w: 0.9987352}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Chest
+      parentName: Spine
+      position: {x: -0.0006761486, y: 0.06851097, z: 0.000110586174}
+      rotation: {x: 0.0008070279, y: 0.0000022076931, z: 0.004934418, w: 0.99998754}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Neck
+      parentName: Chest
+      position: {x: -0, y: 0.15754096, z: -0.020596584}
+      rotation: {x: -0.06495449, y: 0, z: -0, w: 0.99788827}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LeftShoulder
+      parentName: Chest
+      position: {x: -0.023895325, y: 0.13985321, z: -0.021401988}
+      rotation: {x: 0.57856506, y: 0.37636492, z: 0.5277795, w: 0.49503607}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LeftUpperArm
+      parentName: LeftShoulder
+      position: {x: -0.0074070194, y: 0.002695932, z: -0.044703238}
+      rotation: {x: -0.6779843, y: 0.14620136, z: -0.025036708, w: 0.7199553}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LeftLowerArm
+      parentName: LeftUpperArm
+      position: {x: -0.0000000034621916, y: 0.19379528, z: 0.000000001490116}
+      rotation: {x: 0.008654508, y: -0.008657551, z: -0.00036766633, w: 0.999925}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LeftHand
+      parentName: LeftLowerArm
+      position: {x: 0.000000007749768, y: 0.17771368, z: -0.0000000019371509}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RightShoulder
+      parentName: Chest
+      position: {x: 0.023895325, y: 0.13985321, z: -0.021401988}
+      rotation: {x: 0.57856506, y: -0.37636492, z: -0.5277795, w: 0.49503607}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RightUpperArm
+      parentName: RightShoulder
+      position: {x: 0.0074070194, y: 0.002695932, z: -0.044703238}
+      rotation: {x: -0.6779843, y: -0.14620136, z: 0.025036708, w: 0.7199553}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RightLowerArm
+      parentName: RightUpperArm
+      position: {x: 0.0000000034621916, y: 0.19379528, z: 0.000000001490116}
+      rotation: {x: 0.008654508, y: 0.008657551, z: 0.00036766633, w: 0.999925}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RightHand
+      parentName: RightLowerArm
+      position: {x: -0.000000007749768, y: 0.17771368, z: -0.0000000019371509}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ribbon_root
+      parentName: Spine
+      position: {x: -0.00069672224, y: 0.07061331, z: -0.049092546}
+      rotation: {x: -0.29909468, y: -0.0014775693, z: 0.0047080005, w: 0.9542107}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ribbon_L
+      parentName: Ribbon_root
+      position: {x: -0.010789494, y: -0.0016783867, z: -0.001454356}
+      rotation: {x: 0.2175996, y: -0.2172627, z: 0.69118476, w: 0.65399617}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ribbon_L_end
+      parentName: Ribbon_L
+      position: {x: -0.000000020622974, y: 0.06432628, z: -0.000000001117587}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ribbon_R
+      parentName: Ribbon_root
+      position: {x: 0.010789494, y: -0.0016783867, z: -0.001454356}
+      rotation: {x: 0.2175996, y: 0.2172627, z: -0.69118476, w: 0.65399617}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ribbon_R_end
+      parentName: Ribbon_R
+      position: {x: 0.000000020622974, y: 0.06432628, z: -0.000000001117587}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LeftUpperLeg
+      parentName: Hips
+      position: {x: -0.067313865, y: -0.10240408, z: 0.0015256775}
+      rotation: {x: 0.9999605, y: -0.00493427, z: -0.000038288665, w: 0.007399799}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LeftLowerLeg
+      parentName: LeftUpperLeg
+      position: {x: -0, y: 0.26797134, z: -0.0004596853}
+      rotation: {x: 0.04049382, y: 0, z: -0, w: 0.99917984}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LeftFoot
+      parentName: LeftLowerLeg
+      position: {x: -0, y: 0.2730039, z: -0.00000007390976}
+      rotation: {x: -0.48714682, y: 0, z: -0, w: 0.8733201}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LeftToeBase
+      parentName: LeftFoot
+      position: {x: -0, y: 0.09340324, z: -0.000000014305114}
+      rotation: {x: -0.25880414, y: 0, z: -0, w: 0.9659298}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LeftToeBase_end
+      parentName: LeftToeBase
+      position: {x: -0, y: 0.05933657, z: -0.0000000023841857}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RightUpperLeg
+      parentName: Hips
+      position: {x: 0.06527967, y: -0.10371267, z: 0.001525207}
+      rotation: {x: 0.9999605, y: -0.00493427, z: -0.000038288665, w: 0.007399799}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RightLowerLeg
+      parentName: RightUpperLeg
+      position: {x: -0, y: 0.26797134, z: -0.0004596853}
+      rotation: {x: 0.04049382, y: 0, z: -0, w: 0.99917984}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RightFoot
+      parentName: RightLowerLeg
+      position: {x: -0, y: 0.2730039, z: -0.00000007390976}
+      rotation: {x: -0.48714682, y: 0, z: -0, w: 0.8733201}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RightToeBase
+      parentName: RightFoot
+      position: {x: -0, y: 0.09340324, z: -0.000000014305114}
+      rotation: {x: -0.25880414, y: 0, z: -0, w: 0.9659298}
+      scale: {x: 1, y: 1, z: 1}
+    - name: RightToeBase_end
+      parentName: RightToeBase
+      position: {x: -0, y: 0.05933657, z: -0.0000000023841857}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_root
+      parentName: Hips
+      position: {x: 0.00025138631, y: 0.025470039, z: 0.0049367324}
+      rotation: {x: 0.095573656, y: -0.0004698396, z: -0.0049119988, w: 0.99541014}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_1
+      parentName: skirt_root
+      position: {x: -0.0000002417195, y: -0.033630576, z: 0.12564673}
+      rotation: {x: 0.9439348, y: -0.0073201116, z: 0.0072785835, w: 0.32997048}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_2
+      parentName: skirt_front_1
+      position: {x: 0.0015769308, y: 0.09623426, z: 0.0004560518}
+      rotation: {x: 0.05551739, y: -0.0096307155, z: -0.010157781, w: 0.9983596}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_end
+      parentName: skirt_front_2
+      position: {x: -3.7252902e-11, y: 0.12484583, z: -0.0000000047683715}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_L_B_1
+      parentName: skirt_root
+      position: {x: -0.1059813, y: -0.040431686, z: 0.07967046}
+      rotation: {x: 0.8110764, y: -0.059574436, z: 0.49582115, w: 0.30457732}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_L_B_2
+      parentName: skirt_front_L_B_1
+      position: {x: -0.0000000023841857, y: 0.09104565, z: -0.000000005960464}
+      rotation: {x: 0.035576012, y: 0.010964572, z: 0.01591049, w: 0.9991802}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_L_B_end
+      parentName: skirt_front_L_B_2
+      position: {x: 0.0000000011920929, y: 0.10224768, z: 0.0000043755767}
+      rotation: {x: 0.00002127855, y: -0.08589299, z: -0.0000018298683, w: 0.9963044}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_R_B_1
+      parentName: skirt_root
+      position: {x: 0.1059813, y: -0.040431686, z: 0.07967046}
+      rotation: {x: 0.8110764, y: 0.059574436, z: -0.49582115, w: 0.30457732}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_R_B_2
+      parentName: skirt_front_R_B_1
+      position: {x: 0.0000000023841857, y: 0.09104565, z: -0.000000005960464}
+      rotation: {x: 0.035576012, y: -0.010964572, z: -0.01591049, w: 0.9991802}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_R_B_end
+      parentName: skirt_front_R_B_2
+      position: {x: -0.0000000011920929, y: 0.10224768, z: 0.0000043755767}
+      rotation: {x: 0.00002127855, y: 0.08589299, z: 0.0000018298683, w: 0.9963044}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_back_L_1
+      parentName: skirt_root
+      position: {x: -0.11636145, y: -0.054988224, z: -0.034548026}
+      rotation: {x: 0.7783014, y: -0.11209314, z: -0.6157992, w: -0.049731877}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_back_L_2
+      parentName: skirt_back_L_1
+      position: {x: 0.0000000047683715, y: 0.0856436, z: 0.000000012814998}
+      rotation: {x: -0.016338795, y: -0.09202366, z: -0.0022746099, w: 0.9956202}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_back_L_end
+      parentName: skirt_back_L_2
+      position: {x: -0.000000014305114, y: 0.10344328, z: -0.00000001706183}
+      rotation: {x: 0.0000048587785, y: -0.0152364345, z: 0.00000005913616, w: 0.99988395}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_back_1
+      parentName: skirt_root
+      position: {x: -0, y: -0.067806415, z: -0.09705399}
+      rotation: {x: 0.98239124, y: -0, z: 0, w: -0.18683545}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_back_2
+      parentName: skirt_back_1
+      position: {x: -0, y: 0.09459557, z: -0.000000019073486}
+      rotation: {x: -0.035017505, y: 0, z: -0, w: 0.9993867}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_back_end
+      parentName: skirt_back_2
+      position: {x: -0, y: 0.12169182, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_back_R_1
+      parentName: skirt_root
+      position: {x: 0.11636145, y: -0.054988224, z: -0.034548026}
+      rotation: {x: 0.7783014, y: 0.11209318, z: 0.61579937, w: -0.049731895}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_back_R_2
+      parentName: skirt_back_R_1
+      position: {x: -0.0000000047683715, y: 0.0856436, z: 0.000000012814998}
+      rotation: {x: -0.016338795, y: 0.09202366, z: 0.0022746099, w: 0.9956202}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_back_R_end
+      parentName: skirt_back_R_2
+      position: {x: 0.000000014305114, y: 0.10344328, z: -0.00000001706183}
+      rotation: {x: 0.0000048587785, y: 0.0152364345, z: -0.00000005913616, w: 0.99988395}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_R_A_1
+      parentName: skirt_root
+      position: {x: 0.05983075, y: -0.036043573, z: 0.108742416}
+      rotation: {x: 0.9227088, y: 0.03299684, z: -0.23130728, w: 0.3066213}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_R_A_2
+      parentName: skirt_front_R_A_1
+      position: {x: -0.0000000023841857, y: 0.091203764, z: -0.000000007152557}
+      rotation: {x: 0.05776583, y: -0.0023570708, z: -0.0132071925, w: 0.99824005}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_R_A_end
+      parentName: skirt_front_R_A_2
+      position: {x: -0, y: 0.11967113, z: -0.0000000023841857}
+      rotation: {x: -0.000000009152081, y: -0.34300193, z: -0.0000000033419203, w: 0.9393347}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_L_A_1
+      parentName: skirt_root
+      position: {x: -0.05983075, y: -0.036043573, z: 0.108742416}
+      rotation: {x: 0.9227088, y: -0.03299684, z: 0.23130728, w: 0.3066213}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_L_A_2
+      parentName: skirt_front_L_A_1
+      position: {x: 0.0000000023841857, y: 0.091203764, z: -0.000000007152557}
+      rotation: {x: 0.05776583, y: 0.0023570708, z: 0.0132071925, w: 0.99824005}
+      scale: {x: 1, y: 1, z: 1}
+    - name: skirt_front_L_A_end
+      parentName: skirt_front_L_A_2
+      position: {x: -0, y: 0.11967113, z: -0.0000000023841857}
+      rotation: {x: -0.000000009152081, y: 0.34300193, z: 0.0000000033419203, w: 0.9393347}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
