@@ -7,6 +7,11 @@ using UnityEngine;
 /// <summary>
 public class CheckEnemy : MonoBehaviour
 {
+    public GameObject Character;
+    private void Awake()
+    {
+        
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("enemy") & (!Attack.enemys.Contains(other.gameObject)))
@@ -21,6 +26,10 @@ public class CheckEnemy : MonoBehaviour
         {
             Attack.enemys.Remove(other.gameObject);
         }
+    }
+    private void FixedUpdate()
+    {
+        this.transform.position = Vector3.Lerp(this.transform.position, Character.transform.position, 0.05f);
     }
 
 }

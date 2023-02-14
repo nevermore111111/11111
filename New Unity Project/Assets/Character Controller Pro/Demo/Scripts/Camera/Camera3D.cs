@@ -345,7 +345,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 viewReference.up = lerpedCharacterUp;//Quaternion.FromToRotation( viewReference.up , lerpedCharacterUp ) * viewReference.up;
             }
 
-            // Position of the target -----------------------------------------------------------------------
+            // Position of the target ----------这个地方需要改动一下-------------------------------------------------------------
             characterPosition = targetTransform.position;
 
             lerpedHeight = Mathf.Lerp(lerpedHeight, characterActor.BodySize.y, heightLerpSpeed * dt);
