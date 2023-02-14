@@ -163,7 +163,8 @@ namespace Lightbug.CharacterControllerPro.Demo
                 }
                 if(!CharacterActor.IsGrounded)
                 {
-                    CharacterStateController.EnqueueTransition<AttackInAir>();
+                    //CharacterStateController.EnqueueTransition<AttackInAir>();
+                    Debug.Log("应该进入空中攻击，但是现在没有");
                 }
             }
             if (CharacterActions.jetPack.value)

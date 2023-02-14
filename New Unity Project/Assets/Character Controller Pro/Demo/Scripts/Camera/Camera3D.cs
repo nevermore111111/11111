@@ -100,6 +100,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         public bool collisionDetection = true;
         public bool collisionAffectsZoom = false;
         public float detectionRadius = 0.5f;
+        [Tooltip("摄像机检测的层级")]
         public LayerMask layerMask = 0;
         public bool considerKinematicRigidbodies = true;
         public bool considerDynamicRigidbodies = true;

@@ -28,8 +28,7 @@ public class Attack : CharacterState
     protected override void Awake()
     {
         OnceAttack = false;
-        
-        Debug.Log("yijing");
+        Debug.Log("attack≥ı ºªØ");
         base.Awake();
         MaxCombo = 1;
         enemys = new List<GameObject>();
