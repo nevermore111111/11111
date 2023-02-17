@@ -80,6 +80,7 @@ public class AttackOnGround :Attack
         army[0].SetActive(false);
         army[1].SetActive(false);
         CharacterActor.CheckAndSetSize(normalHeightAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
+        Debug.Log(CharacterActor.BodySize);
     }
 
 
