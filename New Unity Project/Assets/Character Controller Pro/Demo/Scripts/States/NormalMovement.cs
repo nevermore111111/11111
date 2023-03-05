@@ -150,18 +150,18 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public override void CheckExitTransition()
         {
-            if(Input.GetKeyDown(KeyCode.M))
+            if (Input.GetKeyDown(KeyCode.M))
             {
                 Debug.Log("jinlai ");
                 CharacterStateController.EnqueueTransition<Grap>();
             }
-            if(CharacterActions.attack.value)
+            if (CharacterActions.attack.value)
             {
                 if (CharacterActor.IsGrounded)
                 {
-                    CharacterStateController.EnqueueTransition<AttackOnGround>(); 
+                    CharacterStateController.EnqueueTransition<AttackOnGround>();
                 }
-                if(!CharacterActor.IsGrounded)
+                if (!CharacterActor.IsGrounded)
                 {
                     //CharacterStateController.EnqueueTransition<AttackInAir>();
                     Debug.Log("应该进入空中攻击，但是现在没有");
@@ -175,7 +175,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 CharacterStateController.EnqueueTransition<Dash>();
             }
-            else if (CharacterActor.Triggers.Count != 0)
+            else if (CharacterActor.Triggers.Count > 1 )
             {
                 CharacterStateController.EnqueueTransition<LadderClimbing>();
                 CharacterStateController.EnqueueTransition<RopeClimbing>();
@@ -194,7 +194,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             reducedAirControlFlag = false;
         }
 
-        
+
 
         /// <summary>
         /// Reduces the amount of acceleration and deceleration (not grounded state) until the character reaches the apex of the jump 
@@ -281,6 +281,17 @@ namespace Lightbug.CharacterControllerPro.Demo
         /// <summary>
         /// Processes the lateral movement of the character (stable and unstable state), that is, walk, run, crouch, etc. 
         /// This movement is tied directly to the "movement" character action.
+        /// 喵喵喵，这个方法是处理角色平面移动的喵！
+        ///首先，获取当前地面行走速度的上限，并计算出速度倍数喵。如果需要加速，就根据输入方向和速度上限计算目标速度向量喵。然后根据角色状态进行不同的处理喵：
+        ///如果角色在空中，就更新当前速度上限喵，并根据输入方向和速度倍数计算目标速度喵。
+        ///如果角色在稳定地面上，就先处理奔跑状态的输入喵，如果要蹲下或不能奔跑，就不能奔跑喵。然后根据当前状态，设置当前速度上限，如果蹲着，速度上限乘以一个蹲着速度倍数，否则，如果要奔跑，速度上限就是奔跑速度上限，否则就是基本速度上限喵。然后，根据输入方向和速度倍数计算目标速度喵。
+        /// 如果角色在不稳定地面上，就将当前速度上限设置为基本速度上限，然后根据输入方向和速度倍数计算目标速度喵。
+        /// 最后，根据是否需要加速来计算角色的加速度喵，如果需要加速，根据角度差来计算加速度的增益喵；否则就使用当前动作的减速度喵。最后，使用MoveTowards方法，根据当前速度、目标速度和加速度来更新角色的平面速度喵。
+        /// 
+        /// 
+        /// 
+        /// 
+        /// 
         /// </summary>
         protected virtual void ProcessPlanarMovement(float dt)
         {
@@ -559,7 +570,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             else
             {
                 JumpResult jumpResult = CanJump();
-                
+
                 switch (jumpResult)
                 {
                     case JumpResult.Grounded:
@@ -655,6 +666,11 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         void HandleLookingDirection(float dt)
         {
+            /*这段代码实现了角色的朝向控制功能，包括三种模式：Movement、ExternalReference、Target。
+
+              在Movement模式下，根据角色的状态（NotGrounded、StableGrounded、UnstableGrounded）设置目标朝向。在ExternalReference模式下，将角色的目标朝向设置为MovementReferenceForward，即角色应朝向的参考方向。在Target模式下，将角色的目标朝向设置为目标位置与角色位置的向量。
+
+              在代码中，使用SetTargetLookingDirection()函数设置目标朝向，并通过Quaternion计算出角色当前帧应该旋转的角度。最后，根据角色是否为2D游戏，使用不同的方式设置角色的朝向。如果是2D游戏，则直接设置角色的Yaw值为目标朝向的X值；如果是3D游戏，则将当前帧旋转的角度应用到角色的Forward向量上。*/
             if (!lookingDirectionParameters.changeLookingDirection)
                 return;
 
@@ -708,7 +724,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         }
 
         void SetTargetLookingDirection(LookingDirectionParameters.LookingDirectionMovementSource lookingDirectionMode)
-        {            
+        {
             if (lookingDirectionMode == LookingDirectionParameters.LookingDirectionMovementSource.Input)
             {
                 if (CharacterStateController.InputMovementReference != Vector3.zero)
@@ -731,7 +747,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             HandleVelocity(dt);
             HandleRotation(dt);
         }
-        
+
         public override void PostUpdateBehaviour(float dt)
         {
             base.PostUpdateBehaviour(dt);
@@ -764,13 +780,13 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         private void Grap()
         {
-            if(Input.GetKeyDown(grappleKey))
+            if (Input.GetKeyDown(grappleKey))
             {
                 StartGrapple();
             }
             if (grappleTimer > 0)
             {
-                grappleTimer-= Time.deltaTime;
+                grappleTimer -= Time.deltaTime;
             }
         }
 
@@ -779,7 +795,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         /// </summary>
         private void LaterGrap()
         {
-            if(grappling)
+            if (grappling)
             {
                 Lr.SetPosition(0, gunTip.position);
             }
@@ -791,19 +807,19 @@ namespace Lightbug.CharacterControllerPro.Demo
             grappling = true;
 
             RaycastHit Hit;
-            if(Physics.Raycast(cam.position,cam.forward,out Hit,maxGrappleDistance,whatIsGrapplable))
+            if (Physics.Raycast(cam.position, cam.forward, out Hit, maxGrappleDistance, whatIsGrapplable))
             {
                 grapplePoint = Hit.point;
                 Invoke(nameof(ExecuteGrapple), grappleDelayTime);
             }
             else
             {
-                grapplePoint = cam.position +cam.forward*maxGrappleDistance;
+                grapplePoint = cam.position + cam.forward * maxGrappleDistance;
 
-                Invoke(nameof(StopGrapple),grappleDelayTime);
+                Invoke(nameof(StopGrapple), grappleDelayTime);
             }
             Lr.enabled = true;
-            Lr.SetPosition(1,grapplePoint);
+            Lr.SetPosition(1, grapplePoint);
         }
         private void ExecuteGrapple()
         {
@@ -815,11 +831,11 @@ namespace Lightbug.CharacterControllerPro.Demo
         {
             grappling = false;
             grappleTimer = grapplingCd;
-            Lr.enabled=false;
+            Lr.enabled = false;
         }
 
-      
-        private Vector3 CalVocality(Vector3 start,Vector3 target, float spHeigh, float grivaty)
+
+        private Vector3 CalVocality(Vector3 start, Vector3 target, float spHeigh, float grivaty)
         {
             grivaty = Physics.gravity.magnitude;
             //自己填写重力
@@ -914,7 +930,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             bool validSize = CharacterActor.CheckAndInterpolateHeight(
                 CharacterActor.DefaultBodySize.y,
                 crouchParameters.sizeLerpSpeed * dt, sizeReferenceType);
-            
+
             if (validSize)
                 isCrouched = false;
         }
