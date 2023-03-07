@@ -16,10 +16,10 @@ public class Attack : CharacterState
     protected static bool canInput;
     protected static bool isJustEnter;
     protected static bool canChangeState;
-    protected static GameObject selectEnemy;
+   // protected  GameObject selectEnemy;
     public static int MaxCombo;
     //这个是范围内的敌人，利用一个球判定进入范围的敌人，进入了就添加在名单里面；
-    public static List<GameObject> enemys = new List<GameObject>();
+   // public static List<GameObject> enemys = new List<GameObject>();
     //这个onceAttack是用来判定每次攻击只执行一次动画减慢效果
     public static bool OnceAttack;
    
@@ -31,7 +31,7 @@ public class Attack : CharacterState
         Debug.Log("attack初始化");
         base.Awake();
         MaxCombo = 1;
-        enemys = new List<GameObject>();
+        
     }
     protected override void Start()
     {

@@ -3,6 +3,7 @@ using UnityEngine;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
+using System;
 
 namespace Lightbug.CharacterControllerPro.Demo
 {
@@ -11,6 +12,14 @@ namespace Lightbug.CharacterControllerPro.Demo
     [DefaultExecutionOrder(ExecutionOrder.CharacterGraphicsOrder + 100)]  // <--- Do your job after everything else
     public class Camera3D : MonoBehaviour
     {
+        [Header("Camera")]
+        [SerializeField]
+        public Camera camera;
+        [SerializeField]
+        private float velocityToChangeFOV;
+        private float MedVToFOV;
+        private float starFov;
+
         [Header("Inputs")]
 
         [SerializeField]
@@ -150,6 +159,8 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         void Awake()
         {
+            camera = this .GetComponent<Camera>();
+            starFov = camera.fieldOfView;
             if (targetTransform == null)
             {
                 Debug.Log("The target graphics object is not active and enabled.");
@@ -243,12 +254,14 @@ namespace Lightbug.CharacterControllerPro.Demo
             float dt = Time.fixedDeltaTime;
 
             UpdateCamera(dt);
+            UpdateCameraFov();
         }
 
-
-
-        
-
+        private void UpdateCameraFov()
+        {
+            MedVToFOV = Mathf.Lerp(MedVToFOV, characterActor.Velocity.magnitude * velocityToChangeFOV, 0.1f);
+            camera.fieldOfView = ((float)(starFov + MedVToFOV));
+        }
 
         void OnTeleport(Vector3 position, Quaternion rotation)
         {
@@ -346,10 +359,15 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
 
             // Position of the target ----------这个地方需要改动一下-------------------------------------------------------------
-            characterPosition = targetTransform.position;
+            characterPosition = targetTransform.position;//设定目标为选择人物基点
 
-            lerpedHeight = Mathf.Lerp(lerpedHeight, characterActor.BodySize.y, heightLerpSpeed * dt);
+            //目标高度是人的脸
+            lerpedHeight = Mathf.Lerp(lerpedHeight, characterActor.BodySize.y, heightLerpSpeed * dt);//lerpheight向characteractor的高度去过渡
             Vector3 targetPosition = characterPosition + targetTransform.up * lerpedHeight + targetTransform.TransformDirection(offsetFromHead);
+            
+            
+            //人物基点+向上的目标点*过渡高度+
+            //transformdirection：xxx.transformdirection(aaa),是将xxx转换到世界坐标中，获得的向量长度是等于传进去的向量长度，
             viewReference.position = targetPosition;
 
             Vector3 finalPosition = viewReference.position;
