@@ -11,6 +11,9 @@ using UnityEngine;
 /// <summary>
 public class AnimatorFunction : Attack
 {
+    [SerializeField]
+    private MainCharacter mainCharacter;
+    
     public void Idle()
     {
         if (isJustEnter)
@@ -45,10 +48,10 @@ public class AnimatorFunction : Attack
         CharacterActor.Animator.SetBool("attack", true);
         canChangeState = false;
         OnceAttack = false;
-        if (Attack.enemys.Count != 0)
+        if (mainCharacter.enemys.Count != 0)
         {
-            Attack.selectEnemy = HelpTools.FindClosest(CharacterActor.gameObject, Attack.enemys);
-            Vector3 Forward = (selectEnemy.transform.position - CharacterActor.transform.position).normalized;
+            mainCharacter.selectEnemy = HelpTools.FindClosest(CharacterActor.gameObject, mainCharacter.enemys);
+            Vector3 Forward = (mainCharacter.selectEnemy.transform.position - CharacterActor.transform.position).normalized;
             CharacterActor.Forward = new(Forward.x,0,Forward.z);
         }
         else

@@ -64,7 +64,7 @@ public class AttackOnGround :Attack
     public override void CheckExitTransition()
     {
         base.CheckExitTransition();
-        if (!CharacterActor.IsGrounded && canChangeState == true)
+        if (!CharacterActor.IsGrounded && isAttack == true)
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }

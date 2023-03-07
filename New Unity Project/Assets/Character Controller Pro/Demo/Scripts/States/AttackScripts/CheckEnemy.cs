@@ -7,24 +7,28 @@ using UnityEngine;
 /// <summary>
 public class CheckEnemy : MonoBehaviour
 {
-    public GameObject Character;
+    [SerializeField]
+    private GameObject Character;
+    [SerializeField]
+    private MainCharacter mainCharacter;
+
     private void Awake()
     {
         
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("enemy") & (!Attack.enemys.Contains(other.gameObject)))
+        if (other.gameObject.CompareTag("enemy") & (!mainCharacter.enemys.Contains(other.gameObject)))
         {
             Debug.Log("enter" + gameObject);
-            Attack.enemys.Add(other.gameObject);
+            mainCharacter.enemys.Add(other.gameObject);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("enemy") & Attack.enemys.Contains(other.gameObject))
+        if (other.gameObject.CompareTag("enemy") & mainCharacter.enemys.Contains(other.gameObject))
         {
-            Attack.enemys.Remove(other.gameObject);
+            mainCharacter.enemys.Remove(other.gameObject);
         }
     }
     private void FixedUpdate()

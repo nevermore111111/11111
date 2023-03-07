@@ -7113,7 +7113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff4b6b3c65c52f43a87e1eb56d56e0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 1743095850}
+  Character: {fileID: 8805377711411893420}
+  mainCharacter: {fileID: 8805377711411893423}
 --- !u!135 &1005673836
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11206,6 +11207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overrideAnimatorController: 1
   runtimeAnimatorController: {fileID: 0}
+  mainCharacter: {fileID: 8805377711411893423}
 --- !u!1 &1511150339
 GameObject:
   m_ObjectHideFlags: 0
@@ -12193,12 +12195,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!1 &1743095850 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5866822931366696804, guid: 15963df9e6a96144bb9d8742a888bd7c,
-    type: 3}
-  m_PrefabInstance: {fileID: 562791725}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1762240379
 GameObject:
   m_ObjectHideFlags: 0
@@ -14616,6 +14612,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8805377711411893421}
   - component: {fileID: 8805377711411893422}
+  - component: {fileID: 8805377711411893423}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -14655,6 +14652,20 @@ MonoBehaviour:
   negativeDisplacementSpeed: 40
   recoveryDuration: 1
   maxRecoverySpeed: 200
+--- !u!114 &8805377711411893423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805377711411893420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9b87879b365d4e488349e74a342ebf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemys: []
+  selectEnemy: {fileID: 0}
 --- !u!1 &8805377712143352352
 GameObject:
   m_ObjectHideFlags: 0
