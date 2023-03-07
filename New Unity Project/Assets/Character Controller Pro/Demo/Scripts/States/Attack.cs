@@ -42,7 +42,7 @@ public class Attack : CharacterState
         //进入攻击时修改人物的高度和宽
         //几率并且修改
         //HeighAndWidth = CharacterActor.BodySize;
-        base.ExitBehaviour(dt, fromState);
+        base.EnterBehaviour(dt, fromState);
         isAttack = true;
         canInput = false;
         isJustEnter = true;
