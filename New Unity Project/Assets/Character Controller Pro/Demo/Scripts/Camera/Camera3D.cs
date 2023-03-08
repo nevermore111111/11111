@@ -259,7 +259,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         private void UpdateCameraFov()
         {
-            MedVToFOV = Mathf.Lerp(MedVToFOV, characterActor.Velocity.magnitude * velocityToChangeFOV, 0.1f);
+            MedVToFOV = Mathf.Lerp(MedVToFOV, characterActor.Velocity.magnitude * velocityToChangeFOV, 1.5f*Time.deltaTime);
             camera.fieldOfView = ((float)(starFov + MedVToFOV));
         }
 

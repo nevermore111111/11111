@@ -120,7 +120,7 @@ public class Grap : CharacterState
     private Vector3 CalVocality(Vector3 start, Vector3 target, float spHeigh, float grivaty)
     {
         grivaty = Grivaty;
-        //自己填写重力
+        //填写重力
         float delY = target.y - start.y;
         float delX = target.x - start.x;
         float delZ = target.z - start.z;

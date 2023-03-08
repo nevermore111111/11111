@@ -276,13 +276,18 @@ namespace Lightbug.CharacterControllerPro.Demo
                 out leftHitInfo,
                 out rightHitInfo
             );
+           // Debug.Log(leftHitInfo.transform.tag + rightHitInfo.transform.tag + leftHitInfo.transform.gameObject.name);
 
             if (!leftHitInfo.hit || !rightHitInfo.hit)
                 return false;
-                        
+
             if (filterByTag)
                 if (!leftHitInfo.transform.CompareTag(tagName) || !rightHitInfo.transform.CompareTag(tagName))
+                {
+                   
                     return false;
+                }
+            
 
             Vector3 interpolatedNormal = Vector3.Normalize(leftHitInfo.normal + rightHitInfo.normal);
             float ledgeAngle = Vector3.Angle(CharacterActor.Up, interpolatedNormal);
