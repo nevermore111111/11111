@@ -33,8 +33,15 @@ public class AnimatorFunction : Attack
             canChangeState = true;
         }
     }
-
-
+    public void NormalIdle()
+    {
+      CharacterActor.SetUpRootMotion(false,false);
+    }
+    public void Stop()
+    {
+        Debug.Log("ֹͣ");
+        CharacterActor.Animator.SetBool("stop", false);
+    }
     public void AttackEnd()
     {
         isAttack=false;

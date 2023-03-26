@@ -104,6 +104,7 @@
     <Compile Include="Assets\Character Controller Pro\Implementation\Scripts\Character\Actions\CharacterActions.cs" />
     <Compile Include="Assets\Character Controller Pro\Demo\Scripts\CustomGravity.cs" />
     <Compile Include="Assets\Character Controller Pro\Implementation\Scripts\Inputs\Actions\BoolAction.cs" />
+    <Compile Include="Assets\Character Controller Pro\Demo\Scripts\character\MainCharacter.cs" />
     <Compile Include="Assets\Character Controller Pro\Utilities\Scripts\SphereColliderComponent2D.cs" />
     <Compile Include="Assets\Character Controller Pro\Demo\Scripts\Platforms\PlatformNode.cs" />
     <Compile Include="Assets\Character Controller Pro\Utilities\Scripts\SphereColliderComponent3D.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Assets\Character Controller Pro\Implementation\Scripts\Inputs\InputHandler\UnityInputHandler.cs" />
     <Compile Include="Assets\Character Controller Pro\Demo\Scripts\Platforms\MovementAction.cs" />
     <Compile Include="Assets\Character Controller Pro\Demo\Scripts\RigidbodyModifier.cs" />
+    <Compile Include="Assets\Character Controller Pro\Demo\Scripts\character\CharacterInfo.cs" />
     <Compile Include="Assets\Character Controller Pro\Implementation\Scripts\Character\Actions\CharacterBrain.cs" />
     <Compile Include="Assets\Character Controller Pro\Demo\Scripts\CharacterParticles.cs" />
     <Compile Include="Assets\Character Controller Pro\Utilities\Scripts\Trigger.cs" />

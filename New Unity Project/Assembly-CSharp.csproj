@@ -62,6 +62,7 @@
     <Compile Include="Assets\scripts\changeItem\ChangeClothes.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+    <Compile Include="Assets\test\test001.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\scripts\New Folder\test.cs" />
@@ -92,13 +93,13 @@
     <Compile Include="Assets\FernNPRCore\Scripts\RenderFeature\DepthShadow\DepthShadowRenderPass.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\test\test01_gameObject.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\scripts\UIscripts\changeItem.cs" />
+    <Compile Include="Assets\test\cinemaStudy.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
@@ -854,8 +855,14 @@
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
@@ -883,9 +890,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="RootMotionEditor.csproj">
+      <Project>{6305BF0C-2A33-3A53-597A-C6B05BDAA7C5}</Project>
+      <Name>RootMotionEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="Fern.RenderPipelines.Universal.PostProcessing.Runtime.csproj">
       <Project>{B15A6DBA-1707-9C34-823C-E2716F6EB435}</Project>
       <Name>Fern.RenderPipelines.Universal.PostProcessing.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="RootMotion.csproj">
+      <Project>{C2BDC7D6-AA34-E7E1-C8FE-DDA5BD55DFEC}</Project>
+      <Name>RootMotion</Name>
     </ProjectReference>
     <ProjectReference Include="com.lightbug.character-controller-pro.csproj">
       <Project>{AAC3359C-69EA-C634-0DD2-669CC728F054}</Project>

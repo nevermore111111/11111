@@ -3,6 +3,7 @@ using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
 using System;
 using UnityEngine;
+using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
 
 namespace Lightbug.CharacterControllerPro.Demo
 {
@@ -90,6 +91,9 @@ namespace Lightbug.CharacterControllerPro.Demo
         bool reducedAirControlFlag = false;
         float reducedAirControlInitialTime = 0f;
         float reductionDuration = 0.5f;
+
+        //上一帧的速度
+        float lastVelocityMagnitude;
 
         protected override void Awake()
         {
@@ -276,8 +280,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
 
         }
-
-
+       
         /// <summary>
         /// Processes the lateral movement of the character (stable and unstable state), that is, walk, run, crouch, etc. 
         /// This movement is tied directly to the "movement" character action.
@@ -287,15 +290,15 @@ namespace Lightbug.CharacterControllerPro.Demo
         ///如果角色在稳定地面上，就先处理奔跑状态的输入喵，如果要蹲下或不能奔跑，就不能奔跑喵。然后根据当前状态，设置当前速度上限，如果蹲着，速度上限乘以一个蹲着速度倍数，否则，如果要奔跑，速度上限就是奔跑速度上限，否则就是基本速度上限喵。然后，根据输入方向和速度倍数计算目标速度喵。
         /// 如果角色在不稳定地面上，就将当前速度上限设置为基本速度上限，然后根据输入方向和速度倍数计算目标速度喵。
         /// 最后，根据是否需要加速来计算角色的加速度喵，如果需要加速，根据角度差来计算加速度的增益喵；否则就使用当前动作的减速度喵。最后，使用MoveTowards方法，根据当前速度、目标速度和加速度来更新角色的平面速度喵。
-        /// 
-        /// 
-        /// 
-        /// 
-        /// 
+
         /// </summary>
         protected virtual void ProcessPlanarMovement(float dt)
         {
             //SetMotionValues();
+
+
+
+            PlayStop();
 
             float speedMultiplier = materialController != null ?
             materialController.CurrentSurface.speedMultiplier * materialController.CurrentVolume.speedMultiplier : 1f;
@@ -386,7 +389,73 @@ namespace Lightbug.CharacterControllerPro.Demo
             );
         }
 
+        public bool moving = false; // 初始状态为未移动
 
+        private float startTime; // 移动开始时间
+
+        void MoveTime()
+        {
+            if (CharacterActions.movement.value.sqrMagnitude != 0) // 检测移动
+            {
+                if (startTime == 0f)
+                {
+                    startTime = Time.time; // 如果移动开始，则记录时间
+                }
+
+                // 如果移动时间超过1秒，则将 `moving` 设为 `true`，并打印提示信息
+                if (Time.time - startTime > 1f)
+                {
+                    moving = true;
+                    Debug.Log("移动时间超过1秒，moving 已设为 True");
+                }
+            }
+            else if(!CharacterActor.IsStable)
+            {
+                moving=false;
+                startTime = 0f; // 如果停止移动，则将开始时间重置为0
+            }
+        }
+        private void PlayStop()
+        {
+            MoveTime();
+            // 获取当前速度大小
+            float currentVelocityMagnitude = CharacterActor.PlanarVelocity.magnitude;
+
+            // 如果速度大小小于等于0，则表示已停止移动
+            if (CharacterActions.movement.value.sqrMagnitude < 0.001f & moving & CharacterActor.IsStable)
+            {
+                moving = false;
+                
+                
+                // 如果上一帧速度大小大于10，则播放停止动画
+                if (lastVelocityMagnitude > 0.8f* planarMovementParameters. boostSpeedLimit)
+                {
+                    CharacterActor.Animator.SetFloat("running", 1);
+                    CharacterActor.Animator.SetBool("stop", true);
+                    CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.SetRotation);
+                }
+                else if (lastVelocityMagnitude > 0.6f * planarMovementParameters.boostSpeedLimit)
+                {
+                    CharacterActor.Animator.SetFloat("running", 0);
+                    CharacterActor.Animator.SetBool("stop", true);
+                    CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.SetRotation);
+                }
+                else
+                {
+
+                }
+                // 更新状态
+                //isMoving = false;
+            }
+            //else
+            //{
+            //    // 更新状态
+            //    isMoving = true;
+            //}
+
+            // 保存当前速度大小，用于下一帧判断
+            lastVelocityMagnitude = currentVelocityMagnitude;
+        }
 
         protected virtual void ProcessGravity(float dt)
         {
@@ -483,6 +552,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         protected virtual bool ProcessJumpDown(float dt)
         {
+           
             if (!verticalMovementParameters.canJumpDown)
                 return false;
 
@@ -501,7 +571,6 @@ namespace Lightbug.CharacterControllerPro.Demo
             if (!ProcessJumpDownAction())
                 return false;
             JumpDown(dt);
-
             return true;
         }
 

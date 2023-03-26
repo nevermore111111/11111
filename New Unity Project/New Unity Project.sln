@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RootMotion", "RootMotion.csproj", "{C2BDC7D6-AA34-E7E1-C8FE-DDA5BD55DFEC}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{B2B58FB2-4462-6B0C-A872-40DD957E5FE0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.lightbug.character-controller-pro", "com.lightbug.character-controller-pro.csproj", "{AAC3359C-69EA-C634-0DD2-669CC728F054}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fern.RenderPipelines.Universal.PostProcessing.Runtime", "Fern.RenderPipelines.Universal.PostProcessing.Runtime.csproj", "{B15A6DBA-1707-9C34-823C-E2716F6EB435}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RootMotionEditor", "RootMotionEditor.csproj", "{6305BF0C-2A33-3A53-597A-C6B05BDAA7C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LWGUI", "LWGUI.csproj", "{514C98E5-1F69-3C71-662B-2D6CA97E1EF1}"
 EndProject
@@ -17,6 +21,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2BDC7D6-AA34-E7E1-C8FE-DDA5BD55DFEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2BDC7D6-AA34-E7E1-C8FE-DDA5BD55DFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2BDC7D6-AA34-E7E1-C8FE-DDA5BD55DFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2BDC7D6-AA34-E7E1-C8FE-DDA5BD55DFEC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B2B58FB2-4462-6B0C-A872-40DD957E5FE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B2B58FB2-4462-6B0C-A872-40DD957E5FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2B58FB2-4462-6B0C-A872-40DD957E5FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,6 +37,10 @@ Global
 		{B15A6DBA-1707-9C34-823C-E2716F6EB435}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B15A6DBA-1707-9C34-823C-E2716F6EB435}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B15A6DBA-1707-9C34-823C-E2716F6EB435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6305BF0C-2A33-3A53-597A-C6B05BDAA7C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6305BF0C-2A33-3A53-597A-C6B05BDAA7C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6305BF0C-2A33-3A53-597A-C6B05BDAA7C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6305BF0C-2A33-3A53-597A-C6B05BDAA7C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{514C98E5-1F69-3C71-662B-2D6CA97E1EF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{514C98E5-1F69-3C71-662B-2D6CA97E1EF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{514C98E5-1F69-3C71-662B-2D6CA97E1EF1}.Release|Any CPU.ActiveCfg = Release|Any CPU

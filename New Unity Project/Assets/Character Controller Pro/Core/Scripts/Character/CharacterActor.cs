@@ -13,9 +13,11 @@ namespace Lightbug.CharacterControllerPro.Core
     }
 
     /// <summary>
-    /// This class represents a character actor. It contains all the character information, collision flags, collision events, and so on. It also responsible for the execution order 
-    /// of everything related to the character, such as movement, rotation, teleportation, rigidbodies interactions, body size, etc. Since the character can be 2D or 3D, this abstract class must be implemented in the 
-    /// two formats, one for 2D and one for 3D.
+    /// 这个类表示一个角色演员。它包含所有字符信息、冲突标志、冲突事件等。它还负责执行顺序
+
+    ///与角色相关的一切，如移动、旋转、传送、刚体交互、体型等。由于角色可以是2D或3D，因此必须在
+
+    ///两种格式，一种用于2D，另一种用于3D。
     /// </summary>
     [AddComponentMenu("Character Controller Pro/Core/Character Actor")]
     [RequireComponent(typeof(CharacterBody))]
