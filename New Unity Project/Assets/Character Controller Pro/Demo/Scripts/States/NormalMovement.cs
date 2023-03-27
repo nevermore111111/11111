@@ -415,18 +415,46 @@ namespace Lightbug.CharacterControllerPro.Demo
                 startTime = 0f; // 如果停止移动，则将开始时间重置为0
             }
         }
+        private bool movementInputIdle;
+        private float movementInputIdleTime;
+        /// <summary>
+        /// 检测是否在0.1s内没按下
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckMovementInputIdle()
+        {
+            if (Input.GetButton("Movement X") || Input.GetButton("Movement Y"))
+            {
+                movementInputIdle = false;
+                movementInputIdleTime = 0f;
+            }
+            else
+            {
+                movementInputIdleTime += Time.deltaTime;
+                if (movementInputIdleTime > 0.1f)
+                {
+                    movementInputIdle = true;
+                }
+            }
+            return movementInputIdle;
+        }
         private void PlayStop()
         {
+            if(CharacterActions.movement.value.sqrMagnitude != 0)
+            {
+                CharacterActor.Animator.SetBool("inputMove", true);
+            }
             MoveTime();
             // 获取当前速度大小
             float currentVelocityMagnitude = CharacterActor.PlanarVelocity.magnitude;
 
             // 如果速度大小小于等于0，则表示已停止移动
-            if (CharacterActions.movement.value.sqrMagnitude < 0.001f & moving & CharacterActor.IsStable)
+            //把这个等于0改成都没有按下
+            
+            if (CheckMovementInputIdle() & moving & CharacterActor.IsStable)
             {
                 moving = false;
-                
-                
+                CharacterActor.Animator.SetBool("inputMove", false);
                 // 如果上一帧速度大小大于10，则播放停止动画
                 if (lastVelocityMagnitude > 0.8f* planarMovementParameters. boostSpeedLimit)
                 {
