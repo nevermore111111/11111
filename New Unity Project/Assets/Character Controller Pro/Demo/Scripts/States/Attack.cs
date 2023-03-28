@@ -1,5 +1,6 @@
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
+using Rusk;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ public class Attack : CharacterState
    // public static List<GameObject> enemys = new List<GameObject>();
     //这个onceAttack是用来判定每次攻击只执行一次动画减慢效果
     public static bool OnceAttack;
+    private NormalMovement NormalMovement;
    
 
 
@@ -31,7 +33,7 @@ public class Attack : CharacterState
         Debug.Log("attack初始化");
         base.Awake();
         MaxCombo = 1;
-        
+        NormalMovement = GetComponent<NormalMovement>();
     }
     protected override void Start()
     {
@@ -65,6 +67,9 @@ public class Attack : CharacterState
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-
+        if(NormalMovement.CanEvade())
+        {
+            CharacterStateController.EnqueueTransition<Evade>();
+        }
     }
 }

@@ -54,7 +54,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
                 return CharacterBrain == null ? new CharacterActions() : CharacterBrain.CharacterActions;
             }
         }
-
+        
         /// <summary>
         /// Gets the CharacterStateController component of the gameObject.
         /// </summary>

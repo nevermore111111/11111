@@ -31,9 +31,9 @@ public class CheckEnemy : MonoBehaviour
             mainCharacter.enemys.Remove(other.gameObject);
         }
     }
-    private void FixedUpdate()
+    private void   Update()
     {
-        this.transform.position = Vector3.Lerp(this.transform.position, Character.transform.position, 0.05f);
+        this.transform.position = Vector3.Lerp(this.transform.position, Character.transform.position, 10.0f* Time.deltaTime);
     }
 
 }

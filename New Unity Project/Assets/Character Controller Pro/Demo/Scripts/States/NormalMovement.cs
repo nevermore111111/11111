@@ -1,6 +1,7 @@
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
+using Rusk;
 using System;
 using UnityEngine;
 using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
@@ -154,6 +155,11 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public override void CheckExitTransition()
         {
+            if(CanEvade())
+            {
+                Debug.Log("进入闪避");
+                CharacterStateController.EnqueueTransition<Evade>();
+            }
             if (Input.GetKeyDown(KeyCode.M))
             {
                 Debug.Log("jinlai ");
@@ -406,7 +412,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 if (Time.time - startTime > 1f)
                 {
                     moving = true;
-                    Debug.Log("移动时间超过1秒，moving 已设为 True");
+                   
                 }
             }
             else if(!CharacterActor.IsStable)
@@ -460,13 +466,13 @@ namespace Lightbug.CharacterControllerPro.Demo
                 {
                     CharacterActor.Animator.SetFloat("running", 1);
                     CharacterActor.Animator.SetBool("stop", true);
-                    CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.SetRotation);
+                    
                 }
                 else if (lastVelocityMagnitude > 0.6f * planarMovementParameters.boostSpeedLimit)
                 {
                     CharacterActor.Animator.SetFloat("running", 0);
                     CharacterActor.Animator.SetBool("stop", true);
-                    CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.SetRotation);
+                   
                 }
                 else
                 {
@@ -1032,11 +1038,45 @@ namespace Lightbug.CharacterControllerPro.Demo
                 isCrouched = false;
         }
 
+        //玩家的输入和输出都要放在update中检测，不能放在fixupdate中
 
         protected virtual void HandleVelocity(float dt)
         {
             ProcessVerticalMovement(dt);
             ProcessPlanarMovement(dt);
+        }
+
+        private float buttonDownTime;
+        public  bool preEvade;
+
+        private void Update()
+        {
+            CanEvade();
+        }
+
+        public bool CanEvade()
+        {
+            if(preEvade)
+            {
+                return true;
+            }
+            if (Input.GetButtonDown("Run"))
+            {
+                // 虚拟按键Run被按下，记录按下时间
+                buttonDownTime = Time.time;
+            }
+            else if (Input.GetButtonUp("Run"))
+            {
+                // 虚拟按键Run被抬起，检查按下时间是否小于0.1秒
+                if (Time.time - buttonDownTime < 0.3f)
+                {
+                    // 按下时间小于0.1秒，返回true
+                    preEvade = true;
+                }
+            }
+
+            // 返回false
+            return false;
         }
     }
 }
