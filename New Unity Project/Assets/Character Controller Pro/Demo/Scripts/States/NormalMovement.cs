@@ -1070,7 +1070,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             else if (Input.GetButtonUp("Run"))
             {
                 // 虚拟按键Run被抬起，检查按下时间是否小于0.1秒
-                if (Time.time - buttonDownTime < 0.3f)
+                if (Time.time - buttonDownTime < 0.35f)
                 {
                     // 按下时间小于0.1秒，返回true
                     preEvade = true;
