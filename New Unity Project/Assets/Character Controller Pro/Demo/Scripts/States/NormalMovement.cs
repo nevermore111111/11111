@@ -157,7 +157,6 @@ namespace Lightbug.CharacterControllerPro.Demo
         {
             if(CanEvade())
             {
-                Debug.Log("进入闪避");
                 CharacterStateController.EnqueueTransition<Evade>();
             }
             if (Input.GetKeyDown(KeyCode.M))
@@ -1048,6 +1047,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         private float buttonDownTime;
         public  bool preEvade;
+        public Vector2 evadeVec2;
 
         private void Update()
         {
@@ -1064,6 +1064,8 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 // 虚拟按键Run被按下，记录按下时间
                 buttonDownTime = Time.time;
+                evadeVec2 = CharacterActions.movement.value;
+               
             }
             else if (Input.GetButtonUp("Run"))
             {

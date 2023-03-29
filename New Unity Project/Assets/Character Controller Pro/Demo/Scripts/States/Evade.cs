@@ -11,9 +11,9 @@ using static Lightbug.CharacterControllerPro.Implementation.MovementReferencePar
 namespace Rusk
 {
     /// <summary>
-    /// 
+    /// 这个类现在需要一个待机状态，播完闪避切换到待机状态，要不太僵硬了并且不好掌控播放这个闪避的时间。直接切换到
     /// <summary>
-
+    ///
     public class Evade : CharacterState
     {
 
@@ -182,15 +182,23 @@ namespace Rusk
 
 
             }
-            UpdateData(CharacterActions.movement.value);
+            UpdateData(NormalMovement.evadeVec2);
+
 
             //这里修改冲刺的方向
             //设置冲刺动画的参数
-     
+            if (NormalMovement.evadeVec2 == Vector2.zero)
+            {
+                dashDirection = - CharacterActor.Forward;
+            }
+            else
+            {
+                dashDirection = InputMovementReference;
+            }
+
+
             
-
-            dashDirection = InputMovementReference;
-
+           
 
             SetAnimatorPar();
 
@@ -204,26 +212,31 @@ namespace Rusk
 
         private void SetAnimatorPar()
         {
-            Vector2 input;
-            if (CharacterActions.movement.value.sqrMagnitude < 0.1)
+            Vector2 input = NormalMovement.evadeVec2;
+            
+            
             {
-                input = new Vector2(0, -1f);
+                input.Normalize();
+            }
+            Vector3 camera = new Vector3(input.x, 0, input.y);
+            Vector3 mid = externalReference.TransformDirection(camera);
+            mid = body.InverseTransformDirection(mid);
+
+            input = new Vector2(mid.x, mid.z);
+            
+            input = input.normalized;
+
+            if (input == Vector2.zero)
+            {
+                characterActor.Animator.SetFloat("xInput", 0);
+                characterActor.Animator.SetFloat("yInput", -1);
             }
             else
             {
-                input = new Vector2(dashDirection.x, dashDirection.y).normalized;
+                characterActor.Animator.SetFloat("xInput", input.x);
+                characterActor.Animator.SetFloat("yInput", input.y);
             }
-            //将摄像机坐标系下的向量转换成人物坐标系下的向量
-            Vector3 vector3 = new Vector3(input.x, input.y);
-            Vector3 mid = externalReference.TransformDirection(vector3);
-            mid = body.InverseTransformDirection(mid);
-            input = mid;
-            input = input.normalized;
-
-
-
-            characterActor.Animator.SetFloat("xInput", input.x);
-            characterActor.Animator.SetFloat("yInput", input.y);
+           
 
         }
 
@@ -291,10 +304,10 @@ namespace Rusk
         public void UpdateData(Vector2 movementInput)
         {
             UpdateMovementReferenceData();
-            if (movementInput == Vector2.zero)
-            {
-                movementInput = new Vector2(0, -1);
-            }
+            //if (movementInput == Vector2.zero)
+            //{
+            //    movementInput = new Vector2(0, -1);
+            //}
 
             {
 
