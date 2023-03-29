@@ -39,7 +39,7 @@ public class AnimatorFunction : Attack
     }
     public void Stop()
     {
-        Debug.Log("ֹͣ");
+        
         CharacterActor.Animator.SetBool("stop", false);
     }
     public void AttackEnd()

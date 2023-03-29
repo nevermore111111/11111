@@ -34,6 +34,7 @@ public class AttackOnGround :Attack
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
+        
         base.EnterBehaviour(dt, fromState);
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity,true,RootMotionRotationType.AddRotation);
         army[0].SetActive(true);

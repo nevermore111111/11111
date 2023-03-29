@@ -5,6 +5,7 @@ using Lightbug.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 using static Lightbug.CharacterControllerPro.Implementation.MovementReferenceParameters;
 
 namespace Rusk
@@ -12,7 +13,7 @@ namespace Rusk
     /// <summary>
     /// 
     /// <summary>
-   
+
     public class Evade : CharacterState
     {
 
@@ -127,7 +128,7 @@ namespace Rusk
             airDashesLeft = availableNotGroundedDashes;
             NormalMovement = GetComponent<NormalMovement>();
             characterActor = this.transform.parent.GetComponentInBranch<CharacterActor>();
-
+            body = characterActor.transform;
 
         }
 
@@ -184,10 +185,14 @@ namespace Rusk
             UpdateData(CharacterActions.movement.value);
 
             //这里修改冲刺的方向
+            //设置冲刺动画的参数
+     
             
-            
-                dashDirection = InputMovementReference;
-            
+
+            dashDirection = InputMovementReference;
+
+
+            SetAnimatorPar();
 
             ResetDash();
 
@@ -197,6 +202,30 @@ namespace Rusk
 
         }
 
+        private void SetAnimatorPar()
+        {
+            Vector2 input;
+            if (CharacterActions.movement.value.sqrMagnitude < 0.1)
+            {
+                input = new Vector2(0, -1f);
+            }
+            else
+            {
+                input = new Vector2(dashDirection.x, dashDirection.y).normalized;
+            }
+            //将摄像机坐标系下的向量转换成人物坐标系下的向量
+            Vector3 vector3 = new Vector3(input.x, input.y);
+            Vector3 mid = externalReference.TransformDirection(vector3);
+            mid = body.InverseTransformDirection(mid);
+            input = mid;
+            input = input.normalized;
+
+
+
+            characterActor.Animator.SetFloat("xInput", input.x);
+            characterActor.Animator.SetFloat("yInput", input.y);
+
+        }
 
         public override void ExitBehaviour(float dt, CharacterState toState)
         {
@@ -257,16 +286,16 @@ namespace Rusk
 
         private CharacterActor characterActor;
 
-        
+        Transform body;
 
         public void UpdateData(Vector2 movementInput)
         {
             UpdateMovementReferenceData();
             if (movementInput == Vector2.zero)
             {
-                movementInput =new Vector2(0,-1) ;
+                movementInput = new Vector2(0, -1);
             }
-            
+
             {
 
                 Vector3 inputMovementReference = CustomUtilities.Multiply(MovementReferenceRight, movementInput.x) +
