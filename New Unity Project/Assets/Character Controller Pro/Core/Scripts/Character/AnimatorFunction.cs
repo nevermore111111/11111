@@ -44,13 +44,15 @@ public class AnimatorFunction : Attack
     }
     public void AttackEnd()
     {
-        isAttack=false;
-        CharacterActor.Animator.SetBool("attack",false);
-        
+        if (!CharacterActor.Animator.IsInTransition(0))
+        {
+            isAttack = false;
+            CharacterActor.Animator.SetBool("attack", false);
+        }
     }
-    public void AttackStart()
+    public void AttackStart(int num)
     {
-      
+        combo = num;
         isAttack = true;
         CharacterActor.Animator.SetBool("attack", true);
         canChangeState = false;

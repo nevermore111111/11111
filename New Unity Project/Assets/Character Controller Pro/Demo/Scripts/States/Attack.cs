@@ -53,6 +53,7 @@ public class Attack : CharacterState
     {
         base.ExitBehaviour(dt, toState);
         isJustEnter = true;
+        isAttack = false;
         // CharacterActor.SetSize(HeighAndWidth,)
     }
 
