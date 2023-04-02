@@ -59,7 +59,10 @@ public class AnimatorFunction : Attack
         OnceAttack = false;
         if (mainCharacter.enemys.Count != 0)
         {
-            mainCharacter.selectEnemy = HelpTools.FindClosest(CharacterActor.gameObject, mainCharacter.enemys);
+            //ÐÂÓï·¨
+            GameObject[] gamesEnemy = mainCharacter.enemys.Select(m => m.gameObject).ToArray();
+            
+            mainCharacter.selectEnemy = HelpTools.FindClosest(CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
             Vector3 Forward = (mainCharacter.selectEnemy.transform.position - CharacterActor.transform.position).normalized;
             CharacterActor.Forward = new(Forward.x,0,Forward.z);
         }
