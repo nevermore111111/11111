@@ -5,6 +5,7 @@ using Rusk;
 using System;
 using UnityEngine;
 using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
+using Cinemachine;
 
 namespace Lightbug.CharacterControllerPro.Demo
 {
