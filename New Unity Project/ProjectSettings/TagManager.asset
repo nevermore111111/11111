@@ -14,6 +14,7 @@ TagManager:
   - WallSlide
   - JumpDown
   - enemy
+  - EnemyFind
   layers:
   - Default
   - TransparentFX
