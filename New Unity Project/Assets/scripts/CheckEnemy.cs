@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Timeline;
 
 /// <summary>
 /// 
@@ -14,12 +15,12 @@ public class CheckEnemy : MonoBehaviour
     private MainCharacter mainCharacter;
     [SerializeField]
     private CinemachineTargetGroup targetGroup;
-    [SerializeField]
-    private MainCharacter MainCharacter;
     float currentWeight;
+    public CinemachineFreeLook MainCamera;
 
     private void Awake()
     {
+       
         float currentWeight = targetGroup.m_Targets[0].weight;
     }
     IEnumerator AdjustTargetWeight(float newWeight, float duration,int targetIndex)
@@ -46,6 +47,7 @@ public class CheckEnemy : MonoBehaviour
                 mainCharacter.enemys.Add(other.gameObject.GetComponentInParent<CharacterInfo>());
                 targetGroup.AddMember(other.transform, 1, other.GetComponentInParent<CharacterInfo>().GetComponent<SphereCollider>().radius);
                 //这里加个协程逐渐调整视角
+
             }
             else
             {
@@ -64,6 +66,10 @@ public class CheckEnemy : MonoBehaviour
     }
     private void   Update()
     {
+        if(mainCharacter.enemys.Count == 0)
+        {
+
+        }
         this.transform.position = Vector3.Lerp(this.transform.position, Character.transform.position, 10.0f* Time.deltaTime);
     }
     //摄像机增加
