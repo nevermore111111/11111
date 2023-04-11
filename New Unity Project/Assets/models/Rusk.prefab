@@ -4621,7 +4621,7 @@ GameObject:
   - component: {fileID: 1500985853}
   - component: {fileID: 1500985854}
   m_Layer: 0
-  m_Name: Rusk_v1.2.0_kaihen
+  m_Name: Rusk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

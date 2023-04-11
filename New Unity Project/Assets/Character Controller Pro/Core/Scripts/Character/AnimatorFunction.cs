@@ -57,6 +57,10 @@ public class AnimatorFunction : Attack
         CharacterActor.Animator.SetBool("attack", true);
         canChangeState = false;
         OnceAttack = false;
+        if(Input.GetButton("Lock"))
+        {
+            CharacterActor.Forward = Vector3.zero;
+        }
         if (mainCharacter.enemys.Count != 0)
         {
             //新语法
@@ -68,7 +72,8 @@ public class AnimatorFunction : Attack
         }
         else
         {
-            //CharacterActor.Forward =( selectEnemy.transform.position - CharacterActor.transform.position).normalized;
+            //没有单位就可以自由转向，但是只能在攻击开始的时候转向
+            CharacterActor.Forward = CharacterStateController.InputMovementReference;
         }
     }
     public void CanGetInput()
