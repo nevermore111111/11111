@@ -14,7 +14,7 @@ namespace Lightbug.CharacterControllerPro.Demo
     {
         [Header("Camera")]
         [SerializeField]
-        public Camera camera;
+        public Camera CameraN;
         [SerializeField]
         private float velocityToChangeFOV;
         private float MedVToFOV;
@@ -159,8 +159,8 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         void Awake()
         {
-            camera = this .GetComponent<Camera>();
-            starFov = camera.fieldOfView;
+            CameraN = this .GetComponent<Camera>();
+            starFov = CameraN.fieldOfView;
             if (targetTransform == null)
             {
                 Debug.Log("The target graphics object is not active and enabled.");
@@ -260,7 +260,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         private void UpdateCameraFov()
         {
             MedVToFOV = Mathf.Lerp(MedVToFOV, characterActor.Velocity.magnitude * velocityToChangeFOV, 1.5f*Time.deltaTime);
-            camera.fieldOfView = ((float)(starFov + MedVToFOV));
+            CameraN.fieldOfView = ((float)(starFov + MedVToFOV));
         }
 
         void OnTeleport(Vector3 position, Quaternion rotation)

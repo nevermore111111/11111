@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.Timeline;
+using System.Linq;
 
 /// <summary>
 /// 
@@ -20,10 +21,10 @@ public class CheckEnemy : MonoBehaviour
 
     private void Awake()
     {
-       
+
         float currentWeight = targetGroup.m_Targets[0].weight;
     }
-    IEnumerator AdjustTargetWeight(float newWeight, float duration,int targetIndex)
+    IEnumerator AdjustTargetWeight(float newWeight, float duration, int targetIndex)
     {
         float elapsedTime = 0;
         float startWeight = currentWeight;
@@ -39,46 +40,86 @@ public class CheckEnemy : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        AddEnemy(other);
+    }
+
+    private void AddEnemy(Collider other)
+    {
         if (other.gameObject.CompareTag("enemy") & (!mainCharacter.enemys.Contains(other.gameObject.GetComponentInParent<CharacterInfo>())))
         {
             CharacterInfo characterInfo = other.gameObject.GetComponentInParent<CharacterInfo>();
-                if(characterInfo != null)
+            if (characterInfo != null)
             {
                 mainCharacter.enemys.Add(other.gameObject.GetComponentInParent<CharacterInfo>());
-                targetGroup.AddMember(other.transform, 1, other.GetComponentInParent<CharacterInfo>().GetComponent<SphereCollider>().radius);
-                //这里加个协程逐渐调整视角
-
+                if (targetGroup.FindMember(other.transform) == -1)
+                {
+                    targetGroup.AddMember(other.transform, 1, other.GetComponentInParent<CharacterInfo>().GetComponent<SphereCollider>().radius);
+                }
             }
             else
             {
                 Debug.Log("这里null");
-                
             }
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("enemy") & mainCharacter.enemys.Contains(other.gameObject.GetComponentInParent<CharacterInfo>()))
+        if (other.gameObject.CompareTag("enemy") && mainCharacter.enemys.Contains(other.gameObject.GetComponentInParent<CharacterInfo>()))
         {
             mainCharacter.enemys.Remove(other.gameObject.GetComponentInParent<CharacterInfo>());
-            targetGroup.RemoveMember(other.transform);
+            StartCoroutine(DelayedEnemyRemoval(other.transform));
         }
     }
-    private void   Update()
+    private void Update()
     {
-        if(mainCharacter.enemys.Count == 0)
+        //
+        SetCamera();
+        MovePosition();
+    }
+    /// <summary>
+    /// 设置主摄像机的优先级，当选择单位中没有敌人的时候，那么将主摄像机的优先级提升。
+    /// </summary>
+    private void SetCamera()
+    {
+        //
+        if (mainCharacter.enemys.Count == 0)
         {
-
+           // MainCamera.Priority = 100;
         }
-        this.transform.position = Vector3.Lerp(this.transform.position, Character.transform.position, 10.0f* Time.deltaTime);
+        else
+        {
+            //MainCamera.Priority = 5;
+        }
+
     }
-    //摄像机增加
-    private   void AddEnemy(Transform obj,float weight,Collider other)
+
+    /// <summary>
+    /// 修改物体的位置和人物重合
+    /// </summary>
+    private void MovePosition()
     {
-        CharacterInfo character =  other.GetComponentInParent<CharacterInfo>();
+        this.transform.position = Vector3.Lerp(this.transform.position, Character.transform.position, 10.0f * Time.deltaTime);
+    }
+
+    //摄像机增加
+    private void AddEnemy(Transform obj, float weight, Collider other)
+    {
+        CharacterInfo character = other.GetComponentInParent<CharacterInfo>();
 
         //targetGroup.AddMember(newTarget.target, newTarget.weight, newTarget.radius);
         targetGroup.AddMember(obj, 1, obj.GetComponentInChildren<CharacterInfo>().characterSphere.radius);
     }
-    
+
+
+
+    IEnumerator DelayedEnemyRemoval(Transform enemyTransform)
+    {
+        yield return new WaitForSeconds(1f);
+        if (!Physics.CheckSphere(enemyTransform.position, 5))
+        {
+            targetGroup.RemoveMember(enemyTransform);
+        }
+    }
+
 }

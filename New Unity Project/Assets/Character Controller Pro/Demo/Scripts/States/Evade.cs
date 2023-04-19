@@ -147,7 +147,11 @@ namespace Rusk
             {
                 if (OnDashEnd != null)
                     OnDashEnd(dashDirection);
-
+                characterActor.Animator.SetTrigger("");
+                CharacterStateController.EnqueueTransition<NormalMovement>();
+            }
+            if(CharacterActions.jump.value == true)
+            {
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }
         }

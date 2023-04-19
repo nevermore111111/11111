@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.838
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.15019345, g: 0.18806413, b: 0.25655842, a: 0.838}
+  m_IndirectSpecularColor: {r: 0.15019387, g: 0.18806474, b: 0.2565593, a: 0.838}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3356,7 +3356,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363548752}
-  m_LocalRotation: {x: 0.06586279, y: -0.42357802, z: 0.030897105, w: 0.90293366}
+  m_LocalRotation: {x: 0.0658628, y: -0.42357802, z: 0.030897105, w: 0.90293366}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3516,7 +3516,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405930693}
-  m_LocalRotation: {x: 0.08993082, y: -0.42260292, z: 0.04218774, w: 0.9008548}
+  m_LocalRotation: {x: 0.08993081, y: -0.42260292, z: 0.04218774, w: 0.9008548}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8991,7 +8991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452e5ccfe20ff074fa56372b1069e59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
+  CameraN: {fileID: 0}
   velocityToChangeFOV: 1
   inputHandlerSettings:
     inputHandler: {fileID: 0}
@@ -9084,7 +9084,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162800274}
-  m_LocalRotation: {x: 0.08993082, y: -0.42260292, z: 0.042187743, w: 0.9008548}
+  m_LocalRotation: {x: 0.089930795, y: -0.4226029, z: 0.04218773, w: 0.9008548}
   m_LocalPosition: {x: -109.722725, y: -0.6152055, z: 91.16947}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12253,7 +12253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectManagerData: {fileID: 11400000, guid: 409bd96ca09799c4eb319160d700c190, type: 2}
-  Path: 
 --- !u!1 &1511150339
 GameObject:
   m_ObjectHideFlags: 0
