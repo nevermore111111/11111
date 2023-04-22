@@ -57,10 +57,10 @@ public class AnimatorFunction : Attack
         CharacterActor.Animator.SetBool("attack", true);
         canChangeState = false;
         OnceAttack = false;
-        if(Input.GetButton("Lock"))
-        {
-            CharacterActor.Forward = Vector3.zero;
-        }
+        //if(Input.GetButton("Lock"))
+        //{
+        //    CharacterActor.Forward = Vector3.zero;
+        //}
         if (mainCharacter.enemys.Count != 0)
         {
             //ÐÂÓï·¨
