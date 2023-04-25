@@ -4489,6 +4489,8 @@ GameObject:
   - component: {fileID: 1500985853}
   - component: {fileID: 1500985854}
   - component: {fileID: 4204216018865737738}
+  - component: {fileID: 564754472}
+  - component: {fileID: 564754473}
   m_Layer: 0
   m_Name: Rusk
   m_TagString: Untagged
@@ -5078,6 +5080,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectManagerData: {fileID: 11400000, guid: 409bd96ca09799c4eb319160d700c190, type: 2}
+--- !u!320 &564754472
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6159700207672757853}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 778857d587b4d6c428499c58f293a373, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -1161795048837756077, guid: 778857d587b4d6c428499c58f293a373, type: 2}
+    value: {fileID: 1500985851}
+  m_ExposedReferences:
+    m_References: []
+--- !u!114 &564754473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6159700207672757853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10a85cb7642d2f448e02d343dc68dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1500985851}
+  timelines:
+  - {fileID: 564754472}
 --- !u!1 &6408492697259054518
 GameObject:
   m_ObjectHideFlags: 0

@@ -85,7 +85,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GhostSamurai_APose_Attack03_3_Root
+  m_Name: attack02_3
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -141,7 +141,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GhostSamurai_APose_Attack03_1_ALL_Root
+  m_Name: attack02_1
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -169,7 +169,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GhostSamurai_APose_Attack01_3_Root
+  m_Name: attack01_3
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -197,7 +197,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GhostSamurai_APose_Attack03_4_Root
+  m_Name: attack02_4
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -308,7 +308,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GhostSamurai_APose_Attack01_2_Root
+  m_Name: attack01_2
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -337,7 +337,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GhostSamurai_APose_Attack03_2_Root
+  m_Name: attack02_2
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -445,7 +445,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GhostSamurai_APose_Attack01_4_Root 0
+  m_Name: attack01_4
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -500,7 +500,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GhostSamurai_APose_Attack01_1_ALL_Root
+  m_Name: attack01_1
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -540,10 +540,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.9085366
-  m_HasExitTime: 1
+  m_TransitionDuration: 0.12062681
+  m_TransitionOffset: 0.0068896464
+  m_ExitTime: 0.95222735
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -586,7 +586,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GhostSamurai_APose_Attack03_5_Root
+  m_Name: attack02_5
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -707,7 +707,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.9096386
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

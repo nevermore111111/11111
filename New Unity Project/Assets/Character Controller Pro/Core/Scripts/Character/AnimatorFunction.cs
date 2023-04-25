@@ -57,6 +57,7 @@ public class AnimatorFunction : Attack
         CharacterActor.Animator.SetBool("attack", true);
         canChangeState = false;
         OnceAttack = false;
+        CharacterActor.Animator.SetInteger("specialAttack", 0);
         //if(Input.GetButton("Lock"))
         //{
         //    CharacterActor.Forward = Vector3.zero;

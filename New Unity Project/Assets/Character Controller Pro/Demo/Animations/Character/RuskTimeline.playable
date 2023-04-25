@@ -71,8 +71,8 @@ MonoBehaviour:
     m_Duration: 2.1666666666666665
     m_TimeScale: 1
     m_ParentTrack: {fileID: 9068090720106623040}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
+    m_EaseInDuration: 0.3
+    m_EaseOutDuration: 0.3
     m_BlendInDuration: -1
     m_BlendOutDuration: -1
     m_MixInCurve:
@@ -123,8 +123,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
+    m_BlendInCurveMode: 1
+    m_BlendOutCurveMode: 1
     m_ExposedParameterNames: []
     m_AnimationCurves: {fileID: 0}
     m_Recordable: 0

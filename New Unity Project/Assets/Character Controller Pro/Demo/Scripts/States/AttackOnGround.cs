@@ -56,10 +56,6 @@ public class AttackOnGround :Attack
             //°´ÏÂ¹¥»÷¼üÎ»
             if (canInput)
             {
-                if(combo == 1)
-                {
-                    Debug.Log("");
-                }
                 canInput = false;
                 combo++;
                 if (combo > MaxCombo)
