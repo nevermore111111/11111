@@ -24,8 +24,30 @@ public class Attack : CharacterState
     //这个onceAttack是用来判定每次攻击只执行一次动画减慢效果
     public static bool OnceAttack;
     private NormalMovement NormalMovement;
-   
+    private AttackMode currentAttackMode = AttackMode.AttackOnGround;
+    enum AttackMode
+    {
+        AttackOnGround,
+        AttackOffGround,
+        AttackOnGround_fist
+    }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            currentAttackMode = AttackMode.AttackOnGround;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            currentAttackMode = AttackMode.AttackOffGround;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            currentAttackMode = AttackMode.AttackOnGround_fist;
+            Debug.Log(currentAttackMode);
+        }
+    }
 
     protected override void Awake()
     {
@@ -71,6 +93,11 @@ public class Attack : CharacterState
         if(NormalMovement.CanEvade())
         {
             CharacterStateController.EnqueueTransition<Evade>();
+        }
+        if (currentAttackMode == AttackMode.AttackOffGround)
+        {
+            //CharacterStateController.EnqueueTransition<>();
+            return;
         }
     }
 }
