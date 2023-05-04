@@ -24,8 +24,12 @@ public class Attack : CharacterState
     //这个onceAttack是用来判定每次攻击只执行一次动画减慢效果
     public static bool OnceAttack;
     private NormalMovement NormalMovement;
-    private AttackMode currentAttackMode = AttackMode.AttackOnGround;
-    enum AttackMode
+    public AttackMode currentAttackMode = AttackMode.AttackOnGround;
+    [SerializeField]
+    private Vector2 HeighAndWidth = new(1f, 1.58f);
+    private Vector2 normalHeightAndWidth;
+    public Attack attack;
+    public enum AttackMode
     {
         AttackOnGround,
         AttackOffGround,
@@ -34,23 +38,27 @@ public class Attack : CharacterState
 
     private void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             currentAttackMode = AttackMode.AttackOnGround;
+            
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             currentAttackMode = AttackMode.AttackOffGround;
+            
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             currentAttackMode = AttackMode.AttackOnGround_fist;
-            Debug.Log(currentAttackMode);
+           
         }
     }
 
     protected override void Awake()
     {
+        attack = GetComponent<Attack>();
         OnceAttack = false;
         Debug.Log("attack初始化");
         base.Awake();
@@ -60,6 +68,7 @@ public class Attack : CharacterState
     protected override void Start()
     {
         base.Start();
+        normalHeightAndWidth = CharacterActor.BodySize;
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
@@ -70,12 +79,14 @@ public class Attack : CharacterState
         isAttack = true;
         canInput = false;
         isJustEnter = true;
+        CharacterActor.CheckAndSetSize(HeighAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
         base.ExitBehaviour(dt, toState);
         isJustEnter = true;
         isAttack = false;
+        CharacterActor.CheckAndSetSize(normalHeightAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
         // CharacterActor.SetSize(HeighAndWidth,)
     }
 

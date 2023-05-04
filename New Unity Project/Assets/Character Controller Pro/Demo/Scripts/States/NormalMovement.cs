@@ -24,6 +24,9 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public LookingDirectionParameters lookingDirectionParameters = new LookingDirectionParameters();
 
+        //自己加
+        private Attack attack = new Attack();
+
 
         [Header("Animation")]
 
@@ -48,6 +51,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         [SerializeField]
         protected string heightParameter = "Height";
 
+        
 
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -104,6 +108,8 @@ namespace Lightbug.CharacterControllerPro.Demo
             notGroundedJumpsLeft = verticalMovementParameters.availableNotGroundedJumps;
 
             materialController = this.GetComponentInBranch<CharacterActor, MaterialController>();
+
+            attack = this.GetComponent<Attack>();
         }
 
         protected virtual void OnValidate()
@@ -162,20 +168,34 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
             if (Input.GetKeyDown(KeyCode.M))
             {
-                Debug.Log("jinlai ");
+                Debug.Log("jinlai");
                 CharacterStateController.EnqueueTransition<Grap>();
             }
-            if (CharacterActions.attack.value)
+            if (CharacterActions.attack.value )
             {
-                if (CharacterActor.IsGrounded)
+                if(CharacterActor.IsGrounded)
                 {
-                    CharacterStateController.EnqueueTransition<AttackOnGround>();
+                    if(attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
+                    {
+                        CharacterStateController.EnqueueTransition<AttackOnGround>();
+                    }
+                    else if(attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                    {
+                        CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+                    }
                 }
-                if (!CharacterActor.IsGrounded)
+                else if(!CharacterActor.IsGrounded)
                 {
-                    //CharacterStateController.EnqueueTransition<AttackInAir>();
-                    Debug.Log("应该进入空中攻击，但是现在没有");
+                    if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
+                    {
+
+                    }
+                    else if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                    {
+                        
+                    }
                 }
+                
             }
             if (CharacterActions.jetPack.value)
             {

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 9ccc8743f0c541e4eb894327b67882be
 ModelImporter:
-  serializedVersion: 20300
+  serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -7793839899830198049
@@ -17,6 +17,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
@@ -84,7 +85,35 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: AttackStart
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 5
+        messageOptions: 0
+      - time: 0.19695608
+        functionName: CanGetInput
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4129395
+        functionName: AttackEnd
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.56530714
+        functionName: CannotGetInput
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -101,6 +130,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -112,6 +142,7 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
+    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -750,7 +781,8 @@ ModelImporter:
     - name: cc_base_r_breast
       parentName: cc_base_r_ribstwist
       position: {x: 0.000000095367426, y: 0.019999694, z: 0.00000045776366}
-      rotation: {x: -0.00000008308777, y: -0.000000049143644, z: 0.00000015646079, w: 1}
+      rotation: {x: -0.00000008308777, y: -0.000000049143644, z: 0.00000015646079,
+        w: 1}
       scale: {x: 1.0000001, y: 1.0000002, z: 1.0000001}
     - name: cc_base_l_breast_root
       parentName: spine_03
@@ -765,7 +797,8 @@ ModelImporter:
     - name: cc_base_l_breast
       parentName: cc_base_l_ribstwist
       position: {x: -0.00000017166137, y: 0.01999981, z: 0.00000030517577}
-      rotation: {x: -0.00000032879504, y: -0.000000033751324, z: -0.00000008195683, w: 1}
+      rotation: {x: -0.00000032879504, y: -0.000000033751324, z: -0.00000008195683,
+        w: 1}
       scale: {x: 1, y: 1.0000001, z: 1.0000001}
     - name: clavicle_r
       parentName: spine_03
@@ -1100,7 +1133,8 @@ ModelImporter:
     - name: Bangs05_End
       parentName: Bangs04
       position: {x: -0.06339698, y: -0.00000030517577, z: 0.000000009536743}
-      rotation: {x: 0.000000040978158, y: -0.00000011920925, z: -0.0000000149011505, w: 1}
+      rotation: {x: 0.000000040978158, y: -0.00000011920925, z: -0.0000000149011505,
+        w: 1}
       scale: {x: 1.0000004, y: 1.0000008, z: 0.9999998}
     - name: Ponytail01
       parentName: head
@@ -1204,7 +1238,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 8489adf5c71f63446a18e9e31f9d23c6, type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 8489adf5c71f63446a18e9e31f9d23c6,
+    type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1

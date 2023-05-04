@@ -102,4 +102,8 @@ public class AnimatorFunction : Attack
     {
         CharacterActor.Animator.SetInteger("specialAttack", kind);
     }
+    public void End()
+    {
+        CharacterActor.Animator.SetTrigger("end");
+    }
 }

@@ -12,31 +12,32 @@ using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
 /// <summary>
 /// 
 /// <summary>
-public class AttackOnGround :Attack
+public class AttackOnGround_fist : Attack
 {
     [Tooltip("½ÇÉ«µÄÎäÆ÷")]
-    public GameObject[] army= new GameObject[1];
-    public  float gravity = 10;
+    public GameObject[] army = new GameObject[1];
+   
+    public float gravity = 10;
 
     protected override void Awake()
     {
         base.Awake();
-        army[0].SetActive(false);
-        army[1].SetActive(false);
+        //army[0].SetActive(false);
+        //army[1].SetActive(false);
     }
     protected override void Start()
     {
         base.Start();
-        
+
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
-        
+
         base.EnterBehaviour(dt, fromState);
-        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity,true,RootMotionRotationType.AddRotation);
-        army[0].SetActive(true);
-        army[1].SetActive(true);
-       
+        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.AddRotation);
+        //army[0].SetActive(true);
+        //army[1].SetActive(true);
+
 
     }
     public override void UpdateBehaviour(float dt)
@@ -77,20 +78,20 @@ public class AttackOnGround :Attack
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-        if(CharacterActions.movement.value != Vector2.zero && canChangeState == true)
+        if (CharacterActions.movement.value != Vector2.zero && canChangeState == true)
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-        if(CharacterActor.IsGrounded && isAttack == false&&attack.currentAttackMode == AttackMode.AttackOnGround_fist)
+        if (CharacterActor.IsGrounded && isAttack == false && attack.currentAttackMode == AttackMode.AttackOnGround)
         {
-            CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+            CharacterStateController.EnqueueTransition<AttackOnGround>();
         }
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
         base.ExitBehaviour(dt, toState);
-        army[0].SetActive(false);
-        army[1].SetActive(false);
+        //army[0].SetActive(false);
+        //army[1].SetActive(false);
     }
 
 
