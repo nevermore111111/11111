@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261e569a450cade41b045fc4b33370b7, type: 3}
+  m_Name: AssetHelper
+  m_EditorClassIdentifier: 
+  AttackOnGround:
+  - {fileID: 11400000, guid: 778857d587b4d6c428499c58f293a373, type: 2}
+  - {fileID: 11400000, guid: 1c3e84399152c724e9e41f000c93aaf4, type: 2}
+  - {fileID: 11400000, guid: 930e4615c7fc6434fa51fd56248ac8ed, type: 2}
+  - {fileID: 11400000, guid: 1e56e5f5018b4474e8adb9a6644c03b0, type: 2}
+  AttackOnGround_fist: []
+  AttackInAir: []

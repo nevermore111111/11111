@@ -4,6 +4,7 @@ using Rusk;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 /// <summary>
@@ -29,6 +30,8 @@ public class Attack : CharacterState
     private Vector2 HeighAndWidth = new(1f, 1.58f);
     private Vector2 normalHeightAndWidth;
     public Attack attack;
+    TimelineManager timelineManager;
+
     public enum AttackMode
     {
         AttackOnGround,
@@ -69,6 +72,7 @@ public class Attack : CharacterState
     {
         base.Start();
         normalHeightAndWidth = CharacterActor.BodySize;
+
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
@@ -80,6 +84,9 @@ public class Attack : CharacterState
         canInput = false;
         isJustEnter = true;
         CharacterActor.CheckAndSetSize(HeighAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
+
+        //根据当前进入的类，去调整当前的timeline的数量
+        string className = this.GetType().Name;
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
