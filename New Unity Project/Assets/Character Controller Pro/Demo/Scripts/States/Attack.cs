@@ -72,7 +72,7 @@ public class Attack : CharacterState
     {
         base.Start();
         normalHeightAndWidth = CharacterActor.BodySize;
-
+        timelineManager = this.transform.parent.gameObject.GetComponentInChildren<TimelineManager>();
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
@@ -87,6 +87,8 @@ public class Attack : CharacterState
 
         //根据当前进入的类，去调整当前的timeline的数量
         string className = this.GetType().Name;
+        //当进入对应模式的时候，去切换对应的timeline数组
+        timelineManager.SwapTimelinesByAssetName(className);
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
