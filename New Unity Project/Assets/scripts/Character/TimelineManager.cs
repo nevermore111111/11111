@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 public class TimelineManager : MonoBehaviour
 {
     public Animator animator;
-     List<PlayableAsset> timelines;
+    public List<PlayableAsset> timelines;
 
     private string currentAnimName;
     private PlayableDirector director;

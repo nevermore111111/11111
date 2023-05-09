@@ -111,11 +111,18 @@ namespace Lightbug.CharacterControllerPro.Demo
 
             if (useInteractAction && !CharacterActions.interact.Started)
                 return false;
+            bool LadderTrigger = false;
+
+            LadderTrigger = JudgeLadder(LadderTrigger);
+            if (LadderTrigger == false)
+            {
+                return false;
+            }
 
             for (int i = 0; i < CharacterActor.Triggers.Count; i++)
             {
-                Trigger trigger = CharacterActor.Triggers[i];
 
+                Trigger trigger = CharacterActor.Triggers[i];
                 Ladder ladder = ladders.GetOrRegisterValue<Transform, Ladder>(trigger.transform);
 
                 if (ladder != null)
@@ -164,6 +171,19 @@ namespace Lightbug.CharacterControllerPro.Demo
             return false;
         }
 
+        private bool JudgeLadder(bool LadderTrigger)
+        {
+            for (int i = 0; i < CharacterActor.Triggers.Count; i++)
+            {
+                Trigger trigger = CharacterActor.Triggers[i];
+                if (trigger.gameObject.tag == "Ladder")
+                {
+                    LadderTrigger = true;
+                }
+            }
+
+            return LadderTrigger;
+        }
 
 
         public override void EnterBehaviour(float dt, CharacterState fromState)
@@ -265,13 +285,13 @@ namespace Lightbug.CharacterControllerPro.Demo
                                 currentClimbingAnimation++;
                                 state = LadderClimbState.Climbing;
                             }
-                            
+
                         }
                         else if (CharacterActions.movement.Down)
                         {
                             if (currentClimbingAnimation == 0)
                             {
-                                CharacterActor.Animator.SetTrigger(bottomDownParameter);                                
+                                CharacterActor.Animator.SetTrigger(bottomDownParameter);
                                 state = LadderClimbState.Exiting;
                             }
                             else
@@ -290,7 +310,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                     // Do nothing and wait for the "Idle" animation state
                     if (animatorStateInfo.IsName(idleStateName))
                         state = LadderClimbState.Idling;
-                    
+
                     break;
                 case LadderClimbState.Exiting:
 
@@ -301,12 +321,12 @@ namespace Lightbug.CharacterControllerPro.Demo
                         forceExit = true;
                         CharacterActor.ForceGrounded();
                     }
-                    
+
                     break;
 
             }
         }
-        
+
         public override void UpdateIK(int layerIndex)
         {
             if (!useIKOffsetValues)

@@ -205,7 +205,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 CharacterStateController.EnqueueTransition<Dash>();
             }
-            else if (CharacterActor.Triggers.Count > 1 )
+            else if (CharacterActor.Triggers.Count >= 1 )
             {
                 CharacterStateController.EnqueueTransition<LadderClimbing>();
                 CharacterStateController.EnqueueTransition<RopeClimbing>();

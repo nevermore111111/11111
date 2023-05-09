@@ -78,6 +78,14 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public override bool CheckEnterTransition(CharacterState fromState)
         {
+            bool RopeTrigger = false;
+
+            RopeTrigger = CheckRope(RopeTrigger);
+
+            if (RopeTrigger == false)
+            {
+                return false;
+            }
 
             for (int i = 0; i < CharacterActor.Triggers.Count; i++)
             {
@@ -102,6 +110,20 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
 
             return false;
+        }
+
+        private bool CheckRope(bool RopeTrigger)
+        {
+            for (int i = 0; i < CharacterActor.Triggers.Count; i++)
+            {
+                Trigger trigger = CharacterActor.Triggers[i];
+                if (trigger.gameObject.tag == "Rope")
+                {
+                    RopeTrigger = true;
+                }
+            }
+
+            return RopeTrigger;
         }
 
         public override void EnterBehaviour(float dt, CharacterState fromState)

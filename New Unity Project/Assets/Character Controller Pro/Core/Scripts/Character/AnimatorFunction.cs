@@ -13,19 +13,19 @@ public class AnimatorFunction : Attack
 {
     [SerializeField]
     private MainCharacter mainCharacter;
-    
+
     public void Idle()
     {
-        if (isJustEnter)
+        if (isJustEnter && CharacterStateController.PreviousState is not Attack)
         {
             isJustEnter = false;
             combo = 1;
-            CharacterActor.Animator.SetInteger("combo",combo);
+            CharacterActor.Animator.SetInteger("combo", combo);
             canChangeState = false;
         }
         else
         {
-            isAttack =false;
+            isAttack = false;
             CharacterActor.Animator.SetBool("attack", false);
             combo = 0;
             CharacterActor.Animator.SetInteger("combo", combo);
@@ -35,11 +35,11 @@ public class AnimatorFunction : Attack
     }
     public void NormalIdle()
     {
-      CharacterActor.SetUpRootMotion(false,false);
+        CharacterActor.SetUpRootMotion(false, false);
     }
     public void Stop()
     {
-        
+
         CharacterActor.Animator.SetBool("stop", false);
     }
     public void AttackEnd()
@@ -66,10 +66,10 @@ public class AnimatorFunction : Attack
         {
             //ÐÂÓï·¨
             GameObject[] gamesEnemy = mainCharacter.enemys.Select(m => m.gameObject).ToArray();
-            
+
             mainCharacter.selectEnemy = HelpTools.FindClosest(CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
             Vector3 Forward = (mainCharacter.selectEnemy.transform.position - CharacterActor.transform.position).normalized;
-            CharacterActor.Forward = new(Forward.x,0,Forward.z);
+            CharacterActor.Forward = new(Forward.x, 0, Forward.z);
         }
         else
         {
