@@ -1077,6 +1077,10 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public bool CanEvade()
         {
+            if(CharacterStateController.CurrentState is Evade)
+            {
+                return false;
+            }
             if(preEvade)
             {
                 return true;
