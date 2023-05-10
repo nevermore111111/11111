@@ -48,6 +48,7 @@ public class CapsuleDetection : Detection
             AgetHitBox hitBox;
             if (item.TryGetComponent(out hitBox) && hitBox.agent && targetTags.Contains(hitBox.agent.tag) && !wasHit.Contains(hitBox.agent))//如果是可攻击对象，并且攻击对象中没有这个目标时
             {
+                
                 wasHit.Add(hitBox.agent);
                 result.Add(item);
             }

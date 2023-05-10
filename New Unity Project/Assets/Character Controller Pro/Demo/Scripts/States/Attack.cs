@@ -13,11 +13,11 @@ using UnityEngine;
 public class Attack : CharacterState
 {
 
-    protected static bool isAttack;
-    protected static int combo;
-    protected static bool canInput;
-    protected static bool isJustEnter;
-    protected static bool canChangeState;
+    public static bool isAttack;
+    public static int combo;
+    public static bool canInput;
+    public static bool isJustEnter;
+    public static bool canChangeState;
    // protected  GameObject selectEnemy;
     public static int MaxCombo;
     //这个是范围内的敌人，利用一个球判定进入范围的敌人，进入了就添加在名单里面；
@@ -27,10 +27,12 @@ public class Attack : CharacterState
     private NormalMovement NormalMovement;
     public AttackMode currentAttackMode = AttackMode.AttackOnGround;
     [SerializeField]
-    private Vector2 HeighAndWidth = new(1f, 1.58f);
+    private Vector2 HeighAndWidth;
     private Vector2 normalHeightAndWidth;
     public Attack attack;
     TimelineManager timelineManager;
+    private WeaponManager weaponManager;
+
 
     public enum AttackMode
     {
@@ -61,6 +63,8 @@ public class Attack : CharacterState
 
     protected override void Awake()
     {
+        weaponManager = GetComponentInChildren<WeaponManager>();
+        HeighAndWidth =  new(1f, 1.58f);
         attack = GetComponent<Attack>();
         OnceAttack = false;
         Debug.Log("attack初始化");
@@ -81,6 +85,7 @@ public class Attack : CharacterState
         //HeighAndWidth = CharacterActor.BodySize;
         base.EnterBehaviour(dt, fromState);
         isAttack = true;
+
         canInput = false;
         isJustEnter = true;
         CharacterActor.CheckAndSetSize(HeighAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
@@ -92,6 +97,10 @@ public class Attack : CharacterState
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
+        if (weaponManager)
+        {
+            weaponManager.ToggleDetection(false);
+        }
         base.ExitBehaviour(dt, toState);
         isJustEnter = true;
         isAttack = false;

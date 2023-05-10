@@ -16,5 +16,6 @@ public class AgetHitBox : MonoBehaviour
     public void GetDamage(float damage,Vector3 pos)
     {
         target.GetDamage(damage, pos);
+        Debug.Log("shouji"); 
     }
 }

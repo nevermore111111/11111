@@ -1,3 +1,4 @@
+using Codice.CM.SEIDInfo;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
@@ -9,55 +10,68 @@ using UnityEngine;
 /// <summary>
 /// 
 /// <summary>
-public class AnimatorFunction : Attack
+public class AnimatorFunction : MonoBehaviour
 {
     [SerializeField]
     private MainCharacter mainCharacter;
+    private WeaponManager weaponManager;
+    private Attack Attack;
+    CharacterStateController CharacterStateController;
+    WeaponManager WeaponManager;
+
+    private void Awake()
+    {
+        weaponManager = GetComponentInChildren<WeaponManager>();
+        Attack =transform.parent.parent.GetComponentInChildren<Attack>();
+        CharacterStateController = transform.parent.parent.GetComponentInChildren<CharacterStateController>();
+    }
 
     public void Idle()
     {
-        if (isJustEnter && CharacterStateController.PreviousState is not Attack)
+        if (Attack.isJustEnter && (CharacterStateController.PreviousState.GetType() != typeof(Attack)))
         {
-            isJustEnter = false;
-            combo = 1;
-            CharacterActor.Animator.SetInteger("combo", combo);
-            canChangeState = false;
+            Attack.isJustEnter = false;
+            Attack.combo = 1;
+            Attack.CharacterActor.Animator.SetInteger("combo", Attack.combo);
+            Attack.canChangeState = false;
         }
         else
         {
-            isAttack = false;
-            CharacterActor.Animator.SetBool("attack", false);
-            combo = 0;
-            CharacterActor.Animator.SetInteger("combo", combo);
-            canInput = true;
-            canChangeState = true;
+            Attack.isAttack = false;
+            Attack.CharacterActor.Animator.SetBool("attack", false);
+            Attack.combo = 0;
+            Attack.CharacterActor.Animator.SetInteger("combo", Attack.combo);
+            Attack.canInput = true;
+            Attack.canChangeState = true;
         }
     }
     public void NormalIdle()
     {
-        CharacterActor.SetUpRootMotion(false, false);
+        Attack.CharacterActor.SetUpRootMotion(false, false);
     }
     public void Stop()
     {
 
-        CharacterActor.Animator.SetBool("stop", false);
+        Attack.CharacterActor.Animator.SetBool("stop", false);
     }
     public void AttackEnd()
     {
-        if (!CharacterActor.Animator.IsInTransition(0))
+        if (!Attack.CharacterActor.Animator.IsInTransition(0))
         {
-            isAttack = false;
-            CharacterActor.Animator.SetBool("attack", false);
+            Attack.isAttack = false;
+            Attack.CharacterActor.Animator.SetBool("attack", false);
+            weaponManager.ToggleDetection(false);
         }
     }
     public void AttackStart(int num)
     {
-        combo = num;
-        isAttack = true;
-        CharacterActor.Animator.SetBool("attack", true);
-        canChangeState = false;
-        OnceAttack = false;
-        CharacterActor.Animator.SetInteger("specialAttack", 0);
+        weaponManager.ToggleDetection(true);
+        Attack.combo = num;
+        Attack.isAttack = true;
+        Attack.CharacterActor.Animator.SetBool("attack", true);
+        Attack.canChangeState = false;
+        Attack.OnceAttack = false;
+        Attack.CharacterActor.Animator.SetInteger("specialAttack", 0);
         //if(Input.GetButton("Lock"))
         //{
         //    CharacterActor.Forward = Vector3.zero;
@@ -67,27 +81,27 @@ public class AnimatorFunction : Attack
             //新语法
             GameObject[] gamesEnemy = mainCharacter.enemys.Select(m => m.gameObject).ToArray();
 
-            mainCharacter.selectEnemy = HelpTools.FindClosest(CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
-            Vector3 Forward = (mainCharacter.selectEnemy.transform.position - CharacterActor.transform.position).normalized;
-            CharacterActor.Forward = new(Forward.x, 0, Forward.z);
+            mainCharacter.selectEnemy = HelpTools01.FindClosest(Attack.CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
+            Vector3 Forward = (mainCharacter.selectEnemy.transform.position - Attack.CharacterActor.transform.position).normalized;
+            Attack.CharacterActor.Forward = new(Forward.x, 0, Forward.z);
         }
         else
         {
             //没有单位就可以自由转向，但是只能在攻击开始的时候转向
-            CharacterActor.Forward = CharacterStateController.InputMovementReference;
+            Attack.CharacterActor.Forward = CharacterStateController.InputMovementReference;
         }
     }
     public void CanGetInput()
     {
-        canInput = true;
+        Attack.canInput = true;
     }
     public void CannotGetInput()
     {
-        if (!isAttack)
+        if (!Attack.isAttack)
         {
             //这样在攻击中的时候，不会被上一次的CannotGetInput重置combo
-            combo = 0;
-            CharacterActor.Animator.SetInteger("combo", 0);
+            Attack.combo = 0;
+            Attack.CharacterActor.Animator.SetInteger("combo", 0);
         }
     }
     /// <summary>
@@ -95,15 +109,15 @@ public class AnimatorFunction : Attack
     /// </summary>
     public void ComboStart(int num)
     {
-        MaxCombo = num;
-        CharacterActor.Animator.SetInteger("specialAttack", 0);
+        Attack.MaxCombo = num;
+        Attack.CharacterActor.Animator.SetInteger("specialAttack", 0);
     }
     public void SpAtk(int kind)
     {
-        CharacterActor.Animator.SetInteger("specialAttack", kind);
+        Attack.CharacterActor.Animator.SetInteger("specialAttack", kind);
     }
     public void End()
     {
-        CharacterActor.Animator.SetTrigger("end");
+       Attack. CharacterActor.Animator.SetTrigger("end");
     }
 }

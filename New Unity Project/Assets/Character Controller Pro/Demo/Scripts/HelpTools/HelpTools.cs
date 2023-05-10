@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 /// <summary>
 /// 
 /// <summary>
-public class HelpTools : MonoBehaviour
+public class HelpTools01 : MonoBehaviour
 {
     /// <summary>
     /// 寻找在objects中距离target最近的物体

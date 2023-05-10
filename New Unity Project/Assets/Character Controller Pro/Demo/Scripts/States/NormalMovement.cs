@@ -25,7 +25,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         public LookingDirectionParameters lookingDirectionParameters = new LookingDirectionParameters();
 
         //自己加
-        private Attack attack = new Attack();
+        private Attack attack;
 
 
         [Header("Animation")]
