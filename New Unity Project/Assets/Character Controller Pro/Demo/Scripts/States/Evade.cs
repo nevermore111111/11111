@@ -25,6 +25,8 @@ namespace Rusk
         [SerializeField]
         protected float duration = 1.0f;
 
+        private float UnChangedDuration;
+
         [SerializeField]
         protected AnimationCurve movementCurve = AnimationCurve.Linear(0, 1, 1, 0);
 
@@ -129,7 +131,7 @@ namespace Rusk
             NormalMovement = GetComponent<NormalMovement>();
             characterActor = this.transform.parent.GetComponentInBranch<CharacterActor>();
             body = characterActor.transform;
-
+            UnChangedDuration = duration;
         }
 
 
@@ -159,6 +161,7 @@ namespace Rusk
 
         public override void EnterBehaviour(float dt, CharacterState fromState)
         {
+            duration = UnChangedDuration;
             NormalMovement.preEvade = false;
             if (forceNotGrounded)
                 CharacterActor.alwaysNotGrounded = true;
@@ -201,7 +204,9 @@ namespace Rusk
             }
 
 
-            
+            //需要根据闪避的方向去增加evade 的时间 
+
+            //我需要 1根据当前闪避的方向和人物后方向归一化的的点乘 的 数值去计算
            
 
             SetAnimatorPar();
@@ -240,7 +245,22 @@ namespace Rusk
                 characterActor.Animator.SetFloat("xInput", input.x);
                 characterActor.Animator.SetFloat("yInput", input.y);
             }
-           
+            
+            //就在这里修改 闪避的时间 
+            float addTime = 0f;
+            if(Mathf.Abs(input.y)>0.3)
+            {
+                if(input.y>0)
+                {
+                    addTime = 0.1f*input.y;
+                }
+                else
+                {
+                    addTime = 0.2f * Mathf.Abs(input.y);
+                }
+            }
+
+            duration += addTime;
 
         }
 
