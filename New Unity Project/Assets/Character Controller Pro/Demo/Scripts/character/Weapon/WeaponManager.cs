@@ -19,10 +19,9 @@ public class WeaponManager : MonoBehaviour
         {
             foreach(Detection item in detections)
             {
-                foreach (var hit in item.GetDetection())
+                foreach (var hit in item.GetDetection())//添加了攻击对象
                 {
-                    if()
-                    hit.GetComponent<AgetHitBox>().GetDamage(1, transform.position);
+                    hit.GetComponent<AgetHitBox>().GetDamage(1, transform.position);//这是攻击对象播放都动画
                 }
             }
         }
