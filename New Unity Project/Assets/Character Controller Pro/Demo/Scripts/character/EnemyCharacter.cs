@@ -16,7 +16,8 @@ public class EnemyCharacter : CharacterInfo, IAgent
     {
         //这个地方需要 1 细化规则 播放那个动画
         //需要在已经进入当前状态的时候是否重新播放动画
-        characterActor.Animator.Play("Lucy_Hit_F_Inplace", 0, 0); // 重置并播放动画
+
+        characterActor.Animator.Play("GetDamage", 0, 0); // 重置并播放动画
     }
 
 

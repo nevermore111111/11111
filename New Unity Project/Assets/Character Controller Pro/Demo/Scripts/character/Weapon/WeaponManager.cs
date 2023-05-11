@@ -1,3 +1,4 @@
+using Lightbug.CharacterControllerPro.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,12 @@ public class WeaponManager : MonoBehaviour
     
     public List<Detection> detections = new List<Detection>();
     public bool isOnDetection;
+    public CharacterActor characterActor;
 
-
+    private void Awake()
+    {
+        characterActor= GetComponentInParent<CharacterActor>();
+    }
     public void Update()
     {
         HandleDetection();
@@ -21,7 +26,9 @@ public class WeaponManager : MonoBehaviour
             {
                 foreach (var hit in item.GetDetection())//添加了攻击对象
                 {
-                    hit.GetComponent<AgetHitBox>().GetDamage(1, transform.position);//这是攻击对象播放都动画
+                    AgetHitBox hitted = hit.GetComponent<AgetHitBox>();
+                    hitted.GetDamage(1, transform.position);//这是攻击对象播放都动画
+                    hitted.GetWeapon(this);
                 }
             }
         }
