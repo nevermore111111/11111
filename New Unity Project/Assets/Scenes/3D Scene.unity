@@ -7230,6 +7230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 604270632}
   - component: {fileID: 604270631}
+  - component: {fileID: 604270633}
   m_Layer: 0
   m_Name: CM FreeLook2
   m_TagString: Untagged
@@ -7359,6 +7360,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 72
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &604270633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604270630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25695443ea7ea274ba551268a51043b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freeLookCamera: {fileID: 0}
+  shakeDuration: 0.3
+  shakeAmplitude: 1.2
+  shakeFrequency: 2
 --- !u!1001 &620322174
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15020,6 +15037,7 @@ GameObject:
   - component: {fileID: 1611968905}
   - component: {fileID: 1611968904}
   - component: {fileID: 1611968903}
+  - component: {fileID: 1611968906}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -15135,6 +15153,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1611968906
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611968901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: e9ce97b7a206dc64d90931ea044e0c72, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1629456688
 GameObject:
   m_ObjectHideFlags: 0

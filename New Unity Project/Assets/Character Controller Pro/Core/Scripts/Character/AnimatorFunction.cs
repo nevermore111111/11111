@@ -1,4 +1,5 @@
 using Codice.CM.SEIDInfo;
+using JetBrains.Annotations;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
@@ -119,5 +120,9 @@ public class AnimatorFunction : MonoBehaviour
     public void End()
     {
        Attack. CharacterActor.Animator.SetTrigger("end");
+    }
+    public void Hit(int attackHitRank)
+    {
+        Debug.Log("Ö´ÐÐ´ò»÷·´À¡");
     }
 }
