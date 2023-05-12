@@ -9,30 +9,46 @@ public class CameraEffects : MonoBehaviour
     public float shakeFrequency = 2.0f;
 
     private float shakeElapsedTime = 0f;
-    private CinemachineBasicMultiChannelPerlin noise;
+    private CinemachineBasicMultiChannelPerlin[] noises;
 
     void Start()
     {
         freeLookCamera = GetComponent<CinemachineFreeLook>();
         if (freeLookCamera != null)
-            noise = freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        Debug.Log(freeLookCamera.GetRig(1));
+        {
+            noises = new CinemachineBasicMultiChannelPerlin[freeLookCamera.m_Orbits.Length];
+            for (int i = 0; i < freeLookCamera.m_Orbits.Length; i++)
+            {
+                noises[i] = freeLookCamera.GetRig(i).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            }
+        }
     }
 
     void Update()
     {
         if (shakeElapsedTime > 0)
         {
-            noise.m_AmplitudeGain = shakeAmplitude;
-            noise.m_FrequencyGain = shakeFrequency;
+            foreach (CinemachineBasicMultiChannelPerlin noise in noises)
+            {
+                if (noise)
+                {
+                    noise.m_AmplitudeGain = shakeAmplitude;
+                    noise.m_FrequencyGain = shakeFrequency;
+                }
+            }
             shakeElapsedTime -= Time.deltaTime;
         }
         else
         {
-            noise.m_AmplitudeGain = 0f;
+            foreach (CinemachineBasicMultiChannelPerlin noise in noises)
+            {
+                if(noise)
+                noise.m_AmplitudeGain = 0f;
+            }
             shakeElapsedTime = 0f;
         }
-        if(Input.GetKeyUp(KeyCode.H))
+
+        if (Input.GetKeyUp(KeyCode.H))
         {
             ShakeCamera();
             Debug.Log("»Î¶¯");

@@ -1,3 +1,4 @@
+using Cinemachine;
 using Codice.CM.SEIDInfo;
 using JetBrains.Annotations;
 using Lightbug.CharacterControllerPro.Core;
@@ -19,12 +20,15 @@ public class AnimatorFunction : MonoBehaviour
     private Attack Attack;
     CharacterStateController CharacterStateController;
     WeaponManager WeaponManager;
+    public CinemachineFreeLook CinemachineFreeLook;
+    CameraEffects CameraEffects;
 
     private void Awake()
     {
         weaponManager = GetComponentInChildren<WeaponManager>();
         Attack =transform.parent.parent.GetComponentInChildren<Attack>();
         CharacterStateController = transform.parent.parent.GetComponentInChildren<CharacterStateController>();
+        CameraEffects = CinemachineFreeLook.GetComponent<CameraEffects>();
     }
 
     public void Idle()
@@ -124,5 +128,6 @@ public class AnimatorFunction : MonoBehaviour
     public void Hit(int attackHitRank)
     {
         Debug.Log("Ö´ÐÐ´ò»÷·´À¡");
+        CameraEffects.ShakeCamera();
     }
 }

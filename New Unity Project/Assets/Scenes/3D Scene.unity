@@ -3583,7 +3583,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405930693}
-  m_LocalRotation: {x: 0.08993094, y: -0.42260206, z: 0.04218769, w: 0.90085524}
+  m_LocalRotation: {x: 0.08993092, y: -0.42260203, z: 0.042187676, w: 0.90085524}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4483,6 +4483,10 @@ PrefabInstance:
       propertyPath: mainCharacter
       value: 
       objectReference: {fileID: 8805377711411893423}
+    - target: {fileID: 1500985852, guid: 15963df9e6a96144bb9d8742a888bd7c, type: 3}
+      propertyPath: CinemachineFreeLook
+      value: 
+      objectReference: {fileID: 604270631}
     - target: {fileID: 85301174418409110, guid: 15963df9e6a96144bb9d8742a888bd7c,
         type: 3}
       propertyPath: m_LocalPosition.x
