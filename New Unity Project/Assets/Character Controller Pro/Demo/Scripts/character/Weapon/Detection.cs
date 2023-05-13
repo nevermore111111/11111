@@ -6,13 +6,20 @@ public abstract class Detection  : MonoBehaviour
 {
     public string[] targetTags;
     public List<GameObject> wasHit = new List<GameObject>();
+    public bool isHited;
     /// <summary>
-    /// 攻击完成时清空
+    /// 攻击完成时清空击中列表，击中判定改为FALSE
     /// </summary>
-    public void ClaerWasHit() => wasHit.Clear();
+    public void ClaerWasHit()
+    {
+        wasHit.Clear();
+        isHited = false;
+    }
     /// <summary>
-    /// 攻击检测方法
+    /// 攻击检测方法，传入当前的isHited变量，表示这个detection是否击中了目标
     /// </summary>
     /// <returns></returns>
-    public abstract List<Collider> GetDetection();
+    public abstract List<Collider>  GetDetection(out bool isHited);
 }
+
+

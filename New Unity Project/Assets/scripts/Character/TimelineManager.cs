@@ -3,6 +3,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Playables;
 
+/// <summary>
+/// 这个方法去更新每个攻击的特效和镜头参数
+/// </summary>
 public class TimelineManager : MonoBehaviour
 {
     public Animator animator;
@@ -16,6 +19,7 @@ public class TimelineManager : MonoBehaviour
     PlayableAsset[] attackOnGroundFist;
     PlayableAsset[] attackInAir;
     
+
 
     private void Start()
     {

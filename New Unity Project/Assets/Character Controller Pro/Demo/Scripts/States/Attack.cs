@@ -31,7 +31,7 @@ public class Attack : CharacterState
     private Vector2 normalHeightAndWidth;
     public Attack attack;
     TimelineManager timelineManager;
-    private WeaponManager weaponManager;
+    WeaponManager[] weaponManagers;
 
 
     public enum AttackMode
@@ -63,7 +63,7 @@ public class Attack : CharacterState
 
     protected override void Awake()
     {
-        weaponManager = GetComponentInChildren<WeaponManager>();
+        weaponManagers = GetComponentsInChildren<WeaponManager>();
         HeighAndWidth =  new(1f, 1.58f);
         attack = GetComponent<Attack>();
         OnceAttack = false;
@@ -97,9 +97,10 @@ public class Attack : CharacterState
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
-        if (weaponManager)
+        foreach (var manager in weaponManagers)
         {
-            weaponManager.ToggleDetection(false);
+            manager.isOnDetection = false;
+            manager.ToggleDetection(false);
         }
         base.ExitBehaviour(dt, toState);
         isJustEnter = true;

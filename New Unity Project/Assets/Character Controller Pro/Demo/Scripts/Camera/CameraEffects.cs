@@ -26,37 +26,67 @@ public class CameraEffects : MonoBehaviour
 
     void Update()
     {
+        Shake();
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            ShakeCamera();
+        }
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+            ShakeCamera(shakeDuration, shakeAmplitude);
+        }
+    }
+
+    private void Shake()
+    {
         if (shakeElapsedTime > 0)
         {
+            float normalizedShakeTime = Mathf.Clamp01(shakeElapsedTime / shakeDuration); // 计算归一化的震动时间
+            float currentShakeAmplitude = shakeAmplitude * normalizedShakeTime; // 根据归一化的时间计算当前的震动幅度
+
             foreach (CinemachineBasicMultiChannelPerlin noise in noises)
             {
                 if (noise)
                 {
-                    noise.m_AmplitudeGain = shakeAmplitude;
-                    noise.m_FrequencyGain = shakeFrequency;
+                    noise.m_AmplitudeGain = currentShakeAmplitude;
+                    //noise.m_FrequencyGain = shakeFrequency;
+                    
                 }
             }
+
             shakeElapsedTime -= Time.deltaTime;
         }
         else
         {
             foreach (CinemachineBasicMultiChannelPerlin noise in noises)
             {
-                if(noise)
-                noise.m_AmplitudeGain = 0f;
+                if (noise)
+                {
+                    noise.m_AmplitudeGain = 0f;
+                }
             }
-            shakeElapsedTime = 0f;
-        }
 
-        if (Input.GetKeyUp(KeyCode.H))
-        {
-            ShakeCamera();
-            Debug.Log("晃动");
+            shakeElapsedTime = 0f;
         }
     }
 
     public void ShakeCamera()
     {
-        shakeElapsedTime = shakeDuration;
+        shakeElapsedTime = shakeDuration; // 设置震动持续时间
+    }
+
+    public void ShakeCamera(float shakeTime, float amplitude)
+    {
+        shakeDuration = shakeTime; // 设置震动持续时间
+        shakeElapsedTime = shakeTime; // 开始震动
+
+        foreach (CinemachineBasicMultiChannelPerlin noise in noises)
+        {
+            if (noise)
+            {
+                noise.m_AmplitudeGain = amplitude;
+                //noise.m_FrequencyGain = shakeFrequency;
+            }
+        }
     }
 }
