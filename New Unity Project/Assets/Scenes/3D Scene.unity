@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.838
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.15019387, g: 0.18806474, b: 0.2565593, a: 0.838}
+  m_IndirectSpecularColor: {r: 0.15019345, g: 0.18806413, b: 0.25655842, a: 0.838}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3213,7 +3213,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349693854}
-  m_LocalRotation: {x: 0.08969632, y: -0.4227159, z: 0.042090144, w: 0.9008298}
+  m_LocalRotation: {x: 0.08969631, y: -0.42271587, z: 0.042090144, w: 0.9008298}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3583,7 +3583,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405930693}
-  m_LocalRotation: {x: 0.089931004, y: -0.42260206, z: 0.042187717, w: 0.90085524}
+  m_LocalRotation: {x: 0.089931004, y: -0.42260206, z: 0.04218772, w: 0.90085524}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4310,6 +4310,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8805377711411893421}
     m_Modifications:
+    - target: {fileID: 564754472, guid: 15963df9e6a96144bb9d8742a888bd7c, type: 3}
+      propertyPath: m_PlayableAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 778857d587b4d6c428499c58f293a373,
+        type: 2}
+    - target: {fileID: 564754472, guid: 15963df9e6a96144bb9d8742a888bd7c, type: 3}
+      propertyPath: m_SceneBindings.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 564754472, guid: 15963df9e6a96144bb9d8742a888bd7c, type: 3}
+      propertyPath: m_SceneBindings.Array.data[7].key
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 564754472, guid: 15963df9e6a96144bb9d8742a888bd7c, type: 3}
+      propertyPath: m_SceneBindings.Array.data[8].key
+      value: 
+      objectReference: {fileID: -6091738387940687147, guid: 778857d587b4d6c428499c58f293a373,
+        type: 2}
+    - target: {fileID: 564754472, guid: 15963df9e6a96144bb9d8742a888bd7c, type: 3}
+      propertyPath: m_SceneBindings.Array.data[9].key
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 564754472, guid: 15963df9e6a96144bb9d8742a888bd7c, type: 3}
+      propertyPath: m_SceneBindings.Array.data[7].value
+      value: 
+      objectReference: {fileID: 1320924595}
+    - target: {fileID: 564754472, guid: 15963df9e6a96144bb9d8742a888bd7c, type: 3}
+      propertyPath: m_SceneBindings.Array.data[8].value
+      value: 
+      objectReference: {fileID: 1320924595}
     - target: {fileID: 564754472, guid: 15963df9e6a96144bb9d8742a888bd7c, type: 3}
       propertyPath: m_ExposedReferences.m_References.Array.data[0].second
       value: 
@@ -5316,9 +5346,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freeLookCamera: {fileID: 0}
-  shakeDuration: 0.3
-  shakeAmplitude: 1.2
-  shakeFrequency: 2
+  shakeDuration: 0.1
+  shakeAmplitude: 3
+  shakeFrequency: 3
 --- !u!1001 &620322174
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10849,7 +10879,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286755445}
-  m_LocalRotation: {x: 0.08284081, y: -0.42292088, z: 0.038861617, w: 0.9015349}
+  m_LocalRotation: {x: 0.0828408, y: -0.42292088, z: 0.038861617, w: 0.9015349}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11106,6 +11136,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318035762}
   m_CullTransparentMesh: 0
+--- !u!1 &1320924595 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6159700207672757853, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1321204496
 GameObject:
   m_ObjectHideFlags: 0

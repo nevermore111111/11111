@@ -145,7 +145,6 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void Hit(int attackHitRank)
     {
-        Debug.Log("Ö´ÐÐ´ò»÷·´À¡");
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled&&manager.isHited ==true)

@@ -15,7 +15,7 @@ using UnityEngine.SearchService;
 
 public class PicChange : MonoBehaviour
 {
-    static string NumsPath = "Assets/Editor/test/Nums/Nums01.xlsx";
+   // static string NumsPath = "Assets/Editor/test/Nums/Nums01.xlsx";
     /// <summary>
     /// 
     /// </summary>

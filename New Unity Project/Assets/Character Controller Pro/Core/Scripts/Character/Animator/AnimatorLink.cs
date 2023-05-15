@@ -5,6 +5,7 @@ namespace Lightbug.CharacterControllerPro.Core
     [RequireComponent(typeof(Animator))]
     public class AnimatorLink : MonoBehaviour
     {
+       
         Animator _animator;
         bool _resetIKWeightsFlag = false;
 

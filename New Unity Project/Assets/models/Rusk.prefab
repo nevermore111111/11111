@@ -4554,7 +4554,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1500985851
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4571,8 +4571,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1500985850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4594,7 +4593,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6159700207672757853}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 682a44af98a50894e8659573f5502082, type: 3}
+  m_Script: {fileID: 11500000, guid: cb3c369a3815ea74f995822f036c9181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mainCharacter: {fileID: 0}

@@ -27,7 +27,7 @@ public class SourceHelper : ScriptableObject
     /// <summary>
     /// 载入asset的配置
     /// </summary>
-    [MenuItem("Assets/测试")]
+   // [MenuItem("Assets/测试")]
     static void Test()
     {
         SourceHelper sourceHelper = AssetDatabase.LoadAssetAtPath<SourceHelper>(AssetPath);
