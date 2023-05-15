@@ -43,12 +43,13 @@ namespace Lightbug.CharacterControllerPro.Demo
         void OnEnable()
         {
             navMeshPath = new NavMeshPath();
-            ;
+            
         }
 
         public override void EnterBehaviour(float dt)
         {
             timer = refreshTime;
+            
         }
 
         public override void UpdateBehaviour(float dt)

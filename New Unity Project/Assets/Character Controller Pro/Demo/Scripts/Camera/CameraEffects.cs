@@ -37,6 +37,9 @@ public class CameraEffects : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 变化的震动幅度，逐渐降低
+    /// </summary>
     private void Shake()
     {
         if (shakeElapsedTime > 0)
@@ -49,7 +52,7 @@ public class CameraEffects : MonoBehaviour
                 if (noise)
                 {
                     noise.m_AmplitudeGain = currentShakeAmplitude;
-                    //noise.m_FrequencyGain = shakeFrequency;
+                    noise.m_FrequencyGain = shakeFrequency;
                     
                 }
             }
@@ -75,6 +78,11 @@ public class CameraEffects : MonoBehaviour
         shakeElapsedTime = shakeDuration; // 设置震动持续时间
     }
 
+    /// <summary>
+    /// 不变的震动幅度
+    /// </summary>
+    /// <param name="shakeTime"></param>
+    /// <param name="amplitude"></param>
     public void ShakeCamera(float shakeTime, float amplitude)
     {
         shakeDuration = shakeTime; // 设置震动持续时间
@@ -85,7 +93,27 @@ public class CameraEffects : MonoBehaviour
             if (noise)
             {
                 noise.m_AmplitudeGain = amplitude;
-                //noise.m_FrequencyGain = shakeFrequency;
+                noise.m_FrequencyGain = shakeFrequency;
+            }
+        }
+    }
+    /// <summary>
+    /// 变化的振幅，三个参数自定义
+    /// </summary>
+    /// <param name="shakeTime"></param>
+    /// <param name="amplitude"></param>
+    /// <param name="frequency"></param>
+    public void ShakeCamera(float shakeTime, float amplitude,float frequency)
+    {
+        shakeDuration = shakeTime; // 设置震动持续时间
+        shakeElapsedTime = shakeTime; // 开始震动
+
+        foreach (CinemachineBasicMultiChannelPerlin noise in noises)
+        {
+            if (noise)
+            {
+                noise.m_AmplitudeGain = amplitude;
+                noise.m_FrequencyGain = frequency;
             }
         }
     }

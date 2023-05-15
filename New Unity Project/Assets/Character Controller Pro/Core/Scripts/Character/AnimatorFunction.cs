@@ -183,6 +183,7 @@ public class AnimatorFunction : MonoBehaviour
 
     public void FreezeFrames(float freezeDuration)
     {
+        Debug.Log(freezeDuration);
         originalTimeScale = Time.timeScale; // 保存原始的时间缩放值
         Time.timeScale = 0f; // 设置时间缩放为0，实现顿帧效果
 
