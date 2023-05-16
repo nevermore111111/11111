@@ -19,7 +19,7 @@ public class CheckEnemy : MonoBehaviour
     float currentWeight;
     public CinemachineFreeLook MainCamera;
     private List<Transform> enemiesInRange = new List<Transform>();
-
+    public float MoveToCharacterSpeed = 10.0f;
 
     private void Awake()
     {
@@ -129,7 +129,7 @@ public class CheckEnemy : MonoBehaviour
     /// </summary>
     private void MovePosition()
     {
-        this.transform.position = Vector3.Lerp(this.transform.position, Character.transform.position, 10.0f * Time.deltaTime);
+        this.transform.position = Vector3.Lerp(this.transform.position, Character.transform.position, MoveToCharacterSpeed * Time.deltaTime);
     }
 
 

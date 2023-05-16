@@ -1,11 +1,7 @@
 using Cinemachine;
-using Codice.CM.SEIDInfo;
-using DG.DemiEditor;
-using JetBrains.Annotations;
-using Lightbug.CharacterControllerPro.Core;
+
 using Lightbug.CharacterControllerPro.Implementation;
-using Lightbug.Utilities;
-using System.Collections;
+
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -95,15 +91,11 @@ public class AnimatorFunction : MonoBehaviour
         Attack.canChangeState = false;
         Attack.OnceAttack = false;
         Attack.CharacterActor.Animator.SetInteger("specialAttack", 0);
-        //if(Input.GetButton("Lock"))
-        //{
-        //    CharacterActor.Forward = Vector3.zero;
-        //}
+
         if (mainCharacter.enemys.Count != 0)
         {
             //新语法
             GameObject[] gamesEnemy = mainCharacter.enemys.Select(m => m.gameObject).ToArray();
-
             mainCharacter.selectEnemy = HelpTools01.FindClosest(Attack.CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
             Vector3 Forward = (mainCharacter.selectEnemy.transform.position - Attack.CharacterActor.transform.position).normalized;
             Attack.CharacterActor.Forward = new(Forward.x, 0, Forward.z);
@@ -113,6 +105,35 @@ public class AnimatorFunction : MonoBehaviour
             //没有单位就可以自由转向，但是只能在攻击开始的时候转向
             Attack.CharacterActor.Forward = CharacterStateController.InputMovementReference;
         }
+        //if (mainCharacter.enemys.Count != 0)
+        //{
+        //    GameObject[] gamesEnemy = mainCharacter.enemys.Select(m => m.gameObject).ToArray();
+        //    mainCharacter.selectEnemy = HelpTools01.FindClosest(Attack.CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
+        //    Vector3 targetDirection = (mainCharacter.selectEnemy.transform.position - Attack.CharacterActor.transform.position).normalized;
+
+        //    float angleDifference = Vector3.Angle(targetDirection, Attack.CharacterActor.Forward);
+        //    if (angleDifference <= 60f)
+        //    {
+        //        // 逐渐转向目标方向
+        //        float rotationSpeed = 200f; // 转身速度（度/秒）
+        //        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+        //        Quaternion currentRotation = Attack.CharacterActor.transform.rotation;
+
+        //        while (Quaternion.Angle(currentRotation, targetRotation) > 0.1f)
+        //        {
+        //            currentRotation = Quaternion.RotateTowards(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
+        //            Attack.CharacterActor.transform.rotation = currentRotation;
+        //            Debug.Log("开启");
+        //            yield return null; // 等待一帧更新
+        //        }
+        //    }
+
+        //   // Attack.CharacterActor.Forward = new Vector3(targetDirection.x, 0f, targetDirection.z);
+        //}
+        //else
+        //{
+        //    Attack.CharacterActor.Forward = CharacterStateController.InputMovementReference;
+        //}
     }
     public void CanGetInput()
     {
@@ -183,7 +204,7 @@ public class AnimatorFunction : MonoBehaviour
 
     public void FreezeFrames(float freezeDuration)
     {
-        Debug.Log(freezeDuration);
+
         originalTimeScale = Time.timeScale; // 保存原始的时间缩放值
         Time.timeScale = 0f; // 设置时间缩放为0，实现顿帧效果
 

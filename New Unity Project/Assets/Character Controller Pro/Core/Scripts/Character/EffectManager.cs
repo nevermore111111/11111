@@ -14,7 +14,7 @@ public class EffectManager : MonoBehaviour
         Path = "Assets/Character Controller Pro/Core/Scripts/Character/杂项/Effect Manager_Rusk.asset";
         {
             Path.Replace("Rusk",this.gameObject.name);
-            effectManagerData = AssetDatabase.LoadMainAssetAtPath(Path) as EffectManagerData;
+            effectManagerData = Resources.Load<EffectManagerData>("Effect Manager_Rusk");
         }
         // 访问保存的数据
         List<GameObject> effect = effectManagerData.effectsPrefab;
