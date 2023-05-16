@@ -11,6 +11,8 @@ public class CameraEffects : MonoBehaviour
     private float shakeElapsedTime = 0f;
     private CinemachineBasicMultiChannelPerlin[] noises;
 
+    public float zoomSpeed = 10f;
+
     void Start()
     {
         freeLookCamera = GetComponent<CinemachineFreeLook>();
@@ -31,10 +33,24 @@ public class CameraEffects : MonoBehaviour
         {
             ShakeCamera();
         }
-        if(Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             ShakeCamera(shakeDuration, shakeAmplitude);
         }
+
+        ChangeZoom();
+    }
+
+    private void ChangeZoom()
+    {
+        // 获取键盘输入
+        float zoomInput = Input.GetAxis("Mouse ScrollWheel");
+
+        // 调整视角远近
+        freeLookCamera.m_Lens.FieldOfView += zoomInput * zoomSpeed;
+
+        // 限制视角范围
+        freeLookCamera.m_Lens.FieldOfView = Mathf.Clamp(freeLookCamera.m_Lens.FieldOfView, 20f, 100f);
     }
 
     /// <summary>

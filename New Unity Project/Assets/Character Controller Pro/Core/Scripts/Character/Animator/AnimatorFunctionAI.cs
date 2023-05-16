@@ -17,5 +17,9 @@ namespace Rusk
         {
 
         }
+        public void AttackEnd()
+        {
+
+        }
     }
 }

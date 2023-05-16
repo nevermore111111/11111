@@ -162,61 +162,65 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public override void CheckExitTransition()
         {
-            if(CanEvade())
+            if (IsPlayer)
             {
-                CharacterStateController.EnqueueTransition<Evade>();
-            }
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                Debug.Log("jinlai");
-                CharacterStateController.EnqueueTransition<Grap>();
-            }
-            if (CharacterActions.attack.value )
-            {
-                if(CharacterActor.IsGrounded)
+                if (CanEvade())
                 {
-                    if(attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
-                    {
-                        CharacterStateController.EnqueueTransition<AttackOnGround>();
-                    }
-                    else if(attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
-                    {
-                        CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
-                    }
+                    CharacterStateController.EnqueueTransition<Evade>();
                 }
-                else if(!CharacterActor.IsGrounded)
+                if (Input.GetKeyDown(KeyCode.M))
                 {
-                    if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
-                    {
-
-                    }
-                    else if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
-                    {
-                        
-                    }
+                    Debug.Log("jinlai");
+                    CharacterStateController.EnqueueTransition<Grap>();
                 }
-                
-            }
-            if (CharacterActions.jetPack.value)
-            {
-                CharacterStateController.EnqueueTransition<JetPack>();
-            }
-            else if (CharacterActions.dash.Started)
-            {
-                CharacterStateController.EnqueueTransition<Dash>();
-            }
-            else if (CharacterActor.Triggers.Count >= 1 )
-            {
-                CharacterStateController.EnqueueTransition<LadderClimbing>();
-                CharacterStateController.EnqueueTransition<RopeClimbing>();
-            }
-            else if (!CharacterActor.IsGrounded)
-            {
-                if (!CharacterActions.crouch.value)
-                    CharacterStateController.EnqueueTransition<WallSlide>();
+                if (CharacterActions.attack.value)
+                {
+                    if (CharacterActor.IsGrounded)
+                    {
+                        if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
+                        {
+                            CharacterStateController.EnqueueTransition<AttackOnGround>();
+                        }
+                        else if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                        {
+                            CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+                        }
+                    }
+                    else if (!CharacterActor.IsGrounded)
+                    {
+                        if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
+                        {
 
-                CharacterStateController.EnqueueTransition<LedgeHanging>();
+                        }
+                        else if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                        {
+
+                        }
+                    }
+
+                }
+                if (CharacterActions.jetPack.value)
+                {
+                    CharacterStateController.EnqueueTransition<JetPack>();
+                }
+                else if (CharacterActions.dash.Started)
+                {
+                    CharacterStateController.EnqueueTransition<Dash>();
+                }
+                else if (CharacterActor.Triggers.Count >= 1)
+                {
+                    CharacterStateController.EnqueueTransition<LadderClimbing>();
+                    CharacterStateController.EnqueueTransition<RopeClimbing>();
+                }
+                else if (!CharacterActor.IsGrounded)
+                {
+                    if (!CharacterActions.crouch.value)
+                        CharacterStateController.EnqueueTransition<WallSlide>();
+
+                    CharacterStateController.EnqueueTransition<LedgeHanging>();
+                }
             }
+
         }
 
         public override void ExitBehaviour(float dt, CharacterState toState)

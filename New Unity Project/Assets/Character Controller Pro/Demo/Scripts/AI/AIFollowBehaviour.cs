@@ -49,7 +49,6 @@ namespace Lightbug.CharacterControllerPro.Demo
         public override void EnterBehaviour(float dt)
         {
             timer = refreshTime;
-            
         }
 
         public override void UpdateBehaviour(float dt)
