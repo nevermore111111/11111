@@ -4,38 +4,34 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PostProcessing
-  - UI
+  - Ice
   - Water
-  - Ignore Raycast
-  - GameController
-  - Player
-  - MainCamera
-  - EditorOnly
-  - Finish
-  - Respawn
-  - Untagged
-  - Enemy
-  - AlarmingObject
-  - BlueEnemy
-  - RedEnemy
-  - Enemy1
-  - Enemy2
+  - Grass
+  - Ledge
+  - Honey
+  - Mud
+  - Boost
+  - WallSlide
+  - JumpDown
+  - enemy
+  - EnemyFind
+  - Ladder
+  - Rope
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - Cover
+  - Grap
   - 
-  - Enemy
+  - One Way Platform
   - 
   - 
-  - PostProcessing
-  - Obstacle
-  - Ground
+  - 
+  - 
+  - 
   - 
   - 
   - 
