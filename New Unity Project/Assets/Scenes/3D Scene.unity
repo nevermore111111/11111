@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.838
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.15019345, g: 0.18806413, b: 0.25655842, a: 0.838}
+  m_IndirectSpecularColor: {r: 0.15019387, g: 0.18806474, b: 0.2565593, a: 0.838}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3189,7 +3189,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 48.40015
+    FieldOfView: 46
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -3213,7 +3213,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349693854}
-  m_LocalRotation: {x: 0.08204635, y: -0.4230589, z: 0.038500503, w: 0.9015583}
+  m_LocalRotation: {x: 0.08427796, y: -0.42296234, z: 0.03954768, w: 0.9013524}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3862,7 +3862,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405930693}
-  m_LocalRotation: {x: 0.089931004, y: -0.42260206, z: 0.042187717, w: 0.90085524}
+  m_LocalRotation: {x: 0.089931004, y: -0.42260206, z: 0.04218772, w: 0.90085524}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5727,7 +5727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &495837298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6475,7 +6475,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1385997539}
   m_CommonLens: 1
   m_Lens:
-    FieldOfView: 48.40015
+    FieldOfView: 46
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -10697,7 +10697,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 48.40015
+  field of view: 46
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -10722,7 +10722,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162800274}
-  m_LocalRotation: {x: 0.07241956, y: -0.4234458, z: 0.033983096, w: 0.9023825}
+  m_LocalRotation: {x: 0.073542826, y: -0.42340317, z: 0.034510184, w: 0.90229166}
   m_LocalPosition: {x: -110.49099, y: 0.31039453, z: 91.80961}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11309,13 +11309,13 @@ MonoBehaviour:
       m_Bits: 4294967295
     hostileAndAlertLayers:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 128
     hostileTags:
     - Player
     alertTags: []
     visionDuringNormalState:
-      coneAngle: 90
-      sightRange: 10
+      coneAngle: 57
+      sightRange: 13.6
     visionDuringAlertState:
       coneAngle: 100
       sightRange: 15
@@ -11654,20 +11654,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   turnSpeed: 5
-  idleAnim: 
-  moveAnim: 
+  idleAnim: Idle
+  moveAnim: Walking
   idleMoveT: 0.25
   ranged: 0
   distanceFromEnemy: 5
   attackDistance: 1
   layersCheckOnAttacking:
     serializedVersion: 2
-    m_Bits: 0
-  attacks: []
+    m_Bits: 128
+  attacks:
+  - attackAnim: Punch
+    attackDuration: 1
+    animT: 0.25
+    useAudio: 0
+    audioIndex: 0
+  - attackAnim: Kick
+    attackDuration: 1
+    animT: 0.25
+    useAudio: 0
+    audioIndex: 0
   attackEvent:
     m_PersistentCalls:
       m_Calls: []
-  attackInIntervals: 0
+  attackInIntervals: 1
   attackInIntervalsTime: {x: 1, y: 4}
   callOthers: 0
   callRadius: 0
@@ -11697,7 +11707,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   onAttackRotateSpeed: 10
-  onAttackRotate: 0
+  onAttackRotate: 1
   searchLocationRadius: 0
   timeToStartSearch: 2
   searchPoints: 3
@@ -11732,7 +11742,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   turnSpeed: 5
-  idleAnim: []
+  idleAnim:
+  - Melee Idle
   moveAnim: 
   animT: 0.25
   idleTime: {x: 5, y: 5}
@@ -11765,8 +11776,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   turnSpeed: 5
-  idleAnim: []
-  moveAnim: 
+  idleAnim:
+  - Idle
+  - Bored Idle
+  moveAnim: Walking
   animT: 0.25
   idleTime: {x: 5, y: 5}
   playAudios: 0
@@ -12761,7 +12774,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286755445}
-  m_LocalRotation: {x: 0.08284081, y: -0.42292088, z: 0.038861617, w: 0.9015349}
+  m_LocalRotation: {x: 0.0828408, y: -0.42292088, z: 0.038861617, w: 0.9015349}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16097,7 +16110,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 48.40015
+    FieldOfView: 46
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -16121,7 +16134,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737914593}
-  m_LocalRotation: {x: 0.07241955, y: -0.42344573, z: 0.03398309, w: 0.9023826}
+  m_LocalRotation: {x: 0.07354282, y: -0.42340308, z: 0.034510188, w: 0.9022917}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17626,7 +17639,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 48.40015
+    FieldOfView: 46
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -19169,7 +19182,8 @@ GameObject:
   - component: {fileID: 8805377711411893422}
   - component: {fileID: 8805377711411893423}
   - component: {fileID: 8805377711411893424}
-  m_Layer: 0
+  - component: {fileID: 8805377711411893425}
+  m_Layer: 7
   m_Name: Graphics
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -19238,6 +19252,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.71
   m_Center: {x: 0, y: 0.83, z: 0}
+--- !u!136 &8805377711411893425
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805377711411893420}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.68, z: 0}
 --- !u!1 &8805377712143352352
 GameObject:
   m_ObjectHideFlags: 0
