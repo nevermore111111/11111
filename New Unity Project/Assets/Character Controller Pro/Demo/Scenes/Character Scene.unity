@@ -37056,7 +37056,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: -179.99998, z: 0}
 --- !u!95 &1924323481
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -37073,8 +37073,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!54 &1924323482
 Rigidbody:
   m_ObjectHideFlags: 0

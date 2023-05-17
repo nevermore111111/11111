@@ -240,7 +240,7 @@ namespace Slate
         Playable CreateClipsMixer(PlayableGraph graph) {
             var clipActions = clips.OfType<PlayAnimatorClip>().ToList();
             ports = new Dictionary<PlayAnimatorClip, int>();
-            clipsMixer = AnimationMixerPlayable.Create(graph, clipActions.Count, true);
+          // clipsMixer = AnimationMixerPlayable.Create(graph, clipActions.Count, true);
             for ( var i = 0; i < clipActions.Count; i++ ) {
                 var playAnimClip = clipActions[i];
                 var clipPlayable = AnimationClipPlayable.Create(graph, playAnimClip.animationClip);
