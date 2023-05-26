@@ -10,4 +10,5 @@ public class AssetHelper : ScriptableObject
     public PlayableAsset[] AttackOnGround;
     public PlayableAsset[] AttackOnGround_fist;
     public PlayableAsset[] AttackInAir;
+    public int[] AttackInAir_fist_int;
 }
