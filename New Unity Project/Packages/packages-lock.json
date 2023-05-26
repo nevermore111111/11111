@@ -1,19 +1,5 @@
 {
   "dependencies": {
-    "com.unity.ads": {
-      "version": "2.0.8",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.analytics": {
-      "version": "3.2.2",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
     "com.unity.burst": {
       "version": "1.8.4",
       "depth": 0,
@@ -101,13 +87,6 @@
     "com.unity.nuget.mono-cecil": {
       "version": "1.11.4",
       "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.purchasing": {
-      "version": "2.0.3",
-      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
