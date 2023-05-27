@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Rusk
-{
+
+
     /// <summary>
     /// 
     /// <summary>
     public class AnimatorFunctionAI:MonoBehaviour
     {
+        Animator Animator;
+        
+        public void Start()
+        {
+            Animator = GetComponent<Animator>();
+        }
         public void Stop()
         {
 
@@ -19,7 +25,11 @@ namespace Rusk
         }
         public void AttackEnd()
         {
-
+            Animator.applyRootMotion = false;
         }
+        public void AttackStart()
+        {
+            Animator.applyRootMotion = true;
+        }
+       
     }
-}

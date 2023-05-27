@@ -1,3 +1,4 @@
+using Lightbug.CharacterControllerPro.Implementation;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,7 +13,7 @@ namespace BlazeAISpace
         public string idleAnim;
         public string moveAnim;
         [Min(0)] public float idleMoveT = 0.25f;
-
+        
 
         [Tooltip("If enabled, will adapt the distancing calculations to suit that of a ranged AI. So for example: if the target is unreachable but within attack distance then the AI will attack.")]
         public bool ranged;
@@ -647,6 +648,7 @@ namespace BlazeAISpace
         // launch attack
         void Attack()
         {
+            blaze.useRootMotion = true;
             // if attacks array is empty then return
             if (attacks.Length <= 0) {
                 blaze.isAttacking = false;
@@ -837,6 +839,7 @@ namespace BlazeAISpace
 
         void StopAttack()
         {
+            blaze.useRootMotion = false;
             blaze.isAttacking = false;
             startAttackTimer = false;
             _attackDuration = 0f;
