@@ -106,6 +106,9 @@ public class CheckEnemy : MonoBehaviour
         //
         SetCamera();
         MovePosition();
+
+        
+
     }
     /// <summary>
     /// 设置主摄像机的优先级，当选择单位中没有敌人的时候，那么将主摄像机的优先级提升。

@@ -50,7 +50,7 @@ public class CameraEffects : MonoBehaviour
         freeLookCamera.m_Lens.FieldOfView += zoomInput * zoomSpeed;
 
         // œﬁ÷∆ ”Ω«∑∂Œß
-        freeLookCamera.m_Lens.FieldOfView = Mathf.Clamp(freeLookCamera.m_Lens.FieldOfView, 20f, 100f);
+        freeLookCamera.m_Lens.FieldOfView = Mathf.Clamp(freeLookCamera.m_Lens.FieldOfView, 40f, 60f);
     }
 
     /// <summary>

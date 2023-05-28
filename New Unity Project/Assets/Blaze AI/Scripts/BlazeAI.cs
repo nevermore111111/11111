@@ -1870,7 +1870,7 @@ public class BlazeAI : MonoBehaviour
     public bool IsAudioScriptableEmpty()
     {
         if (audioScriptable == null) {
-            Debug.Log("A behaviour checked for an audio scriptable to play an audio but the property was empty.");
+           // Debug.Log("A behaviour checked for an audio scriptable to play an audio but the property was empty.");
             return true;
         }
 
