@@ -703,86 +703,6 @@ MonoBehaviour:
   onlyAttackAfterCover: 0
   playAudioOnGoingToCover: 0
   alwaysPlayAudio: 0
---- !u!114 &111287892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111287888}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c28812d26a259df4bafd1b5df06a0fd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  turnSpeed: 5
-  idleAnim: 
-  moveAnim: 
-  idleMoveT: 0.25
-  distanceFromEnemy: 20
-  attackDistance: 20
-  layersCheckOnAttacking:
-    serializedVersion: 2
-    m_Bits: 0
-  shootingAnim: 
-  shootingAnimT: 0.1
-  shootEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  shootEvery: {x: 3, y: 5}
-  singleShotDuration: 0.5
-  delayBetweenEachShot: 0.2
-  totalShootTime: {x: 2, y: 4}
-  firstSightDecision: 2
-  coverBlownDecision: 2
-  attackEnemyCover: 2
-  braveMeter: 0
-  changeCoverFrequency: 0
-  callOthers: 0
-  callRadius: 0
-  showCallRadius: 0
-  agentLayersToCall:
-    serializedVersion: 2
-    m_Bits: 0
-  callOthersTime: 0
-  receiveCallFromOthers: 0
-  moveBackwards: 0
-  moveBackwardsDistance: 5
-  moveBackwardsSpeed: 3
-  moveBackwardsAnim: 
-  moveBackwardsAnimT: 0.25
-  moveBackwardsAttack: 0
-  strafe: 0
-  strafeSpeed: 5
-  strafeTime: {x: 3, y: 5}
-  strafeWaitTime: {x: 0.2, y: 1}
-  leftStrafeAnim: 
-  rightStrafeAnim: 
-  strafeAnimT: 0.25
-  strafeLayersToAvoid:
-    serializedVersion: 2
-    m_Bits: 0
-  searchLocationRadius: 0
-  timeToStartSearch: 2
-  searchPoints: 3
-  searchPointAnim: 
-  pointWaitTime: 3
-  endSearchAnim: 
-  endSearchAnimTime: 3
-  searchAnimsT: 0.25
-  playAudioOnSearchStart: 0
-  playAudioOnSearchEnd: 0
-  returnPatrolAnim: 
-  returnPatrolAnimT: 0.25
-  returnPatrolTime: 3
-  playAudioOnReturnPatrol: 0
-  playAudioOnChase: 0
-  alwaysPlayOnChase: 0
-  playAudioDuringShooting: 0
-  alwaysPlayDuringShooting: 0
-  playAudioOnMoveToShoot: 0
-  alwaysPlayOnMoveToShoot: 0
 --- !u!114 &111287893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,16 +717,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   turnSpeed: 5
-  idleAnim: 
-  moveAnim: 
+  idleAnim: Melee Idle
+  moveAnim: Fight Run
   idleMoveT: 0.25
   ranged: 0
   distanceFromEnemy: 5
-  attackDistance: 1
+  attackDistance: 4
   layersCheckOnAttacking:
     serializedVersion: 2
     m_Bits: 0
-  attacks: []
+  attacks:
+  - attackAnim: Punch
+    attackDuration: 3
+    animT: 0.25
+    useAudio: 0
+    audioIndex: 0
+  - attackAnim: Kick
+    attackDuration: 1
+    animT: 0.25
+    useAudio: 0
+    audioIndex: 0
   attackEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -828,13 +758,13 @@ MonoBehaviour:
   turnToTarget: 1
   turnSensitivity: 0.7
   useTurnAnims: 0
-  strafe: 0
+  strafe: 1
   strafeDirection: 2
   strafeSpeed: 3
-  strafeTime: {x: 3, y: 5}
-  strafeWaitTime: {x: 0.3, y: 1}
-  leftStrafeAnim: 
-  rightStrafeAnim: 
+  strafeTime: {x: 0.5, y: 1}
+  strafeWaitTime: {x: 0.1, y: 0.5}
+  leftStrafeAnim: Left Strafe
+  rightStrafeAnim: Right Strafe
   strafeAnimT: 0.25
   strafeLayersToAvoid:
     serializedVersion: 2
@@ -908,8 +838,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   turnSpeed: 5
-  idleAnim: []
-  moveAnim: 
+  idleAnim:
+  - Idle
+  moveAnim: Walking
   animT: 0.25
   idleTime: {x: 5, y: 5}
   playAudios: 0
@@ -1006,7 +937,7 @@ MonoBehaviour:
   alertStateBehaviour: {fileID: 111287894}
   attackStateBehaviour: {fileID: 111287893}
   coverShooterMode: 0
-  coverShooterBehaviour: {fileID: 111287892}
+  coverShooterBehaviour: {fileID: 0}
   goingToCoverBehaviour: {fileID: 111287891}
   useSurprisedState: 0
   surprisedStateBehaviour: {fileID: 0}
@@ -1139,7 +1070,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 111287888}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 1
@@ -1191,7 +1122,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 111287888}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -6992,7 +6923,8 @@ Transform:
   m_LocalPosition: {x: -78.71, y: 0.052, z: 75.952995}
   m_LocalScale: {x: 13.324945, y: 0.6618395, z: 2.4754455}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 762179533}
   m_Father: {fileID: 0}
   m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 32.503002}
@@ -8590,6 +8522,69 @@ MonoBehaviour:
       value: 0
     movement:
       value: {x: 0, y: 0}
+--- !u!1001 &762179532
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 501368179}
+    m_Modifications:
+    - target: {fileID: 100054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+      propertyPath: m_Name
+      value: GreatSword_Strafe_Walk_R_Root
+      objectReference: {fileID: 0}
+    - target: {fileID: 400054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 86a54ef5092eca84fbd01fe7a2f2c88c, type: 3}
+--- !u!4 &762179533 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400054, guid: 86a54ef5092eca84fbd01fe7a2f2c88c,
+    type: 3}
+  m_PrefabInstance: {fileID: 762179532}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &823095686
 GameObject:
   m_ObjectHideFlags: 0
