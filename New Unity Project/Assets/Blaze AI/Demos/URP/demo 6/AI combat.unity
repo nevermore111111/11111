@@ -5728,7 +5728,7 @@ MonoBehaviour:
   callOthersTime: 0
   showCallRadius: 0
   receiveCallFromOthers: 0
-  moveBackwards: 0
+  moveBackwards: 1
   moveBackwardsDistance: 4.5
   moveBackwardsSpeed: 3
   moveBackwardsAnim: Jog Backwards
