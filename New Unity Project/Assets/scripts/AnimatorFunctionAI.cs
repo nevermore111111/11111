@@ -9,12 +9,12 @@ using UnityEngine;
 /// <summary>
 public class AnimatorFunctionAI : MonoBehaviour
 {
-    Animator Animator;
-
+    Animator animator;
+    private bool isTimeChanged = false;
 
     public void Start()
     {
-        Animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
     public void Stop()
     {
@@ -26,11 +26,11 @@ public class AnimatorFunctionAI : MonoBehaviour
     }
     public void AttackEnd()
     {
-        Animator.applyRootMotion = false;
+        animator.applyRootMotion = false;
     }
     public void AttackStart()
     {
-        Animator.applyRootMotion = true;
+        animator.applyRootMotion = true;
     }
     public void MeleeHitFinished()
     {
@@ -39,6 +39,41 @@ public class AnimatorFunctionAI : MonoBehaviour
     public void Attacking() 
     {
 
+    }
+
+    public void SlowDownAnimation(float speed)
+    {
+        animator.speed = speed;
+    }
+
+    public void RestoreAnimationSpeed()
+    {
+        animator.speed = 1f;
+    }
+
+    public void ChangeAnimationTime(float deltaTime)
+    {
+        if (!isTimeChanged)
+        {
+            animator.speed = 0.3f;
+            isTimeChanged = true;
+        }
+
+        StartCoroutine(ResetAnimationTime(deltaTime));
+    }
+
+
+
+
+
+    private System.Collections.IEnumerator ResetAnimationTime(float deltaTime)
+    {
+        yield return new WaitForSecondsRealtime(deltaTime);
+        if (isTimeChanged)
+        {
+            animator.speed = 1f;
+            isTimeChanged = false;
+        }
     }
 
 }
