@@ -118,11 +118,11 @@ public class CheckEnemy : MonoBehaviour
         //
         if (mainCharacter.enemys.Count == 0)
         {
-           // MainCamera.Priority = 100;
+            MainCamera.Priority = 100;
         }
         else
         {
-            //MainCamera.Priority = 5;
+            MainCamera.Priority = 5;
         }
 
     }
