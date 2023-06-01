@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyCharacter : CharacterInfo, IAgent
 {
      CharacterActor characterActor;
+    public float targetGroupSize = 1;
     protected override  void Awake()
     {
         base.Awake();

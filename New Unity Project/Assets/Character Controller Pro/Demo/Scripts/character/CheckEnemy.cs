@@ -4,6 +4,9 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.Timeline;
 using System.Linq;
+using Lightbug.CharacterControllerPro.Implementation;
+using Lightbug.CharacterControllerPro.Core;
+using Lightbug.CharacterControllerPro.Demo;
 
 /// <summary>
 /// 
@@ -20,11 +23,14 @@ public class CheckEnemy : MonoBehaviour
     public CinemachineFreeLook MainCamera;
     private List<Transform> enemiesInRange = new List<Transform>();
     public float MoveToCharacterSpeed = 10.0f;
-
+    public CharacterActor characterActor ;
+    private NormalMovement NormalMovement;
+    private float MoveDeceleration;
     private void Awake()
     {
-
+        NormalMovement = characterActor.GetComponentInChildren<NormalMovement>();
         float currentWeight = targetGroup.m_Targets[0].weight;
+        MoveDeceleration = NormalMovement.planarMovementParameters.stableGroundedDeceleration;
     }
     IEnumerator AdjustTargetWeight(float newWeight, float duration, int targetIndex)
     {
@@ -49,6 +55,10 @@ public class CheckEnemy : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         AddEnemy(other);
+        if(mainCharacter.enemys.Count != 0)
+        {
+            NormalMovement.planarMovementParameters.stableGroundedDeceleration = MoveDeceleration * 1.5f;
+        }
         if (other.gameObject.CompareTag("enemy") && !mainCharacter.enemys.Contains(other.gameObject.GetComponentInParent<CharacterInfo>()))
         {
             // 在敌人重新进入范围时，停止延迟删除协程
@@ -88,6 +98,10 @@ public class CheckEnemy : MonoBehaviour
             // 在敌人离开范围时，延迟删除目标并逐渐减小权重
             StartCoroutine(DelayedRemoveMember(enemyTransform, 1f));
             StartCoroutine(AdjustTargetWeight(0f, 1f, targetIndex));
+        }
+        if(mainCharacter.enemys.Count == 0)
+        {
+            NormalMovement.planarMovementParameters.stableGroundedDeceleration = MoveDeceleration ;
         }
     }
 

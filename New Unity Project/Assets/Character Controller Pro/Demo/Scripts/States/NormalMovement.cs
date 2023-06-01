@@ -93,7 +93,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         protected bool wantToCrouch = false;
         protected bool isCrouched = false;
 
-        protected PlanarMovementParameters.PlanarMovementProperties currentMotion = new PlanarMovementParameters.PlanarMovementProperties();
+        public PlanarMovementParameters.PlanarMovementProperties currentMotion = new PlanarMovementParameters.PlanarMovementProperties();
         bool reducedAirControlFlag = false;
         float reducedAirControlInitialTime = 0f;
         float reductionDuration = 0.5f;
