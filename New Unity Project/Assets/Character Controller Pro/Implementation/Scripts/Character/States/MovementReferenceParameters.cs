@@ -104,7 +104,13 @@ namespace Lightbug.CharacterControllerPro.Implementation
                         // MovementReferenceForward = CustomUtilities.ProjectOnTangent( externalReference.forward , characterActor.GroundStableNormal , characterActor.Up );
                         // MovementReferenceRight = CustomUtilities.ProjectOnTangent( externalReference.right , characterActor.GroundStableNormal , characterActor.Up );
                         MovementReferenceForward = Vector3.Normalize(Vector3.ProjectOnPlane(externalReference.forward, characterActor.Up));
+
                         MovementReferenceRight = Vector3.Normalize(Vector3.ProjectOnPlane(externalReference.right, characterActor.Up));
+
+                        //MovementReferenceForward = externalReference.forward;
+
+                        //MovementReferenceRight = externalReference.right;
+
                     }
                     else
                         Debug.Log("CharacterStateController: the external reference is null! assign a Transform.");

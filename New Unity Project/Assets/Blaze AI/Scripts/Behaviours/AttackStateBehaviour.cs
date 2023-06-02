@@ -676,6 +676,12 @@ namespace BlazeAISpace
 
             // choose a random attack
             int index = Random.Range(0, attacks.Length);
+
+            //需要在这个地方去根据当前条件修改。
+
+
+
+
             // public property to check attack index 
             chosenAttackIndex = index;
 
