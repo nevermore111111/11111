@@ -13,6 +13,8 @@ public class CameraEffects : MonoBehaviour
 
     public float zoomSpeed = 10f;
 
+    public MainCharacter MainCharacter;
+
     void Start()
     {
         freeLookCamera = GetComponent<CinemachineFreeLook>();
@@ -41,6 +43,22 @@ public class CameraEffects : MonoBehaviour
         ChangeZoom();
     }
 
+    private void SetCamera()
+    {
+        if (MainCharacter.enemys.Count == 0)
+        {
+            freeLookCamera.Priority = 100;
+        }
+        else
+        {
+            freeLookCamera.Priority = 5;
+        }
+    }    
+
+
+    /// <summary>
+    /// 根据键盘输入调整fov
+    /// </summary>
     private void ChangeZoom()
     {
         // 获取键盘输入

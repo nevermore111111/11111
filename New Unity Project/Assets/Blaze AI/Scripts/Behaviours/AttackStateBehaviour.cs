@@ -1,7 +1,9 @@
 using Lightbug.CharacterControllerPro.Implementation;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace BlazeAISpace
 {
@@ -150,6 +152,11 @@ namespace BlazeAISpace
             public float animT;
             public bool useAudio;
             public int audioIndex;
+            [Tooltip("这个是这个攻击的最短攻击距离,都不满足会用第一个攻击")]
+            public float minDistance;
+            [Tooltip("这个是这个攻击的最长攻击距离")]
+            public float maxDistance;
+
         }
 
 
@@ -417,7 +424,7 @@ namespace BlazeAISpace
         #endregion
 
         #region ATTACK
-        
+        List<Attacks> attacksInRange = new List<Attacks>();
         // engage found target
         void Engage(Transform target)
         {
@@ -439,7 +446,7 @@ namespace BlazeAISpace
                 if (!startAttackInIntervals) {
                     if (!blaze.isAttacking) {
                         AddEnemyManager(target, false);
-                        intervalAttackTime = Random.Range(attackInIntervalsTime.x, attackInIntervalsTime.y);
+                        intervalAttackTime =UnityEngine. Random.Range(attackInIntervalsTime.x, attackInIntervalsTime.y);
                         startAttackInIntervals = true;
                     }
                 }
@@ -672,15 +679,23 @@ namespace BlazeAISpace
                     return;
                 }
             }
-
+            float distance = blaze.distanceToEnemy;
 
             // choose a random attack
-            int index = Random.Range(0, attacks.Length);
+            
 
             //需要在这个地方去根据当前条件修改。
+            //删除不需要的index，然后再随机
+            foreach (Attacks currentAttack in attacks)
+            {
+                if (currentAttack.minDistance < blaze.distanceToEnemy && blaze.distanceToEnemy < currentAttack.maxDistance)
+                {
+                    attacksInRange.Add(currentAttack);
+                }
+            }
+            int index =UnityEngine.Random.Range(0, attacksInRange.Count);
 
-
-
+            index = Array.IndexOf(attacks, attacksInRange[index]);
 
             // public property to check attack index 
             chosenAttackIndex = index;
