@@ -26,12 +26,12 @@ public class CapsuleDetection : Detection
                 Gizmos.DrawWireSphere(endPoint.position, radius);
 
                 Vector3 perpendicular = Vector3.Cross(direction, Vector3.up).normalized;
-                Gizmos.DrawLine(startPoint.position + perpendicular * radius, endPoint.position + perpendicular);
-                Gizmos.DrawLine(startPoint.position - perpendicular * radius, endPoint.position - perpendicular);
+                Gizmos.DrawLine(startPoint.position + perpendicular * radius, endPoint.position + perpendicular * radius);
+                Gizmos.DrawLine(startPoint.position - perpendicular * radius, endPoint.position - perpendicular * radius);
 
                 perpendicular = Vector3.Cross(perpendicular,direction).normalized;
-                Gizmos.DrawLine(startPoint.position + perpendicular * radius, endPoint.position + perpendicular);
-                Gizmos.DrawLine(startPoint.position - perpendicular * radius, endPoint.position - perpendicular);
+                Gizmos.DrawLine(startPoint.position + perpendicular * radius, endPoint.position + perpendicular * radius);
+                Gizmos.DrawLine(startPoint.position - perpendicular * radius, endPoint.position - perpendicular * radius);
             }
         }
     }

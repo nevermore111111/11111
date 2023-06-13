@@ -27,12 +27,13 @@ public class RotateToPlayerBack : MonoBehaviour
     {
         // ªÒ»°Cinemachine FreeLook Camera
         freeLookCamera = GetComponent<CinemachineFreeLook>();
+        MainCharacter = GetComponent<CameraEffects>().MainCharacter;
     }
 
     private void Update()
     {
         RotateToEnemy();
-        MainCharacter = GetComponent<CameraEffects>().MainCharacter;
+       
     }
 
     private void RotateToEnemy()

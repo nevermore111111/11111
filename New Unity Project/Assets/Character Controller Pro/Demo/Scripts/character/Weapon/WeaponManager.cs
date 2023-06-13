@@ -1,10 +1,11 @@
+using Cinemachine;
 using Lightbug.CharacterControllerPro.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 //我需要做的一个功能 ，在攻击hit事件的时候判定当前的武器是否集中了敌人，如果集中了敌人，那么就震动摄像机，而且将我和目标的动画播放速度降低
- 
+[RequireComponent(typeof(CinemachineImpulseSource))]
 [RequireComponent(typeof(Detection))]
 public class WeaponManager : MonoBehaviour
 {
@@ -14,17 +15,29 @@ public class WeaponManager : MonoBehaviour
     public bool isOnDetection;
     CharacterActor characterActor;
     public bool isHited;
-
+    private CinemachineImpulseSource impulseSource;
 
     private void Awake()
     {
+        impulseSource = GetComponent<CinemachineImpulseSource>();
         detections = GetComponents<Detection>();
         characterActor= GetComponentInParent<CharacterActor>();
     }
     public void Update()
     {
         HandleDetection();
+        //shake();
     }
+
+
+    void shake()
+    {
+            impulseSource.GenerateImpulse();
+    }
+
+
+
+
     void HandleDetection()
     {
         if(isOnDetection)

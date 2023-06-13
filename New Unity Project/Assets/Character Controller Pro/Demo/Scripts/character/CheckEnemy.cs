@@ -41,6 +41,7 @@ public class CheckEnemy : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / duration;
+            if(targetGroup.m_Targets.Length >= targetIndex)
             targetGroup.m_Targets[targetIndex].weight = Mathf.Lerp(startWeight, newWeight, t);
             yield return null;
         }
@@ -118,28 +119,12 @@ public class CheckEnemy : MonoBehaviour
     private void Update()
     {
         //
-        SetCamera();
         MovePosition();
 
         
 
     }
-    /// <summary>
-    /// 设置主摄像机的优先级，当选择单位中没有敌人的时候，那么将主摄像机的优先级提升。
-    /// </summary>
-    private void SetCamera()
-    {
-        //
-        if (mainCharacter.enemys.Count == 0)
-        {
-            MainCamera.Priority = 100;
-        }
-        else
-        {
-            MainCamera.Priority = 5;
-        }
 
-    }
 
     /// <summary>
     /// 修改物体的位置和人物重合
