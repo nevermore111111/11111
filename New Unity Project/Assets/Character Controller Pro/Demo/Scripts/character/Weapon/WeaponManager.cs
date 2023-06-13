@@ -16,6 +16,7 @@ public class WeaponManager : MonoBehaviour
     CharacterActor characterActor;
     public bool isHited;
     private CinemachineImpulseSource impulseSource;
+    public float[] impulsePar;
 
     private void Awake()
     {
@@ -28,14 +29,6 @@ public class WeaponManager : MonoBehaviour
         HandleDetection();
         //shake();
     }
-
-
-    void shake()
-    {
-            impulseSource.GenerateImpulse();
-    }
-
-
 
 
     void HandleDetection()
@@ -53,6 +46,7 @@ public class WeaponManager : MonoBehaviour
                 //如果存在当前的detection击中目标，那么将武器是否击中目标也改成true。
                 if(item.isHited == true)
                 {
+                    Impluse();
                     isHited = true;
                 }
             }
@@ -73,6 +67,17 @@ public class WeaponManager : MonoBehaviour
                 //清空hit列表，所有是否击中也全部清空
             }
             isHited=false;//武器击中判定也清空
+        }
+    }
+
+    /// <summary>
+    /// 产生震动
+    /// </summary>
+    public void Impluse()
+    {
+        if (impulsePar[0] ==1)
+        {
+            impulseSource.GenerateImpulse();
         }
     }
 

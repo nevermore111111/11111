@@ -1,50 +1,46 @@
 using Cinemachine;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
 [TrackColor(0.855f, 0.8623f, 0.87f)]
-[TrackClipType(typeof(ArrayPlayableAsset))]
+[TrackClipType(typeof(ArrayPlayableAsset02))]
 [TrackBindingType(typeof(GameObject))]
-public class CustomTrack : TrackAsset
+public class CustomTrack02 : TrackAsset
 {
     public List<float> floats = new List<float> { 0, 0, 0, 0 };
 }
 
-[TrackClipType(typeof(ArrayPlayableAsset))]
-public class ArrayPlayableAsset : PlayableAsset, ITimelineClipAsset
+[TrackClipType(typeof(ArrayPlayableAsset02))]
+public class ArrayPlayableAsset02 : PlayableAsset, ITimelineClipAsset
 {
     public float[] arrayData;
-    CinemachineFreeLook mainCinema;
-    CameraEffects cameraEffects;
+   
 
     public ClipCaps clipCaps => ClipCaps.None;
 
     public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
     {
-        var playable = ScriptPlayable<ArrayPlayableBehaviour>.Create(graph);
+        var playable = ScriptPlayable<ArrayPlayableBehaviour02>.Create(graph);
         var playableBehaviour = playable.GetBehaviour();
 
         // 从轨道绑定中获取拖放的 GameObject
         var trackBinding = owner.GetComponent<PlayableDirector>().GetGenericBinding(this) as GameObject;
-        if(mainCinema == null)
-        {
-            mainCinema = owner.GetComponent<AnimatorFunction>().CinemachineFreeLook;
-            cameraEffects = mainCinema.GetComponent<CameraEffects>();
-        }
+       
 
         if (trackBinding != null)
         {
             // 在此处处理拖放的 GameObject
             Debug.Log("Accessed GameObject: " + trackBinding.name);
-            playableBehaviour.targetObject = trackBinding;
+           // playableBehaviour.targetObject = trackBinding;
         }
 
         // 传递数组数据给 PlayableBehaviour
         playableBehaviour.arrayData = arrayData;
-        playableBehaviour.cameraEffects = cameraEffects;
+        playableBehaviour.targetWeapon = trackBinding.GetComponentInChildren<WeaponManager>();
 
 
         return playable;
@@ -52,12 +48,11 @@ public class ArrayPlayableAsset : PlayableAsset, ITimelineClipAsset
 }
 
 [System.Serializable]
-public class ArrayPlayableBehaviour : PlayableBehaviour
+public class ArrayPlayableBehaviour02 : PlayableBehaviour
 {
-    public GameObject targetObject;
+    public WeaponManager targetWeapon;
     public float[] arrayData;
-    public GameObject tarobj;
-    public CameraEffects cameraEffects;
+
 
     public override void OnBehaviourPlay(Playable playable, FrameData info)
     {
@@ -70,11 +65,9 @@ public class ArrayPlayableBehaviour : PlayableBehaviour
         //{
         //    Debug.Log("Array value: " + value);
         //}
-        if(arrayData.Length>=3)
+        if (arrayData.Length >= 3)
         {
-            cameraEffects.shakeDuration = arrayData[0];
-            cameraEffects.shakeAmplitude = arrayData[1];
-            cameraEffects.shakeFrequency = arrayData[2];
+            targetWeapon.impulsePar = arrayData;
         }
     }
 }
