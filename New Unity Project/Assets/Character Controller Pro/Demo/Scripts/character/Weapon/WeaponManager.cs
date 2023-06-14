@@ -75,8 +75,9 @@ public class WeaponManager : MonoBehaviour
     /// </summary>
     public void Impluse()
     {
-        if (impulsePar[0] ==1)
+        if (impulsePar.Length >3 && impulsePar[0]==1)
         {
+            Debug.Log("zhendong");
             impulseSource.GenerateImpulse();
         }
     }

@@ -7,6 +7,8 @@ public class EnemyCharacter : CharacterInfo, IAgent
 {
      CharacterActor characterActor;
     public float targetGroupSize = 1;
+    public float targetHp = 10000;
+
     protected override  void Awake()
     {
         base.Awake();

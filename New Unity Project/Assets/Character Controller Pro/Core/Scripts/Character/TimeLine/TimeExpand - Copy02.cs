@@ -28,13 +28,13 @@ public class ArrayPlayableAsset02 : PlayableAsset, ITimelineClipAsset
         var playableBehaviour = playable.GetBehaviour();
 
         // 从轨道绑定中获取拖放的 GameObject
-        var trackBinding = owner.GetComponent<PlayableDirector>().GetGenericBinding(this) as GameObject;
+        var trackBinding = owner.GetComponent<PlayableDirector>().gameObject;
        
 
         if (trackBinding != null)
         {
             // 在此处处理拖放的 GameObject
-            Debug.Log("Accessed GameObject: " + trackBinding.name);
+            //Debug.Log("Accessed GameObject: " + trackBinding.name);
            // playableBehaviour.targetObject = trackBinding;
         }
 

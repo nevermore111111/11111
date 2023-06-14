@@ -45,7 +45,7 @@ public class CheckEnemy : MonoBehaviour
             targetGroup.m_Targets[targetIndex].weight = Mathf.Lerp(startWeight, newWeight, t);
             yield return null;
         }
-
+        if(targetGroup.m_Targets.Length >targetIndex -1)
         targetGroup.m_Targets[targetIndex].weight = newWeight;
     }
 
