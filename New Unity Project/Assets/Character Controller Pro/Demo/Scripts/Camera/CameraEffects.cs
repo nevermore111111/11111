@@ -45,7 +45,7 @@ public class CameraEffects : MonoBehaviour
 
     private void SetCamera()
     {
-        if (MainCharacter.enemys.Count == 0)
+        if (MainCharacter.enemies.Count == 0)
         {
             freeLookCamera.Priority = 100;
         }
