@@ -10,14 +10,14 @@ public class CharacterInfo : MonoBehaviour
     [Tooltip("代表这个单位的敌人tag")]
     public string enemyTag;
     [Tooltip("代表这个单位的敌人列表")]
-    public List<CharacterInfo> enemys;
+    public List<CharacterInfo> enemies;
     [Tooltip("这个单位的选择目标")]
     public CharacterInfo selectEnemy;
     [Tooltip("代表摄像机中的碰撞体积")]
     public SphereCollider characterSphere;
     protected virtual void  Awake()
     {
-        enemys = new List<CharacterInfo>();
+        enemies = new List<CharacterInfo>();
         characterSphere = GetComponent<SphereCollider>();
         characterSphere.isTrigger = true;
     }

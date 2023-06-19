@@ -56,11 +56,11 @@ public class CheckEnemy : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         AddEnemy(other);
-        if(mainCharacter.enemys.Count != 0)
+        if(mainCharacter.enemies.Count != 0)
         {
             NormalMovement.planarMovementParameters.stableGroundedDeceleration = MoveDeceleration * 1.5f;
         }
-        if (other.gameObject.CompareTag("enemy") && !mainCharacter.enemys.Contains(other.gameObject.GetComponentInParent<CharacterInfo>()))
+        if (other.gameObject.CompareTag("enemy") && !mainCharacter.enemies.Contains(other.gameObject.GetComponentInParent<CharacterInfo>()))
         {
             // 在敌人重新进入范围时，停止延迟删除协程
             Transform enemyTransform = other.transform;
@@ -90,9 +90,9 @@ public class CheckEnemy : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("enemy") && mainCharacter.enemys.Contains(other.gameObject.GetComponentInParent<CharacterInfo>()))
+        if (other.gameObject.CompareTag("enemy") && mainCharacter.enemies.Contains(other.gameObject.GetComponentInParent<CharacterInfo>()))
         {
-            mainCharacter.enemys.Remove(other.gameObject.GetComponentInParent<CharacterInfo>());
+            mainCharacter.enemies.Remove(other.gameObject.GetComponentInParent<CharacterInfo>());
             Transform enemyTransform = other.gameObject.GetComponentInParent<Transform>();
             int targetIndex = targetGroup.FindMember(enemyTransform);
 
@@ -100,7 +100,7 @@ public class CheckEnemy : MonoBehaviour
             StartCoroutine(DelayedRemoveMember(enemyTransform, 1f));
             StartCoroutine(AdjustTargetWeight(0f, 1f, targetIndex));
         }
-        if(mainCharacter.enemys.Count == 0)
+        if(mainCharacter.enemies.Count == 0)
         {
             NormalMovement.planarMovementParameters.stableGroundedDeceleration = MoveDeceleration ;
         }
@@ -140,12 +140,12 @@ public class CheckEnemy : MonoBehaviour
     //摄像机增加
     private void AddEnemy(Collider other)
     {
-        if (other.gameObject.CompareTag("enemy") && !mainCharacter.enemys.Contains(other.gameObject.GetComponentInParent<CharacterInfo>()))
+        if (other.gameObject.CompareTag("enemy") && !mainCharacter.enemies.Contains(other.gameObject.GetComponentInParent<CharacterInfo>()))
         {
             CharacterInfo characterInfo = other.gameObject.GetComponentInParent<CharacterInfo>();
             if (characterInfo != null)
             {
-                mainCharacter.enemys.Add(characterInfo);
+                mainCharacter.enemies.Add(characterInfo);
                 if (targetGroup.FindMember(other.transform) == -1)
                 {
                     targetGroup.AddMember(other.transform, 0, other.GetComponentInParent<CharacterInfo>().GetComponent<SphereCollider>().radius);

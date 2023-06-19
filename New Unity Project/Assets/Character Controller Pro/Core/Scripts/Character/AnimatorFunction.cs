@@ -92,10 +92,10 @@ public class AnimatorFunction : MonoBehaviour
         Attack.OnceAttack = false;
         Attack.CharacterActor.Animator.SetInteger("specialAttack", 0);
 
-        if (mainCharacter.enemys.Count != 0)
+        if (mainCharacter.enemies.Count != 0)
         {
             //ÐÂÓï·¨
-            GameObject[] gamesEnemy = mainCharacter.enemys.Select(m => m.gameObject).ToArray();
+            GameObject[] gamesEnemy = mainCharacter.enemies.Select(m => m.gameObject).ToArray();
             mainCharacter.selectEnemy = HelpTools01.FindClosest(Attack.CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
             Vector3 Forward = (mainCharacter.selectEnemy.transform.position - Attack.CharacterActor.transform.position).normalized;
             Attack.CharacterActor.Forward = new(Forward.x, 0, Forward.z);

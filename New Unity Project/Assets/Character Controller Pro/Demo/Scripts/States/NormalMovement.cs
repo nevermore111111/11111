@@ -97,7 +97,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         bool reducedAirControlFlag = false;
         float reducedAirControlInitialTime = 0f;
         float reductionDuration = 0.5f;
-
+       
         //上一帧的速度
         float lastVelocityMagnitude;
 
@@ -226,6 +226,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         public override void ExitBehaviour(float dt, CharacterState toState)
         {
             reducedAirControlFlag = false;
+            moving =false;
         }
 
 
