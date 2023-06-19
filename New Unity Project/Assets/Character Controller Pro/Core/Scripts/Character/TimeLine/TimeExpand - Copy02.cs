@@ -39,9 +39,9 @@ public class ArrayPlayableAsset02 : PlayableAsset, ITimelineClipAsset
         }
 
         // 传递数组数据给 PlayableBehaviour
-        playableBehaviour.arrayData = arrayData;
+        
         playableBehaviour.targetWeapon = trackBinding.GetComponentInChildren<WeaponManager>();
-
+        playableBehaviour.arrayData = arrayData;
 
         return playable;
     }
