@@ -160,7 +160,7 @@ Material:
     - _Metallic: 0.064
     - _OcclusionStrength: 1
     - _Outline: 1
-    - _OutlineWidth: 6.84
+    - _OutlineWidth: 2.21
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _RECEIVE_SHADOWS_OFF: 1

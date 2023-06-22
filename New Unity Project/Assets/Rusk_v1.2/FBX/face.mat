@@ -154,7 +154,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Outline: 1
-    - _OutlineWidth: 0.28
+    - _OutlineWidth: 0.81
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _RECEIVE_SHADOWS_OFF: 1
@@ -214,7 +214,7 @@ Material:
     - _EmissionChannel: {r: 0, g: 0, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HighColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0.9960785, g: 0.68235296, b: 0.64705884, a: 1}
+    - _OutlineColor: {r: 1, g: 0.3994516, b: 0.044025064, a: 1}
     - _PBRMetallicChannel: {r: 1, g: 0, b: 0, a: 0}
     - _PBROcclusionChannel: {r: 0, g: 1, b: 0, a: 0}
     - _PBRSmothnessChannel: {r: 0, g: 0, b: 0, a: 1}
