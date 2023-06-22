@@ -18,15 +18,16 @@ public class TimelineManager : MonoBehaviour
     PlayableAsset[] attackOnGround;
     PlayableAsset[] attackOnGroundFist;
     PlayableAsset[] attackInAir;
+    PlayableAsset[] start;
     
 
 
     private void Start()
     {
         // 加载配置文件
+        director = GetComponent<PlayableDirector>();
         LoadTimeLineAsset();
         currentAnimName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name; // 获取当前动画名称
-        director = GetComponent<PlayableDirector>();
         PlayTimelineByName(currentAnimName); // 播放对应名称的Playable
     }
 
@@ -40,7 +41,9 @@ public class TimelineManager : MonoBehaviour
             attackOnGround = myAssetHelper.AttackOnGround;
             attackOnGroundFist = myAssetHelper.AttackOnGround_fist;
             attackInAir = myAssetHelper.AttackInAir;
+            start = myAssetHelper.Start;
         }
+        director.Play(start[0]);
     }
 
     private void Update()
