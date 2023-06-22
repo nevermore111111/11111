@@ -15,14 +15,19 @@ MonoBehaviour:
   version: 5
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: face
   m_Shader: {fileID: 4800000, guid: 4466465ffd73f3e42bae37fdf7e6ed2e, type: 3}
-  m_ShaderKeywords: _OUTLINE _RAMPSHADING
+  m_ValidKeywords:
+  - _OUTLINE
+  - _RAMPSHADING
+  m_InvalidKeywords:
+  - _IS_FILTER_LIGHTCOLOR_ON
+  - _USEHALFLAMBERT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -53,6 +58,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DiffuseRampMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveNoiseTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -116,18 +125,22 @@ Material:
     - _BumpScale: 1
     - _CELLSmoothing: 0.191
     - _CELLThreshold: 0.088
+    - _CasterShadow: 1
     - _CellBandSoftness: 0.001
     - _CellBands: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _ClearShading: 0
     - _Cull: 2
     - _Cutoff: 0.5
     - _DepthOffsetShadowReverseX: 0
+    - _DepthPrePass: 0
     - _DepthShadowOffset: -0.43
     - _DepthShadowSoftness: 0
     - _DepthShadowThresoldOffset: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DissolveThreshold: 0
     - _DstBlend: 0
     - _EmissionColorAlbedoWeight: 0
     - _EnvironmentReflections: 1
@@ -135,12 +148,13 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Is_Filter_LightColor: 1
+    - _Is_SDInPaint: 0
     - _LightDirectionObliqueWeight: 0
     - _LightIntensityClamp: 3.03
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Outline: 1
-    - _OutlineWidth: 0.15
+    - _OutlineWidth: 0.28
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _RECEIVE_SHADOWS_OFF: 1
@@ -167,17 +181,24 @@ Material:
     - _StylizedSpecularSoftness: 0.195
     - _Surface: 0
     - _UseDepthShadow: 0
+    - _UseDissolveEffect: 0
     - _UseEmissionTex: 0
     - _UseHalfLambert: 1
     - _UseRadianceOcclusion: 0
     - _WorkflowMode: 1
+    - _ZOffset: 0
     - _ZWrite: 1
     - _enum_diffuse: 1
+    - _enum_outline_color: 0
+    - _enum_outline_smoothed: 0
+    - _enum_outline_width: 0
     - _enum_rim: 0
     - _enum_specular: 0
     - _group: 0
     - _group1: 1
+    - _groupAI: 1
     - _groupAdditionLight: 1
+    - _groupDissolveSetting: 0
     - _groupEmission: 0
     - _groupLightDirectionOffset: 0
     - _groupOutline: 1
@@ -185,6 +206,7 @@ Material:
     - _groupShadingMask: 0
     - _groupShadowSetting: 1
     - _groupSpecular: 1
+    - _groupSurface: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

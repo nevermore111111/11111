@@ -7,6 +7,8 @@
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/ParallaxMapping.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DBuffer.hlsl"
+#include "../ShaderLibrary/NPRUtils.hlsl"
+
 #include "../ShaderLibrary/NPRInput.hlsl"
 
 #if defined(_DETAIL_MULX2) || defined(_DETAIL_SCALED)
@@ -31,6 +33,11 @@ half4 _AngleRingBrightColor;
 half4 _AngleRingShadowColor;
 half4 _MatCapColor;
 half4 _EmissionColor;
+
+#if _USEDISSOLVEEFFECT
+//add space for dissolve effect
+half _DissolveThreshold;
+#endif
 
 // Channel
 half4 _PBRMetallicChannel;
@@ -98,6 +105,8 @@ half _RimSoftness;
 half _DepthRimOffset;
 half _DepthRimThresoldOffset;
 
+half _ZOffset;
+
 #if EYE
     half _Parallax;
     half _BumpIrisInvert;
@@ -118,10 +127,12 @@ half _Cutoff;
 half _Surface;
 half _ClipThresold;
 
+// AI
+half _Is_SDInPaint;
+half _ClearShading;
+
 half _OutlineWidth;
 CBUFFER_END
-
-
 
 // NOTE: Do not ifdef the properties for dots instancing, but ifdef the actual usage.
 // Otherwise you might break CPU-side as property constant-buffer offsets change per variant.
@@ -230,10 +241,15 @@ TEXTURE2D(_AnisoShiftMap);       SAMPLER(sampler_AnisoShiftMap);
 TEXTURE2D(_ShadingMap01);       SAMPLER(sampler_ShadingMap01);
 TEXTURE2D(_EmissionTex);       SAMPLER(sampler_EmissionTex);
 
+
 #if FACE
     TEXTURE2D(_SDFFaceTex);      SAMPLER(sampler_SDFFaceTex);
 #endif
 
+// add sampler for dissolve effect
+#if _USEDISSOLVEEFFECT
+TEXTURE2D(_DissolveNoiseTex);       SAMPLER(sampler_DissolveNoiseTex);
+#endif
 
 #ifdef _SPECULAR_SETUP
     #define SAMPLE_METALLICSPECULAR(uv) SAMPLE_TEXTURE2D(_SpecGlossMap, sampler_SpecGlossMap, uv)
@@ -297,16 +313,16 @@ half3 EmissionColor(half4 pbrLightMap, half4 shadingMap01, half3 albedo, half2 u
     }
 #endif
 
+
 inline half SpecularAA(half3 normalWS, half smoothness)
 {
     half dx = dot(ddx(normalWS),ddx(normalWS));
     half dy = dot(ddy(normalWS),ddy(normalWS));
     half roughness = 1 - smoothness;
-    half roughnessAA = roughness * roughness + min(_SpaceScreenVariant * (dx + dy) * 2, _SpecularAAThreshold * _SpecularAAThreshold);
+    half roughnessAA = roughness * roughness + min(_SpaceScreenVariant * (dx + dy) * 8, _SpecularAAThreshold * _SpecularAAThreshold);
     roughnessAA = saturate(roughnessAA);
-    roughnessAA = sqrt(roughnessAA);
-    roughnessAA = sqrt(roughnessAA);
-    half smoothnessAA = 1 - roughnessAA;
+    //roughnessAA = sqrt(roughnessAA);
+    half smoothnessAA = smoothness * (1 - roughnessAA);
     return smoothnessAA;
 }
 
@@ -321,6 +337,7 @@ inline void InitializeNPRStandardSurfaceData(float2 uv, InputData inputData, out
     #endif
     uv += uvOffset;
     half4 albedoAlpha = SampleAlbedoAlpha(uv, TEXTURE2D_ARGS(_BaseMap, sampler_BaseMap));
+    albedoAlpha.rgb = lerp(albedoAlpha.rgb, 1, _ClearShading);
     half4 pbrLightMap = SAMPLE_TEXTURE2D(_LightMap, sampler_LightMap, uv);
     half4 pbrChannel = SamplePBRChannel(pbrLightMap, shadingMap01);
     outSurfaceData.alpha = Alpha(albedoAlpha.a, _BaseColor, _Cutoff);
@@ -338,7 +355,11 @@ inline void InitializeNPRStandardSurfaceData(float2 uv, InputData inputData, out
     #endif
     outSurfaceData.emission = EmissionColor(pbrLightMap, shadingMap01, outSurfaceData.albedo, uv);
 
-   
+    #if _USEDISSOLVEEFFECT
+      //WIP
+      half dissolve_value = SAMPLE_TEXTURE2D(_DissolveNoiseTex, sampler_DissolveNoiseTex, uv).r;
+      clip(dissolve_value - _DissolveThreshold);
+    #endif 
 }
 
 

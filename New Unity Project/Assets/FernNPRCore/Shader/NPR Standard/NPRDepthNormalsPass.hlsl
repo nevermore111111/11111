@@ -34,6 +34,8 @@ struct Varyings
     #endif
 
     half3 viewDirWS    : TEXCOORD5;
+    
+    float3 positionWS    : TEXCOORD6;
 
     #if defined(REQUIRES_TANGENT_SPACE_VIEW_DIR_INTERPOLATOR)
     half3 viewDirTS     : TEXCOORD8;
@@ -52,6 +54,7 @@ Varyings DepthNormalsVertex(Attributes input)
 
     output.uv         = TRANSFORM_TEX(input.texcoord, _BaseMap);
     output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
+    output.positionWS = TransformObjectToWorld(input.positionOS.xyz);
 
     VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);
     VertexNormalInputs normalInput = GetVertexNormalInputs(input.normal, input.tangentOS);
@@ -72,22 +75,36 @@ Varyings DepthNormalsVertex(Attributes input)
         output.viewDirTS = viewDirTS;
     #endif
 
+    output.positionCS = CalculateClipPosition(output.positionCS, _ZOffset);
+
+    output.positionCS = PerspectiveRemove(output.positionCS, output.positionWS, input.positionOS);
+
     return output;
 }
 
 
-half4 DepthNormalsFragment(Varyings input) : SV_TARGET
+void DepthNormalsFragment(
+    Varyings input
+    , out half4 outNormalWS : SV_Target0
+#ifdef _WRITE_RENDERING_LAYERS
+    , out float4 outRenderingLayers : SV_Target1
+#endif
+)
 {
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
     Alpha(SampleAlbedoAlpha(input.uv, TEXTURE2D_ARGS(_BaseMap, sampler_BaseMap)).a, _BaseColor, _Cutoff);
+
+    #ifdef LOD_FADE_CROSSFADE
+        LODFadeCrossFade(input.positionCS);
+    #endif
 
     #if defined(_GBUFFER_NORMALS_OCT)
         float3 normalWS = normalize(input.normalWS);
         float2 octNormalWS = PackNormalOctQuadEncode(normalWS);           // values between [-1, +1], must use fp32 on some platforms
         float2 remappedOctNormalWS = saturate(octNormalWS * 0.5 + 0.5);   // values between [ 0,  1]
         half3 packedNormalWS = PackFloat2To888(remappedOctNormalWS);      // values between [ 0,  1]
-        return half4(packedNormalWS, 0.0);
+        outNormalWS = half4(packedNormalWS, 0.0);
     #else
         float2 uv = input.uv;
 
@@ -107,8 +124,14 @@ half4 DepthNormalsFragment(Varyings input) : SV_TARGET
             float3 normalWS = input.normalWS;
         #endif
 
-        return half4(NormalizeNormalPerPixel(normalWS), 0.0);
+        outNormalWS = half4(NormalizeNormalPerPixel(normalWS), 0.0);
+    #endif
+
+    #ifdef _WRITE_RENDERING_LAYERS
+        uint renderingLayers = GetMeshRenderingLayer();
+        outRenderingLayers = float4(EncodeMeshRenderingLayer(renderingLayers), 0, 0, 0);
     #endif
 }
+
 
 #endif
