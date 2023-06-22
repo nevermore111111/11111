@@ -18,8 +18,9 @@ public class TimelineManager : MonoBehaviour
     PlayableAsset[] attackOnGround;
     PlayableAsset[] attackOnGroundFist;
     PlayableAsset[] attackInAir;
-    PlayableAsset[] start;
-    
+    PlayableAsset[] startPlay;
+
+
 
 
     private void Start()
@@ -41,9 +42,9 @@ public class TimelineManager : MonoBehaviour
             attackOnGround = myAssetHelper.AttackOnGround;
             attackOnGroundFist = myAssetHelper.AttackOnGround_fist;
             attackInAir = myAssetHelper.AttackInAir;
-            start = myAssetHelper.Start;
+            startPlay = myAssetHelper.StartPlay;
         }
-        director.Play(start[0]);
+        
     }
 
     private void Update()

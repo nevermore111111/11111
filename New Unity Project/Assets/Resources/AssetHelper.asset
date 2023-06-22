@@ -19,5 +19,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1e56e5f5018b4474e8adb9a6644c03b0, type: 2}
   AttackOnGround_fist: []
   AttackInAir: []
-  Start:
-  - {fileID: 11400000, guid: 3f998ca49e944374aaf9ef283a66636e, type: 2}
+  StartPlay:
+  - {fileID: 0}

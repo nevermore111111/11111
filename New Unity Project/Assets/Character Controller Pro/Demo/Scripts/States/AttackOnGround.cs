@@ -20,8 +20,8 @@ public class AttackOnGround :Attack
     protected override void Awake()
     {
         base.Awake();
-        army[0].SetActive(false);
-        army[1].SetActive(false);
+        //army[0].SetActive(false);
+        //army[1].SetActive(false);
     }
     protected override void Start()
     {
