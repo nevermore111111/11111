@@ -49,6 +49,7 @@ public class AnimatorFunction : MonoBehaviour
             Attack.canInput = true;
             Attack.canChangeState = true;
         }
+        
     }
     public void NormalIdle()
     {
@@ -149,6 +150,21 @@ public class AnimatorFunction : MonoBehaviour
             Attack.CharacterActor.Animator.SetInteger("combo", 0);
         }
     }
+    /// <summary>
+    /// 玩家可以控制
+    /// </summary>
+    public void CanPlayerControl()
+    {
+        if (CharacterStateController.PreviousState is StartPlay)
+        {
+            CharacterState.canPlayerControl = true;
+        }
+    }
+
+
+
+
+
     /// <summary>
     /// 在一个连招开始时执行，定义这个连招的最大连击数量。
     /// </summary>

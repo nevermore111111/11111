@@ -21,6 +21,8 @@ namespace Lightbug.CharacterControllerPro.Implementation
         [SerializeField]
         RuntimeAnimatorController runtimeAnimatorController = null;
 
+        static public bool  canPlayerControl = false;
+
         /// <summary>
         /// Gets the hash value (Animator) associated with this state, based on its name.
         /// </summary>
@@ -69,7 +71,10 @@ namespace Lightbug.CharacterControllerPro.Implementation
             CharacterBrain = this.GetComponentInBranch<CharacterActor, CharacterBrain>();
         }
 
-
+        public virtual void CanPlayerControl(bool canControl)
+        {
+            canPlayerControl = canControl;
+        }
         protected virtual void Start()
         {
             StateNameHash = Animator.StringToHash(this.GetType().Name);
@@ -93,7 +98,10 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// <summary>
         /// This method runs frame by frame, and should be implemented by the derived state class.
         /// </summary>
-        public abstract void UpdateBehaviour(float dt);
+        public virtual void UpdateBehaviour(float dt)
+        {
+           
+        }
 
         /// <summary>
         /// This methods runs after the main Update method.
@@ -131,6 +139,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// </summary>
         public virtual void CheckExitTransition()
         {
+           
         }
 
         /// <summary>

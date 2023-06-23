@@ -34,10 +34,15 @@ public class AttackOnGround :Attack
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity,true,RootMotionRotationType.AddRotation);
         army[0].SetActive(true);
         army[1].SetActive(true);
+        CharacterActor.Animator.CrossFade("GhostSamurai_Common_Idle_Inplace", 0.5f);
     }
     public override void UpdateBehaviour(float dt)
     {
         base.UpdateBehaviour(dt);
+        if(!canPlayerControl)
+        {
+            return;
+        }
         UseGravity(dt);
         if (CharacterActions.test.value)
         {
@@ -69,6 +74,10 @@ public class AttackOnGround :Attack
     public override void CheckExitTransition()
     {
         base.CheckExitTransition();
+        if (!canPlayerControl)
+        {
+            return;
+        }
         if (!CharacterActor.IsGrounded && isAttack == false)
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();

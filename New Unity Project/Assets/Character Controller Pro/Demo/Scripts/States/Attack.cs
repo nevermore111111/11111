@@ -41,6 +41,7 @@ public class Attack : CharacterState
         AttackOnGround_fist
     }
 
+    
     private void Update()
     {
         
@@ -112,11 +113,15 @@ public class Attack : CharacterState
 
     public override void UpdateBehaviour(float dt)
     {
-
+        
     }
     public override void CheckExitTransition()
     {
         base.CheckExitTransition();
+        if (!canPlayerControl)
+        {
+            return;
+        }
         if (CharacterActions.jump.value)
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
