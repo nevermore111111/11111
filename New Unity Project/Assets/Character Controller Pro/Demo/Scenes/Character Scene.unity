@@ -23656,6 +23656,10 @@ MonoBehaviour:
   horizontalAxisParameter: HorizontalAxis
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
+  currentMotion:
+    acceleration: 0
+    deceleration: 0
+    angleAccelerationMultiplier: 0
   moving: 0
   cam: {fileID: 0}
   gunTip: {fileID: 0}

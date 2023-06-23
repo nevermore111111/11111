@@ -4822,11 +4822,15 @@ MonoBehaviour:
     animT: 0.25
     useAudio: 0
     audioIndex: 0
+    minDistance: 0
+    maxDistance: 0
   - attackAnim: Kick
     attackDuration: 0.8
     animT: 0.25
     useAudio: 0
     audioIndex: 0
+    minDistance: 0
+    maxDistance: 0
   attackEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -8132,11 +8136,15 @@ MonoBehaviour:
     animT: 0.25
     useAudio: 0
     audioIndex: 0
+    minDistance: 0
+    maxDistance: 0
   - attackAnim: Kick
     attackDuration: 0.8
     animT: 0.25
     useAudio: 0
     audioIndex: 0
+    minDistance: 0
+    maxDistance: 0
   attackEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -9030,11 +9038,15 @@ MonoBehaviour:
     animT: 0.25
     useAudio: 0
     audioIndex: 0
+    minDistance: 0
+    maxDistance: 0
   - attackAnim: Kick
     attackDuration: 0.8
     animT: 0.25
     useAudio: 0
     audioIndex: 0
+    minDistance: 0
+    maxDistance: 0
   attackEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -11975,11 +11987,15 @@ MonoBehaviour:
     animT: 0.25
     useAudio: 0
     audioIndex: 0
+    minDistance: 0
+    maxDistance: 0
   - attackAnim: Kick
     attackDuration: 0.8
     animT: 0.25
     useAudio: 0
     audioIndex: 0
+    minDistance: 0
+    maxDistance: 0
   attackEvent:
     m_PersistentCalls:
       m_Calls: []
