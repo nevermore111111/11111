@@ -107,6 +107,7 @@ public class Attack : CharacterState
         base.ExitBehaviour(dt, toState);
         isJustEnter = true;
         isAttack = false;
+        CharacterActor.Animator.SetBool("attack", false);
         CharacterActor.CheckAndSetSize(normalHeightAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
         // CharacterActor.SetSize(HeighAndWidth,)
     }

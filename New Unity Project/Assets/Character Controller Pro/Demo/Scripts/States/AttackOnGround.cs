@@ -34,7 +34,7 @@ public class AttackOnGround :Attack
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity,true,RootMotionRotationType.AddRotation);
         army[0].SetActive(true);
         army[1].SetActive(true);
-        CharacterActor.Animator.CrossFade("GhostSamurai_Common_Idle_Inplace", 0.5f);
+        CharacterActor.Animator.CrossFade("GhostSamurai_Common_Idle_Inplace", 0.05f);
     }
     public override void UpdateBehaviour(float dt)
     {

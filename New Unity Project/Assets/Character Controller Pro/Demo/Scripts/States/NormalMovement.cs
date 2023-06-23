@@ -774,9 +774,10 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 weaponManager[i].gameObject.SetActive(false);
             }
-
+            
 
             CharacterActor.alwaysNotGrounded = false;
+            CharacterActor.Animator.CrossFade("StableGrounded", 0.05f);
 
             targetLookingDirection = CharacterActor.Forward;
 
