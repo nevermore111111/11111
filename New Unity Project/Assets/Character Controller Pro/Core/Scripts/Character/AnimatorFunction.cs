@@ -20,6 +20,7 @@ public class AnimatorFunction : MonoBehaviour
     public CinemachineFreeLook CinemachineFreeLook;
     CameraEffects CameraEffects;
     private List<WeaponManager> weaponManagers;
+    
 
 
     private void Awake()

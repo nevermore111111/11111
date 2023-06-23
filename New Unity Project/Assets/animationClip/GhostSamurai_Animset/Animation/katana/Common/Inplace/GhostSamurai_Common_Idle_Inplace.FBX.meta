@@ -488,7 +488,7 @@ ModelImporter:
     second: GhostSamurai_Common_Idle
   - first:
       74: 7400002
-    second: GhostSamurai_Common_Idle_Inplace
+    second: Idle
   - first:
       95: 9500000
     second: //RootNode
@@ -530,7 +530,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: GhostSamurai_Common_Idle_Inplace
+      name: Idle
       takeName: GhostSamurai_Common_Idle_Inplace
       internalID: 0
       firstFrame: 0

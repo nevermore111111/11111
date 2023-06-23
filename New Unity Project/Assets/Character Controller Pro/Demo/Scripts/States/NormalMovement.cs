@@ -26,7 +26,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         //自己加
         private Attack attack;
-
+        private WeaponManager[] weaponManager;
 
         [Header("Animation")]
 
@@ -110,6 +110,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             materialController = this.GetComponentInBranch<CharacterActor, MaterialController>();
 
             attack = this.GetComponent<Attack>();
+            weaponManager = GetComponentsInChildren<WeaponManager>();
         }
 
         protected virtual void OnValidate()
@@ -769,6 +770,12 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public override void EnterBehaviour(float dt, CharacterState fromState)
         {
+            for(int i = 0; i < weaponManager.Length;i++)
+            {
+                weaponManager[i].gameObject.SetActive(false);
+            }
+
+
             CharacterActor.alwaysNotGrounded = false;
 
             targetLookingDirection = CharacterActor.Forward;

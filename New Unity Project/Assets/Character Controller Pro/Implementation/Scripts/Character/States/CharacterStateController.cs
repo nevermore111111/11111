@@ -84,11 +84,11 @@ namespace Lightbug.CharacterControllerPro.Implementation
         public event System.Action<CharacterState, CharacterState> OnStateChange;
 
 
-
+        public CharacterState CurrentState;
         /// <summary>
         /// Gets the current state used by the state machine.
         /// </summary>
-        public CharacterState CurrentState { get; protected set; }
+       // public CharacterState CurrentState { get; protected set; }
 
         /// <summary>
         /// Gets the previous state used by the state machine.

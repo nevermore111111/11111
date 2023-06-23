@@ -87,6 +87,7 @@ public class Attack : CharacterState
         isAttack = true;
 
         canInput = false;
+        if(CharacterStateController.PreviousState is  not StartPlay)
         isJustEnter = true;
         CharacterActor.CheckAndSetSize(HeighAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
 
