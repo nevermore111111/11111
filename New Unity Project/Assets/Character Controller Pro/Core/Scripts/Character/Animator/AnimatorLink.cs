@@ -21,7 +21,12 @@ namespace Lightbug.CharacterControllerPro.Core
             _animator = GetComponent<Animator>();
         }
 
-        void OnAnimatorMove() => OnAnimatorMoveEvent?.Invoke();
+        void OnAnimatorMove()
+        {
+            
+            OnAnimatorMoveEvent?.Invoke();
+        }
+
 
         void OnAnimatorIK(int layerIndex)
         {

@@ -430,9 +430,10 @@ namespace Lightbug.CharacterControllerPro.Core
 
         protected virtual void UpdateDynamicRootMotionPosition()
         {
+            Debug.Log("");
             if (!UpdateRootPosition)
                 return;
-
+            Debug.Log(Animator.deltaPosition);
             RigidbodyComponent.Move(Position + Animator.deltaPosition);
         }
 
