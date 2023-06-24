@@ -155,6 +155,7 @@ public class AnimatorFunction : MonoBehaviour
     /// </summary>
     public void CanPlayerControl()
     {
+        //如果之前的是，那么就开始操作。
         if (CharacterStateController.PreviousState is StartPlay)
         {
             CharacterState.canPlayerControl = true;
