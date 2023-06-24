@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using FernGraph;
 using FernGraph.Editor;
-using StableDiffusionGraph.SDGraph.Nodes;
 using Unity.EditorCoroutines.Editor;
 using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace StableDiffusionGraph.SDGraph.Editor
+namespace FernNPRCore.StableDiffusionGraph
 {
     [CustomNodeView(typeof(SDLora))]
     public class SDLoraView : NodeView
@@ -37,7 +35,7 @@ namespace StableDiffusionGraph.SDGraph.Editor
         {
             var lora = Target as SDLora;
             if(lora == null) return;
-            
+
             if (lora.loraNames != null && lora.loraNames.Count > 0)
             {
                 extensionContainer.Clear();
@@ -46,19 +44,19 @@ namespace StableDiffusionGraph.SDGraph.Editor
                 listContainer.style.flexDirection = FlexDirection.Row;
                 listContainer.style.alignItems = Align.Center;
                 listContainer.style.justifyContent = Justify.Center;
-            
+
                 var popup = new PopupField<string>(lora.loraNames, lora.currentIndex);
-            
+
                 // Add a callback to perform additional actions on value change
                 popup.RegisterValueChangedCallback(evt =>
                 {
-                    SDUtil.SDLog($"Selected lora: { evt.newValue}");
+                    SDUtil.Log($"Selected lora: { evt.newValue}");
                     lora.lora = evt.newValue;
                     lora.currentIndex = lora.loraNames.IndexOf(evt.newValue);
                 });
 
                 listContainer.Add(popup);
-                
+
                 extensionContainer.Add(listContainer);
                 RefreshExpandedState();
             }

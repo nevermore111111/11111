@@ -83,7 +83,7 @@ Material:
     - _ClearCoatMask: 1
     - _ClearCoatSmoothness: 1
     - _ClearCoatTexSource: 0
-    - _ClearShading: 1
+    - _ClearShading: 0
     - _Cull: 2
     - _CullMode: 2
     - _Cutoff: 0.5
@@ -99,7 +99,7 @@ Material:
     - _DstBlend: 0
     - _EmissionColorAlbedoWeight: 0
     - _Is_Filter_LightColor: 1
-    - _Is_SDInPaint: 1
+    - _Is_SDInPaint: 0
     - _LightIntensityClamp: 1
     - _Metallic: 0
     - _OcclusionStrength: 0

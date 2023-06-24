@@ -1,3 +1,4 @@
+//#define GETLOARMODELS TODO: Wait for lora's api to pass
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using Unity.EditorCoroutines.Editor;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace StableDiffusionGraph.SDGraph.Nodes
+namespace FernNPRCore.StableDiffusionGraph
 {
     [Node(Path = "SD Standard")]
     [Tags("SD Node")]
@@ -17,6 +18,7 @@ namespace StableDiffusionGraph.SDGraph.Nodes
     {
         
         [Input("Prompt")] public string prompt;
+        [Input("LoRAPrompt")] public string loraPrompt = "";
         [Input("Strength")] public float strength = 1;
         [Output("Lora")] public string lora;
         public string loraDir;
@@ -38,17 +40,54 @@ namespace StableDiffusionGraph.SDGraph.Nodes
         /// <returns></returns>
         public IEnumerator ListLoraAsync()
         {
+#if GETLOARMODELS
+            if (loraNames == null)
+                loraNames = new List<string>();
+            else
+                loraNames.Clear();
             // Stable diffusion API url for getting the models list
-            string url = stableGraph.serverURL + SDDataHandle.DataDirAPI;
+            string url = SDDataHandle.Instance.GetServerURL() + SDDataHandle.Instance.LorasAPI;
+            SDUtil.Log(url);
+
+            UnityWebRequest request = new UnityWebRequest(url, "GET");
+            request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            if (SDDataHandle.Instance.GetUseAuth() && !string.IsNullOrEmpty(SDDataHandle.Instance.GetUserName()) && !string.IsNullOrEmpty(SDDataHandle.Instance.GetPassword()))
+            {
+                SDUtil.Log("Using API key to authenticate");
+                byte[] bytesToEncode = Encoding.UTF8.GetBytes(SDDataHandle.Instance.GetUserName() + ":" + SDDataHandle.Instance.GetPassword());
+                string encodedCredentials = Convert.ToBase64String(bytesToEncode);
+                request.SetRequestHeader("Authorization", "Basic " + encodedCredentials);
+            }
+
+            yield return request.SendWebRequest();
+
+            try
+            {
+                SDUtil.Log(request.downloadHandler.text);
+                // Deserialize the response to a class
+                SDLoraModel[] ms = JsonConvert.DeserializeObject<SDLoraModel[]>(request.downloadHandler.text);
+
+                foreach (var m in ms)
+                    loraNames.Add(m.name);
+            }
+            catch (Exception)
+            {
+                SDUtil.LogError("Server needs and API key authentication. Please check your settings!");
+            }
+#else
+            // Stable diffusion API url for getting the models list
+            string url = SDDataHandle.Instance.GetServerURL() + SDDataHandle.Instance.DataDirAPI;
 
             UnityWebRequest request = new UnityWebRequest(url, "GET");
             request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
         
-            if (SDDataHandle.UseAuth && !SDDataHandle.Username.Equals("") && !SDDataHandle.Password.Equals(""))
+            if (SDDataHandle.Instance.UseAuth && !SDDataHandle.Instance.Username.Equals("") && !SDDataHandle.Instance.Password.Equals(""))
             {
-                Debug.Log("Using API key to authenticate");
-                byte[] bytesToEncode = Encoding.UTF8.GetBytes(SDDataHandle.Username + ":" + SDDataHandle.Password);
+                SDUtil.Log("Using API key to authenticate");
+                byte[] bytesToEncode = Encoding.UTF8.GetBytes(SDDataHandle.Instance.Username + ":" + SDDataHandle.Instance.Password);
                 string encodedCredentials = Convert.ToBase64String(bytesToEncode);
                 request.SetRequestHeader("Authorization", "Basic " + encodedCredentials);
             }
@@ -62,8 +101,11 @@ namespace StableDiffusionGraph.SDGraph.Nodes
                 // Keep only the names of the models
                 loraDir = m.lora_dir;
                 string[] files = Directory.GetFiles(loraDir, "*.safetensors", SearchOption.AllDirectories);
-                SDUtil.SDLog(files.Length.ToString());
-                if (loraNames == null) loraNames = new List<string>();
+                if (files.Length == 0)
+                {
+                    SDUtil.LogError($"There are no lora files in {loraDir}");
+                }
+                loraNames ??= new List<string>();
                 loraNames.Clear();
                 foreach (var f in files)
                 {
@@ -72,15 +114,21 @@ namespace StableDiffusionGraph.SDGraph.Nodes
             }
             catch (Exception)
             {
-                Debug.Log(url + " " + request.downloadHandler.text);
+                SDUtil.LogError(url + " " + request.downloadHandler.text);
             }
+#endif
         }
-        
-        
+
+
         public override object OnRequestValue(Port port)
         {
             prompt = GetInputValue("Prompt", this.prompt);
-            string result = $"{prompt},<lora:{lora}:{strength}>";
+            loraPrompt = GetInputValue("LoRAPrompt", this.loraPrompt);
+            if (!string.IsNullOrEmpty(loraPrompt))
+            {
+                loraPrompt = $"{loraPrompt},";
+            }
+            string result = $"{prompt},{loraPrompt}<lora:{lora}:{strength}>";
             return result;
         }
     }

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FernGraph;
 using Newtonsoft.Json;
-using Unity.EditorCoroutines.Editor;
+
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -43,8 +43,8 @@ namespace StableDiffusionGraph.SDGraph.Nodes
         {
             base.OnAddedToGraph();
             controlNet = new ControlNetData();
-            EditorCoroutineUtility.StartCoroutine(ControlNetModelListAsync(), this);
-            EditorCoroutineUtility.StartCoroutine(ControlNetMoudleList(), this);
+            //EditorCoroutineUtility.StartCoroutine(ControlNetModelListAsync(), this);
+            //EditorCoroutineUtility.StartCoroutine(ControlNetMoudleList(), this);
         }
 
         public override object OnRequestValue(Port port)

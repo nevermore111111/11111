@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using FernGraph;
 using FernGraph.Editor;
-using StableDiffusionGraph.SDGraph.Nodes;
-using UnityEditor.UIElements;
+using Unity.EditorCoroutines.Editor;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace StableDiffusionGraph.SDGraph.Editor
+namespace FernNPRCore.StableDiffusionGraph
 {
     [CustomNodeView(typeof(SDCheckPoint))]
     public class SDCheckPointView : NodeView
@@ -45,11 +46,11 @@ namespace StableDiffusionGraph.SDGraph.Editor
                 listContainer.style.flexDirection = FlexDirection.Row;
                 listContainer.style.alignItems = Align.Center;
                 listContainer.style.justifyContent = Justify.Center;
-            
+
                 List<string> stringList = new List<string>();
                 stringList.AddRange(checkPoint.modelNames);
                 var popup = new PopupField<string>(stringList, checkPoint.currentIndex);
-            
+
                 // Add a callback to perform additional actions on value change
                 popup.RegisterValueChangedCallback(evt =>
                 {
@@ -59,9 +60,13 @@ namespace StableDiffusionGraph.SDGraph.Editor
                 });
 
                 listContainer.Add(popup);
-                
+
                 extensionContainer.Add(listContainer);
                 RefreshExpandedState();
+            }
+            else
+            {
+                EditorCoroutineUtility.StartCoroutine(checkPoint.ListModelsAsync(), this);
             }
         }
     }

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using FernGraph;
 using FernGraph.Editor;
-using StableDiffusionGraph.SDGraph.Nodes;
 using Unity.EditorCoroutines.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Rendering;
 
-namespace StableDiffusionGraph.SDGraph
+namespace FernNPRCore.StableDiffusionGraph
 {
     
     /// <summary>
@@ -47,7 +46,6 @@ namespace StableDiffusionGraph.SDGraph
     public class StableDiffusionGraph : Graph
     {
         public Dictionary<SDInpaintCapture, RTHandle> InpaintDict = new Dictionary<SDInpaintCapture, RTHandle>();
-        public string serverURL = "http://127.0.0.1:7860";
         
         public SDStart sdStart;
         public override string Title {

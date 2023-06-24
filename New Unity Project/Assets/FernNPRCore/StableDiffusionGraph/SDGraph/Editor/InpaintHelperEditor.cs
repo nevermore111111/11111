@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FernNPRCore.StableDiffusionGraph.SDGraph.Core;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -12,8 +11,6 @@ namespace FernNPRCore.StableDiffusionGraph.SDGraph
     [CustomEditor(typeof(InpaintHelper))]
     public class InpaintHelperEditor : Editor
     {
-        bool isRender = false;
-
         private SerializedProperty m_renderersProp;
         private static readonly int IsSDInPaint = Shader.PropertyToID("_Is_SDInPaint");
 

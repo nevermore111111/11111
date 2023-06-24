@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using Random = UnityEngine.Random;
 
-namespace StableDiffusionGraph.SDGraph.Nodes
+namespace FernNPRCore.StableDiffusionGraph
 {
     [Node(Path = "SD Standard")]
     [Tags("SD Node")]
@@ -57,7 +57,7 @@ namespace StableDiffusionGraph.SDGraph.Nodes
             {
                 if (Seed == 0)
                 {
-                    Seed = GenerateRandomLong(-1, Int64.MaxValue);
+                    Seed = -1;
                 }
                 yield return (GenerateAsync());
             }
@@ -88,27 +88,27 @@ namespace StableDiffusionGraph.SDGraph.Nodes
 
         IEnumerator GenerateAsync()
         {
-
+            long seed = Seed;
+            if (seed == -1)
+                seed = GenerateRandomLong(-1, Int64.MaxValue);
             // Generate the image
             HttpWebRequest httpWebRequest = null;
             //try
             {
                 // Make a HTTP POST request to the Stable Diffusion server
                 httpWebRequest =
-                    (HttpWebRequest)WebRequest.Create(SDDataHandle.serverURL + SDDataHandle.ImageToImageAPI);
+                    (HttpWebRequest)WebRequest.Create(SDDataHandle.Instance.GetServerURL() + SDDataHandle.Instance.ImageToImageAPI);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
 
                 // add auth-header to request
-                if (SDDataHandle.UseAuth && !SDDataHandle.Username.Equals("") && !SDDataHandle.Password.Equals(""))
+                if (SDDataHandle.Instance.GetUseAuth() && !string.IsNullOrEmpty(SDDataHandle.Instance.GetUserName()) && !string.IsNullOrEmpty(SDDataHandle.Instance.GetPassword()))
                 {
                     httpWebRequest.PreAuthenticate = true;
-                    byte[] bytesToEncode = Encoding.UTF8.GetBytes(SDDataHandle.Username + ":" + SDDataHandle.Password);
+                    byte[] bytesToEncode = Encoding.UTF8.GetBytes(SDDataHandle.Instance.GetUserName() + ":" + SDDataHandle.Instance.GetPassword());
                     string encodedCredentials = Convert.ToBase64String(bytesToEncode);
                     httpWebRequest.Headers.Add("Authorization", "Basic " + encodedCredentials);
                 }
-                
-
                 // Send the generation parameters along with the POST request
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -116,13 +116,27 @@ namespace StableDiffusionGraph.SDGraph.Nodes
                     byte[] inputImgBytes = InputImage.EncodeToPNG();
                     string inputImgString = Convert.ToBase64String(inputImgBytes);
                     string maskImgString = "";
+
+
+
+
+
+
+
+
+
+
+
                     string json;
                     
                     
                     if (controlNetData != null)
                     {
-                        SDUtil.SDLog("use ControlNet");
+                        SDUtil.Log("use ControlNet");
                         SDParamsInImg2ImgControlNet sd = new SDParamsInImg2ImgControlNet();
+
+
+
                         sd.init_images = new string[] { inputImgString };
                         sd.prompt = Prompt.positive;
                         sd.negative_prompt = Prompt.negative;
@@ -131,7 +145,7 @@ namespace StableDiffusionGraph.SDGraph.Nodes
                         sd.denoising_strength = DenisoStrength;
                         sd.width = Screen.width;
                         sd.height = Screen.height;
-                        sd.seed = Seed;
+                        sd.seed = seed;
                         sd.tiling = false;
                         sd.sampler_name = SamplerMethod;
                         sd.alwayson_scripts = new ALWAYSONSCRIPTS();
@@ -140,7 +154,7 @@ namespace StableDiffusionGraph.SDGraph.Nodes
                         json = JsonConvert.SerializeObject(sd);
                     }else if (MaskImage != null)
                     {
-                        SDUtil.SDLog("use Mask");
+                        SDUtil.Log("use Mask");
                         
                         SDParamsInImg2ImgMask sd = new SDParamsInImg2ImgMask();
                         sd.init_images = new string[] { inputImgString };
@@ -151,7 +165,7 @@ namespace StableDiffusionGraph.SDGraph.Nodes
                         sd.denoising_strength = DenisoStrength;
                         sd.width = Screen.width;
                         sd.height = Screen.height;
-                        sd.seed = Seed;
+                        sd.seed = seed;
                         sd.tiling = false;
                         sd.sampler_name = SamplerMethod;
                         byte[] maskImgBytes = MaskImage.EncodeToPNG();
@@ -162,12 +176,16 @@ namespace StableDiffusionGraph.SDGraph.Nodes
                         sd.inpaint_full_res_padding = inpaint_full_res_padding;
                         sd.inpainting_mask_invert = inpainting_mask_invert;
                         sd.mask_blur = mask_blur;
+
                         json = JsonConvert.SerializeObject(sd);
                     }
                     else
                     {
-                        SDUtil.SDLog("use Only Img2Img");
+                        SDUtil.Log("use Only Img2Img");
                         SDParamsInImg2Img sd = new SDParamsInImg2Img();
+
+
+
                         sd.init_images = new string[] { inputImgString };
                         sd.prompt = Prompt.positive;
                         sd.negative_prompt = Prompt.negative;
@@ -176,9 +194,22 @@ namespace StableDiffusionGraph.SDGraph.Nodes
                         sd.denoising_strength = DenisoStrength;
                         sd.width = Screen.width;
                         sd.height = Screen.height;
-                        sd.seed = Seed;
+                        sd.seed = seed;
                         sd.tiling = false;
                         sd.sampler_name = SamplerMethod;
+
+
+
+
+
+
+
+
+
+
+
+
+
                         json = JsonConvert.SerializeObject(sd);
                     }
                     
@@ -188,7 +219,7 @@ namespace StableDiffusionGraph.SDGraph.Nodes
             }
             // catch (Exception e)
             // {
-            //     Debug.LogError(e.Message + "\n\n" + e.StackTrace);
+            //     SDUtil.LogError(e.Message + "\n\n" + e.StackTrace);
             // }
 
             // Read the output of generation
@@ -199,7 +230,7 @@ namespace StableDiffusionGraph.SDGraph.Nodes
 
                 while (!webResponse.IsCompleted)
                 {
-                    if (SDDataHandle.UseAuth && !SDDataHandle.Username.Equals("") && !SDDataHandle.Password.Equals(""))
+                    //if (SDDataHandle.Instance.UseAuth && !SDDataHandle.Instance.Username.Equals("") && !SDDataHandle.Instance.Password.Equals(""))
                         //UpdateGenerationProgressWithAuth();
                         // else
                         // UpdateGenerationProgress();
@@ -221,7 +252,7 @@ namespace StableDiffusionGraph.SDGraph.Nodes
                     // If no image, there was probably an error so abort
                     if (json.images == null || json.images.Length == 0)
                     {
-                        Debug.LogError(
+                        SDUtil.LogError(
                             "No image was return by the server. This should not happen. Verify that the server is correctly setup.");
 
 #if UNITY_EDITOR
@@ -244,13 +275,12 @@ namespace StableDiffusionGraph.SDGraph.Nodes
 
                             // Read the seed that was used by Stable Diffusion to generate this result
                             outSeed = info.seed;
-                            Seed = 0;
                             OnUpdateSeedField?.Invoke(Seed, outSeed);
                         }
                     }
                     catch (Exception e)
                     {
-                        Debug.LogError(e.Message + "\n\n" + e.StackTrace);
+                        SDUtil.LogError(e.Message + "\n\n" + e.StackTrace);
                     }
                 }
             }

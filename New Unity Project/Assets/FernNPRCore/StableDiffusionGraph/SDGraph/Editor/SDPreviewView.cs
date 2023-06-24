@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using FernGraph;
 using FernGraph.Editor;
-using StableDiffusionGraph.SDGraph.Nodes;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
-namespace StableDiffusionGraph.SDGraph.Editor
+namespace FernNPRCore.StableDiffusionGraph
 {
     [CustomNodeView(typeof(SDPreview))]
     public class SDPreviewView : NodeView
@@ -29,8 +28,8 @@ namespace StableDiffusionGraph.SDGraph.Editor
             PortView inView = GetInputPort("In Image");
             if (inView != null) inView.AddToClassList("PreviewInImg");
             
-            style.transformOrigin = new TransformOrigin(0, 0, 0);
-            style.scale = new StyleScale(new Scale(Vector3.one));
+            style.transformOrigin = new TransformOrigin(0, 0);
+            style.scale = new StyleScale(Vector3.one);
             style.maxWidth = 256;
             
             this.preview = Target as SDPreview;

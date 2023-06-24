@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using FernGraph;
 using FernGraph.Editor;
-using StableDiffusionGraph.SDGraph.Nodes;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace StableDiffusionGraph.SDGraph.Editor
+namespace FernNPRCore.StableDiffusionGraph
 {
     [CustomNodeView(typeof(SDImg2ImgNode))]
     public class SDImg2ImgNodeView : NodeView
@@ -31,7 +29,7 @@ namespace StableDiffusionGraph.SDGraph.Editor
             samplerNode.OnUpdateSeedField += OnUpadteSeed;
 
             List<string> samplerMethodList = new List<string>();
-            samplerMethodList.AddRange(SDDataHandle.samplers);
+            samplerMethodList.AddRange(SDDataHandle.Instance.samplers);
 
             var samplerMethodDropdown = new DropdownField(samplerMethodList, 0);
             samplerMethodDropdown.RegisterValueChangedCallback(e =>
@@ -59,6 +57,7 @@ namespace StableDiffusionGraph.SDGraph.Editor
             labelSeed.style.marginRight = 5;
             
             longField = new LongField();
+            longField.value = -1;
             longField.RegisterValueChangedCallback((e) =>
             {
                 samplerNode.Seed = e.newValue;
