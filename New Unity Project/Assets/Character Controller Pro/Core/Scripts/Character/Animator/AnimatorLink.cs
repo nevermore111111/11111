@@ -5,7 +5,7 @@ namespace Lightbug.CharacterControllerPro.Core
     [RequireComponent(typeof(Animator))]
     public class AnimatorLink : MonoBehaviour
     {
-       
+
         Animator _animator;
         bool _resetIKWeightsFlag = false;
 
@@ -13,7 +13,7 @@ namespace Lightbug.CharacterControllerPro.Core
         public event System.Action<int> OnAnimatorIKEvent;
 
         public void ResetIKWeights() => _resetIKWeightsFlag = true;
-                
+
         #region Messages
 
         void Awake()
@@ -21,7 +21,7 @@ namespace Lightbug.CharacterControllerPro.Core
             _animator = GetComponent<Animator>();
         }
 
-        void OnAnimatorMove() => OnAnimatorMoveEvent?.Invoke();        
+        void OnAnimatorMove() => OnAnimatorMoveEvent?.Invoke();
 
         void OnAnimatorIK(int layerIndex)
         {
