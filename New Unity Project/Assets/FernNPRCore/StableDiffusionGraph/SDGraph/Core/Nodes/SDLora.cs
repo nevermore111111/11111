@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using FernGraph;
 using Newtonsoft.Json;
-using Unity.EditorCoroutines.Editor;
+
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -31,7 +31,7 @@ namespace FernNPRCore.StableDiffusionGraph
         {
             base.OnAddedToGraph();
             stableGraph = Graph as StableDiffusionGraph;
-            EditorCoroutineUtility.StartCoroutine(ListLoraAsync(), this);
+            
         }
 
         /// <summary>

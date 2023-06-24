@@ -8,7 +8,7 @@ using System.Text;
 using FernGraph;
 using Newtonsoft.Json;
 using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
+
 using UnityEngine;
 
 namespace FernNPRCore.StableDiffusionGraph

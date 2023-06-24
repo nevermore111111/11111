@@ -902,10 +902,6 @@
       <Project>{958D8316-29AA-E07F-948B-9B9040DB27C2}</Project>
       <Name>AquaSys.TextureBaker.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Toonshader.csproj">
-      <Project>{ECBACBF8-A36D-9AE0-791F-3ABB858A0EAA}</Project>
-      <Name>Unity.Toonshader</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.csproj">
       <Project>{C1BD0D23-76E5-0DB8-F998-DF084AAB2E0D}</Project>
       <Name>Unity.TextMeshPro</Name>
@@ -917,10 +913,6 @@
     <ProjectReference Include="AquaSys.TextureBaker.csproj">
       <Project>{2481BE0E-E909-F928-4E6F-19B7B6A9AF12}</Project>
       <Name>AquaSys.TextureBaker</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Toonshader.Editor.csproj">
-      <Project>{E5C5D1C8-F798-8150-95ED-649E0B9AF72A}</Project>
-      <Name>Unity.Toonshader.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="DOTween.Modules.csproj">
       <Project>{723D97EB-DF20-DEE3-DE0F-9BD088EEF5A2}</Project>

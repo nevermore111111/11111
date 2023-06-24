@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+
 using UnityEngine;
 
 namespace FernGraph
@@ -47,7 +47,7 @@ namespace FernGraph
                 #if UNITY_EDITOR 
                 return UnityEditor.Experimental.GraphView.ContentZoomer.DefaultMinScale; 
                 #else
-                return 1.0;
+                return 1.0f;
                 #endif
             } 
         }
@@ -63,7 +63,7 @@ namespace FernGraph
                 #if UNITY_EDITOR 
                 return UnityEditor.Experimental.GraphView.ContentZoomer.DefaultMaxScale; 
                 #else
-                return 1.0;
+                return 1.0f;
                 #endif
             }
         }

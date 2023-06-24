@@ -60,7 +60,7 @@ public class CheckEnemy : MonoBehaviour
         {
             NormalMovement.planarMovementParameters.stableGroundedDeceleration = MoveDeceleration * 1.5f;
         }
-        if (other.gameObject.CompareTag("enemy") && !mainCharacter.enemies.Contains(other.gameObject.GetComponentInParent<CharacterInfo>()))
+        if (other.gameObject.CompareTag("enemy") )//&& !mainCharacter.enemies.Contains(other.gameObject.GetComponentInParent<CharacterInfo>())
         {
             // 在敌人重新进入范围时，停止延迟删除协程
             Transform enemyTransform = other.transform;
@@ -68,9 +68,10 @@ public class CheckEnemy : MonoBehaviour
 
             if (targetIndex != -1)
             {
+                //targetGroup.AddMember(enemyTransform, 1,enemyTransform.GetComponentInParent<CharacterInfo>().GetComponent<SphereCollider>().radius);
                 StopCoroutine(DelayedRemoveMember(enemyTransform, 1f));
 
-                // 在敌人重新进入范围时，逐渐增加权重
+                //// 在敌人重新进入范围时，逐渐增加权重
                 StartCoroutine(AdjustTargetWeight(1f, 1f, targetIndex));
             }
         }
@@ -95,7 +96,7 @@ public class CheckEnemy : MonoBehaviour
             mainCharacter.enemies.Remove(other.gameObject.GetComponentInParent<CharacterInfo>());
             Transform enemyTransform = other.gameObject.GetComponentInParent<Transform>();
             int targetIndex = targetGroup.FindMember(enemyTransform);
-
+            //targetGroup.RemoveMember(enemyTransform);
             // 在敌人离开范围时，延迟删除目标并逐渐减小权重
             StartCoroutine(DelayedRemoveMember(enemyTransform, 1f));
             StartCoroutine(AdjustTargetWeight(0f, 1f, targetIndex));
@@ -113,7 +114,7 @@ public class CheckEnemy : MonoBehaviour
         // 检查敌人是否在范围内，如果不在范围内，则从目标组中移除
         if (!enemyTransform.GetComponent<SphereCollider>().bounds.Contains(targetGroup.transform.position))
         {
-            targetGroup.RemoveMember(enemyTransform);
+            //targetGroup.RemoveMember(enemyTransform);
         }
     }
     private void Update()

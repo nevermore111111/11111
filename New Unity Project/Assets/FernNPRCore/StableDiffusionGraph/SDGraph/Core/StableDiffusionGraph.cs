@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FernGraph;
-using FernGraph.Editor;
-using Unity.EditorCoroutines.Editor;
+
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -70,7 +69,7 @@ namespace FernNPRCore.StableDiffusionGraph
 
             if (GetNode<SDStart>() == null)
             {
-                sdStart = NodeReflection.Instantiate<SDStart>();
+               
                 AddNode(sdStart);
             }
         }
@@ -90,7 +89,7 @@ namespace FernNPRCore.StableDiffusionGraph
 
         public override void ExecuteGraph()
         {
-            EditorCoroutineUtility.StartCoroutine(Execute(), this);
+            
         }
 
         public IEnumerator Execute()
