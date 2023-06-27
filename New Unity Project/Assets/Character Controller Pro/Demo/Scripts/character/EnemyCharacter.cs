@@ -12,7 +12,7 @@ public class EnemyCharacter : CharacterInfo, IAgent
     protected override  void Awake()
     {
         base.Awake();
-        characterActor = GetComponentInParent<CharacterActor>();
+       // characterActor = GetComponentInParent<CharacterActor>();
     }
 
     public void GetDamage(float damage, Vector3 pos)

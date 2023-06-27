@@ -22,7 +22,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         RuntimeAnimatorController runtimeAnimatorController = null;
 
         static public bool  canPlayerControl = false;
-
+        static public bool isTimelineAnimation = false;
         /// <summary>
         /// Gets the hash value (Animator) associated with this state, based on its name.
         /// </summary>
@@ -168,8 +168,18 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// <returns>True if the Animator is valid, false otherwise.</returns>
         public bool IsAnimatorValid() => CharacterActor.IsAnimatorValid();
 
-        
 
+        /// <summary>
+        /// 这个方法让使用timeline播放的动画实现rootMovtion的效果
+        /// 必须先开启characteractor的rootmotion
+        /// 如果有多个动画，只会播放最后一个动画的rootmovtion
+        /// 第二行个人情况开启或者关闭
+        /// </summary>
+        public void SetTimeLineAnimationRootMotion(bool startRootMovtion)
+        {
+            isTimelineAnimation = startRootMovtion;
+            //CharacterActor.SetUpRootMotion(startRootMovtion, startRootMovtion);
+        }
     }
 
 }

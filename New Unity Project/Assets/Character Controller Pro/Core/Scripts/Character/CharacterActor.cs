@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Lightbug.Utilities;
 using System.Data;
+using Lightbug.CharacterControllerPro.Implementation;
 
 namespace Lightbug.CharacterControllerPro.Core
 {
@@ -1707,7 +1708,14 @@ namespace Lightbug.CharacterControllerPro.Core
 
         protected override void UpdateDynamicRootMotionPosition()
         {
+
+            if(CharacterState.isTimelineAnimation)
+            {
+                Animator.transform.position = Animator.rootPosition;
+                return;
+            }
             Vector3 rootMotionVelocity = Animator.deltaPosition / Time.deltaTime;
+
             switch (rootMotionVelocityType)
             {
                 case RootMotionVelocityType.SetVelocity:
@@ -1721,7 +1729,7 @@ namespace Lightbug.CharacterControllerPro.Core
                     break;
             }
 
-            Debug.Log("如果是timeline，就在这个地方设置位移 get模型的position = animator.rootposition");
+            //Debug.Log("如果是timeline，就在这个地方设置位移 get模型的position = animator.rootposition");
 
 
         }

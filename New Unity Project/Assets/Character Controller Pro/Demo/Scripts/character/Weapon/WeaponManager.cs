@@ -2,6 +2,7 @@ using Cinemachine;
 using Lightbug.CharacterControllerPro.Core;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 //我需要做的一个功能 ，在攻击hit事件的时候判定当前的武器是否集中了敌人，如果集中了敌人，那么就震动摄像机，而且将我和目标的动画播放速度降低
@@ -28,6 +29,7 @@ public class WeaponManager : MonoBehaviour
     {
         HandleDetection();
         //shake();
+        Debug.Log(Time.timeScale);
     }
 
 
@@ -46,7 +48,7 @@ public class WeaponManager : MonoBehaviour
                 //如果存在当前的detection击中目标，那么将武器是否击中目标也改成true。
                 if(item.isHited == true)
                 {
-                    Impluse();
+                    //Impluse();//这里调用武器的或者人物的方法。
                     isHited = true;
                 }
             }
@@ -78,7 +80,7 @@ public class WeaponManager : MonoBehaviour
         if (impulsePar.Length >3 && impulsePar[0]==1)
         {
             Debug.Log("zhendong");
-            impulseSource.GenerateImpulse();
+            impulseSource.GenerateImpulse(-this.transform.up);
         }
     }
 

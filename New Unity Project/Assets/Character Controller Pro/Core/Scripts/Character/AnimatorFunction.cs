@@ -29,6 +29,8 @@ public class AnimatorFunction : MonoBehaviour
         Attack =transform.parent.parent.GetComponentInChildren<Attack>();
         CharacterStateController = transform.parent.parent.GetComponentInChildren<CharacterStateController>();
         CameraEffects = CinemachineFreeLook.GetComponent<CameraEffects>();
+
+        //
     }
 
     public void Idle()
@@ -188,12 +190,10 @@ public class AnimatorFunction : MonoBehaviour
         {
             if (manager.isActiveAndEnabled&&manager.isHited ==true)
             {
-                CameraEffects.ShakeCamera();
-                //SlowDownAnimator(0.01f, 0.15f);
-                FreezeFrames(0.1f);
-                // 执行Hit方法的前提是isOnDetection为true
-                // 在这里添加你要执行的代码
-                break;
+                StartCoroutine(AdjustTimeScaleOverDuration(0.05f,0.03f,0.05f,0.05f));
+                manager.Impluse();
+                Debug.Log("执行了动画事件hit");
+                return;
             }
         }
     }
@@ -220,20 +220,86 @@ public class AnimatorFunction : MonoBehaviour
     }
     private float originalTimeScale;
 
-    public void FreezeFrames(float freezeDuration)
+    public System.Collections.IEnumerator AdjustTimeScaleOverDuration(float fadeInOutDuration, float duration, float targetTimeScale)
     {
+        float initialTimeScale = Time.timeScale;
+        float elapsedTime = 0f;
 
-        originalTimeScale = Time.timeScale; // 保存原始的时间缩放值
-        Time.timeScale = 0f; // 设置时间缩放为0，实现顿帧效果
+        // 渐入
+        while (elapsedTime < fadeInOutDuration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeInOutDuration);
+            Time.timeScale = Mathf.Lerp(initialTimeScale, targetTimeScale, normalizedTime);
+            // 可以在这里根据需要进行其他的逻辑处理
 
-        // 在指定的时间后恢复时间缩放
-        StartCoroutine(ResumeTimeScale(freezeDuration));
+            // 等待一帧
+            yield return null;
+        }
+
+        // 设置目标时间缩放
+        Time.timeScale = targetTimeScale;
+
+        // 持续时间
+        yield return new WaitForSecondsRealtime(duration);
+
+        // 渐出
+        elapsedTime = 0f;
+        while (elapsedTime < fadeInOutDuration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeInOutDuration);
+            Time.timeScale = Mathf.Lerp(targetTimeScale, 1f, normalizedTime);
+            // 可以在这里根据需要进行其他的逻辑处理
+
+            // 等待一帧
+            yield return null;
+        }
+
+        // 恢复原始的时间缩放
+        Time.timeScale = 1f;
+    }
+    public System.Collections.IEnumerator AdjustTimeScaleOverDuration(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale)
+    {
+        float initialTimeScale = Time.timeScale;
+        float elapsedTime = 0f;
+
+        // 渐入
+        while (elapsedTime < fadeInDuration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeInDuration);
+            Time.timeScale = Mathf.Lerp(initialTimeScale, targetTimeScale, normalizedTime);
+            // 可以在这里根据需要进行其他的逻辑处理
+
+            // 等待一帧
+            yield return null;
+        }
+
+        // 设置目标时间缩放
+        Time.timeScale = targetTimeScale;
+
+        // 持续时间
+        yield return new WaitForSecondsRealtime(duration);
+
+        // 渐出
+        elapsedTime = 0f;
+        while (elapsedTime < fadeOutDuration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeOutDuration);
+            Time.timeScale = Mathf.Lerp(targetTimeScale, 1f, normalizedTime);
+            // 可以在这里根据需要进行其他的逻辑处理
+
+            // 等待一帧
+            yield return null;
+        }
+
+        // 恢复原始的时间缩放
+        Time.timeScale = 1f;
     }
 
-    private System.Collections.IEnumerator ResumeTimeScale(float delay)
-    {
-        yield return new WaitForSecondsRealtime(delay);
 
-        Time.timeScale = originalTimeScale; // 恢复原始的时间缩放
-    }
+
+
 }
