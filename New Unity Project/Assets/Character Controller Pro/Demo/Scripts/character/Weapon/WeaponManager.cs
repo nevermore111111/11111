@@ -18,18 +18,29 @@ public class WeaponManager : MonoBehaviour
     public bool isHited;
     private CinemachineImpulseSource impulseSource;
     public float[] impulsePar;
+    [Tooltip("这里配置要装载哪一段特效")]
+    public int FxLoad;
+
+    public ParticleSystem[] HittedFx;
 
     private void Awake()
     {
         impulseSource = GetComponent<CinemachineImpulseSource>();
         detections = GetComponents<Detection>();
         characterActor= GetComponentInParent<CharacterActor>();
+        switch(FxLoad)
+        {
+            case 1: HittedFx = Resources.Load<FxHelper>("FxHelper").Sword;break;
+                case 2: break;
+
+        }
+        
     }
     public void Update()
     {
         HandleDetection();
         //shake();
-        Debug.Log(Time.timeScale);
+       // Debug.Log(Time.timeScale);
     }
 
 
@@ -75,13 +86,21 @@ public class WeaponManager : MonoBehaviour
     /// <summary>
     /// 产生震动
     /// </summary>
-    public void Impluse()
+    public void Impluse(int i = 0)
     {
         if (impulsePar.Length >3 && impulsePar[0]==1)
         {
-            Debug.Log("zhendong");
             impulseSource.GenerateImpulse(-this.transform.up);
         }
     }
-
+    /// <summary>
+    /// 播放这个武器的攻击特效
+    /// </summary>
+    /// <param name="HitNum"></param>
+    public void PlayHittedFx(int HitNum = 0)
+    {
+        ParticleSystem particle = HittedFx[0];
+        particle.transform.position = this.GetComponentInChildren<WeaponFx>().transform.position;
+        HittedFx[0].Play(true);
+    }
 }

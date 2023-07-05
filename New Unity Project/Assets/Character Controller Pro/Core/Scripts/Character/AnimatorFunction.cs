@@ -1,7 +1,7 @@
 using Cinemachine;
 
 using Lightbug.CharacterControllerPro.Implementation;
-
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -20,13 +20,15 @@ public class AnimatorFunction : MonoBehaviour
     public CinemachineFreeLook CinemachineFreeLook;
     CameraEffects CameraEffects;
     private List<WeaponManager> weaponManagers;
-    
+    //private Action<int> hitActionOfImpulse;
+    //private Action<int> hitActionOfPlayFX;
+
 
 
     private void Awake()
     {
         weaponManagers = GetComponentsInChildren<WeaponManager>().ToList();
-        Attack =transform.parent.parent.GetComponentInChildren<Attack>();
+        Attack = transform.parent.parent.GetComponentInChildren<Attack>();
         CharacterStateController = transform.parent.parent.GetComponentInChildren<CharacterStateController>();
         CameraEffects = CinemachineFreeLook.GetComponent<CameraEffects>();
 
@@ -51,7 +53,7 @@ public class AnimatorFunction : MonoBehaviour
             Attack.canInput = true;
             Attack.canChangeState = true;
         }
-        
+
     }
     public void NormalIdle()
     {
@@ -80,7 +82,7 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void AttackStart(int num)
     {
-        
+
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
@@ -182,16 +184,46 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void End()
     {
-       Attack. CharacterActor.Animator.SetTrigger("end");
+        Attack.CharacterActor.Animator.SetTrigger("end");
     }
+
+
     public void Hit(int attackHitRank)
     {
         foreach (var manager in weaponManagers)
         {
-            if (manager.isActiveAndEnabled&&manager.isHited ==true)
+            if (manager.isActiveAndEnabled && manager.isHited == true)
             {
-                StartCoroutine(AdjustTimeScaleOverDuration(0.05f,0.03f,0.05f,0.05f));
-                manager.Impluse();
+                Debug.Log("zhendong"); 
+                switch (attackHitRank)
+                {
+                    
+                    case 0:
+                        {
+                            
+                            break;
+                        }
+                    case 1:
+                        {
+                            StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.05f, 0.06f, 0.2f, manager));
+                            //hitActionOfImpulse += manager.Impluse;
+                            //hitActionOfPlayFX += manager.PlayHittedFx;
+                            break;
+                        }
+                    case 2:
+                        {
+                            StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.06f, 0.1f, 0.05f, manager));
+                            break;
+                        }
+                    case 3:
+                        {
+                            break;
+                        }
+
+
+                }
+
+                // manager.Impluse();
                 Debug.Log("执行了动画事件hit");
                 return;
             }
@@ -259,6 +291,15 @@ public class AnimatorFunction : MonoBehaviour
         // 恢复原始的时间缩放
         Time.timeScale = 1f;
     }
+
+    /// <summary>
+    ///一个时停的方法。
+    /// </summary>
+    /// <param name="fadeInDuration">渐入时间</param>
+    /// <param name="fadeOutDuration">渐出时间</param>
+    /// <param name="duration">持续时间</param>
+    /// <param name="targetTimeScale"></param>
+    /// <returns></returns>
     public System.Collections.IEnumerator AdjustTimeScaleOverDuration(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale)
     {
         float initialTimeScale = Time.timeScale;
@@ -284,6 +325,12 @@ public class AnimatorFunction : MonoBehaviour
 
         // 渐出
         elapsedTime = 0f;
+
+        //调用震动和特效
+
+
+
+
         while (elapsedTime < fadeOutDuration)
         {
             elapsedTime += Time.unscaledDeltaTime;
@@ -294,11 +341,65 @@ public class AnimatorFunction : MonoBehaviour
             // 等待一帧
             yield return null;
         }
-
+        //一般在时停的最后时间再去调用摄像机的震动效果。
         // 恢复原始的时间缩放
         Time.timeScale = 1f;
     }
+    /// <summary>
+    /// 一个时停加震动的复合方法。
+    /// </summary>
+    /// <param name="fadeInDuration"></param>
+    /// <param name="fadeOutDuration"></param>
+    /// <param name="duration"></param>
+    /// <param name="targetTimeScale"></param>
+    /// <param name="weaponManager"></param>
+    /// <returns></returns>
+    public System.Collections.IEnumerator AdjustTimeScaleOverDuration(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager)
+    {
+        float initialTimeScale = Time.timeScale;
+        float elapsedTime = 0f;
 
+        // 渐入
+        while (elapsedTime < fadeInDuration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeInDuration);
+            Time.timeScale = Mathf.Lerp(initialTimeScale, targetTimeScale, normalizedTime);
+            // 可以在这里根据需要进行其他的逻辑处理
+
+            // 等待一帧
+            yield return null;
+        }
+       
+        // 设置目标时间缩放
+        Time.timeScale = targetTimeScale;
+        weaponManager.PlayHittedFx();
+        // 持续时间
+        yield return new WaitForSecondsRealtime(duration);
+
+        // 渐出
+        elapsedTime = 0f;
+
+        //调用震动和特效
+        weaponManager.Impluse();
+        //这里需要调用两个地方产生特效，一个是自身的刀光额外特效，另外一个是怪物的受击反馈。
+        //需要做个委托
+
+
+        while (elapsedTime < fadeOutDuration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeOutDuration);
+            Time.timeScale = Mathf.Lerp(targetTimeScale, 1f, normalizedTime);
+            // 可以在这里根据需要进行其他的逻辑处理
+
+            // 等待一帧
+            yield return null;
+        }
+        //一般在时停的最后时间再去调用摄像机的震动效果。
+        // 恢复原始的时间缩放
+        Time.timeScale = 1f;
+    }
 
 
 

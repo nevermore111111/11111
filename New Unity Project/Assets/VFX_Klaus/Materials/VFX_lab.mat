@@ -67,7 +67,7 @@ Material:
     - _Down_Color: {r: 0.11764707, g: 0.11764707, b: 0.13725491, a: 1}
     - _Up_Color: {r: 0.20784315, g: 0.21960786, b: 0.34117648, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &6022870597953464485
+--- !u!114 &7548961756075576591
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

@@ -68,7 +68,6 @@ public class Attack : CharacterState
         HeighAndWidth =  new(1f, 1.58f);
         attack = GetComponent<Attack>();
         OnceAttack = false;
-        Debug.Log("attack≥ı ºªØ");
         base.Awake();
         MaxCombo = 1;
         NormalMovement = GetComponent<NormalMovement>();
