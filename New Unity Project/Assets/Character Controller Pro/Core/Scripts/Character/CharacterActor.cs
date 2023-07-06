@@ -1711,7 +1711,16 @@ namespace Lightbug.CharacterControllerPro.Core
 
             if(CharacterState.isTimelineAnimation)
             {
-                Animator.transform.position = Animator.rootPosition;
+                Vector3 movement = Animator.deltaPosition;
+
+                // 获取Animator组件的旋转四元数
+                Quaternion rotation = Animator.deltaRotation;
+
+                // 将位移向量和旋转四元数应用到角色的Transform组件
+                Animator.transform. Translate(movement, Space.World);
+                Animator.transform.rotation *= rotation;
+                //Animator.transform.position = Animator.rootPosition;
+                //Animator.transform.rotation = Animator.rootRotation;
                 return;
             }
             Vector3 rootMotionVelocity = Animator.deltaPosition / Time.deltaTime;

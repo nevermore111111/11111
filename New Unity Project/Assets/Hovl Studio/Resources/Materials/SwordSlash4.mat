@@ -82,7 +82,7 @@ Material:
     - _Usedepth: 0
     - _Usesmoothdissolve: 0
     m_Colors:
-    - _AddColor: {r: 0.103773594, g: 0.07531178, b: 0.060208265, a: 0}
+    - _AddColor: {r: 0, g: 0.9160304, b: 1, a: 0}
     - _DissolveTiling: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionTexTiling: {r: 1, g: 1, b: 0, a: 0}
     - _MainTexTiling: {r: 1, g: 1, b: 0, a: 0}

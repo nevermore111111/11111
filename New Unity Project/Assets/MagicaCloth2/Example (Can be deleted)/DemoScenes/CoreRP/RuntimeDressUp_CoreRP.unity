@@ -104,7 +104,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +117,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -128,6 +128,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2796634018937255253, guid: bca76fc2423c0a14db7d44f7745ab286,
@@ -196,6 +197,9 @@ PrefabInstance:
       value: RuntimeDressUpDemo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bca76fc2423c0a14db7d44f7745ab286, type: 3}
 --- !u!114 &69686574 stripped
 MonoBehaviour:
@@ -214,6 +218,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5994381236524526321, guid: 228b0487b4c6f43448267a8277251bc6,
@@ -297,6 +302,9 @@ PrefabInstance:
       value: OnBodyEquipButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 228b0487b4c6f43448267a8277251bc6, type: 3}
 --- !u!1 &705507993
 GameObject:
@@ -403,6 +411,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5981700785874397920, guid: 4e3c7d56d063a904c9dad4bf2ccea5ad,
@@ -466,6 +475,9 @@ PrefabInstance:
       value: Utc_sum_humanoid (Skeleton)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e3c7d56d063a904c9dad4bf2ccea5ad, type: 3}
 --- !u!1 &1441527336 stripped
 GameObject:
@@ -546,6 +558,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6825672987964501168, guid: 1950e99f479bef04581d5185a7cf27b3,
@@ -609,12 +622,16 @@ PrefabInstance:
       value: CubeRoup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1950e99f479bef04581d5185a7cf27b3, type: 3}
 --- !u!1001 &7999109506078386159
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 830224251490306943, guid: 23be23f56fcb4ac48ac4de26c111e332,
@@ -678,12 +695,16 @@ PrefabInstance:
       value: Stage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23be23f56fcb4ac48ac4de26c111e332, type: 3}
 --- !u!1001 &8595711965012278381
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 539690048208611283, guid: b5bac44e9cdf69541b2d1de75e68a9ba,
@@ -757,4 +778,7 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5bac44e9cdf69541b2d1de75e68a9ba, type: 3}

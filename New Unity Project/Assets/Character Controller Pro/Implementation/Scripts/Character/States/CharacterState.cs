@@ -178,7 +178,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         public void SetTimeLineAnimationRootMotion(bool startRootMovtion)
         {
             isTimelineAnimation = startRootMovtion;
-            //CharacterActor.SetUpRootMotion(startRootMovtion, startRootMovtion);
+            CharacterActor.SetUpRootMotion(startRootMovtion, false);
         }
     }
 
