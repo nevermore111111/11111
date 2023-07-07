@@ -85,10 +85,11 @@ namespace BlazeAISpace
             // check if a hit was registered
             if (blaze.hitRegistered) {
                 blaze.hitRegistered = false;
+                //这里根据hitkind来确认使用哪一种受击动画
                 int chosenHitIndex = Random.Range(0, hitAnims.Count);
                 hitDuration = hitAnims[chosenHitIndex].duration;
                 
-
+                
                 if (_duration == 0) {
                     blaze.animManager.Play(hitAnims[chosenHitIndex].animName, hitAnimT, true);
                 }

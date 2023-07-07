@@ -191,6 +191,7 @@ public class BlazeAI : MonoBehaviour
     public string sawAlertTagName { get; private set; }
     public Vector3 sawAlertTagPos { get; private set; }
     public Transform sawAlertTagObject { get; private set; }
+    public int hittedKind { get; set; }
     
     
     // read by behaviours
@@ -2546,7 +2547,7 @@ public class BlazeAI : MonoBehaviour
     }
 
     // hit the AI
-    public void Hit(GameObject enemy = null, bool callOthers = false) 
+    public void Hit(GameObject enemy = null, bool callOthers = false,int hitKind = 0)  
     {
         if (state == State.death || !enabled) {
             Debug.Log("Hit() can't be called when the AI is in death state or Blaze AI is disabled.");
@@ -2563,6 +2564,7 @@ public class BlazeAI : MonoBehaviour
         // read by the hit state behaviour
         hitEnemy = enemy;
         hitRegistered = true;
+        hittedKind = hitKind;
 
 
         // if AI has took cover and got hit -> flag this occurance to have the AI change cover
