@@ -65,7 +65,7 @@ namespace Rusk
         protected float currentSpeedMultiplier = 1f;
 
         protected NormalMovement NormalMovement;
-
+        private Attack attack;
 
 
         #region Events
@@ -125,7 +125,7 @@ namespace Rusk
         protected override void Awake()
         {
             base.Awake();
-
+            attack = this.GetComponent<Attack>();
             materialController = this.GetComponentInBranch<CharacterActor, MaterialController>();
             airDashesLeft = availableNotGroundedDashes;
             NormalMovement = GetComponent<NormalMovement>();
@@ -152,6 +152,23 @@ namespace Rusk
                // characterActor.Animator.SetTrigger("");
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }
+            if(characterActor.IsGrounded)
+            {
+                if (dashCursor >= 0.85f && CharacterActions.attack.value == true)
+                {
+                    if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
+                    {
+                        CharacterStateController.EnqueueTransition<AttackOnGround>(); ResetDash();
+                    }
+                    
+                    if(attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                    {
+                        CharacterStateController.EnqueueTransition<AttackOnGround_fist>(); ResetDash();
+                    }
+                }
+            }
+
+            
             if(CharacterActions.jump.value == true)
             {
                 CharacterStateController.EnqueueTransition<NormalMovement>();
@@ -165,7 +182,7 @@ namespace Rusk
             NormalMovement.preEvade = false;
             if (forceNotGrounded)
                 CharacterActor.alwaysNotGrounded = true;
-
+            characterActor.Animator.Play("Evade");
             CharacterActor.UseRootMotion = false;
 
             if (CharacterActor.IsGrounded)
@@ -255,7 +272,7 @@ namespace Rusk
                 }
                 else
                 {
-                    addTime = 0.2f * Mathf.Abs(input.y);
+                    addTime = 0.3f * Mathf.Abs(input.y);
                 }
             }
 
@@ -294,6 +311,7 @@ namespace Rusk
 
         public virtual void ResetDash()
         {
+
             CharacterActor.Velocity = Vector3.zero;
             isDone = false;
             dashCursor = 0;

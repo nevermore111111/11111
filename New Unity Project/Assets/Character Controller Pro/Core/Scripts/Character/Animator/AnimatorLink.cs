@@ -22,11 +22,11 @@ namespace Lightbug.CharacterControllerPro.Core
             Debug.Log(" 注意下面这个函数要打开");
         }
 
-        //void OnAnimatorMove()
-        //{
+        void OnAnimatorMove()
+        {
 
-        //    OnAnimatorMoveEvent?.Invoke();
-        //}
+            OnAnimatorMoveEvent?.Invoke();
+        }
 
 
         void OnAnimatorIK(int layerIndex)

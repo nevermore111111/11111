@@ -86,7 +86,7 @@ namespace BlazeAISpace
             if (blaze.hitRegistered) {
                 blaze.hitRegistered = false;
                 //这里根据hitkind来确认使用哪一种受击动画
-                int chosenHitIndex = Random.Range(0, hitAnims.Count);
+                int chosenHitIndex = GetAnimationIndex(blaze.hittedKind);
                 hitDuration = hitAnims[chosenHitIndex].duration;
                 
                 
@@ -130,6 +130,14 @@ namespace BlazeAISpace
                 FinishHitState();
             }
         }
+
+        int GetAnimationIndex(int HittedKind)
+        {
+            int index = HittedKind;
+            blaze.hittedKind = 0;
+            return index;
+        }
+
 
         #endregion
 

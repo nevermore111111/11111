@@ -34,7 +34,7 @@ public class AttackOnGround :Attack
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity,true,RootMotionRotationType.AddRotation);
         army[0].SetActive(true);
         army[1].SetActive(true);
-        CharacterActor.Animator.CrossFade("GhostSamurai_Common_Idle_Inplace", 0.05f);
+        CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
     }
     public override void UpdateBehaviour(float dt)
     {
@@ -44,10 +44,7 @@ public class AttackOnGround :Attack
             return;
         }
         UseGravity(dt);
-        if (CharacterActions.test.value)
-        {
-            CharacterActor.Animator.speed = 0.1f;
-        }
+       
         //ÔÚ·Ç¹¥»÷Ê±
         if (CharacterActions.attack.value)
         {
