@@ -23,6 +23,9 @@ public class WeaponManager : MonoBehaviour
 
     public ParticleSystem[] HittedFx;
 
+    public List<CharacterInfo> HittedCharacter;
+
+
     private void Awake()
     {
         impulseSource = GetComponent<CinemachineImpulseSource>();
@@ -32,7 +35,10 @@ public class WeaponManager : MonoBehaviour
         {
             case 1: HittedFx = Resources.Load<FxHelper>("FxHelper").Sword;break;
                 case 2: break;
-
+        }
+        for(int i = 0; i <detections.Length; i++)
+        {
+            detections[i].WeaponManagerOwner = this;
         }
         
     }
@@ -43,15 +49,19 @@ public class WeaponManager : MonoBehaviour
        // Debug.Log(Time.timeScale);
     }
 
-
+    /// <summary>
+    /// 检测，如果在检测，就
+    /// </summary>
     void HandleDetection()
     {
+        Debug.Log(isOnDetection);
         if(isOnDetection)
         {
             foreach(Detection item in detections)
             {
                 foreach (var hit in item.GetDetection(out item.isHited))//添加了攻击对象
                 {
+                    Debug.Log(hit);
                     AgetHitBox hitted = hit.GetComponent<AgetHitBox>();
                     hitted.GetDamage(1, transform.position);//这是攻击对象播放都动画
                     hitted.GetWeapon(this);
@@ -65,6 +75,10 @@ public class WeaponManager : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// 关闭检测的方法
+    /// </summary>
+    /// <param name="value"></param>
     public void ToggleDetection(bool value)
     {
         isOnDetection = value;
@@ -78,6 +92,7 @@ public class WeaponManager : MonoBehaviour
             {
                 item.ClaerWasHit();
                 //清空hit列表，所有是否击中也全部清空
+                
             }
             isHited=false;//武器击中判定也清空
         }
@@ -102,5 +117,12 @@ public class WeaponManager : MonoBehaviour
         ParticleSystem particle = HittedFx[0];
         particle.transform.position = this.GetComponentInChildren<WeaponFx>().transform.position;
         HittedFx[0].Play(true);
+    }
+    /// <summary>
+    /// 需要做一个关于武器的方法，只在第一次击中一个characterINFO时才调用，需要传入的是击中的判定区域，击中的collider
+    /// </summary>
+    public void Hitted()
+    {
+
     }
 }

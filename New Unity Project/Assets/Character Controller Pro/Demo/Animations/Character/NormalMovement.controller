@@ -313,8 +313,8 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: VerticalSpeed
     m_Mirror: 0
-  m_BlendParameter: attackFromH
-  m_BlendParameterY: attackFromV
+  m_BlendParameter: attackXFrom
+  m_BlendParameterY: attackZFrom
   m_MinThreshold: 0
   m_MaxThreshold: 0.75
   m_UseAutomaticThresholds: 0
@@ -1102,13 +1102,19 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: attackFromH
+  - m_Name: attackYFrom
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: attackFromV
+  - m_Name: attackXFrom
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: attackZFrom
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0

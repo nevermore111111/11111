@@ -1,7 +1,9 @@
 
+using System;
 using System.Collections.Generic;
 
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CapsuleDetection : Detection
@@ -10,6 +12,8 @@ public class CapsuleDetection : Detection
     public Transform endPoint;
     public float radius;
     public bool debug;
+    
+    
 
     private void OnDrawGizmos()
     {
@@ -35,6 +39,11 @@ public class CapsuleDetection : Detection
             }
         }
     }
+    /// <summary>
+    /// 这里返回的是这一帧击中的符合条件的物体
+    /// </summary>
+    /// <param name="isHited"></param>
+    /// <returns></returns>
     public override List<Collider> GetDetection(out bool isHited)
     {
         List<Collider> result = new List<Collider>();
@@ -47,6 +56,11 @@ public class CapsuleDetection : Detection
             {
                 wasHit.Add(hitBox.agent);
                 result.Add(item);
+                if(!WeaponManagerOwner.HittedCharacter.Contains(hitBox.characterInfoOwner))
+                {
+                    WeaponManagerOwner.HittedCharacter.Add(hitBox.characterInfoOwner);
+                    //调用一次
+                }
             }
         }
         if(result.Count != 0)
