@@ -54,14 +54,14 @@ public class WeaponManager : MonoBehaviour
     /// </summary>
     void HandleDetection()
     {
-        Debug.Log(isOnDetection);
+        
         if(isOnDetection)
         {
             foreach(Detection item in detections)
             {
                 foreach (var hit in item.GetDetection(out item.isHited))//添加了攻击对象
                 {
-                    Debug.Log(hit);
+                    
                     AgetHitBox hitted = hit.GetComponent<AgetHitBox>();
                     hitted.GetDamage(1, transform.position);//这是攻击对象播放都动画
                     hitted.GetWeapon(this);

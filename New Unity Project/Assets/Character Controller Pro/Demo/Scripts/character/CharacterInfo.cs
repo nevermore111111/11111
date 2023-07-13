@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class CharacterInfo : MonoBehaviour
+public abstract class CharacterInfo : MonoBehaviour
 {
     //周围全部的敌人
     
@@ -21,6 +21,5 @@ public class CharacterInfo : MonoBehaviour
         characterSphere = GetComponent<SphereCollider>();
         characterSphere.isTrigger = true;
     }
-   
     
 }
