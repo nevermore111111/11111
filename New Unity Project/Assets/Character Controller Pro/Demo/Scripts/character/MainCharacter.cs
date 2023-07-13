@@ -6,10 +6,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCharacter : CharacterInfo 
+public class MainCharacter : CharacterInfo ,IAgent
 {
     public CharacterActor CharacterActor;
     public CharacterStateController CharacterStateController;
+    public
+
+     void GetDamage(float damage, Vector3 pos)
+    {
+        
+    }
+
+
     protected override void Awake()
     {
         base.Awake();

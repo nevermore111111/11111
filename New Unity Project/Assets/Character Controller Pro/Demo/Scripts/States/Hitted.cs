@@ -22,11 +22,12 @@ public class Hitted : CharacterState
     {
         
     }
-
-    public void GetHitted(Vector3 attackSource)
+    //根据目标的方位和攻击类型来决定自身的受击类型。需要设置当前的受击动画。
+    public void GetHitted(Vector3 attackDirection,WeaponManager weapon)
     {
         //动画机处理
-        Vector3 attackPos = GetAttackDirection(CharacterActor.transform, attackSource);
+        CharacterStateController.EnqueueTransition<Hitted>();
+        Vector3 attackPos = GetAttackDirection(CharacterActor.transform, attackDirection);
         SetAnimationParameters(ConvertToVector2(attackPos));
     }
 

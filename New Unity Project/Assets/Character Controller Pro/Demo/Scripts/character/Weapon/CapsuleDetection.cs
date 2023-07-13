@@ -60,6 +60,7 @@ public class CapsuleDetection : Detection
                 {
                     WeaponManagerOwner.HittedCharacter.Add(hitBox.characterInfoOwner);
                     //调用一次
+
                 }
             }
         }
