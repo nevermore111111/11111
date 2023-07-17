@@ -23,12 +23,19 @@ public class Hitted : CharacterState
         
     }
     //根据目标的方位和攻击类型来决定自身的受击类型。需要设置当前的受击动画。
-    public void GetHitted(Vector3 attackDirection,WeaponManager weapon)
+    public void GetHitted(WeaponManager weapon,IAgent.HitKind hitKind)
     {
+        switch(hitKind)
+        {
+            case 0:
+                {
+                    CharacterStateController.EnqueueTransition<Hitted>();
+                    Vector3 attackPos = -weapon.GetWeaponDirectInverse(CharacterActor.transform);
+                    SetAnimationParameters(ConvertToVector2(attackPos));
+                }
+                break;
+        }
         //动画机处理
-        CharacterStateController.EnqueueTransition<Hitted>();
-        Vector3 attackPos = GetAttackDirection(CharacterActor.transform, attackDirection);
-        SetAnimationParameters(ConvertToVector2(attackPos));
     }
 
 
@@ -55,5 +62,16 @@ public class Hitted : CharacterState
         
         CharacterActor.Animator.SetFloat("attackXFrom", attackXFrom);
         CharacterActor.Animator.SetFloat("attackZFrom", attackZFrom);
+    }
+    public void SetAnimationParameters(Vector3 attackDirection)
+    {
+        float attackXFrom = Mathf.Abs(attackDirection.x);
+        float attackZFrom = Mathf.Abs(attackDirection.z);
+        float attackYFrom = Mathf.Abs(attackDirection.y);
+
+        // 设置动画机参数
+        CharacterActor.Animator.SetFloat("attackXFrom", attackXFrom);
+        CharacterActor.Animator.SetFloat("attackZFrom", attackZFrom);
+        CharacterActor.Animator.SetFloat("attackYFrom", attackYFrom);
     }
 }

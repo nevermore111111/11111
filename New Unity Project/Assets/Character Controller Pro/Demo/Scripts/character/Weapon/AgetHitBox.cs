@@ -27,9 +27,9 @@ public class AgetHitBox : MonoBehaviour
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="pos"></param>
-    public void GetDamage(float damage,Vector3 pos)
+    public void GetDamage(float damage, Vector3 pos)
     {
-        target.GetDamage(damage, pos);
+        //target.GetDamage(damage, pos);
     }
     /// <summary>
     /// 在击中的那一帧调用

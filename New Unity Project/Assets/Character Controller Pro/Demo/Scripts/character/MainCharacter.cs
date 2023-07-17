@@ -6,15 +6,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCharacter : CharacterInfo ,IAgent
+public class MainCharacter : CharacterInfo
 {
     public CharacterActor CharacterActor;
     public CharacterStateController CharacterStateController;
-    public
+    public Hitted CharacterHitted;
 
-     void GetDamage(float damage, Vector3 pos)
+    public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, IAgent.HitKind hit = IAgent.HitKind.ground)
     {
-        
+        //需要找到主角调用
+        CharacterHitted.GetHitted( weapon,hit );
     }
 
 
@@ -23,9 +24,10 @@ public class MainCharacter : CharacterInfo ,IAgent
         base.Awake();
         CharacterActor = GetComponentInParent<CharacterActor>();
         CharacterStateController = this.transform.parent.GetComponentInChildren<CharacterStateController>();
+        CharacterHitted = GetComponentInChildren<Hitted>();
     }
 
-#warning(这里没做)
+#warning(这里没做,摄像机使用的)
     internal bool GetIsAttacked()
     {
         return false;

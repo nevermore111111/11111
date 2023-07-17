@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public abstract class CharacterInfo : MonoBehaviour
+public abstract class CharacterInfo : MonoBehaviour, IAgent
 {
     //周围全部的敌人
     
@@ -15,6 +15,18 @@ public abstract class CharacterInfo : MonoBehaviour
     public CharacterInfo selectEnemy;
     [Tooltip("代表摄像机中的碰撞体积")]
     public SphereCollider characterSphere;
+
+    /// <summary>
+    /// 伤害，目标位置，武器方向，击中类型
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="pos"></param>
+    /// <param name="weapon"></param>
+    /// <param name="hit"></param>
+    abstract public void GetDamage(float damage, Vector3 pos, WeaponManager weapon,IAgent.HitKind hit = IAgent.HitKind.ground);
+
+ 
+
     protected virtual void  Awake()
     {
         enemies = new List<CharacterInfo>();

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 
 using System.Linq;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -60,7 +61,7 @@ public class CapsuleDetection : Detection
                 {
                     WeaponManagerOwner.HittedCharacter.Add(hitBox.characterInfoOwner);
                     //调用一次
-
+                    hitBox.characterInfoOwner.GetDamage(1,WeaponManagerOwner.transform.position,WeaponManagerOwner,IAgent.HitKind.ground);
                 }
             }
         }

@@ -3,26 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCharacter : CharacterInfo, IAgent
+public class EnemyCharacter : CharacterInfo
 {
      CharacterActor characterActor;
     public float targetGroupSize = 1;
     public float targetHp = 10000;
+    public BlazeAI BlazeAI;
 
     protected override  void Awake()
     {
         base.Awake();
+        BlazeAI = GetComponentInChildren<BlazeAI>();
        // characterActor = GetComponentInParent<CharacterActor>();
     }
 
-    public void GetDamage(float damage, Vector3 pos)
+
+    public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, IAgent.HitKind hit = IAgent.HitKind.ground)
     {
-        //这个地方需要 1 细化规则 播放那个动画
-        //需要在已经进入当前状态的时候是否重新播放动画
-
-        //characterActor.Animator.Play("GetDamage", 0, 0); // 重置并播放动画
-        Debug.Log("jizhongle");
+        //这个是被击中效果
+        weapon.Hitted();
+        if(BlazeAI !=null)
+        {
+            BlazeAI.Hit();
+        }
     }
-
-
 }

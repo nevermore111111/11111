@@ -1,5 +1,6 @@
 using Cinemachine;
 using Lightbug.CharacterControllerPro.Core;
+using MagicaCloth2;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -24,6 +25,9 @@ public class WeaponManager : MonoBehaviour
     public ParticleSystem[] HittedFx;
 
     public List<CharacterInfo> HittedCharacter;
+    public Vector3 WeaponDirection;
+    private int frameCount = 0;
+    private Vector3 previousWeaponPosition;
 
 
     private void Awake()
@@ -42,11 +46,33 @@ public class WeaponManager : MonoBehaviour
         }
         
     }
+    public void UpdateWeaponDirection()
+    {
+        if (frameCount == 0)
+        {
+            // 获取当前武器位置
+            Vector3 currentWeaponPosition = transform.position;
+
+            if (frameCount == 3)
+            {
+                // 计算武器方向
+                WeaponDirection = currentWeaponPosition - previousWeaponPosition;
+                WeaponDirection.Normalize();
+            }
+
+            // 更新上一帧的武器位置
+            previousWeaponPosition = currentWeaponPosition;
+        }
+
+        // 增加帧计数
+        frameCount = (frameCount + 1) % 3;
+    }
     public void Update()
     {
         HandleDetection();
+        UpdateWeaponDirection();
         //shake();
-       // Debug.Log(Time.timeScale);
+        // Debug.Log(Time.timeScale);
     }
 
     /// <summary>
@@ -63,7 +89,7 @@ public class WeaponManager : MonoBehaviour
                 {
                     
                     AgetHitBox hitted = hit.GetComponent<AgetHitBox>();
-                    hitted.GetDamage(1, transform.position);//这是攻击对象播放都动画
+                    //hitted.GetDamage(1, transform.position);//这是攻击对象播放都动画
                     hitted.GetWeapon(this);
                 }
                 //如果存在当前的detection击中目标，那么将武器是否击中目标也改成true。
@@ -105,7 +131,7 @@ public class WeaponManager : MonoBehaviour
     {
         if (impulsePar.Length >3 && impulsePar[0]==1)
         {
-            impulseSource.GenerateImpulse(-this.transform.up);
+            impulseSource.GenerateImpulse(WeaponDirection);
         }
     }
     /// <summary>
@@ -123,6 +149,70 @@ public class WeaponManager : MonoBehaviour
     /// </summary>
     public void Hitted()
     {
+        Debug.Log("击中");
+        StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.05f, 1f, 0.2f, this));
+    }
+    /// <summary>
+    /// 一个时停加震动的复合方法。
+    /// </summary>
+    /// <param name="fadeInDuration"></param>
+    /// <param name="fadeOutDuration"></param>
+    /// <param name="duration"></param>
+    /// <param name="targetTimeScale"></param>
+    /// <param name="weaponManager"></param>
+    /// <returns></returns>
+    public System.Collections.IEnumerator AdjustTimeScaleOverDuration(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager)
+    {
+        float initialTimeScale = Time.timeScale;
+        float elapsedTime = 0f;
 
+        // 渐入
+        while (elapsedTime < fadeInDuration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeInDuration);
+            Time.timeScale = Mathf.Lerp(initialTimeScale, targetTimeScale, normalizedTime);
+            // 可以在这里根据需要进行其他的逻辑处理
+
+            // 等待一帧
+            yield return null;
+        }
+
+        // 设置目标时间缩放
+        Time.timeScale = targetTimeScale;
+        weaponManager.PlayHittedFx();
+        // 持续时间
+        yield return new WaitForSecondsRealtime(duration);
+
+        // 渐出
+        elapsedTime = 0f;
+
+        //调用震动和特效
+        weaponManager.Impluse();
+        //这里需要调用两个地方产生特效，一个是自身的刀光额外特效，另外一个是怪物的受击反馈。
+        //需要做个委托
+
+
+        while (elapsedTime < fadeOutDuration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeOutDuration);
+            Time.timeScale = Mathf.Lerp(targetTimeScale, 1f, normalizedTime);
+            // 可以在这里根据需要进行其他的逻辑处理
+
+            // 等待一帧
+            yield return null;
+        }
+        //一般在时停的最后时间再去调用摄像机的震动效果。
+        // 恢复原始的时间缩放
+        Time.timeScale = 1f;
+    }
+    /// <summary>
+    /// 相对于人物坐标系武器的运动方向
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 GetWeaponDirectInverse(Transform HittedCharacterTransform)
+    {
+        return HittedCharacterTransform.InverseTransformDirection(WeaponDirection);
     }
 }
