@@ -149,7 +149,7 @@ public class CheckEnemy : MonoBehaviour
                 mainCharacter.enemies.Add(characterInfo);
                 if (targetGroup.FindMember(other.transform) == -1)
                 {
-                    targetGroup.AddMember(other.transform, 0, other.GetComponentInParent<CharacterInfo>().GetComponent<SphereCollider>().radius);
+                    targetGroup.AddMember(other.transform, 0, other.GetComponentInParent<CharacterInfo>().cameraRadius);
                     StartCoroutine(AdjustTargetWeight(1f, 1f, targetGroup.m_Targets.Length - 1));
                 }
             }

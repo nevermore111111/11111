@@ -89,7 +89,6 @@ namespace BlazeAISpace
                 int chosenHitIndex = GetAnimationIndex(blaze.hittedKind);
                 hitDuration = hitAnims[chosenHitIndex].duration;
                 
-                
                 if (_duration == 0) {
                     blaze.animManager.Play(hitAnims[chosenHitIndex].animName, hitAnimT, true);
                 }
