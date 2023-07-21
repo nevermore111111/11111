@@ -54,7 +54,6 @@ namespace Lightbug.CharacterControllerPro.Implementation
                 return element.AxesValue;
         }
 
-
     }
 
 }

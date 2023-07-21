@@ -9,6 +9,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
     /// </summary>
     public class UnityInputHandler : InputHandler
     {
+        private Dictionary<string, float> pressTimes = new Dictionary<string, float>();
         struct Vector2Action
         {
             public string x;
@@ -37,6 +38,10 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
             return output;
         }
+
+
+
+        
 
         public override float GetFloat(string actionName)
         {
@@ -97,6 +102,10 @@ namespace Lightbug.CharacterControllerPro.Implementation
             Debug.LogWarning($"{actionXName} and/or {actionYName} actions not found! Please make sure both of these actions are included in your input settings (axis). If you're only testing the demo scenes from " +
             "Character Controller Pro please load the input preset included at \"Character Controller Pro/OPEN ME/Presets/.");
         }
+
+        
+
+       
     }
 
 }

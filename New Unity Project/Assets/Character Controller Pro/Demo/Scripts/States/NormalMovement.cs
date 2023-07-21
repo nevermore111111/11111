@@ -161,6 +161,10 @@ namespace Lightbug.CharacterControllerPro.Demo
             set => verticalMovementParameters.useGravity = value;
         }
 
+        //我现在想做的：按下和长按触发不同效果，如果是短按，那么就正常触发，如果是长按，那么就进入特殊攻击
+
+
+
         public override void CheckExitTransition()
         {
             if (IsPlayer)
@@ -168,11 +172,6 @@ namespace Lightbug.CharacterControllerPro.Demo
                 if (CanEvade())
                 {
                     CharacterStateController.EnqueueTransition<Evade>();
-                }
-                if (Input.GetKeyDown(KeyCode.M))
-                {
-                    Debug.Log("jinlai");
-                    CharacterStateController.EnqueueTransition<Grap>();
                 }
                 if (CharacterActions.attack.value)
                 {
