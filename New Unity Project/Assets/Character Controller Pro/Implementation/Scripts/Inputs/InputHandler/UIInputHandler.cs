@@ -54,20 +54,6 @@ namespace Lightbug.CharacterControllerPro.Implementation
                 return element.AxesValue;
         }
 
-        public override void Update()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override bool IsShortPress(string actionName, float shortPressTime)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override bool IsLongPress(string actionName, float longPressTime)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 
 }

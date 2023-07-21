@@ -22,6 +22,9 @@ namespace Lightbug.CharacterControllerPro.Implementation
     /// </summary>
     public abstract class InputHandler : MonoBehaviour
     {
+
+        public static float shortPressTime = 0.2f;
+        public static float longPressTime = 0.2f;
         public static InputHandler CreateInputHandler(GameObject gameObject, HumanInputType inputType)
         {
             InputHandler inputHandler = null;
@@ -45,12 +48,12 @@ namespace Lightbug.CharacterControllerPro.Implementation
             return inputHandler;
         }
 
-        public abstract void Update();
+        //public abstract void Update();
         public abstract bool GetBool(string actionName);
         public abstract float GetFloat(string actionName);
         public abstract Vector2 GetVector2(string actionName);
-        public abstract bool IsShortPress(string actionName);
-        public abstract bool IsLongPress(string actionName);
+        //public abstract bool IsShortPress(string actionName);
+        //public abstract bool IsLongPress(string actionName);
 
     }
 
