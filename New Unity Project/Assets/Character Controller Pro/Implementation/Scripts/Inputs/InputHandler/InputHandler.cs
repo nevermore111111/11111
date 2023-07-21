@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Lightbug.CharacterControllerPro.Implementation
@@ -44,9 +45,12 @@ namespace Lightbug.CharacterControllerPro.Implementation
             return inputHandler;
         }
 
+        public abstract void Update();
         public abstract bool GetBool(string actionName);
         public abstract float GetFloat(string actionName);
         public abstract Vector2 GetVector2(string actionName);
+        public abstract bool IsShortPress(string actionName);
+        public abstract bool IsLongPress(string actionName);
 
     }
 

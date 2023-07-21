@@ -9,6 +9,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
     /// </summary>
     public class UnityInputHandler : InputHandler
     {
+        private Dictionary<string, float> pressTimes = new Dictionary<string, float>();
         struct Vector2Action
         {
             public string x;
@@ -37,6 +38,10 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
             return output;
         }
+
+
+
+        
 
         public override float GetFloat(string actionName)
         {
@@ -96,6 +101,64 @@ namespace Lightbug.CharacterControllerPro.Implementation
         {
             Debug.LogWarning($"{actionXName} and/or {actionYName} actions not found! Please make sure both of these actions are included in your input settings (axis). If you're only testing the demo scenes from " +
             "Character Controller Pro please load the input preset included at \"Character Controller Pro/OPEN ME/Presets/.");
+        }
+
+        public override bool IsShortPress(string actionName)
+        {
+            float pressTime = GetPressTime(actionName);
+            return pressTime <= shortPressTime;
+        }
+
+        public override bool IsLongPress(string actionName)
+        {
+            float pressTime = GetPressTime(actionName);
+            return pressTime >= longPressTime;
+        }
+
+        private float GetPressTime(string actionName)
+        {
+            float pressTime = 0f;
+            if (Input.GetButton(actionName))
+            {
+                if (pressTimes.ContainsKey(actionName))
+                {
+                    pressTime = pressTimes[actionName] + Time.deltaTime;
+                }
+                else
+                {
+                    pressTime = Time.deltaTime;
+                }
+                pressTimes[actionName] = pressTime;
+            }
+            else
+            {
+                pressTimes.Remove(actionName);
+            }
+            return pressTime;
+        }
+
+        public override void Update()
+        {
+            // 在 Update 方法中更新按键状态
+            foreach (var actionName in pressTimes.Keys)
+            {
+                if (Input.GetButtonUp(actionName))
+                {
+                    // 在松开按键时，根据按下时间触发对应的事件
+                    float pressTime = pressTimes[actionName];
+                    if (pressTime <= shortPressTime)
+                    {
+                        // 短按事件
+                        OnShortPress(actionName);
+                    }
+                    else
+                    {
+                        // 长按事件
+                        OnLongPress(actionName);
+                    }
+                    pressTimes.Remove(actionName);
+                }
+            }
         }
     }
 

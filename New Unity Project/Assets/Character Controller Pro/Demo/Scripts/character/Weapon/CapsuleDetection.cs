@@ -53,17 +53,27 @@ public class CapsuleDetection : Detection
         foreach (var item in hits)
         {
             AgetHitBox hitBox;
-            if (item.TryGetComponent(out hitBox) && hitBox.agent && targetTags.Contains(hitBox.agent.tag) && !wasHit.Contains(hitBox.agent))//如果是可攻击对象，并且攻击对象中没有这个目标时
+            //看一下是不是敌对目标
+            if(targetTags.Contains( item.tag))
             {
-                wasHit.Add(hitBox.agent);
-                result.Add(item);
-                if(!WeaponManagerOwner.HittedCharacter.Contains(hitBox.characterInfoOwner))
+                //
+                hitBox = item.GetComponentInParent<AgetHitBox>();
+                if (hitBox != null)
                 {
-                    WeaponManagerOwner.HittedCharacter.Add(hitBox.characterInfoOwner);
-                    //调用一次
-                    hitBox.characterInfoOwner.GetDamage(1,WeaponManagerOwner.transform.position,WeaponManagerOwner,IAgent.HitKind.ground);
+                    if (hitBox.agent && targetTags.Contains(hitBox.agent.tag) && !wasHit.Contains(hitBox.agent))//如果是可攻击对象，并且攻击对象中没有这个目标时
+                    {
+                        wasHit.Add(hitBox.agent);
+                        result.Add(item);
+                        if (!WeaponManagerOwner.HittedCharacter.Contains(hitBox.characterInfoOwner))
+                        {
+                            WeaponManagerOwner.HittedCharacter.Add(hitBox.characterInfoOwner);
+                            //调用一次
+                            hitBox.characterInfoOwner.GetDamage(1, WeaponManagerOwner.transform.position, WeaponManagerOwner, IAgent.HitKind.ground);
+                        }
+                    }
                 }
             }
+            
         }
         if(result.Count != 0)
         {
