@@ -8,6 +8,6 @@ public interface IAgent
     {
         ground = 0
     }
-    public void GetDamage(float damage,  Vector3 pos, WeaponManager weapon,HitKind hit = HitKind.ground);
+    public void GetDamage(float damage,  Vector3 pos, WeaponManager weapon,Collider collider,HitKind hit = HitKind.ground);
 }
 

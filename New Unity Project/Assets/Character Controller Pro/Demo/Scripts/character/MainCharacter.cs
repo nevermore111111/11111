@@ -12,7 +12,7 @@ public class MainCharacter : CharacterInfo
     public CharacterStateController CharacterStateController;
     public Hitted CharacterHitted;
 
-    public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, IAgent.HitKind hit = IAgent.HitKind.ground)
+    public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider,IAgent.HitKind hit = IAgent.HitKind.ground)
     {
         //需要找到主角调用
         CharacterHitted.GetHitted( weapon,hit );
