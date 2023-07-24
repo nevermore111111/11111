@@ -9,7 +9,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
     /// </summary>
     public class UnityInputHandler : InputHandler
     {
-        private Dictionary<string, float> pressTimes = new Dictionary<string, float>();
+        
         struct Vector2Action
         {
             public string x;
