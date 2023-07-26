@@ -68,8 +68,8 @@ public class CheckEnemy : MonoBehaviour
 
             if (targetIndex != -1)
             {
-                //targetGroup.AddMember(enemyTransform, 1,enemyTransform.GetComponentInParent<CharacterInfo>().GetComponent<SphereCollider>().radius);
-                StopCoroutine(DelayedRemoveMember(enemyTransform, 1f));
+               
+               // StopCoroutine(DelayedRemoveMember(enemyTransform, 1f));
 
                 //// 在敌人重新进入范围时，逐渐增加权重
                 StartCoroutine(AdjustTargetWeight(1f, 1f, targetIndex));
@@ -98,7 +98,7 @@ public class CheckEnemy : MonoBehaviour
             int targetIndex = targetGroup.FindMember(enemyTransform);
             //targetGroup.RemoveMember(enemyTransform);
             // 在敌人离开范围时，延迟删除目标并逐渐减小权重
-            StartCoroutine(DelayedRemoveMember(enemyTransform, 1f));
+            //StartCoroutine(DelayedRemoveMember(enemyTransform, 1f));
             StartCoroutine(AdjustTargetWeight(0f, 1f, targetIndex));
         }
         if(mainCharacter.enemies.Count == 0)

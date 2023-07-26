@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FxHelper
   m_EditorClassIdentifier: 
   Sword:
-  - {fileID: 7636447462946250417, guid: 24ae0db302db37547918ae657d2d31b1, type: 3}
+  - {fileID: 134609147636460867, guid: 049e03098556e094781575aaa944d49f, type: 3}

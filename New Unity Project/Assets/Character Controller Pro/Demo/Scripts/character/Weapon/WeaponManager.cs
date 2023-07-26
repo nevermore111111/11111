@@ -46,26 +46,28 @@ public class WeaponManager : MonoBehaviour
         }
         
     }
+    //在激活中，就每三帧更新一次这个武器方向
     public void UpdateWeaponDirection()
     {
-        if (frameCount == 0)
+        if (isActiveAndEnabled)
         {
-            // 获取当前武器位置
-            Vector3 currentWeaponPosition = transform.position;
-
-            if (frameCount == 3)
+            if (frameCount == 1)
             {
+                // 获取当前武器位置
+                Vector3 currentWeaponPosition = transform.position;
+
+
                 // 计算武器方向
                 WeaponDirection = currentWeaponPosition - previousWeaponPosition;
                 WeaponDirection.Normalize();
+
+                // 更新上一帧的武器位置
+                previousWeaponPosition = currentWeaponPosition;
             }
 
-            // 更新上一帧的武器位置
-            previousWeaponPosition = currentWeaponPosition;
+            // 增加帧计数
+            frameCount = (frameCount + 1) % 3;
         }
-
-        // 增加帧计数
-        frameCount = (frameCount + 1) % 3;
     }
     public void Update()
     {
@@ -131,6 +133,7 @@ public class WeaponManager : MonoBehaviour
     {
         if (impulsePar.Length >3 && impulsePar[0]==1)
         {
+            Debug.Log(WeaponDirection);
             impulseSource.GenerateImpulse(WeaponDirection);
         }
     }
@@ -151,7 +154,7 @@ public class WeaponManager : MonoBehaviour
     {
         Debug.Log("击中");
         //b播放击中特效
-        StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.05f,0.1f, 0.2f, this));
+        StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.05f,0.1f, 0.05f, this));
     }
     /// <summary>
     /// 播放击中特效
