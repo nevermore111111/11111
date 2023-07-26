@@ -577,7 +577,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.10169492
-        functionName: AttackStart
+        functionName: HitStart
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -613,6 +613,20 @@ ModelImporter:
         messageOptions: 0
       - time: 0.539296
         functionName: CannotGetInput
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0
+        functionName: AttackStart
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.19635856
+        functionName: HitReStart
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

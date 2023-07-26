@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 5ddcab072b086f74889f8be00bcc7916
 ModelImporter:
-  serializedVersion: 21202
+  serializedVersion: 22200
   internalIDToNameTable:
   - first:
       1: 100000
@@ -585,7 +585,21 @@ ModelImporter:
         floatParameter: 0
         intParameter: 5
         messageOptions: 0
-      - time: 0.24030925
+      - time: 0.08325795
+        functionName: HitStart
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.10751182
+        functionName: CanGetInput
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.1890272
         functionName: AttackEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -594,13 +608,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.6126051
         functionName: CannotGetInput
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.092554554
-        functionName: CanGetInput
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -618,6 +625,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -645,6 +653,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -1499,6 +1508,8 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

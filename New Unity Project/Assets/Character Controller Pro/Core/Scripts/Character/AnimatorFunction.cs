@@ -3,6 +3,7 @@ using Cinemachine;
 using Lightbug.CharacterControllerPro.Implementation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 
@@ -37,22 +38,15 @@ public class AnimatorFunction : MonoBehaviour
 
     public void Idle()
     {
-        if (Attack.isJustEnter && (CharacterStateController.PreviousState.GetType() != typeof(Attack)))
-        {
-            Attack.isJustEnter = false;
-            Attack.combo = 1;
-            Attack.CharacterActor.Animator.SetInteger("combo", Attack.combo);
-            Attack.canChangeState = false;
-        }
-        else
-        {
+        
+    
             Attack.isAttack = false;
             Attack.CharacterActor.Animator.SetBool("attack", false);
             Attack.combo = 0;
             Attack.CharacterActor.Animator.SetInteger("combo", Attack.combo);
             Attack.canInput = true;
             Attack.canChangeState = true;
-        }
+       
 
     }
     public void NormalIdle()
@@ -75,15 +69,27 @@ public class AnimatorFunction : MonoBehaviour
                 if (manager.isActiveAndEnabled)
                 {
                     manager.ToggleDetection(false);
-                    Debug.Log("½áÊø¹¥»÷");
                     break;
                 }
             }
         }
     }
-    public void AttackStart(int num)
+    public void HitEnd()
     {
-        Debug.Log("¿ªÊ¼¹¥»÷");
+        if (!Attack.CharacterActor.Animator.IsInTransition(0))
+        {
+            foreach (var manager in weaponManagers)
+            {
+                if (manager.isActiveAndEnabled)
+                {
+                    manager.ToggleDetection(false);
+                    break;
+                }
+            }
+        }
+    }
+    public void HitStart()
+    {
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
@@ -92,7 +98,23 @@ public class AnimatorFunction : MonoBehaviour
                 break;
             }
         }
-        Attack.combo = num;
+    }
+    public void HitReStart()
+    {
+        foreach (var manager in weaponManagers)
+        {
+            if (manager.isActiveAndEnabled)
+            {
+                manager.ToggleDetection(false);
+                manager.ToggleDetection(true);
+                break;
+            }
+        }
+    }
+
+    public void AttackStart(int num)
+    {
+        //Attack.combo = num;
         Attack.isAttack = true;
         Attack.CharacterActor.Animator.SetBool("attack", true);
         Attack.canChangeState = false;
@@ -191,44 +213,44 @@ public class AnimatorFunction : MonoBehaviour
 
     public void Hit(int attackHitRank)
     {
-        foreach (var manager in weaponManagers)
-        {
-            if (manager.isActiveAndEnabled && manager.isHited == true)
-            {
+        //foreach (var manager in weaponManagers)
+        //{
+        //    if (manager.isActiveAndEnabled && manager.isHited == true)
+        //    {
            
-                switch (attackHitRank)
-                {
+        //        switch (attackHitRank)
+        //        {
                     
-                    case 0:
-                        {
+        //            case 0:
+        //                {
                             
-                            break;
-                        }
-                    case 1:
-                        {
-                            //StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.05f, 0.06f, 0.2f, manager));
-                            //hitActionOfImpulse += manager.Impluse;
-                            //hitActionOfPlayFX += manager.PlayHittedFx;
-                            break;
-                        }
-                    case 2:
-                        {
-                            //StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.06f, 0.1f, 0.05f, manager));
-                            break;
-                        }
-                    case 3:
-                        {
-                            break;
-                        }
+        //                    break;
+        //                }
+        //            case 1:
+        //                {
+        //                    //StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.05f, 0.06f, 0.2f, manager));
+        //                    //hitActionOfImpulse += manager.Impluse;
+        //                    //hitActionOfPlayFX += manager.PlayHittedFx;
+        //                    break;
+        //                }
+        //            case 2:
+        //                {
+        //                    //StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.06f, 0.1f, 0.05f, manager));
+        //                    break;
+        //                }
+        //            case 3:
+        //                {
+        //                    break;
+        //                }
 
 
-                }
+        //        }
 
-                // manager.Impluse();
+        //        // manager.Impluse();
              
-                return;
-            }
-        }
+        //        return;
+        //    }
+        //}
     }
 
 

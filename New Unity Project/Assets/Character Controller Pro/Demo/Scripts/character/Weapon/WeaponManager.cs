@@ -150,8 +150,17 @@ public class WeaponManager : MonoBehaviour
     public void Hitted()
     {
         Debug.Log("击中");
-        StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.05f, 1f, 0.2f, this));
+        //b播放击中特效
+        StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.05f,0.1f, 0.2f, this));
     }
+    /// <summary>
+    /// 播放击中特效
+    /// </summary>
+    public void PlayFX()
+    {
+
+    }
+
     /// <summary>
     /// 一个时停加震动的复合方法。
     /// </summary>

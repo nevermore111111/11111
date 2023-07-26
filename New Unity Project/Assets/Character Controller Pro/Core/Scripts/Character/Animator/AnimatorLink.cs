@@ -19,12 +19,10 @@ namespace Lightbug.CharacterControllerPro.Core
         void Awake()
         {
             _animator = GetComponent<Animator>();
-            Debug.Log(" 注意下面这个函数要打开");
+            
         }
-
         void OnAnimatorMove()
         {
-
             OnAnimatorMoveEvent?.Invoke();
         }
 

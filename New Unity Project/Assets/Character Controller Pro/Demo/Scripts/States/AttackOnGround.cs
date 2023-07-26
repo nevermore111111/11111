@@ -1,6 +1,7 @@
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Authentication.ExtendedProtection;
@@ -31,10 +32,22 @@ public class AttackOnGround :Attack
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         base.EnterBehaviour(dt, fromState);
+        Type type =CharacterStateController.PreviousState.GetType();
+        if ( (type != typeof(Attack))&& type != typeof(StartPlay)&& CharacterActor.IsGrounded)
+        {
+            combo = 1;
+            CharacterActor.Animator.SetInteger("combo", Attack.combo);
+            canChangeState = false;
+            CharacterActor.Animator.Play("attack01_1");
+        }
+        else
+        {
+            CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
+        }
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity,true,RootMotionRotationType.AddRotation);
         army[0].SetActive(true);
         army[1].SetActive(true);
-        CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
+        
     }
     public override void UpdateBehaviour(float dt)
     {
@@ -52,12 +65,18 @@ public class AttackOnGround :Attack
             if (canInput)
             {
                 canInput = false;
+                if (combo == 2)
+                {
+                    Debug.Log(""); 
+                }
                 combo++;
                 if (combo > MaxCombo)
                 {
                     combo = 1;
                 }
+               
                 CharacterActor.Animator.SetInteger("combo", combo);
+                Debug.Log($"{combo},{MaxCombo}");
             }
         }
     }
