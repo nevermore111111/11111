@@ -65,9 +65,9 @@ public class ArrayPlayableBehaviour02 : PlayableBehaviour
         //{
         //    Debug.Log("Array value: " + value);
         //}
-        if (arrayData.Length >= 3)
-        {
-            targetWeapon.impulsePar = arrayData;
-        }
+        //if (arrayData.Length >= 3)
+        //{
+        //    targetWeapon.impulsePar = arrayData;
+        //}
     }
 }

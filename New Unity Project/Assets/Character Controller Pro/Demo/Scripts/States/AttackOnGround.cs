@@ -74,9 +74,7 @@ public class AttackOnGround :Attack
                 {
                     combo = 1;
                 }
-               
                 CharacterActor.Animator.SetInteger("combo", combo);
-                Debug.Log($"{combo},{MaxCombo}");
             }
         }
     }

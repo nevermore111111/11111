@@ -15,7 +15,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     public CharacterInfo selectEnemy;
     [Tooltip("这个人物在摄像机中的大小半径，cinemachine的TargetGrounp中的size")]
     public float cameraRadius = 0.5f;
-
+    public AgetHitBox hitBox;
 
     /// <summary>
     /// 伤害，目标位置，武器方向，击中类型
@@ -32,7 +32,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     protected virtual void  Awake()
     {
         enemies = new List<CharacterInfo>();
-
+        hitBox = GetComponentInChildren<AgetHitBox>();
     }
     
 }

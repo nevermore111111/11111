@@ -21,6 +21,7 @@ public class EnemyCharacter : CharacterInfo
     public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground)
     {
         //这个是被击中效果
+        Debug.Log("JIZHONG");
         weapon.Hitted();
         if(BlazeAI !=null)
         {

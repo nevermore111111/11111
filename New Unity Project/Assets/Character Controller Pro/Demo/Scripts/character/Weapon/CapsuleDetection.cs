@@ -53,11 +53,11 @@ public class CapsuleDetection : Detection
         Collider[] hits = Physics.OverlapCapsule(startPoint.position, endPoint.position, radius);
         foreach (var item in hits)
         {
-            
+   
             AgetHitBox hitBox;
-            if(targetTags.Contains(item.tag))
+            if(targetTags.Contains(item.tag)&&(item.TryGetComponent (out AttackReceive receive)))
             {
-                hitBox = item.GetComponentInParent<AgetHitBox>();
+                hitBox = receive.CharacterInfo.hitBox;
             if (hitBox && hitBox.agent && targetTags.Contains(hitBox.agent.tag) && !wasHit.Contains(hitBox.agent))//如果是可攻击对象，并且攻击对象中没有这个目标时
                 {
                     wasHit.Add(hitBox.agent);

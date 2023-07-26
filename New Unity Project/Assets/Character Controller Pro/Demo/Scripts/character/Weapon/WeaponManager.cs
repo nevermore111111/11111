@@ -11,7 +11,13 @@ using UnityEngine;
 [RequireComponent(typeof(Detection))]
 public class WeaponManager : MonoBehaviour
 {
-    
+
+    public enum WeaponKind
+    {
+        sword,
+        fist
+    }
+    public WeaponKind kind;
     Detection[] detections;
     //是否开启检测
     public bool isOnDetection;
@@ -34,17 +40,17 @@ public class WeaponManager : MonoBehaviour
     {
         impulseSource = GetComponent<CinemachineImpulseSource>();
         detections = GetComponents<Detection>();
-        characterActor= GetComponentInParent<CharacterActor>();
-        switch(FxLoad)
+        characterActor = GetComponentInParent<CharacterActor>();
+        switch (FxLoad)
         {
-            case 1: HittedFx = Resources.Load<FxHelper>("FxHelper").Sword;break;
-                case 2: break;
+            case 1: HittedFx = Resources.Load<FxHelper>("FxHelper").Sword; break;
+            case 2: break;
         }
-        for(int i = 0; i <detections.Length; i++)
+        for (int i = 0; i < detections.Length; i++)
         {
             detections[i].WeaponManagerOwner = this;
         }
-        
+
     }
     //在激活中，就每三帧更新一次这个武器方向
     public void UpdateWeaponDirection()
@@ -82,20 +88,20 @@ public class WeaponManager : MonoBehaviour
     /// </summary>
     void HandleDetection()
     {
-        
-        if(isOnDetection)
+
+        if (isOnDetection)
         {
-            foreach(Detection item in detections)
+            foreach (Detection item in detections)
             {
                 foreach (var hit in item.GetDetection(out item.isHited))//添加了攻击对象
                 {
-                    
+
                     AgetHitBox hitted = hit.GetComponent<AgetHitBox>();
                     //hitted.GetDamage(1, transform.position);//这是攻击对象播放都动画
                     hitted.GetWeapon(this);
                 }
                 //如果存在当前的detection击中目标，那么将武器是否击中目标也改成true。
-                if(item.isHited == true)
+                if (item.isHited == true)
                 {
                     //Impluse();//这里调用武器的或者人物的方法。
                     isHited = true;
@@ -116,13 +122,13 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            foreach(var item in detections)
+            foreach (var item in detections)
             {
                 item.ClaerWasHit();
                 //清空hit列表，所有是否击中也全部清空
-                
+
             }
-            isHited=false;//武器击中判定也清空
+            isHited = false;//武器击中判定也清空
         }
     }
 
@@ -131,11 +137,8 @@ public class WeaponManager : MonoBehaviour
     /// </summary>
     public void Impluse(int i = 0)
     {
-        if (impulsePar.Length >3 && impulsePar[0]==1)
-        {
-            Debug.Log(WeaponDirection);
-            impulseSource.GenerateImpulse(WeaponDirection);
-        }
+        Debug.Log("产生震动");
+        impulseSource.GenerateImpulse(WeaponDirection);
     }
     /// <summary>
     /// 播放这个武器的攻击特效
@@ -143,9 +146,9 @@ public class WeaponManager : MonoBehaviour
     /// <param name="HitNum"></param>
     public void PlayHittedFx(int HitNum = 0)
     {
-        ParticleSystem particle = HittedFx[0];
-        particle.transform.position = this.GetComponentInChildren<WeaponFx>().transform.position;
-        HittedFx[0].Play(true);
+        //ParticleSystem particle = HittedFx[0];
+        //particle.transform.position = this.GetComponentInChildren<WeaponFx>().transform.position;
+        //HittedFx[0].Play(true);
     }
     /// <summary>
     /// 需要做一个关于武器的方法，只在第一次击中一个characterINFO时才调用，需要传入的是击中的判定区域，击中的collider
@@ -154,7 +157,7 @@ public class WeaponManager : MonoBehaviour
     {
         Debug.Log("击中");
         //b播放击中特效
-        StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.05f,0.1f, 0.05f, this));
+        StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.05f, 0.1f, 0.05f, this));
     }
     /// <summary>
     /// 播放击中特效
@@ -177,6 +180,7 @@ public class WeaponManager : MonoBehaviour
     {
         float initialTimeScale = Time.timeScale;
         float elapsedTime = 0f;
+        Debug.Log("1");
 
         // 渐入
         while (elapsedTime < fadeInDuration)
@@ -189,13 +193,14 @@ public class WeaponManager : MonoBehaviour
             // 等待一帧
             yield return null;
         }
-
+  
         // 设置目标时间缩放
         Time.timeScale = targetTimeScale;
         weaponManager.PlayHittedFx();
         // 持续时间
+       
         yield return new WaitForSecondsRealtime(duration);
-
+     
         // 渐出
         elapsedTime = 0f;
 
@@ -215,9 +220,11 @@ public class WeaponManager : MonoBehaviour
             // 等待一帧
             yield return null;
         }
+
         //一般在时停的最后时间再去调用摄像机的震动效果。
         // 恢复原始的时间缩放
         Time.timeScale = 1f;
+
     }
     /// <summary>
     /// 相对于人物坐标系武器的运动方向
