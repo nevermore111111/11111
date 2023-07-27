@@ -62,11 +62,16 @@ public class CapsuleDetection : Detection
                 {
                     wasHit.Add(hitBox.agent);
                     result.Add(item);
-                    if (!WeaponManagerOwner.HittedCharacter.Contains(hitBox.characterInfoOwner))
+                    if (!Weapon.HittedCharacter.Contains(hitBox.characterInfoOwner))
                     {
-                        WeaponManagerOwner.HittedCharacter.Add(hitBox.characterInfoOwner);
+                        //记录攻击到的人
+                        Weapon.HittedCharacter.Add(hitBox.characterInfoOwner);
                         //调用一次
-                        hitBox.characterInfoOwner.GetDamage(1, WeaponManagerOwner.transform.position, WeaponManagerOwner,item, IAgent.HitKind.ground);
+
+                        //调用攻击到的人的受击方法
+                        hitBox.characterInfoOwner.GetDamage(1, Weapon.transform.position, Weapon,item, IAgent.HitKind.ground);
+                        //调用武器主人的攻击方法
+                        Weapon.weaponOwner.HitOther(0.03f, 0.05f, 0.1f, 0.05f, Weapon);
                     }
                 }
             }

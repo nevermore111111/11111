@@ -14,6 +14,7 @@ public class WeaponManager : MonoBehaviour
 
     public enum WeaponKind
     {
+        nullArm,
         sword,
         fist
     }
@@ -34,6 +35,7 @@ public class WeaponManager : MonoBehaviour
     public Vector3 WeaponDirection;
     private int frameCount = 0;
     private Vector3 previousWeaponPosition;
+    public CharacterInfo weaponOwner;
 
 
     private void Awake()
@@ -41,6 +43,7 @@ public class WeaponManager : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
         detections = GetComponents<Detection>();
         characterActor = GetComponentInParent<CharacterActor>();
+        weaponOwner = GetComponentInParent<CharacterInfo>();
         switch (FxLoad)
         {
             case 1: HittedFx = Resources.Load<FxHelper>("FxHelper").Sword; break;
@@ -48,7 +51,7 @@ public class WeaponManager : MonoBehaviour
         }
         for (int i = 0; i < detections.Length; i++)
         {
-            detections[i].WeaponManagerOwner = this;
+            detections[i].Weapon = this;
         }
 
     }
@@ -151,15 +154,6 @@ public class WeaponManager : MonoBehaviour
         //HittedFx[0].Play(true);
     }
     /// <summary>
-    /// 需要做一个关于武器的方法，只在第一次击中一个characterINFO时才调用，需要传入的是击中的判定区域，击中的collider
-    /// </summary>
-    public void Hitted()
-    {
-        Debug.Log("击中");
-        //b播放击中特效
-        StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.05f, 0.1f, 0.05f, this));
-    }
-    /// <summary>
     /// 播放击中特效
     /// </summary>
     public void PlayFX()
@@ -176,56 +170,7 @@ public class WeaponManager : MonoBehaviour
     /// <param name="targetTimeScale"></param>
     /// <param name="weaponManager"></param>
     /// <returns></returns>
-    public System.Collections.IEnumerator AdjustTimeScaleOverDuration(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager)
-    {
-        float initialTimeScale = Time.timeScale;
-        float elapsedTime = 0f;
-        Debug.Log("1");
 
-        // 渐入
-        while (elapsedTime < fadeInDuration)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeInDuration);
-            Time.timeScale = Mathf.Lerp(initialTimeScale, targetTimeScale, normalizedTime);
-            // 可以在这里根据需要进行其他的逻辑处理
-
-            // 等待一帧
-            yield return null;
-        }
-  
-        // 设置目标时间缩放
-        Time.timeScale = targetTimeScale;
-        weaponManager.PlayHittedFx();
-        // 持续时间
-       
-        yield return new WaitForSecondsRealtime(duration);
-     
-        // 渐出
-        elapsedTime = 0f;
-
-        //调用震动和特效
-        weaponManager.Impluse();
-        //这里需要调用两个地方产生特效，一个是自身的刀光额外特效，另外一个是怪物的受击反馈。
-        //需要做个委托
-
-
-        while (elapsedTime < fadeOutDuration)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeOutDuration);
-            Time.timeScale = Mathf.Lerp(targetTimeScale, 1f, normalizedTime);
-            // 可以在这里根据需要进行其他的逻辑处理
-
-            // 等待一帧
-            yield return null;
-        }
-
-        //一般在时停的最后时间再去调用摄像机的震动效果。
-        // 恢复原始的时间缩放
-        Time.timeScale = 1f;
-
-    }
     /// <summary>
     /// 相对于人物坐标系武器的运动方向
     /// </summary>

@@ -34,5 +34,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
         enemies = new List<CharacterInfo>();
         hitBox = GetComponentInChildren<AgetHitBox>();
     }
+
+    abstract public IEnumerator HitOther(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager);
     
 }
