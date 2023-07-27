@@ -62,7 +62,14 @@ public class MainCharacter : CharacterInfo
         }
         return false;
     }
-    override public IEnumerator HitOther(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager)
+    override public void HitOther(WeaponManager weapon)
+    {
+        
+        //这个需要一个动画时间方法，动画中去更新这次攻击的参数
+        Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon);
+    }
+
+    public IEnumerator Hit(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager)
     {
         float initialTimeScale = Time.timeScale;
         float elapsedTime = 0f;

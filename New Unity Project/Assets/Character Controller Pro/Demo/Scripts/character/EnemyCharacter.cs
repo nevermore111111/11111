@@ -27,7 +27,7 @@ public class EnemyCharacter : CharacterInfo
         }
     }
 
-    public override IEnumerator HitOther(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager)
+    public override void HitOther(WeaponManager weaponManager)
     {
         throw new System.NotImplementedException();
     }
