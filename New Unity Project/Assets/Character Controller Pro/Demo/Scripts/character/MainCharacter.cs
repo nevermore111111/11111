@@ -75,19 +75,24 @@ public class MainCharacter : CharacterInfo
     {
         switch (HitKind)
         {
+            case 0:
+                {
+                    StartCoroutine(Hit(0.03f, 0.03f, 0.05f, 0.1f, weapon));
+                    break;
+                }
             case 1:
                 {
-                    Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon);
+                    StartCoroutine(Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon));
                     break;
                 }
             case 2:
                 {
-                    Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon);
+                    StartCoroutine(Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon));
                     break;
                 }
             case 3:
                 {
-                    Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon);
+                    StartCoroutine(Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon));
                     break;
                 }
         }
