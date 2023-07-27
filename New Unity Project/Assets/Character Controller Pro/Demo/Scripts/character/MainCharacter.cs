@@ -12,6 +12,7 @@ public class MainCharacter : CharacterInfo
     public CharacterStateController CharacterStateController;
     public Hitted CharacterHitted;
     public WeaponManager.WeaponKind WeaponKind;
+    public int HitKind;
     public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider,IAgent.HitKind hit = IAgent.HitKind.ground)
     {
         //需要找到主角调用
@@ -64,9 +65,33 @@ public class MainCharacter : CharacterInfo
     }
     override public void HitOther(WeaponManager weapon)
     {
-        
+
         //这个需要一个动画时间方法，动画中去更新这次攻击的参数
-        Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon);
+        HitParByHitKind(weapon);
+       
+    }
+   
+    public void HitParByHitKind(WeaponManager weapon)
+    {
+        switch (HitKind)
+        {
+            case 1:
+                {
+                    Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon);
+                    break;
+                }
+            case 2:
+                {
+                    Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon);
+                    break;
+                }
+            case 3:
+                {
+                    Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon);
+                    break;
+                }
+        }
+       
     }
 
     public IEnumerator Hit(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager)
