@@ -115,7 +115,7 @@ public class AnimatorFunction : MonoBehaviour
     public void AttackStart(int num)
     {
         //Attack.combo = num;
-        mainCharacter.HitKind =num;
+        mainCharacter.HitKind = num;
         Attack.isAttack = true;
         Attack.CharacterActor.Animator.SetBool("attack", true);
         Attack.canChangeState = false;
