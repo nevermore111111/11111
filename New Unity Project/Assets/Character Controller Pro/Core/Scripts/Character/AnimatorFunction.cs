@@ -1,5 +1,5 @@
 using Cinemachine;
-
+using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using System;
 using System.Collections.Generic;
@@ -73,6 +73,7 @@ public class AnimatorFunction : MonoBehaviour
                 }
             }
         }
+        Attack.CharacterActor.SetUpRootMotion(true, true);
     }
     public void HitEnd()
     {
@@ -116,6 +117,7 @@ public class AnimatorFunction : MonoBehaviour
     {
         //Attack.combo = num;
         mainCharacter.HitKind = num;
+       
         Attack.isAttack = true;
         Attack.CharacterActor.Animator.SetBool("attack", true);
         Attack.canChangeState = false;
@@ -127,6 +129,16 @@ public class AnimatorFunction : MonoBehaviour
             //新语法
             GameObject[] gamesEnemy = mainCharacter.enemies.Select(m => m.gameObject).ToArray();
             mainCharacter.selectEnemy = HelpTools01.FindClosest(Attack.CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
+            if(mainCharacter.selectEnemy != null)
+            {
+                //距离目标很近的时候，就把rootmovtion关了；
+                if(Vector3.Magnitude(mainCharacter.selectEnemy.transform.position - mainCharacter.transform.position)<1.5f)
+                {
+                    Attack.CharacterActor.PlanarVelocity = Vector3.zero;
+                    Attack.CharacterActor.SetUpRootMotion(false,false);
+                }
+            }
+
             Vector3 Forward = (mainCharacter.selectEnemy.transform.position - Attack.CharacterActor.transform.position).normalized;
             Attack.CharacterActor.Forward = new(Forward.x, 0, Forward.z);
         }
