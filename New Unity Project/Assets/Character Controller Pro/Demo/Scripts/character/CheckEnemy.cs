@@ -99,7 +99,6 @@ public class CheckEnemy : MonoBehaviour
             //targetGroup.RemoveMember(enemyTransform);
             // 在敌人离开范围时，延迟删除目标并逐渐减小权重
             //StartCoroutine(DelayedRemoveMember(enemyTransform, 1f));
-            if (targetGroup.m_Targets.Length >= targetIndex )
             StartCoroutine(AdjustTargetWeight(0f, 1f, targetIndex));
         }
         if(mainCharacter.enemies.Count == 0)

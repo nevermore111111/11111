@@ -44,7 +44,7 @@ public class AttackOnGround :Attack
         {
             CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
         }
-        CharacterActor.SetUpRootMotion(true,true);
+        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity,true,RootMotionRotationType.AddRotation);
         army[0].SetActive(true);
         army[1].SetActive(true);
         

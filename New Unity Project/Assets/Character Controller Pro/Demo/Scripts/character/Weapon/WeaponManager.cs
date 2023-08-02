@@ -99,7 +99,7 @@ public class WeaponManager : MonoBehaviour
                 foreach (var hit in item.GetDetection(out item.isHited))//添加了攻击对象
                 {
 
-                    AgetHitBox hitted = hit.GetComponent<AttackReceive>().CharacterInfo.hitBox;
+                    AgetHitBox hitted = hit.GetComponent<AgetHitBox>();
                     //hitted.GetDamage(1, transform.position);//这是攻击对象播放都动画
                     hitted.GetWeapon(this);
                 }
@@ -140,7 +140,7 @@ public class WeaponManager : MonoBehaviour
     /// </summary>
     public void Impluse(int i = 0)
     {
-        
+        Debug.Log("产生震动");
         impulseSource.GenerateImpulse(WeaponDirection);
     }
     /// <summary>
