@@ -1,5 +1,5 @@
 using Cinemachine;
-
+using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using System;
 using System.Collections.Generic;
@@ -60,8 +60,10 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void AttackEnd()
     {
+        
         if (!Attack.CharacterActor.Animator.IsInTransition(0))
         {
+            Attack.CharacterActor.SetUpRootMotion(true, true);
             Attack.isAttack = false;
             Attack.CharacterActor.Animator.SetBool("attack", false);
             foreach (var manager in weaponManagers)
@@ -99,8 +101,9 @@ public class AnimatorFunction : MonoBehaviour
             }
         }
     }
-    public void HitReStart()
+    public void HitReStart(int Hit = 1)
     {
+        mainCharacter.HitKind = Hit;    
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
@@ -129,6 +132,11 @@ public class AnimatorFunction : MonoBehaviour
             mainCharacter.selectEnemy = HelpTools01.FindClosest(Attack.CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
             Vector3 Forward = (mainCharacter.selectEnemy.transform.position - Attack.CharacterActor.transform.position).normalized;
             Attack.CharacterActor.Forward = new(Forward.x, 0, Forward.z);
+            if((transform.position-mainCharacter.selectEnemy.transform.position).magnitude <1.5f)
+            {
+                Attack.CharacterActor.PlanarVelocity = Vector3.zero;
+                Attack.CharacterActor.SetUpRootMotion(false, false);
+            }
         }
         else
         {

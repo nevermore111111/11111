@@ -65,17 +65,23 @@ public class WeaponManager : MonoBehaviour
                 // 获取当前武器位置
                 Vector3 currentWeaponPosition = transform.position;
 
-
+                if (currentWeaponPosition - previousWeaponPosition != Vector3.zero)
                 // 计算武器方向
-                WeaponDirection = currentWeaponPosition - previousWeaponPosition;
-                WeaponDirection.Normalize();
+
+                {
+                    WeaponDirection = currentWeaponPosition - previousWeaponPosition;
+
+
+                    WeaponDirection.Normalize();
+
+                    previousWeaponPosition = currentWeaponPosition;
+                }
 
                 // 更新上一帧的武器位置
-                previousWeaponPosition = currentWeaponPosition;
             }
 
             // 增加帧计数
-            frameCount = (frameCount + 1) % 3;
+            frameCount = (frameCount + 1) % 2;
         }
     }
     public void Update()
@@ -140,8 +146,34 @@ public class WeaponManager : MonoBehaviour
     /// </summary>
     public void Impluse(int i = 0)
     {
-        Debug.Log("产生震动");
-        impulseSource.GenerateImpulse(WeaponDirection);
+        if (weaponOwner is MainCharacter)
+        {
+            switch (weaponOwner.HitKind)
+            {
+                case 0:
+                    {
+                        impulseSource.GenerateImpulse(0.4f*WeaponDirection);
+                        break;
+                    }
+                case 1:
+                    {
+                        impulseSource.GenerateImpulse(0.6f * WeaponDirection);
+                        break;
+                    }
+                case 2:
+                    {
+                        impulseSource.GenerateImpulse(0.9f * WeaponDirection);
+                        break;
+                    }
+            }
+
+            
+        }
+
+        else
+        {
+
+        }
     }
     /// <summary>
     /// 播放这个武器的攻击特效

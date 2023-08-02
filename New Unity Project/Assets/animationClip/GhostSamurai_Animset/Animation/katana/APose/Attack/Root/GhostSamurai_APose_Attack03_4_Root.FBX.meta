@@ -584,7 +584,21 @@ ModelImporter:
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
-      - time: 0.2662185
+      - time: 0.123996235
+        functionName: CanGetInput
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.15788823
+        functionName: HitStart
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.2583445
         functionName: AttackEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -593,20 +607,6 @@ ModelImporter:
         messageOptions: 0
       - time: 0.59326905
         functionName: CannotGetInput
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.123996235
-        functionName: CanGetInput
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.11064414
-        functionName: HitStart
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

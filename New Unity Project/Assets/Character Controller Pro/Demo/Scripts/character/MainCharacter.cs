@@ -12,7 +12,7 @@ public class MainCharacter : CharacterInfo
     public CharacterStateController CharacterStateController;
     public Hitted CharacterHitted;
     public WeaponManager.WeaponKind WeaponKind;
-    public int HitKind;
+    
     public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider,IAgent.HitKind hit = IAgent.HitKind.ground)
     {
         //需要找到主角调用
@@ -70,24 +70,26 @@ public class MainCharacter : CharacterInfo
         HitParByHitKind(weapon);
        
     }
-   
+    
+    //这个是我打到别人的方法
     public void HitParByHitKind(WeaponManager weapon)
     {
         switch (HitKind)
         {
+            
             case 0:
                 {
-                    StartCoroutine(Hit(0.03f, 0.03f, 0.05f, 0.1f, weapon));
+                    StartCoroutine(Hit(0.03f, 0.03f, 0.03f, 0.3f, weapon));
                     break;
                 }
             case 1:
                 {
-                    StartCoroutine(Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon));
+                    StartCoroutine(Hit(0.05f, 0.05f, 0.06f, 0.1f, weapon));
                     break;
                 }
             case 2:
                 {
-                    StartCoroutine(Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon));
+                    StartCoroutine(Hit(0.05f, 0.06f, 0.08f, 0.1f, weapon));
                     break;
                 }
             case 3:
@@ -126,6 +128,7 @@ public class MainCharacter : CharacterInfo
         elapsedTime = 0f;
         if (weaponManager.isActiveAndEnabled)
         {
+      
             //调用震动和特效
             weaponManager.Impluse();
         }
