@@ -1,4 +1,5 @@
 using Cinemachine;
+using Cysharp.Threading.Tasks;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using MagicaCloth2;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -39,15 +41,15 @@ public class AnimatorFunction : MonoBehaviour
 
     public void Idle()
     {
-        
-    
-            Attack.isAttack = false;
-            Attack.CharacterActor.Animator.SetBool("attack", false);
-            Attack.combo = 0;
-            Attack.CharacterActor.Animator.SetInteger("combo", Attack.combo);
-            Attack.canInput = true;
-            Attack.canChangeState = true;
-       
+
+
+        Attack.isAttack = false;
+        Attack.CharacterActor.Animator.SetBool("attack", false);
+        Attack.combo = 0;
+        Attack.CharacterActor.Animator.SetInteger("combo", Attack.combo);
+        Attack.canInput = true;
+        Attack.canChangeState = true;
+
 
     }
     public void NormalIdle()
@@ -61,7 +63,7 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void AttackEnd()
     {
-        
+
         if (!Attack.CharacterActor.Animator.IsInTransition(0))
         {
             Attack.CharacterActor.SetUpRootMotion(true, true);
@@ -86,26 +88,52 @@ public class AnimatorFunction : MonoBehaviour
                 if (manager.isActiveAndEnabled)
                 {
                     manager.ToggleDetection(false);
-                   
+
                     break;
                 }
             }
         }
     }
-    public void HitStart()
+    public void HitStart(int hitKind)
     {
+        //设置当前攻击类别
+        mainCharacter.HitKind = hitKind;
+        //根据当前攻击类别来进行
+        //
+
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
             {
                 manager.ToggleDetection(true);
+                if (manager != null)
+                {
+                    switch (hitKind)
+                    {
+                        case 0:
+                            manager.AdjustFrequencyAndAmplitude(1, 0.5f);
+                            break;
+                        case 1:
+                            manager.AdjustFrequencyAndAmplitude(1.5f, 0.4f);
+                            break;
+                        case 2:
+                            manager.AdjustFrequencyAndAmplitude(2f, 0.4f);
+                            break;
+                        case 4:
+                            manager.AdjustFrequencyAndAmplitude(3f, 0.4f);
+                            break;
+                        default:
+                            manager.AdjustFrequencyAndAmplitude(1f, 1f);
+                            break;
+                    }
+                }
                 break;
             }
         }
     }
     public void HitReStart(int Hit = 1)
     {
-        mainCharacter.HitKind = Hit;    
+        mainCharacter.HitKind = Hit;
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
@@ -120,7 +148,7 @@ public class AnimatorFunction : MonoBehaviour
     public void AttackStart(int num)
     {
         //Attack.combo = num;
-        mainCharacter.HitKind = num;
+
         Attack.isAttack = true;
         Attack.CharacterActor.Animator.SetBool("attack", true);
         Attack.canChangeState = false;
@@ -134,7 +162,7 @@ public class AnimatorFunction : MonoBehaviour
             mainCharacter.selectEnemy = HelpTools01.FindClosest(Attack.CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
             Vector3 Forward = (mainCharacter.selectEnemy.transform.position - Attack.CharacterActor.transform.position).normalized;
             Attack.CharacterActor.Forward = new(Forward.x, 0, Forward.z);
-            if((transform.position-mainCharacter.selectEnemy.transform.position).magnitude <1.5f)
+            if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
             {
                 Attack.CharacterActor.PlanarVelocity = Vector3.zero;
                 Attack.CharacterActor.SetUpRootMotion(false, false);
@@ -230,7 +258,7 @@ public class AnimatorFunction : MonoBehaviour
     }
 
 
-   
+
 
 
 
@@ -281,7 +309,7 @@ public class AnimatorFunction : MonoBehaviour
             // 等待一帧
             yield return null;
         }
-       
+
         // 设置目标时间缩放
         Time.timeScale = targetTimeScale;
         weaponManager.PlayHittedFx();

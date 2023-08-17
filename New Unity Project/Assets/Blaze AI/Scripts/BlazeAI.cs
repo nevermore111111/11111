@@ -45,6 +45,7 @@ public class BlazeAI : MonoBehaviour
     [Header("FRIENDLY AI")]
     [Tooltip("If this is enabled the AI will never turn to attack state when seeing a hostile tag or on enemy contact until this property is set to false. TAKE NOTE: specifically calling the API SetEnemy(player) or Hit(player) will force disable friendly mode.")]
     public bool friendly;
+    public bool canBeAttack;
 
 
     [Header("DISTANCE CULLING")]
@@ -151,9 +152,18 @@ public class BlazeAI : MonoBehaviour
     public MonoBehaviour companionBehaviour;
     
     
+    public bool isCanbeAttack;
+
+
+
+
+
+
+
+
     #region SYSTEM VARIABLES
 
-    Animator anim;
+    public Animator anim;
     public NavMeshAgent navmeshAgent { get; private set; }
     CapsuleCollider capsuleCollider;
     NavMeshPath path;
@@ -2549,18 +2559,33 @@ public class BlazeAI : MonoBehaviour
     // hit the AI
     public void Hit(GameObject enemy = null, bool callOthers = false,int hitKind = 0)  
     {
+        //如果是不会打破当前状态的攻击
+        //这样去播放动画就可以
+        if (!canBeAttack)
+        {
+            this.anim.Play("Hitted", 1);
+        }
+
+
         if (state == State.death || !enabled) {
             Debug.Log("Hit() can't be called when the AI is in death state or Blaze AI is disabled.");
             return;
         }
 
         
-        if (IsCompanion(enemy)) {
+        if (IsCompanion(enemy)) 
+        {
             enemy = null;
             Debug.Log("Hit() called on companion. It has been negated. This is just a warning.");
         }
 
-
+        if (!isCanbeAttack)
+        {
+            //这是后不能被打破攻击状态
+            this.anim.SetLayerWeight(1, 0.3f);
+            this.anim.Play("Hitted", 1, 0f);
+            return;
+        }
         // read by the hit state behaviour
         hitEnemy = enemy;
         hitRegistered = true;

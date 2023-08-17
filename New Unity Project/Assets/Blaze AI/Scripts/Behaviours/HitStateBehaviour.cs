@@ -1,3 +1,5 @@
+using Lightbug.CharacterControllerPro.Core;
+using Lightbug.CharacterControllerPro.Implementation;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -269,6 +271,58 @@ namespace BlazeAISpace
             playedAudio = false;
         }
 
+        #endregion
+        #region 受击方向
+        public void GetHitted(WeaponManager weapon, IAgent.HitKind hitKind)
+        {
+            switch (hitKind)
+            {
+                case 0:
+                    {
+                        Vector3 attackPos = -weapon.GetWeaponDirectInverse(blaze.transform);
+                        SetAnimationParameters(ConvertToVector2(attackPos));
+                    }
+                    break;
+            }
+            //动画机处理
+        }
+
+
+        public Vector3 GetAttackDirection(Transform characterTransform, Vector3 attackSource)
+        {
+            //Vector3 direction = attackSource - characterTransform.position;
+            //direction.y = 0f; // 忽略高度差
+            //direction.Normalize();
+            Vector3 attackFrom = characterTransform.InverseTransformDirection(-attackSource);
+            //attackFrom.y = 0f;
+            attackFrom.Normalize();
+            return attackFrom;
+        }
+        public Vector2 ConvertToVector2(Vector3 vector3)
+        {
+            return new Vector2(vector3.x, vector3.z).normalized;
+        }
+        public void SetAnimationParameters(Vector2 attackDirection)
+        {
+            float attackXFrom = attackDirection.x;
+            float attackZFrom = attackDirection.y;
+
+            // 设置动画机参数
+
+            blaze.anim.SetFloat("attackXFrom", attackXFrom);
+            blaze.anim.SetFloat("attackZFrom", attackZFrom);
+        }
+        public void SetAnimationParameters(Vector3 attackDirection)
+        {
+            float attackXFrom = Mathf.Abs(attackDirection.x);
+            float attackZFrom = Mathf.Abs(attackDirection.z);
+            float attackYFrom = Mathf.Abs(attackDirection.y);
+
+            // 设置动画机参数
+            blaze.anim.SetFloat("attackXFrom", attackXFrom);
+            blaze.anim.SetFloat("attackZFrom", attackZFrom);
+            blaze.anim.SetFloat("attackYFrom", attackYFrom);
+        }
         #endregion
     }
 }
