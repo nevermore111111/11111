@@ -1,4 +1,5 @@
 
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 
@@ -41,6 +42,7 @@ public class CapsuleDetection : Detection
             }
         }
     }
+  
     /// <summary>
     /// 这里返回的是这一帧击中的符合条件的物体
     /// </summary>
@@ -51,9 +53,12 @@ public class CapsuleDetection : Detection
         List<Collider> result = new List<Collider>();
         //打出一个胶囊体，判断当前胶囊体中是否存在其他 collider，可选参数除了这三个以外，还可以使用 layermask 和QueryTriggerInteraction queryTriggerInteraction= QueryTriggerInteraction.UseGlobal （询问当前collider是否可以命中触发器）
         Collider[] hits = Physics.OverlapCapsule(startPoint.position, endPoint.position, radius);
+
+
+        //求出来距离这个刀最近的地方
         foreach (var item in hits)
         {
-   
+        
             AgetHitBox hitBox;
             if(targetTags.Contains(item.tag)&&(item.TryGetComponent (out AttackReceive receive)))
             {
@@ -62,11 +67,13 @@ public class CapsuleDetection : Detection
                 {
                     wasHit.Add(hitBox.agent);
                     result.Add(item);
+                    
+                    //这样去添加物体
                     if (!Weapon.HittedCharacter.Contains(hitBox.characterInfoOwner))
                     {
                         //记录攻击到的人
                         Weapon.HittedCharacter.Add(hitBox.characterInfoOwner);
-                        //调用一次
+                        //调用一次//调用一个添加特效
 
                         //调用攻击到的人的受击方法
                         hitBox.characterInfoOwner.GetDamage(1, Weapon.transform.position, Weapon,item, IAgent.HitKind.ground);

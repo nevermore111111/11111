@@ -85,7 +85,8 @@ namespace BlazeAISpace
         void Update()
         {
             // check if a hit was registered
-            if (blaze.hitRegistered) {
+            if (blaze.hitRegistered)
+            {
                 blaze.hitRegistered = false;
                 //这里根据hitkind来确认使用哪一种受击动画
                 int chosenHitIndex = GetAnimationIndex(blaze.hittedKind);
@@ -134,9 +135,10 @@ namespace BlazeAISpace
 
         int GetAnimationIndex(int HittedKind)
         {
+            //这里是判定已经被击破状态，所以一定会播放相应的受击动画，当前这里只有一个受击动画，所以直接先返回一个0
             int index = HittedKind;
-            blaze.hittedKind = 0;
-            return index;
+            blaze.hittedKind = HittedKind;
+            return 0;
         }
 
 

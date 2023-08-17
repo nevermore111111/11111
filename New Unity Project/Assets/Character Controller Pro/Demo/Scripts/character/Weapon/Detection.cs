@@ -8,6 +8,7 @@ public abstract class Detection  : MonoBehaviour
     public List<GameObject> wasHit = new List<GameObject>();
     public bool isHited;
     public WeaponManager Weapon;
+    public WeaponDetector WeaponDetector = WeaponDetector.arm01;
     /// <summary>
     /// 攻击完成时清空击中列表，击中判定改为FALSE
     /// </summary>
@@ -23,5 +24,13 @@ public abstract class Detection  : MonoBehaviour
     /// <returns></returns>
     public abstract List<Collider>  GetDetection(out bool isHited);
 }
-
+public enum WeaponDetector
+{
+    leftHand = 0,
+    rightHand = 1,
+    letfFoot = 2,
+    rightFoot = 3,
+    arm01 = 4,
+    arm02 = 5,
+}
 

@@ -94,12 +94,22 @@ public class AnimatorFunction : MonoBehaviour
             }
         }
     }
-    public void HitStart(int hitKind)
+    private int[] ConvertStringToIntArray(string str)
+    {
+        int[] intArray = new int[str.Length];
+        for (int i = 0; i < str.Length; i++)
+        {
+            intArray[i] = int.Parse(str[i].ToString());
+        }
+        return intArray;
+    }
+    public void HitStart(int hitKind,string activeWeaponDetect)
     {
         //设置当前攻击类别
         mainCharacter.HitKind = hitKind;
         //根据当前攻击类别来进行
         //
+        //根据当前的detections进行调整这个激活的detection;
 
         foreach (var manager in weaponManagers)
         {
@@ -108,6 +118,10 @@ public class AnimatorFunction : MonoBehaviour
                 manager.ToggleDetection(true);
                 if (manager != null)
                 {
+                    //根据动画参数激活对应的碰撞区域
+                    int[] weaponIndexes = ConvertStringToIntArray(activeWeaponDetect);
+                    manager.ActiveWeaponDetectors = weaponIndexes.Select(index => (WeaponDetector)index).ToArray();
+
                     switch (hitKind)
                     {
                         case 0:
@@ -166,14 +180,6 @@ public class AnimatorFunction : MonoBehaviour
             {
                 Attack.CharacterActor.PlanarVelocity = Vector3.zero;
                 Attack.CharacterActor.SetUpRootMotion(false, false);
-                foreach (var manager in weaponManagers)
-                {
-                    if (manager.isActiveAndEnabled)
-                    {
-                        manager.AdjustFrequencyAndAmplitude();
-                        break;
-                    }
-                }
             }
         }
         else
@@ -293,52 +299,52 @@ public class AnimatorFunction : MonoBehaviour
     /// <param name="targetTimeScale"></param>
     /// <param name="weaponManager"></param>
     /// <returns></returns>
-    public System.Collections.IEnumerator AdjustTimeScaleOverDuration(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager)
-    {
-        float initialTimeScale = Time.timeScale;
-        float elapsedTime = 0f;
+    //public System.Collections.IEnumerator AdjustTimeScaleOverDuration(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager)
+    //{
+    //    float initialTimeScale = Time.timeScale;
+    //    float elapsedTime = 0f;
 
-        // 渐入
-        while (elapsedTime < fadeInDuration)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeInDuration);
-            Time.timeScale = Mathf.Lerp(initialTimeScale, targetTimeScale, normalizedTime);
-            // 可以在这里根据需要进行其他的逻辑处理
+    //    // 渐入
+    //    while (elapsedTime < fadeInDuration)
+    //    {
+    //        elapsedTime += Time.unscaledDeltaTime;
+    //        float normalizedTime = Mathf.Clamp01(elapsedTime / fadeInDuration);
+    //        Time.timeScale = Mathf.Lerp(initialTimeScale, targetTimeScale, normalizedTime);
+    //        // 可以在这里根据需要进行其他的逻辑处理
 
-            // 等待一帧
-            yield return null;
-        }
+    //        // 等待一帧
+    //        yield return null;
+    //    }
 
-        // 设置目标时间缩放
-        Time.timeScale = targetTimeScale;
-        weaponManager.PlayHittedFx();
-        // 持续时间
-        yield return new WaitForSecondsRealtime(duration);
+    //    // 设置目标时间缩放
+    //    Time.timeScale = targetTimeScale;
+    //    weaponManager.PlayHittedFx();
+    //    // 持续时间
+    //    yield return new WaitForSecondsRealtime(duration);
 
-        // 渐出
-        elapsedTime = 0f;
+    //    // 渐出
+    //    elapsedTime = 0f;
 
-        //调用震动和特效
-        weaponManager.Impluse();
-        //这里需要调用两个地方产生特效，一个是自身的刀光额外特效，另外一个是怪物的受击反馈。
-        //需要做个委托
+    //    //调用震动和特效
+    //    weaponManager.Impluse();
+    //    //这里需要调用两个地方产生特效，一个是自身的刀光额外特效，另外一个是怪物的受击反馈。
+    //    //需要做个委托
 
 
-        while (elapsedTime < fadeOutDuration)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeOutDuration);
-            Time.timeScale = Mathf.Lerp(targetTimeScale, 1f, normalizedTime);
-            // 可以在这里根据需要进行其他的逻辑处理
+    //    while (elapsedTime < fadeOutDuration)
+    //    {
+    //        elapsedTime += Time.unscaledDeltaTime;
+    //        float normalizedTime = Mathf.Clamp01(elapsedTime / fadeOutDuration);
+    //        Time.timeScale = Mathf.Lerp(targetTimeScale, 1f, normalizedTime);
+    //        // 可以在这里根据需要进行其他的逻辑处理
 
-            // 等待一帧
-            yield return null;
-        }
-        //一般在时停的最后时间再去调用摄像机的震动效果。
-        // 恢复原始的时间缩放
-        Time.timeScale = 1f;
-    }
+    //        // 等待一帧
+    //        yield return null;
+    //    }
+    //    //一般在时停的最后时间再去调用摄像机的震动效果。
+    //    // 恢复原始的时间缩放
+    //    Time.timeScale = 1f;
+    //}
 
 
 

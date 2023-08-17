@@ -65,10 +65,9 @@ public class MainCharacter : CharacterInfo
     }
     override public void HitOther(WeaponManager weapon)
     {
-
         //这个需要一个动画时间方法，动画中去更新这次攻击的参数
+        //调用击中效果
         HitParByHitKind(weapon);
-       
     }
     
     //这个是我打到别人的方法

@@ -4,6 +4,8 @@ using MagicaCloth2;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 //我需要做的一个功能 ，在攻击hit事件的时候判定当前的武器是否集中了敌人，如果集中了敌人，那么就震动摄像机，而且将我和目标的动画播放速度降低
@@ -28,15 +30,14 @@ public class WeaponManager : MonoBehaviour
     public float[] impulsePar;
     [Tooltip("这里配置要装载哪一段特效")]
     public int FxLoad;
-
     public ParticleSystem[] HittedFx;
-
     public List<CharacterInfo> HittedCharacter;
     public Vector3 WeaponDirection;
     private int frameCount = 0;
     private Vector3 previousWeaponPosition;
     public CharacterInfo weaponOwner;
-
+    public Detection[] Detections;
+    public WeaponDetector[] ActiveWeaponDetectors;
 
     private void Awake()
     {
@@ -53,8 +54,29 @@ public class WeaponManager : MonoBehaviour
         {
             detections[i].Weapon = this;
         }
-
+        Detection detection = GetComponentInChildren<Detection>();
+        Detections = GetComponentsInChildren<Detection>();
+        /*SetColliderByDetect(detection);*///根据这个检测去生成一个碰撞盒
     }
+
+    //private static void SetColliderByDetect(Detection detection)
+    //{
+    //    if (detection is CapsuleDetection)
+    //    {
+    //        CapsuleDetection detectionCas = detection as CapsuleDetection;
+    //        GameObject colliderObject = new GameObject("collider");
+    //        CapsuleCollider capsuleCollider = colliderObject.AddComponent<CapsuleCollider>();
+
+    //        // 可以在这里设置 CapsuleCollider 的属性
+    //        capsuleCollider.center = (detectionCas.startPoint.position + detectionCas.endPoint.position) / 2;
+    //        capsuleCollider.radius =  detectionCas.radius;
+    //        capsuleCollider.height = (detectionCas.startPoint.position - detectionCas.endPoint.position).magnitude+2*detectionCas.radius;
+    //    }
+    //    else if (true)
+    //    {
+
+    //    }
+    //}
 
     public void AdjustFrequencyAndAmplitude(float frequency, float amplitude)
     {
@@ -66,7 +88,10 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    //在激活中，就每三帧更新一次这个武器方向
+
+    /// <summary>
+    ///  在激活中，就每三帧更新一次这个武器方向
+    /// </summary>
     public void UpdateWeaponDirection()
     {
         if (isActiveAndEnabled)
@@ -113,6 +138,11 @@ public class WeaponManager : MonoBehaviour
         {
             foreach (Detection item in detections)
             {
+                //如果当前激活的物体不应该包括这个那么直接跳出进入下一个
+                if(!this.ActiveWeaponDetectors.Contains(item.WeaponDetector))
+                {
+                    continue;
+                }
                 foreach (var hit in item.GetDetection(out item.isHited))//添加了攻击对象
                 {
 
@@ -192,9 +222,9 @@ public class WeaponManager : MonoBehaviour
     /// <param name="HitNum"></param>
     public void PlayHittedFx(int HitNum = 0)
     {
-        //ParticleSystem particle = HittedFx[0];
-        //particle.transform.position = this.GetComponentInChildren<WeaponFx>().transform.position;
-        //HittedFx[0].Play(true);
+        ParticleSystem particle = HittedFx[0];
+        particle.transform.position = this.GetComponentInChildren<WeaponFx>().transform.position;
+        HittedFx[0].Play(true);
     }
     /// <summary>
     /// 播放击中特效
