@@ -55,6 +55,17 @@ public class WeaponManager : MonoBehaviour
         }
 
     }
+
+    public void AdjustFrequencyAndAmplitude(float frequency, float amplitude)
+    {
+        if (impulseSource != null)
+        {
+            // 设置频率和力度
+            impulseSource.m_ImpulseDefinition.m_FrequencyGain = frequency;
+            impulseSource.m_ImpulseDefinition.m_AmplitudeGain = amplitude;
+        }
+    }
+
     //在激活中，就每三帧更新一次这个武器方向
     public void UpdateWeaponDirection()
     {

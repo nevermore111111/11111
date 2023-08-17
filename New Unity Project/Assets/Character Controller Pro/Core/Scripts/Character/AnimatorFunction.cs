@@ -1,6 +1,7 @@
 using Cinemachine;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
+using MagicaCloth2;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -85,6 +86,7 @@ public class AnimatorFunction : MonoBehaviour
                 if (manager.isActiveAndEnabled)
                 {
                     manager.ToggleDetection(false);
+                   
                     break;
                 }
             }
@@ -136,6 +138,14 @@ public class AnimatorFunction : MonoBehaviour
             {
                 Attack.CharacterActor.PlanarVelocity = Vector3.zero;
                 Attack.CharacterActor.SetUpRootMotion(false, false);
+                foreach (var manager in weaponManagers)
+                {
+                    if (manager.isActiveAndEnabled)
+                    {
+                        manager.AdjustFrequencyAndAmplitude();
+                        break;
+                    }
+                }
             }
         }
         else
@@ -220,47 +230,7 @@ public class AnimatorFunction : MonoBehaviour
     }
 
 
-    public void Hit(int attackHitRank)
-    {
-        //foreach (var manager in weaponManagers)
-        //{
-        //    if (manager.isActiveAndEnabled && manager.isHited == true)
-        //    {
-           
-        //        switch (attackHitRank)
-        //        {
-                    
-        //            case 0:
-        //                {
-                            
-        //                    break;
-        //                }
-        //            case 1:
-        //                {
-        //                    //StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.05f, 0.06f, 0.2f, manager));
-        //                    //hitActionOfImpulse += manager.Impluse;
-        //                    //hitActionOfPlayFX += manager.PlayHittedFx;
-        //                    break;
-        //                }
-        //            case 2:
-        //                {
-        //                    //StartCoroutine(AdjustTimeScaleOverDuration(0.03f, 0.06f, 0.1f, 0.05f, manager));
-        //                    break;
-        //                }
-        //            case 3:
-        //                {
-        //                    break;
-        //                }
-
-
-        //        }
-
-        //        // manager.Impluse();
-             
-        //        return;
-        //    }
-        //}
-    }
+   
 
 
 
