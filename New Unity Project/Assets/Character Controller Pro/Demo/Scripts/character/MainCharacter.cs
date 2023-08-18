@@ -11,7 +11,7 @@ public class MainCharacter : CharacterInfo
     public CharacterActor CharacterActor;
     public CharacterStateController CharacterStateController;
     public Hitted CharacterHitted;
-    public WeaponManager.WeaponKind WeaponKind;
+    public WeaponKind WeaponKind;
     
     public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider,IAgent.HitKind hit = IAgent.HitKind.ground)
     {

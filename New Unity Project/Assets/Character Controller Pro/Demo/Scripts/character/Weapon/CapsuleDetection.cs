@@ -26,7 +26,7 @@ public class CapsuleDetection : Detection
             float length = direction.magnitude;
             direction.Normalize();
 
-            if (length > 0)
+            if (length >= 0)
             {
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawWireSphere(startPoint.position, radius);

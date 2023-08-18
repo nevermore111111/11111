@@ -9,17 +9,12 @@ using UnityEditor;
 using UnityEngine;
 
 //我需要做的一个功能 ，在攻击hit事件的时候判定当前的武器是否集中了敌人，如果集中了敌人，那么就震动摄像机，而且将我和目标的动画播放速度降低
-[RequireComponent(typeof(CinemachineImpulseSource))]
-[RequireComponent(typeof(Detection))]
+//[RequireComponent(typeof(CinemachineImpulseSource))]
+//[RequireComponent(typeof(Detection))]
 public class WeaponManager : MonoBehaviour
 {
 
-    public enum WeaponKind
-    {
-        nullArm,
-        sword,
-        fist
-    }
+  
     public WeaponKind kind;
     Detection[] detections;
     //是否开启检测
@@ -52,6 +47,7 @@ public class WeaponManager : MonoBehaviour
         }
         for (int i = 0; i < detections.Length; i++)
         {
+            if(detections[i].Weapon == null)
             detections[i].Weapon = this;
         }
         Detection detection = GetComponentInChildren<Detection>();
@@ -252,4 +248,10 @@ public class WeaponManager : MonoBehaviour
     {
         return HittedCharacterTransform.InverseTransformDirection(WeaponDirection);
     }
+}
+public enum WeaponKind
+{
+    nullArm,
+    sword,
+    fist
 }

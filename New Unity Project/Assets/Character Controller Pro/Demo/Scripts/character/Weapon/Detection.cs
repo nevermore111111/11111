@@ -9,6 +9,7 @@ public abstract class Detection  : MonoBehaviour
     public bool isHited;
     public WeaponManager Weapon;
     public WeaponDetector WeaponDetector = WeaponDetector.arm01;
+    
     /// <summary>
     /// 攻击完成时清空击中列表，击中判定改为FALSE
     /// </summary>
@@ -30,7 +31,9 @@ public enum WeaponDetector
     rightHand = 1,
     letfFoot = 2,
     rightFoot = 3,
+    //前四个属于fist的
     arm01 = 4,
+    //这个属于sword
     arm02 = 5,
 }
 
