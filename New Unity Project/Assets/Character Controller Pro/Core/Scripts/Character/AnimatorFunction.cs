@@ -119,8 +119,7 @@ public class AnimatorFunction : MonoBehaviour
                 if (manager != null)
                 {
                     //根据动画参数激活对应的碰撞区域
-                    int[] weaponIndexes = ConvertStringToIntArray(activeWeaponDetect);
-                    manager.ActiveWeaponDetectors = weaponIndexes.Select(index => (WeaponDetector)index).ToArray();
+                    ActiveDetectionByStringPar(activeWeaponDetect, manager);
 
                     switch (hitKind)
                     {
@@ -145,13 +144,17 @@ public class AnimatorFunction : MonoBehaviour
             }
         }
     }
-    public void HitReStart(int Hit = 1)
+    public void HitReStart(int Hit = 1,string activeWeaponDetect = null)
     {
         mainCharacter.HitKind = Hit;
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
             {
+                if(activeWeaponDetect !=null)
+                {
+                    ActiveDetectionByStringPar(activeWeaponDetect, manager);
+                }
                 manager.ToggleDetection(false);
                 manager.ToggleDetection(true);
                 break;
@@ -159,10 +162,17 @@ public class AnimatorFunction : MonoBehaviour
         }
     }
 
+    //根据动画时间传递的参数来确认当前应该激活的检测区域
+    private void ActiveDetectionByStringPar(string activeWeaponDetect, WeaponManager manager)
+    {
+        int[] weaponIndexes = ConvertStringToIntArray(activeWeaponDetect);
+        manager.ActiveWeaponDetectors = weaponIndexes.Select(index => (WeaponDetector)index).ToArray();
+    }
+
     public void AttackStart(int num)
     {
-        //Attack.combo = num;
-
+        Attack.combo = num;
+        Attack.CharacterActor.Animator.SetInteger("combo", num);
         Attack.isAttack = true;
         Attack.CharacterActor.Animator.SetBool("attack", true);
         Attack.canChangeState = false;

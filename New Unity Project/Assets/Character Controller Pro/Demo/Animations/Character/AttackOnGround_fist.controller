@@ -198,7 +198,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: attack01_3
-  m_Speed: 1.5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6035453394570325079}
@@ -504,7 +504,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: attack01_4
-  m_Speed: 1.5
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3741728450048524300}
@@ -767,7 +767,7 @@ AnimatorStateMachine:
     m_Position: {x: 521.0502, y: 436.54065, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 494066308132985059}
-    m_Position: {x: 627.1642, y: 569.18317, z: 0}
+    m_Position: {x: 620, y: 570, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -4941854162523240323}
@@ -911,9 +911,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.09015754
   m_TransitionOffset: 0
-  m_ExitTime: 0.9085366
+  m_ExitTime: 0.25955224
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -933,9 +933,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.113827914
+  m_TransitionDuration: 0.16023311
   m_TransitionOffset: 0
-  m_ExitTime: 0.21366873
+  m_ExitTime: 0.19116929
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

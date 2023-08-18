@@ -603,7 +603,7 @@ ModelImporter:
         messageOptions: 0
       - time: 0.1663868
         functionName: HitStart
-        data: 
+        data: 4
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
