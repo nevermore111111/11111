@@ -7,7 +7,7 @@ public abstract class Detection  : MonoBehaviour
     public string[] targetTags;
     public List<GameObject> wasHit = new List<GameObject>();
     public bool isHited;
-    public WeaponManager Weapon;
+    public WeaponManager Weapon;//这是这个探测器所服务的检测
     public WeaponDetector WeaponDetector = WeaponDetector.arm01;
     
     /// <summary>

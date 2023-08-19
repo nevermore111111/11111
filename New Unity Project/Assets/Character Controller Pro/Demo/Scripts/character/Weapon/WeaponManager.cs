@@ -14,11 +14,11 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
 
-  
-    public WeaponKind kind;
-    Detection[] detections;
-    //是否开启检测
-    public bool isOnDetection;
+
+    public WeaponKind kind;//这个武器的种类，会根据这个武器的种类去那应该有哪些探测器
+    Detection[] detections;    //这个武器的所有探测器
+    public WeaponDetector[] ActiveWeaponDetectors;//这个武器当前激活的探测器
+    public bool isOnDetection;  //是否开启检测
     CharacterActor characterActor;
     public bool isHited;
     private CinemachineImpulseSource impulseSource;
@@ -31,13 +31,11 @@ public class WeaponManager : MonoBehaviour
     private int frameCount = 0;
     private Vector3 previousWeaponPosition;
     public CharacterInfo weaponOwner;
-    public Detection[] Detections;
-    public WeaponDetector[] ActiveWeaponDetectors;
+   
 
     private void Awake()
     {
         impulseSource = GetComponent<CinemachineImpulseSource>();
-        detections = GetComponents<Detection>();
         characterActor = GetComponentInParent<CharacterActor>();
         weaponOwner = GetComponentInParent<CharacterInfo>();
         switch (FxLoad)
@@ -45,34 +43,56 @@ public class WeaponManager : MonoBehaviour
             case 1: HittedFx = Resources.Load<FxHelper>("FxHelper").Sword; break;
             case 2: break;
         }
-        for (int i = 0; i < detections.Length; i++)
+        switch(kind)
         {
-            if(detections[i].Weapon == null)
-            detections[i].Weapon = this;
+            default:
+                {
+                    Debug.LogError("这个weapon没有选择种类");
+                    break;
+                }
+            case WeaponKind.sword:
+                {
+                    #region(学习)
+                    /*
+                     * 
+Where 和 Select 是 LINQ（语言集成查询）中的两个常用操作符，用于对集合（如数组、列表、查询结果等）进行筛选和转换。它们的用途和功能有所不同：
+
+Where：
+Where 操作符用于筛选集合中的元素，返回满足特定条件的元素子集。它接受一个条件（谓词）作为参数，并返回一个新的集合，其中包含满足条件的元素。
+
+示例：
+
+csharp
+Copy code
+var evenNumbers = numbers.Where(x => x % 2 == 0);
+在上述示例中，numbers 是一个整数集合，Where 操作筛选出其中的偶数元素。
+
+Select：
+Select 操作符用于将集合中的每个元素转换成另一种类型，形成一个新的集合。它接受一个转换函数作为参数，并返回一个新的集合，其中包含应用转换函数后的结果。
+
+示例：
+
+csharp
+Copy code
+var squaredNumbers = numbers.Select(x => x * x);
+                     */
+                    #endregion
+                    //对于where来说，选择的还是原本的值，对于select来说，返回的是一个新的对象。
+                    detections = GetComponentsInChildren<Detection>().Where(_=> _.WeaponDetector == WeaponDetector.arm01).ToArray();
+                    break;
+                }
+                case WeaponKind.fist:
+                {
+                    detections = GetComponentsInChildren<Detection>().Where(_ => _.WeaponDetector == WeaponDetector.rightFoot|| _.WeaponDetector == WeaponDetector.letfFoot|| _.WeaponDetector == WeaponDetector.rightHand|| _.WeaponDetector == WeaponDetector.leftHand).ToArray();
+                    break;
+                }
         }
-        Detection detection = GetComponentInChildren<Detection>();
-        Detections = GetComponentsInChildren<Detection>();
-        /*SetColliderByDetect(detection);*///根据这个检测去生成一个碰撞盒
+        
+               
+        
     }
 
-    //private static void SetColliderByDetect(Detection detection)
-    //{
-    //    if (detection is CapsuleDetection)
-    //    {
-    //        CapsuleDetection detectionCas = detection as CapsuleDetection;
-    //        GameObject colliderObject = new GameObject("collider");
-    //        CapsuleCollider capsuleCollider = colliderObject.AddComponent<CapsuleCollider>();
-
-    //        // 可以在这里设置 CapsuleCollider 的属性
-    //        capsuleCollider.center = (detectionCas.startPoint.position + detectionCas.endPoint.position) / 2;
-    //        capsuleCollider.radius =  detectionCas.radius;
-    //        capsuleCollider.height = (detectionCas.startPoint.position - detectionCas.endPoint.position).magnitude+2*detectionCas.radius;
-    //    }
-    //    else if (true)
-    //    {
-
-    //    }
-    //}
+   
 
     public void AdjustFrequencyAndAmplitude(float frequency, float amplitude)
     {
@@ -135,7 +155,7 @@ public class WeaponManager : MonoBehaviour
             foreach (Detection item in detections)
             {
                 //如果当前激活的物体不应该包括这个那么直接跳出进入下一个
-                if(!this.ActiveWeaponDetectors.Contains(item.WeaponDetector))
+                if (!this.ActiveWeaponDetectors.Contains(item.WeaponDetector))
                 {
                     continue;
                 }
@@ -189,7 +209,7 @@ public class WeaponManager : MonoBehaviour
             {
                 case 0:
                     {
-                        impulseSource.GenerateImpulse(0.4f*WeaponDirection);
+                        impulseSource.GenerateImpulse(0.4f * WeaponDirection);
                         break;
                     }
                 case 1:
@@ -204,7 +224,7 @@ public class WeaponManager : MonoBehaviour
                     }
             }
 
-            
+
         }
 
         else
