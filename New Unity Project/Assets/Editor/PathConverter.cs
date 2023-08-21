@@ -55,8 +55,8 @@ public static class PathConverter
     /// 鱼吃鱼项目的配置表路径
     /// </summary>
     /// <returns></returns>
-    public static string GetSettingPathOfFish()
+    public static string GetSettingPathOfRusk()
     {
-        return Application.dataPath.Replace("Client/Assets", "Configs/Shark.xlsx");
+        return PathConverter.ConvertToDirectoryPath("Assets/Editor/Data.xlsx");
     }
 }

@@ -24,6 +24,9 @@ public class AnimatorFunction : MonoBehaviour
     public CinemachineFreeLook CinemachineFreeLook;
     CameraEffects CameraEffects;
     private List<WeaponManager> weaponManagers;
+    private AnimationConfig animationConfig;
+    private int currentAnimPar;
+    
     //private Action<int> hitActionOfImpulse;
     //private Action<int> hitActionOfPlayFX;
 
@@ -35,8 +38,11 @@ public class AnimatorFunction : MonoBehaviour
         Attack = transform.parent.parent.GetComponentInChildren<Attack>();
         CharacterStateController = transform.parent.parent.GetComponentInChildren<CharacterStateController>();
         CameraEffects = CinemachineFreeLook.GetComponent<CameraEffects>();
-
         //
+    }
+    private void Start()
+    {
+        animationConfig = FindAnyObjectByType<DataLoad>().animationConfig;
     }
 
     public void Idle()
@@ -108,7 +114,6 @@ public class AnimatorFunction : MonoBehaviour
         //设置当前攻击类别
         mainCharacter.HitKind = hitKind;
         //根据当前攻击类别来进行
-        //
         //根据当前的detections进行调整这个激活的detection;
 
         foreach (var manager in weaponManagers)
@@ -171,8 +176,9 @@ public class AnimatorFunction : MonoBehaviour
 
     public void AttackStart(int num)
     {
-        Attack.combo = num;
-        Attack.CharacterActor.Animator.SetInteger("combo", num);
+        Debug.Log(Attack.CharacterActor.Animator.GetCurrentAnimatorStateInfo(0).shortNameHash);
+        //Attack.combo = num;
+        //Attack.CharacterActor.Animator.SetInteger("combo", num);
         Attack.isAttack = true;
         Attack.CharacterActor.Animator.SetBool("attack", true);
         Attack.canChangeState = false;
