@@ -26,7 +26,8 @@ public class GameManager // Ìí¼Ó¼Ì³Ð×Ô MonoBehaviour
             Combo = ExcelReaderHelper.ExcelReaderEZ<int>(0, "Combo"),
             AnmationStateName = ExcelReaderHelper.ExcelReaderEZ<string>(0, "AnmationStateName"),
             HitStrength = ExcelReaderHelper.ExcelReaderEZ<int[]>(0, "HitStrength"),
-            HitDetect = ExcelReaderHelper.ExcelReaderEZ<string[]>(0, "HitDetect")
+            HitDetect = ExcelReaderHelper.ExcelReaderEZ<string[]>(0, "HitDetect"),
+            AnimStateInfo = ExcelReaderHelper.ExcelReaderEZ<int>(0, "AnimStateInfo")
         };
 
         string filePath = Application.persistentDataPath + "/config.json";

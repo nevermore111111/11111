@@ -177,22 +177,22 @@ namespace Lightbug.CharacterControllerPro.Demo
                 {
                     if (CharacterActor.IsGrounded)
                     {
-                        if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
+                        if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
                         {
                             CharacterStateController.EnqueueTransition<AttackOnGround>();
                         }
-                        else if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                        else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
                         {
                             CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
                         }
                     }
                     else if (!CharacterActor.IsGrounded)
                     {
-                        if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
+                        if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
                         {
 
                         }
-                        else if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                        else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
                         {
 
                         }

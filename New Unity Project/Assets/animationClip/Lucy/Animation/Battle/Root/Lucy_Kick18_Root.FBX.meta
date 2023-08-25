@@ -94,24 +94,24 @@ ModelImporter:
         messageOptions: 0
       - time: 0.17094018
         functionName: HitStart
-        data: 3
+        data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 1
+        intParameter: 0
         messageOptions: 0
       - time: 0.2027417
         functionName: HitEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 1
+        intParameter: 0
         messageOptions: 0
       - time: 0.26495728
         functionName: HitStart
-        data: 2
+        data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 1
+        intParameter: 0
         messageOptions: 0
       - time: 0.2905983
         functionName: HitEnd

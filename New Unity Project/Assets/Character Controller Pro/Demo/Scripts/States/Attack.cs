@@ -4,7 +4,7 @@ using Rusk;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -18,14 +18,14 @@ public class Attack : CharacterState
     public static bool canInput;
     public static bool isJustEnter;
     public static bool canChangeState;
-   // protected  GameObject selectEnemy;
+    // protected  GameObject selectEnemy;
     public static int MaxCombo;
     //这个是范围内的敌人，利用一个球判定进入范围的敌人，进入了就添加在名单里面；
-   // public static List<GameObject> enemys = new List<GameObject>();
+    // public static List<GameObject> enemys = new List<GameObject>();
     //这个onceAttack是用来判定每次攻击只执行一次动画减慢效果
     public static bool OnceAttack;
     private NormalMovement NormalMovement;
-    public AttackMode currentAttackMode = AttackMode.AttackOnGround;
+    public static AttackMode currentAttackMode = AttackMode.AttackOnGround;
     [SerializeField]
     private Vector2 HeighAndWidth;
     private Vector2 normalHeightAndWidth;
@@ -40,32 +40,56 @@ public class Attack : CharacterState
         AttackOffGround,
         AttackOnGround_fist
     }
+    public void ChangeWeaponState(bool ExitAttack)
+    {
+        if(ExitAttack == true)
+        {
+            weaponManagers.Select(_ => _.gameObject).ToList().ForEach(_ => _.gameObject.SetActive(false));
+        }
+        switch (currentAttackMode)
+        {
+            case AttackMode.AttackOnGround:
+                {
+                    #region(学习)
+                    /*
+                     * list.foreach()//遍历这个列表中的所有物体，并且对其进行某种操作
+                     */
+                    #endregion
+                    weaponManagers.Where(_ => _.kind != WeaponKind.sword).ToList().ForEach(_ => _.gameObject.SetActive(false));
+                    break;
+                }
+            case AttackMode.AttackOnGround_fist:
+                {
+                    weaponManagers.Where(_ => _.kind != WeaponKind.fist).ToList().ForEach(_ => _.gameObject.SetActive(false));
+                    break;
+                }
+        }
+    }
 
-    
     private void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             currentAttackMode = AttackMode.AttackOnGround;
-            
+
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            currentAttackMode = AttackMode.AttackOffGround;
-            
+            //currentAttackMode = AttackMode.AttackOffGround;
+
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             currentAttackMode = AttackMode.AttackOnGround_fist;
-           
+
         }
     }
 
     protected override void Awake()
     {
-        weaponManagers = GetComponentsInChildren<WeaponManager>();
-        HeighAndWidth =  new(1f, 1.58f);
+        weaponManagers = this.transform.parent.GetComponentsInChildren<WeaponManager>();
+        HeighAndWidth = new(1f, 1.58f);
         attack = GetComponent<Attack>();
         OnceAttack = false;
         base.Awake();
@@ -87,8 +111,8 @@ public class Attack : CharacterState
         isAttack = true;
 
         canInput = false;
-        if(CharacterStateController.PreviousState is  not StartPlay)
-        isJustEnter = true;
+        if (CharacterStateController.PreviousState is not StartPlay)
+            isJustEnter = true;
         CharacterActor.CheckAndSetSize(HeighAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
 
         //根据当前进入的类，去调整当前的timeline的数量
@@ -113,7 +137,7 @@ public class Attack : CharacterState
 
     public override void UpdateBehaviour(float dt)
     {
-        
+
     }
     public override void CheckExitTransition()
     {
@@ -126,7 +150,7 @@ public class Attack : CharacterState
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-        if(NormalMovement.CanEvade())
+        if (NormalMovement.CanEvade())
         {
             CharacterStateController.EnqueueTransition<Evade>();
         }

@@ -156,12 +156,12 @@ namespace Rusk
             {
                 if (dashCursor >= 0.85f && CharacterActions.attack.value == true)
                 {
-                    if (attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
+                    if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
                     {
                         CharacterStateController.EnqueueTransition<AttackOnGround>(); ResetDash();
                     }
                     
-                    if(attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                    if(Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
                     {
                         CharacterStateController.EnqueueTransition<AttackOnGround_fist>(); ResetDash();
                     }

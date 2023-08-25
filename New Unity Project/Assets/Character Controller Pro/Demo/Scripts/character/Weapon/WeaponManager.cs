@@ -78,7 +78,7 @@ var squaredNumbers = numbers.Select(x => x * x);
                      */
                     #endregion
                     //对于where来说，选择的还是原本的值，对于select来说，返回的是一个新的对象。
-                    detections = GetComponentsInChildren<Detection>().Where(_=> _.WeaponDetector == WeaponDetector.arm01).ToArray();
+                    detections = GetComponentsInChildren<Detection>().Where(_=> _.WeaponDetector == WeaponDetector.sword).ToArray();
                     break;
                 }
                 case WeaponKind.fist:

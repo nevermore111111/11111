@@ -23,10 +23,15 @@ public class AnimatorFunction : MonoBehaviour
     WeaponManager WeaponManager;
     public CinemachineFreeLook CinemachineFreeLook;
     CameraEffects CameraEffects;
-    private List<WeaponManager> weaponManagers;
-    private AnimationConfig animationConfig;
+    private List<WeaponManager> weaponManagers;//这个是所有武器
+    private AnimationConfig animationConfig;//这个是动画参数
+    public SoloAnimaConfig CurrentAnimConfig;//这个是用来记录单个时间的参数
+    public int currentHitIndex;//当前这个攻击的第n次攻击检测
     private int currentAnimPar;
-    
+    public int hitKind;//现在攻击的种类
+    public string activeWeaponDetect;//现在激活的碰撞区域
+    public AnimatorStateInfo currentAnimatorClipName;//当前的动画
+
     //private Action<int> hitActionOfImpulse;
     //private Action<int> hitActionOfPlayFX;
 
@@ -109,13 +114,41 @@ public class AnimatorFunction : MonoBehaviour
         }
         return intArray;
     }
-    public void HitStart(int hitKind,string activeWeaponDetect)
+
+
+    public void HitStart()//int hitKind, string activeWeaponDetect
     {
+        AnimatorStateInfo currentClipName = GetStateInfo(Attack.CharacterActor.Animator);
+        int index = GetAnimConfig(currentClipName, animationConfig.AnmationStateName);
+
+        if (currentAnimatorClipName.ToShortString() == currentClipName.ToShortString())
+        {
+            //什么也不做
+        }
+        else
+        {
+            currentAnimatorClipName = currentClipName;
+            //int index = FindClipIndexByName("动画名称");
+            if (index != -1)
+            {
+                CurrentAnimConfig = new SoloAnimaConfig(
+                    animationConfig.Index[index],
+                    animationConfig.ClipName[index],
+                    animationConfig.Combo[index],
+                    animationConfig.AnmationStateName[index],
+                    animationConfig.HitStrength[index],
+                    animationConfig.HitDetect[index],
+                    animationConfig.AnimStateInfo[index]
+                );
+            }
+            //Attack.combo = CurrentAnimConfig.Combo;
+        }
+        hitKind = CurrentAnimConfig.HitStrength[currentHitIndex];
         //设置当前攻击类别
         mainCharacter.HitKind = hitKind;
         //根据当前攻击类别来进行
         //根据当前的detections进行调整这个激活的detection;
-
+        currentHitIndex++;
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
@@ -149,14 +182,15 @@ public class AnimatorFunction : MonoBehaviour
             }
         }
     }
-    public void HitReStart(int Hit = 1,string activeWeaponDetect = null)
+    public void HitReStart()//int Hit = 1, string activeWeaponDetect = null
     {
-        mainCharacter.HitKind = Hit;
+        currentHitIndex++;
+        mainCharacter.HitKind = hitKind;
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
             {
-                if(activeWeaponDetect !=null)
+                if (activeWeaponDetect != null)
                 {
                     ActiveDetectionByStringPar(activeWeaponDetect, manager);
                 }
@@ -174,11 +208,10 @@ public class AnimatorFunction : MonoBehaviour
         manager.ActiveWeaponDetectors = weaponIndexes.Select(index => (WeaponDetector)index).ToArray();
     }
 
-    public void AttackStart(int num)
+    public void AttackStart()
     {
-        Debug.Log(Attack.CharacterActor.Animator.GetCurrentAnimatorStateInfo(0).shortNameHash);
-        //Attack.combo = num;
-        //Attack.CharacterActor.Animator.SetInteger("combo", num);
+        currentHitIndex = 0;
+
         Attack.isAttack = true;
         Attack.CharacterActor.Animator.SetBool("attack", true);
         Attack.canChangeState = false;
@@ -302,66 +335,85 @@ public class AnimatorFunction : MonoBehaviour
 
         Attack.CharacterActor.Animator.speed = originalSpeed; // 恢复原始播放速度
     }
-    private float originalTimeScale;
+
+    private string GetPlayingClipName(Animator animator)
+    {
+        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+        if (clipInfo.Length > 0)
+        {
+            return clipInfo[0].clip.name;
+        }
+        return null;
+    }
+    private string GetTargetClipName(Animator animator)
+    {
+        AnimatorTransitionInfo transitionInfo = animator.GetAnimatorTransitionInfo(0);
+
+        if (transitionInfo.anyState)//如果在过渡
+        {
+            int targetStateHash = transitionInfo.nameHash;
+            AnimatorStateInfo targetStateInfo = animator.GetNextAnimatorStateInfo(0);
+
+            if (targetStateInfo.fullPathHash == targetStateHash)
+            {
+                return targetStateInfo.shortNameHash.ToString();
+            }
+        }
+
+        return string.Empty;
+    }
 
 
+    private int FindClipIndexByName(string clipName)
+    {
+        if (clipName != null)
+        {
+            for (int i = 0; i < animationConfig.ClipName.Count; i++)
+            {
+                if (animationConfig.ClipName[i] == clipName)
+                {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
 
     /// <summary>
-    /// 一个时停加震动的复合方法。
+    /// 获取当前正在播放的动画的AnimatorStateInfo，如果在过渡，就返回过渡目标的动画
     /// </summary>
-    /// <param name="fadeInDuration"></param>
-    /// <param name="fadeOutDuration"></param>
-    /// <param name="duration"></param>
-    /// <param name="targetTimeScale"></param>
-    /// <param name="weaponManager"></param>
     /// <returns></returns>
-    //public System.Collections.IEnumerator AdjustTimeScaleOverDuration(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager)
-    //{
-    //    float initialTimeScale = Time.timeScale;
-    //    float elapsedTime = 0f;
+    private AnimatorStateInfo GetStateInfo(Animator animator)
+    {
+        AnimatorTransitionInfo transitionInfo = animator.GetAnimatorTransitionInfo(0);
 
-    //    // 渐入
-    //    while (elapsedTime < fadeInDuration)
-    //    {
-    //        elapsedTime += Time.unscaledDeltaTime;
-    //        float normalizedTime = Mathf.Clamp01(elapsedTime / fadeInDuration);
-    //        Time.timeScale = Mathf.Lerp(initialTimeScale, targetTimeScale, normalizedTime);
-    //        // 可以在这里根据需要进行其他的逻辑处理
+        if (transitionInfo.anyState)
+        {
+            AnimatorStateInfo targetStateInfo = animator.GetNextAnimatorStateInfo(0);
+            return targetStateInfo;
+        }
+        else
+        {
+            AnimatorStateInfo currentStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            return currentStateInfo;
+        }
+    }
 
-    //        // 等待一帧
-    //        yield return null;
-    //    }
-
-    //    // 设置目标时间缩放
-    //    Time.timeScale = targetTimeScale;
-    //    weaponManager.PlayHittedFx();
-    //    // 持续时间
-    //    yield return new WaitForSecondsRealtime(duration);
-
-    //    // 渐出
-    //    elapsedTime = 0f;
-
-    //    //调用震动和特效
-    //    weaponManager.Impluse();
-    //    //这里需要调用两个地方产生特效，一个是自身的刀光额外特效，另外一个是怪物的受击反馈。
-    //    //需要做个委托
-
-
-    //    while (elapsedTime < fadeOutDuration)
-    //    {
-    //        elapsedTime += Time.unscaledDeltaTime;
-    //        float normalizedTime = Mathf.Clamp01(elapsedTime / fadeOutDuration);
-    //        Time.timeScale = Mathf.Lerp(targetTimeScale, 1f, normalizedTime);
-    //        // 可以在这里根据需要进行其他的逻辑处理
-
-    //        // 等待一帧
-    //        yield return null;
-    //    }
-    //    //一般在时停的最后时间再去调用摄像机的震动效果。
-    //    // 恢复原始的时间缩放
-    //    Time.timeScale = 1f;
-    //}
-
+    /// <summary>
+    ///  根据当前的animatorinfo得到动画信息
+    /// </summary>
+    /// <returns></returns>
+    private int GetAnimConfig(AnimatorStateInfo stateInfo,List<string> Names)
+    {
+        for(int i = 0;i<stateInfo.length;i++)
+        {
+            if( stateInfo.IsName(Names[i]))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 
 }

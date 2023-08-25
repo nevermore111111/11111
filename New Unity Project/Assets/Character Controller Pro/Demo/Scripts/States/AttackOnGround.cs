@@ -45,9 +45,11 @@ public class AttackOnGround :Attack
             CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
         }
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity,true,RootMotionRotationType.AddRotation);
-        army[0].SetActive(true);
-        army[1].SetActive(true);
-        
+        //army[0].SetActive(true);
+        //army[1].SetActive(true);
+        ChangeWeaponState(false);
+
+
     }
     public override void UpdateBehaviour(float dt)
     {
@@ -96,7 +98,7 @@ public class AttackOnGround :Attack
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-        if(CharacterActor.IsGrounded && isAttack == false&&attack.currentAttackMode == AttackMode.AttackOnGround_fist)
+        if(CharacterActor.IsGrounded && isAttack == false&& Attack.currentAttackMode == AttackMode.AttackOnGround_fist)
         {
             CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
         }
@@ -104,8 +106,9 @@ public class AttackOnGround :Attack
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
         base.ExitBehaviour(dt, toState);
-        army[0].SetActive(false);
-        army[1].SetActive(false);
+        //army[0].SetActive(false);
+        //army[1].SetActive(false);
+        ChangeWeaponState(true);
     }
 
 

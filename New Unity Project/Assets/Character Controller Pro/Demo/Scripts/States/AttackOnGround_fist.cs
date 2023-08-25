@@ -34,6 +34,7 @@ public class AttackOnGround_fist : Attack
 
         base.EnterBehaviour(dt, fromState);
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.AddRotation);
+        ChangeWeaponState(false);
         //army[0].SetActive(true);
         //army[1].SetActive(true);
 
@@ -81,7 +82,7 @@ public class AttackOnGround_fist : Attack
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-        if (CharacterActor.IsGrounded && isAttack == false && attack.currentAttackMode == AttackMode.AttackOnGround)
+        if (CharacterActor.IsGrounded && isAttack == false && currentAttackMode == AttackMode.AttackOnGround)
         {
             CharacterStateController.EnqueueTransition<AttackOnGround>();
         }
@@ -89,6 +90,7 @@ public class AttackOnGround_fist : Attack
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
         base.ExitBehaviour(dt, toState);
+        ChangeWeaponState(true);
         //army[0].SetActive(false);
         //army[1].SetActive(false);
     }

@@ -99,22 +99,22 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.22792022
+      - time: 0.2380468
         functionName: HitStart
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 2
         messageOptions: 0
-      - time: 0.3162393
+      - time: 0.3010494
         functionName: HitEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 2
         messageOptions: 0
-      - time: 0.42364532
-        functionName: HitStart
+      - time: 0.42617697
+        functionName: AttackEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
