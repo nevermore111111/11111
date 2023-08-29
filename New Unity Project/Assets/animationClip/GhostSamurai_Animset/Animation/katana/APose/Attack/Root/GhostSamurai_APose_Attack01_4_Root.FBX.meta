@@ -579,7 +579,7 @@ ModelImporter:
       events:
       - time: 0
         functionName: AttackStart
-        data: 
+        data: sword.attack01_4
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 1

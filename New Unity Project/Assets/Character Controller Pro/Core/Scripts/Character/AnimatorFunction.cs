@@ -30,7 +30,7 @@ public class AnimatorFunction : MonoBehaviour
     private int currentAnimPar;
     public int hitKind;//现在攻击的种类
     public string activeWeaponDetect;//现在激活的碰撞区域
-    public AnimatorStateInfo currentAnimatorClipName;//当前的动画
+    public string currentStateName;//当前正在播放的动画
 
     //private Action<int> hitActionOfImpulse;
     //private Action<int> hitActionOfPlayFX;
@@ -118,31 +118,31 @@ public class AnimatorFunction : MonoBehaviour
 
     public void HitStart()//int hitKind, string activeWeaponDetect
     {
-        AnimatorStateInfo currentClipName = GetStateInfo(Attack.CharacterActor.Animator);
-        int index = GetAnimConfig(currentClipName, animationConfig.AnmationStateName);
+        //AnimatorStateInfo currentClipName = GetStateInfo(Attack.CharacterActor.Animator);
+        //int index = GetAnimConfig(currentClipName, animationConfig.AnmationStateName);
 
-        if (currentAnimatorClipName.ToShortString() == currentClipName.ToShortString())
-        {
-            //什么也不做
-        }
-        else
-        {
-            currentAnimatorClipName = currentClipName;
-            //int index = FindClipIndexByName("动画名称");
-            if (index != -1)
-            {
-                CurrentAnimConfig = new SoloAnimaConfig(
-                    animationConfig.Index[index],
-                    animationConfig.ClipName[index],
-                    animationConfig.Combo[index],
-                    animationConfig.AnmationStateName[index],
-                    animationConfig.HitStrength[index],
-                    animationConfig.HitDetect[index],
-                    animationConfig.AnimStateInfo[index]
-                );
-            }
-            //Attack.combo = CurrentAnimConfig.Combo;
-        }
+        //if ()
+        //{
+        //    //什么也不做
+        //}
+        //else
+        //{
+        //    currentAnimatorClipName = currentClipName;
+        //    //int index = FindClipIndexByName("动画名称");
+        //    if (index != -1)
+        //    {
+        //        CurrentAnimConfig = new SoloAnimaConfig(
+        //            animationConfig.Index[index],
+        //            animationConfig.ClipName[index],
+        //            animationConfig.Combo[index],
+        //            animationConfig.AnmationStateName[index],
+        //            animationConfig.HitStrength[index],
+        //            animationConfig.HitDetect[index],
+        //            animationConfig.AnimStateInfo[index]
+        //        );
+        //    }
+        //    //Attack.combo = CurrentAnimConfig.Combo;
+        //}
         hitKind = CurrentAnimConfig.HitStrength[currentHitIndex];
         //设置当前攻击类别
         mainCharacter.HitKind = hitKind;
@@ -208,8 +208,32 @@ public class AnimatorFunction : MonoBehaviour
         manager.ActiveWeaponDetectors = weaponIndexes.Select(index => (WeaponDetector)index).ToArray();
     }
 
-    public void AttackStart()
+    public void AttackStart(string attackName)
     {
+        //如果名字一致不做任何事情
+        if( currentStateName ==attackName)
+        {
+
+        }
+        else
+        {
+            currentStateName = attackName;
+            int index = FindStateIndexByName(attackName);//根据当前的动画名称来修改
+            if (index != -1)
+            {
+                CurrentAnimConfig = new SoloAnimaConfig(
+                    animationConfig.Index[index],
+                    animationConfig.ClipName[index],
+                    animationConfig.Combo[index],
+                    animationConfig.AnmationStateName[index],
+                    animationConfig.HitStrength[index],
+                    animationConfig.HitDetect[index],
+                    animationConfig.AnimStateInfo[index]
+                );
+            }
+            //Attack.combo = CurrentAnimConfig.Combo;
+        }
+
         currentHitIndex = 0;
 
         Attack.isAttack = true;
@@ -378,6 +402,22 @@ public class AnimatorFunction : MonoBehaviour
         }
         return -1;
     }
+
+    private int FindStateIndexByName(string stateName)
+    {
+        if (stateName != null)
+        {
+            for (int i = 0; i < animationConfig.AnmationStateName.Count; i++)
+            {
+                if (animationConfig.AnmationStateName[i] == stateName)
+                {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
 
     /// <summary>
     /// 获取当前正在播放的动画的AnimatorStateInfo，如果在过渡，就返回过渡目标的动画
