@@ -201,13 +201,21 @@ public class AnimatorFunction : MonoBehaviour
         }
     }
 
-    //根据动画时间传递的参数来确认当前应该激活的检测区域
+    /// <summary>
+    ///根据动画时间传递的参数来确认当前应该激活的检测区域
+    /// </summary>
+    /// <param name="activeWeaponDetect"></param>
+    /// <param name="manager"></param>
     private void ActiveDetectionByStringPar(string activeWeaponDetect, WeaponManager manager)
     {
         int[] weaponIndexes = ConvertStringToIntArray(activeWeaponDetect);
         manager.ActiveWeaponDetectors = weaponIndexes.Select(index => (WeaponDetector)index).ToArray();
     }
 
+    /// <summary>
+    /// 攻击开始
+    /// </summary>
+    /// <param name="attackName"></param>
     public void AttackStart(string attackName)
     {
         //Debug.Log(attackName);

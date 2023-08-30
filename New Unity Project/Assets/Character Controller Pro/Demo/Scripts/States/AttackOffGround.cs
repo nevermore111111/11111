@@ -1,3 +1,4 @@
+using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
@@ -12,9 +13,9 @@ using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
 /// <summary>
 /// 
 /// <summary>
-public class AttackOnGround :Attack
+public class AttackOffGround : Attack
 {
-    public  float gravity = 10;
+    public float gravity = 10;
     protected override void Awake()
     {
         base.Awake();
@@ -22,24 +23,35 @@ public class AttackOnGround :Attack
     protected override void Start()
     {
         base.Start();
-        
+
     }
+
+
+
+
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         base.EnterBehaviour(dt, fromState);
-        Type type =CharacterStateController.PreviousState.GetType();
-        if ( (type != typeof(Attack))&& type != typeof(StartPlay)&& CharacterActor.IsGrounded)
+        Type type = CharacterStateController.PreviousState.GetType();
+        if (type != typeof(StartPlay) && type == typeof(AttackOnGround))//这个是我从什么地方进入这个状态，然后进入时播放不同的动画
         {
             combo = 1;
             CharacterActor.Animator.SetInteger("combo", Attack.combo);
             canChangeState = false;
             CharacterActor.Animator.Play("attack01_1");
         }
-        else
+        else if(type == typeof(AttackOnGround_fist))
         {
-            CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
+            combo = 1;
+            CharacterActor.Animator.SetInteger("combo", Attack.combo);
+            canChangeState = false;
+            CharacterActor.Animator.Play("attack01_1");
         }
-        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity,true,RootMotionRotationType.AddRotation);
+        else if(!CharacterActor.IsGrounded)
+        {
+            //这是在空中某个状态进入
+        }
+        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.SetRotation);
 
         ChangeWeaponState(false);
 
@@ -48,10 +60,12 @@ public class AttackOnGround :Attack
     public override void UpdateBehaviour(float dt)
     {
         base.UpdateBehaviour(dt);
-        if(!canPlayerControl)
+        if (!canPlayerControl)
         {
             return;
         }
+
+
         //在非攻击时
         if (CharacterActions.attack.value)
         {
@@ -82,11 +96,11 @@ public class AttackOnGround :Attack
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-        if(CharacterActions.movement.value != Vector2.zero && canChangeState == true)
+        if (CharacterActions.movement.value != Vector2.zero && canChangeState == true)
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-        if(CharacterActor.IsGrounded && isAttack == false&& Attack.currentAttackMode == AttackMode.AttackOnGround_fist)
+        if (CharacterActor.IsGrounded && isAttack == false && Attack.currentAttackMode == AttackMode.AttackOnGround_fist)
         {
             CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
         }

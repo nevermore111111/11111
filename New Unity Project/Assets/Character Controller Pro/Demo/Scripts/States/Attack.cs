@@ -1,5 +1,6 @@
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
+using Lightbug.Utilities;
 using Rusk;
 using System;
 using System.Collections;
@@ -32,37 +33,56 @@ public class Attack : CharacterState
     public Attack attack;
     TimelineManager timelineManager;
     WeaponManager[] weaponManagers;
-
-
+    public static bool useGravity = true;
+    
     public enum AttackMode
     {
         AttackOnGround,
         AttackOffGround,
         AttackOnGround_fist
     }
+    /// <summary>
+    /// false是展示
+    /// </summary>
+    /// <param name="ExitAttack"></param>
     public void ChangeWeaponState(bool ExitAttack)
     {
         if(ExitAttack == true)
         {
-            weaponManagers.Select(_ => _.gameObject).ToList().ForEach(_ => _.gameObject.SetActive(false));
+            foreach (var weapon in weaponManagers)
+            {
+                weapon.gameObject.SetActive(false);
+            }
         }
-        switch (currentAttackMode)
+        else
         {
-            case AttackMode.AttackOnGround:
-                {
-                    #region(学习)
-                    /*
-                     * list.foreach()//遍历这个列表中的所有物体，并且对其进行某种操作
-                     */
-                    #endregion
-                    weaponManagers.Where(_ => _.kind != WeaponKind.sword).ToList().ForEach(_ => _.gameObject.SetActive(false));
-                    break;
-                }
-            case AttackMode.AttackOnGround_fist:
-                {
-                    weaponManagers.Where(_ => _.kind != WeaponKind.fist).ToList().ForEach(_ => _.gameObject.SetActive(false));
-                    break;
-                }
+            switch (currentAttackMode)
+            {
+                case AttackMode.AttackOnGround:
+                    {
+                        #region(学习)
+                        /*
+                         * list.foreach()//遍历这个列表中的所有物体，并且对其进行某种操作
+                         */
+                        #endregion
+                        foreach (var weapon in weaponManagers)
+                        {
+                            weapon.gameObject.SetActive(true);
+                        }
+                        weaponManagers.Where(_ => _.kind != WeaponKind.sword).ToList().ForEach(_ => _.gameObject.SetActive(false));
+                        break;
+                    }
+                case AttackMode.AttackOnGround_fist:
+                    {
+                        //foreach (var weapon in weaponManagers)
+                        //{
+                        //    weapon.gameObject.SetActive(true);
+                        //}
+                        // //如果是使用fist攻击，那么只要关闭当前的weapon检测就可以了
+                        weaponManagers.Where(_ => _.kind != WeaponKind.fist).ToList().ForEach(_ => _.gameObject.SetActive(false));
+                        break;
+                    }
+            }
         }
     }
 
@@ -76,12 +96,11 @@ public class Attack : CharacterState
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            //currentAttackMode = AttackMode.AttackOffGround;
+            currentAttackMode = AttackMode.AttackOnGround_fist;
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            currentAttackMode = AttackMode.AttackOnGround_fist;
 
         }
     }
@@ -137,7 +156,16 @@ public class Attack : CharacterState
 
     public override void UpdateBehaviour(float dt)
     {
+        if(useGravity)
+        {
+            UseGravity(dt);
+        }
+    }
 
+    private void UseGravity(float dt)
+    {
+        if (!CharacterActor.IsStable)
+            CharacterActor.VerticalVelocity += CustomUtilities.Multiply(-CharacterActor.Up, gravity, dt);
     }
     public override void CheckExitTransition()
     {
@@ -154,10 +182,16 @@ public class Attack : CharacterState
         {
             CharacterStateController.EnqueueTransition<Evade>();
         }
-        if (currentAttackMode == AttackMode.AttackOffGround)
+        if(CharacterActions.spAttack.value)//特殊攻击
         {
-            //CharacterStateController.EnqueueTransition<>();
-            return;
+            switch(currentAttackMode)
+            {
+                case AttackMode.AttackOnGround://这是使用剑攻击
+                    CharacterStateController.EnqueueTransition<>
+                    break;
+                        
+
+            }
         }
     }
 }
