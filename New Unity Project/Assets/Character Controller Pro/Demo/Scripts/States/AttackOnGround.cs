@@ -53,20 +53,7 @@ public class AttackOnGround :Attack
             return;
         }
         //在非攻击时
-        if (CharacterActions.attack.value)
-        {
-            //按下攻击键位
-            if (canInput)
-            {
-                canInput = false;
-                combo++;
-                if (combo > MaxCombo)
-                {
-                    combo = 1;
-                }
-                CharacterActor.Animator.SetInteger("combo", combo);
-            }
-        }
+      
     }
 
 
@@ -85,6 +72,10 @@ public class AttackOnGround :Attack
         if(CharacterActions.movement.value != Vector2.zero && canChangeState == true)
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
+        }
+        if(CharacterActor.IsGrounded && isAttack == false && CharacterActions.spAttack.value == true)
+        {
+            CharacterStateController.EnqueueTransition<AttackOffGround>();
         }
         if(CharacterActor.IsGrounded && isAttack == false&& Attack.currentAttackMode == AttackMode.AttackOnGround_fist)
         {

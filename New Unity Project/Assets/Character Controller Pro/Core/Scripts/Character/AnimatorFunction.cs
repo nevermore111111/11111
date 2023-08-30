@@ -304,6 +304,8 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void CanGetInput()
     {
+
+        Attack.CharacterActor.Animator.SetInteger("specialAttack",0);
         Attack.canInput = true;
     }
     public void CannotGetInput()
@@ -389,7 +391,6 @@ public class AnimatorFunction : MonoBehaviour
         {
             int targetStateHash = transitionInfo.nameHash;
             AnimatorStateInfo targetStateInfo = animator.GetNextAnimatorStateInfo(0);
-
             if (targetStateInfo.fullPathHash == targetStateHash)
             {
                 return targetStateInfo.shortNameHash.ToString();

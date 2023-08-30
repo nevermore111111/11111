@@ -40,14 +40,14 @@ public class AttackOffGround : Attack
             canChangeState = false;
             CharacterActor.Animator.Play("attack01_1");
         }
-        else if(type == typeof(AttackOnGround_fist))
+        else if (type == typeof(AttackOnGround_fist))
         {
             combo = 1;
             CharacterActor.Animator.SetInteger("combo", Attack.combo);
             canChangeState = false;
             CharacterActor.Animator.Play("attack01_1");
         }
-        else if(!CharacterActor.IsGrounded)
+        else if (!CharacterActor.IsGrounded)
         {
             //这是在空中某个状态进入
         }
@@ -64,26 +64,26 @@ public class AttackOffGround : Attack
         {
             return;
         }
+        CheckSpAttack();
+    }
 
-
-        //在非攻击时
-        if (CharacterActions.attack.value)
+    private void CheckSpAttack()
+    {
+        if (CharacterActions.spAttack.value)
         {
-            //按下攻击键位
-            if (canInput)
+            //播放下落的动画
+            switch (Attack.currentAttackMode)
             {
-                canInput = false;
-                combo++;
-                if (combo > MaxCombo)
-                {
-                    combo = 1;
-                }
-                CharacterActor.Animator.SetInteger("combo", combo);
+                case AttackMode.AttackOnGround:
+                    CharacterActor.Animator.SetInteger("specialAttack", 10);
+                    //这个执行一个下落攻击
+                    break;
+                case AttackMode.AttackOnGround_fist:
+                    CharacterActor.Animator.SetInteger("specialAttack", 11);
+                    break;
             }
         }
     }
-
-
 
     public override void CheckExitTransition()
     {
@@ -92,18 +92,19 @@ public class AttackOffGround : Attack
         {
             return;
         }
-        if (!CharacterActor.IsGrounded && isAttack == false)
+        if (CharacterActor.IsGrounded)
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-        if (CharacterActions.movement.value != Vector2.zero && canChangeState == true)
-        {
-            CharacterStateController.EnqueueTransition<NormalMovement>();
-        }
-        if (CharacterActor.IsGrounded && isAttack == false && Attack.currentAttackMode == AttackMode.AttackOnGround_fist)
-        {
-            CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
-        }
+
+        //if (CharacterActions.movement.value != Vector2.zero && canChangeState == true)
+        //{
+        //    CharacterStateController.EnqueueTransition<NormalMovement>();
+        //}
+        //if (CharacterActor.IsGrounded && isAttack == false && Attack.currentAttackMode == AttackMode.AttackOnGround_fist)
+        //{
+        //    CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+        //}
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {

@@ -43,34 +43,8 @@ public class AttackOnGround_fist : Attack
     public override void UpdateBehaviour(float dt)
     {
         base.UpdateBehaviour(dt);
-        UseGravity(dt);
-        if (CharacterActions.test.value)
-        {
-            CharacterActor.Animator.speed = 0.1f;
-        }
         //在非攻击时
-        if (CharacterActions.attack.value)
-        {
-            //按下攻击键位
-            if (canInput)
-            {
-                canInput = false;
-                combo++;
-                if (combo > MaxCombo)
-                {
-                    combo = 1;
-                }
-                CharacterActor.Animator.SetInteger("combo", combo);
-            }
-        }
     }
-
-    private void UseGravity(float dt)
-    {
-        if (!CharacterActor.IsStable)
-            CharacterActor.VerticalVelocity += CustomUtilities.Multiply(-CharacterActor.Up, gravity, dt);
-    }
-
     public override void CheckExitTransition()
     {
         base.CheckExitTransition();

@@ -34,6 +34,7 @@ public class Attack : CharacterState
     TimelineManager timelineManager;
     WeaponManager[] weaponManagers;
     public static bool useGravity = true;
+    public static float AttackGravity = 10f;
     
     public enum AttackMode
     {
@@ -156,16 +157,37 @@ public class Attack : CharacterState
 
     public override void UpdateBehaviour(float dt)
     {
-        if(useGravity)
+        if (useGravity)
         {
             UseGravity(dt);
+        }
+        SetCombo();
+    }
+    /// <summary>
+    /// 根据输入，来确认当前的combo
+    /// </summary>
+    private void SetCombo()
+    {
+        if (CharacterActions.attack.value)
+        {
+            //按下攻击键位
+            if (canInput)
+            {
+                canInput = false;
+                combo++;
+                if (combo > MaxCombo)
+                {
+                    combo = 1;
+                }
+                CharacterActor.Animator.SetInteger("combo", combo);
+            }
         }
     }
 
     private void UseGravity(float dt)
     {
         if (!CharacterActor.IsStable)
-            CharacterActor.VerticalVelocity += CustomUtilities.Multiply(-CharacterActor.Up, gravity, dt);
+            CharacterActor.VerticalVelocity += CustomUtilities.Multiply(-CharacterActor.Up, AttackGravity, dt);
     }
     public override void CheckExitTransition()
     {
@@ -184,14 +206,7 @@ public class Attack : CharacterState
         }
         if(CharacterActions.spAttack.value)//特殊攻击
         {
-            switch(currentAttackMode)
-            {
-                case AttackMode.AttackOnGround://这是使用剑攻击
-                    CharacterStateController.EnqueueTransition<>
-                    break;
-                        
-
-            }
+            
         }
     }
 }
