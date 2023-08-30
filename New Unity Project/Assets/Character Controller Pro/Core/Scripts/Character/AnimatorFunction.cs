@@ -210,6 +210,10 @@ public class AnimatorFunction : MonoBehaviour
 
     public void AttackStart(string attackName)
     {
+        //Debug.Log(attackName);
+        //Debug.Log(Attack.CharacterActor.Animator.GetInteger("combo"));
+
+
         //如果名字一致不做任何事情
         if( currentStateName ==attackName)
         {
