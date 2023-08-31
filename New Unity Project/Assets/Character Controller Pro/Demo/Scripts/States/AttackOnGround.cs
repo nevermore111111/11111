@@ -34,12 +34,11 @@ public class AttackOnGround :Attack
             spAttack = -1;
             canChangeState = false;
         }
-        if ( (type != typeof(Attack))&& type != typeof(StartPlay)&& CharacterActor.IsGrounded)
+        else if( (type != typeof(Attack))&& type != typeof(StartPlay)&& CharacterActor.IsGrounded)
         {
             combo = 1;
             CharacterActor.Animator.SetInteger("combo", Attack.combo);
             canChangeState = false;
-           
         }
         else
         {
@@ -48,7 +47,6 @@ public class AttackOnGround :Attack
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity,true,RootMotionRotationType.AddRotation);
 
         ChangeWeaponState(false);
-
 
     }
     public override void UpdateBehaviour(float dt)

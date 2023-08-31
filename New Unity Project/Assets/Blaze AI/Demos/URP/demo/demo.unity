@@ -5272,6 +5272,7 @@ MonoBehaviour:
   enemyContactRadius: 1.5
   showEnemyContactRadius: 1
   friendly: 0
+  canBeAttack: 0
   distanceCull: 0
   animToPlayOnCull: 
   ignoreUnreachableEnemy: 0
@@ -5314,6 +5315,8 @@ MonoBehaviour:
   companionMode: 0
   companionTo: {fileID: 0}
   companionBehaviour: {fileID: 0}
+  isCanbeAttack: 0
+  anim: {fileID: 0}
 --- !u!95 &948333434
 Animator:
   serializedVersion: 5
@@ -8646,6 +8649,7 @@ MonoBehaviour:
   enemyContactRadius: 1.5
   showEnemyContactRadius: 1
   friendly: 0
+  canBeAttack: 0
   distanceCull: 0
   animToPlayOnCull: 
   ignoreUnreachableEnemy: 0
@@ -8688,6 +8692,8 @@ MonoBehaviour:
   companionMode: 0
   companionTo: {fileID: 0}
   companionBehaviour: {fileID: 0}
+  isCanbeAttack: 0
+  anim: {fileID: 0}
 --- !u!95 &1423372242
 Animator:
   serializedVersion: 5
@@ -9565,6 +9571,7 @@ MonoBehaviour:
   enemyContactRadius: 1.5
   showEnemyContactRadius: 1
   friendly: 0
+  canBeAttack: 0
   distanceCull: 0
   animToPlayOnCull: 
   ignoreUnreachableEnemy: 0
@@ -9607,6 +9614,8 @@ MonoBehaviour:
   companionMode: 0
   companionTo: {fileID: 0}
   companionBehaviour: {fileID: 0}
+  isCanbeAttack: 0
+  anim: {fileID: 0}
 --- !u!95 &1476428944
 Animator:
   serializedVersion: 5
@@ -12030,6 +12039,7 @@ MonoBehaviour:
   enemyContactRadius: 1.5
   showEnemyContactRadius: 1
   friendly: 0
+  canBeAttack: 0
   distanceCull: 0
   animToPlayOnCull: 
   ignoreUnreachableEnemy: 0
@@ -12072,6 +12082,8 @@ MonoBehaviour:
   companionMode: 0
   companionTo: {fileID: 0}
   companionBehaviour: {fileID: 0}
+  isCanbeAttack: 0
+  anim: {fileID: 0}
 --- !u!95 &2023609407
 Animator:
   serializedVersion: 5

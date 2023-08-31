@@ -201,17 +201,27 @@ namespace Lightbug.CharacterControllerPro.Demo
                 }
                 if (CharacterActions.spAttack.value)//特殊攻击
                 {
-                    if(Attack.currentAttackMode == Attack.AttackMode.AttackOffGround)
+                    if (CharacterActor.IsGrounded)
                     {
-                        //attack
-                        Attack.spAttack = 10;
-                        CharacterStateController.EnqueueTransition<AttackOnGround>();
+                        if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
+                        {
+                            //attack
+                            Attack.spAttack = 10;
+                            CharacterStateController.EnqueueTransition<AttackOnGround>();
+                        }
+                        else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                        {
+                            Attack.spAttack = 11;
+                            CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+                        }
                     }
-                    else if(Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                    else
                     {
-                        Attack.spAttack = 11;
-                        CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+                        //在天空使用特殊攻击
+                        Attack.spAttack = 13;
+                        CharacterStateController.EnqueueTransition<AttackOffGround>();
                     }
+
                 }
                 if (CharacterActions.jetPack.value)
                 {
