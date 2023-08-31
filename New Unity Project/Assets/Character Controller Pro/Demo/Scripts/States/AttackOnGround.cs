@@ -28,12 +28,18 @@ public class AttackOnGround :Attack
     {
         base.EnterBehaviour(dt, fromState);
         Type type =CharacterStateController.PreviousState.GetType();
+        if(CharacterActor.IsGrounded&&Attack.spAttack ==10)
+        {
+            CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
+            spAttack = -1;
+            canChangeState = false;
+        }
         if ( (type != typeof(Attack))&& type != typeof(StartPlay)&& CharacterActor.IsGrounded)
         {
             combo = 1;
             CharacterActor.Animator.SetInteger("combo", Attack.combo);
             canChangeState = false;
-            CharacterActor.Animator.Play("attack01_1");
+           
         }
         else
         {

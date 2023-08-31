@@ -35,7 +35,7 @@ public class Attack : CharacterState
     WeaponManager[] weaponManagers;
     public static bool useGravity = true;
     public static float AttackGravity = 10f;
-    
+    public static int spAttack = -1;
     public enum AttackMode
     {
         AttackOnGround,
@@ -204,9 +204,6 @@ public class Attack : CharacterState
         {
             CharacterStateController.EnqueueTransition<Evade>();
         }
-        if(CharacterActions.spAttack.value)//ÌØÊâ¹¥»÷
-        {
-            
-        }
+      
     }
 }

@@ -4,6 +4,7 @@ using Lightbug.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Authentication.ExtendedProtection;
+using System;
 
 using UnityEngine;
 using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
@@ -35,6 +36,24 @@ public class AttackOnGround_fist : Attack
         base.EnterBehaviour(dt, fromState);
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.AddRotation);
         ChangeWeaponState(false);
+        Type type = CharacterStateController.PreviousState.GetType();
+        if (CharacterActor.IsGrounded && Attack.spAttack == 11)
+        {
+            CharacterActor.Animator.Play("AttackOnGround_fist.sp01", 0);
+            spAttack = -1;
+            canChangeState = false;
+        }
+        if (CharacterActor.IsGrounded)
+        {
+            combo = 1;
+            CharacterActor.Animator.Play("AttackOnGround_fist.attack01_1", 0);
+            CharacterActor.Animator.SetInteger("combo", Attack.combo);
+            canChangeState = false;
+        }
+        else
+        {
+            CharacterActor.Animator.Play("AttackOnGround_fist.Lucy_Idle");
+        }
         //army[0].SetActive(true);
         //army[1].SetActive(true);
 

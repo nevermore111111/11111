@@ -199,6 +199,20 @@ namespace Lightbug.CharacterControllerPro.Demo
                     }
 
                 }
+                if (CharacterActions.spAttack.value)//特殊攻击
+                {
+                    if(Attack.currentAttackMode == Attack.AttackMode.AttackOffGround)
+                    {
+                        //attack
+                        Attack.spAttack = 10;
+                        CharacterStateController.EnqueueTransition<AttackOnGround>();
+                    }
+                    else if(Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                    {
+                        Attack.spAttack = 11;
+                        CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+                    }
+                }
                 if (CharacterActions.jetPack.value)
                 {
                     CharacterStateController.EnqueueTransition<JetPack>();
