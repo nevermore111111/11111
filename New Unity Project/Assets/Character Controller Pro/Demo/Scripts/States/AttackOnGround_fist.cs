@@ -18,12 +18,12 @@ public class AttackOnGround_fist : Attack
     public GameObject[] army = new GameObject[1];
    
     public float gravity = 10;
+    //这个是使用sp02技能后起跳的速度。
+    public float upVerticalVelocity = 10f;
 
     protected override void Awake()
     {
         base.Awake();
-        //army[0].SetActive(false);
-        //army[1].SetActive(false);
     }
     protected override void Start()
     {
@@ -32,16 +32,17 @@ public class AttackOnGround_fist : Attack
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
-
         base.EnterBehaviour(dt, fromState);
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.AddRotation);
         ChangeWeaponState(false);
         Type type = CharacterStateController.PreviousState.GetType();
         if (CharacterActor.IsGrounded && Attack.spAttack == 11)
         {
-            CharacterActor.Animator.Play("AttackOnGround_fist.sp01", 0);
+            CharacterActor.Animator.Play("AttackOnGround_fist.sp02", 0);
             spAttack = -1;
             canChangeState = false;
+            CharacterActor.ForceNotGrounded();
+            CharacterActor.VerticalVelocity = new Vector3(0, upVerticalVelocity, 0);
         }
         if (CharacterActor.IsGrounded)
         {

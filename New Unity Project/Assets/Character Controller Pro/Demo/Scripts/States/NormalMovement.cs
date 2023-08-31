@@ -515,13 +515,11 @@ namespace Lightbug.CharacterControllerPro.Demo
                 {
                     CharacterActor.Animator.SetFloat("running", 1);
                     CharacterActor.Animator.SetBool("stop", true);
-                    
                 }
                 else if (lastVelocityMagnitude > 0.6f * planarMovementParameters.boostSpeedLimit)
                 {
                     CharacterActor.Animator.SetFloat("running", 0);
                     CharacterActor.Animator.SetBool("stop", true);
-                   
                 }
                 else
                 {

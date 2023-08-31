@@ -1729,6 +1729,7 @@ namespace Lightbug.CharacterControllerPro.Core
             {
                 case RootMotionVelocityType.SetVelocity:
                     Velocity = rootMotionVelocity;
+                    Debug.Log(Velocity);
                     break;
                 case RootMotionVelocityType.SetPlanarVelocity:
                     PlanarVelocity = rootMotionVelocity;
@@ -1737,7 +1738,6 @@ namespace Lightbug.CharacterControllerPro.Core
                     VerticalVelocity = rootMotionVelocity;
                     break;
             }
-
             //Debug.Log("如果是timeline，就在这个地方设置位移 get模型的position = animator.rootposition");
 
 

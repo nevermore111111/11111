@@ -23,11 +23,7 @@ public class AttackOffGround : Attack
     protected override void Start()
     {
         base.Start();
-
     }
-
-
-
 
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {

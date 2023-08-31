@@ -33,7 +33,7 @@ public class Attack : CharacterState
     public Attack attack;
     TimelineManager timelineManager;
     WeaponManager[] weaponManagers;
-    public static bool useGravity = true;
+    public static bool useGravity = false;
     public static float AttackGravity = 10f;
     public static int spAttack = -1;
     public enum AttackMode
@@ -150,6 +150,7 @@ public class Attack : CharacterState
         base.ExitBehaviour(dt, toState);
         isJustEnter = true;
         isAttack = false;
+        CharacterActor.SetUpRootMotion(false, false);
         CharacterActor.Animator.SetBool("attack", false);
         CharacterActor.CheckAndSetSize(normalHeightAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
         // CharacterActor.SetSize(HeighAndWidth,)

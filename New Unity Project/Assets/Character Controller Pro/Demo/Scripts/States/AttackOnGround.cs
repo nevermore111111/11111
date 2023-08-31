@@ -31,26 +31,31 @@ public class AttackOnGround :Attack
         if(CharacterActor.IsGrounded&&Attack.spAttack ==10)
         {
             CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
-            spAttack = -1;
             canChangeState = false;
+            CharacterActor.ForceNotGrounded();
+            CharacterActor.VerticalVelocity = CharacterActor.Up * 10f;
+            Debug.Log("Àë¿ªµØÃæ");
         }
         else if( (type != typeof(Attack))&& type != typeof(StartPlay)&& CharacterActor.IsGrounded)
         {
             combo = 1;
             CharacterActor.Animator.SetInteger("combo", Attack.combo);
+            CharacterActor.Animator.Play("AttackOnGround.attack01_1", 0);
             canChangeState = false;
         }
         else
         {
             CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
         }
-        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity,true,RootMotionRotationType.AddRotation);
+       CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity,true,RootMotionRotationType.AddRotation);
 
         ChangeWeaponState(false);
 
     }
     public override void UpdateBehaviour(float dt)
     {
+        if (spAttack == 10)
+            CharacterActor.ForceNotGrounded();
         base.UpdateBehaviour(dt);
         if(!canPlayerControl)
         {

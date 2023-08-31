@@ -218,8 +218,7 @@ public class AnimatorFunction : MonoBehaviour
     /// <param name="attackName"></param>
     public void AttackStart(string attackName)
     {
-        //Debug.Log(attackName);
-        //Debug.Log(Attack.CharacterActor.Animator.GetInteger("combo"));
+
 
 
         //如果名字一致不做任何事情
