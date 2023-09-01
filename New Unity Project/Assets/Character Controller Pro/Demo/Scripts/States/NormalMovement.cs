@@ -51,7 +51,10 @@ namespace Lightbug.CharacterControllerPro.Demo
         [SerializeField]
         protected string heightParameter = "Height";
 
-        
+        [SerializeField]
+        protected string GroundDistance = "GroundDistance";
+
+
 
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -1019,6 +1022,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             CharacterStateController.Animator.SetFloat(horizontalAxisParameter, CharacterActions.movement.value.x);
             CharacterStateController.Animator.SetFloat(verticalAxisParameter, CharacterActions.movement.value.y);
             CharacterStateController.Animator.SetFloat(heightParameter, CharacterActor.BodySize.y);
+            CharacterStateController.Animator.SetFloat(GroundDistance, CharacterActor.PredictedGroundDistance);
         }
 
         public override void PostCharacterSimulation(float dt)

@@ -74,7 +74,7 @@ public class AttackOnGround :Attack
         {
             return;
         }
-        if (!CharacterActor.IsGrounded && isAttack == false)
+        if (!CharacterActor.IsGrounded && isAttack == false&&Attack.spAttack ==-1)
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
