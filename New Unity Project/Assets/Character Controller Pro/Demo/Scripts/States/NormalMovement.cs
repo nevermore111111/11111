@@ -254,6 +254,10 @@ namespace Lightbug.CharacterControllerPro.Demo
         {
             reducedAirControlFlag = false;
             moving =false;
+            if(IsPlayer)
+            {
+                CharacterActor.Animator.SetBool("jump", false);
+            }
         }
 
 
@@ -755,6 +759,11 @@ namespace Lightbug.CharacterControllerPro.Demo
                 if (OnJumpPerformed != null)
                     OnJumpPerformed();
 
+                if(IsPlayer)
+                {
+                    CharacterActor.Animator.SetBool("jump", true);
+                }
+
                 // Define the jump direction ---------------------------------------------------
                 jumpDirection = SetJumpDirection();
 
@@ -773,6 +782,8 @@ namespace Lightbug.CharacterControllerPro.Demo
 
 
         }
+
+        
 
         /// <summary>
         /// Returns the jump direction vector whenever the jump action is started.

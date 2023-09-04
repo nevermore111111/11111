@@ -28,6 +28,8 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// </summary>
         public int StateNameHash { get; private set; }
 
+        public TimelineManager timelineManager;
+
         /// <summary>
         /// Gets the state runtime animator controller.
         /// </summary>
@@ -78,6 +80,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         protected virtual void Start()
         {
             StateNameHash = Animator.StringToHash(this.GetType().Name);
+            timelineManager = this.transform.parent.GetComponentInChildren<TimelineManager>();
         }
 
 
@@ -86,6 +89,10 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// </summary>
         public virtual void EnterBehaviour(float dt, CharacterState fromState)
         {
+            string className = this.GetType().Name;
+            //当进入对应模式的时候，去切换对应的timeline数组
+            if(timelineManager != null)
+            timelineManager.SwapTimelinesByAssetName(className);
         }
 
         /// <summary>

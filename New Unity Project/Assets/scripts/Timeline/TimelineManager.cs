@@ -1,3 +1,4 @@
+using Rusk;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,8 +18,10 @@ public class TimelineManager : MonoBehaviour
     public AssetHelper myAssetHelper;
     PlayableAsset[] attackOnGround;
     PlayableAsset[] attackOnGroundFist;
-    PlayableAsset[] attackInAir;
+    PlayableAsset[] attackOffGround;
     PlayableAsset[] startPlay;
+    PlayableAsset[] normalMovement;
+    PlayableAsset[] evade;
 
 
 
@@ -41,27 +44,28 @@ public class TimelineManager : MonoBehaviour
         {
             attackOnGround = myAssetHelper.AttackOnGround;
             attackOnGroundFist = myAssetHelper.AttackOnGround_fist;
-            attackInAir = myAssetHelper.AttackInAir;
+            attackOffGround = myAssetHelper.AttackOffGround;
+            evade = myAssetHelper.Evade;
             startPlay = myAssetHelper.StartPlay;
-        }
-        
-    }
-
-    private void Update()
-    {
-        string animName = "";
-        if (animator.GetCurrentAnimatorClipInfo(0).Length != 0)
-        {
-            animName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name; // 获取当前动画名称
-        }
-        if (animName != currentAnimName) // 当前动画名称和上一个不同
-        {
-            currentAnimName = animName; // 更新当前动画名称
-            PlayTimelineByName(currentAnimName); // 播放对应名称的Playable
+            normalMovement = myAssetHelper.NormalMovement;
         }
     }
 
-    private void PlayTimelineByName(string name)
+    //private void Update()
+    //{
+    //    string animName = "";
+    //    if (animator.GetCurrentAnimatorClipInfo(0).Length != 0)
+    //    {
+    //        animName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name; // 获取当前动画名称
+    //    }
+    //    if (animName != currentAnimName) // 当前动画名称和上一个不同
+    //    {
+    //        currentAnimName = animName; // 更新当前动画名称
+    //        PlayTimelineByName(currentAnimName); // 播放对应名称的Playable
+    //    }
+    //}
+
+    public void PlayTimelineByName(string name)
     {
         foreach (PlayableAsset playable in timelines)
         {
@@ -76,19 +80,24 @@ public class TimelineManager : MonoBehaviour
     public void SwapTimelinesByAssetName(string name)
     {
         PlayableAsset[] assets = null;
-        if (name == "AttackOnGround")
+        switch (name) 
         {
-            assets = attackOnGround;
+            case "attackOnGround":
+                assets = attackOnGround;
+                break;
+            case "AttackOnGround_fist":
+                assets = attackOnGroundFist;
+                break;
+            case "AttackOffGround":
+                assets = attackOffGround;
+                break;
+            case "NormalMovement":
+                assets = normalMovement;
+                break;
+            case "Evade":
+                assets = evade;
+                break;
         }
-        else if (name == "AttackOnGround_fist")
-        {
-            assets = attackOnGroundFist;
-        }
-        else if (name == "AttackInAir")
-        {
-            assets = attackInAir;
-        }
-
         if (assets != null)
         {
             timelines = assets.ToList();

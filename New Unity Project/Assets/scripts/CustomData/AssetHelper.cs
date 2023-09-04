@@ -9,7 +9,10 @@ public class AssetHelper : ScriptableObject
 {
     public PlayableAsset[] AttackOnGround;
     public PlayableAsset[] AttackOnGround_fist;
-    public PlayableAsset[] AttackInAir;
     public PlayableAsset[] StartPlay;
+    public PlayableAsset[] NormalMovement;
+    public PlayableAsset[] AttackOffGround;
+    public PlayableAsset[] Evade;
+
 }
 

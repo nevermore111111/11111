@@ -31,7 +31,6 @@ public class Attack : CharacterState
     private Vector2 HeighAndWidth;
     private Vector2 normalHeightAndWidth;
     public Attack attack;
-    TimelineManager timelineManager;
     WeaponManager[] weaponManagers;
     public static bool useGravity = false;
     public static float AttackGravity = 10f;
@@ -120,7 +119,7 @@ public class Attack : CharacterState
     {
         base.Start();
         normalHeightAndWidth = CharacterActor.BodySize;
-        timelineManager = this.transform.parent.gameObject.GetComponentInChildren<TimelineManager>();
+       
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
@@ -135,10 +134,10 @@ public class Attack : CharacterState
             isJustEnter = true;
         CharacterActor.CheckAndSetSize(HeighAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
 
-        //根据当前进入的类，去调整当前的timeline的数量
-        string className = this.GetType().Name;
-        //当进入对应模式的时候，去切换对应的timeline数组
-        timelineManager.SwapTimelinesByAssetName(className);
+       // //根据当前进入的类，去调整当前的timeline的数量
+       // string className = this.GetType().Name;
+       // //当进入对应模式的时候，去切换对应的timeline数组
+       //timelineManager.SwapTimelinesByAssetName(className);
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {

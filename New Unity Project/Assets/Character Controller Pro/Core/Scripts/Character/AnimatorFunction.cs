@@ -32,6 +32,7 @@ public class AnimatorFunction : MonoBehaviour
     public string activeWeaponDetect;//现在激活的碰撞区域
     public string currentStateName;//当前正在播放的动画
 
+    private TimelineManager timelineManager;
     //private Action<int> hitActionOfImpulse;
     //private Action<int> hitActionOfPlayFX;
 
@@ -43,11 +44,19 @@ public class AnimatorFunction : MonoBehaviour
         Attack = transform.parent.parent.GetComponentInChildren<Attack>();
         CharacterStateController = transform.parent.parent.GetComponentInChildren<CharacterStateController>();
         CameraEffects = CinemachineFreeLook.GetComponent<CameraEffects>();
+        timelineManager = GetComponent<TimelineManager>();
         //
     }
     private void Start()
     {
         animationConfig = FindAnyObjectByType<DataLoad>().animationConfig;
+    }
+
+
+    public void JumpStart()
+    {
+        //关闭动画机进入的条件
+        Attack.CharacterActor.Animator.SetBool("jump", false);
     }
 
     public void Idle()
@@ -118,31 +127,7 @@ public class AnimatorFunction : MonoBehaviour
 
     public void HitStart()//int hitKind, string activeWeaponDetect
     {
-        //AnimatorStateInfo currentClipName = GetStateInfo(Attack.CharacterActor.Animator);
-        //int index = GetAnimConfig(currentClipName, animationConfig.AnmationStateName);
-
-        //if ()
-        //{
-        //    //什么也不做
-        //}
-        //else
-        //{
-        //    currentAnimatorClipName = currentClipName;
-        //    //int index = FindClipIndexByName("动画名称");
-        //    if (index != -1)
-        //    {
-        //        CurrentAnimConfig = new SoloAnimaConfig(
-        //            animationConfig.Index[index],
-        //            animationConfig.ClipName[index],
-        //            animationConfig.Combo[index],
-        //            animationConfig.AnmationStateName[index],
-        //            animationConfig.HitStrength[index],
-        //            animationConfig.HitDetect[index],
-        //            animationConfig.AnimStateInfo[index]
-        //        );
-        //    }
-        //    //Attack.combo = CurrentAnimConfig.Combo;
-        //}
+        
         hitKind = CurrentAnimConfig.HitStrength[currentHitIndex];
         //设置当前攻击类别
         mainCharacter.HitKind = hitKind;
@@ -218,9 +203,6 @@ public class AnimatorFunction : MonoBehaviour
     /// <param name="attackName"></param>
     public void AttackStart(string attackName)
     {
-
-
-
         //如果名字一致不做任何事情
         if( currentStateName ==attackName)
         {
@@ -229,22 +211,10 @@ public class AnimatorFunction : MonoBehaviour
         else
         {
             currentStateName = attackName;
-            int index = FindStateIndexByName(attackName);//根据当前的动画名称来修改
-            if (index != -1)
-            {
-                CurrentAnimConfig = new SoloAnimaConfig(
-                    animationConfig.Index[index],
-                    animationConfig.ClipName[index],
-                    animationConfig.Combo[index],
-                    animationConfig.AnmationStateName[index],
-                    animationConfig.HitStrength[index],
-                    animationConfig.HitDetect[index],
-                    animationConfig.AnimStateInfo[index]
-                );
-            }
+            GetAnimationPar(currentStateName);//根据当前的动画传入的state去拿动画参数
+            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // 播放对应名称的Playable
             //Attack.combo = CurrentAnimConfig.Combo;
         }
-
         currentHitIndex = 0;
 
         Attack.isAttack = true;
@@ -301,6 +271,9 @@ public class AnimatorFunction : MonoBehaviour
         //    Attack.CharacterActor.Forward = CharacterStateController.InputMovementReference;
         //}
     }
+
+   
+
     public void CanGetInput()
     {
 
@@ -356,6 +329,26 @@ public class AnimatorFunction : MonoBehaviour
 
     //_______________________________________________非动画事件分割线_______________________________________________
     private float originalSpeed;
+
+    private void GetAnimationPar(string currentStateName)
+    {
+
+        int index = FindStateIndexByName(currentStateName);//根据当前的动画名称来修改
+        if (index != -1)
+        {
+            CurrentAnimConfig = new SoloAnimaConfig(
+                animationConfig.Index[index],
+                animationConfig.ClipName[index],
+                animationConfig.Combo[index],
+                animationConfig.AnmationStateName[index],
+                animationConfig.HitStrength[index],
+                animationConfig.HitDetect[index],
+                animationConfig.AnimStateInfo[index]
+            );
+        }
+    }
+
+
     public void SlowDownAnimator(float slowDownFactor, float duration)
     {
         originalSpeed = Attack.CharacterActor.Animator.speed; // 保存原始的播放速度
