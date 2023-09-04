@@ -40,7 +40,7 @@ public class WeaponManager : MonoBehaviour
         weaponOwner = GetComponentInParent<CharacterInfo>();
         switch (FxLoad)
         {
-            case 1: HittedFx = Resources.Load<FxHelper>("FxHelper").Sword; break;
+            case 1: HittedFx = Resources.Load<FxHelper>("FxHelper").AllFx; break;
             case 2: break;
         }
         switch(kind)
@@ -87,13 +87,7 @@ var squaredNumbers = numbers.Select(x => x * x);
                     break;
                 }
         }
-        
-               
-        
     }
-
-   
-
     public void AdjustFrequencyAndAmplitude(float frequency, float amplitude)
     {
         if (impulseSource != null)
