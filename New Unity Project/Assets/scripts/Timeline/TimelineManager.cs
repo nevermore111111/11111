@@ -16,6 +16,9 @@ public class TimelineManager : MonoBehaviour
     private PlayableDirector director;
 
     public AssetHelper myAssetHelper;
+
+
+
     PlayableAsset[] attackOnGround;
     PlayableAsset[] attackOnGroundFist;
     PlayableAsset[] attackOffGround;
@@ -51,19 +54,7 @@ public class TimelineManager : MonoBehaviour
         }
     }
 
-    //private void Update()
-    //{
-    //    string animName = "";
-    //    if (animator.GetCurrentAnimatorClipInfo(0).Length != 0)
-    //    {
-    //        animName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name; // 获取当前动画名称
-    //    }
-    //    if (animName != currentAnimName) // 当前动画名称和上一个不同
-    //    {
-    //        currentAnimName = animName; // 更新当前动画名称
-    //        PlayTimelineByName(currentAnimName); // 播放对应名称的Playable
-    //    }
-    //}
+    
 
     public void PlayTimelineByName(string name)
     {
@@ -73,9 +64,10 @@ public class TimelineManager : MonoBehaviour
             {
                 director.playableAsset = playable; // 设置Playable
                 director.Play(); // 播放Playable
-                break;
+                return;
             }
         }
+        Debug.Log("没找到对应的timeline");
     }
     public void SwapTimelinesByAssetName(string name)
     {
@@ -96,6 +88,9 @@ public class TimelineManager : MonoBehaviour
                 break;
             case "Evade":
                 assets = evade;
+                break;
+            case "StartPlay":
+                assets = startPlay;
                 break;
         }
         if (assets != null)

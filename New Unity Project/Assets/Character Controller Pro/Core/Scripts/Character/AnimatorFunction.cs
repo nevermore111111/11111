@@ -206,14 +206,17 @@ public class AnimatorFunction : MonoBehaviour
         //如果名字一致不做任何事情
         if( currentStateName ==attackName)
         {
-
+            currentStateName = attackName;
+            GetAnimationPar(currentStateName);//根据当前的动画传入的state去拿动画参数
+            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // 播放对应名称的Playable
+            Debug.Log(CurrentAnimConfig.ClipName);
         }
         else
         {
             currentStateName = attackName;
             GetAnimationPar(currentStateName);//根据当前的动画传入的state去拿动画参数
             timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // 播放对应名称的Playable
-            //Attack.combo = CurrentAnimConfig.Combo;
+            Debug.Log(CurrentAnimConfig.ClipName);
         }
         currentHitIndex = 0;
 
@@ -272,7 +275,10 @@ public class AnimatorFunction : MonoBehaviour
         //}
     }
 
-   
+    public void PlayTimeline(string TimelineName)
+    {
+        timelineManager.PlayTimelineByName(TimelineName);
+    }
 
     public void CanGetInput()
     {
@@ -345,6 +351,10 @@ public class AnimatorFunction : MonoBehaviour
                 animationConfig.HitDetect[index],
                 animationConfig.AnimStateInfo[index]
             );
+        }
+        else
+        {
+            Debug.LogError($"没找到{currentStateName}");
         }
     }
 

@@ -1729,7 +1729,6 @@ namespace Lightbug.CharacterControllerPro.Core
             {
                 case RootMotionVelocityType.SetVelocity:
                     Velocity = rootMotionVelocity;
-                    Debug.Log(Velocity);
                     break;
                 case RootMotionVelocityType.SetPlanarVelocity:
                     PlanarVelocity = rootMotionVelocity;

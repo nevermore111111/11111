@@ -589,7 +589,7 @@ ModelImporter:
         messageOptions: 0
       - time: 0
         functionName: AttackStart
-        data: 
+        data: sword.attack02_1
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 1
