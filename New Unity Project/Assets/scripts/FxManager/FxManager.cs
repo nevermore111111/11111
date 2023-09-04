@@ -22,7 +22,15 @@ public class FxManager : MonoBehaviour
 
     public ParticleSystem PlayFx(string FxName,bool isAutoDestory = true,Transform parent =null,float maxTimeDestory = 5f)
     {
-        ParticleSystem clone = Instantiate(FindFxByName(FxName), transform.position, transform.rotation,parent);
+        ParticleSystem clone;
+        if (parent = null)
+        {
+            clone = Instantiate(FindFxByName(FxName), transform.position, transform.rotation, parent);
+        }
+        else
+        {
+            clone = Instantiate(FindFxByName(FxName), parent);
+        }
         clone.Play(true);
         if(isAutoDestory)
         {
@@ -36,7 +44,15 @@ public class FxManager : MonoBehaviour
     }
     public ParticleSystem PlayFx(string FxName,Vector3 scale, bool isAutoDestory = true, Transform parent = null, float maxTimeDestory = 5f)
     {
-        ParticleSystem clone = Instantiate(FindFxByName(FxName), transform.position, transform.rotation, parent);
+        ParticleSystem clone;
+        if (parent = null)
+        {
+             clone = Instantiate(FindFxByName(FxName), transform.position, transform.rotation, parent);
+        }
+        else
+        {
+             clone = Instantiate(FindFxByName(FxName), parent);
+        }
         clone.Play(true);
         clone.transform.localScale = scale;
         if (isAutoDestory)
@@ -49,6 +65,7 @@ public class FxManager : MonoBehaviour
         }
         return clone;
     }
+
     private ParticleSystem FindFxByName(string name)
     {
         for(int i = 0; i < particleSystem.Length; i++)
@@ -74,7 +91,6 @@ public class FxManager : MonoBehaviour
                 {
                     if (!particleSystemTodestory[i].isPlaying)
                     {
-                        Debug.Log($"Ö´ÐÐÁËÉ¾³ý{particleSystemTodestory.Count}");
                         Destroy(particleSystemTodestory[i].gameObject);
                     }
                 }
