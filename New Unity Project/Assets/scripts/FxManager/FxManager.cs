@@ -19,17 +19,29 @@ public class FxManager : MonoBehaviour
     {
 
     }
-
-    public ParticleSystem PlayFx(string FxName,bool isAutoDestory = true,Transform parent =null,float maxTimeDestory = 5f)
+    /// <summary>
+    /// parent和pos不能同时是null
+    /// </summary>
+    /// <param name="FxName"></param>
+    /// <param name="pos"></param>
+    /// <param name="isAutoDestory"></param>
+    /// <param name="parent"></param>
+    /// <param name="maxTimeDestory"></param>
+    /// <returns></returns>
+    public ParticleSystem PlayFx(string FxName, Transform pos = null,bool isAutoDestory = true,Transform parent =null,float maxTimeDestory = 5f)
     {
         ParticleSystem clone;
-        if (parent = null)
+        if ((parent = null) && (pos != null))
         {
-            clone = Instantiate(FindFxByName(FxName), transform.position, transform.rotation, parent);
+            clone = Instantiate(FindFxByName(FxName), pos.position, pos.rotation);
+        }
+        else if (parent != null)
+        {
+            clone = Instantiate(FindFxByName(FxName), parent);
         }
         else
         {
-            clone = Instantiate(FindFxByName(FxName), parent);
+            clone = Instantiate(FindFxByName(FxName));
         }
         clone.Play(true);
         if(isAutoDestory)
@@ -42,16 +54,30 @@ public class FxManager : MonoBehaviour
         }
         return clone;
     }
-    public ParticleSystem PlayFx(string FxName,Vector3 scale, bool isAutoDestory = true, Transform parent = null, float maxTimeDestory = 5f)
+    /// <summary>
+    /// parent和pos不能同时为null
+    /// </summary>
+    /// <param name="FxName"></param>
+    /// <param name="scale"></param>
+    /// <param name="pos"></param>
+    /// <param name="isAutoDestory"></param>
+    /// <param name="parent"></param>
+    /// <param name="maxTimeDestory"></param>
+    /// <returns></returns>
+    public ParticleSystem PlayFx(string FxName,Vector3 scale, Transform pos =null,bool isAutoDestory = true, Transform parent = null, float maxTimeDestory = 5f)
     {
         ParticleSystem clone;
-        if (parent = null)
+        if ((parent = null) && (pos!=null))
         {
-             clone = Instantiate(FindFxByName(FxName), transform.position, transform.rotation, parent);
+             clone = Instantiate(FindFxByName(FxName), pos.position, pos.rotation);
+        }
+        else if(parent!=null)
+        {
+             clone = Instantiate(FindFxByName(FxName), parent);
         }
         else
         {
-             clone = Instantiate(FindFxByName(FxName), parent);
+            clone = Instantiate(FindFxByName(FxName));
         }
         clone.Play(true);
         clone.transform.localScale = scale;
