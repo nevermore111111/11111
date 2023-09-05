@@ -227,6 +227,8 @@ public class AnimatorFunction : MonoBehaviour
         }
         currentHitIndex = 0;
 
+
+        Attack.isNextAttack = false;
         Attack.isAttack = true;
         Attack.CharacterActor.Animator.SetBool("attack", true);
         Attack.canChangeState = false;
