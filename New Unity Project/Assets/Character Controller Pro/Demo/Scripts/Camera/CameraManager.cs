@@ -9,6 +9,10 @@ public class CameraManager : MonoBehaviour
     public CheckEnemy checkEnemy;
     public MainCharacter mainCharacter;
 
+    [Tooltip("如果存在测试摄像机，那么测试摄像机为最大权重")]
+    public CinemachineFreeLook mainCharacterPrefab;
+
+
     public int mainCameraPriority = 0;
     public int subCameraPriority = 20;
 
