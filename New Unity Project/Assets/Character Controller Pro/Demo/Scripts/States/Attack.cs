@@ -35,6 +35,8 @@ public class Attack : CharacterState
     public static bool useGravity = false;
     public static float AttackGravity = 10f;
     public static int spAttack = -1;
+    public static bool isNextAttack = false;
+
     public enum AttackMode
     {
         AttackOnGround,
@@ -177,6 +179,7 @@ public class Attack : CharacterState
                 combo++;
                 if (combo > MaxCombo)
                 {
+                    isNextAttack = true;
                     combo = 1;
                 }
                 CharacterActor.Animator.SetInteger("combo", combo);

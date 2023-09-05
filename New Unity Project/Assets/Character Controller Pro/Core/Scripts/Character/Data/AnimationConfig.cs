@@ -11,6 +11,7 @@ public class AnimationConfig
     public List<int[]> HitStrength;
     public List<string[]> HitDetect;
     public List<int> AnimStateInfo;
+    public List<float[]> SpAttackPar;
     // Add other data members as needed
 }
 public class SoloAnimaConfig
@@ -22,8 +23,9 @@ public class SoloAnimaConfig
     public int[] HitStrength;
     public string[] HitDetect;
     public int AnimStateInfo;
+    public float[] SpAttackPar;
 
-    public SoloAnimaConfig(int index, string clipName, int combo, string animationStateName, int[] hitStrength, string[] hitDetect, int animStateInfo)
+    public SoloAnimaConfig(int index, string clipName, int combo, string animationStateName, int[] hitStrength, string[] hitDetect, int animStateInfo, float[] spAttackPar)
     {
         Index = index;
         ClipName = clipName;
@@ -32,5 +34,6 @@ public class SoloAnimaConfig
         HitStrength = hitStrength;
         HitDetect = hitDetect;
         AnimStateInfo = animStateInfo;
+        SpAttackPar = spAttackPar;
     }
 }

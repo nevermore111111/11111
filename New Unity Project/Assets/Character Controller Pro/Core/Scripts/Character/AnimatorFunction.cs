@@ -83,7 +83,6 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void AttackEnd()
     {
-
         if (!Attack.CharacterActor.Animator.IsInTransition(0))
         {
             Attack.CharacterActor.SetUpRootMotion(true, true);
@@ -195,6 +194,14 @@ public class AnimatorFunction : MonoBehaviour
     {
         int[] weaponIndexes = ConvertStringToIntArray(activeWeaponDetect);
         manager.ActiveWeaponDetectors = weaponIndexes.Select(index => (WeaponDetector)index).ToArray();
+    }
+
+    public void SpAttackStart(string spAttackName)
+    {
+        AttackStart(spAttackName);
+        //这里开始sp攻击，根据当前sp攻击的名称，设置当前spattack信息
+        Attack.spAttack = Mathf.RoundToInt(CurrentAnimConfig.SpAttackPar[0]);
+        //根据当前的动画参数设置
     }
 
     /// <summary>
@@ -349,7 +356,8 @@ public class AnimatorFunction : MonoBehaviour
                 animationConfig.AnmationStateName[index],
                 animationConfig.HitStrength[index],
                 animationConfig.HitDetect[index],
-                animationConfig.AnimStateInfo[index]
+                animationConfig.AnimStateInfo[index],
+                animationConfig.SpAttackPar[index]
             );
         }
         else
