@@ -29,26 +29,56 @@ public class AttackOffGround : Attack
     {
         base.EnterBehaviour(dt, fromState);
         Type type = CharacterStateController.PreviousState.GetType();
-        if (type != typeof(StartPlay) && type == typeof(AttackOnGround))//这个是我从什么地方进入这个状态，然后进入时播放不同的动画
+        if(CharacterActor.IsGrounded == false)
         {
-            combo = 1;
-            CharacterActor.Animator.SetInteger("combo", Attack.combo);
-            canChangeState = false;
-            CharacterActor.Animator.Play("attack01_1");
-        }
-        else if (type == typeof(AttackOnGround_fist))
-        {
-            combo = 1;
-            CharacterActor.Animator.SetInteger("combo", Attack.combo);
-            canChangeState = false;
-            CharacterActor.Animator.Play("attack01_1");
-        }
-        else if (!CharacterActor.IsGrounded)
-        {
-            //这是在空中某个状态进入
-        }
-        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.SetRotation);
+            if (currentAttackMode == AttackMode.AttackOnGround)
+            {
+                if (spAttack == -1)
+                {
 
+                }
+                else if(spAttack == 10)
+                {
+
+                }
+            }
+            else if (currentAttackMode == AttackMode.AttackOnGround_fist)
+            {
+                if(spAttack == -1)
+                {
+
+                }
+                else if(spAttack ==10)
+                {
+
+                }
+
+            }
+        }
+        else
+        {
+            Debug.LogError("进入空中状态时是地面状态（isground = true）");
+        }
+
+        //if (type != typeof(StartPlay) && type == typeof(AttackOnGround))//这个是我从什么地方进入这个状态，然后进入时播放不同的动画
+        //{
+        //    combo = 1;
+        //    CharacterActor.Animator.SetInteger("combo", Attack.combo);
+        //    canChangeState = false;
+        //    CharacterActor.Animator.Play("attack01_1");
+        //}
+        //else if (type == typeof(AttackOnGround_fist))
+        //{
+        //    combo = 1;
+        //    CharacterActor.Animator.SetInteger("combo", Attack.combo);
+        //    canChangeState = false;
+        //    CharacterActor.Animator.Play("attack01_1");
+        //}
+        //else if (!CharacterActor.IsGrounded)
+        //{
+        //    //这是在空中某个状态进入
+        //}
+        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.SetRotation);
         ChangeWeaponState(false);
 
 

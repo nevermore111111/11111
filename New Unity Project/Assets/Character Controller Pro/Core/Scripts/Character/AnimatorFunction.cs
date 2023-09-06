@@ -228,7 +228,7 @@ public class AnimatorFunction : MonoBehaviour
         currentHitIndex = 0;
 
 
-        Attack.isNextAttack = false;
+        Attack.isNextAttack = false;//这个代表已经执行了下一次攻击
         Attack.isAttack = true;
         Attack.CharacterActor.Animator.SetBool("attack", true);
         Attack.canChangeState = false;

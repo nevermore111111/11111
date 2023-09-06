@@ -40,7 +40,7 @@ public class Attack : CharacterState
     public enum AttackMode
     {
         AttackOnGround,
-        AttackOffGround,
+        //AttackOffGround,
         AttackOnGround_fist
     }
     /// <summary>
@@ -207,6 +207,5 @@ public class Attack : CharacterState
         {
             CharacterStateController.EnqueueTransition<Evade>();
         }
-      
     }
 }

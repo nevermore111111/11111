@@ -76,29 +76,35 @@ public class AttackOnGround :Attack
         }
         //我需要一个方法来存储有没有下一次攻击,来判定是否进入哪一个状态
         //spattack == -1 的意思是没有进行特殊攻击，但是我还要判断是不是进行了普通攻击，是否存在未执行的攻击
-        if (!CharacterActor.IsGrounded && isAttack == false&& spAttack ==-1)//0代表没有下一个要执行的动画
+        if (!CharacterActor.IsGrounded)//0代表没有下一个要执行的动画
         {
-            //存在下一个普通攻击，直接进入空中攻击
-            if(isNextAttack)
+            if(isAttack ==false && spAttack == -1)
             {
-                CharacterStateController.EnqueueTransition<AttackOffGround>();
+                //存在下一个普通攻击，直接进入空中攻击
+                if (isNextAttack)
+                {
+                    CharacterStateController.EnqueueTransition<AttackOffGround>();
+                }
+                else
+                {
+                    CharacterStateController.EnqueueTransition<NormalMovement>();
+                }
             }
-            else
+        }
+        else//这样是在地面
+        {
+            if (CharacterActions.movement.value != Vector2.zero && canChangeState == true)
             {
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }
-        }
-        if(CharacterActions.movement.value != Vector2.zero && canChangeState == true)
-        {
-            CharacterStateController.EnqueueTransition<NormalMovement>();
-        }
-        if(CharacterActor.IsGrounded && isAttack == false && CharacterActions.spAttack.value == true)
-        {
-            CharacterStateController.EnqueueTransition<AttackOffGround>();
-        }
-        if(CharacterActor.IsGrounded && isAttack == false&& Attack.currentAttackMode == AttackMode.AttackOnGround_fist)
-        {
-            CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+            if (isAttack == false && CharacterActions.spAttack.value == true)
+            {
+                CharacterStateController.EnqueueTransition<AttackOffGround>();
+            }
+            if (CharacterActor.IsGrounded && isAttack == false && Attack.currentAttackMode == AttackMode.AttackOnGround_fist)
+            {
+                CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+            }
         }
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
