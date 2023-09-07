@@ -35,6 +35,10 @@ public class Attack : CharacterState
     public static bool useGravity = false;
     public static float AttackGravity = 10f;
     public static int spAttack = -1;
+    //10 地面普通攻击 剑
+    //11 剑下落攻击 剑
+    //12 地面击飞  拳
+    //13 空中sp  拳
     public static bool isNextAttack = false;
 
     public enum AttackMode

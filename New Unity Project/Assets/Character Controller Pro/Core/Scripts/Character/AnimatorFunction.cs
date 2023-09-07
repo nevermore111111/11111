@@ -85,9 +85,11 @@ public class AnimatorFunction : MonoBehaviour
     {
         if (!Attack.CharacterActor.Animator.IsInTransition(0))
         {
+            
             Attack.CharacterActor.SetUpRootMotion(true, true);
             Attack.isAttack = false;
             Attack.CharacterActor.Animator.SetBool("attack", false);
+            Attack.spAttack = -1;
             foreach (var manager in weaponManagers)
             {
                 if (manager.isActiveAndEnabled)

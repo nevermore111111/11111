@@ -33,7 +33,7 @@ public class AttackOnGround :Attack
             CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
             canChangeState = false;
             CharacterActor.ForceNotGrounded();
-            CharacterActor.VerticalVelocity = CharacterActor.Up * 10f;
+            //CharacterActor.VerticalVelocity = CharacterActor.Up * 10f;
             Debug.Log("离开地面");
         }
         else if( (type != typeof(Attack))&& type != typeof(StartPlay)&& CharacterActor.IsGrounded)
@@ -61,8 +61,18 @@ public class AttackOnGround :Attack
         {
             return;
         }
-        //在非攻击时
-      
+        if(CharacterActions.spAttack.value)
+        {
+            if(CharacterActor.IsGrounded)
+            {
+                spAttack = 10;
+                CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
+            }
+            else
+            {
+                spAttack = 11;
+            }
+        }
     }
 
 
@@ -93,7 +103,7 @@ public class AttackOnGround :Attack
         }
         else//这样是在地面
         {
-            if (CharacterActions.movement.value != Vector2.zero && canChangeState == true)
+            if (CharacterActions.movement.value != Vector2.zero && canChangeState == true&&spAttack == -1)
             {
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }

@@ -809,16 +809,16 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 weaponManager[i].gameObject.SetActive(false);
             }
-
+           
             if (CharacterActor.IsGrounded)
             {
                 CharacterActor.Animator.CrossFade("NormalMovement.StableGrounded", 0.05f);
             }
             else
             {
-                if(CharacterActor.Animator.GetFloat("GroundDistance")>0.3)
+                if(CharacterActor.PredictedGroundDistance>0.3)
                 {
-                    CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_Loop_Inplace", 0.05f);
+                    CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_Loop_Inplace", 0.3f);
                 }
                 else
                 {

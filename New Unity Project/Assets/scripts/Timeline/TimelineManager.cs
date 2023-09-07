@@ -34,8 +34,8 @@ public class TimelineManager : MonoBehaviour
         // 加载配置文件
         director = GetComponent<PlayableDirector>();
         LoadTimeLineAsset();
-        currentAnimName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name; // 获取当前动画名称
-        PlayTimelineByName(currentAnimName); // 播放对应名称的Playable
+        //currentAnimName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name; // 获取当前动画名称
+        //PlayTimelineByName(currentAnimName); // 播放对应名称的Playable
     }
 
     /// <summary>
@@ -74,7 +74,7 @@ public class TimelineManager : MonoBehaviour
         PlayableAsset[] assets = null;
         switch (name) 
         {
-            case "attackOnGround":
+            case "AttackOnGround":
                 assets = attackOnGround;
                 break;
             case "AttackOnGround_fist":

@@ -93,6 +93,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
             //当进入对应模式的时候，去切换对应的timeline数组
             if(timelineManager != null)
             timelineManager.SwapTimelinesByAssetName(className);
+            Debug.Log(className);
         }
 
         /// <summary>
