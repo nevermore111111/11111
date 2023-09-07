@@ -812,8 +812,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             Debug.Log(CharacterActor.CharacterCollisionInfo);
             if (CharacterActor.IsGrounded)
             {
-                CharacterActor.Animator.CrossFade("NormalMovement.StableGrounded", 0.05f);
-                
+                CharacterActor.Animator.CrossFade("NormalMovement.StableGrounded", 0.3f);
             }
             else
             {
