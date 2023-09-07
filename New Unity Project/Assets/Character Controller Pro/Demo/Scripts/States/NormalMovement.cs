@@ -809,10 +809,11 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 weaponManager[i].gameObject.SetActive(false);
             }
-           
+            Debug.Log(CharacterActor.CharacterCollisionInfo);
             if (CharacterActor.IsGrounded)
             {
                 CharacterActor.Animator.CrossFade("NormalMovement.StableGrounded", 0.05f);
+                
             }
             else
             {

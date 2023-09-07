@@ -22,6 +22,7 @@ public class RotateToPlayerBack : MonoBehaviour
     private MainCharacter MainCharacter;
     public Vector3 vector1;
     public Vector3 vector2;
+    bool isReady;
 
     private void Start()
     {
@@ -44,7 +45,8 @@ public class RotateToPlayerBack : MonoBehaviour
                 //这个是摄像机的方向
                 cameraToTargetPosition = -(gameObject.transform.position - freeLookCamera.LookAt.position);
                 Vector3 planeNormal = Vector3.up; // Y轴为平面的法线
-                Vector3 projectedVector1 = Vector3.ProjectOnPlane(cameraToTargetPosition, planeNormal);
+                Vector3 projectedVector1 = Vector3.ProjectOnPlane(cameraToTargetPosition, planeNormal);//返回向平面投影的的向量
+                //
                if(mode == CameraMode.AutoRotate)
                 {
                     Rotate(planeNormal, projectedVector1);
@@ -76,7 +78,7 @@ public class RotateToPlayerBack : MonoBehaviour
 
     private void Rotate(Vector3 planeNormal, Vector3 projectedVector1)
     {
-        if (group.m_Targets.Length > 1)
+        if (group.m_Targets.Length >= 1)
         {
             RotateCameraToEnemy(planeNormal, projectedVector1);
 
@@ -92,12 +94,17 @@ public class RotateToPlayerBack : MonoBehaviour
     {
         return false;
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="planeNormal">这个是摄像机水平面lootat目标的投影</param>
+    /// <param name="projectedVector1"></param>
     private void RotateCameraToEnemy(Vector3 planeNormal, Vector3 projectedVector1)
     {
         //并且这个物体在镜头的边界。我就给他转过来镜头
-        Vector3 targetPosition = group.m_Targets[1].target.transform.position;
+        Vector3 targetPosition = MainCharacter.enemies[0].transform.position;
         Vector3 screenPosition = freeLookCamera.gameObject.transform.position;
-        Debug.Log(screenPosition);
+        //Debug.Log(screenPosition);
 
         playToTarget = group.m_Targets[1].target.transform.position - group.m_Targets[0].target.transform.position;
         Vector3 projectedVector2 = Vector3.ProjectOnPlane(playToTarget, planeNormal);
@@ -110,10 +117,10 @@ public class RotateToPlayerBack : MonoBehaviour
 
         Debug.Log(angle);
         // 判断角度是否大于30度
-        if (angle > 30f)
+        if (angle > 90f)
         {
             freeLookCamera.m_XAxis.Value = -Mathf.LerpAngle(freeLookCamera.m_XAxis.Value, targetRotate.eulerAngles.y, group.m_Targets[1].weight * rotationSpeed * Time.deltaTime);
-            Debug.Log(freeLookCamera.m_XAxis.Value);
+            //Debug.Log(freeLookCamera.m_XAxis.Value);
         }
     }
 

@@ -29,7 +29,11 @@ public class CheckEnemy : MonoBehaviour
     private void Awake()
     {
         NormalMovement = characterActor.GetComponentInChildren<NormalMovement>();
-        float currentWeight = targetGroup.m_Targets[0].weight;
+        if(targetGroup.m_Targets.Length > 0)
+        {
+             currentWeight = targetGroup.m_Targets[0].weight;
+        }
+        
         MoveDeceleration = NormalMovement.planarMovementParameters.stableGroundedDeceleration;
     }
     IEnumerator AdjustTargetWeight(float newWeight, float duration, int targetIndex)
