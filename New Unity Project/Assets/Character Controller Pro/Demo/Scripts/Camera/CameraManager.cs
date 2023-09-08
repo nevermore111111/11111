@@ -6,15 +6,15 @@ public class CameraManager : MonoBehaviour
 {
     public CinemachineFreeLook mainCamera;
     public CinemachineVirtualCamera subCamera;
-    public CheckEnemy checkEnemy;
-    public MainCharacter mainCharacter;
+    CheckEnemy checkEnemy;
+    MainCharacter mainCharacter;
 
     [Tooltip("如果存在测试摄像机，那么测试摄像机为最大权重")]
     public CinemachineFreeLook mainCharacterPrefab;
 
 
-    public int LowCameraPriority = 0;
-    public int HighCameraPriority = 20;
+     int LowCameraPriority = 0;
+     int HighCameraPriority = 20;
 
     private CinemachineBrain cinemachineBrain;
 
@@ -35,14 +35,14 @@ public class CameraManager : MonoBehaviour
         mainCamera = GameObject.Find("MainCamera").GetComponent<CinemachineFreeLook>();
         subCamera = GameObject.Find("subCamera").GetComponent<CinemachineVirtualCamera>();
         checkEnemy = FindObjectOfType<CheckEnemy>();
-        checkCamera = subCamera.GetComponent<CheckCamera>();    
+        checkCamera = subCamera.GetComponent<CheckCamera>();
     }
 
     private void Update()
     {
         // 检查主摄像机切换到副摄像机的条件
         bool switchToSubCamera = false;
-        
+
         if (mainCharacter != null)
         {
             // 条件1：受到攻击
@@ -81,10 +81,17 @@ public class CameraManager : MonoBehaviour
             {
                 switchToMainCamera = true;
             }
-            if(!checkCamera.ShouldSwitchToSubCamera())
+            if (!checkCamera.ShouldSwitchToSubCamera())
             {
                 //如果当前角度很大，那么直接返回普通视角
                 switchToMainCamera = true;
+            }
+        }
+        if (subCamera.Priority == HighCameraPriority)
+        {
+            if (switchToMainCamera == true)
+            {
+                Debug.Log("");
             }
         }
 
