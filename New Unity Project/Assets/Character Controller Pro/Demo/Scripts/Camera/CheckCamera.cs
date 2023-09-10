@@ -9,6 +9,7 @@ public class CheckCamera : MonoBehaviour
     public bool ShouldSwitchToSubCamera()
     {
         // 如果夹角sin值>于0.5，返回true，否则返回false.<0.5的话，是不能转换的
-        return Mathf.Sin(Vector3.Angle(transform.forward, Vector3.up)) > 0.5f;//这个值越大，容忍范围越小
+        float tarAngele = Vector3.Angle(transform.forward, Vector3.up);
+        return Mathf.Sin(Mathf.Deg2Rad * tarAngele) > 0.5f;//这个值越大，容忍范围越小(取值范围 （0,1）)
     }
 }

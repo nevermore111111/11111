@@ -83,7 +83,8 @@ public class CameraManager : MonoBehaviour
             }
             if (!checkCamera.ShouldSwitchToSubCamera())
             {
-                //如果当前角度很大，那么直接返回普通视角
+                //Debug.Log("角度不合格导致转化");
+                ////如果当前角度很大，那么直接返回普通视角
                 switchToMainCamera = true;
             }
         }

@@ -74,6 +74,7 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void NormalIdle()
     {
+        if(Attack.CharacterActor.Animator.IsInTransition(0)==false)
         Attack.CharacterActor.SetUpRootMotion(false, false);
     }
     public void Stop()
@@ -81,11 +82,11 @@ public class AnimatorFunction : MonoBehaviour
 
         Attack.CharacterActor.Animator.SetBool("stop", false);
     }
+
     public void AttackEnd()
     {
         if (!Attack.CharacterActor.Animator.IsInTransition(0))
         {
-            
             Attack.CharacterActor.SetUpRootMotion(true, true);
             Attack.isAttack = false;
             Attack.CharacterActor.Animator.SetBool("attack", false);
@@ -247,7 +248,11 @@ public class AnimatorFunction : MonoBehaviour
             if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
             {
                 Attack.CharacterActor.PlanarVelocity = Vector3.zero;
-                Attack.CharacterActor.SetUpRootMotion(false, false);
+                if (Attack.spAttack == -1)
+                {
+                    Attack.CharacterActor.SetUpRootMotion(false, false);
+                }
+                
             }
         }
         else

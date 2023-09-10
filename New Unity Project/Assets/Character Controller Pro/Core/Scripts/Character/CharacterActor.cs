@@ -26,6 +26,7 @@ namespace Lightbug.CharacterControllerPro.Core
     [DefaultExecutionOrder(ExecutionOrder.CharacterActorOrder)]
     public class CharacterActor : PhysicsActor
     {
+
         [Header("Collision")]
 
         [Tooltip("One way platforms are objects that can be contacted by the character feet (bottom sphere) while descending.")]
@@ -764,8 +765,10 @@ namespace Lightbug.CharacterControllerPro.Core
                 return LocalVelocity.y > 0f;
             }
         }
-
-
+        ///// <summary>
+        ///// 用来判断进入一个状态时候，是否需要用代码修改当前动画（crossfade）
+        ///// </summary>
+        //public bool NeedSettingAnim = true;
 
         #region public Body properties
 

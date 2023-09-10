@@ -8,6 +8,9 @@ public class CameraEffects : MonoBehaviour
     public float shakeAmplitude = 1.2f;
     public float shakeFrequency = 2.0f;
 
+    public float maxFov = 45f;
+    public float minFov = 40f;
+
     private float shakeElapsedTime = 0f;
     private CinemachineBasicMultiChannelPerlin[] noises;
 
@@ -68,7 +71,7 @@ public class CameraEffects : MonoBehaviour
         freeLookCamera.m_Lens.FieldOfView += zoomInput * zoomSpeed;
 
         // œﬁ÷∆ ”Ω«∑∂Œß
-        freeLookCamera.m_Lens.FieldOfView = Mathf.Clamp(freeLookCamera.m_Lens.FieldOfView, 40f, 45f);
+        freeLookCamera.m_Lens.FieldOfView = Mathf.Clamp(freeLookCamera.m_Lens.FieldOfView, minFov, maxFov);
     }
 
     /// <summary>

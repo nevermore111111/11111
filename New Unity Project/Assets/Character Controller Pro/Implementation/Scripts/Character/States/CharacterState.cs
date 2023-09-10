@@ -29,6 +29,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         public int StateNameHash { get; private set; }
 
         public TimelineManager timelineManager;
+     
 
         /// <summary>
         /// Gets the state runtime animator controller.

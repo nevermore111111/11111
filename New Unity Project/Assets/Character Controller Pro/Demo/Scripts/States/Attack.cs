@@ -205,6 +205,7 @@ public class Attack : CharacterState
         }
         if (CharacterActions.jump.value)
         {
+            CharacterActor.ForceNotGrounded();
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
         if (NormalMovement.CanEvade())

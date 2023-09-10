@@ -100,7 +100,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         bool reducedAirControlFlag = false;
         float reducedAirControlInitialTime = 0f;
         float reductionDuration = 0.5f;
-       
+
         //上一帧的速度
         float lastVelocityMagnitude;
 
@@ -253,8 +253,8 @@ namespace Lightbug.CharacterControllerPro.Demo
         public override void ExitBehaviour(float dt, CharacterState toState)
         {
             reducedAirControlFlag = false;
-            moving =false;
-            if(IsPlayer)
+            moving = false;
+            if (IsPlayer)
             {
                 CharacterActor.Animator.SetBool("jump", false);
             }
@@ -342,7 +342,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
 
         }
-       
+
         /// <summary>
         /// Processes the lateral movement of the character (stable and unstable state), that is, walk, run, crouch, etc. 
         /// This movement is tied directly to the "movement" character action.
@@ -468,12 +468,12 @@ namespace Lightbug.CharacterControllerPro.Demo
                 if (Time.time - startTime > 1f)
                 {
                     moving = true;
-                   
+
                 }
             }
-            else if(!CharacterActor.IsStable)
+            else if (!CharacterActor.IsStable)
             {
-                moving=false;
+                moving = false;
                 startTime = 0f; // 如果停止移动，则将开始时间重置为0
             }
         }
@@ -502,7 +502,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         }
         private void PlayStop()
         {
-            if(CharacterActions.movement.value.sqrMagnitude != 0)
+            if (CharacterActions.movement.value.sqrMagnitude != 0)
             {
                 CharacterActor.Animator.SetBool("inputMove", true);
             }
@@ -512,13 +512,13 @@ namespace Lightbug.CharacterControllerPro.Demo
 
             // 如果速度大小小于等于0，则表示已停止移动
             //把这个等于0改成都没有按下
-            
+
             if (CheckMovementInputIdle() & moving & CharacterActor.IsStable)
             {
                 moving = false;
                 CharacterActor.Animator.SetBool("inputMove", false);
                 // 如果上一帧速度大小大于10，则播放停止动画
-                if (lastVelocityMagnitude > 0.8f* planarMovementParameters. boostSpeedLimit)
+                if (lastVelocityMagnitude > 0.8f * planarMovementParameters.boostSpeedLimit)
                 {
                     CharacterActor.Animator.SetFloat("running", 1);
                     CharacterActor.Animator.SetBool("stop", true);
@@ -640,7 +640,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         protected virtual bool ProcessJumpDown(float dt)
         {
-           
+
             if (!verticalMovementParameters.canJumpDown)
                 return false;
 
@@ -759,7 +759,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 if (OnJumpPerformed != null)
                     OnJumpPerformed();
 
-                if(IsPlayer)
+                if (IsPlayer)
                 {
                     CharacterActor.Animator.SetBool("jump", true);
                 }
@@ -783,7 +783,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         }
 
-        
+
 
         /// <summary>
         /// Returns the jump direction vector whenever the jump action is started.
@@ -805,7 +805,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public override void EnterBehaviour(float dt, CharacterState fromState)
         {
-            for(int i = 0; i < weaponManager.Length;i++)
+            for (int i = 0; i < weaponManager.Length; i++)
             {
                 weaponManager[i].gameObject.SetActive(false);
             }
@@ -816,7 +816,12 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
             else
             {
-                if(CharacterActor.PredictedGroundDistance>0.3)
+                //如果竖直方向上在前进
+                if (CharacterActions.jump.value == true)
+                {
+                    CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_Start_Inplace", 0.05f, 0, 0.2f);
+                }
+                else if (CharacterActor.PredictedGroundDistance > 0.3f)
                 {
                     CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_Loop_Inplace", 0.3f);
                 }
@@ -825,6 +830,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                     CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_End_Inplace", 0.05f);
                 }
             }
+
             CharacterActor.alwaysNotGrounded = false;
 
             targetLookingDirection = CharacterActor.Forward;
@@ -1129,7 +1135,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         }
 
         private float buttonDownTime;
-        public  bool preEvade;
+        public bool preEvade;
         public Vector2 evadeVec2;
 
         private void Update()
@@ -1139,11 +1145,11 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public bool CanEvade()
         {
-            if(CharacterStateController.CurrentState is Evade)
+            if (CharacterStateController.CurrentState is Evade)
             {
                 return false;
             }
-            if(preEvade)
+            if (preEvade)
             {
                 return true;
             }
@@ -1152,7 +1158,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 // 虚拟按键Run被按下，记录按下时间
                 buttonDownTime = Time.time;
                 evadeVec2 = CharacterActions.movement.value;
-               
+
             }
             else if (Input.GetButtonUp("Run"))
             {
