@@ -182,7 +182,7 @@ namespace Rusk
             NormalMovement.preEvade = false;
             if (forceNotGrounded)
                 CharacterActor.alwaysNotGrounded = true;
-            characterActor.Animator.Play("Evade");
+            characterActor.Animator.CrossFade("Evade",0.05f);
             CharacterActor.UseRootMotion = false;
 
             if (CharacterActor.IsGrounded)

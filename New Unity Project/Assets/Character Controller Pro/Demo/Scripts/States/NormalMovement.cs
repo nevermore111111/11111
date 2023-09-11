@@ -828,9 +828,10 @@ namespace Lightbug.CharacterControllerPro.Demo
                 Debug.Log("否");
             }
             yield return null;
-            bool isPlayMove = AnimatorFunction.GetStateInfo(CharacterActor.Animator).IsTag("NormalMovement");
-            if (CharacterStateController.CurrentState is NormalMovement&& !isPlayMove)
+            bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("NormalMovement");
+            if (CharacterStateController.CurrentState is NormalMovement&& (!isPlayMove))
             {
+                Debug.LogError("");
                 if (CharacterActor.IsGrounded)
                 {
                     CharacterActor.Animator.CrossFade("NormalMovement.StableGrounded", 0.3f);
