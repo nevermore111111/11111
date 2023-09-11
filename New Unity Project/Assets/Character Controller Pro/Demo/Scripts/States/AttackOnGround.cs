@@ -97,6 +97,7 @@ public class AttackOnGround :Attack
                 }
                 else
                 {
+                    //现在我想做的是移动到normalMove状态。不按照当前的normal的规则去播放
                     CharacterStateController.EnqueueTransition<NormalMovement>();
                 }
             }

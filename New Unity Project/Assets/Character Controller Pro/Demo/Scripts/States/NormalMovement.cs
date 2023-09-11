@@ -6,6 +6,7 @@ using System;
 using UnityEngine;
 using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
 using Cinemachine;
+using System.Collections;
 
 namespace Lightbug.CharacterControllerPro.Demo
 {
@@ -28,31 +29,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         private Attack attack;
         private WeaponManager[] weaponManager;
 
-        [Header("Animation")]
-
-        [SerializeField]
-        protected string groundedParameter = "Grounded";
-
-        [SerializeField]
-        protected string stableParameter = "Stable";
-
-        [SerializeField]
-        protected string verticalSpeedParameter = "VerticalSpeed";
-
-        [SerializeField]
-        protected string planarSpeedParameter = "PlanarSpeed";
-
-        [SerializeField]
-        protected string horizontalAxisParameter = "HorizontalAxis";
-
-        [SerializeField]
-        protected string verticalAxisParameter = "VerticalAxis";
-
-        [SerializeField]
-        protected string heightParameter = "Height";
-
-        [SerializeField]
-        protected string GroundDistance = "GroundDistance";
+       
 
 
 
@@ -810,26 +787,8 @@ namespace Lightbug.CharacterControllerPro.Demo
                 weaponManager[i].gameObject.SetActive(false);
             }
             Debug.Log(CharacterActor.CharacterCollisionInfo);
-            if (CharacterActor.IsGrounded)
-            {
-                CharacterActor.Animator.CrossFade("NormalMovement.StableGrounded", 0.3f);
-            }
-            else
-            {
-                //如果竖直方向上在前进
-                if (CharacterActions.jump.value == true)
-                {
-                    CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_Start_Inplace", 0.05f, 0, 0.2f);
-                }
-                else if (CharacterActor.PredictedGroundDistance > 0.3f)
-                {
-                    CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_Loop_Inplace", 0.3f);
-                }
-                else
-                {
-                    CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_End_Inplace", 0.05f);
-                }
-            }
+
+            StartCoroutine(CheckAnim());
 
             CharacterActor.alwaysNotGrounded = false;
 
@@ -847,6 +806,52 @@ namespace Lightbug.CharacterControllerPro.Demo
             currentPlanarSpeedLimit = Mathf.Max(CharacterActor.PlanarVelocity.magnitude, planarMovementParameters.baseSpeedLimit);
 
             CharacterActor.UseRootMotion = false;
+        }
+
+        private IEnumerator CheckAnim()
+        {
+            if(CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("NormalMovement"))
+            {
+                Debug.Log("是");
+            }
+            else
+            {
+                Debug.Log("否");
+            }
+            yield return null;
+            if (CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("NormalMovement"))
+            {
+                Debug.Log("是");
+            }
+            else
+            {
+                Debug.Log("否");
+            }
+            yield return null;
+            bool isPlayMove = AnimatorFunction.GetStateInfo(CharacterActor.Animator).IsTag("NormalMovement");
+            if (CharacterStateController.CurrentState is NormalMovement&& !isPlayMove)
+            {
+                if (CharacterActor.IsGrounded)
+                {
+                    CharacterActor.Animator.CrossFade("NormalMovement.StableGrounded", 0.3f);
+                }
+                else
+                {
+                    //如果竖直方向上在前进
+                    if (CharacterActions.jump.value == true)
+                    {
+                        CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_Start_Inplace", 0.05f, 0, 0.2f);
+                    }
+                    else if (CharacterActor.PredictedGroundDistance > 0.3f)
+                    {
+                        CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_Loop_Inplace", 0.3f);
+                    }
+                    else
+                    {
+                        CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_End_Inplace", 0.05f);
+                    }
+                }
+            }
         }
 
         protected virtual void HandleRotation(float dt)
@@ -1042,17 +1047,10 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public override void PreCharacterSimulation(float dt)
         {
+            base.PreCharacterSimulation(dt);
             // Pre/PostCharacterSimulation methods are useful to update all the Animator parameters. 
             // Why? Because the CharacterActor component will end up modifying the velocity of the actor.
-            if (!CharacterActor.IsAnimatorValid())
-                return;
-
-            CharacterStateController.Animator.SetBool(groundedParameter, CharacterActor.IsGrounded);
-            CharacterStateController.Animator.SetBool(stableParameter, CharacterActor.IsStable);
-            CharacterStateController.Animator.SetFloat(horizontalAxisParameter, CharacterActions.movement.value.x);
-            CharacterStateController.Animator.SetFloat(verticalAxisParameter, CharacterActions.movement.value.y);
-            CharacterStateController.Animator.SetFloat(heightParameter, CharacterActor.BodySize.y);
-            CharacterStateController.Animator.SetFloat(GroundDistance, CharacterActor.PredictedGroundDistance);
+           
         }
 
         public override void PostCharacterSimulation(float dt)

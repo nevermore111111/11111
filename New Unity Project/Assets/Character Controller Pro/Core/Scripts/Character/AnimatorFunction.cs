@@ -455,7 +455,7 @@ public class AnimatorFunction : MonoBehaviour
     /// 获取当前正在播放的动画的AnimatorStateInfo，如果在过渡，就返回过渡目标的动画
     /// </summary>
     /// <returns></returns>
-    private AnimatorStateInfo GetStateInfo(Animator animator)
+    static public AnimatorStateInfo GetStateInfo(Animator animator)
     {
         AnimatorTransitionInfo transitionInfo = animator.GetAnimatorTransitionInfo(0);
 

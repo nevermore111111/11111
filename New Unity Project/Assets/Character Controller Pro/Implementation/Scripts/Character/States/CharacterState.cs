@@ -67,6 +67,33 @@ namespace Lightbug.CharacterControllerPro.Implementation
         public CharacterStateController CharacterStateController { get; private set; }
 
 
+
+        [Header("Animation")]
+
+        [SerializeField]
+        protected string groundedParameter = "Grounded";
+
+        [SerializeField]
+        protected string stableParameter = "Stable";
+
+        [SerializeField]
+        protected string verticalSpeedParameter = "VerticalSpeed";
+
+        [SerializeField]
+        protected string planarSpeedParameter = "PlanarSpeed";
+
+        [SerializeField]
+        protected string horizontalAxisParameter = "HorizontalAxis";
+
+        [SerializeField]
+        protected string verticalAxisParameter = "VerticalAxis";
+
+        [SerializeField]
+        protected string heightParameter = "Height";
+
+        [SerializeField]
+        protected string GroundDistance = "GroundDistance";
+
         protected virtual void Awake()
         {
             CharacterActor = this.GetComponentInBranch<CharacterActor>();
@@ -126,6 +153,15 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// </summary>
         public virtual void PreCharacterSimulation(float dt)
         {
+            if (!CharacterActor.IsAnimatorValid())
+                return;
+
+            CharacterStateController.Animator.SetBool(groundedParameter, CharacterActor.IsGrounded);
+            CharacterStateController.Animator.SetBool(stableParameter, CharacterActor.IsStable);
+            CharacterStateController.Animator.SetFloat(horizontalAxisParameter, CharacterActions.movement.value.x);
+            CharacterStateController.Animator.SetFloat(verticalAxisParameter, CharacterActions.movement.value.y);
+            CharacterStateController.Animator.SetFloat(heightParameter, CharacterActor.BodySize.y);
+            CharacterStateController.Animator.SetFloat(GroundDistance, CharacterActor.PredictedGroundDistance);
         }
 
         /// <summary>

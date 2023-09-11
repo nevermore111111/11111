@@ -230,6 +230,7 @@ namespace Lightbug.CharacterControllerPro.Core
         CircleCollider2D groundTriggerCollider2D = null;
         SphereCollider groundTriggerCollider3D = null;
         float unstableGroundContactTime = 0f;
+        public bool NeedSettingAnimator = false;
 
         public float StepOffset => stepUpDistance - BodySize.x / 2f;
 
