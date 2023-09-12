@@ -97,7 +97,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         [SerializeField]
         protected string evadeParameter = "evade";
 
-        private static int spAttack = -1;
+        private static int spAttack;
 
         public  int SpAttack
         {

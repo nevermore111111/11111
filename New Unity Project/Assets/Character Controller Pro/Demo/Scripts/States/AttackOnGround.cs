@@ -33,6 +33,8 @@ public class AttackOnGround :Attack
             CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
             canChangeState = false;
             CharacterActor.ForceNotGrounded();
+            //CharacterActor.VerticalVelocity = CharacterActor.Up * 10f;
+            Debug.Log("Àë¿ªµØÃæ");
         }
         else if( (type != typeof(Attack))&& type != typeof(StartPlay)&& CharacterActor.IsGrounded)
         {
