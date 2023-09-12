@@ -34,7 +34,7 @@ public class Attack : CharacterState
     WeaponManager[] weaponManagers;
     public static bool useGravity = false;
     public static float AttackGravity = 10f;
-  
+    public static int spAttack = -1;
     //10 地面普通攻击 剑
     //11 剑下落攻击 剑
     //12 地面击飞  拳
@@ -53,7 +53,7 @@ public class Attack : CharacterState
     /// <param name="ExitAttack"></param>
     public void ChangeWeaponState(bool ExitAttack)
     {
-        if (ExitAttack == true)
+        if(ExitAttack == true)
         {
             foreach (var weapon in weaponManagers)
             {
@@ -125,7 +125,7 @@ public class Attack : CharacterState
     {
         base.Start();
         normalHeightAndWidth = CharacterActor.BodySize;
-
+       
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
@@ -140,10 +140,10 @@ public class Attack : CharacterState
             isJustEnter = true;
         CharacterActor.CheckAndSetSize(HeighAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
 
-        // //根据当前进入的类，去调整当前的timeline的数量
-        // string className = this.GetType().Name;
-        // //当进入对应模式的时候，去切换对应的timeline数组
-        //timelineManager.SwapTimelinesByAssetName(className);
+       // //根据当前进入的类，去调整当前的timeline的数量
+       // string className = this.GetType().Name;
+       // //当进入对应模式的时候，去切换对应的timeline数组
+       //timelineManager.SwapTimelinesByAssetName(className);
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
@@ -174,32 +174,27 @@ public class Attack : CharacterState
     /// </summary>
     private void SetCombo()
     {
-        if (CharacterActions.spAttack.value && canInput)
-        {
-            canInput = false;
-            if (CharacterActor.IsGrounded)
-            {
-                SpAttack = 10;
-                if(currentAttackMode == AttackMode.AttackOnGround)
-                CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
-            }
-            else
-            {
-                Debug.LogError("");
-                SpAttack = 11;
-            }
-        }
-        else if (CharacterActions.attack.value && canInput)
+        if (CharacterActions.attack.value)
         {
             //按下攻击键位
-            canInput = false;
-            combo++;
-            if (combo > MaxCombo)
+            if (canInput)
             {
-                isNextAttack = true;
-                combo = 1;
+                canInput = false;
+                combo++;
+                if (combo > MaxCombo)
+                {
+                    isNextAttack = true;
+                    combo = 1;
+                }
+                CharacterActor.Animator.SetInteger("combo", combo);
             }
-            CharacterActor.Animator.SetInteger("combo", combo);
+        }
+        if(CharacterActions.spAttack.value)
+        {
+            if(canInput)
+            {
+
+            }
         }
     }
 

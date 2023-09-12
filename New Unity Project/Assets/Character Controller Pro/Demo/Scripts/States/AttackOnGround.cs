@@ -28,7 +28,7 @@ public class AttackOnGround :Attack
     {
         base.EnterBehaviour(dt, fromState);
         Type type =CharacterStateController.PreviousState.GetType();
-        if(CharacterActor.IsGrounded&& SpAttack == 10)
+        if(CharacterActor.IsGrounded&&Attack.spAttack ==10)
         {
             CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
             canChangeState = false;
@@ -56,13 +56,24 @@ public class AttackOnGround :Attack
     {
        
         base.UpdateBehaviour(dt);
-        if (SpAttack == 10)
+        if (spAttack == 10)
             CharacterActor.ForceNotGrounded();
         if (!canPlayerControl)
         {
             return;
         }
-      
+        if(CharacterActions.spAttack.value)
+        {
+            if(CharacterActor.IsGrounded)
+            {
+                spAttack = 10;
+                CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
+            }
+            else
+            {
+                spAttack = 11;
+            }
+        }
     }
 
 
@@ -78,7 +89,7 @@ public class AttackOnGround :Attack
         //spattack == -1 的意思是没有进行特殊攻击，但是我还要判断是不是进行了普通攻击，是否存在未执行的攻击
         if (!CharacterActor.IsGrounded)//0代表没有下一个要执行的动画
         {
-            if(isAttack ==false && SpAttack == -1)
+            if(isAttack ==false && spAttack == -1)
             {
                 //存在下一个普通攻击，直接进入空中攻击
                 if (isNextAttack)
@@ -94,7 +105,7 @@ public class AttackOnGround :Attack
         }
         else//这样是在地面
         {
-            if (CharacterActions.movement.value != Vector2.zero && canChangeState == true&& SpAttack == -1)
+            if (CharacterActions.movement.value != Vector2.zero && canChangeState == true&&spAttack == -1)
             {
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }
