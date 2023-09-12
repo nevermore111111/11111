@@ -29,7 +29,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         private Attack attack;
         private WeaponManager[] weaponManager;
 
-       
+
 
 
 
@@ -186,19 +186,20 @@ namespace Lightbug.CharacterControllerPro.Demo
                         if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
                         {
                             //attack
-                            Attack.spAttack = 10;
+                            SpAttack = 10;
                             CharacterStateController.EnqueueTransition<AttackOnGround>();
                         }
                         else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
                         {
-                            Attack.spAttack = 11;
+                            Debug.LogError("");
+                            SpAttack = 11;
                             CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
                         }
                     }
                     else
                     {
                         //在天空使用特殊攻击
-                        Attack.spAttack = 13;
+                        SpAttack = 13;
                         CharacterStateController.EnqueueTransition<AttackOffGround>();
                     }
 
@@ -813,7 +814,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             yield return null;
             //yield return null;
             bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("NormalMovement");
-            if (CharacterStateController.CurrentState is NormalMovement&& (!isPlayMove))
+            if (CharacterStateController.CurrentState is NormalMovement && (!isPlayMove))
             {
                 if (CharacterActor.IsGrounded)
                 {
@@ -1034,7 +1035,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             base.PreCharacterSimulation(dt);
             // Pre/PostCharacterSimulation methods are useful to update all the Animator parameters. 
             // Why? Because the CharacterActor component will end up modifying the velocity of the actor.
-           
+
         }
 
         public override void PostCharacterSimulation(float dt)

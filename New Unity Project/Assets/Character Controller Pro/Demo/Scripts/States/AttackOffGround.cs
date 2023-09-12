@@ -33,22 +33,22 @@ public class AttackOffGround : Attack
         {
             if (currentAttackMode == AttackMode.AttackOnGround)
             {
-                if (spAttack == -1)
+                if (SpAttack == -1)
                 {
 
                 }
-                else if(spAttack == 10)
+                else if(SpAttack == 10)
                 {
 
                 }
             }
             else if (currentAttackMode == AttackMode.AttackOnGround_fist)
             {
-                if(spAttack == -1)
+                if(SpAttack == -1)
                 {
 
                 }
-                else if(spAttack ==10)
+                else if(SpAttack == 10)
                 {
 
                 }

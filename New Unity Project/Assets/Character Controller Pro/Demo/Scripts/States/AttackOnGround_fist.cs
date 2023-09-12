@@ -36,10 +36,10 @@ public class AttackOnGround_fist : Attack
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.AddRotation);
         ChangeWeaponState(false);
         Type type = CharacterStateController.PreviousState.GetType();
-        if (CharacterActor.IsGrounded && Attack.spAttack == 11)
+        if (CharacterActor.IsGrounded && SpAttack == 11)
         {
             CharacterActor.Animator.Play("AttackOnGround_fist.sp02", 0);
-            spAttack = -1;
+            SpAttack = -1;
             canChangeState = false;
             CharacterActor.ForceNotGrounded();
             CharacterActor.VerticalVelocity = new Vector3(0, upVerticalVelocity, 0);
