@@ -67,7 +67,7 @@ public class AttackOnGround : Attack
         }
         base.UpdateBehaviour(dt);
 
-        if ( SpAttack == 10)
+        if ( SpAttack == 10&&isAttack == true)
         {
             CharacterActor.ForceNotGrounded();
         }
