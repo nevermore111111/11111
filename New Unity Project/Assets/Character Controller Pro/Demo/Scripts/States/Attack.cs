@@ -1,4 +1,3 @@
-using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
@@ -35,7 +34,7 @@ public class Attack : CharacterState
     WeaponManager[] weaponManagers;
     public static bool useGravity = false;
     public static float AttackGravity = 10f;
-    
+    public static int spAttack = -1;
     //10 µØÃæÆÕÍ¨¹¥»÷ ½£
     //11 ½£ÏÂÂä¹¥»÷ ½£
     //12 µØÃæ»÷·É  È­
@@ -194,19 +193,7 @@ public class Attack : CharacterState
         {
             if(canInput)
             {
-                canInput=false;
-                if(CharacterStateController.CurrentState is AttackOnGround)
-                {
-                    SpAttack = 10;
-                }
-                else if(CharacterStateController.CurrentState is AttackOnGround_fist)
-                {
 
-                }
-                else if(CharacterStateController.CurrentState is AttackOffGround)
-                {
-
-                }
             }
         }
     }

@@ -177,6 +177,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
                         }
                     }
+
                 }
                 if (CharacterActions.spAttack.value)//特殊攻击
                 {
@@ -185,21 +186,22 @@ namespace Lightbug.CharacterControllerPro.Demo
                         if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
                         {
                             //attack
-                            SpAttack = 10;
+                            Attack.spAttack = 10;
                             CharacterStateController.EnqueueTransition<AttackOnGround>();
                         }
                         else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
                         {
-                            SpAttack = 11;
+                            Attack.spAttack = 11;
                             CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
                         }
                     }
                     else
                     {
                         //在天空使用特殊攻击
-                        SpAttack = 13;
+                        Attack.spAttack = 13;
                         CharacterStateController.EnqueueTransition<AttackOffGround>();
                     }
+
                 }
                 if (CharacterActions.jetPack.value)
                 {
@@ -809,8 +811,9 @@ namespace Lightbug.CharacterControllerPro.Demo
         private IEnumerator CheckAnim()
         {
             yield return null;
-            bool isPlayCurrentAnim = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("NormalMovement");
-            if (CharacterStateController.CurrentState.GetType() == this.GetType() && (!isPlayCurrentAnim))
+            //yield return null;
+            bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("NormalMovement");
+            if (CharacterStateController.CurrentState is NormalMovement&& (!isPlayMove))
             {
                 if (CharacterActor.IsGrounded)
                 {

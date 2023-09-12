@@ -12,9 +12,9 @@ using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
 /// <summary>
 /// 
 /// <summary>
-public class AttackOnGround : Attack
+public class AttackOnGround :Attack
 {
-    public float gravity = 10;
+    public  float gravity = 10;
     protected override void Awake()
     {
         base.Awake();
@@ -22,54 +22,57 @@ public class AttackOnGround : Attack
     protected override void Start()
     {
         base.Start();
-
+        
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         base.EnterBehaviour(dt, fromState);
-        StartCoroutine(CheckAnim());
-        ChangeWeaponState(false);
-    }
-    private IEnumerator CheckAnim()
-    {
-        yield return null;
-        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.SetRotation);
-        bool isPlayCurrentAnim = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("AttackOnGround");
-        if (CharacterStateController.CurrentState.GetType() == this.GetType() && (!isPlayCurrentAnim))
+        Type type =CharacterStateController.PreviousState.GetType();
+        if(CharacterActor.IsGrounded&&Attack.spAttack ==10)
         {
-            Type type = CharacterStateController.PreviousState.GetType();
-            if (CharacterActor.IsGrounded && SpAttack == 10)
-            {
-                CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
-                canChangeState = false;
-                CharacterActor.ForceNotGrounded();
-                //CharacterActor.VerticalVelocity = CharacterActor.Up * 10f;
-                Debug.Log("离开地面");
-            }
-            else if ((type != typeof(Attack)) && type != typeof(StartPlay) && CharacterActor.IsGrounded)
-            {
-                combo = 1;
-                CharacterActor.Animator.SetInteger("combo", Attack.combo);
-                CharacterActor.Animator.Play("AttackOnGround.attack01_1", 0);
-                canChangeState = false;
-            }
-            else
-            {
-                CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
-            }
+            CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
+            canChangeState = false;
+            CharacterActor.ForceNotGrounded();
+            //CharacterActor.VerticalVelocity = CharacterActor.Up * 10f;
+            Debug.Log("离开地面");
         }
+        else if( (type != typeof(Attack))&& type != typeof(StartPlay)&& CharacterActor.IsGrounded)
+        {
+            combo = 1;
+            CharacterActor.Animator.SetInteger("combo", Attack.combo);
+            CharacterActor.Animator.Play("AttackOnGround.attack01_1", 0);
+            canChangeState = false;
+        }
+        else
+        {
+            CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
+        }
+       CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity,true,RootMotionRotationType.AddRotation);
+
+        ChangeWeaponState(false);
+
     }
     public override void UpdateBehaviour(float dt)
     {
+       
+        base.UpdateBehaviour(dt);
+        if (spAttack == 10)
+            CharacterActor.ForceNotGrounded();
         if (!canPlayerControl)
         {
             return;
         }
-        base.UpdateBehaviour(dt);
-
-        if ( SpAttack == 10)
+        if(CharacterActions.spAttack.value)
         {
-            CharacterActor.ForceNotGrounded();
+            if(CharacterActor.IsGrounded)
+            {
+                spAttack = 10;
+                CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
+            }
+            else
+            {
+                spAttack = 11;
+            }
         }
     }
 
@@ -86,7 +89,7 @@ public class AttackOnGround : Attack
         //spattack == -1 的意思是没有进行特殊攻击，但是我还要判断是不是进行了普通攻击，是否存在未执行的攻击
         if (!CharacterActor.IsGrounded)//0代表没有下一个要执行的动画
         {
-            if (isAttack == false && SpAttack == -1)
+            if(isAttack ==false && spAttack == -1)
             {
                 //存在下一个普通攻击，直接进入空中攻击
                 if (isNextAttack)
@@ -102,7 +105,7 @@ public class AttackOnGround : Attack
         }
         else//这样是在地面
         {
-            if (CharacterActions.movement.value != Vector2.zero && canChangeState == true && SpAttack == -1)
+            if (CharacterActions.movement.value != Vector2.zero && canChangeState == true&&spAttack == -1)
             {
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }
