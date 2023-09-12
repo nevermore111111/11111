@@ -134,6 +134,8 @@ public class Attack : CharacterState
         //几率并且修改
         //HeighAndWidth = CharacterActor.BodySize;
         base.EnterBehaviour(dt, fromState);
+        isAttack = true;
+
         canInput = false;
         if (CharacterStateController.PreviousState is not StartPlay)
             isJustEnter = true;
