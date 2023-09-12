@@ -810,28 +810,11 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         private IEnumerator CheckAnim()
         {
-            if(CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("NormalMovement"))
-            {
-                Debug.Log("是");
-            }
-            else
-            {
-                Debug.Log("否");
-            }
             yield return null;
-            if (CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("NormalMovement"))
-            {
-                Debug.Log("是");
-            }
-            else
-            {
-                Debug.Log("否");
-            }
-            yield return null;
+            //yield return null;
             bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("NormalMovement");
             if (CharacterStateController.CurrentState is NormalMovement&& (!isPlayMove))
             {
-                Debug.LogError("");
                 if (CharacterActor.IsGrounded)
                 {
                     CharacterActor.Animator.CrossFade("NormalMovement.StableGrounded", 0.3f);

@@ -94,6 +94,9 @@ namespace Lightbug.CharacterControllerPro.Implementation
         [SerializeField]
         protected string GroundDistance = "GroundDistance";
 
+        [SerializeField]
+        protected string evadeParameter = "evade";
+
         protected virtual void Awake()
         {
             CharacterActor = this.GetComponentInBranch<CharacterActor>();

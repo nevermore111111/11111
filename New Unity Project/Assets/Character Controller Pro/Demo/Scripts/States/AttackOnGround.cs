@@ -54,10 +54,11 @@ public class AttackOnGround :Attack
     }
     public override void UpdateBehaviour(float dt)
     {
+       
+        base.UpdateBehaviour(dt);
         if (spAttack == 10)
             CharacterActor.ForceNotGrounded();
-        base.UpdateBehaviour(dt);
-        if(!canPlayerControl)
+        if (!canPlayerControl)
         {
             return;
         }

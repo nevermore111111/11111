@@ -189,6 +189,13 @@ public class Attack : CharacterState
                 CharacterActor.Animator.SetInteger("combo", combo);
             }
         }
+        if(CharacterActions.spAttack.value)
+        {
+            if(canInput)
+            {
+
+            }
+        }
     }
 
     private void UseGravity(float dt)

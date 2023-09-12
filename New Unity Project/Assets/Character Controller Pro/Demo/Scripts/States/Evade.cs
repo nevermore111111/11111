@@ -96,8 +96,6 @@ namespace Rusk
         {
             CharacterActor.OnGroundedStateEnter -= OnGroundedStateEnter;
         }
-
-
         public override string GetInfo()
         {
             return "This state is entirely based on particular movement, the \"dash\". This movement is normally a fast impulse along " +
@@ -178,6 +176,8 @@ namespace Rusk
 
         public override void EnterBehaviour(float dt, CharacterState fromState)
         {
+            base.EnterBehaviour(dt, fromState);
+            characterActor.Animator.SetBool(evadeParameter, true);
             duration = UnChangedDuration;
             NormalMovement.preEvade = false;
             if (forceNotGrounded)
@@ -272,16 +272,16 @@ namespace Rusk
                 }
                 else
                 {
-                    addTime = 0.3f * Mathf.Abs(input.y);
+                    addTime = 0.4f * Mathf.Abs(input.y);
                 }
             }
 
             duration += addTime;
-
         }
 
         public override void ExitBehaviour(float dt, CharacterState toState)
         {
+            characterActor.Animator.SetBool(evadeParameter, false);
             if (forceNotGrounded)
                 CharacterActor.alwaysNotGrounded = false;
         }
@@ -301,7 +301,6 @@ namespace Rusk
                 isDone = true;
                 dashCursor = 0;
             }
-
         }
 
         public override void PostUpdateBehaviour(float dt)

@@ -821,8 +821,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102522144}
-  m_LocalRotation: {x: 0.03468134, y: -0.120432034, z: 0.004209975, w: 0.9921067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.03888598, y: -0.12041409, z: 0.0047204164, w: 0.99195063}
+  m_LocalPosition: {x: 0.059150696, y: 0.06203103, z: -0.24003601}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2981,6 +2981,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -3441,6 +3442,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -4335,7 +4337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 1.843366, z: -5.835029}
+  m_FollowOffset: {x: 0, y: 1.6, z: -5}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -5392,6 +5394,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -6015,7 +6018,7 @@ PrefabInstance:
     - target: {fileID: 7174589064515782875, guid: 15963df9e6a96144bb9d8742a888bd7c,
         type: 3}
       propertyPath: m_ImpulseDefinition.m_FrequencyGain
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6429,7 +6432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 1.843366, z: -5.835029}
+  m_FollowOffset: {x: 0, y: 1.6, z: -5}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -7240,8 +7243,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: 0.03468134, y: -0.120432034, z: 0.004209975, w: 0.9921067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.03888598, y: -0.120414086, z: 0.004720417, w: 0.99195063}
+  m_LocalPosition: {x: 0.059150696, y: 0.06203103, z: -0.24003601}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7420,7 +7423,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605997566}
-  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
+  m_LocalRotation: {x: 0.023164071, y: -0.26986164, z: 0.0064939777, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8693,8 +8696,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811303954}
-  m_LocalRotation: {x: 0.05028029, y: -0.12035194, z: 0.0061035873, w: 0.9914384}
-  m_LocalPosition: {x: 0.19978333, y: 0.243366, z: -0.81077576}
+  m_LocalRotation: {x: 0.034681343, y: -0.12043204, z: 0.0042099752, w: 0.9921067}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9864,8 +9867,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234836, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.0620477, z: -5.874625}
+  m_LocalRotation: {x: 0.039234813, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.062047, z: -5.874625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15526,6 +15529,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   layerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -15567,6 +15571,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   initialVelocity: 30
   duration: 0.5
   movementCurve:
@@ -15622,6 +15627,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   useIKOffsetValues: 0
   rightFootOffset: {x: 0, y: 0, z: 0}
   leftFootOffset: {x: 0, y: 0, z: 0}
@@ -15663,6 +15669,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   IsPlayer: 1
   planarMovementParameters:
     baseSpeedLimit: 8
@@ -15843,6 +15850,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   filterByTag: 1
   wallTag: WallSlide
   slideAcceleration: 10
@@ -15884,6 +15892,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   climbSpeed: 3
   angularSpeed: 120
   jumpVelocity: 10
@@ -15915,6 +15924,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
   gravity: 10
@@ -15942,6 +15952,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   cam: {fileID: 1162800279}
   gunTip: {fileID: 0}
   whatIsGrapplable:
@@ -15978,6 +15989,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   initialVelocity: 12
   duration: 0.65
   movementCurve:
@@ -16033,6 +16045,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
 --- !u!114 &1257029339
@@ -16059,6 +16072,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
   army:
@@ -16089,6 +16103,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   changeState: 0
 --- !u!114 &1257029341
 MonoBehaviour:
@@ -16114,6 +16129,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   HeighAndWidth: {x: 0, y: 0}
   attack: {fileID: 0}
   gravity: 10
@@ -16883,6 +16899,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 2
@@ -17933,6 +17950,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -18112,6 +18130,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   attackEnd: 0
 --- !u!1 &1484830150
 GameObject:
@@ -19681,7 +19700,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689691047}
-  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
+  m_LocalRotation: {x: 0.023164071, y: -0.26986164, z: 0.0064939777, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19747,6 +19766,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -19987,7 +20007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 1.843366, z: -5.835029}
+  m_FollowOffset: {x: 0, y: 1.6, z: -5}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -20280,6 +20300,7 @@ MonoBehaviour:
   verticalAxisParameter: VerticalAxis
   heightParameter: Height
   GroundDistance: GroundDistance
+  evadeParameter: evade
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
