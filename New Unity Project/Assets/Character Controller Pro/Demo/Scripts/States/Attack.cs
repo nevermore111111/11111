@@ -181,6 +181,7 @@ public class Attack : CharacterState
        
         if (CharacterActions.spAttack.value)
         {
+            isNextAttack = true;
             if (CharacterActor.IsGrounded)
             {
                 if(currentAttackMode == AttackMode.AttackOnGround)
@@ -203,10 +204,10 @@ public class Attack : CharacterState
             if (canInput)
             {
                 canInput = false;
+                isNextAttack = true;
                 combo++;
                 if (combo > MaxCombo)
                 {
-                    isNextAttack = true;
                     combo = 1;
                 }
                 CharacterActor.Animator.SetInteger("combo", combo);

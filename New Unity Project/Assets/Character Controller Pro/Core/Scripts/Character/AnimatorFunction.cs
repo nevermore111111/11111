@@ -32,6 +32,7 @@ public class AnimatorFunction : MonoBehaviour
     public string activeWeaponDetect;//现在激活的碰撞区域
     public string currentStateName;//当前正在播放的动画
 
+
     private TimelineManager timelineManager;
     //private Action<int> hitActionOfImpulse;
     //private Action<int> hitActionOfPlayFX;
@@ -69,9 +70,18 @@ public class AnimatorFunction : MonoBehaviour
         Attack.CharacterActor.Animator.SetInteger("combo", Attack.combo);
         Attack.canInput = true;
         Attack.canChangeState = true;
-
-
     }
+
+    public void Fly()
+    {
+        Attack.CharacterActor.alwaysNotGrounded = true;
+    }
+    public void FlyEnd()
+    {
+        Attack.CharacterActor.alwaysNotGrounded = true;
+    }
+
+
     public void NormalIdle()
     {
         if(Attack.CharacterActor.Animator.IsInTransition(0)==false)
@@ -90,7 +100,6 @@ public class AnimatorFunction : MonoBehaviour
             Attack.CharacterActor.SetUpRootMotion(true, true);
             Attack.isAttack = false;
             Attack.CharacterActor.Animator.SetBool("attack", false);
-            Attack.SpAttack = -1;
             foreach (var manager in weaponManagers)
             {
                 if (manager.isActiveAndEnabled)
@@ -298,6 +307,7 @@ public class AnimatorFunction : MonoBehaviour
 
         Attack.CharacterActor.Animator.SetInteger("specialAttack",0);
         Attack.canInput = true;
+        Attack.isNextAttack = false;
     }
     public void CannotGetInput()
     {

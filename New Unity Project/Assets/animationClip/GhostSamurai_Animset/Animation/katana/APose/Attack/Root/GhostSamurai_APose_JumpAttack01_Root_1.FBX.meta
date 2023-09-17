@@ -618,6 +618,27 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0
+        functionName: Fly
+        data: sword.sp01
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.39444828
+        functionName: CanGetInput
+        data: sword.sp01
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4033872
+        functionName: FlyEnd
+        data: sword.sp01
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.6130352
         functionName: AttackEnd
         data: sword.sp01
