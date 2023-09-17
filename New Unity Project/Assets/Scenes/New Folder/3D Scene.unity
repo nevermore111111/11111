@@ -821,8 +821,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102522144}
-  m_LocalRotation: {x: 0.03888598, y: -0.12041409, z: 0.0047204164, w: 0.99195063}
-  m_LocalPosition: {x: 0.059150696, y: 0.06203103, z: -0.24003601}
+  m_LocalRotation: {x: 0.03468134, y: -0.120432034, z: 0.004209975, w: 0.9921067}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2982,6 +2982,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -3443,6 +3444,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -5395,6 +5397,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -7243,8 +7246,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: 0.03888598, y: -0.120414086, z: 0.004720417, w: 0.99195063}
-  m_LocalPosition: {x: 0.059150696, y: 0.06203103, z: -0.24003601}
+  m_LocalRotation: {x: 0.03468134, y: -0.120432034, z: 0.004209975, w: 0.9921067}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7423,7 +7426,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605997566}
-  m_LocalRotation: {x: 0.023164071, y: -0.26986164, z: 0.0064939777, w: 0.96259856}
+  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8696,7 +8699,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811303954}
-  m_LocalRotation: {x: 0.034681343, y: -0.12043204, z: 0.0042099752, w: 0.9921067}
+  m_LocalRotation: {x: 0.03468134, y: -0.120432034, z: 0.004209975, w: 0.9921067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9867,8 +9870,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234813, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.062047, z: -5.874625}
+  m_LocalRotation: {x: 0.039234836, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.0620477, z: -5.874625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15530,6 +15533,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   layerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -15572,6 +15576,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   initialVelocity: 30
   duration: 0.5
   movementCurve:
@@ -15628,6 +15633,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   useIKOffsetValues: 0
   rightFootOffset: {x: 0, y: 0, z: 0}
   leftFootOffset: {x: 0, y: 0, z: 0}
@@ -15670,6 +15676,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   IsPlayer: 1
   planarMovementParameters:
     baseSpeedLimit: 8
@@ -15851,6 +15858,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   filterByTag: 1
   wallTag: WallSlide
   slideAcceleration: 10
@@ -15893,6 +15901,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   climbSpeed: 3
   angularSpeed: 120
   jumpVelocity: 10
@@ -15925,6 +15934,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
   gravity: 10
@@ -15953,6 +15963,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   cam: {fileID: 1162800279}
   gunTip: {fileID: 0}
   whatIsGrapplable:
@@ -15990,6 +16001,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   initialVelocity: 12
   duration: 0.65
   movementCurve:
@@ -16046,6 +16058,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
 --- !u!114 &1257029339
@@ -16073,6 +16086,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
   army:
@@ -16104,6 +16118,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   changeState: 0
 --- !u!114 &1257029341
 MonoBehaviour:
@@ -16130,6 +16145,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   HeighAndWidth: {x: 0, y: 0}
   attack: {fileID: 0}
   gravity: 10
@@ -16900,6 +16916,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 2
@@ -17951,6 +17968,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -18131,6 +18149,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   attackEnd: 0
 --- !u!1 &1484830150
 GameObject:
@@ -19767,6 +19786,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -20301,6 +20321,7 @@ MonoBehaviour:
   heightParameter: Height
   GroundDistance: GroundDistance
   evadeParameter: evade
+  spAttackParameter: spAttack
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
