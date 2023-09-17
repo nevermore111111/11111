@@ -186,19 +186,19 @@ namespace Lightbug.CharacterControllerPro.Demo
                         if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
                         {
                             //attack
-                            Attack.spAttack = 10;
+                           SpAttack = 10;
                             CharacterStateController.EnqueueTransition<AttackOnGround>();
                         }
                         else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
                         {
-                            Attack.spAttack = 11;
+                           SpAttack = 11;
                             CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
                         }
                     }
                     else
                     {
                         //在天空使用特殊攻击
-                        Attack.spAttack = 13;
+                       SpAttack = 13;
                         CharacterStateController.EnqueueTransition<AttackOffGround>();
                     }
 

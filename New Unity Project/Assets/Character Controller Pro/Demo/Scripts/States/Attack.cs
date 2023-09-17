@@ -34,7 +34,7 @@ public class Attack : CharacterState
     WeaponManager[] weaponManagers;
     public static bool useGravity = false;
     public static float AttackGravity = 10f;
-    public static int spAttack = -1;
+   
     //10 地面普通攻击 剑
     //11 剑下落攻击 剑
     //12 地面击飞  拳
@@ -163,6 +163,10 @@ public class Attack : CharacterState
 
     public override void UpdateBehaviour(float dt)
     {
+        if (!canPlayerControl)
+        {
+            return;
+        }
         if (useGravity)
         {
             UseGravity(dt);
@@ -174,6 +178,25 @@ public class Attack : CharacterState
     /// </summary>
     private void SetCombo()
     {
+       
+        if (CharacterActions.spAttack.value)
+        {
+            if (CharacterActor.IsGrounded)
+            {
+                if(currentAttackMode == AttackMode.AttackOnGround)
+                {
+                    SpAttack = 10;
+                    //CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
+                }
+            }
+            else
+            {
+                SpAttack = 11;
+            }
+        }
+
+
+
         if (CharacterActions.attack.value)
         {
             //按下攻击键位

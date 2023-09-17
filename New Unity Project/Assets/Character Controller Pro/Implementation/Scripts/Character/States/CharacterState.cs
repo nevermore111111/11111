@@ -97,6 +97,23 @@ namespace Lightbug.CharacterControllerPro.Implementation
         [SerializeField]
         protected string evadeParameter = "evade";
 
+        [SerializeField]
+        protected string spAttackParameter = "spAttack";
+
+        private static int spAttack = -1;
+
+        public int SpAttack
+        { get 
+            {
+                return spAttack;
+            }
+            set
+            {
+                spAttack = value;
+                CharacterActor.Animator.SetInteger(spAttackParameter, value);
+            }
+        }
+
         protected virtual void Awake()
         {
             CharacterActor = this.GetComponentInBranch<CharacterActor>();

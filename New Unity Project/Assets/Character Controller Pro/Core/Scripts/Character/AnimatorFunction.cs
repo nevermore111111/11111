@@ -90,7 +90,7 @@ public class AnimatorFunction : MonoBehaviour
             Attack.CharacterActor.SetUpRootMotion(true, true);
             Attack.isAttack = false;
             Attack.CharacterActor.Animator.SetBool("attack", false);
-            Attack.spAttack = -1;
+            Attack.SpAttack = -1;
             foreach (var manager in weaponManagers)
             {
                 if (manager.isActiveAndEnabled)
@@ -203,7 +203,7 @@ public class AnimatorFunction : MonoBehaviour
     {
         AttackStart(spAttackName);
         //这里开始sp攻击，根据当前sp攻击的名称，设置当前spattack信息
-        Attack.spAttack = Mathf.RoundToInt(CurrentAnimConfig.SpAttackPar[0]);
+        Attack.SpAttack = Mathf.RoundToInt(CurrentAnimConfig.SpAttackPar[0]);
         //根据当前的动画参数设置
     }
 
@@ -246,7 +246,7 @@ public class AnimatorFunction : MonoBehaviour
             if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
             {
                 Attack.CharacterActor.PlanarVelocity = Vector3.zero;
-                if (Attack.spAttack == -1)
+                if (Attack.SpAttack == -1)
                 {
                     Attack.CharacterActor.SetUpRootMotion(false, false);
                 }
