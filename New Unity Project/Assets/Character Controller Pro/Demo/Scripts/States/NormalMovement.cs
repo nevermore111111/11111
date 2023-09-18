@@ -179,7 +179,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                     }
 
                 }
-                if (CharacterActions.spAttack.value)//特殊攻击
+                if (CharacterActions.spAttack.value||SpAttack != -1)//特殊攻击
                 {
                     if (CharacterActor.IsGrounded)
                     {
