@@ -197,7 +197,6 @@ namespace Lightbug.CharacterControllerPro.Core
         [Header("Physics")]
 
         public bool canPushDynamicRigidbodies = true;
-
         [Condition("canPushDynamicRigidbodies", ConditionAttribute.ConditionType.IsTrue, ConditionAttribute.VisibilityType.NotEditable)]
         public LayerMask pushableRigidbodyLayerMask = -1;
 

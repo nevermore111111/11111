@@ -17,7 +17,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1c3e84399152c724e9e41f000c93aaf4, type: 2}
   - {fileID: 11400000, guid: 930e4615c7fc6434fa51fd56248ac8ed, type: 2}
   - {fileID: 11400000, guid: 1e56e5f5018b4474e8adb9a6644c03b0, type: 2}
+  - {fileID: 11400000, guid: 94326143e80300342856efb7046456b3, type: 2}
+  - {fileID: 11400000, guid: fa96adba0f282ec4889dec9d1c68792e, type: 2}
+  - {fileID: 11400000, guid: a2b9e50e64fef374891700eaa0a6c32b, type: 2}
+  - {fileID: 11400000, guid: 72e159649a051914ebf6a5748a2ccf57, type: 2}
+  - {fileID: 11400000, guid: 6f7348f38306a6c488f04eb4a01d4060, type: 2}
+  - {fileID: 11400000, guid: d14c7eef5a36ecc4a98915a407ea79e4, type: 2}
   AttackOnGround_fist: []
-  AttackInAir: []
   StartPlay:
   - {fileID: 0}
+  NormalMovement: []
+  AttackOffGround: []
+  Evade: []

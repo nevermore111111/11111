@@ -97,7 +97,7 @@ public class AttackOnGround :Attack
             }
             if (isAttack == false && CharacterActions.spAttack.value == true)
             {
-                CharacterStateController.EnqueueTransition<AttackOffGround>();
+
             }
             if (CharacterActor.IsGrounded && isAttack == false && Attack.currentAttackMode == AttackMode.AttackOnGround_fist)
             {

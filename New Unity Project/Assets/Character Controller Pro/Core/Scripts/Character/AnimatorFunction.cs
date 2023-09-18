@@ -75,10 +75,14 @@ public class AnimatorFunction : MonoBehaviour
     public void Fly()
     {
         Attack.CharacterActor.alwaysNotGrounded = true;
+        Debug.Log($"{Attack.CharacterActor.UseRootMotion}");
+        
     }
     public void FlyEnd()
     {
-        Attack.CharacterActor.alwaysNotGrounded = true;
+        Attack.CharacterActor.alwaysNotGrounded = false;
+        Debug.Log($"{Attack.CharacterActor.UseRootMotion}");
+        Debug.Log($"{Attack.CharacterActor.Velocity}");
     }
 
 
@@ -223,6 +227,7 @@ public class AnimatorFunction : MonoBehaviour
     /// <param name="attackName"></param>
     public void AttackStart(string attackName)
     {
+        Attack.CharacterActor.UseRootMotion = true;
         //如果名字一致不做任何事情
         if( currentStateName ==attackName)
         {

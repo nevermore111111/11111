@@ -786,7 +786,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 weaponManager[i].gameObject.SetActive(false);
             }
-            Debug.Log(CharacterActor.CharacterCollisionInfo);
+            
 
             StartCoroutine(CheckAnim());
 

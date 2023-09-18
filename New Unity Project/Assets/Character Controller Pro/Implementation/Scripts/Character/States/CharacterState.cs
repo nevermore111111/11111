@@ -240,11 +240,11 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// 如果有多个动画，只会播放最后一个动画的rootmovtion
         /// 第二行个人情况开启或者关闭
         /// </summary>
-        public void SetTimeLineAnimationRootMotion(bool startRootMovtion)
-        {
-            isTimelineAnimation = startRootMovtion;
-            CharacterActor.SetUpRootMotion(startRootMovtion, false);
-        }
+        //public void SetTimeLineAnimationRootMotion(bool startRootMovtion)
+        //{
+        //    isTimelineAnimation = startRootMovtion;
+        //    CharacterActor.SetUpRootMotion(startRootMovtion, false);
+        //}
     }
 
 }

@@ -78,7 +78,7 @@ public class AttackOffGround : Attack
         //{
         //    //这是在空中某个状态进入
         //}
-        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.SetRotation);
+        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.SetRotation);
         ChangeWeaponState(false);
 
 

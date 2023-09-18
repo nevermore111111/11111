@@ -33,7 +33,7 @@ public class AttackOnGround_fist : Attack
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         base.EnterBehaviour(dt, fromState);
-        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetPlanarVelocity, true, RootMotionRotationType.AddRotation);
+        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.AddRotation);
         ChangeWeaponState(false);
         Type type = CharacterStateController.PreviousState.GetType();
         if (CharacterActor.IsGrounded && SpAttack == 11)
