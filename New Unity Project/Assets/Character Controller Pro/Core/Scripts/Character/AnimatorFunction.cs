@@ -100,6 +100,7 @@ public class AnimatorFunction : MonoBehaviour
             Attack.CharacterActor.SetUpRootMotion(true, true);
             Attack.isAttack = false;
             Attack.CharacterActor.Animator.SetBool("attack", false);
+            
             foreach (var manager in weaponManagers)
             {
                 if (manager.isActiveAndEnabled)
@@ -308,6 +309,7 @@ public class AnimatorFunction : MonoBehaviour
         Attack.CharacterActor.Animator.SetInteger("specialAttack",0);
         Attack.canInput = true;
         Attack.isNextAttack = false;
+        Attack.SpAttack = -1;
     }
     public void CannotGetInput()
     {

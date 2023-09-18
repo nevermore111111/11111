@@ -187,12 +187,11 @@ public class Attack : CharacterState
                 if(currentAttackMode == AttackMode.AttackOnGround)
                 {
                     SpAttack = 10;
-                    //CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
                 }
             }
             else
             {
-                SpAttack = 11;
+                //SpAttack = 11;
             }
         }
 

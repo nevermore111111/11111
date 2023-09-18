@@ -56,23 +56,9 @@ public class AttackOnGround :Attack
     {
        
         base.UpdateBehaviour(dt);
-        if (SpAttack == 10)
-            CharacterActor.ForceNotGrounded();
         if (!canPlayerControl)
         {
             return;
-        }
-        if(CharacterActions.spAttack.value)
-        {
-            if(CharacterActor.IsGrounded)
-            {
-                SpAttack = 10;
-                CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
-            }
-            else
-            {
-                SpAttack = 11;
-            }
         }
     }
 
@@ -94,7 +80,7 @@ public class AttackOnGround :Attack
                 //存在下一个普通攻击，直接进入空中攻击
                 if (isNextAttack)
                 {
-                    CharacterStateController.EnqueueTransition<AttackOffGround>();
+                   // CharacterStateController.EnqueueTransition<AttackOffGround>();
                 }
                 else
                 {

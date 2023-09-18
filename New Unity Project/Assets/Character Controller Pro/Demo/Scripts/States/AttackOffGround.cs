@@ -28,6 +28,7 @@ public class AttackOffGround : Attack
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         base.EnterBehaviour(dt, fromState);
+        CharacterActor.alwaysNotGrounded = true;
         Type type = CharacterStateController.PreviousState.GetType();
         if(CharacterActor.IsGrounded == false)
         {
@@ -133,6 +134,7 @@ public class AttackOffGround : Attack
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
+        CharacterActor.alwaysNotGrounded = false;
         base.ExitBehaviour(dt, toState);
         ChangeWeaponState(true);
     }
