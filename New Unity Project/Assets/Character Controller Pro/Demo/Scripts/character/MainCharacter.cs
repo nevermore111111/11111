@@ -127,7 +127,6 @@ public class MainCharacter : CharacterInfo
         elapsedTime = 0f;
         if (weaponManager.isActiveAndEnabled)
         {
-      
             //调用震动和特效
             weaponManager.Impluse();
         }

@@ -217,10 +217,7 @@ var squaredNumbers = numbers.Select(x => x * x);
                         break;
                     }
             }
-
-
         }
-
         else
         {
 
@@ -232,9 +229,13 @@ var squaredNumbers = numbers.Select(x => x * x);
     /// <param name="HitNum"></param>
     public void PlayHittedFx(int HitNum = 0)
     {
-        ParticleSystem particle = HittedFx[0];
-        particle.transform.position = this.GetComponentInChildren<WeaponFx>().transform.position;
-        HittedFx[0].Play(true);
+        Debug.Log("播放击中特效");
+        //if (HittedFx[0]!=null)
+        //{
+        //    ParticleSystem particle = HittedFx[0];
+        //    particle.transform.position = this.GetComponentInChildren<WeaponFx>().transform.position;
+        //    HittedFx[0].Play(true);
+        //}
     }
     /// <summary>
     /// 播放击中特效

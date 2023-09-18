@@ -74,7 +74,6 @@ public class CapsuleDetection : Detection
                         //记录攻击到的人
                         Weapon.HittedCharacter.Add(hitBox.characterInfoOwner);
                         //调用一次//调用一个添加特效
-
                         //调用攻击到的人的受击方法
                         hitBox.characterInfoOwner.GetDamage(1, Weapon.transform.position, Weapon,item, IAgent.HitKind.ground);
                         //调用武器主人的攻击方法，这个地方要再修改

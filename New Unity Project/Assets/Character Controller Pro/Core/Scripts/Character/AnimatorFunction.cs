@@ -99,6 +99,7 @@ public class AnimatorFunction : MonoBehaviour
 
     public void AttackEnd()
     {
+        Attack.CharacterActor.Animator.speed = 1f;
         if (!Attack.CharacterActor.Animator.IsInTransition(0))
         {
             Attack.CharacterActor.SetUpRootMotion(true, true);
@@ -145,6 +146,7 @@ public class AnimatorFunction : MonoBehaviour
     {
         
         hitKind = CurrentAnimConfig.HitStrength[currentHitIndex];
+        activeWeaponDetect = CurrentAnimConfig.HitDetect[currentHitIndex];
         //设置当前攻击类别
         mainCharacter.HitKind = hitKind;
         //根据当前攻击类别来进行
@@ -227,6 +229,7 @@ public class AnimatorFunction : MonoBehaviour
     /// <param name="attackName"></param>
     public void AttackStart(string attackName)
     {
+        Attack.CharacterActor.Animator.speed = 1.2f;
         Attack.CharacterActor.UseRootMotion = true;
         //如果名字一致不做任何事情
         if( currentStateName ==attackName)
