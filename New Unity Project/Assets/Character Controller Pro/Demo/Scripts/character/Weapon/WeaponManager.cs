@@ -31,6 +31,7 @@ public class WeaponManager : MonoBehaviour
     private int frameCount = 0;
     private Vector3 previousWeaponPosition;
     public CharacterInfo weaponOwner;
+    public WeaponData weaponData;
    
 
     private void Awake()
@@ -38,6 +39,7 @@ public class WeaponManager : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
         characterActor = GetComponentInParent<CharacterActor>();
         weaponOwner = GetComponentInParent<CharacterInfo>();
+        weaponData = characterActor.GetComponentInChildren<WeaponData>();
         switch (FxLoad)
         {
             case 1: HittedFx = Resources.Load<FxHelper>("FxHelper").AllFx; break;
@@ -102,38 +104,38 @@ var squaredNumbers = numbers.Select(x => x * x);
     /// <summary>
     ///  在激活中，就每三帧更新一次这个武器方向
     /// </summary>
-    public void UpdateWeaponDirection()
-    {
-        if (isActiveAndEnabled)
-        {
-            if (frameCount == 1)
-            {
-                // 获取当前武器位置
-                Vector3 currentWeaponPosition = transform.position;
+    //public void UpdateWeaponDirection()
+    //{
+    //    if (isActiveAndEnabled)
+    //    {
+    //        if (frameCount == 1)
+    //        {
+    //            // 获取当前武器位置
+    //            Vector3 currentWeaponPosition = transform.position;
 
-                if (currentWeaponPosition - previousWeaponPosition != Vector3.zero)
-                // 计算武器方向
+    //            if (currentWeaponPosition - previousWeaponPosition != Vector3.zero)
+    //            // 计算武器方向
 
-                {
-                    WeaponDirection = currentWeaponPosition - previousWeaponPosition;
+    //            {
+    //                WeaponDirection = currentWeaponPosition - previousWeaponPosition;
 
 
-                    WeaponDirection.Normalize();
+    //                WeaponDirection.Normalize();
 
-                    previousWeaponPosition = currentWeaponPosition;
-                }
+    //                previousWeaponPosition = currentWeaponPosition;
+    //            }
 
-                // 更新上一帧的武器位置
-            }
+    //            // 更新上一帧的武器位置
+    //        }
 
-            // 增加帧计数
-            frameCount = (frameCount + 1) % 2;
-        }
-    }
+    //        // 增加帧计数
+    //        frameCount = (frameCount + 1) % 2;
+    //    }
+    //}
     public void Update()
     {
         HandleDetection();
-        UpdateWeaponDirection();
+        //UpdateWeaponDirection();
         //shake();
         // Debug.Log(Time.timeScale);
     }
@@ -190,6 +192,28 @@ var squaredNumbers = numbers.Select(x => x * x);
             }
             isHited = false;//武器击中判定也清空
         }
+    }
+    /// <summary>
+    /// 调整并震动
+    /// </summary>
+    /// <param name="impulseRank"></param>
+    public void ChangeDirection(float impulseRank)
+    {
+        WeaponDirection = weaponData.transform.forward;
+        Shake(impulseRank);
+    }
+
+    public void Shake(float impulseRank)
+    {
+        impulseSource.GenerateImpulse(impulseRank * WeaponDirection);
+    }
+
+    /// <summary>
+    /// 需要给timeline增加两列，一调整方向 二 根据方向调整大小，三调整时间
+    /// </summary>
+    public void ImplusePlus()
+    {
+        //新的震动的方法，修改震动大小并且震动
     }
 
     /// <summary>

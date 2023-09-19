@@ -1,3 +1,5 @@
+using Lightbug.CharacterControllerPro.Core;
+using Lightbug.CharacterControllerPro.Implementation;
 using Rusk;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +13,11 @@ public class TimelineManager : MonoBehaviour
 {
     public Animator animator;
     public List<PlayableAsset> timelines;
-
     private string currentAnimName;
     private PlayableDirector director;
-
     public AssetHelper myAssetHelper;
-
-
+    public CharacterActor CharacterActor;
+    public CharacterStateController CharacterStateController;
 
     PlayableAsset[] attackOnGround;
     PlayableAsset[] attackOnGroundFist;
@@ -34,6 +34,11 @@ public class TimelineManager : MonoBehaviour
         // 加载配置文件
         director = GetComponent<PlayableDirector>();
         LoadTimeLineAsset();
+
+        CharacterActor = GetComponentInParent<CharacterActor>();
+        CharacterStateController = CharacterActor.GetComponentInChildren<CharacterStateController>();
+
+
         //currentAnimName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name; // 获取当前动画名称
         //PlayTimelineByName(currentAnimName); // 播放对应名称的Playable
     }
@@ -58,6 +63,11 @@ public class TimelineManager : MonoBehaviour
 
     public void PlayTimelineByName(string name)
     {
+        if(CharacterStateController.CurrentState is Attack)
+        {
+            Debug.Log("暂时屏蔽了timeline的播放");
+            return;
+        }
         foreach (PlayableAsset playable in timelines)
         {
             if (playable.name == name) // 找到名称匹配的Playable
