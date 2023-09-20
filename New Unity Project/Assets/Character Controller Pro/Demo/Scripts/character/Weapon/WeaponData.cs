@@ -14,7 +14,7 @@ public class WeaponData : MonoBehaviour
     private float durationValue = 1.0f; // 初始值
 
     // 在Inspector面板中显示impulse属性
-    public float Impulse
+    public float ImpulseForce
     {
         get { return impulseValue; }
         set
@@ -34,6 +34,17 @@ public class WeaponData : MonoBehaviour
             UpdateLocalScale();
         }
     }
+
+    public Vector3 ImpulseDirection
+    {
+        get { return transform.forward; }
+        set
+        {
+            // 设置 transform.forward 的新值
+            transform.forward = value;
+        }
+    }
+
 
     // 使用setter和getter方法来更新transform.localScale
     private void UpdateLocalScale()

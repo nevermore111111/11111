@@ -214,6 +214,13 @@ var squaredNumbers = numbers.Select(x => x * x);
     public void ImplusePlus()
     {
         //新的震动的方法，修改震动大小并且震动
+        Impluse(weaponData);
+    }
+    public void Impluse(WeaponData weaponData)
+    {
+        // Debug.Log(impulseSource.m_ImpulseDefinition.m_ImpulseDuration);
+        impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.Duration;
+        impulseSource.GenerateImpulse(weaponData.ImpulseForce * weaponData.ImpulseDirection);
     }
 
     /// <summary>
