@@ -4,26 +4,44 @@ using UnityEngine;
 
 public class WeaponData : MonoBehaviour
 {
-    public float impulse
+
+    [SerializeField]
+    [Range(0.1f, 10.0f)] // 使用Range属性来定义可编辑范围
+    private float impulseValue = 1.0f; // 初始值
+
+    [SerializeField]
+    [Range(0.1f, 10.0f)]
+    private float durationValue = 1.0f; // 初始值
+
+    // 在Inspector面板中显示impulse属性
+    public float Impulse
     {
-        get { return transform.localScale.z; }
+        get { return impulseValue; }
         set
         {
-            // 设置transform.localScale.x的新值
-            Vector3 newScale = transform.localScale;
-            newScale.z = value;
-            transform.localScale = newScale;
+            impulseValue = value;
+            UpdateLocalScale();
         }
     }
-    public float duration
+
+    // 在Inspector面板中显示duration属性
+    public float Duration
     {
-        get { return transform.localScale.y; }
+        get { return durationValue; }
         set
         {
-            Vector3 newScale = transform.localScale;
-            newScale.y = value;
-            transform.localScale = newScale;
+            durationValue = value;
+            UpdateLocalScale();
         }
+    }
+
+    // 使用setter和getter方法来更新transform.localScale
+    private void UpdateLocalScale()
+    {
+        Vector3 newScale = transform.localScale;
+        newScale.z = impulseValue;
+        newScale.y = durationValue;
+        transform.localScale = newScale;
     }
 
 }
