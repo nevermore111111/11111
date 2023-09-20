@@ -60,28 +60,43 @@ public class AttackOffGround : Attack
             Debug.LogError("进入空中状态时是地面状态（isground = true）");
         }
 
-        //if (type != typeof(StartPlay) && type == typeof(AttackOnGround))//这个是我从什么地方进入这个状态，然后进入时播放不同的动画
-        //{
-        //    combo = 1;
-        //    CharacterActor.Animator.SetInteger("combo", Attack.combo);
-        //    canChangeState = false;
-        //    CharacterActor.Animator.Play("attack01_1");
-        //}
-        //else if (type == typeof(AttackOnGround_fist))
-        //{
-        //    combo = 1;
-        //    CharacterActor.Animator.SetInteger("combo", Attack.combo);
-        //    canChangeState = false;
-        //    CharacterActor.Animator.Play("attack01_1");
-        //}
-        //else if (!CharacterActor.IsGrounded)
-        //{
-        //    //这是在空中某个状态进入
-        //}
+       
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.SetRotation);
         ChangeWeaponState(false);
 
 
+    }
+
+
+    private IEnumerator CheckAnim()
+    {
+        yield return null;
+        //yield return null;
+        Type type = CharacterStateController.PreviousState.GetType();
+        bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("AttackOnGround");
+        if (CharacterStateController.CurrentState is AttackOnGround && (!isPlayMove))
+        {
+            Debug.Log("自动切换了");
+            if (CharacterActor.IsGrounded && SpAttack == 10)
+            {
+                CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
+                canChangeState = false;
+                CharacterActor.ForceNotGrounded();
+                //CharacterActor.VerticalVelocity = CharacterActor.Up * 10f;
+                Debug.Log("离开地面");
+            }
+            else if ((type != typeof(Attack)) && type != typeof(StartPlay) && CharacterActor.IsGrounded)
+            {
+                combo = 1;
+                CharacterActor.Animator.SetInteger("combo", Attack.combo);
+                CharacterActor.Animator.Play("AttackOnGround.attack01_1", 0);
+                canChangeState = false;
+            }
+            else
+            {
+                CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
+            }
+        }
     }
     public override void UpdateBehaviour(float dt)
     {

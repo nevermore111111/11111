@@ -27,31 +27,45 @@ public class AttackOnGround :Attack
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         base.EnterBehaviour(dt, fromState);
-        Type type =CharacterStateController.PreviousState.GetType();
-        if(CharacterActor.IsGrounded&&SpAttack ==10)
-        {
-            CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
-            canChangeState = false;
-            CharacterActor.ForceNotGrounded();
-            //CharacterActor.VerticalVelocity = CharacterActor.Up * 10f;
-            Debug.Log("离开地面");
-        }
-        else if( (type != typeof(Attack))&& type != typeof(StartPlay)&& CharacterActor.IsGrounded)
-        {
-            combo = 1;
-            CharacterActor.Animator.SetInteger("combo", Attack.combo);
-            CharacterActor.Animator.Play("AttackOnGround.attack01_1", 0);
-            canChangeState = false;
-        }
-        else
-        {
-            CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
-        }
-       CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity,true,RootMotionRotationType.SetRotation);
-
+        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity,true,RootMotionRotationType.SetRotation);
+        StartCoroutine(CheckAnim());
         ChangeWeaponState(false);
-
     }
+
+    private IEnumerator CheckAnim()
+    {
+        yield return null;
+        //yield return null;
+        Type type = CharacterStateController.PreviousState.GetType();
+        bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("AttackOnGround");
+        if (CharacterStateController.CurrentState is AttackOnGround && (!isPlayMove))
+        {
+            Debug.Log("自动切换了");
+            if (CharacterActor.IsGrounded && SpAttack == 10)
+            {
+                CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
+                canChangeState = false;
+                CharacterActor.ForceNotGrounded();
+                //CharacterActor.VerticalVelocity = CharacterActor.Up * 10f;
+                Debug.Log("离开地面");
+            }
+            else if ((type != typeof(Attack)) && type != typeof(StartPlay) && CharacterActor.IsGrounded)
+            {
+                combo = 1;
+                CharacterActor.Animator.SetInteger("combo", Attack.combo);
+                CharacterActor.Animator.Play("AttackOnGround.attack01_1", 0);
+                canChangeState = false;
+            }
+            else
+            {
+                CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
+            }
+        }
+    }
+
+
+
+
     public override void UpdateBehaviour(float dt)
     {
        
@@ -73,7 +87,7 @@ public class AttackOnGround :Attack
         }
         //我需要一个方法来存储有没有下一次攻击,来判定是否进入哪一个状态
         //spattack == -1 的意思是没有进行特殊攻击，但是我还要判断是不是进行了普通攻击，是否存在未执行的攻击
-        if (!CharacterActor.IsGrounded)//0代表没有下一个要执行的动画
+        if (!CharacterActor.IsGrounded && CharacterActor.PredictedGroundDistance > CharacterState.HightCanAttackInAir)//0代表没有下一个要执行的动画
         {
             if(isAttack ==false && SpAttack == -1)
             {
@@ -89,7 +103,7 @@ public class AttackOnGround :Attack
                 }
             }
         }
-        else//这样是在地面
+        else if(CharacterActor.IsGrounded)//这样是在地面
         {
             if (CharacterActions.movement.value != Vector2.zero && canChangeState == true&&SpAttack == -1)
             {
