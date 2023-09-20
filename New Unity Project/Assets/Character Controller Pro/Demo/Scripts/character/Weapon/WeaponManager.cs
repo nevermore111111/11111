@@ -32,22 +32,20 @@ public class WeaponManager : MonoBehaviour
     private Vector3 previousWeaponPosition;
     public CharacterInfo weaponOwner;
     public WeaponData weaponData;
-    private CinemachineBrain brain;
-   
+
 
     private void Awake()
     {
         impulseSource = GetComponent<CinemachineImpulseSource>();
         characterActor = GetComponentInParent<CharacterActor>();
         weaponOwner = GetComponentInParent<CharacterInfo>();
-        weaponData = characterActor.GetComponentInChildren<WeaponData>();
-        brain = GameObject.FindAnyObjectByType<CinemachineBrain>();
+        weaponData = FindFirstObjectByType <WeaponData>();
         switch (FxLoad)
         {
             case 1: HittedFx = Resources.Load<FxHelper>("FxHelper").AllFx; break;
             case 2: break;
         }
-        switch(kind)
+        switch (kind)
         {
             default:
                 {
@@ -82,12 +80,12 @@ var squaredNumbers = numbers.Select(x => x * x);
                      */
                     #endregion
                     //对于where来说，选择的还是原本的值，对于select来说，返回的是一个新的对象。
-                    detections = GetComponentsInChildren<Detection>().Where(_=> _.WeaponDetector == WeaponDetector.sword).ToArray();
+                    detections = GetComponentsInChildren<Detection>().Where(_ => _.WeaponDetector == WeaponDetector.sword).ToArray();
                     break;
                 }
-                case WeaponKind.fist:
+            case WeaponKind.fist:
                 {
-                    detections = GetComponentsInChildren<Detection>().Where(_ => _.WeaponDetector == WeaponDetector.rightFoot|| _.WeaponDetector == WeaponDetector.letfFoot|| _.WeaponDetector == WeaponDetector.rightHand|| _.WeaponDetector == WeaponDetector.leftHand).ToArray();
+                    detections = GetComponentsInChildren<Detection>().Where(_ => _.WeaponDetector == WeaponDetector.rightFoot || _.WeaponDetector == WeaponDetector.letfFoot || _.WeaponDetector == WeaponDetector.rightHand || _.WeaponDetector == WeaponDetector.leftHand).ToArray();
                     break;
                 }
         }
@@ -232,7 +230,7 @@ var squaredNumbers = numbers.Select(x => x * x);
     //    // Debug.Log(impulseSource.m_ImpulseDefinition.m_ImpulseDuration);
     //    impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.Duration;
     //    impulseSource.GenerateImpulse(weaponData.ImpulseForce *brain.transform.InverseTransformDirection( weaponData.transform.TransformVector(weaponData.ImpulseDirection)));
-        
+
     //}
 
     /// <summary>
@@ -242,21 +240,58 @@ var squaredNumbers = numbers.Select(x => x * x);
     {
         if (weaponOwner is MainCharacter)
         {
+
             switch (weaponOwner.HitKind)
             {
                 case 0:
                     {
-                        impulseSource.GenerateImpulse(0.4f * WeaponDirection);
+                       
+                        impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.durationValue0;
+                        impulseSource.GenerateImpulse(weaponData.impulseValue0 * WeaponDirection);
+                        if (weaponData.PrintHit)
+                        {
+                            Debug.Log($"当前的攻击类型是{weaponOwner.HitKind},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue0}");
+                        }
                         break;
                     }
                 case 1:
                     {
-                        impulseSource.GenerateImpulse(0.6f * WeaponDirection);
+                        impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.durationValue1;
+                        impulseSource.GenerateImpulse(weaponData.impulseValue1 * WeaponDirection);
+                        if (weaponData.PrintHit)
+                        {
+                            Debug.Log($"当前的攻击类型是{weaponOwner.HitKind},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue1}");
+                        }
                         break;
                     }
                 case 2:
                     {
-                        impulseSource.GenerateImpulse(0.9f * WeaponDirection);
+                        impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.durationValue2;
+                        impulseSource.GenerateImpulse(weaponData.impulseValue2 * WeaponDirection);
+                        if (weaponData.PrintHit)
+                        {
+                            Debug.Log($"当前的攻击类型是{weaponOwner.HitKind},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue2}");
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.durationValue3;
+                        impulseSource.GenerateImpulse(weaponData.impulseValue3 * WeaponDirection);
+                        if (weaponData.PrintHit)
+                        {
+                            Debug.Log($"当前的攻击类型是{weaponOwner.HitKind},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue3}");
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.durationValue4;
+                        impulseSource.GenerateImpulse(weaponData.impulseValue4 * WeaponDirection);
+                        if (weaponData.PrintHit)
+                        {
+                            Debug.Log($"当前的攻击类型是{weaponOwner.HitKind},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue4}");
+                        }
                         break;
                     }
             }
@@ -268,7 +303,7 @@ var squaredNumbers = numbers.Select(x => x * x);
     }
     public void OnDrawGizmos()
     {
-        
+
     }
 
     /// <summary>

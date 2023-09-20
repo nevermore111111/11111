@@ -78,22 +78,22 @@ public class MainCharacter : CharacterInfo
             
             case 0:
                 {
-                    StartCoroutine(Hit(0.03f, 0.03f, 0.03f, 0.3f, weapon));
+                    StartCoroutine(Hit(0.01f, 0.03f, 0.03f, 0.3f, weapon));
                     break;
                 }
             case 1:
                 {
-                    StartCoroutine(Hit(0.05f, 0.05f, 0.06f, 0.1f, weapon));
+                    StartCoroutine(Hit(0.03f, 0.05f, 0.06f, 0.1f, weapon));
                     break;
                 }
             case 2:
                 {
-                    StartCoroutine(Hit(0.05f, 0.06f, 0.08f, 0.1f, weapon));
+                    StartCoroutine(Hit(0.03f, 0.05f, 0.07f, 0.1f, weapon));
                     break;
                 }
             case 3:
                 {
-                    StartCoroutine(Hit(0.05f, 0.05f, 0.08f, 0.1f, weapon));
+                    StartCoroutine(Hit(0.03f, 0.05f, 0.08f, 0.1f, weapon));
                     break;
                 }
         }

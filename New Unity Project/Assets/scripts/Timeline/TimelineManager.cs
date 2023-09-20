@@ -63,11 +63,11 @@ public class TimelineManager : MonoBehaviour
 
     public void PlayTimelineByName(string name)
     {
-        if(CharacterStateController.CurrentState is Attack)
-        {
-            Debug.Log("暂时屏蔽了timeline的播放");
-            return;
-        }
+        //if(CharacterStateController.CurrentState is Attack)
+        //{
+        //    Debug.Log("暂时屏蔽了timeline的播放");
+        //    return;
+        //}
         foreach (PlayableAsset playable in timelines)
         {
             if (playable.name == name) // 找到名称匹配的Playable

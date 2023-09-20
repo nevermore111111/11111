@@ -166,7 +166,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                             CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
                         }
                     }
-                    else if (!CharacterActor.IsGrounded)
+                    else if (!CharacterActor.IsGrounded && CharacterActor.PredictedGroundDistance > CharacterState.HightCanAttackInAir)
                     {
                         if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
                         {
@@ -191,15 +191,14 @@ namespace Lightbug.CharacterControllerPro.Demo
                         }
                         else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
                         {
-                            SpAttack = 11;
-                            CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+                            //SpAttack = 11;
+                            //CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
                         }
                     }
-                    else
+                    else if (!CharacterActor.IsGrounded && CharacterActor.PredictedGroundDistance > CharacterState.HightCanAttackInAir)
                     {
-                        //在天空使用特殊攻击
-                        //SpAttack = 13;
-                        //CharacterStateController.EnqueueTransition<AttackOffGround>();
+                        SpAttack = 11;
+                        CharacterStateController.EnqueueTransition<AttackOffGround>();
                     }
 
                 }
