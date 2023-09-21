@@ -62,8 +62,6 @@ public class AnimatorFunction : MonoBehaviour
 
     public void Idle()
     {
-
-
         Attack.isAttack = false;
         Attack.CharacterActor.Animator.SetBool("attack", false);
         Attack.combo = 0;
