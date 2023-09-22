@@ -166,6 +166,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                             CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
                         }
                     }
+                    //在空中
                     else if (!CharacterActor.IsGrounded && CharacterActor.PredictedGroundDistance > CharacterState.HightCanAttackInAir)
                     {
                         if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
@@ -179,7 +180,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                     }
 
                 }
-                if (CharacterActions.spAttack.value||SpAttack != -1)//特殊攻击
+                if (CharacterActions.spAttack.value)//特殊攻击
                 {
                     if (CharacterActor.IsGrounded)
                     {
@@ -790,7 +791,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             StartCoroutine(CheckAnim());
 
             CharacterActor.alwaysNotGrounded = false;
-
+            SpAttack = -1;
             targetLookingDirection = CharacterActor.Forward;
 
             if (fromState == CharacterStateController.GetState<WallSlide>())

@@ -29,38 +29,7 @@ public class AttackOffGround : Attack
     {
         base.EnterBehaviour(dt, fromState);
         CharacterActor.alwaysNotGrounded = true;
-        Type type = CharacterStateController.PreviousState.GetType();
-        if(CharacterActor.IsGrounded == false)
-        {
-            if (currentAttackMode == AttackMode.AttackOnGround)
-            {
-                if (SpAttack == -1)
-                {
-
-                }
-                else if(SpAttack == 10)
-                {
-
-                }
-            }
-            else if (currentAttackMode == AttackMode.AttackOnGround_fist)
-            {
-                if(SpAttack == -1)
-                {
-
-                }
-                else if(SpAttack ==10)
-                {
-
-                }
-            }
-        }
-        else
-        {
-            Debug.LogError("进入空中状态时是地面状态（isground = true）");
-        }
-
-       
+        StartCoroutine(CheckAnim());
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.SetRotation);
         ChangeWeaponState(false);
 
@@ -73,28 +42,25 @@ public class AttackOffGround : Attack
         yield return null;
         //yield return null;
         Type type = CharacterStateController.PreviousState.GetType();
-        bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("AttackOnGround");
-        if (CharacterStateController.CurrentState is AttackOnGround && (!isPlayMove))
+        bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("AttackOffGround");
+        if (CharacterStateController.CurrentState is AttackOffGround && (!isPlayMove))
         {
             Debug.Log("自动切换了");
-            if (CharacterActor.IsGrounded && SpAttack == 10)
+            if(CharacterActor.IsGrounded)
             {
-                CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
-                canChangeState = false;
-                CharacterActor.ForceNotGrounded();
-                //CharacterActor.VerticalVelocity = CharacterActor.Up * 10f;
-                Debug.Log("离开地面");
+                Debug.LogError("为什么在落地状态进入空中攻击？");
             }
-            else if ((type != typeof(Attack)) && type != typeof(StartPlay) && CharacterActor.IsGrounded)
+            if (!CharacterActor.IsGrounded && SpAttack == 11)
             {
-                combo = 1;
-                CharacterActor.Animator.SetInteger("combo", Attack.combo);
-                CharacterActor.Animator.Play("AttackOnGround.attack01_1", 0);
+                CharacterActor.Animator.Play("AttackOffGround.sp11", 0);
                 canChangeState = false;
             }
             else
             {
-                CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
+                combo = 1;
+                CharacterActor.Animator.SetInteger("combo", Attack.combo);
+                CharacterActor.Animator.CrossFade("AttackOffGround.air_attack01_1", 0.1f);
+                canChangeState = false;
             }
         }
     }
