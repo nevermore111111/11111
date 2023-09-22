@@ -314,8 +314,16 @@ public class AnimatorFunction : MonoBehaviour
 
         Attack.CharacterActor.Animator.SetInteger("specialAttack",0);
         Attack.canInput = true;
-        Attack.isNextAttack = false;
         Attack.SpAttack = -1;
+    }
+    
+    public void Drop(float dropSpeed)
+    {
+        Attack.CharacterActor.UseRootMotion = false;
+        Attack.useGravity = true;
+        Attack.CharacterActor.VerticalVelocity -= dropSpeed*Attack.CharacterActor.Up;
+        Attack.CharacterActor.alwaysNotGrounded = false;
+        //仅仅使用水平移动
     }
     public void CannotGetInput()
     {

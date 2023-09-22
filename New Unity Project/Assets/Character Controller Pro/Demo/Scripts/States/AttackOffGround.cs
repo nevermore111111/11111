@@ -32,8 +32,6 @@ public class AttackOffGround : Attack
         StartCoroutine(CheckAnim());
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.SetRotation);
         ChangeWeaponState(false);
-
-
     }
 
 
@@ -50,17 +48,20 @@ public class AttackOffGround : Attack
             {
                 Debug.LogError("为什么在落地状态进入空中攻击？");
             }
-            if (!CharacterActor.IsGrounded && SpAttack == 11)
+            //if(isNextAttack)
             {
-                CharacterActor.Animator.Play("AttackOffGround.sp11", 0);
-                canChangeState = false;
-            }
-            else
-            {
-                combo = 1;
-                CharacterActor.Animator.SetInteger("combo", Attack.combo);
-                CharacterActor.Animator.CrossFade("AttackOffGround.air_attack01_1", 0.1f);
-                canChangeState = false;
+                if(SpAttack==11)
+                {
+                    CharacterActor.Animator.Play("AttackOffGround.sp11", 0);
+                    canChangeState = false;
+                }
+                else
+                {
+                    combo = 1;
+                    CharacterActor.Animator.SetInteger("combo", Attack.combo);
+                    CharacterActor.Animator.CrossFade("AttackOffGround.air_attack01_1", 0.1f);
+                    canChangeState = false;
+                }
             }
         }
     }
@@ -103,15 +104,6 @@ public class AttackOffGround : Attack
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-
-        //if (CharacterActions.movement.value != Vector2.zero && canChangeState == true)
-        //{
-        //    CharacterStateController.EnqueueTransition<NormalMovement>();
-        //}
-        //if (CharacterActor.IsGrounded && isAttack == false && Attack.currentAttackMode == AttackMode.AttackOnGround_fist)
-        //{
-        //    CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
-        //}
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {

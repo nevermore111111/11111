@@ -167,7 +167,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                         }
                     }
                     //在空中
-                    else if (!CharacterActor.IsGrounded && CharacterActor.PredictedGroundDistance > CharacterState.HightCanAttackInAir)
+                    else if (!CharacterActor.IsGrounded && canAttackInair)
                     {
                         if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
                         {
@@ -196,7 +196,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                             //CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
                         }
                     }
-                    else if (!CharacterActor.IsGrounded && CharacterActor.PredictedGroundDistance > CharacterState.HightCanAttackInAir)
+                    else if ( canAttackInair)
                     {
                         SpAttack = 11;
                         CharacterStateController.EnqueueTransition<AttackOffGround>();

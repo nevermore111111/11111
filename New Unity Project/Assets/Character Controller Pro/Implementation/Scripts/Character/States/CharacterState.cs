@@ -21,7 +21,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         [SerializeField]
         RuntimeAnimatorController runtimeAnimatorController = null;
 
-        static public bool  canPlayerControl = false;
+        static public bool canPlayerControl = false;
         static public bool isTimelineAnimation = false;
         /// <summary>
         /// Gets the hash value (Animator) associated with this state, based on its name.
@@ -29,7 +29,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         public int StateNameHash { get; private set; }
 
         public TimelineManager timelineManager;
-     
+
 
         /// <summary>
         /// Gets the state runtime animator controller.
@@ -60,7 +60,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
                 return CharacterBrain == null ? new CharacterActions() : CharacterBrain.CharacterActions;
             }
         }
-        
+
         /// <summary>
         /// Gets the CharacterStateController component of the gameObject.
         /// </summary>
@@ -106,7 +106,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         public static float HightCanAttackInAir = 0.6f;
 
         public int SpAttack
-        { get 
+        { get
             {
                 return spAttack;
             }
@@ -128,6 +128,12 @@ namespace Lightbug.CharacterControllerPro.Implementation
         {
             canPlayerControl = canControl;
         }
+
+        /// <summary>
+        /// 是否能进行空中攻击，如果可以，才会进行
+        /// </summary>
+        public bool canAttackInair => (!CharacterActor.IsGrounded)&&(CharacterActor.PredictedGroundDistance > HightCanAttackInAir);
+
         protected virtual void Start()
         {
             StateNameHash = Animator.StringToHash(this.GetType().Name);

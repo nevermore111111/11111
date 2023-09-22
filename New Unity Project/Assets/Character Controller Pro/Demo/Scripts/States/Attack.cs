@@ -134,7 +134,7 @@ public class Attack : CharacterState
         //HeighAndWidth = CharacterActor.BodySize;
         base.EnterBehaviour(dt, fromState);
         isAttack = true;
-
+        useGravity = false;
         canInput = false;
         if (CharacterStateController.PreviousState is not StartPlay)
             isJustEnter = true;
@@ -155,8 +155,9 @@ public class Attack : CharacterState
         base.ExitBehaviour(dt, toState);
         isJustEnter = true;
         isAttack = false;
-        CharacterActor.SetUpRootMotion(false, false);
         CharacterActor.Animator.SetBool("attack", false);
+        CharacterActor.Animator.speed = 1f;
+        CharacterActor.SetUpRootMotion(false, false);
         CharacterActor.CheckAndSetSize(normalHeightAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
         // CharacterActor.SetSize(HeighAndWidth,)
     }
@@ -181,27 +182,26 @@ public class Attack : CharacterState
        
         if (CharacterActions.spAttack.value)
         {
-            isNextAttack = true;
             if (CharacterActor.IsGrounded)
             {
                 if(currentAttackMode == AttackMode.AttackOnGround)
                 {
+                    isNextAttack = true;
                     SpAttack = 10;
                 }
             }
-            else
+            else if(canAttackInair && currentAttackMode == AttackMode.AttackOnGround)
             {
-                //SpAttack = 11;
+                isNextAttack = true;
+                SpAttack = 11;
             }
         }
-
-
-
         if (CharacterActions.attack.value)
         {
             //°´ÏÂ¹¥»÷¼üÎ»
             if (canInput)
             {
+                isNextAttack = true;
                 canInput = false;
                 isNextAttack = true;
                 combo++;
@@ -212,13 +212,7 @@ public class Attack : CharacterState
                 CharacterActor.Animator.SetInteger("combo", combo);
             }
         }
-        if(CharacterActions.spAttack.value)
-        {
-            if(canInput)
-            {
-
-            }
-        }
+     
     }
 
     private void UseGravity(float dt)
