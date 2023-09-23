@@ -85,19 +85,37 @@ public class AttackOnGround :Attack
         {
             return;
         }
-        if(canAttackInair&& isNextAttack)
+        //if(canAttackInair&& isNextAttack&&isAttack)
+        //{
+        //     CharacterStateController.EnqueueTransition<AttackOffGround>();
+        //}
+        //if(!CharacterActor.IsGrounded)
+        //{
+        //    CharacterStateController.EnqueueTransition<NormalMovement>();
+        //}
+        //else if(CharacterActor.IsGrounded)//这样是在地面
+        //{
+        //    if (CharacterActions.movement.value != Vector2.zero && canChangeState == true&&SpAttack == -1)
+        //    {
+        //        CharacterStateController.EnqueueTransition<NormalMovement>();
+        //    }
+        //}
+        if(CharacterActor.IsGrounded)
         {
-             CharacterStateController.EnqueueTransition<AttackOffGround>();
-        }
-        else if(CharacterActor.IsGrounded)//这样是在地面
-        {
-            if (CharacterActions.movement.value != Vector2.zero && canChangeState == true&&SpAttack == -1)
+            if (CharacterActions.movement.value != Vector2.zero && canChangeState == true && SpAttack == -1)
             {
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }
-            if (CharacterActor.IsGrounded && isAttack == false && Attack.currentAttackMode == AttackMode.AttackOnGround_fist)
+        }
+        else if(!CharacterActor.IsGrounded&&!isAttack)//空中非攻击才会切换
+        {
+            if(canAttackInair&&isNextAttack)
             {
-                CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+                CharacterStateController.EnqueueTransition<AttackOffGround>();
+            }
+            else
+            {
+                CharacterStateController.EnqueueTransition<NormalMovement>();
             }
         }
     }

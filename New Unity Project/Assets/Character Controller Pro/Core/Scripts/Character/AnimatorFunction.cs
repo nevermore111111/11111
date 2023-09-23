@@ -73,14 +73,10 @@ public class AnimatorFunction : MonoBehaviour
     public void Fly()
     {
         Attack.CharacterActor.alwaysNotGrounded = true;
-        Debug.Log($"{Attack.CharacterActor.UseRootMotion}");
-        
     }
     public void FlyEnd()
     {
         Attack.CharacterActor.alwaysNotGrounded = false;
-        Debug.Log($"{Attack.CharacterActor.UseRootMotion}");
-        Debug.Log($"{Attack.CharacterActor.Velocity}");
     }
 
 
