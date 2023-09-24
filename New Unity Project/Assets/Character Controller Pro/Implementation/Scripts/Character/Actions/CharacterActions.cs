@@ -105,7 +105,7 @@ public struct CharacterActions
         @attack.value = inputHandler.GetBool("attack");
         @grap.value = inputHandler.GetBool("grap");
         @spAttack.value = inputHandler.GetBool("spAttack");
-        @test.value = inputHandler.GetBoolUp("Test");//Ì§Æð
+        @test.value = inputHandler.GetBool("Test");//Ì§Æð
 
         @pitch.value = inputHandler.GetFloat("Pitch");
         @roll.value = inputHandler.GetFloat("Roll");

@@ -1,8 +1,11 @@
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
+using Lightbug.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 /// <summary>
@@ -22,18 +25,18 @@ public class Grap : CharacterState
     }
     public override void UpdateBehaviour(float dt)
     {
+        Debug.Log(grappleTimer);
         if (CharacterActions.attack.value)
         {
-
             Grap01();
-            //CharacterActor.ForceNotGrounded();
         }
-        if (grappling)
+        if (grappleTimer > 0)
         {
-            CharacterActor.Velocity -= new Vector3(0, Grivaty * Time.deltaTime, 0);
+            grappleTimer -= Time.deltaTime;
         }
-
+        UseGravity(dt);
     }
+   
     public override void PostUpdateBehaviour(float dt)
     {
         LaterGrap();
@@ -47,8 +50,9 @@ public class Grap : CharacterState
 
     public override void CheckExitTransition()
     {
-        if (CharacterActions.test.value)
+        if (CharacterActions.jump.value)
         {
+            grappleTimer = 0;
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
     }
@@ -69,6 +73,7 @@ public class Grap : CharacterState
 
     [Header("Cooldown")]
     public float grapplingCd;
+    [SerializeField]
     private float grappleTimer;
     [Space(10)]
     [Header("Input")]
@@ -76,13 +81,13 @@ public class Grap : CharacterState
 
     public bool grappling;
 
+    [Header("这个是测试用的")]
+    public Transform Target;
+
     private void Grap01()
     {
         StartGrapple();
-        if (grappleTimer > 0)
-        {
-            grappleTimer -= Time.deltaTime;
-        }
+       
     }
 
     /// <summary>
@@ -94,6 +99,7 @@ public class Grap : CharacterState
         {
             Lr.SetPosition(0, gunTip.position);
         }
+       
     }
 
     private void StartGrapple()
@@ -105,6 +111,10 @@ public class Grap : CharacterState
         if (Physics.Raycast(cam.position, cam.forward, out Hit, maxGrappleDistance, whatIsGrapplable))
         {
             grapplePoint = Hit.point;
+            if(Target != null)
+            {
+                grapplePoint = Target.position;
+            }
             Invoke(nameof(ExecuteGrapple), grappleDelayTime);
         }
         else
@@ -118,7 +128,7 @@ public class Grap : CharacterState
     }
     private void ExecuteGrapple()
     {
-        Vector3 vecs = CalVocality(CharacterActor.Position, grapplePoint, UnityEngine.Random.Range(0f, 2f), 9.8f);
+        Vector3 vecs = CalVocality(CharacterActor.Position, grapplePoint, UnityEngine.Random.Range(0f, 2f), Grivaty);
         CharacterActor.ForceNotGrounded();
         CharacterActor.Velocity = vecs;
         Debug.Log("弹射");
@@ -145,5 +155,11 @@ public class Grap : CharacterState
         Vector3 med = new(delX, 0, delZ);
         Vector3 end = med.normalized * vXZ + new Vector3(0, vy, 0);
         return end;
+    }
+
+    private void UseGravity(float dt)
+    {
+        if (!CharacterActor.IsStable)
+            CharacterActor.VerticalVelocity += CustomUtilities.Multiply(-CharacterActor.Up, Grivaty, dt);
     }
 }
