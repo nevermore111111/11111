@@ -103,7 +103,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         private static int spAttack = -1;
 
         //可以进入空中攻击的最低限度
-        public static float HightCanAttackInAir = 0.6f;
+        public static float HightCanAttackInAir = 0.8f;
 
         public int SpAttack
         { get

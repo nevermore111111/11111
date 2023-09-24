@@ -97,6 +97,7 @@ public class AnimatorFunction : MonoBehaviour
         Attack.CharacterActor.Animator.speed = 1f;
         if (!Attack.CharacterActor.Animator.IsInTransition(0))
         {
+            if(CharacterStateController.CurrentState is Attack)
             Attack.CharacterActor.SetUpRootMotion(true, true);
             Attack.isAttack = false;
             Attack.CharacterActor.Animator.SetBool("attack", false);
@@ -255,7 +256,9 @@ public class AnimatorFunction : MonoBehaviour
             GameObject[] gamesEnemy = mainCharacter.enemies.Select(m => m.gameObject).ToArray();
             mainCharacter.selectEnemy = HelpTools01.FindClosest(Attack.CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
             Vector3 Forward = (mainCharacter.selectEnemy.transform.position - Attack.CharacterActor.transform.position).normalized;
+            Debug.Log(Attack.CharacterActor.Forward);
             Attack.CharacterActor.Forward = new(Forward.x, 0, Forward.z);
+            Debug.Log(Attack.CharacterActor.Forward);
             if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
             {
                 Attack.CharacterActor.PlanarVelocity = Vector3.zero;

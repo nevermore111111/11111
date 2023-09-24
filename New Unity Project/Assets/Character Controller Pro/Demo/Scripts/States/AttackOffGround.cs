@@ -31,7 +31,7 @@ public class AttackOffGround : Attack
         base.EnterBehaviour(dt, fromState);
         //CharacterActor.alwaysNotGrounded = true;
         StartCoroutine(CheckAnim());
-        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.SetRotation);
+        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.AddRotation);
         ChangeWeaponState(false);
     }
 

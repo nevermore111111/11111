@@ -27,7 +27,7 @@ public class AttackOnGround :Attack
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         base.EnterBehaviour(dt, fromState);
-        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity,true,RootMotionRotationType.SetRotation);
+        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity,true,RootMotionRotationType.AddRotation);
         StartCoroutine(CheckAnim());
         ChangeWeaponState(false);
     }
