@@ -47,7 +47,6 @@ public class AttackOnGround :Attack
                 canChangeState = false;
                 CharacterActor.ForceNotGrounded();
                 //CharacterActor.VerticalVelocity = CharacterActor.Up * 10f;
-                Debug.Log("Àë¿ªµØÃæ");
             }
             else if ((type != typeof(Attack)) && type != typeof(StartPlay) && CharacterActor.IsGrounded)
             {

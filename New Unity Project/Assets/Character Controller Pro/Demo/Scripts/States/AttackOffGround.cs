@@ -105,7 +105,6 @@ public class AttackOffGround : Attack
         {
             if(CharacterActor.IsGrounded&&SpAttack == 11)
             {
-                Debug.Log("xialuo");
                 weaponManagers.FirstOrDefault(_ => _.kind == WeaponKind.sword).SPImpluse("sp11");
             }
             CharacterStateController.EnqueueTransition<NormalMovement>();
