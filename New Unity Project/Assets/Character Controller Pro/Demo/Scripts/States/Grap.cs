@@ -1,3 +1,4 @@
+using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
 using System;
 using System.Collections;
@@ -9,36 +10,49 @@ using UnityEngine;
 /// <summary>
 public class Grap : CharacterState
 {
-   
+
     protected override void Awake()
     {
-        base.Awake();   
+        base.Awake();
     }
     protected override void Start()
     {
         base.Start();
-        
+        Lr = gunTip.GetComponent<LineRenderer>();
     }
     public override void UpdateBehaviour(float dt)
     {
-        if(CharacterActions.jump.value)
+        if (CharacterActions.attack.value)
         {
-            
+
             Grap01();
             //CharacterActor.ForceNotGrounded();
         }
-        if(grappling)
+        if (grappling)
         {
-            CharacterActor.Velocity -= new Vector3(0,Grivaty*Time.deltaTime,0);
+            CharacterActor.Velocity -= new Vector3(0, Grivaty * Time.deltaTime, 0);
         }
-        
+
+    }
+    public override void PostUpdateBehaviour(float dt)
+    {
+        LaterGrap();
     }
 
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         base.EnterBehaviour(dt, fromState);
-        CharacterActor.Velocity = new Vector3(0,0,0);
+        CharacterActor.Velocity = new Vector3(0, 0, 0);
     }
+
+    public override void CheckExitTransition()
+    {
+        if (CharacterActions.test.value)
+        {
+            CharacterStateController.EnqueueTransition<NormalMovement>();
+        }
+    }
+
 
     [Header("References")]
     public Transform cam;
@@ -64,7 +78,7 @@ public class Grap : CharacterState
 
     private void Grap01()
     {
-            StartGrapple();
+        StartGrapple();
         if (grappleTimer > 0)
         {
             grappleTimer -= Time.deltaTime;
@@ -108,6 +122,7 @@ public class Grap : CharacterState
         CharacterActor.ForceNotGrounded();
         CharacterActor.Velocity = vecs;
         Debug.Log("µØ…‰");
+        Invoke(nameof(StopGrapple), 1f);
     }
     private void StopGrapple()
     {

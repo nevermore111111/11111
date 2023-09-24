@@ -31,7 +31,7 @@ public class Attack : CharacterState
     private Vector2 HeighAndWidth;
     private Vector2 normalHeightAndWidth;
     public Attack attack;
-    WeaponManager[] weaponManagers;
+    protected WeaponManager[] weaponManagers;
     public static bool useGravity = false;
     public static float AttackGravity = 10f;
    
@@ -184,13 +184,13 @@ public class Attack : CharacterState
         {
             if (CharacterActor.IsGrounded)
             {
-                if(currentAttackMode == AttackMode.AttackOnGround)
+                //if(currentAttackMode == AttackMode.AttackOnGround)
                 {
                     isNextAttack = true;
                     SpAttack = 10;
                 }
             }
-            else if(canAttackInair && currentAttackMode == AttackMode.AttackOnGround)
+            else if(canAttackInair )//&& currentAttackMode == AttackMode.AttackOnGround)
             {
                 isNextAttack = true;
                 SpAttack = 11;

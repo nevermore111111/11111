@@ -54,6 +54,17 @@ namespace Lightbug.CharacterControllerPro.Implementation
                 return element.AxesValue;
         }
 
+        public override bool GetBoolDown(string actionName)
+        {
+            Debug.LogError("这地方没做");
+            return GetBool(actionName);
+        }
+
+        public override bool GetBoolUp(string actionName)
+        {
+            Debug.LogError("这地方没做");
+            return GetBool(actionName);
+        }
     }
 
 }

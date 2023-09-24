@@ -50,6 +50,8 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
         //public abstract void Update();
         public abstract bool GetBool(string actionName);
+        public abstract bool GetBoolDown(string actionName);
+        public abstract bool GetBoolUp(string actionName);
         public abstract float GetFloat(string actionName);
         public abstract Vector2 GetVector2(string actionName);
         //public abstract bool IsShortPress(string actionName);

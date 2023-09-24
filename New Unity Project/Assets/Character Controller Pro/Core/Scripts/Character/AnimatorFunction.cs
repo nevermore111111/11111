@@ -31,7 +31,7 @@ public class AnimatorFunction : MonoBehaviour
     public int hitKind;//现在攻击的种类
     public string activeWeaponDetect;//现在激活的碰撞区域
     public string currentStateName;//当前正在播放的动画
-
+    public WeaponData WeaponData;
 
     private TimelineManager timelineManager;
     //private Action<int> hitActionOfImpulse;
@@ -46,6 +46,7 @@ public class AnimatorFunction : MonoBehaviour
         CharacterStateController = transform.parent.parent.GetComponentInChildren<CharacterStateController>();
         CameraEffects = CinemachineFreeLook.GetComponent<CameraEffects>();
         timelineManager = GetComponent<TimelineManager>();
+        WeaponData = FindAnyObjectByType<WeaponData>();
         //
     }
     private void Start()
@@ -313,11 +314,11 @@ public class AnimatorFunction : MonoBehaviour
         Attack.SpAttack = -1;
     }
     
-    public void Drop(float dropSpeed)
+    public void Drop()
     {
         Attack.CharacterActor.UseRootMotion = false;
         Attack.useGravity = true;
-        Attack.CharacterActor.VerticalVelocity -= dropSpeed*Attack.CharacterActor.Up;
+        Attack.CharacterActor.VerticalVelocity -= WeaponData.DropSpeed*Attack.CharacterActor.Up;
         Attack.CharacterActor.alwaysNotGrounded = false;
         //仅仅使用水平移动
     }

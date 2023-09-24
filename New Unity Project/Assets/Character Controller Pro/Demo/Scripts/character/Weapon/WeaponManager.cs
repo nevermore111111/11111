@@ -236,11 +236,32 @@ var squaredNumbers = numbers.Select(x => x * x);
     /// <summary>
     /// 产生震动
     /// </summary>
+    public void SPImpluse(string attackName)
+    {
+        switch(attackName)
+        {
+            case "sp11":
+                {
+                    impulseSource.m_ImpulseDefinition.m_ImpulseShape = weaponData.ImpulseShapes;
+                    impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.sp11Duration;
+                    impulseSource.GenerateImpulse(WeaponDirection * weaponData.sp11Force);
+                    break;
+                }
+        }
+    }
+
+
+    /// <summary>
+    /// 产生震动
+    /// </summary>
     public void Impluse(int i = 0)
     {
         if (weaponOwner is MainCharacter)
         {
-
+            if(impulseSource.m_ImpulseDefinition.m_ImpulseShape != CinemachineImpulseDefinition.ImpulseShapes.Explosion)
+            {
+                impulseSource.m_ImpulseDefinition.m_ImpulseShape = CinemachineImpulseDefinition.ImpulseShapes.Explosion;
+            }
             switch (weaponOwner.HitKind)
             {
                 case 0:

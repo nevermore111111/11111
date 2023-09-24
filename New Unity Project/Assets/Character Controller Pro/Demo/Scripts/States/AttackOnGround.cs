@@ -85,21 +85,6 @@ public class AttackOnGround :Attack
         {
             return;
         }
-        //if(canAttackInair&& isNextAttack&&isAttack)
-        //{
-        //     CharacterStateController.EnqueueTransition<AttackOffGround>();
-        //}
-        //if(!CharacterActor.IsGrounded)
-        //{
-        //    CharacterStateController.EnqueueTransition<NormalMovement>();
-        //}
-        //else if(CharacterActor.IsGrounded)//这样是在地面
-        //{
-        //    if (CharacterActions.movement.value != Vector2.zero && canChangeState == true&&SpAttack == -1)
-        //    {
-        //        CharacterStateController.EnqueueTransition<NormalMovement>();
-        //    }
-        //}
         if(CharacterActor.IsGrounded)
         {
             if (CharacterActions.movement.value != Vector2.zero && canChangeState == true && SpAttack == -1)
@@ -115,6 +100,7 @@ public class AttackOnGround :Attack
             }
             else
             {
+                useGravity = true;
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }
         }

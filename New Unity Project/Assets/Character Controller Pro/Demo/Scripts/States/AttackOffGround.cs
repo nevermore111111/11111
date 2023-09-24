@@ -5,6 +5,7 @@ using Lightbug.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Authentication.ExtendedProtection;
 
 using UnityEngine;
@@ -28,7 +29,7 @@ public class AttackOffGround : Attack
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         base.EnterBehaviour(dt, fromState);
-        CharacterActor.alwaysNotGrounded = true;
+        //CharacterActor.alwaysNotGrounded = true;
         StartCoroutine(CheckAnim());
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.SetRotation);
         ChangeWeaponState(false);
@@ -41,6 +42,7 @@ public class AttackOffGround : Attack
         //yield return null;
         Type type = CharacterStateController.PreviousState.GetType();
         bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("AttackOffGround");
+        canChangeState = false;
         if (CharacterStateController.CurrentState is AttackOffGround && (!isPlayMove))
         {
             Debug.Log("×Ô¶¯ÇÐ»»ÁË");
@@ -53,14 +55,12 @@ public class AttackOffGround : Attack
                 if(SpAttack==11)
                 {
                     CharacterActor.Animator.Play("AttackOffGround.sp11", 0);
-                    canChangeState = false;
                 }
                 else
                 {
                     combo = 1;
                     CharacterActor.Animator.SetInteger("combo", Attack.combo);
                     CharacterActor.Animator.CrossFade("AttackOffGround.air_attack01_1", 0.1f);
-                    canChangeState = false;
                 }
             }
         }
@@ -100,14 +100,20 @@ public class AttackOffGround : Attack
         {
             return;
         }
-        if (CharacterActor.IsGrounded)
+       
+        if (CharacterActor.IsGrounded||canChangeState)
         {
+            if(CharacterActor.IsGrounded&&SpAttack == 11)
+            {
+                Debug.Log("xialuo");
+                weaponManagers.FirstOrDefault(_ => _.kind == WeaponKind.sword).SPImpluse("sp11");
+            }
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
-        CharacterActor.alwaysNotGrounded = false;
+  //      CharacterActor.alwaysNotGrounded = false;
         base.ExitBehaviour(dt, toState);
         ChangeWeaponState(true);
     }

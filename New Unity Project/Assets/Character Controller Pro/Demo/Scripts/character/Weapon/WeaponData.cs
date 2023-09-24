@@ -42,5 +42,19 @@ public class WeaponData : MonoBehaviour
     [Range(0f, 1f)]
     public float durationValue4 = 1.0f; // ≥ı º÷µ
 
+    [Header("Ãÿ ‚π•ª˜≈‰÷√")]
+    [SerializeField]
+    [Range(0f, 1f)]
+    public float sp11Duration = 1.0f;
+    [SerializeField]
+    [Range(0f, 5f)]
+    public float sp11Force = 1.0f;
+
+    public CinemachineImpulseDefinition.ImpulseShapes ImpulseShapes = CinemachineImpulseDefinition.ImpulseShapes.Bump;
+
+
+
+
+    public float DropSpeed = 10f;
 
 }

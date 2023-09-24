@@ -39,9 +39,34 @@ namespace Lightbug.CharacterControllerPro.Implementation
             return output;
         }
 
+        public override bool GetBoolDown(string actionName)
+        {
+            bool output = false;
+            try
+            {
+                output = Input.GetButtonDown(actionName);
+            }
+            catch (System.Exception)
+            {
+                PrintInputWarning(actionName);
+            }
 
+            return output;
+        }
 
-        
+        public override bool GetBoolUp(string actionName)
+        {
+            bool output = false;
+            try
+            {
+                output = Input.GetButtonUp(actionName);
+            }
+            catch (System.Exception)
+            {
+                PrintInputWarning(actionName);
+            }
+            return output;
+        }
 
         public override float GetFloat(string actionName)
         {

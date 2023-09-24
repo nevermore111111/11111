@@ -180,7 +180,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                     }
 
                 }
-                if (CharacterActions.spAttack.value)//特殊攻击
+                else if (CharacterActions.spAttack.value)//特殊攻击
                 {
                     if (CharacterActor.IsGrounded)
                     {
@@ -203,7 +203,11 @@ namespace Lightbug.CharacterControllerPro.Demo
                     }
 
                 }
-                if (CharacterActions.jetPack.value)
+                else if(CharacterActions.test.value)
+                {
+                    CharacterStateController.EnqueueTransition<Grap>();
+                }    
+                else if (CharacterActions.jetPack.value)
                 {
                     CharacterStateController.EnqueueTransition<JetPack>();
                 }
