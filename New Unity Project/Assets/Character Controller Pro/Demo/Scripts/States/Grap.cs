@@ -62,7 +62,7 @@ public class Grap : CharacterState
     public Transform cam;
     public Transform gunTip;
     public LayerMask whatIsGrapplable;
-    public float Grivaty;
+    public float Gravity;
 
     [Header("Grapping")]
     public float maxGrappleDistance;
@@ -128,7 +128,9 @@ public class Grap : CharacterState
     }
     private void ExecuteGrapple()
     {
-        Vector3 vecs = CalVocality(CharacterActor.Position, grapplePoint, UnityEngine.Random.Range(0f, 2f), Grivaty);
+        float randomNum = UnityEngine.Random.Range(0f, 2f);
+        Vector3 vecs = CalculateJumpVelocity(CharacterActor.Position, grapplePoint, randomNum);
+        Debug.Log($"新的速度{vecs},老的速度{CalVocality(CharacterActor.Position, grapplePoint, randomNum,Gravity)}");
         CharacterActor.ForceNotGrounded();
         CharacterActor.Velocity = vecs;
         Debug.Log("弹射");
@@ -144,7 +146,7 @@ public class Grap : CharacterState
 
     private Vector3 CalVocality(Vector3 start, Vector3 target, float spHeigh, float grivaty)
     {
-        grivaty = Grivaty;
+        grivaty = Gravity;
         //填写重力
         float delY = target.y - start.y;
         float delX = target.x - start.x;
@@ -157,9 +159,22 @@ public class Grap : CharacterState
         return end;
     }
 
+    public Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)
+    {
+        float gravity = Gravity;
+        float displacementY = endPoint.y - startPoint.y;
+        Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
+
+        Vector3 velocityY = Vector3.up * Mathf.Sqrt(2 * gravity * trajectoryHeight);
+        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(2 * trajectoryHeight / gravity)
+            + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
+
+        return velocityXZ + velocityY;
+    }
+
     private void UseGravity(float dt)
     {
         if (!CharacterActor.IsStable)
-            CharacterActor.VerticalVelocity += CustomUtilities.Multiply(-CharacterActor.Up, Grivaty, dt);
+            CharacterActor.VerticalVelocity += CustomUtilities.Multiply(-CharacterActor.Up, Gravity, dt);
     }
 }
