@@ -4,6 +4,7 @@ using Lightbug.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
@@ -129,8 +130,9 @@ public class Grap : CharacterState
     private void ExecuteGrapple()
     {
         float randomNum = UnityEngine.Random.Range(0f, 2f);
-        Vector3 vecs = CalculateJumpVelocity(CharacterActor.Position, grapplePoint, randomNum);
-        Debug.Log($"新的速度{vecs},老的速度{CalVocality(CharacterActor.Position, grapplePoint, randomNum,Gravity)}");
+        //Vector3 vecs = CalculateJumpVelocity(CharacterActor.Position, grapplePoint, randomNum);
+        //Debug.Log($"新的速度{vecs},老的速度{CalVocality(CharacterActor.Position, grapplePoint, randomNum,Gravity)}");
+        Vector3 vecs = CalVocalityRe(CharacterActor.Position, grapplePoint, randomNum);
         CharacterActor.ForceNotGrounded();
         CharacterActor.Velocity = vecs;
         Debug.Log("弹射");
@@ -144,33 +146,33 @@ public class Grap : CharacterState
     }
 
 
-    private Vector3 CalVocality(Vector3 start, Vector3 target, float spHeigh, float grivaty)
+
+    /// <summary>
+    ///根号下不能合并，切记数学教训
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="target"></param>
+    /// <param name="spHeigh"></param>
+    /// <returns></returns>
+    private Vector3 CalVocalityRe(Vector3 start, Vector3 target, float spHeigh)
     {
-        grivaty = Gravity;
+        float grivaty = Gravity;
         //填写重力
         float delY = target.y - start.y;
         float delX = target.x - start.x;
         float delZ = target.z - start.z;
+        float time1 = Mathf.Sqrt(2f * spHeigh / grivaty);
+        float time2 = Mathf.Sqrt(2f * (spHeigh + delY) / grivaty);
+        float timeTotal = time1 + time2;
 
-        float vy = MathF.Sqrt(2f * ((delY) + spHeigh) * grivaty);
-        float vXZ = Mathf.Sqrt(((Mathf.Pow(delX, 2) + Mathf.Pow(delZ, 2)) * grivaty / (2 * delY + 4 * spHeigh)));
+
+        float vy = Mathf.Sqrt(2f * ((delY) + spHeigh) * grivaty);
+        float vXZ = Mathf.Sqrt(Mathf.Pow(delX, 2) + Mathf.Pow(delZ, 2)) / timeTotal;
         Vector3 med = new(delX, 0, delZ);
         Vector3 end = med.normalized * vXZ + new Vector3(0, vy, 0);
         return end;
     }
 
-    public Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)
-    {
-        float gravity = Gravity;
-        float displacementY = endPoint.y - startPoint.y;
-        Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
-
-        Vector3 velocityY = Vector3.up * Mathf.Sqrt(2 * gravity * trajectoryHeight);
-        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(2 * trajectoryHeight / gravity)
-            + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
-
-        return velocityXZ + velocityY;
-    }
 
     private void UseGravity(float dt)
     {
