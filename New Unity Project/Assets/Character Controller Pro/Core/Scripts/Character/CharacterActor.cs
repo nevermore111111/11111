@@ -14,6 +14,8 @@ namespace Lightbug.CharacterControllerPro.Core
         UnstableGrounded
     }
 
+
+  
     /// <summary>
     /// 这个类表示一个角色演员。它包含所有字符信息、冲突标志、冲突事件等。它还负责执行顺序
 
@@ -26,7 +28,7 @@ namespace Lightbug.CharacterControllerPro.Core
     [DefaultExecutionOrder(ExecutionOrder.CharacterActorOrder)]
     public class CharacterActor : PhysicsActor
     {
-
+        public bool isPlayer = false;
         [Header("Collision")]
 
         [Tooltip("One way platforms are objects that can be contacted by the character feet (bottom sphere) while descending.")]

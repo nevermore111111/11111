@@ -15,8 +15,8 @@ public class CapsuleDetection : Detection
     public Transform endPoint;
     public float radius;
     public bool debug;
-    
-    
+
+    public event EventHandler HittedEvent;
 
     private void OnDrawGizmos()
     {
@@ -71,6 +71,8 @@ public class CapsuleDetection : Detection
                     //这样去添加物体
                     if (!Weapon.HittedCharacter.Contains(hitBox.characterInfoOwner))
                     {
+                        //添加攻击事件
+                        HittedEvent?.Invoke(this, null);
                         //记录攻击到的人
                         Weapon.HittedCharacter.Add(hitBox.characterInfoOwner);
                         //调用一次//调用一个添加特效

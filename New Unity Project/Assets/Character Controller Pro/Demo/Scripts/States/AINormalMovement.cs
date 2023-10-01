@@ -1,17 +1,13 @@
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
-using Rusk;
 using System;
 using UnityEngine;
-using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
-using Cinemachine;
-using System.Collections;
 
 namespace Lightbug.CharacterControllerPro.Demo
 {
-    [AddComponentMenu("Character Controller Pro/Demo/Character/States/Normal Movement")]
-    public class NormalMovement : CharacterState
+    [AddComponentMenu("Character Controller Pro/Demo/Character/States/AINormal Movement")]
+    public class AINormalMovement : CharacterState
     {
         public bool IsPlayer;
 
@@ -25,17 +21,10 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public LookingDirectionParameters lookingDirectionParameters = new LookingDirectionParameters();
 
-        //è‡ªå·±åŠ 
-        private Attack attack;
-        private WeaponManager[] weaponManager;
 
-       
-
-
-
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤
+        // ©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤
+        // ©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤
 
 
         #region Events	
@@ -72,14 +61,10 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         protected bool wantToCrouch = false;
         protected bool isCrouched = false;
-
-        public PlanarMovementParameters.PlanarMovementProperties currentMotion = new PlanarMovementParameters.PlanarMovementProperties();
+        protected PlanarMovementParameters.PlanarMovementProperties currentMotion = new PlanarMovementParameters.PlanarMovementProperties();
         bool reducedAirControlFlag = false;
         float reducedAirControlInitialTime = 0f;
         float reductionDuration = 0.5f;
-
-        //ä¸Šä¸€å¸§çš„é€Ÿåº¦
-        float lastVelocityMagnitude;
 
         protected override void Awake()
         {
@@ -88,9 +73,6 @@ namespace Lightbug.CharacterControllerPro.Demo
             notGroundedJumpsLeft = verticalMovementParameters.availableNotGroundedJumps;
 
             materialController = this.GetComponentInBranch<CharacterActor, MaterialController>();
-
-            attack = this.GetComponent<Attack>();
-            weaponManager = GetComponentsInChildren<WeaponManager>();
         }
 
         protected virtual void OnValidate()
@@ -141,104 +123,49 @@ namespace Lightbug.CharacterControllerPro.Demo
             set => verticalMovementParameters.useGravity = value;
         }
 
-        //æˆ‘ç°åœ¨æƒ³åšçš„ï¼šæŒ‰ä¸‹å’Œé•¿æŒ‰è§¦å‘ä¸åŒæ•ˆæœï¼Œå¦‚æœæ˜¯çŸ­æŒ‰ï¼Œé‚£ä¹ˆå°±æ­£å¸¸è§¦å‘ï¼Œå¦‚æœæ˜¯é•¿æŒ‰ï¼Œé‚£ä¹ˆå°±è¿›å…¥ç‰¹æ®Šæ”»å‡»
-
-
-
         public override void CheckExitTransition()
         {
-            if (IsPlayer)
+            if (Input.GetKeyDown(KeyCode.M))
             {
-                if (CanEvade())
+                Debug.Log("jinlai ");
+                CharacterStateController.EnqueueTransition<Grap>();
+            }
+            if (CharacterActions.attack.value)
+            {
+                if (CharacterActor.IsGrounded)
                 {
-                    CharacterStateController.EnqueueTransition<Evade>();
+                    CharacterStateController.EnqueueTransition<AttackOnGround>();
                 }
-                if (CharacterActions.attack.value)
+                if (!CharacterActor.IsGrounded)
                 {
-                    if (CharacterActor.IsGrounded)
-                    {
-                        if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
-                        {
-                            CharacterStateController.EnqueueTransition<AttackOnGround>();
-                        }
-                        else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
-                        {
-                            CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
-                        }
-                    }
-                    //åœ¨ç©ºä¸­
-                    else if (!CharacterActor.IsGrounded && canAttackInair)
-                    {
-                        if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
-                        {
-
-                        }
-                        else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
-                        {
-
-                        }
-                    }
-
-                }
-                else if (CharacterActions.spAttack.value)//ç‰¹æ®Šæ”»å‡»
-                {
-                    if (CharacterActor.IsGrounded)
-                    {
-                        if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
-                        {
-                            //attack
-                            SpAttack = 10;
-                            CharacterStateController.EnqueueTransition<AttackOnGround>();
-                        }
-                        else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
-                        {
-                            //SpAttack = 11;
-                            //CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
-                        }
-                    }
-                    else if ( canAttackInair)
-                    {
-                        SpAttack = 11;
-                        CharacterStateController.EnqueueTransition<AttackOffGround>();
-                    }
-
-                }
-                else if(CharacterActions.test.value)
-                {
-                    CharacterStateController.EnqueueTransition<Grap>();
-                }    
-                else if (CharacterActions.jetPack.value)
-                {
-                    CharacterStateController.EnqueueTransition<JetPack>();
-                }
-                else if (CharacterActions.dash.Started)
-                {
-                    CharacterStateController.EnqueueTransition<Dash>();
-                }
-                else if (CharacterActor.Triggers.Count >= 1)
-                {
-                    CharacterStateController.EnqueueTransition<LadderClimbing>();
-                    CharacterStateController.EnqueueTransition<RopeClimbing>();
-                }
-                else if (!CharacterActor.IsGrounded)
-                {
-                    if (!CharacterActions.crouch.value)
-                        CharacterStateController.EnqueueTransition<WallSlide>();
-
-                    CharacterStateController.EnqueueTransition<LedgeHanging>();
+                    CharacterStateController.EnqueueTransition<AttackInAir>();
                 }
             }
+            if (CharacterActions.jetPack.value)
+            {
+                CharacterStateController.EnqueueTransition<JetPack>();
+            }
+            else if (CharacterActions.dash.Started)
+            {
+                CharacterStateController.EnqueueTransition<Dash>();
+            }
+            else if (CharacterActor.Triggers.Count != 0)
+            {
+                CharacterStateController.EnqueueTransition<LadderClimbing>();
+                CharacterStateController.EnqueueTransition<RopeClimbing>();
+            }
+            else if (!CharacterActor.IsGrounded)
+            {
+                if (!CharacterActions.crouch.value)
+                    CharacterStateController.EnqueueTransition<WallSlide>();
 
+                CharacterStateController.EnqueueTransition<LedgeHanging>();
+            }
         }
 
         public override void ExitBehaviour(float dt, CharacterState toState)
         {
             reducedAirControlFlag = false;
-            moving = false;
-            if (IsPlayer)
-            {
-                CharacterActor.Animator.SetBool("jump", false);
-            }
         }
 
 
@@ -324,24 +251,14 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         }
 
+
         /// <summary>
         /// Processes the lateral movement of the character (stable and unstable state), that is, walk, run, crouch, etc. 
         /// This movement is tied directly to the "movement" character action.
-        /// å–µå–µå–µï¼Œè¿™ä¸ªæ–¹æ³•æ˜¯å¤„ç†è§’è‰²å¹³é¢ç§»åŠ¨çš„å–µï¼
-        ///é¦–å…ˆï¼Œè·å–å½“å‰åœ°é¢è¡Œèµ°é€Ÿåº¦çš„ä¸Šé™ï¼Œå¹¶è®¡ç®—å‡ºé€Ÿåº¦å€æ•°å–µã€‚å¦‚æœéœ€è¦åŠ é€Ÿï¼Œå°±æ ¹æ®è¾“å…¥æ–¹å‘å’Œé€Ÿåº¦ä¸Šé™è®¡ç®—ç›®æ ‡é€Ÿåº¦å‘é‡å–µã€‚ç„¶åæ ¹æ®è§’è‰²çŠ¶æ€è¿›è¡Œä¸åŒçš„å¤„ç†å–µï¼š
-        ///å¦‚æœè§’è‰²åœ¨ç©ºä¸­ï¼Œå°±æ›´æ–°å½“å‰é€Ÿåº¦ä¸Šé™å–µï¼Œå¹¶æ ¹æ®è¾“å…¥æ–¹å‘å’Œé€Ÿåº¦å€æ•°è®¡ç®—ç›®æ ‡é€Ÿåº¦å–µã€‚
-        ///å¦‚æœè§’è‰²åœ¨ç¨³å®šåœ°é¢ä¸Šï¼Œå°±å…ˆå¤„ç†å¥”è·‘çŠ¶æ€çš„è¾“å…¥å–µï¼Œå¦‚æœè¦è¹²ä¸‹æˆ–ä¸èƒ½å¥”è·‘ï¼Œå°±ä¸èƒ½å¥”è·‘å–µã€‚ç„¶åæ ¹æ®å½“å‰çŠ¶æ€ï¼Œè®¾ç½®å½“å‰é€Ÿåº¦ä¸Šé™ï¼Œå¦‚æœè¹²ç€ï¼Œé€Ÿåº¦ä¸Šé™ä¹˜ä»¥ä¸€ä¸ªè¹²ç€é€Ÿåº¦å€æ•°ï¼Œå¦åˆ™ï¼Œå¦‚æœè¦å¥”è·‘ï¼Œé€Ÿåº¦ä¸Šé™å°±æ˜¯å¥”è·‘é€Ÿåº¦ä¸Šé™ï¼Œå¦åˆ™å°±æ˜¯åŸºæœ¬é€Ÿåº¦ä¸Šé™å–µã€‚ç„¶åï¼Œæ ¹æ®è¾“å…¥æ–¹å‘å’Œé€Ÿåº¦å€æ•°è®¡ç®—ç›®æ ‡é€Ÿåº¦å–µã€‚
-        /// å¦‚æœè§’è‰²åœ¨ä¸ç¨³å®šåœ°é¢ä¸Šï¼Œå°±å°†å½“å‰é€Ÿåº¦ä¸Šé™è®¾ç½®ä¸ºåŸºæœ¬é€Ÿåº¦ä¸Šé™ï¼Œç„¶åæ ¹æ®è¾“å…¥æ–¹å‘å’Œé€Ÿåº¦å€æ•°è®¡ç®—ç›®æ ‡é€Ÿåº¦å–µã€‚
-        /// æœ€åï¼Œæ ¹æ®æ˜¯å¦éœ€è¦åŠ é€Ÿæ¥è®¡ç®—è§’è‰²çš„åŠ é€Ÿåº¦å–µï¼Œå¦‚æœéœ€è¦åŠ é€Ÿï¼Œæ ¹æ®è§’åº¦å·®æ¥è®¡ç®—åŠ é€Ÿåº¦çš„å¢ç›Šå–µï¼›å¦åˆ™å°±ä½¿ç”¨å½“å‰åŠ¨ä½œçš„å‡é€Ÿåº¦å–µã€‚æœ€åï¼Œä½¿ç”¨MoveTowardsæ–¹æ³•ï¼Œæ ¹æ®å½“å‰é€Ÿåº¦ã€ç›®æ ‡é€Ÿåº¦å’ŒåŠ é€Ÿåº¦æ¥æ›´æ–°è§’è‰²çš„å¹³é¢é€Ÿåº¦å–µã€‚
-
         /// </summary>
         protected virtual void ProcessPlanarMovement(float dt)
         {
             //SetMotionValues();
-
-
-
-            PlayStop();
 
             float speedMultiplier = materialController != null ?
             materialController.CurrentSurface.speedMultiplier * materialController.CurrentVolume.speedMultiplier : 1f;
@@ -432,99 +349,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             );
         }
 
-        public bool moving = false; // åˆå§‹çŠ¶æ€ä¸ºæœªç§»åŠ¨
 
-        private float startTime; // ç§»åŠ¨å¼€å§‹æ—¶é—´
-
-        void MoveTime()
-        {
-            if (CharacterActions.movement.value.sqrMagnitude != 0) // æ£€æµ‹ç§»åŠ¨
-            {
-                if (startTime == 0f)
-                {
-                    startTime = Time.time; // å¦‚æœç§»åŠ¨å¼€å§‹ï¼Œåˆ™è®°å½•æ—¶é—´
-                }
-
-                // å¦‚æœç§»åŠ¨æ—¶é—´è¶…è¿‡1ç§’ï¼Œåˆ™å°† `moving` è®¾ä¸º `true`ï¼Œå¹¶æ‰“å°æç¤ºä¿¡æ¯
-                if (Time.time - startTime > 1f)
-                {
-                    moving = true;
-
-                }
-            }
-            else if (!CharacterActor.IsStable)
-            {
-                moving = false;
-                startTime = 0f; // å¦‚æœåœæ­¢ç§»åŠ¨ï¼Œåˆ™å°†å¼€å§‹æ—¶é—´é‡ç½®ä¸º0
-            }
-        }
-        private bool movementInputIdle;
-        private float movementInputIdleTime;
-        /// <summary>
-        /// æ£€æµ‹æ˜¯å¦åœ¨0.1så†…æ²¡æŒ‰ä¸‹
-        /// </summary>
-        /// <returns></returns>
-        private bool CheckMovementInputIdle()
-        {
-            if (Input.GetButton("Movement X") || Input.GetButton("Movement Y"))
-            {
-                movementInputIdle = false;
-                movementInputIdleTime = 0f;
-            }
-            else
-            {
-                movementInputIdleTime += Time.deltaTime;
-                if (movementInputIdleTime > 0.1f)
-                {
-                    movementInputIdle = true;
-                }
-            }
-            return movementInputIdle;
-        }
-        private void PlayStop()
-        {
-            if (CharacterActions.movement.value.sqrMagnitude != 0)
-            {
-                CharacterActor.Animator.SetBool("inputMove", true);
-            }
-            MoveTime();
-            // è·å–å½“å‰é€Ÿåº¦å¤§å°
-            float currentVelocityMagnitude = CharacterActor.PlanarVelocity.magnitude;
-
-            // å¦‚æœé€Ÿåº¦å¤§å°å°äºç­‰äº0ï¼Œåˆ™è¡¨ç¤ºå·²åœæ­¢ç§»åŠ¨
-            //æŠŠè¿™ä¸ªç­‰äº0æ”¹æˆéƒ½æ²¡æœ‰æŒ‰ä¸‹
-
-            if (CheckMovementInputIdle() & moving & CharacterActor.IsStable)
-            {
-                moving = false;
-                CharacterActor.Animator.SetBool("inputMove", false);
-                // å¦‚æœä¸Šä¸€å¸§é€Ÿåº¦å¤§å°å¤§äº10ï¼Œåˆ™æ’­æ”¾åœæ­¢åŠ¨ç”»
-                if (lastVelocityMagnitude > 0.8f * planarMovementParameters.boostSpeedLimit)
-                {
-                    CharacterActor.Animator.SetFloat("running", 1);
-                    CharacterActor.Animator.SetBool("stop", true);
-                }
-                else if (lastVelocityMagnitude > 0.6f * planarMovementParameters.boostSpeedLimit)
-                {
-                    CharacterActor.Animator.SetFloat("running", 0);
-                    CharacterActor.Animator.SetBool("stop", true);
-                }
-                else
-                {
-
-                }
-                // æ›´æ–°çŠ¶æ€
-                //isMoving = false;
-            }
-            //else
-            //{
-            //    // æ›´æ–°çŠ¶æ€
-            //    isMoving = true;
-            //}
-
-            // ä¿å­˜å½“å‰é€Ÿåº¦å¤§å°ï¼Œç”¨äºä¸‹ä¸€å¸§åˆ¤æ–­
-            lastVelocityMagnitude = currentVelocityMagnitude;
-        }
 
         protected virtual void ProcessGravity(float dt)
         {
@@ -621,7 +446,6 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         protected virtual bool ProcessJumpDown(float dt)
         {
-
             if (!verticalMovementParameters.canJumpDown)
                 return false;
 
@@ -640,6 +464,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             if (!ProcessJumpDownAction())
                 return false;
             JumpDown(dt);
+
             return true;
         }
 
@@ -740,11 +565,6 @@ namespace Lightbug.CharacterControllerPro.Demo
                 if (OnJumpPerformed != null)
                     OnJumpPerformed();
 
-                if (IsPlayer)
-                {
-                    CharacterActor.Animator.SetBool("jump", true);
-                }
-
                 // Define the jump direction ---------------------------------------------------
                 jumpDirection = SetJumpDirection();
 
@@ -763,8 +583,6 @@ namespace Lightbug.CharacterControllerPro.Demo
 
 
         }
-
-
 
         /// <summary>
         /// Returns the jump direction vector whenever the jump action is started.
@@ -786,59 +604,22 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public override void EnterBehaviour(float dt, CharacterState fromState)
         {
-         
-            
-            if(CharacterActor.isPlayer)
-            {
-                StartCoroutine(CheckAnim());
-                SpAttack = -1;
-                for (int i = 0; i < weaponManager.Length; i++)
-                {
-                    weaponManager[i].gameObject.SetActive(false);
-                }
-            }
-
             CharacterActor.alwaysNotGrounded = false;
+
             targetLookingDirection = CharacterActor.Forward;
+
             if (fromState == CharacterStateController.GetState<WallSlide>())
             {
                 // "availableNotGroundedJumps + 1" because the update code will consume one jump!
                 notGroundedJumpsLeft = verticalMovementParameters.availableNotGroundedJumps + 1;
+
                 // Reduce the amount of air control (acceleration and deceleration) for 0.5 seconds.
                 ReduceAirControl(0.5f);
             }
-            currentPlanarSpeedLimit = Mathf.Max(CharacterActor.PlanarVelocity.magnitude, planarMovementParameters.baseSpeedLimit);
-            CharacterActor.UseRootMotion = false;
-        }
 
-        private IEnumerator CheckAnim()
-        {
-            yield return null;
-            //yield return null;
-            bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("NormalMovement");
-            if (CharacterStateController.CurrentState is NormalMovement&& (!isPlayMove))
-            {
-                if (CharacterActor.IsGrounded)
-                {
-                    CharacterActor.Animator.CrossFade("NormalMovement.StableGrounded", 0.3f);
-                }
-                else
-                {
-                    //å¦‚æœç«–ç›´æ–¹å‘ä¸Šåœ¨å‰è¿›
-                    if (CharacterActions.jump.value == true)
-                    {
-                        CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_Start_Inplace", 0.05f, 0, 0.2f);
-                    }
-                    else if (CharacterActor.PredictedGroundDistance > 0.3f)
-                    {
-                        CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_Loop_Inplace", 0.3f);
-                    }
-                    else
-                    {
-                        CharacterActor.Animator.CrossFade("NormalMovement.Lucy_Jump_End_Inplace", 0.05f);
-                    }
-                }
-            }
+            currentPlanarSpeedLimit = Mathf.Max(CharacterActor.PlanarVelocity.magnitude, planarMovementParameters.baseSpeedLimit);
+
+            CharacterActor.UseRootMotion = false;
         }
 
         protected virtual void HandleRotation(float dt)
@@ -848,11 +629,6 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         void HandleLookingDirection(float dt)
         {
-            /*è¿™æ®µä»£ç å®ç°äº†è§’è‰²çš„æœå‘æ§åˆ¶åŠŸèƒ½ï¼ŒåŒ…æ‹¬ä¸‰ç§æ¨¡å¼ï¼šMovementã€ExternalReferenceã€Targetã€‚
-
-              åœ¨Movementæ¨¡å¼ä¸‹ï¼Œæ ¹æ®è§’è‰²çš„çŠ¶æ€ï¼ˆNotGroundedã€StableGroundedã€UnstableGroundedï¼‰è®¾ç½®ç›®æ ‡æœå‘ã€‚åœ¨ExternalReferenceæ¨¡å¼ä¸‹ï¼Œå°†è§’è‰²çš„ç›®æ ‡æœå‘è®¾ç½®ä¸ºMovementReferenceForwardï¼Œå³è§’è‰²åº”æœå‘çš„å‚è€ƒæ–¹å‘ã€‚åœ¨Targetæ¨¡å¼ä¸‹ï¼Œå°†è§’è‰²çš„ç›®æ ‡æœå‘è®¾ç½®ä¸ºç›®æ ‡ä½ç½®ä¸è§’è‰²ä½ç½®çš„å‘é‡ã€‚
-
-              åœ¨ä»£ç ä¸­ï¼Œä½¿ç”¨SetTargetLookingDirection()å‡½æ•°è®¾ç½®ç›®æ ‡æœå‘ï¼Œå¹¶é€šè¿‡Quaternionè®¡ç®—å‡ºè§’è‰²å½“å‰å¸§åº”è¯¥æ—‹è½¬çš„è§’åº¦ã€‚æœ€åï¼Œæ ¹æ®è§’è‰²æ˜¯å¦ä¸º2Dæ¸¸æˆï¼Œä½¿ç”¨ä¸åŒçš„æ–¹å¼è®¾ç½®è§’è‰²çš„æœå‘ã€‚å¦‚æœæ˜¯2Dæ¸¸æˆï¼Œåˆ™ç›´æ¥è®¾ç½®è§’è‰²çš„Yawå€¼ä¸ºç›®æ ‡æœå‘çš„Xå€¼ï¼›å¦‚æœæ˜¯3Dæ¸¸æˆï¼Œåˆ™å°†å½“å‰å¸§æ—‹è½¬çš„è§’åº¦åº”ç”¨åˆ°è§’è‰²çš„Forwardå‘é‡ä¸Šã€‚*/
             if (!lookingDirectionParameters.changeLookingDirection)
                 return;
 
@@ -930,114 +706,19 @@ namespace Lightbug.CharacterControllerPro.Demo
             HandleRotation(dt);
         }
 
-        public override void PostUpdateBehaviour(float dt)
-        {
-            base.PostUpdateBehaviour(dt);
-            if (IsPlayer)
-            {
-                LaterGrap();
-            }
-        }
-
-        [Header("References")]
-        public Transform cam;
-        public Transform gunTip;
-        public LayerMask whatIsGrapplable;
-
-        [Header("Grapping")]
-        public float maxGrappleDistance;
-        public float grappleDelayTime;
-        public LineRenderer Lr;
-
-        private Vector3 grapplePoint;
-
-        [Header("Cooldown")]
-        public float grapplingCd;
-        private float grappleTimer;
-        [Space(10)]
-        [Header("Input")]
-        public KeyCode grappleKey = KeyCode.Mouse1;
-
-        public bool grappling;
-
-        private void Grap()
-        {
-            if (Input.GetKeyDown(grappleKey))
-            {
-                StartGrapple();
-            }
-            if (grappleTimer > 0)
-            {
-                grappleTimer -= Time.deltaTime;
-            }
-        }
-
-        /// <summary>
-        /// è¿™ä¸ªæ–¹æ³•ç”¨æ¥è®¾ç½®çº¿æ€§æ¸²æŸ“å™¨çš„ä½ç½®ï¼›
-        /// </summary>
-        private void LaterGrap()
-        {
-            if (grappling)
-            {
-                Lr.SetPosition(0, gunTip.position);
-            }
-        }
-
-        private void StartGrapple()
-        {
-            if (grappleTimer > 0) return;
-            grappling = true;
-
-            RaycastHit Hit;
-            if (Physics.Raycast(cam.position, cam.forward, out Hit, maxGrappleDistance, whatIsGrapplable))
-            {
-                grapplePoint = Hit.point;
-                Invoke(nameof(ExecuteGrapple), grappleDelayTime);
-            }
-            else
-            {
-                grapplePoint = cam.position + cam.forward * maxGrappleDistance;
-
-                Invoke(nameof(StopGrapple), grappleDelayTime);
-            }
-            Lr.enabled = true;
-            Lr.SetPosition(1, grapplePoint);
-        }
-        private void ExecuteGrapple()
-        {
-            Vector3 vecs = CalVocality(CharacterActor.Position, grapplePoint, UnityEngine.Random.Range(0f, 2f), 19.8f);
-            CharacterActor.Velocity = vecs;
-            Debug.Log("å¼¹å°„");
-        }
-        private void StopGrapple()
-        {
-            grappling = false;
-            grappleTimer = grapplingCd;
-            Lr.enabled = false;
-        }
-
-
-        private Vector3 CalVocality(Vector3 start, Vector3 target, float spHeigh, float grivaty)
-        {
-            grivaty = Physics.gravity.magnitude;
-            //è‡ªå·±å¡«å†™é‡åŠ›
-            float delY = target.y - start.y;
-            float delX = target.x - start.x;
-            float delZ = target.z - start.z;
-
-            float vy = MathF.Sqrt(2f * ((delY) + spHeigh) * grivaty);
-            float vXZ = Mathf.Sqrt(((Mathf.Pow(delX, 2) + Mathf.Pow(delZ, 2)) * grivaty / (2 * delY + 4 * spHeigh)));
-            Vector3 med = new(delX, 0, delZ);
-            Vector3 end = med.normalized * vXZ + new Vector3(0, vy, 0);
-            return end;
-        }
-
+      
         public override void PreCharacterSimulation(float dt)
         {
-            base.PreCharacterSimulation(dt);
             // Pre/PostCharacterSimulation methods are useful to update all the Animator parameters. 
-            // Why? Because the CharacterActor component will end up modifying the velocity of the actor.
-           
+            // Why? Because the CharacterActor component will end up modifying the velocity of the actor. 
+            if (!CharacterActor.IsAnimatorValid())
+                return;
+
+            CharacterStateController.Animator.SetBool(groundedParameter, CharacterActor.IsGrounded);
+            CharacterStateController.Animator.SetBool(stableParameter, CharacterActor.IsStable);
+            CharacterStateController.Animator.SetFloat(horizontalAxisParameter, CharacterActions.movement.value.x);
+            CharacterStateController.Animator.SetFloat(verticalAxisParameter, CharacterActions.movement.value.y);
+            CharacterStateController.Animator.SetFloat(heightParameter, CharacterActor.BodySize.y);
         }
 
         public override void PostCharacterSimulation(float dt)
@@ -1111,52 +792,11 @@ namespace Lightbug.CharacterControllerPro.Demo
                 isCrouched = false;
         }
 
-        //ç©å®¶çš„è¾“å…¥å’Œè¾“å‡ºéƒ½è¦æ”¾åœ¨updateä¸­æ£€æµ‹ï¼Œä¸èƒ½æ”¾åœ¨fixupdateä¸­
 
         protected virtual void HandleVelocity(float dt)
         {
             ProcessVerticalMovement(dt);
             ProcessPlanarMovement(dt);
-        }
-
-        private float buttonDownTime;
-        public bool preEvade;
-        public Vector2 evadeVec2;
-
-        private void Update()
-        {
-            CanEvade();
-        }
-
-        public bool CanEvade()
-        {
-            if (CharacterStateController.CurrentState is Evade)
-            {
-                return false;
-            }
-            if (preEvade)
-            {
-                return true;
-            }
-            if (Input.GetButtonDown("Run"))
-            {
-                // è™šæ‹ŸæŒ‰é”®Runè¢«æŒ‰ä¸‹ï¼Œè®°å½•æŒ‰ä¸‹æ—¶é—´
-                buttonDownTime = Time.time;
-                evadeVec2 = CharacterActions.movement.value;
-
-            }
-            else if (Input.GetButtonUp("Run"))
-            {
-                // è™šæ‹ŸæŒ‰é”®Runè¢«æŠ¬èµ·ï¼Œæ£€æŸ¥æŒ‰ä¸‹æ—¶é—´æ˜¯å¦å°äº0.1ç§’
-                if (Time.time - buttonDownTime < 0.35f)
-                {
-                    // æŒ‰ä¸‹æ—¶é—´å°äº0.1ç§’ï¼Œè¿”å›true
-                    preEvade = true;
-                }
-            }
-
-            // è¿”å›false
-            return false;
         }
     }
 }
