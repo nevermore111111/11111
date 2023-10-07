@@ -1,8 +1,10 @@
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Database;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-
+[RequireComponent(typeof(AgetHitBox))]
 public abstract class CharacterInfo : MonoBehaviour, IAgent
 {
     //周围全部的敌人
