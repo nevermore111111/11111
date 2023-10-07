@@ -37,7 +37,7 @@ public class Grap : CharacterState
         }
         UseGravity(dt);
     }
-   
+
     public override void PostUpdateBehaviour(float dt)
     {
         LaterGrap();
@@ -88,7 +88,7 @@ public class Grap : CharacterState
     private void Grap01()
     {
         StartGrapple();
-       
+
     }
 
     /// <summary>
@@ -100,7 +100,7 @@ public class Grap : CharacterState
         {
             Lr.SetPosition(0, gunTip.position);
         }
-       
+
     }
 
     private void StartGrapple()
@@ -112,7 +112,7 @@ public class Grap : CharacterState
         if (Physics.Raycast(cam.position, cam.forward, out Hit, maxGrappleDistance, whatIsGrapplable))
         {
             grapplePoint = Hit.point;
-            if(Target != null)
+            if (Target != null)
             {
                 grapplePoint = Target.position;
             }
@@ -179,4 +179,56 @@ public class Grap : CharacterState
         if (!CharacterActor.IsStable)
             CharacterActor.VerticalVelocity += CustomUtilities.Multiply(-CharacterActor.Up, Gravity, dt);
     }
+
+
+    //需要根据需要去发射射线，选择对应的点
+    public int MaxTarget = 1;
+    public float CastSphereR = 2f;
+
+    public Transform TargetIcon;
+    public RaycastHit predictionHits;
+    private void CheckForSwingPoints()
+    {
+        for (int i = 0; i < MaxTarget; i++)
+        {
+            RaycastHit sphereCastHit;
+            //开始位置的球心的位置，应该是pos
+            Physics.SphereCast(cam.position + CastSphereR * cam.forward, CastSphereR, cam.forward,
+                                out sphereCastHit, maxGrappleDistance, whatIsGrapplable);
+
+            RaycastHit raycastHit;
+            Physics.Raycast(cam.position, cam.forward,
+                                out raycastHit, maxGrappleDistance, whatIsGrapplable);
+
+            Vector3 realHitPoint;
+
+            // Option 1 - Direct Hit
+            if (raycastHit.point != Vector3.zero)
+                realHitPoint = raycastHit.point;
+
+            // Option 2 - Indirect (predicted) Hit
+            else if (sphereCastHit.point != Vector3.zero)
+                realHitPoint = sphereCastHit.point;
+
+            // Option 3 - Miss
+            else
+                realHitPoint = Vector3.zero;
+
+            // realHitPoint found
+            if (realHitPoint != Vector3.zero)
+            {
+                TargetIcon.gameObject.SetActive(true);
+                TargetIcon.position = realHitPoint;
+            }
+            // realHitPoint not found
+            else
+            {
+                TargetIcon.gameObject.SetActive(false);
+            }
+
+            predictionHits = raycastHit.point == Vector3.zero ? sphereCastHit : raycastHit;
+        }
+    }
+
+
 }
