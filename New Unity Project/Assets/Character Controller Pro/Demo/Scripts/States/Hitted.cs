@@ -21,11 +21,15 @@ public class Hitted : CharacterState
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         
+        if(CharacterActor.isPlayer)
+        {
+
+        }
     }
     //根据目标的方位和攻击类型来决定自身的受击类型。需要设置当前的受击动画。
     public void GetHitted(WeaponManager weapon,IAgent.HitKind hitKind)
     {
-        Debug.Log("主角受击了");
+        Debug.Log("受击了");
         switch(hitKind)
         {
             case 0:

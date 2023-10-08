@@ -233,10 +233,15 @@ namespace Lightbug.CharacterControllerPro.Core
         float unstableGroundContactTime = 0f;
         public bool NeedSettingAnimator = false;
 
+        public CharacterInfo CharacterInfo;
+
         public float StepOffset => stepUpDistance - BodySize.x / 2f;
 
         public void OnValidate()
         {
+            if(CharacterInfo == null)
+                CharacterInfo = GetComponentInChildren<CharacterInfo>();
+
             if (CharacterBody == null)
                 CharacterBody = GetComponent<CharacterBody>();
 

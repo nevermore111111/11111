@@ -1769,6 +1769,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   weightGravity: 9.8
   NeedSettingAnimator: 0
+  CharacterInfo: {fileID: 0}
 --- !u!114 &141768896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6681,6 +6682,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   weightGravity: 9.8
   NeedSettingAnimator: 0
+  CharacterInfo: {fileID: 1767079605}
 --- !u!114 &495837300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7685,7 +7687,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: -0.13850157, y: -0.11932661, z: -0.016812678, w: 0.9830035}
+  m_LocalRotation: {x: -0.13850158, y: -0.11932658, z: -0.016812678, w: 0.9830035}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8001,7 +8003,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605997566}
-  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
+  m_LocalRotation: {x: 0.023164071, y: -0.26986164, z: 0.0064939777, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9379,7 +9381,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811303954}
-  m_LocalRotation: {x: -0.13850158, y: -0.11932658, z: -0.016812678, w: 0.9830035}
+  m_LocalRotation: {x: -0.13850157, y: -0.11932661, z: -0.016812678, w: 0.9830035}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15618,6 +15620,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   weightGravity: 9.8
   NeedSettingAnimator: 0
+  CharacterInfo: {fileID: 0}
 --- !u!114 &1035178969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16620,6 +16623,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   weightGravity: 9.8
   NeedSettingAnimator: 0
+  CharacterInfo: {fileID: 2067846938}
 --- !u!114 &1142782122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18618,6 +18622,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   weightGravity: 9.8
   NeedSettingAnimator: 0
+  CharacterInfo: {fileID: 870937998}
 --- !u!114 &1292161158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20219,6 +20224,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   weightGravity: 9.8
   NeedSettingAnimator: 0
+  CharacterInfo: {fileID: 0}
 --- !u!114 &1446095594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20914,8 +20920,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498168725}
-  m_LocalRotation: {x: -0.33856216, y: 0.62452376, z: 0.61371773, w: 0.34452337}
-  m_LocalPosition: {x: -121.63472, y: -6.6470647, z: 95.80858}
+  m_LocalRotation: {x: 0.20701441, y: 0.6818293, z: 0.66914815, w: -0.21093763}
+  m_LocalPosition: {x: -121.71017, y: -6.6471176, z: 95.76063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23103,6 +23109,7 @@ GameObject:
   - component: {fileID: 1786591023}
   - component: {fileID: 1786591021}
   - component: {fileID: 1786591025}
+  - component: {fileID: 1786591026}
   m_Layer: 7
   m_Name: GameObject
   m_TagString: enemy
@@ -23194,6 +23201,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.46, z: 0}
+--- !u!114 &1786591026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786591020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0e9cf2785063764793f8750acb1696e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  manager: []
+  characterInfoOwner: {fileID: 0}
 --- !u!1001 &1789466499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25347,6 +25369,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   weightGravity: 9.8
   NeedSettingAnimator: 0
+  CharacterInfo: {fileID: 0}
 --- !u!114 &2052769033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26505,3 +26528,4 @@ MonoBehaviour:
     m_Bits: 4294967295
   weightGravity: 9.8
   NeedSettingAnimator: 0
+  CharacterInfo: {fileID: 8805377711411893423}
