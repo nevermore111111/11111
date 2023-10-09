@@ -77,6 +77,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         bool reducedAirControlFlag = false;
         float reducedAirControlInitialTime = 0f;
         float reductionDuration = 0.5f;
+        float _stableGroundedDeceleration;
 
         //上一帧的速度
         float lastVelocityMagnitude;
@@ -91,6 +92,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
             attack = this.GetComponent<Attack>();
             weaponManager = GetComponentsInChildren<WeaponManager>();
+            _stableGroundedDeceleration = planarMovementParameters.stableGroundedDeceleration;
         }
 
         protected virtual void OnValidate()
@@ -498,21 +500,21 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 moving = false;
                 CharacterActor.Animator.SetBool("inputMove", false);
+                this.planarMovementParameters.stableGroundedDeceleration = 10f;
+                planarMovementParameters.stableGroundedDeceleration = _stableGroundedDeceleration;
                 // 如果上一帧速度大小大于10，则播放停止动画
-                if (lastVelocityMagnitude > 0.8f * planarMovementParameters.boostSpeedLimit)
+                if (lastVelocityMagnitude > 0.7f * planarMovementParameters.boostSpeedLimit)
                 {
                     CharacterActor.Animator.SetFloat("running", 1);
+                    this.planarMovementParameters.stableGroundedDeceleration = planarMovementParameters.stableGroundedDeceleration_Dash;
                     CharacterActor.Animator.SetBool("stop", true);
                 }
-                else if (lastVelocityMagnitude > 0.6f * planarMovementParameters.boostSpeedLimit)
+                else if (lastVelocityMagnitude > 0.5f * planarMovementParameters.boostSpeedLimit)
                 {
                     CharacterActor.Animator.SetFloat("running", 0);
                     CharacterActor.Animator.SetBool("stop", true);
                 }
-                else
-                {
 
-                }
                 // 更新状态
                 //isMoving = false;
             }
@@ -1125,6 +1127,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         private void Update()
         {
+            if(CharacterActor.isPlayer)
             CanEvade();
         }
 

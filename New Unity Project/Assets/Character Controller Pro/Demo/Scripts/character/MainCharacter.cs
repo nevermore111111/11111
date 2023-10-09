@@ -16,16 +16,16 @@ public class MainCharacter : CharacterInfo
     public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider,IAgent.HitKind hit = IAgent.HitKind.ground)
     {
         //需要找到主角调用
-        CharacterHitted.GetHitted( weapon,hit );
+        CharacterHitted.GetHitted( weapon,hit);
     }
 
 
     protected override void Awake()
     {
         base.Awake();
-        CharacterActor = GetComponentInParent<CharacterActor>();
+        CharacterActor = this.GetComponentInParent<CharacterActor>();
         CharacterStateController = this.transform.parent.GetComponentInChildren<CharacterStateController>();
-        CharacterHitted = GetComponentInChildren<Hitted>();
+        CharacterHitted = CharacterActor.GetComponentInChildren<Hitted>();
     }
 
 #warning(这里没做,摄像机使用的)

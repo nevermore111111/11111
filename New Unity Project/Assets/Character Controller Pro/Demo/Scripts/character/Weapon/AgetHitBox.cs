@@ -16,6 +16,7 @@ public class AgetHitBox : MonoBehaviour
         //找到自身的主人
         characterInfoOwner = gameObject.GetComponentInParent<CharacterInfo>();
         target = this.GetComponentInParent<IAgent>();
+        agent = this.gameObject;
     }
     public void GetDamageOfCharacter()
     {

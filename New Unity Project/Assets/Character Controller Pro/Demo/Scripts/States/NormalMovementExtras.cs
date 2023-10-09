@@ -27,6 +27,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         [Header("Stable grounded parameters")]
         public float stableGroundedAcceleration = 50f;
         public float stableGroundedDeceleration = 40f;
+        public float stableGroundedDeceleration_Dash = 10f;
         public AnimationCurve stableGroundedAngleAccelerationBoost = AnimationCurve.EaseInOut(0f, 1f, 180f, 2f);
 
         [Header("Unstable grounded parameters")]

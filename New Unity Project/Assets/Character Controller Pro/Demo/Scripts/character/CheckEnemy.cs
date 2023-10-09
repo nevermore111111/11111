@@ -41,6 +41,7 @@ public class CheckEnemy : MonoBehaviour
         float elapsedTime = 0;
         float startWeight = targetGroup.m_Targets[targetIndex].weight;
 
+
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
@@ -59,68 +60,41 @@ public class CheckEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        AddEnemy(other);
-        if(mainCharacter.enemies.Count != 0)
-        {
-            NormalMovement.planarMovementParameters.stableGroundedDeceleration = MoveDeceleration * 1.5f;
-        }
-        if (other.gameObject.CompareTag("enemy") )//&& !mainCharacter.enemies.Contains(other.gameObject.GetComponentInParent<CharacterInfo>())
-        {
-            // 在敌人重新进入范围时，停止延迟删除协程
-            Transform enemyTransform = other.transform;
-            int targetIndex = FindTargetIndex(enemyTransform);
 
-            if (targetIndex != -1)
+        AttackReceive attackReceive;
+        if (other.gameObject.CompareTag("enemy") && other.TryGetComponent<AttackReceive>(out attackReceive) == true && !mainCharacter.enemies.Contains(attackReceive.CharacterInfo))
+        {
+            CharacterInfo characterInfo = attackReceive.CharacterInfo;
+            if (characterInfo != null)
             {
-               
-               // StopCoroutine(DelayedRemoveMember(enemyTransform, 1f));
-
-                //// 在敌人重新进入范围时，逐渐增加权重
-                StartCoroutine(AdjustTargetWeight(1f, 1f, targetIndex));
+                mainCharacter.enemies.Add(characterInfo);
+                int indexNum = targetGroup.FindMember(characterInfo.transform);
+                if (indexNum == -1)
+                {
+                    targetGroup.AddMember(characterInfo.transform, 0, characterInfo.cameraRadius);
+                }
+                indexNum = targetGroup.FindMember(characterInfo.transform);
+                StartCoroutine(AdjustTargetWeight(1f, 1f, indexNum));
             }
         }
     }
-    private int FindTargetIndex(Transform target)
-    {
-        for (int i = 0; i < targetGroup.m_Targets.Length; i++)
-        {
-            if (targetGroup.m_Targets[i].target == target)
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
+
 
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("enemy") && mainCharacter.enemies.Contains(other.gameObject.GetComponentInParent<CharacterInfo>()))
+        AttackReceive attackReceive;
+        if (other.gameObject.CompareTag("enemy") && other.TryGetComponent<AttackReceive>(out attackReceive) == true && mainCharacter.enemies.Contains(attackReceive.CharacterInfo))
         {
-            mainCharacter.enemies.Remove(other.gameObject.GetComponentInParent<CharacterInfo>());
-            Transform enemyTransform = other.gameObject.GetComponentInParent<Transform>();
-            int targetIndex = targetGroup.FindMember(enemyTransform);
+            mainCharacter.enemies.Remove(attackReceive.CharacterInfo);
+            int targetIndex = targetGroup.FindMember(attackReceive.CharacterInfo.transform);
             //targetGroup.RemoveMember(enemyTransform);
             // 在敌人离开范围时，延迟删除目标并逐渐减小权重
             //StartCoroutine(DelayedRemoveMember(enemyTransform, 1f));
             StartCoroutine(AdjustTargetWeight(0f, 1f, targetIndex));
         }
-        if(mainCharacter.enemies.Count == 0)
-        {
-            NormalMovement.planarMovementParameters.stableGroundedDeceleration = MoveDeceleration ;
-        }
     }
 
-    IEnumerator DelayedRemoveMember(Transform enemyTransform, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        // 检查敌人是否在范围内，如果不在范围内，则从目标组中移除
-        if (!enemyTransform.GetComponent<SphereCollider>().bounds.Contains(targetGroup.transform.position))
-        {
-            //targetGroup.RemoveMember(enemyTransform);
-        }
-    }
     private void Update()
     {
         //
@@ -143,26 +117,6 @@ public class CheckEnemy : MonoBehaviour
 
 
     //摄像机增加
-    private void AddEnemy(Collider other)
-    {
-        if (other.gameObject.CompareTag("enemy") && !mainCharacter.enemies.Contains(other.gameObject.GetComponentInParent<CharacterInfo>()))
-        {
-            CharacterInfo characterInfo = other.gameObject.GetComponentInParent<CharacterInfo>();
-            if (characterInfo != null)
-            {
-                mainCharacter.enemies.Add(characterInfo);
-                if (targetGroup.FindMember(other.transform) == -1)
-                {
-                    targetGroup.AddMember(other.transform, 0, other.GetComponentInParent<CharacterInfo>().cameraRadius);
-                    StartCoroutine(AdjustTargetWeight(1f, 1f, targetGroup.m_Targets.Length - 1));
-                }
-            }
-            else
-            {
-                Debug.Log("这里null");
-            }
-        }
-    }
 
 
 
