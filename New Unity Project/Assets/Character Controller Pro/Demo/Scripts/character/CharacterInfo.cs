@@ -19,7 +19,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     public float cameraRadius = 0.5f;
 
     public AgetHitBox hitBox;
-    public int HitKind;
+    public int HitStrength;
     /// <summary>
     /// 伤害，目标位置，武器方向，击中类型
     /// </summary>

@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using Lightbug.CharacterControllerPro.Implementation;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ using UnityEngine;
 
 public class Hitted : CharacterState
 {
+    public float HittedForce = 10f;
+    public float HittedDrag = 0.1f;
     override protected void Start()
     {
         base.Start();
@@ -37,6 +40,11 @@ public class Hitted : CharacterState
     {
         Debug.Log("受击了");
 
+        int hitStrength = weapon.weaponOwner.HitStrength;
+        CharacterActor.Velocity = Vector3.zero;
+        CharacterActor.RigidbodyComponent.AddForce(HittedForce*(weapon.weaponOwner.transform.position - CharacterActor.transform.position).ProjectOntoPlane(Vector3.up).normalized);
+        CharacterActor.RigidbodyComponent.LinearDrag = HittedDrag;
+        Debug.Log($"速度{CharacterActor.Velocity}");
         switch (hitKind)
         {
             case 0:

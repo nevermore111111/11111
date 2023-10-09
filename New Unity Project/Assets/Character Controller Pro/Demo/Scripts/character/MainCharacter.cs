@@ -73,7 +73,7 @@ public class MainCharacter : CharacterInfo
     //这个是我打到别人的方法
     public void HitParByHitKind(WeaponManager weapon)
     {
-        switch (HitKind)
+        switch (HitStrength)
         {
             
             case 0:

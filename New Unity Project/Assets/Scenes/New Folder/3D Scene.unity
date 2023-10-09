@@ -821,8 +821,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102522144}
-  m_LocalRotation: {x: -0.13850157, y: -0.11932661, z: -0.016812678, w: 0.9830035}
-  m_LocalPosition: {x: -0.10384369, y: -0.5076852, z: 0.42144012}
+  m_LocalRotation: {x: -0.13850164, y: -0.119326584, z: -0.016812682, w: 0.9830035}
+  m_LocalPosition: {x: -0.1287384, y: -2.742185, z: 0.52246857}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1575,7 +1575,7 @@ MonoBehaviour:
   selectEnemy: {fileID: 0}
   cameraRadius: 0.5
   hitBox: {fileID: 0}
-  HitKind: 0
+  HitStrength: 0
   targetGroupSize: 2
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -6149,7 +6149,7 @@ PrefabInstance:
     - target: {fileID: 7174589064515782875, guid: 15963df9e6a96144bb9d8742a888bd7c,
         type: 3}
       propertyPath: m_ImpulseDefinition.m_ImpulseShape
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7174589064515782875, guid: 15963df9e6a96144bb9d8742a888bd7c,
         type: 3}
@@ -6169,7 +6169,7 @@ PrefabInstance:
     - target: {fileID: 7174589064515782875, guid: 15963df9e6a96144bb9d8742a888bd7c,
         type: 3}
       propertyPath: m_ImpulseDefinition.m_ImpulseDuration
-      value: 0.059
+      value: 0.028
       objectReference: {fileID: 0}
     - target: {fileID: 7174589064515782875, guid: 15963df9e6a96144bb9d8742a888bd7c,
         type: 3}
@@ -7690,8 +7690,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: -0.13850161, y: -0.11932658, z: -0.01681268, w: 0.9830035}
-  m_LocalPosition: {x: -0.10384369, y: -0.5076852, z: 0.42144012}
+  m_LocalRotation: {x: 0.1666924, y: -0.11879378, z: 0.02023469, w: 0.97861755}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8006,7 +8006,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605997566}
-  m_LocalRotation: {x: 0.023164071, y: -0.26986164, z: 0.0064939777, w: 0.96259856}
+  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9584,8 +9584,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811303954}
-  m_LocalRotation: {x: -0.13850157, y: -0.11932661, z: -0.016812678, w: 0.9830035}
-  m_LocalPosition: {x: -0.10384369, y: -0.5076852, z: 0.42144012}
+  m_LocalRotation: {x: 0.16669244, y: -0.11879381, z: 0.020234695, w: 0.97861755}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10233,7 +10233,7 @@ MonoBehaviour:
   selectEnemy: {fileID: 0}
   cameraRadius: 0.5
   hitBox: {fileID: 0}
-  HitKind: 0
+  HitStrength: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -10927,8 +10927,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234765, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.0620468, z: -5.8746176}
+  m_LocalRotation: {x: 0.039234784, y: 0.000007778405, z: -0.00000030361113, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.0620465, z: -5.874625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21081,8 +21081,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498168725}
-  m_LocalRotation: {x: -0.58117, y: 0.39870894, z: 0.39181018, w: 0.59140295}
-  m_LocalPosition: {x: -121.65257, y: -6.647057, z: 95.86633}
+  m_LocalRotation: {x: 0.68920255, y: -0.12981452, z: -0.1275684, w: -0.70133764}
+  m_LocalPosition: {x: -121.70153, y: -6.647043, z: 95.8863}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23072,6 +23072,8 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  HittedForce: 10
+  HittedDrag: 0.1
 --- !u!1 &1767079602
 GameObject:
   m_ObjectHideFlags: 0
@@ -23142,7 +23144,7 @@ MonoBehaviour:
   selectEnemy: {fileID: 0}
   cameraRadius: 0.5
   hitBox: {fileID: 0}
-  HitKind: 0
+  HitStrength: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -23324,7 +23326,7 @@ MonoBehaviour:
   selectEnemy: {fileID: 0}
   cameraRadius: 0.5
   hitBox: {fileID: 0}
-  HitKind: 0
+  HitStrength: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -24499,7 +24501,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890388382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -120.63914, y: -2.5075204, z: 91.51473}
+  m_LocalPosition: {x: -120.61424, y: -0.2730205, z: 91.413704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25686,7 +25688,7 @@ MonoBehaviour:
   selectEnemy: {fileID: 0}
   cameraRadius: 0.5
   hitBox: {fileID: 0}
-  HitKind: 0
+  HitStrength: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -26535,7 +26537,7 @@ MonoBehaviour:
   selectEnemy: {fileID: 0}
   cameraRadius: 0.5
   hitBox: {fileID: 0}
-  HitKind: 0
+  HitStrength: 0
   CharacterActor: {fileID: 0}
   CharacterStateController: {fileID: 0}
   CharacterHitted: {fileID: 0}

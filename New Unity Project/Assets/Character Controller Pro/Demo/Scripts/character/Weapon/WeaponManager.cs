@@ -262,7 +262,7 @@ var squaredNumbers = numbers.Select(x => x * x);
             {
                 impulseSource.m_ImpulseDefinition.m_ImpulseShape = CinemachineImpulseDefinition.ImpulseShapes.Explosion;
             }
-            switch (weaponOwner.HitKind)
+            switch (weaponOwner.HitStrength)
             {
                 case 0:
                     {
@@ -271,7 +271,7 @@ var squaredNumbers = numbers.Select(x => x * x);
                         impulseSource.GenerateImpulse(weaponData.impulseValue0 * WeaponDirection);
                         if (weaponData.PrintHit)
                         {
-                            Debug.Log($"当前的攻击类型是{weaponOwner.HitKind},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue0}");
+                            Debug.Log($"当前的攻击类型是{weaponOwner.HitStrength},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue0}");
                         }
                         break;
                     }
@@ -281,7 +281,7 @@ var squaredNumbers = numbers.Select(x => x * x);
                         impulseSource.GenerateImpulse(weaponData.impulseValue1 * WeaponDirection);
                         if (weaponData.PrintHit)
                         {
-                            Debug.Log($"当前的攻击类型是{weaponOwner.HitKind},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue1}");
+                            Debug.Log($"当前的攻击类型是{weaponOwner.HitStrength},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue1}");
                         }
                         break;
                     }
@@ -291,7 +291,7 @@ var squaredNumbers = numbers.Select(x => x * x);
                         impulseSource.GenerateImpulse(weaponData.impulseValue2 * WeaponDirection);
                         if (weaponData.PrintHit)
                         {
-                            Debug.Log($"当前的攻击类型是{weaponOwner.HitKind},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue2}");
+                            Debug.Log($"当前的攻击类型是{weaponOwner.HitStrength},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue2}");
                         }
                         break;
                     }
@@ -301,7 +301,7 @@ var squaredNumbers = numbers.Select(x => x * x);
                         impulseSource.GenerateImpulse(weaponData.impulseValue3 * WeaponDirection);
                         if (weaponData.PrintHit)
                         {
-                            Debug.Log($"当前的攻击类型是{weaponOwner.HitKind},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue3}");
+                            Debug.Log($"当前的攻击类型是{weaponOwner.HitStrength},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue3}");
                         }
                         break;
                     }
@@ -311,7 +311,7 @@ var squaredNumbers = numbers.Select(x => x * x);
                         impulseSource.GenerateImpulse(weaponData.impulseValue4 * WeaponDirection);
                         if (weaponData.PrintHit)
                         {
-                            Debug.Log($"当前的攻击类型是{weaponOwner.HitKind},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue4}");
+                            Debug.Log($"当前的攻击类型是{weaponOwner.HitStrength},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue4}");
                         }
                         break;
                     }

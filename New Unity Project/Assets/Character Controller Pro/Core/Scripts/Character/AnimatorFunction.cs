@@ -144,7 +144,7 @@ public class AnimatorFunction : MonoBehaviour
         hitKind = CurrentAnimConfig.HitStrength[currentHitIndex];
         activeWeaponDetect = CurrentAnimConfig.HitDetect[currentHitIndex];
         //设置当前攻击类别
-        mainCharacter.HitKind = hitKind;
+        mainCharacter.HitStrength = hitKind;
         //根据当前攻击类别来进行
         //根据当前的detections进行调整这个激活的detection;
         currentHitIndex++;
@@ -184,7 +184,7 @@ public class AnimatorFunction : MonoBehaviour
     public void HitReStart()//int Hit = 1, string activeWeaponDetect = null
     {
         currentHitIndex++;
-        mainCharacter.HitKind = hitKind;
+        mainCharacter.HitStrength = hitKind;
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
