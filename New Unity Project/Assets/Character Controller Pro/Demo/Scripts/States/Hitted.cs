@@ -57,6 +57,7 @@ public class Hitted : CharacterState
         if(NeedChangeState)
         {
             CharacterStateController.EnqueueTransition<Hitted>();
+            CharacterActor.Animator.CrossFade("Hitted.HittedOnGround", 0.3f,0,0f);
         }
         //ÊÇ·ñÊÇÖ÷½Ç
         if(CharacterActor.isPlayer)

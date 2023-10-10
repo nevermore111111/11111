@@ -261,11 +261,11 @@ public class AnimatorFunction : MonoBehaviour
             Debug.Log(Attack.CharacterActor.Forward);
             if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
             {
-                Attack.CharacterActor.PlanarVelocity = Vector3.zero;
-                if (Attack.SpAttack == -1)
-                {
-                    Attack.CharacterActor.SetUpRootMotion(false, false);
-                }
+                //Attack.CharacterActor.PlanarVelocity = Vector3.zero;
+                //if (Attack.SpAttack == -1)
+                //{
+                //    Attack.CharacterActor.SetUpRootMotion(false, false);
+                //}
             }
         }
         else
