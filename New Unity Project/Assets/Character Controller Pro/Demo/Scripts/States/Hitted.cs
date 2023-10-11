@@ -10,7 +10,7 @@ using UnityEngine;
 public class Hitted : CharacterState
 {
     public float HittedForce = 10f;
-    public float HittedDrag = 0.1f;
+    public float HittedDrag = 2f;
     override protected void Start()
     {
         base.Start();
