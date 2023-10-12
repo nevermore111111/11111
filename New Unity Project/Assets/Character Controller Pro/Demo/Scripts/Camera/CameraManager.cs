@@ -69,8 +69,12 @@ public class CameraManager : MonoBehaviour
             {
                 switchToMainCamera = true;
             }
+            else if((mainCharacter.selectEnemy.transform.position - mainCharacter.transform.position).sqrMagnitude < 5)
+            {
+                switchToMainCamera = true;
+            }
 
-            // 条件2：移动时间超过1.5秒
+            // 条件2：移动时间超过1秒
             if (mainCharacter.ismoving())
             {
                 switchToMainCamera = true;
