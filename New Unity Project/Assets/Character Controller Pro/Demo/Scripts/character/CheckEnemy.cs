@@ -57,7 +57,6 @@ public class CheckEnemy : MonoBehaviour
 
 
 
-
     private void OnTriggerEnter(Collider other)
     {
 

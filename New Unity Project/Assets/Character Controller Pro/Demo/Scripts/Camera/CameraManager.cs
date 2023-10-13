@@ -1,6 +1,5 @@
 using UnityEngine;
 using Cinemachine;
-using Unity.VisualScripting;
 
 public class CameraManager : MonoBehaviour
 {
@@ -9,37 +8,33 @@ public class CameraManager : MonoBehaviour
     CheckEnemy checkEnemy;
     MainCharacter mainCharacter;
 
-    [Tooltip("如果存在测试摄像机，那么测试摄像机为最大权重")]
-    public CinemachineFreeLook mainCharacterPrefab;
-
-
-     int LowCameraPriority = 0;
-     int HighCameraPriority = 20;
+    int LowCameraPriority = 0;
+    int HighCameraPriority = 20;
 
     private CinemachineBrain cinemachineBrain;
-
     CheckCamera checkCamera;
 
-    /// <summary>
-    ///摄像机切换逻辑
-    ///在人物攻击且范围内存在敌人的时候
-    ///在人物受到攻击的时候
-    ///返回正常视角的时间
-    ///当人物自由移动或者范围内没有敌人的时候，持续1.5s后，返回自由视角。
-    ///转动屏幕的时候，立刻返回自动相机
-    /// </summary>
+    private int prevMainCameraPriority; // 保存上一帧开始时的主摄像机Priority
+    private int prevSubCameraPriority; // 保存上一帧开始时的副摄像机Priority
+
     private void Start()
     {
         mainCharacter = FindObjectOfType<MainCharacter>();
         cinemachineBrain = FindObjectOfType<CinemachineBrain>();
-        mainCamera = GameObject.Find("MainCamera").GetComponent<CinemachineFreeLook>();
-        subCamera = GameObject.Find("subCamera").GetComponent<CinemachineVirtualCamera>();
+        if (mainCamera == null)
+            mainCamera = GameObject.Find("FreeLook Camera_Main").GetComponent<CinemachineFreeLook>();
+        if (subCamera == null)
+            subCamera = GameObject.Find("subCamera").GetComponent<CinemachineVirtualCamera>();
         checkEnemy = FindObjectOfType<CheckEnemy>();
         checkCamera = subCamera.GetComponent<CheckCamera>();
     }
 
     private void Update()
     {
+        // 在每帧开始前记录摄像机的Priority
+        int startMainCameraPriority = mainCamera.Priority;
+        int startSubCameraPriority = subCamera.Priority;
+
         // 检查主摄像机切换到副摄像机的条件
         bool switchToSubCamera = false;
 
@@ -69,10 +64,10 @@ public class CameraManager : MonoBehaviour
             {
                 switchToMainCamera = true;
             }
-            else if((mainCharacter.selectEnemy.transform.position - mainCharacter.transform.position).sqrMagnitude < 5)
-            {
-                switchToMainCamera = true;
-            }
+            //else if((mainCharacter.selectEnemy.transform.position - mainCharacter.transform.position).sqrMagnitude < 4)
+            //{
+            //    switchToMainCamera = true;
+            //}
 
             // 条件2：移动时间超过1秒
             if (mainCharacter.ismoving())
@@ -87,18 +82,18 @@ public class CameraManager : MonoBehaviour
             }
             if (!checkCamera.ShouldSwitchToSubCamera())
             {
-                //Debug.Log("角度不合格导致转化");
+                Debug.Log("角度不合格导致转化");
                 ////如果当前角度很大，那么直接返回普通视角
                 switchToMainCamera = true;
             }
         }
-        if (subCamera.Priority == HighCameraPriority)
-        {
-            if (switchToMainCamera == true)
-            {
-                Debug.Log("");
-            }
-        }
+        //if (subCamera.Priority == HighCameraPriority)
+        //{
+        //    if (switchToMainCamera == true)
+        //    {
+        //        Debug.Log("");
+        //    }
+        //}
 
         // 根据条件切换摄像机
         if (switchToSubCamera)
@@ -114,6 +109,23 @@ public class CameraManager : MonoBehaviour
             mainCamera.Priority = HighCameraPriority;
             subCamera.Priority = LowCameraPriority;
         }
-        // 更新相机状态
+
+        // 如果开始时的Priority与上一帧开始时不同，执行ChangeTransform方法
+        //if (startMainCameraPriority != prevMainCameraPriority || startSubCameraPriority != prevSubCameraPriority)
+        //{
+        //    ChangeTransform();
+        //}
+
+        // 更新保存的Priority
+        prevMainCameraPriority = startMainCameraPriority;
+        prevSubCameraPriority = startSubCameraPriority;
+    }
+
+    private void ChangeTransform()
+    {
+        mainCamera.transform.position = Camera.main.transform.position;
+        mainCamera.transform.rotation = Camera.main.transform.rotation;
+        subCamera.transform.position = Camera.main.transform.position;
+        subCamera.transform.rotation = Camera.main.transform.rotation;
     }
 }

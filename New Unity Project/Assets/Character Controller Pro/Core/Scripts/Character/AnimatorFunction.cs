@@ -88,8 +88,7 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void Stop()
     {
-
-        Attack.CharacterActor.Animator.SetBool("stop", false);
+        Attack.CharacterActor.Animator.SetBool(Attack.stopParameter, false);
     }
 
     public void AttackEnd()
@@ -256,9 +255,9 @@ public class AnimatorFunction : MonoBehaviour
             GameObject[] gamesEnemy = mainCharacter.enemies.Select(m => m.gameObject).ToArray();
             mainCharacter.selectEnemy = HelpTools01.FindClosest(Attack.CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
             Vector3 Forward = (mainCharacter.selectEnemy.transform.position - Attack.CharacterActor.transform.position).normalized;
-            Debug.Log(Attack.CharacterActor.Forward);
+            //Debug.Log(Attack.CharacterActor.Forward);
             Attack.CharacterActor.Forward = new(Forward.x, 0, Forward.z);
-            Debug.Log(Attack.CharacterActor.Forward);
+            //Debug.Log(Attack.CharacterActor.Forward);
             if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
             {
                 //Attack.CharacterActor.PlanarVelocity = Vector3.zero;

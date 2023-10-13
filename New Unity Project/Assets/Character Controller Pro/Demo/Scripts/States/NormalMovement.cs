@@ -448,7 +448,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 }
 
                 // 如果移动时间超过1秒，则将 `moving` 设为 `true`，并打印提示信息
-                if (Time.time - startTime > 1f)
+                if (Time.time - startTime > 0.5f)
                 {
                     moving = true;
 
@@ -507,12 +507,12 @@ namespace Lightbug.CharacterControllerPro.Demo
                 {
                     CharacterActor.Animator.SetFloat("running", 1);
                     this.planarMovementParameters.stableGroundedDeceleration = planarMovementParameters.stableGroundedDeceleration_Dash;
-                    CharacterActor.Animator.SetBool("stop", true);
+                    CharacterActor.Animator.SetBool(stopParameter, true);
                 }
                 else if (lastVelocityMagnitude > 0.5f * planarMovementParameters.boostSpeedLimit)
                 {
                     CharacterActor.Animator.SetFloat("running", 0);
-                    CharacterActor.Animator.SetBool("stop", true);
+                    CharacterActor.Animator.SetBool(stopParameter, true);
                 }
 
                 // 更新状态
@@ -822,7 +822,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 if (CharacterActor.IsGrounded)
                 {
-                    CharacterActor.Animator.CrossFade("NormalMovement.StableGrounded", 0.3f);
+                    CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.StableGrounded",0.2f);
                 }
                 else
                 {

@@ -604,14 +604,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65588612}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc2c77182e0ba75449ff9f60934456ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
   subCamera: {fileID: 0}
-  mainCharacterPrefab: {fileID: 0}
 --- !u!4 &65588614
 Transform:
   m_ObjectHideFlags: 0
@@ -796,7 +795,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 45
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -821,7 +820,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102522144}
-  m_LocalRotation: {x: -0.12767984, y: -0.11950416, z: -0.015499011, w: 0.98446757}
+  m_LocalRotation: {x: -0.13850157, y: -0.11932661, z: -0.016812678, w: 0.9830035}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2991,6 +2990,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -3454,6 +3454,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -4355,7 +4356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 0.1, z: -4}
+  m_FollowOffset: {x: 0, y: 0.698362, z: -4.496308}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -4716,7 +4717,7 @@ MonoBehaviour:
     roll: 0
   - position: {x: 1.69, y: 1.14, z: -0.89}
     roll: -41.21
-  - position: {x: 0.2567542, y: 1.772542, z: -3.950958}
+  - position: {x: 0.1228205, y: 1.772542, z: -5.474835}
     roll: 0
 --- !u!4 &436386489
 Transform:
@@ -5129,6 +5130,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -6873,7 +6875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 0.1, z: -4}
+  m_FollowOffset: {x: 0, y: 0.698362, z: -4.496308}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -7174,8 +7176,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539236866}
-  m_LocalRotation: {x: -0.07083242, y: -0.5761807, z: -0.0502183, w: 0.8126972}
-  m_LocalPosition: {x: -120.90678, y: -1.992856, z: 95.54177}
+  m_LocalRotation: {x: -0.06834546, y: -0.57323694, z: -0.048064344, w: 0.8151185}
+  m_LocalPosition: {x: -120.87188, y: -1.9938153, z: 95.522415}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7665,7 +7667,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 45
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -7690,8 +7692,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: -0.12767984, y: -0.11950416, z: -0.015499011, w: 0.98446757}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.06055595, y: -0.12028074, z: -0.0073508746, w: 0.99086404}
+  m_LocalPosition: {x: 0.1187439, y: 0.5983622, z: -0.48189545}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9764,7 +9766,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 45
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -9789,8 +9791,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811303954}
-  m_LocalRotation: {x: -0.12767985, y: -0.11950413, z: -0.015499009, w: 0.9844676}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.060556024, y: -0.12027992, z: -0.007350826, w: 0.9908641}
+  m_LocalPosition: {x: 0.11873627, y: 0.5983622, z: -0.48189545}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11132,8 +11134,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234765, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.0620468, z: -5.8746176}
+  m_LocalRotation: {x: 0.039234784, y: 0.000007778405, z: -0.00000030361113, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.0620465, z: -5.874625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15482,7 +15484,7 @@ Transform:
   m_GameObject: {fileID: 1005673833}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -114.3367, y: -2.1896055, z: 95.005}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -16767,7 +16769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f7633c93f0364a418841eeb8b058634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
+  m_TrackedObjectOffset: {x: 0, y: 1.32, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
@@ -16775,10 +16777,10 @@ MonoBehaviour:
   m_VerticalDamping: 0.5
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
+  m_DeadZoneWidth: 0.391
+  m_DeadZoneHeight: 0.877
+  m_SoftZoneWidth: 0.638
+  m_SoftZoneHeight: 0.911
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
@@ -16790,7 +16792,7 @@ MonoBehaviour:
   m_MaxDollyOut: 5000
   m_MinimumDistance: 1
   m_MaximumDistance: 5000
-  m_MinimumFOV: 3
+  m_MinimumFOV: 45
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
@@ -17496,8 +17498,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162800274}
-  m_LocalRotation: {x: -0.07083242, y: -0.5761807, z: -0.0502183, w: 0.8126972}
-  m_LocalPosition: {x: -120.90678, y: -1.992856, z: 95.54177}
+  m_LocalRotation: {x: -0.06834546, y: -0.57323694, z: -0.048064344, w: 0.8151185}
+  m_LocalPosition: {x: -120.87188, y: -1.9938153, z: 95.522415}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17569,7 +17571,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 2
-    m_Time: 2
+    m_Time: 0.8
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -18169,6 +18171,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   layerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -18212,6 +18215,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   initialVelocity: 30
   duration: 0.5
   movementCurve:
@@ -18269,6 +18273,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   useIKOffsetValues: 0
   rightFootOffset: {x: 0, y: 0, z: 0}
   leftFootOffset: {x: 0, y: 0, z: 0}
@@ -18312,6 +18317,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   IsPlayer: 1
   planarMovementParameters:
     baseSpeedLimit: 8
@@ -18495,6 +18501,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   filterByTag: 1
   wallTag: WallSlide
   slideAcceleration: 10
@@ -18538,6 +18545,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   climbSpeed: 3
   angularSpeed: 120
   jumpVelocity: 10
@@ -18571,6 +18579,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
   gravity: 10
@@ -18600,6 +18609,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   cam: {fileID: 1162800279}
   gunTip: {fileID: 597766025}
   whatIsGrapplable:
@@ -18643,6 +18653,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   initialVelocity: 12
   duration: 0.65
   movementCurve:
@@ -18700,6 +18711,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
 --- !u!114 &1257029339
@@ -18728,6 +18740,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
   army:
@@ -18760,6 +18773,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   changeState: 0
 --- !u!114 &1257029341
 MonoBehaviour:
@@ -18787,6 +18801,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   HeighAndWidth: {x: 0, y: 0}
   attack: {fileID: 0}
   gravity: 10
@@ -19560,6 +19575,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 2
@@ -19884,7 +19900,7 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_Targets:
   - target: {fileID: 8805377711411893421}
-    weight: 1
+    weight: 0.1
     radius: 0.5
 --- !u!1001 &1387877939
 PrefabInstance:
@@ -20684,6 +20700,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -20866,6 +20883,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   attackEnd: 0
 --- !u!1 &1484830150
 GameObject:
@@ -21231,7 +21249,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1498168727}
   - component: {fileID: 1498168726}
-  - component: {fileID: 1498168728}
   - component: {fileID: 1498168729}
   m_Layer: 0
   m_Name: subCamera
@@ -21286,8 +21303,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498168725}
-  m_LocalRotation: {x: 0.42941803, y: 0.5638524, z: 0.55337065, w: -0.4375519}
-  m_LocalPosition: {x: -121.74687, y: -6.6471176, z: 95.782074}
+  m_LocalRotation: {x: -0.50789016, y: 0.49131954, z: 0.4800566, w: 0.51980615}
+  m_LocalPosition: {x: -121.47178, y: -6.6519494, z: 95.891884}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21295,29 +21312,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1498168728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1498168725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ApplyAfter: 2
-  m_ChannelMask: 1
-  m_Gain: 1
-  m_Use2DDistance: 0
-  m_UseCameraSpace: 1
-  m_ReactionSettings:
-    m_SecondaryNoise: {fileID: 0}
-    m_AmplitudeGain: 1
-    m_FrequencyGain: 1
-    m_Duration: 1
-    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!114 &1498168729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21853,7 +21847,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594338177}
-  m_LocalRotation: {x: -0.007510226, y: 0.9602752, z: -0.02596604, w: -0.27774286}
+  m_LocalRotation: {x: -0.006225598, y: 0.97550666, z: -0.027844036, w: -0.21811184}
   m_LocalPosition: {x: -0.00000011920926, y: 1.14, z: 0.9700011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -22495,7 +22489,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689691047}
-  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
+  m_LocalRotation: {x: 0.023164071, y: -0.26986164, z: 0.0064939777, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -22563,6 +22557,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -22810,7 +22805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 0.1, z: -4}
+  m_FollowOffset: {x: 0, y: 0.698362, z: -4.496308}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -23129,6 +23124,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -23277,6 +23273,7 @@ MonoBehaviour:
   GroundDistance: GroundDistance
   evadeParameter: evade
   spAttackParameter: spAttack
+  stopParameter: stop
   HittedForce: 10
   HittedDrag: 2
 --- !u!1 &1767079602
@@ -23503,10 +23500,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1786591024}
-  - component: {fileID: 1786591023}
   - component: {fileID: 1786591021}
   - component: {fileID: 1786591025}
   - component: {fileID: 1786591026}
+  - component: {fileID: 1786591027}
   m_Layer: 7
   m_Name: GameObject
   m_TagString: enemy
@@ -23535,32 +23532,6 @@ MonoBehaviour:
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
---- !u!143 &1786591023
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1786591020}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1786591024
 Transform:
   m_ObjectHideFlags: 0
@@ -23613,6 +23584,33 @@ MonoBehaviour:
   agent: {fileID: 0}
   manager: []
   characterInfoOwner: {fileID: 0}
+--- !u!54 &1786591027
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786591020}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1789466499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24611,11 +24609,11 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 30
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 1385997539}
+  m_LookAt: {fileID: 8805377711411893421}
   m_Follow: {fileID: 8805377711411893421}
   m_CommonLens: 1
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 45
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -24635,7 +24633,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 6
+    m_MaxSpeed: 5
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -24659,9 +24657,9 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 300
-    m_AccelTime: 0.1
-    m_DecelTime: 0.1
+    m_MaxSpeed: 600
+    m_AccelTime: 0.2
+    m_DecelTime: 0.2
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
     m_InvertInput: 0
@@ -24706,7 +24704,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890388382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -120.72449, y: -2.9409056, z: 91.86112}
+  m_LocalPosition: {x: -120.74298, y: -3.0152056, z: 91.93617}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
