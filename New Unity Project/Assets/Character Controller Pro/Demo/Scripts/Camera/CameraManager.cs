@@ -80,7 +80,7 @@ public class CameraManager : MonoBehaviour
             {
                 switchToMainCamera = true;
             }
-            if (!checkCamera.ShouldSwitchToSubCamera())
+            if (switchToSubCamera && !checkCamera.ShouldSwitchToSubCamera())
             {
                 Debug.Log("角度不合格导致转化");
                 ////如果当前角度很大，那么直接返回普通视角

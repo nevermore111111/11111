@@ -116,7 +116,7 @@ public class MainCharacter : CharacterInfo
         }
         // 设置目标时间缩放
         Time.timeScale = targetTimeScale;
-        if(weaponManager.isActiveAndEnabled)
+        if (weaponManager.isActiveAndEnabled)
         {
             weaponManager.PlayHittedFx();
         }

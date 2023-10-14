@@ -27,7 +27,7 @@ public class ConvertGenericToHumanoid : AssetPostprocessor
     [MenuItem("Assets/测试转化", false, 1)] // 添加加载 JSON 的菜单项
     static public void ChangeFbx()
     {
-        ModelImporter modelImporter;
+        //ModelImporter modelImporter;
         string path = AssetDatabase.GUIDToAssetPath(Selection.assetGUIDs[0]);
         string fullPath  = PathConverter.ConvertToDirectoryPath(path);
         ConvertFBXFilesToHumanoid(fullPath);
