@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cinemachine;
+using Lightbug.CharacterControllerPro.Demo;
 
 public class CameraManager : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class CameraManager : MonoBehaviour
     public CinemachineVirtualCamera subCamera;
     CheckEnemy checkEnemy;
     MainCharacter mainCharacter;
+    CinemachineOrbitalTransposer CinemachineOrbitalTransposer;
+
 
     int LowCameraPriority = 0;
     int HighCameraPriority = 20;
@@ -27,6 +30,7 @@ public class CameraManager : MonoBehaviour
             subCamera = GameObject.Find("subCamera").GetComponent<CinemachineVirtualCamera>();
         checkEnemy = FindObjectOfType<CheckEnemy>();
         checkCamera = subCamera.GetComponent<CheckCamera>();
+        CinemachineOrbitalTransposer = subCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
     }
 
     private void Update()
@@ -74,7 +78,12 @@ public class CameraManager : MonoBehaviour
             {
                 switchToMainCamera = true;
             }
-
+            //使用orbit轨道的时候立刻切换
+            if (mainCharacter.CharacterStateController.CurrentState is NormalMovement && CinemachineOrbitalTransposer != null)
+            {
+                //是否立刻切换
+                switchToMainCamera = true;
+            }
             // 条件3：鼠标存在移动时立即切换
             if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
             {
@@ -102,10 +111,18 @@ public class CameraManager : MonoBehaviour
             {
                 mainCamera.Priority = LowCameraPriority;
                 subCamera.Priority = HighCameraPriority;
+                //切换到sub，这时候需要根据根据当前的摄像机去设置subcamera。
+                if (CinemachineOrbitalTransposer != null)
+                {
+                    CinemachineOrbitalTransposer.m_FollowOffset.y = mainCamera.transform.position.y - mainCamera.Follow.position.y;
+                    mainCharacter.CharacterStateController.ExternalReference = mainCamera.transform;
+                }
             }
+
         }
         else if (switchToMainCamera)
         {
+            mainCharacter.CharacterStateController.ExternalReference = cinemachineBrain.transform;
             mainCamera.Priority = HighCameraPriority;
             subCamera.Priority = LowCameraPriority;
         }
@@ -119,6 +136,10 @@ public class CameraManager : MonoBehaviour
         // 更新保存的Priority
         prevMainCameraPriority = startMainCameraPriority;
         prevSubCameraPriority = startSubCameraPriority;
+        if (subCamera.Priority > mainCamera.Priority && CinemachineOrbitalTransposer != null)
+        {
+
+        }
     }
 
     private void ChangeTransform()
