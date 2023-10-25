@@ -4,12 +4,14 @@ using Lightbug.CharacterControllerPro.Demo;
 
 public class CameraManager : MonoBehaviour
 {
-    public CinemachineFreeLook mainCamera;
-    public CinemachineVirtualCamera subCamera;
+    public CinemachineVirtualCameraBase mainCamera;
+    public CinemachineVirtualCameraBase subCamera;
     CheckEnemy checkEnemy;
     MainCharacter mainCharacter;
     CinemachineOrbitalTransposer CinemachineOrbitalTransposer;
-
+    public float tooCloseDis = 2f;
+    public float tooFarDis = 5f;
+    float distanceToEnemy;
 
     int LowCameraPriority = 0;
     int HighCameraPriority = 20;
@@ -30,7 +32,7 @@ public class CameraManager : MonoBehaviour
             subCamera = GameObject.Find("subCamera").GetComponent<CinemachineVirtualCamera>();
         checkEnemy = FindObjectOfType<CheckEnemy>();
         checkCamera = subCamera.GetComponent<CheckCamera>();
-        CinemachineOrbitalTransposer = subCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+        CinemachineOrbitalTransposer = (subCamera as CinemachineVirtualCamera).GetCinemachineComponent<CinemachineOrbitalTransposer>();
     }
 
     private void Update()
@@ -56,6 +58,9 @@ public class CameraManager : MonoBehaviour
             {
                 switchToSubCamera = true;
             }
+
+
+
         }
 
         // 检查副摄像机切换到主摄像机的条件
@@ -104,21 +109,35 @@ public class CameraManager : MonoBehaviour
         //    }
         //}
 
+        {//并且和敌人距离不能太近
+            if (mainCharacter.selectEnemy != null)
+                distanceToEnemy = (mainCharacter.transform.position - mainCharacter.selectEnemy.transform.position).magnitude;
+            else if (mainCharacter.enemies.Count > 0)
+            {
+                distanceToEnemy = (mainCharacter.transform.position - mainCharacter.enemies[0].transform.position).magnitude;
+            }
+            else
+            {
+                distanceToEnemy = 0;
+            }
+            if (distanceToEnemy < tooCloseDis || distanceToEnemy > tooFarDis)
+            {
+                switchToSubCamera = false;
+                switchToMainCamera = true;
+            }
+        }
+
         // 根据条件切换摄像机
         if (switchToSubCamera)
         {
-            if (checkCamera != null)
+            mainCamera.Priority = LowCameraPriority;
+            subCamera.Priority = HighCameraPriority;
+            //切换到sub，这时候需要根据根据当前的摄像机去设置subcamera。
+            if (CinemachineOrbitalTransposer != null)
             {
-                mainCamera.Priority = LowCameraPriority;
-                subCamera.Priority = HighCameraPriority;
-                //切换到sub，这时候需要根据根据当前的摄像机去设置subcamera。
-                if (CinemachineOrbitalTransposer != null)
-                {
-                    CinemachineOrbitalTransposer.m_FollowOffset.y = mainCamera.transform.position.y - mainCamera.Follow.position.y;
-                    mainCharacter.CharacterStateController.ExternalReference = mainCamera.transform;
-                }
+                CinemachineOrbitalTransposer.m_FollowOffset.y = mainCamera.transform.position.y - mainCamera.Follow.position.y;
+                mainCharacter.CharacterStateController.ExternalReference = mainCamera.transform;
             }
-
         }
         else if (switchToMainCamera)
         {

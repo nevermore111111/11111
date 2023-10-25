@@ -20,12 +20,12 @@ public class CheckEnemy : MonoBehaviour
     [SerializeField]
     private CinemachineTargetGroup targetGroup;
     float currentWeight;
-    public CinemachineFreeLook MainCamera;
     private List<Transform> enemiesInRange = new List<Transform>();
     public float MoveToCharacterSpeed = 10.0f;
     public CharacterActor characterActor ;
     private NormalMovement NormalMovement;
     private float MoveDeceleration;
+    CameraManager CameraManager;
     private void Awake()
     {
         NormalMovement = characterActor.GetComponentInChildren<NormalMovement>();
@@ -35,6 +35,7 @@ public class CheckEnemy : MonoBehaviour
         }
         
         MoveDeceleration = NormalMovement.planarMovementParameters.stableGroundedDeceleration;
+        CameraManager = FindObjectOfType<CameraManager>();
     }
     IEnumerator AdjustTargetWeight(float newWeight, float duration, int targetIndex)
     {
@@ -74,10 +75,15 @@ public class CheckEnemy : MonoBehaviour
                 }
                 indexNum = targetGroup.FindMember(characterInfo.transform);
                 StartCoroutine(AdjustTargetWeight(1f, 1f, indexNum));
+                //更新摄像机
+                FreshCamera();
             }
         }
     }
-
+    private void  FreshCamera()
+    {
+        CameraManager.subCamera.ForceCameraPosition(CameraManager.mainCamera.transform.position, CameraManager.mainCamera.transform.rotation);
+    }
 
 
     private void OnTriggerExit(Collider other)
@@ -91,6 +97,7 @@ public class CheckEnemy : MonoBehaviour
             // 在敌人离开范围时，延迟删除目标并逐渐减小权重
             //StartCoroutine(DelayedRemoveMember(enemyTransform, 1f));
             StartCoroutine(AdjustTargetWeight(0f, 1f, targetIndex));
+            FreshCamera();
         }
     }
 

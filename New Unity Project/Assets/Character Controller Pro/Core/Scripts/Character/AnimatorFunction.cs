@@ -44,7 +44,7 @@ public class AnimatorFunction : MonoBehaviour
         weaponManagers = GetComponentsInChildren<WeaponManager>().ToList();
         Attack = transform.parent.parent.GetComponentInChildren<Attack>();
         CharacterStateController = transform.parent.parent.GetComponentInChildren<CharacterStateController>();
-        CameraEffects = CinemachineFreeLook.GetComponent<CameraEffects>();
+        //CameraEffects = CinemachineFreeLook.GetComponent<CameraEffects>();
         timelineManager = GetComponent<TimelineManager>();
         WeaponData = FindAnyObjectByType<WeaponData>();
         //
@@ -257,6 +257,7 @@ public class AnimatorFunction : MonoBehaviour
             Vector3 Forward = (mainCharacter.selectEnemy.transform.position - Attack.CharacterActor.transform.position).normalized;
             //Debug.Log(Attack.CharacterActor.Forward);
             Attack.CharacterActor.Forward = new(Forward.x, 0, Forward.z);
+            Attack.CharacterActor.Up = Vector3.up;
             //Debug.Log(Attack.CharacterActor.Forward);
             if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
             {
