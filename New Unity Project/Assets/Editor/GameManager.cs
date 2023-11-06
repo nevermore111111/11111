@@ -28,7 +28,8 @@ public class GameManager // Ìí¼Ó¼Ì³Ð×Ô MonoBehaviour
             HitStrength = ExcelReaderHelper.ExcelReaderEZ<int[]>(0, "HitStrength"),
             HitDetect = ExcelReaderHelper.ExcelReaderEZ<string[]>(0, "HitDetect"),
             AnimStateInfo = ExcelReaderHelper.ExcelReaderEZ<int>(0, "AnimStateInfo"),
-            SpAttackPar = ExcelReaderHelper.ExcelReaderEZ<float[]>(0, "SpAttackPar")
+            SpAttackPar = ExcelReaderHelper.ExcelReaderEZ<float[]>(0, "SpAttackPar"),
+            AttackDirection = ExcelReaderHelper.ExcelReaderEZ<float[]>(0, "AttackDirection"),
         };
 
         string filePath = Application.persistentDataPath + "/config.json";

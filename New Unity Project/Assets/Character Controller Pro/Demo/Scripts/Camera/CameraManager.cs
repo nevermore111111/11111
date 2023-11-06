@@ -22,6 +22,9 @@ public class CameraManager : MonoBehaviour
     private int prevMainCameraPriority; // 保存上一帧开始时的主摄像机Priority
     private int prevSubCameraPriority; // 保存上一帧开始时的副摄像机Priority
 
+    Transform TrueCameraTransform;
+
+
     private void Start()
     {
         mainCharacter = FindObjectOfType<MainCharacter>();
@@ -32,7 +35,7 @@ public class CameraManager : MonoBehaviour
             subCamera = GameObject.Find("subCamera").GetComponent<CinemachineVirtualCamera>();
         checkEnemy = FindObjectOfType<CheckEnemy>();
         checkCamera = subCamera.GetComponent<CheckCamera>();
-       
+        TrueCameraTransform = Camera.main.transform;
     }
 
     private void Update()
@@ -55,7 +58,7 @@ public class CameraManager : MonoBehaviour
         if (mainCharacter != null && mainCharacter.enemies.Count > 0)
         {
             // 条件1：受到攻击
-            if (mainCharacter.GetIsAttacked()|| mainCharacter.GetIsAttacking())
+            if (mainCharacter.GetIsAttacked() || mainCharacter.GetIsAttacking())
             {
                 switchToSubCamera = true;
                 switchToMainCamera = false;
@@ -65,7 +68,7 @@ public class CameraManager : MonoBehaviour
         if (mainCharacter != null)
         {
             // 条件1：攻击范围内敌人为0
-            if (mainCharacter.enemies.Count == 0 || IsSuitableDistance() || mainCharacter.ismoving()|| IsMoveMouse())
+            if (mainCharacter.enemies.Count == 0 || IsSuitableDistance() || mainCharacter.ismoving() || IsMoveMouse())
             {
                 switchToMainCamera = true;
                 switchToSubCamera = false;
@@ -77,7 +80,7 @@ public class CameraManager : MonoBehaviour
             switchToMainCamera = true;
         }
 
-       
+
 
         // 根据条件切换摄像机
         if (switchToSubCamera)
@@ -85,7 +88,7 @@ public class CameraManager : MonoBehaviour
             mainCamera.Priority = LowCameraPriority;
             subCamera.Priority = HighCameraPriority;
             //切换到sub，这时候需要根据根据当前的摄像机去设置subcamera。
-           
+
         }
         else if (switchToMainCamera)
         {
@@ -95,15 +98,27 @@ public class CameraManager : MonoBehaviour
         }
 
         // 如果开始时的Priority与上一帧开始时不同，执行ChangeTransform方法
-        //if (startMainCameraPriority != prevMainCameraPriority || startSubCameraPriority != prevSubCameraPriority)
-        //{
-        //    ChangeTransform();
-        //}
+        if (IsChangeCameraPriority(startMainCameraPriority, startSubCameraPriority))
+        {
+            
+            ChangeTransform();
+        }
 
         // 更新保存的Priority
         prevMainCameraPriority = startMainCameraPriority;
         prevSubCameraPriority = startSubCameraPriority;
-       
+
+    }
+
+    /// <summary>
+    /// 是否修改了摄像机的优先级
+    /// </summary>
+    /// <param name="startMainCameraPriority"></param>
+    /// <param name="startSubCameraPriority"></param>
+    /// <returns></returns>
+    private bool IsChangeCameraPriority(int startMainCameraPriority, int startSubCameraPriority)
+    {
+        return startMainCameraPriority != prevMainCameraPriority || startSubCameraPriority != prevSubCameraPriority;
     }
 
     private static bool IsMoveMouse()
@@ -129,12 +144,12 @@ public class CameraManager : MonoBehaviour
         }
         return distanceToEnemy < tooCloseDis || distanceToEnemy > tooFarDis;
     }
-
+    /// <summary>
+    /// 强制摄像机更新到当前主摄像机的位置
+    /// </summary>
     private void ChangeTransform()
     {
-        mainCamera.transform.position = Camera.main.transform.position;
-        mainCamera.transform.rotation = Camera.main.transform.rotation;
-        subCamera.transform.position = Camera.main.transform.position;
-        subCamera.transform.rotation = Camera.main.transform.rotation;
+        mainCamera.ForceCameraPosition(TrueCameraTransform.position, TrueCameraTransform.rotation);
+        subCamera.ForceCameraPosition(TrueCameraTransform.position,TrueCameraTransform.rotation);
     }
 }

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 所有攻击的参数
+/// </summary>
 public class AnimationConfig
 {
     public List<int> Index;
@@ -12,8 +15,12 @@ public class AnimationConfig
     public List<string[]> HitDetect;
     public List<int> AnimStateInfo;
     public List<float[]> SpAttackPar;
+    public List<float[]> AttackDirection;
     // Add other data members as needed
 }
+/// <summary>
+/// 单个攻击的参数
+/// </summary>
 public class SoloAnimaConfig
 {
     public int Index;
@@ -24,8 +31,21 @@ public class SoloAnimaConfig
     public string[] HitDetect;
     public int AnimStateInfo;
     public float[] SpAttackPar;
+    public float[] AttackDirection;
 
-    public SoloAnimaConfig(int index, string clipName, int combo, string animationStateName, int[] hitStrength, string[] hitDetect, int animStateInfo, float[] spAttackPar)
+    /// <summary>
+    /// 用来记录单个攻击的参数
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="clipName"></param>
+    /// <param name="combo"></param>
+    /// <param name="animationStateName"></param>
+    /// <param name="hitStrength"></param>
+    /// <param name="hitDetect"></param>
+    /// <param name="animStateInfo"></param>
+    /// <param name="spAttackPar"></param>
+    /// <param name="attackDirection"></param>
+    public SoloAnimaConfig(int index, string clipName, int combo, string animationStateName, int[] hitStrength, string[] hitDetect, int animStateInfo, float[] spAttackPar, float[] attackDirection)
     {
         Index = index;
         ClipName = clipName;
@@ -35,5 +55,6 @@ public class SoloAnimaConfig
         HitDetect = hitDetect;
         AnimStateInfo = animStateInfo;
         SpAttackPar = spAttackPar;
+        AttackDirection = attackDirection;
     }
 }

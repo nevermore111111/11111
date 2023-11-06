@@ -53,8 +53,6 @@ public class AnimatorFunction : MonoBehaviour
     {
         animationConfig = FindAnyObjectByType<DataLoad>().animationConfig;
     }
-
-
     public void JumpStart()
     {
         //关闭动画机进入的条件
@@ -224,7 +222,7 @@ public class AnimatorFunction : MonoBehaviour
     /// <param name="attackName"></param>
     public void AttackStart(string attackName)
     {
-        Attack.CharacterActor.Animator.speed = 1.2f;
+        Attack.CharacterActor.Animator.speed = 1.3f;
         Attack.CharacterActor.UseRootMotion = true;
         //如果名字一致不做任何事情
         if( currentStateName ==attackName)
@@ -261,11 +259,12 @@ public class AnimatorFunction : MonoBehaviour
             //Debug.Log(Attack.CharacterActor.Forward);
             if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
             {
-                //Attack.CharacterActor.PlanarVelocity = Vector3.zero;
-                //if (Attack.SpAttack == -1)
-                //{
-                //    Attack.CharacterActor.SetUpRootMotion(false, false);
-                //}
+             
+                if (Attack.SpAttack == -1)
+                {
+                    Attack.CharacterActor.SetUpRootMotion(false, false);
+                }
+                Attack.CharacterActor.PlanarVelocity = Vector3.zero;
             }
         }
         else
@@ -321,7 +320,7 @@ public class AnimatorFunction : MonoBehaviour
     {
         Attack.CharacterActor.UseRootMotion = false;
         Attack.useGravity = true;
-        Attack.CharacterActor.VerticalVelocity -= WeaponData.DropSpeed*Attack.CharacterActor.Up;
+        Attack.CharacterActor.VerticalVelocity -= 10f*Attack.CharacterActor.Up;
         Attack.CharacterActor.alwaysNotGrounded = false;
         //仅仅使用水平移动
     }
@@ -389,7 +388,8 @@ public class AnimatorFunction : MonoBehaviour
                 animationConfig.HitStrength[index],
                 animationConfig.HitDetect[index],
                 animationConfig.AnimStateInfo[index],
-                animationConfig.SpAttackPar[index]
+                animationConfig.SpAttackPar[index],
+                animationConfig.AttackDirection[index]
             );
         }
         else

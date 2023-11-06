@@ -242,7 +242,7 @@ var squaredNumbers = numbers.Select(x => x * x);
         {
             case "sp11":
                 {
-                    impulseSource.m_ImpulseDefinition.m_ImpulseShape = weaponData.ImpulseShapes;
+                    impulseSource.m_ImpulseDefinition.m_ImpulseShape = weaponData.SpAttackImpulseShapes;
                     impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.sp11Duration;
                     impulseSource.GenerateImpulse(WeaponDirection * weaponData.sp11Force);
                     break;
@@ -262,6 +262,14 @@ var squaredNumbers = numbers.Select(x => x * x);
             {
                 impulseSource.m_ImpulseDefinition.m_ImpulseShape = CinemachineImpulseDefinition.ImpulseShapes.Explosion;
             }
+
+            if(weaponData.onlyUseVirticalShake)
+            {
+                //这样代表只上下方向的震动 
+                //这是需要修改当前的weaponDirection=>
+                WeaponDirection = Vector3.Project(WeaponDirection, Vector3.up);
+            }
+
             switch (weaponOwner.HitStrength)
             {
                 case 0:

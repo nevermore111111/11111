@@ -10,6 +10,7 @@ public class Hitted : CharacterState
 {
     public float HittedForce = 10f;
     public float HittedDrag = 2f;
+    public float HittedMixWeight = 0.5f;
     override protected void Start()
     {
         base.Start();
@@ -56,7 +57,12 @@ public class Hitted : CharacterState
         if(NeedChangeState)
         {
             CharacterStateController.EnqueueTransition<Hitted>();
-            CharacterActor.Animator.CrossFade("Hitted.HittedOnGround", 0.3f,0,0f);
+            CharacterActor.Animator.CrossFadeInFixedTime("Hitted.HittedOnGround",0.1f, 0,0.2f);
+        }
+        else
+        {
+            CharacterActor.Animator.Play("MixHitted", 1, 0.3f);
+            CharacterActor.Animator.SetLayerWeight(1, HittedMixWeight);
         }
         //ÊÇ·ñÊÇÖ÷½Ç
         if(CharacterActor.isPlayer)
