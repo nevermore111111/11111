@@ -242,7 +242,7 @@ var squaredNumbers = numbers.Select(x => x * x);
         {
             case "sp11":
                 {
-                    impulseSource.m_ImpulseDefinition.m_ImpulseShape = weaponData.SpAttackImpulseShapes;
+                    impulseSource.m_ImpulseDefinition.m_ImpulseShape = weaponData.ImpulseShapes;
                     impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.sp11Duration;
                     impulseSource.GenerateImpulse(WeaponDirection * weaponData.sp11Force);
                     break;
@@ -329,10 +329,6 @@ var squaredNumbers = numbers.Select(x => x * x);
         {
 
         }
-    }
-    public void OnDrawGizmos()
-    {
-
     }
 
     /// <summary>

@@ -100,7 +100,6 @@ public class CameraManager : MonoBehaviour
         // 如果开始时的Priority与上一帧开始时不同，执行ChangeTransform方法
         if (IsChangeCameraPriority(startMainCameraPriority, startSubCameraPriority))
         {
-            
             ChangeTransform();
         }
 
@@ -149,7 +148,13 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ChangeTransform()
     {
-        mainCamera.ForceCameraPosition(TrueCameraTransform.position, TrueCameraTransform.rotation);
-        subCamera.ForceCameraPosition(TrueCameraTransform.position,TrueCameraTransform.rotation);
+        if (mainCamera.Priority == HighCameraPriority)
+        {
+            mainCamera.ForceCameraPosition(TrueCameraTransform.position, TrueCameraTransform.rotation);
+        }
+        else
+        {
+            subCamera.ForceCameraPosition(TrueCameraTransform.position, TrueCameraTransform.rotation);
+        }
     }
 }

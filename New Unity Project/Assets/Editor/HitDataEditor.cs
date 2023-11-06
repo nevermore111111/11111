@@ -4,6 +4,7 @@ using UnityEditor;
 [CustomEditor(typeof(HitData))]
 public class HitDataEditor : Editor
 {
+    SerializedProperty ForceCurrentHit;
     SerializedProperty currentHit;
 
     SerializedProperty fadeTime00;
@@ -24,6 +25,7 @@ public class HitDataEditor : Editor
 
     private void OnEnable()
     {
+        ForceCurrentHit = serializedObject.FindProperty("ForceCurrentHit");
         // Setup the SerializedProperties
         currentHit = serializedObject.FindProperty("CurrentHit");
 
@@ -47,6 +49,8 @@ public class HitDataEditor : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
+     
+        EditorGUILayout.PropertyField(ForceCurrentHit);
 
         EditorGUILayout.PropertyField(currentHit);
 

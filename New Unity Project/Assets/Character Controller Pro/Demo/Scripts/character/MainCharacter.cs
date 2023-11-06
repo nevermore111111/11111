@@ -80,6 +80,7 @@ public class MainCharacter : CharacterInfo
         // 只在Unity编辑器中运行的代码
         if(hitData.ForceCurrentHit != -1)
         {
+            //如果强制使用这个震动，会播放这个震动的震屏效果
             HitStrength = hitData.ForceCurrentHit;
         }
 #endif

@@ -8,7 +8,7 @@ public class HitData : MonoBehaviour
     //编辑器类HitDataEditor
     //还需要声明一个时停的相关参数
     //包括1渐入渐出时间，2是持续时间，3是持续是时停倍数
-    [Tooltip("如果不是-1，会每次攻击都强制使用这个类型的攻击（的震动和时停参数）")]
+    [Tooltip("如果不是-1，在编辑器模式下会每次攻击都强制使用这个类型的攻击（的震动和时停参数）")]
     public int ForceCurrentHit = -1;
 
     public int CurrentHit = -1;

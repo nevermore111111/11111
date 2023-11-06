@@ -6,6 +6,9 @@ using UnityEngine;
 [SaveDuringPlay]
 public class WeaponData : MonoBehaviour
 {
+    [Header("是否只应用垂直方向震动")]
+    public bool onlyUseVirticalShake = false;
+
     [Header("是否打印攻击类型")]
     public bool PrintHit = true;
 
