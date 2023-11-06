@@ -9,6 +9,10 @@ public class WeaponData : MonoBehaviour
     [Header("是否打印攻击类型")]
     public bool PrintHit = true;
 
+    public bool isNeedChangeCurrentHit = false;
+    public int  ChangeCurrentHitNum = -1;
+
+
     [Header("这个脚本会运行时保存")]
     [SerializeField]
     [Range(0f,1f)] // 使用Range属性来定义可编辑范围
@@ -51,10 +55,6 @@ public class WeaponData : MonoBehaviour
     public float sp11Force = 1.0f;
 
     public CinemachineImpulseDefinition.ImpulseShapes ImpulseShapes = CinemachineImpulseDefinition.ImpulseShapes.Bump;
-
-
-
-
     public float DropSpeed = 10f;
 
 }

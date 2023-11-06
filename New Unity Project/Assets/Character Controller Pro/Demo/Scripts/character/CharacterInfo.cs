@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(AgetHitBox))]
 public abstract class CharacterInfo : MonoBehaviour, IAgent
 {
+
+
     //周围全部的敌人
     
     [Tooltip("代表这个单位的敌人tag")]
