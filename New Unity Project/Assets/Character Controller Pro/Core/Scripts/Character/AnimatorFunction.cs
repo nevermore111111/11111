@@ -111,6 +111,7 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void HitEnd()
     {
+        Attack.CharacterActor.Animator.speed = 1f;
         if (!Attack.CharacterActor.Animator.IsInTransition(0))
         {
             foreach (var manager in weaponManagers)
@@ -137,7 +138,8 @@ public class AnimatorFunction : MonoBehaviour
 
     public void HitStart()//int hitKind, string activeWeaponDetect
     {
-        
+        Debug.LogError("开始攻击");
+        Attack.CharacterActor.Animator.speed = 1.3f;
         hitKind = CurrentAnimConfig.HitStrength[currentHitIndex];
         activeWeaponDetect = CurrentAnimConfig.HitDetect[currentHitIndex];
         //设置当前攻击类别
@@ -222,7 +224,7 @@ public class AnimatorFunction : MonoBehaviour
     /// <param name="attackName"></param>
     public void AttackStart(string attackName)
     {
-        Attack.CharacterActor.Animator.speed = 1.3f;
+        Attack.CharacterActor.Animator.speed = 1f;
         Attack.CharacterActor.UseRootMotion = true;
         //如果名字一致不做任何事情
         if( currentStateName ==attackName)
@@ -310,7 +312,6 @@ public class AnimatorFunction : MonoBehaviour
 
     public void CanGetInput()
     {
-
         Attack.CharacterActor.Animator.SetInteger("specialAttack",0);
         Attack.canInput = true;
         Attack.SpAttack = -1;

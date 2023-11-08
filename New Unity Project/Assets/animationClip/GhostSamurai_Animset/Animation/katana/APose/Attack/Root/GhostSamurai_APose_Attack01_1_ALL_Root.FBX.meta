@@ -541,8 +541,8 @@ ModelImporter:
       will be discarded.\n\t'ball_l' has translation animation that will be discarded.\n\t'calf_r'
       has translation animation that will be discarded.\n\t'foot_r' has translation
       animation that will be discarded.\n\t'ball_r' has translation animation that
-      will be discarded.\nEvent ComboStart has a time (0.000000) outside the clip's
-      valid range (0.000000..2.166667). It will never be firedEvent AttackStart has
+      will be discarded.\nEvent AttackStart has a time (0.000000) outside the clip's
+      valid range (0.000000..2.166667). It will never be firedEvent ComboStart has
       a time (0.000000) outside the clip's valid range (0.000000..2.166667). It will
       never be fired"
     animationRetargetingWarnings: 
@@ -583,34 +583,41 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: ComboStart
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 4
-        messageOptions: 0
-      - time: 0
         functionName: AttackStart
         data: sword.attack01_1
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
-      - time: 0.14285713
-        functionName: HitStart
-        data: 4
+      - time: 0
+        functionName: ComboStart
+        data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 2
+        intParameter: 4
         messageOptions: 0
-      - time: 0.16798028
+      - time: 0.14006151
         functionName: CanGetInput
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
-      - time: 0.23605946
+      - time: 0.16528924
+        functionName: HitStart
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 1
+        messageOptions: 0
+      - time: 0.20097294
+        functionName: HitEnd
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 1
+        messageOptions: 0
+      - time: 0.2512879
         functionName: AttackEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -618,7 +625,7 @@ ModelImporter:
         intParameter: 1
         messageOptions: 0
       - time: 0.5960102
-        functionName: CannotGetInput
+        functionName: HitEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

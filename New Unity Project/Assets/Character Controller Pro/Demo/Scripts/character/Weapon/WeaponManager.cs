@@ -267,7 +267,7 @@ var squaredNumbers = numbers.Select(x => x * x);
             {
                 //这样代表只上下方向的震动 
                 //这是需要修改当前的weaponDirection=>
-                WeaponDirection = Vector3.Project(WeaponDirection, Vector3.up);
+                WeaponDirection = Vector3.Project(WeaponDirection, Vector3.up).normalized;
             }
 
             switch (weaponOwner.HitStrength)

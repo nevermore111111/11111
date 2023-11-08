@@ -596,7 +596,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.11568629
+      - time: 0.12076243
         functionName: HitStart
         data: 4
         objectReferenceParameter: {instanceID: 0}
@@ -610,7 +610,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.24341726
+      - time: 0.28910252
         functionName: HitReStart
         data: 
         objectReferenceParameter: {instanceID: 0}

@@ -115,55 +115,55 @@ public class MainCharacter : CharacterInfo
 
     }
 
-    public IEnumerator Hit(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager)
-    {
-        float initialTimeScale = Time.timeScale;
-        float elapsedTime = 0f;
-        // 渐入
-        while (elapsedTime < fadeInDuration)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeInDuration);
-            Time.timeScale = Mathf.Lerp(initialTimeScale, targetTimeScale, normalizedTime);
-            // 可以在这里根据需要进行其他的逻辑处理
-            // 等待一帧
-            yield return null;
-        }
-        // 设置目标时间缩放
-        Time.timeScale = targetTimeScale;
-        if (weaponManager.isActiveAndEnabled)
-        {
-            weaponManager.PlayHittedFx();
-        }
-        // 持续时间
-        yield return new WaitForSecondsRealtime(duration);
+    //public IEnumerator Hit(float fadeInDuration, float fadeOutDuration, float duration, float targetTimeScale, WeaponManager weaponManager)
+    //{
+    //    float initialTimeScale = Time.timeScale;
+    //    float elapsedTime = 0f;
+    //    // 渐入
+    //    while (elapsedTime < fadeInDuration)
+    //    {
+    //        elapsedTime += Time.unscaledDeltaTime;
+    //        float normalizedTime = Mathf.Clamp01(elapsedTime / fadeInDuration);
+    //        Time.timeScale = Mathf.Lerp(initialTimeScale, targetTimeScale, normalizedTime);
+    //        // 可以在这里根据需要进行其他的逻辑处理
+    //        // 等待一帧
+    //        yield return null;
+    //    }
+    //    // 设置目标时间缩放
+    //    Time.timeScale = targetTimeScale;
+    //    if (weaponManager.isActiveAndEnabled)
+    //    {
+    //        weaponManager.PlayHittedFx();
+    //    }
+    //    // 持续时间
+    //    yield return new WaitForSecondsRealtime(duration);
 
-        // 渐出
-        elapsedTime = 0f;
-        if (weaponManager.isActiveAndEnabled)
-        {
-            //调用震动和特效
-            weaponManager.Impluse();
-        }
-        //这里需要调用两个地方产生特效，一个是自身的刀光额外特效，另外一个是怪物的受击反馈。
-        //需要做个委托
+    //    // 渐出
+    //    elapsedTime = 0f;
+    //    if (weaponManager.isActiveAndEnabled)
+    //    {
+    //        //调用震动和特效
+    //        weaponManager.Impluse();
+    //    }
+    //    //这里需要调用两个地方产生特效，一个是自身的刀光额外特效，另外一个是怪物的受击反馈。
+    //    //需要做个委托
 
 
-        while (elapsedTime < fadeOutDuration)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeOutDuration);
-            Time.timeScale = Mathf.Lerp(targetTimeScale, 1f, normalizedTime);
-            // 可以在这里根据需要进行其他的逻辑处理
+    //    while (elapsedTime < fadeOutDuration)
+    //    {
+    //        elapsedTime += Time.unscaledDeltaTime;
+    //        float normalizedTime = Mathf.Clamp01(elapsedTime / fadeOutDuration);
+    //        Time.timeScale = Mathf.Lerp(targetTimeScale, 1f, normalizedTime);
+    //        // 可以在这里根据需要进行其他的逻辑处理
 
-            // 等待一帧
-            yield return null;
-        }
+    //        // 等待一帧
+    //        yield return null;
+    //    }
 
-        //一般在时停的最后时间再去调用摄像机的震动效果。
-        // 恢复原始的时间缩放
-        Time.timeScale = 1f;
-    }
+    //    //一般在时停的最后时间再去调用摄像机的震动效果。
+    //    // 恢复原始的时间缩放
+    //    Time.timeScale = 1f;
+    //}
     public IEnumerator Hit(int currentHit, HitData hitData, WeaponManager weaponManager)
     {
         float fadeInDuration = hitData.GetFadeTime(hitData, currentHit);
@@ -172,6 +172,12 @@ public class MainCharacter : CharacterInfo
         float targetTimeScale = hitData.GetTimeScale(hitData, currentHit);
         float initialTimeScale = Time.timeScale;
         float elapsedTime = 0f;
+        if (weaponManager.isActiveAndEnabled)
+        {
+            //调用震动和特效
+            weaponManager.Impluse();
+            Debug.LogError("开始执行受击方法");
+        }
         // 渐入
         while (elapsedTime < fadeInDuration)
         {
@@ -193,11 +199,7 @@ public class MainCharacter : CharacterInfo
 
         // 渐出
         elapsedTime = 0f;
-        if (weaponManager.isActiveAndEnabled)
-        {
-            //调用震动和特效
-            weaponManager.Impluse();
-        }
+      
         //这里需要调用两个地方产生特效，一个是自身的刀光额外特效，另外一个是怪物的受击反馈。
         //需要做个委托
 
