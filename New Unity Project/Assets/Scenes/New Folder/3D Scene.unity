@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.838
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.15019387, g: 0.18806474, b: 0.2565593, a: 0.838}
+  m_IndirectSpecularColor: {r: 0.15019345, g: 0.18806413, b: 0.25655842, a: 0.838}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -963,7 +963,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102522144}
-  m_LocalRotation: {x: -0.13850158, y: -0.11932658, z: -0.016812678, w: 0.9830035}
+  m_LocalRotation: {x: -0.13850157, y: -0.11932661, z: -0.016812678, w: 0.9830035}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6890,7 +6890,633 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1670461620}
+    - targetCorrespondingSourceObject: {fileID: 5866822931366696804, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 479726674}
+    - targetCorrespondingSourceObject: {fileID: 540636271050761032, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 479726673}
+    - targetCorrespondingSourceObject: {fileID: 539862570557816459, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 479726672}
+    - targetCorrespondingSourceObject: {fileID: 3192471496285145508, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1247334135}
+    - targetCorrespondingSourceObject: {fileID: 3435441795650924222, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 591202249}
+    - targetCorrespondingSourceObject: {fileID: 3775046453808555561, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1953211280}
+    - targetCorrespondingSourceObject: {fileID: 3733823087080053677, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1297739057}
+    - targetCorrespondingSourceObject: {fileID: 5424735122083702132, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1300529432}
   m_SourcePrefab: {fileID: 100100000, guid: 15963df9e6a96144bb9d8742a888bd7c, type: 3}
+--- !u!4 &479726656 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 825395085768634989, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &479726657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5424735122083702132, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &479726658 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 881779363401420632, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &479726659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3733823087080053677, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &479726660 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 101870926894591644, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &479726661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3775046453808555561, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &479726662 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2512725040011156508, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &479726663 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3435441795650924222, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &479726664 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1751912251507589671, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &479726665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3192471496285145508, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &479726666 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1769683398664743927, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &479726667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 539862570557816459, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &479726668 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6541849689123875407, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &479726669 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 540636271050761032, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &479726670 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6949028541940807990, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &479726671 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5866822931366696804, guid: 15963df9e6a96144bb9d8742a888bd7c,
+    type: 3}
+  m_PrefabInstance: {fileID: 479726655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &479726672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479726667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f233e4c5d6f4aa6a1618016c2233f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 0}
+  profileSync: 0
+  target: {fileID: 479726666}
+  _active: 1
+  ignoreVisibility: 0
+  executeInEditMode: 0
+  ignoreFrames: 0
+  duration: 0.5
+  continuous: 0
+  smooth: 0
+  checkWorldPosition: 1
+  minDistance: 0.3
+  worldPositionRelativeOption: 0
+  worldPositionRelativeTransform: {fileID: 0}
+  checkScreenPosition: 0
+  minPixelDistance: 10
+  stepsBufferSize: 1023
+  maxStepsPerFrame: 12
+  checkTime: 0
+  timeInterval: 1
+  checkCollisions: 0
+  orientToSurface: 1
+  ground: 0
+  surfaceOffset: 0.05
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  mask: {fileID: 0}
+  drawBehind: 1
+  cullMode: 2
+  subMeshMask: -1
+  colorOverTime:
+    serializedVersion: 2
+    key0: {r: 0.015686274, g: 1, b: 0.77092826, a: 1}
+    key1: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.25882354}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  colorRamp: 0
+  colorRampTexture: {fileID: 0}
+  colorRampStart: {fileID: 0}
+  colorRampEnd: {fileID: 0}
+  fadeOut: 1
+  colorSequence: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorCycleDuration: 3
+  colorCycleLoop: 1
+  pingPongSpeed: 1
+  colorStartPalette:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0, g: 1, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 1, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 32768
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  cam: {fileID: 0}
+  effect: 2
+  customMaterial: {fileID: 0}
+  texture: {fileID: 0}
+  scale: {x: 1, y: 1, z: 1}
+  scaleStartRandomMin: {x: 1, y: 1, z: 1}
+  scaleStartRandomMax: {x: 1, y: 1, z: 1}
+  scaleOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ignoreTransformScale: 0
+  scaleUniform: 0
+  parent: {fileID: 0}
+  localPositionRandomMin: {x: 0, y: 0, z: 0}
+  localPositionRandomMax: {x: 0, y: 0, z: 0}
+  laserBandWidth: 0.1
+  laserIntensity: 20
+  laserFlash: 0.2
+  trailTint: {r: 0, g: 0, b: 0.1, a: 1}
+  cameraDistanceFade: 0
+  cameraDistanceFadeNear: 0
+  cameraDistanceFadeFar: 1000
+  animationStates: 
+  animator: {fileID: 0}
+  lookTarget: {fileID: 0}
+  lookToCamera: 1
+  textureCutOff: 0.25
+  normalThreshold: 0.3
+  useLastAnimationState: 0
+  maxBatches: 50
+  meshPoolSize: 256
+  interpolate: 0
+--- !u!114 &479726673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479726669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f233e4c5d6f4aa6a1618016c2233f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 0}
+  profileSync: 0
+  target: {fileID: 479726668}
+  _active: 1
+  ignoreVisibility: 0
+  executeInEditMode: 0
+  ignoreFrames: 0
+  duration: 0.5
+  continuous: 0
+  smooth: 0
+  checkWorldPosition: 1
+  minDistance: 0.3
+  worldPositionRelativeOption: 0
+  worldPositionRelativeTransform: {fileID: 0}
+  checkScreenPosition: 0
+  minPixelDistance: 10
+  stepsBufferSize: 1023
+  maxStepsPerFrame: 12
+  checkTime: 0
+  timeInterval: 1
+  checkCollisions: 0
+  orientToSurface: 1
+  ground: 0
+  surfaceOffset: 0.05
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  mask: {fileID: 0}
+  drawBehind: 1
+  cullMode: 2
+  subMeshMask: -1
+  colorOverTime:
+    serializedVersion: 2
+    key0: {r: 0.015686274, g: 1, b: 0.77092826, a: 1}
+    key1: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.25882354}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  colorRamp: 0
+  colorRampTexture: {fileID: 0}
+  colorRampStart: {fileID: 0}
+  colorRampEnd: {fileID: 0}
+  fadeOut: 1
+  colorSequence: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorCycleDuration: 3
+  colorCycleLoop: 1
+  pingPongSpeed: 1
+  colorStartPalette:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0, g: 1, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 1, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 32768
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  cam: {fileID: 0}
+  effect: 2
+  customMaterial: {fileID: 0}
+  texture: {fileID: 0}
+  scale: {x: 1, y: 1, z: 1}
+  scaleStartRandomMin: {x: 1, y: 1, z: 1}
+  scaleStartRandomMax: {x: 1, y: 1, z: 1}
+  scaleOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ignoreTransformScale: 0
+  scaleUniform: 0
+  parent: {fileID: 0}
+  localPositionRandomMin: {x: 0, y: 0, z: 0}
+  localPositionRandomMax: {x: 0, y: 0, z: 0}
+  laserBandWidth: 0.1
+  laserIntensity: 20
+  laserFlash: 0.2
+  trailTint: {r: 0, g: 0, b: 0.1, a: 1}
+  cameraDistanceFade: 0
+  cameraDistanceFadeNear: 0
+  cameraDistanceFadeFar: 1000
+  animationStates: 
+  animator: {fileID: 0}
+  lookTarget: {fileID: 0}
+  lookToCamera: 1
+  textureCutOff: 0.25
+  normalThreshold: 0.3
+  useLastAnimationState: 0
+  maxBatches: 50
+  meshPoolSize: 256
+  interpolate: 0
+--- !u!114 &479726674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479726671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f233e4c5d6f4aa6a1618016c2233f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 0}
+  profileSync: 0
+  target: {fileID: 479726670}
+  _active: 1
+  ignoreVisibility: 0
+  executeInEditMode: 0
+  ignoreFrames: 0
+  duration: 0.5
+  continuous: 0
+  smooth: 0
+  checkWorldPosition: 1
+  minDistance: 0.3
+  worldPositionRelativeOption: 0
+  worldPositionRelativeTransform: {fileID: 0}
+  checkScreenPosition: 0
+  minPixelDistance: 10
+  stepsBufferSize: 1023
+  maxStepsPerFrame: 12
+  checkTime: 0
+  timeInterval: 1
+  checkCollisions: 0
+  orientToSurface: 1
+  ground: 0
+  surfaceOffset: 0.05
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  mask: {fileID: 0}
+  drawBehind: 1
+  cullMode: 2
+  subMeshMask: -1
+  colorOverTime:
+    serializedVersion: 2
+    key0: {r: 0.015686274, g: 1, b: 0.77092826, a: 1}
+    key1: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.25882354}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  colorRamp: 0
+  colorRampTexture: {fileID: 0}
+  colorRampStart: {fileID: 0}
+  colorRampEnd: {fileID: 0}
+  fadeOut: 1
+  colorSequence: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorCycleDuration: 3
+  colorCycleLoop: 1
+  pingPongSpeed: 1
+  colorStartPalette:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0, g: 1, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 1, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 32768
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  cam: {fileID: 0}
+  effect: 2
+  customMaterial: {fileID: 0}
+  texture: {fileID: 0}
+  scale: {x: 1, y: 1, z: 1}
+  scaleStartRandomMin: {x: 1, y: 1, z: 1}
+  scaleStartRandomMax: {x: 1, y: 1, z: 1}
+  scaleOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ignoreTransformScale: 0
+  scaleUniform: 0
+  parent: {fileID: 0}
+  localPositionRandomMin: {x: 0, y: 0, z: 0}
+  localPositionRandomMax: {x: 0, y: 0, z: 0}
+  laserBandWidth: 0.1
+  laserIntensity: 20
+  laserFlash: 0.2
+  trailTint: {r: 0, g: 0, b: 0.1, a: 1}
+  cameraDistanceFade: 0
+  cameraDistanceFadeNear: 0
+  cameraDistanceFadeFar: 1000
+  animationStates: 
+  animator: {fileID: 0}
+  lookTarget: {fileID: 0}
+  lookToCamera: 1
+  textureCutOff: 0.25
+  normalThreshold: 0.3
+  useLastAnimationState: 0
+  maxBatches: 50
+  meshPoolSize: 256
+  interpolate: 0
 --- !u!1 &486510535
 GameObject:
   m_ObjectHideFlags: 0
@@ -8117,7 +8743,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: -0.13850158, y: -0.11932658, z: -0.016812678, w: 0.9830035}
+  m_LocalRotation: {x: -0.13850157, y: -0.11932661, z: -0.016812678, w: 0.9830035}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8157,6 +8783,172 @@ Transform:
   m_Father: {fileID: 1670461626}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &591202249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479726663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f233e4c5d6f4aa6a1618016c2233f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 0}
+  profileSync: 0
+  target: {fileID: 479726662}
+  _active: 1
+  ignoreVisibility: 0
+  executeInEditMode: 0
+  ignoreFrames: 0
+  duration: 0.5
+  continuous: 0
+  smooth: 0
+  checkWorldPosition: 1
+  minDistance: 0.3
+  worldPositionRelativeOption: 0
+  worldPositionRelativeTransform: {fileID: 0}
+  checkScreenPosition: 0
+  minPixelDistance: 10
+  stepsBufferSize: 1023
+  maxStepsPerFrame: 12
+  checkTime: 0
+  timeInterval: 1
+  checkCollisions: 0
+  orientToSurface: 1
+  ground: 0
+  surfaceOffset: 0.05
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  mask: {fileID: 0}
+  drawBehind: 1
+  cullMode: 2
+  subMeshMask: -1
+  colorOverTime:
+    serializedVersion: 2
+    key0: {r: 0.015686274, g: 1, b: 0.77092826, a: 1}
+    key1: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.25882354}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  colorRamp: 0
+  colorRampTexture: {fileID: 0}
+  colorRampStart: {fileID: 0}
+  colorRampEnd: {fileID: 0}
+  fadeOut: 1
+  colorSequence: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorCycleDuration: 3
+  colorCycleLoop: 1
+  pingPongSpeed: 1
+  colorStartPalette:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0, g: 1, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 1, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 32768
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  cam: {fileID: 0}
+  effect: 2
+  customMaterial: {fileID: 0}
+  texture: {fileID: 0}
+  scale: {x: 1, y: 1, z: 1}
+  scaleStartRandomMin: {x: 1, y: 1, z: 1}
+  scaleStartRandomMax: {x: 1, y: 1, z: 1}
+  scaleOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ignoreTransformScale: 0
+  scaleUniform: 0
+  parent: {fileID: 0}
+  localPositionRandomMin: {x: 0, y: 0, z: 0}
+  localPositionRandomMax: {x: 0, y: 0, z: 0}
+  laserBandWidth: 0.1
+  laserIntensity: 20
+  laserFlash: 0.2
+  trailTint: {r: 0, g: 0, b: 0.1, a: 1}
+  cameraDistanceFade: 0
+  cameraDistanceFadeNear: 0
+  cameraDistanceFadeFar: 1000
+  animationStates: 
+  animator: {fileID: 0}
+  lookTarget: {fileID: 0}
+  lookToCamera: 1
+  textureCutOff: 0.25
+  normalThreshold: 0.3
+  useLastAnimationState: 0
+  maxBatches: 50
+  meshPoolSize: 256
+  interpolate: 0
 --- !u!1 &594382264
 GameObject:
   m_ObjectHideFlags: 3
@@ -8464,7 +9256,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605997566}
-  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
+  m_LocalRotation: {x: 0.023164071, y: -0.26986164, z: 0.0064939777, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11889,8 +12681,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234754, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.062047, z: -5.8746176}
+  m_LocalRotation: {x: 0.039234847, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.0620472, z: -5.874625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18728,6 +19520,172 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialsProperties: {fileID: 11400000, guid: b515c95e65d4cde4fbffe49daa5e0fa0,
     type: 2}
+--- !u!114 &1247334135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479726665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f233e4c5d6f4aa6a1618016c2233f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 0}
+  profileSync: 0
+  target: {fileID: 479726664}
+  _active: 1
+  ignoreVisibility: 0
+  executeInEditMode: 0
+  ignoreFrames: 0
+  duration: 0.5
+  continuous: 0
+  smooth: 0
+  checkWorldPosition: 1
+  minDistance: 0.3
+  worldPositionRelativeOption: 0
+  worldPositionRelativeTransform: {fileID: 0}
+  checkScreenPosition: 0
+  minPixelDistance: 10
+  stepsBufferSize: 1023
+  maxStepsPerFrame: 12
+  checkTime: 0
+  timeInterval: 1
+  checkCollisions: 0
+  orientToSurface: 1
+  ground: 0
+  surfaceOffset: 0.05
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  mask: {fileID: 0}
+  drawBehind: 1
+  cullMode: 2
+  subMeshMask: -1
+  colorOverTime:
+    serializedVersion: 2
+    key0: {r: 0.015686274, g: 1, b: 0.77092826, a: 1}
+    key1: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.25882354}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  colorRamp: 0
+  colorRampTexture: {fileID: 0}
+  colorRampStart: {fileID: 0}
+  colorRampEnd: {fileID: 0}
+  fadeOut: 1
+  colorSequence: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorCycleDuration: 3
+  colorCycleLoop: 1
+  pingPongSpeed: 1
+  colorStartPalette:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0, g: 1, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 1, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 32768
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  cam: {fileID: 0}
+  effect: 2
+  customMaterial: {fileID: 0}
+  texture: {fileID: 0}
+  scale: {x: 1, y: 1, z: 1}
+  scaleStartRandomMin: {x: 1, y: 1, z: 1}
+  scaleStartRandomMax: {x: 1, y: 1, z: 1}
+  scaleOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ignoreTransformScale: 0
+  scaleUniform: 0
+  parent: {fileID: 0}
+  localPositionRandomMin: {x: 0, y: 0, z: 0}
+  localPositionRandomMax: {x: 0, y: 0, z: 0}
+  laserBandWidth: 0.1
+  laserIntensity: 20
+  laserFlash: 0.2
+  trailTint: {r: 0, g: 0, b: 0.1, a: 1}
+  cameraDistanceFade: 0
+  cameraDistanceFadeNear: 0
+  cameraDistanceFadeFar: 1000
+  animationStates: 
+  animator: {fileID: 0}
+  lookTarget: {fileID: 0}
+  lookToCamera: 1
+  textureCutOff: 0.25
+  normalThreshold: 0.3
+  useLastAnimationState: 0
+  maxBatches: 50
+  meshPoolSize: 256
+  interpolate: 0
 --- !u!1 &1257029324
 GameObject:
   m_ObjectHideFlags: 0
@@ -19664,6 +20622,338 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1297739057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479726659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f233e4c5d6f4aa6a1618016c2233f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 0}
+  profileSync: 0
+  target: {fileID: 479726658}
+  _active: 1
+  ignoreVisibility: 0
+  executeInEditMode: 0
+  ignoreFrames: 0
+  duration: 0.5
+  continuous: 0
+  smooth: 0
+  checkWorldPosition: 1
+  minDistance: 0.3
+  worldPositionRelativeOption: 0
+  worldPositionRelativeTransform: {fileID: 0}
+  checkScreenPosition: 0
+  minPixelDistance: 10
+  stepsBufferSize: 1023
+  maxStepsPerFrame: 12
+  checkTime: 0
+  timeInterval: 1
+  checkCollisions: 0
+  orientToSurface: 1
+  ground: 0
+  surfaceOffset: 0.05
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  mask: {fileID: 0}
+  drawBehind: 1
+  cullMode: 2
+  subMeshMask: -1
+  colorOverTime:
+    serializedVersion: 2
+    key0: {r: 0.015686274, g: 1, b: 0.77092826, a: 1}
+    key1: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.25882354}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  colorRamp: 0
+  colorRampTexture: {fileID: 0}
+  colorRampStart: {fileID: 0}
+  colorRampEnd: {fileID: 0}
+  fadeOut: 1
+  colorSequence: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorCycleDuration: 3
+  colorCycleLoop: 1
+  pingPongSpeed: 1
+  colorStartPalette:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0, g: 1, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 1, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 32768
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  cam: {fileID: 0}
+  effect: 2
+  customMaterial: {fileID: 0}
+  texture: {fileID: 0}
+  scale: {x: 1, y: 1, z: 1}
+  scaleStartRandomMin: {x: 1, y: 1, z: 1}
+  scaleStartRandomMax: {x: 1, y: 1, z: 1}
+  scaleOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ignoreTransformScale: 0
+  scaleUniform: 0
+  parent: {fileID: 0}
+  localPositionRandomMin: {x: 0, y: 0, z: 0}
+  localPositionRandomMax: {x: 0, y: 0, z: 0}
+  laserBandWidth: 0.1
+  laserIntensity: 20
+  laserFlash: 0.2
+  trailTint: {r: 0, g: 0, b: 0.1, a: 1}
+  cameraDistanceFade: 0
+  cameraDistanceFadeNear: 0
+  cameraDistanceFadeFar: 1000
+  animationStates: 
+  animator: {fileID: 0}
+  lookTarget: {fileID: 0}
+  lookToCamera: 1
+  textureCutOff: 0.25
+  normalThreshold: 0.3
+  useLastAnimationState: 0
+  maxBatches: 50
+  meshPoolSize: 256
+  interpolate: 0
+--- !u!114 &1300529432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479726657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f233e4c5d6f4aa6a1618016c2233f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 0}
+  profileSync: 0
+  target: {fileID: 479726656}
+  _active: 1
+  ignoreVisibility: 0
+  executeInEditMode: 0
+  ignoreFrames: 0
+  duration: 0.5
+  continuous: 0
+  smooth: 0
+  checkWorldPosition: 1
+  minDistance: 0.3
+  worldPositionRelativeOption: 0
+  worldPositionRelativeTransform: {fileID: 0}
+  checkScreenPosition: 0
+  minPixelDistance: 10
+  stepsBufferSize: 1023
+  maxStepsPerFrame: 12
+  checkTime: 0
+  timeInterval: 1
+  checkCollisions: 0
+  orientToSurface: 1
+  ground: 0
+  surfaceOffset: 0.05
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  mask: {fileID: 0}
+  drawBehind: 1
+  cullMode: 2
+  subMeshMask: -1
+  colorOverTime:
+    serializedVersion: 2
+    key0: {r: 0.015686274, g: 1, b: 0.77092826, a: 1}
+    key1: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.25882354}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  colorRamp: 0
+  colorRampTexture: {fileID: 0}
+  colorRampStart: {fileID: 0}
+  colorRampEnd: {fileID: 0}
+  fadeOut: 1
+  colorSequence: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorCycleDuration: 3
+  colorCycleLoop: 1
+  pingPongSpeed: 1
+  colorStartPalette:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0, g: 1, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 1, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 32768
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  cam: {fileID: 0}
+  effect: 2
+  customMaterial: {fileID: 0}
+  texture: {fileID: 0}
+  scale: {x: 1, y: 1, z: 1}
+  scaleStartRandomMin: {x: 1, y: 1, z: 1}
+  scaleStartRandomMax: {x: 1, y: 1, z: 1}
+  scaleOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ignoreTransformScale: 0
+  scaleUniform: 0
+  parent: {fileID: 0}
+  localPositionRandomMin: {x: 0, y: 0, z: 0}
+  localPositionRandomMax: {x: 0, y: 0, z: 0}
+  laserBandWidth: 0.1
+  laserIntensity: 20
+  laserFlash: 0.2
+  trailTint: {r: 0, g: 0, b: 0.1, a: 1}
+  cameraDistanceFade: 0
+  cameraDistanceFadeNear: 0
+  cameraDistanceFadeFar: 1000
+  animationStates: 
+  animator: {fileID: 0}
+  lookTarget: {fileID: 0}
+  lookToCamera: 1
+  textureCutOff: 0.25
+  normalThreshold: 0.3
+  useLastAnimationState: 0
+  maxBatches: 50
+  meshPoolSize: 256
+  interpolate: 0
 --- !u!1 &1307942616
 GameObject:
   m_ObjectHideFlags: 0
@@ -21962,8 +23252,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498168725}
-  m_LocalRotation: {x: 0.0033799526, y: 0.71324223, z: 0.7009011, w: -0.003439465}
-  m_LocalPosition: {x: -121.7032, y: -6.8216925, z: 95.49314}
+  m_LocalRotation: {x: -0.6795972, y: 0.0035273267, z: 0.0032678028, w: 0.73356974}
+  m_LocalPosition: {x: -121.69969, y: -6.832234, z: 95.85164}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25545,6 +26835,172 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1953211280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479726661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f233e4c5d6f4aa6a1618016c2233f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 0}
+  profileSync: 0
+  target: {fileID: 479726660}
+  _active: 1
+  ignoreVisibility: 0
+  executeInEditMode: 0
+  ignoreFrames: 0
+  duration: 0.5
+  continuous: 0
+  smooth: 0
+  checkWorldPosition: 1
+  minDistance: 0.3
+  worldPositionRelativeOption: 0
+  worldPositionRelativeTransform: {fileID: 0}
+  checkScreenPosition: 0
+  minPixelDistance: 10
+  stepsBufferSize: 1023
+  maxStepsPerFrame: 12
+  checkTime: 0
+  timeInterval: 1
+  checkCollisions: 0
+  orientToSurface: 1
+  ground: 0
+  surfaceOffset: 0.05
+  collisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  mask: {fileID: 0}
+  drawBehind: 1
+  cullMode: 2
+  subMeshMask: -1
+  colorOverTime:
+    serializedVersion: 2
+    key0: {r: 0.015686274, g: 1, b: 0.77092826, a: 1}
+    key1: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.25882354}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  colorRamp: 0
+  colorRampTexture: {fileID: 0}
+  colorRampStart: {fileID: 0}
+  colorRampEnd: {fileID: 0}
+  fadeOut: 1
+  colorSequence: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  colorCycleDuration: 3
+  colorCycleLoop: 1
+  pingPongSpeed: 1
+  colorStartPalette:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0, g: 1, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 1, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 32768
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  cam: {fileID: 0}
+  effect: 2
+  customMaterial: {fileID: 0}
+  texture: {fileID: 0}
+  scale: {x: 1, y: 1, z: 1}
+  scaleStartRandomMin: {x: 1, y: 1, z: 1}
+  scaleStartRandomMax: {x: 1, y: 1, z: 1}
+  scaleOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ignoreTransformScale: 0
+  scaleUniform: 0
+  parent: {fileID: 0}
+  localPositionRandomMin: {x: 0, y: 0, z: 0}
+  localPositionRandomMax: {x: 0, y: 0, z: 0}
+  laserBandWidth: 0.1
+  laserIntensity: 20
+  laserFlash: 0.2
+  trailTint: {r: 0, g: 0, b: 0.1, a: 1}
+  cameraDistanceFade: 0
+  cameraDistanceFadeNear: 0
+  cameraDistanceFadeFar: 1000
+  animationStates: 
+  animator: {fileID: 0}
+  lookTarget: {fileID: 0}
+  lookToCamera: 1
+  textureCutOff: 0.25
+  normalThreshold: 0.3
+  useLastAnimationState: 0
+  maxBatches: 50
+  meshPoolSize: 256
+  interpolate: 0
 --- !u!1 &1958084516
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,8 @@ using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TrailsFX;
 using UnityEngine;
 using UnityEngine.Windows;
 using static Lightbug.CharacterControllerPro.Implementation.MovementReferenceParameters;
@@ -68,6 +70,10 @@ namespace Rusk
         private Attack attack;
 
 
+        private List<TrailEffect> evadeFX;
+
+
+
         #region Events
 
         /// <summary>
@@ -130,6 +136,7 @@ namespace Rusk
             characterActor = this.transform.parent.GetComponentInBranch<CharacterActor>();
             body = characterActor.transform;
             UnChangedDuration = duration;
+            evadeFX = CharacterActor.GetComponentsInChildren<TrailEffect>().ToList();
         }
 
 
@@ -182,7 +189,7 @@ namespace Rusk
             NormalMovement.preEvade = false;
             if (forceNotGrounded)
                 CharacterActor.alwaysNotGrounded = true;
-            characterActor.Animator.CrossFade("Evade",0.05f);
+            characterActor.Animator.CrossFade("Evade", 0.05f);
             CharacterActor.UseRootMotion = false;
 
             if (CharacterActor.IsGrounded)
@@ -213,7 +220,7 @@ namespace Rusk
             //设置冲刺动画的参数
             if (NormalMovement.evadeVec2 == Vector2.zero)
             {
-                dashDirection = - CharacterActor.Forward;
+                dashDirection = -CharacterActor.Forward;
             }
             else
             {
@@ -229,10 +236,27 @@ namespace Rusk
 
             ResetDash();
 
+            SetEvadeFX(true);
+
             //Execute the event
             if (OnDashStart != null)
                 OnDashStart(dashDirection);
 
+        }
+        /// <summary>
+        /// 是否显示拖尾特效
+        /// </summary>
+        /// <param name="isShowFx"></param>
+        private void SetEvadeFX(bool isShowFx)
+        {
+            foreach (TrailEffect effect in evadeFX)
+            {
+                if (effect != null)
+
+                {
+                    effect.active = isShowFx;
+                }
+            }
         }
 
         private void SetAnimatorPar()
@@ -284,6 +308,7 @@ namespace Rusk
             characterActor.Animator.SetBool(evadeParameter, false);
             if (forceNotGrounded)
                 CharacterActor.alwaysNotGrounded = false;
+            SetEvadeFX(false);
         }
 
 
