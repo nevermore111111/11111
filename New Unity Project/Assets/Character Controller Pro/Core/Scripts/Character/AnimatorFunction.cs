@@ -20,7 +20,6 @@ public class AnimatorFunction : MonoBehaviour
     private WeaponManager weaponManager;
     private Attack Attack;
     CharacterStateController CharacterStateController;
-    WeaponManager WeaponManager;
     public CinemachineFreeLook CinemachineFreeLook;
     CameraEffects CameraEffects;
     private List<WeaponManager> weaponManagers;//这个是所有武器
@@ -81,8 +80,8 @@ public class AnimatorFunction : MonoBehaviour
 
     public void NormalIdle()
     {
-        if(Attack.CharacterActor.Animator.IsInTransition(0)==false)
-        Attack.CharacterActor.SetUpRootMotion(false, false);
+        if (Attack.CharacterActor.Animator.IsInTransition(0) == false)
+            Attack.CharacterActor.SetUpRootMotion(false, false);
     }
     public void Stop()
     {
@@ -94,11 +93,11 @@ public class AnimatorFunction : MonoBehaviour
         Attack.CharacterActor.Animator.speed = 1f;
         if (!Attack.CharacterActor.Animator.IsInTransition(0))
         {
-            if(CharacterStateController.CurrentState is Attack)
-            Attack.CharacterActor.SetUpRootMotion(true, true);
+            if (CharacterStateController.CurrentState is Attack)
+                Attack.CharacterActor.SetUpRootMotion(true, true);
             Attack.isAttack = false;
             Attack.CharacterActor.Animator.SetBool("attack", false);
-            
+
             foreach (var manager in weaponManagers)
             {
                 if (manager.isActiveAndEnabled)
@@ -147,6 +146,7 @@ public class AnimatorFunction : MonoBehaviour
         //根据当前攻击类别来进行
         //根据当前的detections进行调整这个激活的detection;
         currentHitIndex++;
+        SetWeaponDirection();
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
@@ -157,32 +157,100 @@ public class AnimatorFunction : MonoBehaviour
                     //根据动画参数激活对应的碰撞区域
                     ActiveDetectionByStringPar(activeWeaponDetect, manager);
 
-                    switch (hitKind)
-                    {
-                        case 0:
-                            manager.AdjustFrequencyAndAmplitude(1, 0.5f);
-                            break;
-                        case 1:
-                            manager.AdjustFrequencyAndAmplitude(1.5f, 0.4f);
-                            break;
-                        case 2:
-                            manager.AdjustFrequencyAndAmplitude(2f, 0.4f);
-                            break;
-                        case 4:
-                            manager.AdjustFrequencyAndAmplitude(3f, 0.4f);
-                            break;
-                        default:
-                            manager.AdjustFrequencyAndAmplitude(1f, 1f);
-                            break;
-                    }
+                    //switch (hitKind)
+                    //{
+                    //    case 0:
+                    //        manager.AdjustFrequencyAndAmplitude(1, 0.5f);
+                    //        break;
+                    //    case 1:
+                    //        manager.AdjustFrequencyAndAmplitude(1.5f, 0.4f);
+                    //        break;
+                    //    case 2:
+                    //        manager.AdjustFrequencyAndAmplitude(2f, 0.4f);
+                    //        break;
+                    //    case 4:
+                    //        manager.AdjustFrequencyAndAmplitude(3f, 0.4f);
+                    //        break;
+                    //    default:
+                    //        manager.AdjustFrequencyAndAmplitude(1f, 1f);
+                    //        break;
+                    //}
                 }
                 break;
             }
         }
+
     }
+
+    /// <summary>
+    /// 是否要自动更新武器方向，如果不自动，回去读表。attack开始时一定去开自动
+    /// </summary>
+    /// <param name="autoUpdate"></param>
+    private void SetWeaponDirection(bool autoUpdate = false)
+    {
+        if (autoUpdate)
+        {
+            foreach (WeaponManager manager in weaponManagers)
+            {
+                if (manager.isActiveAndEnabled)
+                {
+                    manager.isNeedUpdateDirection = true;
+                    weaponManager = manager;
+                    return;
+                }
+            }
+        }
+        //修正当前的攻击方向
+        if (CurrentAnimConfig.AttackDirection.Length < 3)
+        {
+            //这代表没填写
+            //要继续更新
+            foreach (WeaponManager manager in weaponManagers)
+            {
+                if (manager.isActiveAndEnabled)
+                {
+                    manager.isNeedUpdateDirection = true;
+                    weaponManager = manager;
+                    break;
+                }
+                    
+            }
+        }
+        else
+        {
+            //会根据当前此次攻击的次数去区对应的攻击
+            foreach (WeaponManager manager in weaponManagers)
+            {
+                if (manager.isActiveAndEnabled)
+                {
+                    weaponManager = manager;
+                    manager.isNeedUpdateDirection = false;
+                    Vector3 DirectionIncharacter = new Vector3(CurrentAnimConfig.AttackDirection[currentHitIndex * 3 - 3], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 - 2], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 - 1]);
+                    //然后我需要把这个
+                    manager.WeaponDirection = Attack.transform.TransformDirection(DirectionIncharacter);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void OnDrawGizmos()
+    {
+        Debug.Log("绘制");
+        if (weaponManager != null)
+        {
+            Debug.Log("开始绘制");
+            Debug.Log(weaponManager.WeaponDirection);
+            Gizmos.DrawLine(weaponManager.transform.position, weaponManager.transform.position + weaponManager.WeaponDirection);
+        }
+
+    }
+
+
     public void HitReStart()//int Hit = 1, string activeWeaponDetect = null
     {
         currentHitIndex++;
+        SetWeaponDirection();
         mainCharacter.HitStrength = hitKind;
         foreach (var manager in weaponManagers)
         {
@@ -224,22 +292,13 @@ public class AnimatorFunction : MonoBehaviour
     /// <param name="attackName"></param>
     public void AttackStart(string attackName)
     {
+        //修正当前的攻击方向
+
         Attack.CharacterActor.Animator.speed = 1f;
         Attack.CharacterActor.UseRootMotion = true;
-        //如果名字一致不做任何事情
-        if( currentStateName ==attackName)
-        {
-            currentStateName = attackName;
-            GetAnimationPar(currentStateName);//根据当前的动画传入的state去拿动画参数
-            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // 播放对应名称的Playable
-        }
-        else
-        {
-            currentStateName = attackName;
-            GetAnimationPar(currentStateName);//根据当前的动画传入的state去拿动画参数
-            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // 播放对应名称的Playable
-        }
-        currentHitIndex = 0;
+        ResetCurrentInfo(attackName);
+
+        //SetWeaponDirection(true);
 
 
         Attack.isNextAttack = false;//这个代表已经执行了下一次攻击
@@ -261,7 +320,7 @@ public class AnimatorFunction : MonoBehaviour
             //Debug.Log(Attack.CharacterActor.Forward);
             if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
             {
-             
+
                 if (Attack.SpAttack == -1)
                 {
                     Attack.CharacterActor.SetUpRootMotion(false, false);
@@ -274,35 +333,29 @@ public class AnimatorFunction : MonoBehaviour
             //没有单位就可以自由转向，但是只能在攻击开始的时候转向
             Attack.CharacterActor.Forward = CharacterStateController.InputMovementReference;
         }
-        //if (mainCharacter.enemys.Count != 0)
-        //{
-        //    GameObject[] gamesEnemy = mainCharacter.enemys.Select(m => m.gameObject).ToArray();
-        //    mainCharacter.selectEnemy = HelpTools01.FindClosest(Attack.CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
-        //    Vector3 targetDirection = (mainCharacter.selectEnemy.transform.position - Attack.CharacterActor.transform.position).normalized;
 
-        //    float angleDifference = Vector3.Angle(targetDirection, Attack.CharacterActor.Forward);
-        //    if (angleDifference <= 60f)
-        //    {
-        //        // 逐渐转向目标方向
-        //        float rotationSpeed = 200f; // 转身速度（度/秒）
-        //        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        //        Quaternion currentRotation = Attack.CharacterActor.transform.rotation;
+    }
 
-        //        while (Quaternion.Angle(currentRotation, targetRotation) > 0.1f)
-        //        {
-        //            currentRotation = Quaternion.RotateTowards(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
-        //            Attack.CharacterActor.transform.rotation = currentRotation;
-        //            Debug.Log("开启");
-        //            yield return null; // 等待一帧更新
-        //        }
-        //    }
-
-        //   // Attack.CharacterActor.Forward = new Vector3(targetDirection.x, 0f, targetDirection.z);
-        //}
-        //else
-        //{
-        //    Attack.CharacterActor.Forward = CharacterStateController.InputMovementReference;
-        //}
+    /// <summary>
+    /// 重新根据动画名称更新配置信息
+    /// </summary>
+    /// <param name="attackName"></param>
+    private void ResetCurrentInfo(string attackName)
+    {
+        //如果名字一致不做任何事情
+        if (currentStateName == attackName)
+        {
+            currentStateName = attackName;
+            GetAnimationPar(currentStateName);//根据当前的动画传入的state去拿动画参数
+            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // 播放对应名称的Playable
+        }
+        else
+        {
+            currentStateName = attackName;
+            GetAnimationPar(currentStateName);//根据当前的动画传入的state去拿动画参数
+            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // 播放对应名称的Playable
+        }
+        currentHitIndex = 0;
     }
 
     public void PlayTimeline(string TimelineName)
@@ -312,16 +365,16 @@ public class AnimatorFunction : MonoBehaviour
 
     public void CanGetInput()
     {
-        Attack.CharacterActor.Animator.SetInteger("specialAttack",0);
+        Attack.CharacterActor.Animator.SetInteger("specialAttack", 0);
         Attack.canInput = true;
         Attack.SpAttack = -1;
     }
-    
+
     public void Drop()
     {
         Attack.CharacterActor.UseRootMotion = false;
         Attack.useGravity = true;
-        Attack.CharacterActor.VerticalVelocity -= 10f*Attack.CharacterActor.Up;
+        Attack.CharacterActor.VerticalVelocity -= 10f * Attack.CharacterActor.Up;
         Attack.CharacterActor.alwaysNotGrounded = false;
         //仅仅使用水平移动
     }
@@ -499,11 +552,11 @@ public class AnimatorFunction : MonoBehaviour
     ///  根据当前的animatorinfo得到动画信息
     /// </summary>
     /// <returns></returns>
-    private int GetAnimConfig(AnimatorStateInfo stateInfo,List<string> Names)
+    private int GetAnimConfig(AnimatorStateInfo stateInfo, List<string> Names)
     {
-        for(int i = 0;i<stateInfo.length;i++)
+        for (int i = 0; i < stateInfo.length; i++)
         {
-            if( stateInfo.IsName(Names[i]))
+            if (stateInfo.IsName(Names[i]))
             {
                 return i;
             }

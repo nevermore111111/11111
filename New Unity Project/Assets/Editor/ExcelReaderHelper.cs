@@ -144,6 +144,7 @@ public class ExcelReaderHelper : MonoBehaviour
                 for (int i = 0; i < strArray.Length; i++)
                 {
                     //((Array)(object)array).SetValue(Convert.ChangeType(strArray[i], typeof(T).GetElementType()), i);
+                    Debug.Log(strArray.Length);
                     (array as Array).SetValue(Convert.ChangeType(strArray[i], typeof(T).GetElementType()), i);
                 }
 

@@ -1,8 +1,10 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[SaveDuringPlay]
 public class HitData : MonoBehaviour
 {
     //±à¼­Æ÷ÀàHitDataEditor
