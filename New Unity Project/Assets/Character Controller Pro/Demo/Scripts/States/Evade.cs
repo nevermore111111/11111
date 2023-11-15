@@ -137,6 +137,7 @@ namespace Rusk
             body = characterActor.transform;
             UnChangedDuration = duration;
             evadeFX = CharacterActor.GetComponentsInChildren<TrailEffect>().ToList();
+            SetEvadeFX(false);
         }
 
 
