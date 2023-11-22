@@ -16,6 +16,8 @@ public class AnimationConfig
     public List<int> AnimStateInfo;
     public List<float[]> SpAttackPar;
     public List<float[]> AttackDirection;
+    public List<string[]> HittedEffect;
+
     // Add other data members as needed
 }
 /// <summary>
@@ -32,6 +34,7 @@ public class SoloAnimaConfig
     public int AnimStateInfo;
     public float[] SpAttackPar;
     public float[] AttackDirection;
+    public string[] HittedEffect;
 
     /// <summary>
     /// 用来记录单个攻击的参数
@@ -45,7 +48,7 @@ public class SoloAnimaConfig
     /// <param name="animStateInfo"></param>
     /// <param name="spAttackPar"></param>
     /// <param name="attackDirection"></param>
-    public SoloAnimaConfig(int index, string clipName, int combo, string animationStateName, int[] hitStrength, string[] hitDetect, int animStateInfo, float[] spAttackPar, float[] attackDirection)
+    public SoloAnimaConfig(int index, string clipName, int combo, string animationStateName, int[] hitStrength, string[] hitDetect, int animStateInfo, float[] spAttackPar, float[] attackDirection, string[] hittedEffect)
     {
         Index = index;
         ClipName = clipName;
@@ -56,5 +59,6 @@ public class SoloAnimaConfig
         AnimStateInfo = animStateInfo;
         SpAttackPar = spAttackPar;
         AttackDirection = attackDirection;
+        HittedEffect = hittedEffect;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FxManager : MonoBehaviour
@@ -28,10 +29,10 @@ public class FxManager : MonoBehaviour
     /// <param name="parent"></param>
     /// <param name="maxTimeDestory"></param>
     /// <returns></returns>
-    public ParticleSystem PlayFx(string FxName, Transform pos = null,bool isAutoDestory = true,Transform parent =null,float maxTimeDestory = 5f)
+    public ParticleSystem PlayFx(string FxName, Transform pos = null, bool isAutoDestory = true, Transform parent = null, float maxTimeDestory = 5f)
     {
         ParticleSystem clone;
-        if ((parent = null) && (pos != null))
+        if ((parent == null) && (pos != null))
         {
             clone = Instantiate(FindFxByName(FxName), pos.position, pos.rotation);
         }
@@ -44,13 +45,56 @@ public class FxManager : MonoBehaviour
             clone = Instantiate(FindFxByName(FxName));
         }
         clone.Play(true);
-        if(isAutoDestory)
+        if (isAutoDestory)
         {
             particleSystemTodestory.Add(clone);
         }
         if (maxTimeDestory != 5)
         {
             timeMaxDestory = time + maxTimeDestory;
+        }
+        return clone;
+    }
+    public ParticleSystem PlayFx<T>(T FxName, Transform parent = null, float maxTimeDestory = 5f)
+    {
+        if (FxName is string)
+        {
+            // 如果是单个字符串，创建单个特效
+            return PlaySingleFx((string)(object)FxName, parent, maxTimeDestory);
+        }
+        else if (FxName is string[])
+        {
+            // 如果是字符串数组，创建多个特效
+            return PlayMultipleFx((string[])(object)FxName, parent, maxTimeDestory);
+        }
+        else
+        {
+            Debug.LogError("FxName类型不支持");
+            return null;
+        }
+    }
+
+    private ParticleSystem PlaySingleFx(string FxName, Transform parent = null, float maxTimeDestory = 5f)
+    {
+        ParticleSystem clone;
+        if (parent != null)
+        {
+            clone = Instantiate(FindFxByName(FxName), parent);
+        }
+        else
+        {
+            clone = Instantiate(FindFxByName(FxName));
+        }
+        clone.Play(true);
+        return clone;
+    }
+
+    private ParticleSystem PlayMultipleFx(string[] FxNames, Transform parent = null, float maxTimeDestory = 5f)
+    {
+        ParticleSystem clone = null;
+        foreach (var FxName in FxNames)
+        {
+            clone =  PlaySingleFx(FxName, parent, maxTimeDestory);
         }
         return clone;
     }
@@ -64,16 +108,16 @@ public class FxManager : MonoBehaviour
     /// <param name="parent"></param>
     /// <param name="maxTimeDestory"></param>
     /// <returns></returns>
-    public ParticleSystem PlayFx(string FxName,Vector3 scale, Transform pos =null,bool isAutoDestory = true, Transform parent = null, float maxTimeDestory = 5f)
+    public ParticleSystem PlayFx(string FxName, Vector3 scale, Transform pos = null, bool isAutoDestory = true, Transform parent = null, float maxTimeDestory = 5f)
     {
         ParticleSystem clone;
-        if ((parent = null) && (pos!=null))
+        if ((parent == null) && (pos != null))
         {
-             clone = Instantiate(FindFxByName(FxName), pos.position, pos.rotation);
+            clone = Instantiate(FindFxByName(FxName), pos.position, pos.rotation);
         }
-        else if(parent!=null)
+        else if (parent != null)
         {
-             clone = Instantiate(FindFxByName(FxName), parent);
+            clone = Instantiate(FindFxByName(FxName), parent);
         }
         else
         {
@@ -85,7 +129,7 @@ public class FxManager : MonoBehaviour
         {
             particleSystemTodestory.Add(clone);
         }
-        if(maxTimeDestory != 5)
+        if (maxTimeDestory != 5)
         {
             timeMaxDestory = time + maxTimeDestory;
         }
@@ -94,9 +138,9 @@ public class FxManager : MonoBehaviour
 
     private ParticleSystem FindFxByName(string name)
     {
-        for(int i = 0; i < particleSystem.Length; i++)
+        for (int i = 0; i < particleSystem.Length; i++)
         {
-            if(particleSystem[i].name == name)
+            if (particleSystem[i].name == name)
             {
                 return particleSystem[i];
             }

@@ -155,6 +155,7 @@ public class AnimatorFunction : MonoBehaviour
                 if (manager != null)
                 {
                     //根据动画参数激活对应的碰撞区域
+                    manager.weaponFx = CurrentAnimConfig.HittedEffect;
                     ActiveDetectionByStringPar(activeWeaponDetect, manager);
 
                     //switch (hitKind)
@@ -296,18 +297,30 @@ public class AnimatorFunction : MonoBehaviour
 
         Attack.CharacterActor.Animator.speed = 1f;
         Attack.CharacterActor.UseRootMotion = true;
+        //更新攻击名称和配置表
         ResetCurrentInfo(attackName);
-
+        //foreach(var weapon in weaponManagers)
+        //{
+        //    //
+        //}
         //SetWeaponDirection(true);
 
-
+        //开始一次攻击
         Attack.isNextAttack = false;//这个代表已经执行了下一次攻击
         Attack.isAttack = true;
         Attack.CharacterActor.Animator.SetBool("attack", true);
         Attack.canChangeState = false;
         Attack.OnceAttack = false;
         Attack.CharacterActor.Animator.SetInteger("specialAttack", 0);
+        ResetAttackRootAndrotate();
+    }
 
+    /// <summary>
+    /// 如果没有敌人就正常攻击，有的话会转向敌人，并且会根据自身距离敌人的距离决定是否开启rootmotion
+    /// </summary>
+    private void ResetAttackRootAndrotate()
+    {
+        
         if (mainCharacter.enemies.Count != 0)
         {
             //新语法
@@ -333,7 +346,6 @@ public class AnimatorFunction : MonoBehaviour
             //没有单位就可以自由转向，但是只能在攻击开始的时候转向
             Attack.CharacterActor.Forward = CharacterStateController.InputMovementReference;
         }
-
     }
 
     /// <summary>
@@ -443,7 +455,8 @@ public class AnimatorFunction : MonoBehaviour
                 animationConfig.HitDetect[index],
                 animationConfig.AnimStateInfo[index],
                 animationConfig.SpAttackPar[index],
-                animationConfig.AttackDirection[index]
+                animationConfig.AttackDirection[index],
+                animationConfig.HittedEffect[index]
             );
         }
         else

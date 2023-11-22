@@ -6,4 +6,5 @@ using UnityEngine;
 public class FxHelper : ScriptableObject
 {
     public ParticleSystem[] AllFx;
+    public ParticleSystem[] weaponHittedFX;
 }

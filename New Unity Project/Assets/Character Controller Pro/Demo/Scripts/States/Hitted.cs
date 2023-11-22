@@ -39,7 +39,7 @@ public class Hitted : CharacterState
     public void GetHitted(WeaponManager weapon,IAgent.HitKind hitKind,bool NeedChangeState = true)
     {
         Debug.Log("สÜป๗มห");
-
+        
         int hitStrength = weapon.weaponOwner.HitStrength;
         CharacterActor.Velocity = Vector3.zero;
         CharacterActor.RigidbodyComponent.AddForce(HittedForce*(weapon.weaponOwner.transform.position - CharacterActor.transform.position).ProjectOntoPlane(Vector3.up).normalized);

@@ -24,8 +24,7 @@ public class WeaponManager : MonoBehaviour
     private CinemachineImpulseSource impulseSource;
     public float[] impulsePar;
     [Tooltip("这里配置要装载哪一段特效")]
-    public int FxLoad;
-    public ParticleSystem[] HittedFx;
+    public string[] weaponFx;
     public List<CharacterInfo> HittedCharacter;
     public Vector3 WeaponDirection;
     private int frameCount = 0;
@@ -41,11 +40,7 @@ public class WeaponManager : MonoBehaviour
         characterActor = GetComponentInParent<CharacterActor>();
         weaponOwner = GetComponentInParent<CharacterInfo>();
         weaponData = FindFirstObjectByType <WeaponData>();
-        switch (FxLoad)
-        {
-            case 1: HittedFx = Resources.Load<FxHelper>("FxHelper").AllFx; break;
-            case 2: break;
-        }
+        
         switch (kind)
         {
             default:
