@@ -90,6 +90,10 @@ public class AttackOnGround :Attack
             {
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }
+            else if(currentAttackMode == AttackMode.AttackOnGround_fist)
+            {
+                CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+            }
         }
         else if(!CharacterActor.IsGrounded&&!isAttack)//空中非攻击才会切换
         {
