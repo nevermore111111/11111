@@ -5,17 +5,49 @@ using UnityEngine;
 
 public class FxManager : MonoBehaviour
 {
+    private static FxManager _instance; // Singleton instance
+
+    public static FxManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<FxManager>();
+
+                if (_instance == null)
+                {
+                    GameObject singletonObject = new GameObject("FxManager");
+                    _instance = singletonObject.AddComponent<FxManager>();
+                }
+            }
+
+            return _instance;
+        }
+    }
+
     public FxHelper FxHelper;
     public ParticleSystem[] particleSystem;
     private float time;
     private List<ParticleSystem> particleSystemTodestory;
     float timeMaxDestory = 5f;
-    public void Awake()
+
+    private void Awake()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         FxHelper = Resources.Load<FxHelper>("FxHelper");
         particleSystem = FxHelper.AllFx;
         particleSystemTodestory = new List<ParticleSystem>();
     }
+
     public void Start()
     {
 
@@ -76,6 +108,10 @@ public class FxManager : MonoBehaviour
 
     private ParticleSystem PlaySingleFx(string FxName, Transform parent = null, float maxTimeDestory = 5f)
     {
+        if( FindFxByName(FxName) ==null) 
+        {
+            return null;
+        }
         ParticleSystem clone;
         if (parent != null)
         {
@@ -85,6 +121,7 @@ public class FxManager : MonoBehaviour
         {
             clone = Instantiate(FindFxByName(FxName));
         }
+
         clone.Play(true);
         return clone;
     }
@@ -94,7 +131,7 @@ public class FxManager : MonoBehaviour
         ParticleSystem clone = null;
         foreach (var FxName in FxNames)
         {
-            clone =  PlaySingleFx(FxName, parent, maxTimeDestory);
+            clone = PlaySingleFx(FxName, parent, maxTimeDestory);
         }
         return clone;
     }

@@ -23,7 +23,7 @@ public class EnemyCharacter : CharacterInfo
     {
         if(CharacterHitted != null)
         CharacterHitted.GetHitted(weapon, hit, true);
-        fxManagerPlayer.PlayFx<string[]>(weapon.weaponFx, collider.transform);
+        FxManager.Instance.PlayFx<string[]>(weapon.weaponFx, collider.transform);
     }
 
     public override void HitOther(WeaponManager weaponManager)
