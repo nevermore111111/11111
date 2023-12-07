@@ -42,7 +42,10 @@ public class FxManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (FxHelper == null)
+        {
 
+        }
         FxHelper = Resources.Load<FxHelper>("FxHelper");
         particleSystem = FxHelper.AllFx;
         particleSystemTodestory = new List<ParticleSystem>();
@@ -135,46 +138,50 @@ public class FxManager : MonoBehaviour
         }
         return clone;
     }
-    /// <summary>
-    /// parent和pos不能同时为null
-    /// </summary>
-    /// <param name="FxName"></param>
-    /// <param name="scale"></param>
-    /// <param name="pos"></param>
-    /// <param name="isAutoDestory"></param>
-    /// <param name="parent"></param>
-    /// <param name="maxTimeDestory"></param>
-    /// <returns></returns>
-    public ParticleSystem PlayFx(string FxName, Vector3 scale, Transform pos = null, bool isAutoDestory = true, Transform parent = null, float maxTimeDestory = 5f)
-    {
-        ParticleSystem clone;
-        if ((parent == null) && (pos != null))
-        {
-            clone = Instantiate(FindFxByName(FxName), pos.position, pos.rotation);
-        }
-        else if (parent != null)
-        {
-            clone = Instantiate(FindFxByName(FxName), parent);
-        }
-        else
-        {
-            clone = Instantiate(FindFxByName(FxName));
-        }
-        clone.Play(true);
-        clone.transform.localScale = scale;
-        if (isAutoDestory)
-        {
-            particleSystemTodestory.Add(clone);
-        }
-        if (maxTimeDestory != 5)
-        {
-            timeMaxDestory = time + maxTimeDestory;
-        }
-        return clone;
-    }
+    ///// <summary>
+    ///// parent和pos不能同时为null
+    ///// </summary>
+    ///// <param name="FxName"></param>
+    ///// <param name="scale"></param>
+    ///// <param name="pos"></param>
+    ///// <param name="isAutoDestory"></param>
+    ///// <param name="parent"></param>
+    ///// <param name="maxTimeDestory"></param>
+    ///// <returns></returns>
+    //public ParticleSystem PlayFx(string FxName, Vector3 scale, Transform pos = null, bool isAutoDestory = true, Transform parent = null, float maxTimeDestory = 5f)
+    //{
+    //    ParticleSystem clone;
+    //    if ((parent == null) && (pos != null))
+    //    {
+    //        clone = Instantiate(FindFxByName(FxName), pos.position, pos.rotation);
+    //    }
+    //    else if (parent != null)
+    //    {
+    //        clone = Instantiate(FindFxByName(FxName), parent);
+    //    }
+    //    else
+    //    {
+    //        clone = Instantiate(FindFxByName(FxName));
+    //    }
+    //    clone.Play(true);
+    //    clone.transform.localScale = scale;
+    //    if (isAutoDestory)
+    //    {
+    //        particleSystemTodestory.Add(clone);
+    //    }
+    //    if (maxTimeDestory != 5)
+    //    {
+    //        timeMaxDestory = time + maxTimeDestory;
+    //    }
+    //    return clone;
+    //}
 
     private ParticleSystem FindFxByName(string name)
     {
+        if (particleSystem ==null)
+        {
+            return null;
+        }
         for (int i = 0; i < particleSystem.Length; i++)
         {
             if (particleSystem[i].name == name)

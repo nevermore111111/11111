@@ -112,15 +112,15 @@ public class TimeScaleManager : MonoBehaviour
 
         // 渐入
         await DOTween.To(() => Time.timeScale, value => SetTimeScaleByPriority(value, changePriority), targetTimeScale, fadeInTime)
-            .OnUpdate(() => { /* 可在更新时执行其他操作 */ })
+            .OnUpdate(() => { /* 可在更新时执行其他操作 */ }).SetUpdate(true)
             .AsyncWaitForCompletion();
 
         // 持续
-        await UniTask.Delay((int)(duration * 1000));
+        await UniTask.Delay((int)(duration * 1000),true);
 
         // 渐出
         await DOTween.To(() => Time.timeScale, value => SetTimeScaleByPriority(value, changePriority), originalTimeScale, fadeOutTime)
-            .OnUpdate(() => { /* 可在更新时执行其他操作 */ })
+            .OnUpdate(() => { /* 可在更新时执行其他操作 */ }).SetUpdate(true)
             .AsyncWaitForCompletion();
 
         // 恢复到初始时间缩放
