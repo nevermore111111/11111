@@ -1,6 +1,8 @@
 using UnityEngine;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
+using System.Threading;
+using System;
 
 public class TimeScaleManager : MonoBehaviour
 {
@@ -50,6 +52,15 @@ public class TimeScaleManager : MonoBehaviour
     {
         Time.timeScale = newTimeScale;
     }
+    //如果设置的当前时间缩放优先级大于等于，就会生效
+    public void SetTimeScaleByPriority(float newTimeScale, int priority)
+    {
+        if (priority >= currentPriority)
+        {
+            currentPriority = priority;
+            Time.timeScale = newTimeScale;
+        }
+    }
 
     // 重置时间缩放为初始值
     public void ResetTimeScale()
@@ -93,14 +104,14 @@ public class TimeScaleManager : MonoBehaviour
         ResetTimeScale();
     }
 
+    private int currentPriority;
 
-
-    public async UniTask SetTimeScale(float fadeInTime, float fadeOutTime, float duration, float targetTimeScale)
+    public async UniTask SetTimeScale(float fadeInTime, float fadeOutTime, float duration, float targetTimeScale, int changePriority = 0)
     {
         float currentTimeScale = Time.timeScale;
 
         // 渐入
-        await DOTween.To(() => Time.timeScale, value => Time.timeScale = value, targetTimeScale, fadeInTime)
+        await DOTween.To(() => Time.timeScale, value => SetTimeScaleByPriority(value, changePriority), targetTimeScale, fadeInTime)
             .OnUpdate(() => { /* 可在更新时执行其他操作 */ })
             .AsyncWaitForCompletion();
 
@@ -108,13 +119,35 @@ public class TimeScaleManager : MonoBehaviour
         await UniTask.Delay((int)(duration * 1000));
 
         // 渐出
-        await DOTween.To(() => Time.timeScale, value => Time.timeScale = value, originalTimeScale, fadeOutTime)
+        await DOTween.To(() => Time.timeScale, value => SetTimeScaleByPriority(value, changePriority), originalTimeScale, fadeOutTime)
             .OnUpdate(() => { /* 可在更新时执行其他操作 */ })
             .AsyncWaitForCompletion();
 
         // 恢复到初始时间缩放
         ResetTimeScale();
+        currentPriority = 0;
     }
 
 
+
+    //public async UniTask SetTimeScale(float fadeInTime, float fadeOutTime, float duration, float targetTimeScale)
+    //{
+    //    float currentTimeScale = Time.timeScale;
+
+    //    // 渐入
+    //    await DOTween.To(() => Time.timeScale, value => Time.timeScale = value, targetTimeScale, fadeInTime)
+    //        .OnUpdate(() => { /* 可在更新时执行其他操作 */ })
+    //        .AsyncWaitForCompletion();
+
+    //    // 持续
+    //    await UniTask.Delay((int)(duration * 1000));
+
+    //    // 渐出
+    //    await DOTween.To(() => Time.timeScale, value => Time.timeScale = value, originalTimeScale, fadeOutTime)
+    //        .OnUpdate(() => { /* 可在更新时执行其他操作 */ })
+    //        .AsyncWaitForCompletion();
+
+    //    // 恢复到初始时间缩放
+    //    ResetTimeScale();
+    //}
 }
