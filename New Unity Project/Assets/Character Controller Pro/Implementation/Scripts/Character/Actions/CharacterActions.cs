@@ -15,7 +15,7 @@ public struct CharacterActions
     public BoolAction @grap;
     public BoolAction @test;
     public BoolAction @spAttack;
-
+    public BoolAction @defend;
 
     // Float actions
     public FloatAction @pitch;
@@ -39,6 +39,7 @@ public struct CharacterActions
         @grap.Reset();
         @test.Reset();
         @spAttack.Reset();
+        @defend.Reset();
 
 
         @pitch.Reset();
@@ -73,6 +74,9 @@ public struct CharacterActions
         @attack = new BoolAction();
         @attack.Initialize();
 
+        @defend = new BoolAction();
+        @defend.Initialize();
+
         @grap = new BoolAction();
         @grap.Initialize();
 
@@ -106,6 +110,7 @@ public struct CharacterActions
         @grap.value = inputHandler.GetBool("grap");
         @spAttack.value = inputHandler.GetBool("spAttack");
         @test.value = inputHandler.GetBool("Test");//Ì§Æð
+        @defend.value = inputHandler.GetBool("Defend");
 
         @pitch.value = inputHandler.GetFloat("Pitch");
         @roll.value = inputHandler.GetFloat("Roll");
@@ -127,7 +132,8 @@ public struct CharacterActions
         @attack.value = characterActions.attack.value;
         @grap.value = characterActions.grap.value;
         @test.value = characterActions.test.value;
-        @spAttack.value= characterActions.spAttack.value;
+        @spAttack.value = characterActions.spAttack.value;
+        @defend.value = characterActions.defend.value;
 
 
         @pitch.value = characterActions.pitch.value;
@@ -153,5 +159,6 @@ public struct CharacterActions
         @grap.Update(dt);
         @test.Update(dt);
         @spAttack.Update(dt);
+        defend.Update(dt);
     }
 }
