@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_Fish_SlowDown_Glow01
+  m_Shader: {fileID: 4800000, guid: 648e14b824eafdc4a8285400214fd57a, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3100
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 3e888dd065c80f74d8c4b34063480440, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 2800000, guid: 7f4d966d1ee0ff24a98d6ff773c543a6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Niuqu:
+        m_Texture: {fileID: 2800000, guid: ab1df920cb26a9e4fb430cade256819d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
+        m_Texture: {fileID: 2800000, guid: fddc8b9253ef30c42b46a892ffc38057, type: 3}
+        m_Scale: {x: 1, y: 0.3}
+        m_Offset: {x: 0, y: 0}
+    - _Vertex:
+        m_Texture: {fileID: 2800000, guid: ab1df920cb26a9e4fb430cade256819d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _ColorPower: 3
+    - _Float0: 1
+    - _Flow_Speed_X: 0
+    - _Flow_Speed_Y: -1
+    - _Niuqu_U: 0.2
+    - _Niuqu_V: 0
+    - _Tex_U: 0
+    - _Tex_V: -1
+    - _Texture_V: 1
+    - _Vertex_U: 0.1
+    - _Vertex_V: 0.1
+    - __dirty: 0
+    m_Colors:
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Tiling: {r: 2, g: 0.5, b: 0, a: 0}
+    - _Vector: {r: 0.2, g: 0.2, b: 0, a: 0}
+  m_BuildTextureStacks: []

@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_Fish_SlowDown_Glow03
+  m_Shader: {fileID: 4800000, guid: 073ffabea15b07545ad009f8d49b26b0, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3100
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Mask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Niuqu:
+        m_Texture: {fileID: 2800000, guid: 104be724d3fd4944cbddc4a027091251, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+        m_Offset: {x: 0, y: 0}
+    - _Niuqu1:
+        m_Texture: {fileID: 2800000, guid: 104be724d3fd4944cbddc4a027091251, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
+        m_Texture: {fileID: 2800000, guid: cf8a5fe043b9b3543875f157c6d224db, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: c041191ac53fb2048ad6ef9aa94aea73, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: 34d06db59ac904b4a93b8dd5f06fc729, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Vertex:
+        m_Texture: {fileID: 2800000, guid: 7f8ba80031ceb994fbb51ebc12f796b7, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Float0: 0
+    - _Niuqu_U: 0
+    - _Niuqu_U1: 0.2
+    - _Niuqu_V: 1
+    - _Niuqu_V1: 0
+    - _Tex_U: 0.08
+    - _Tex_U1: 0
+    - _Tex_V: 0
+    - _Tex_V1: 0
+    - _Texture_V: 2
+    - _V1: 0.1
+    - _Vertex_U: 0
+    - _Vertex_V: 0
+    - __dirty: 0
+    m_Colors:
+    - _Color0: {r: 0, g: 0, b: 0, a: 0}
+    - _Texture_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Vector: {r: 0, g: 0, b: 0, a: 0}
+    - _Vector0: {r: 2, g: 2, b: 0, a: 0}
+  m_BuildTextureStacks: []
