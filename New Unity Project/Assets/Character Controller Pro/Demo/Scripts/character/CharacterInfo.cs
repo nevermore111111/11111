@@ -9,7 +9,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
 
 
     //周围全部的敌人
-    
+
     [Tooltip("代表这个单位的敌人tag")]
     public string enemyTag;
     [Tooltip("代表这个单位的敌人列表")]
@@ -29,17 +29,23 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     /// <param name="weapon"></param>
     /// <param name="collider">受击位置</param>
     /// <param name="hit"></param>
-    abstract public void GetDamage(float damage, Vector3 pos, WeaponManager weapon,Collider collider,IAgent.HitKind hit = IAgent.HitKind.ground);
+    abstract public void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground);
 
- 
+    virtual public void GetDamage(float damage, Vector3 attackDirection, float hitStrength)
+    {
 
-    protected virtual void  Awake()
+    }
+
+
+
+
+    protected virtual void Awake()
     {
         enemies = new List<CharacterInfo>();
         hitBox = GetComponentInChildren<AgetHitBox>();
-        
+
     }
 
-    abstract public void HitOther( WeaponManager weaponManager);
-    
+    abstract public void HitOther(WeaponManager weaponManager);
+
 }

@@ -26,8 +26,23 @@ public class EnemyCharacter : CharacterInfo
         FxManager.Instance.PlayFx<string[]>(weapon.weaponFx, collider.transform);
     }
 
+    
+
     public override void HitOther(WeaponManager weaponManager)
     {
         throw new System.NotImplementedException();
+    }
+
+    public override void GetDamage(float damage, Vector3 attackDirection, float hitStrength)
+    {
+        ChangeAnim(attackDirection);
+        //得到关于自身的攻击方向
+    }
+    private void ChangeAnim(Vector3 attackDirection)
+    {
+        Vector3 attackDirecFrom = transform.InverseTransformDirection(attackDirection);
+        characterActor.Animator.SetFloat("attackXFrom", attackDirecFrom.x);
+        characterActor.Animator.SetFloat("attackYFrom", attackDirecFrom.y);
+        characterActor.Animator.SetFloat("attackZFrom", attackDirecFrom.z);
     }
 }
