@@ -62,7 +62,7 @@ public class CheckEnemy : MonoBehaviour
     {
 
         AttackReceive attackReceive;
-        if (other.gameObject.CompareTag("enemy") && other.TryGetComponent<AttackReceive>(out attackReceive) == true && !mainCharacter.enemies.Contains(attackReceive.CharacterInfo))
+        if (other.gameObject.CompareTag("enemy") && other.TryGetComponent(out attackReceive) == true && attackReceive.isNormalReceive()&& !mainCharacter.enemies.Contains(attackReceive.CharacterInfo))
         {
             CharacterInfo characterInfo = attackReceive.CharacterInfo;
             if (characterInfo != null)
@@ -89,7 +89,7 @@ public class CheckEnemy : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         AttackReceive attackReceive;
-        if (other.gameObject.CompareTag("enemy") && other.TryGetComponent<AttackReceive>(out attackReceive) == true && mainCharacter.enemies.Contains(attackReceive.CharacterInfo))
+        if (other.gameObject.CompareTag("enemy") && other.TryGetComponent(out attackReceive) == true&& attackReceive.isNormalReceive() && mainCharacter.enemies.Contains(attackReceive.CharacterInfo))
         {
             mainCharacter.enemies.Remove(attackReceive.CharacterInfo);
             int targetIndex = targetGroup.FindMember(attackReceive.CharacterInfo.transform);

@@ -158,12 +158,15 @@ var squaredNumbers = numbers.Select(x => x * x);
                 {
                     continue;
                 }
+                AttackReceive attack;
                 foreach (var hit in item.GetDetection(out item.isHited))//添加了攻击对象
                 {
-
-                    AgetHitBox hitted = hit.GetComponent<AttackReceive>().CharacterInfo.hitBox;
-                    //hitted.GetDamage(1, transform.position);//这是攻击对象播放都动画
-                    hitted.GetWeapon(this);
+            
+                    if(hit.TryGetComponent(out attack)&&attack.isNormalReceive())
+                    {
+                        AgetHitBox hitted = attack.CharacterInfo.hitBox;
+                        hitted.GetWeapon(this);
+                    }
                 }
                 //如果存在当前的detection击中目标，那么将武器是否击中目标也改成true。
                 if (item.isHited == true)

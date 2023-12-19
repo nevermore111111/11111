@@ -241,8 +241,12 @@ namespace Rusk
 
             //Execute the event
             if (OnDashStart != null)
+            {
                 OnDashStart(dashDirection);
+                //新增一个逻辑，在闪避的时候生成一个碰撞盒
+                //用他来判定碰撞。如果被击中进入极限闪避
 
+            }
         }
         /// <summary>
         /// 是否显示拖尾特效
