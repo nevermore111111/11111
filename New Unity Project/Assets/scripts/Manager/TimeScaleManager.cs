@@ -106,6 +106,15 @@ public class TimeScaleManager : MonoBehaviour
 
     private int currentPriority;
 
+    /// <summary>
+    /// 这里的所有时间均为无视时间缩放的
+    /// </summary>
+    /// <param name="fadeInTime"></param>
+    /// <param name="fadeOutTime"></param>
+    /// <param name="duration"></param>
+    /// <param name="targetTimeScale"></param>
+    /// <param name="changePriority"></param>
+    /// <returns></returns>
     public async UniTask SetTimeScale(float fadeInTime, float fadeOutTime, float duration, float targetTimeScale, int changePriority = 0)
     {
         float currentTimeScale = Time.timeScale;
@@ -114,7 +123,6 @@ public class TimeScaleManager : MonoBehaviour
         await DOTween.To(() => Time.timeScale, value => SetTimeScaleByPriority(value, changePriority), targetTimeScale, fadeInTime)
             .OnUpdate(() => { /* 可在更新时执行其他操作 */ }).SetUpdate(true)
             .AsyncWaitForCompletion();
-
         // 持续
         await UniTask.Delay((int)(duration * 1000),true);
 
