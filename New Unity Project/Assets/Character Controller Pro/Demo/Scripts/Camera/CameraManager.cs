@@ -68,7 +68,7 @@ public class CameraManager : MonoBehaviour
         if (mainCharacter != null)
         {
             // 条件1：攻击范围内敌人为0
-            if (mainCharacter.enemies.Count == 0 || IsSuitableDistance() || mainCharacter.ismoving() || IsMoveMouse())
+            if (mainCharacter.enemies.Count == 0 || IsSuitableDistance() || mainCharacter.ismoving() || IsMoveMouse(0.3f))
             {
                 switchToMainCamera = true;
                 switchToSubCamera = false;
@@ -120,9 +120,9 @@ public class CameraManager : MonoBehaviour
         return startMainCameraPriority != prevMainCameraPriority || startSubCameraPriority != prevSubCameraPriority;
     }
 
-    private static bool IsMoveMouse()
+    private static bool IsMoveMouse(float targetMouseMoveNum)
     {
-        return Input.GetAxis("Mouse X")! > 0.1f || Input.GetAxis("Mouse Y") > 0.1f;
+        return Mathf.Abs(Input.GetAxis("Mouse X")) > targetMouseMoveNum || Mathf.Abs(Input.GetAxis("Mouse Y")) > targetMouseMoveNum;
     }
 
     /// <summary>
