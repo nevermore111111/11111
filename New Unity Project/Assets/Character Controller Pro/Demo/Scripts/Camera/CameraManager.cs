@@ -41,6 +41,34 @@ public class CameraManager : MonoBehaviour
     private void Update()
     {
         CheckCamera();
+        CheckMouseMovement();
+    }
+
+    private bool isMouseMoving;
+    private float mouseMoveStartTime;
+    private void CheckMouseMovement()
+    {
+        if (IsMoveMouse(0.05f))
+        {
+            if (!isMouseMoving)
+            {
+                isMouseMoving = true;
+                mouseMoveStartTime = Time.time;
+            }
+        }
+        else
+        {
+            isMouseMoving = false;
+        }
+    }
+    /// <summary>
+    /// 返回鼠标移动是否超过了这个时间
+    /// </summary>
+    /// <param name="MoveTime"></param>
+    /// <returns></returns>
+    private bool IsMoveTimeGreaterNum(float MoveTime)
+    {
+        return Time.time - mouseMoveStartTime > MoveTime;
     }
 
     private void CheckCamera()
@@ -68,7 +96,7 @@ public class CameraManager : MonoBehaviour
         if (mainCharacter != null)
         {
             // 条件1：攻击范围内敌人为0
-            if (mainCharacter.enemies.Count == 0 || IsSuitableDistance() || mainCharacter.ismoving() || IsMoveMouse(0.3f))
+            if (mainCharacter.enemies.Count == 0 || IsSuitableDistance() || mainCharacter.ismoving() || (IsMoveMouse(0.3f)&& IsMoveTimeGreaterNum(0.1f)))
             {
                 switchToMainCamera = true;
                 switchToSubCamera = false;

@@ -22,6 +22,7 @@ public class WeaponManager : MonoBehaviour
     CharacterActor characterActor;
     public bool isHited;
     private CinemachineImpulseSource impulseSource;
+    Impulse impulse;
     public float[] impulsePar;
     [Tooltip("这里配置要装载哪一段特效")]
     public string[] weaponFx;
@@ -39,8 +40,9 @@ public class WeaponManager : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
         characterActor = GetComponentInParent<CharacterActor>();
         weaponOwner = GetComponentInParent<CharacterInfo>();
-        weaponData = FindFirstObjectByType <WeaponData>();
-        
+        weaponData = FindFirstObjectByType<WeaponData>();
+        impulse = GetComponent<Impulse>();
+
         switch (kind)
         {
             default:
@@ -102,7 +104,7 @@ var squaredNumbers = numbers.Select(x => x * x);
     /// </summary>
     public void UpdateWeaponDirection()
     {
-        if (isActiveAndEnabled&&isNeedUpdateDirection)
+        if (isActiveAndEnabled && isNeedUpdateDirection)
         {
             if (frameCount == 1)
             {
@@ -161,8 +163,8 @@ var squaredNumbers = numbers.Select(x => x * x);
                 AttackReceive attack;
                 foreach (var hit in item.GetDetection(out item.isHited))//添加了攻击对象
                 {
-            
-                    if(hit.TryGetComponent(out attack)&&attack.isNormalReceive())
+
+                    if (hit.TryGetComponent(out attack) && attack.isNormalReceive())
                     {
                         AgetHitBox hitted = attack.CharacterInfo.hitBox;
                         hitted.GetWeapon(this);
@@ -237,7 +239,7 @@ var squaredNumbers = numbers.Select(x => x * x);
     /// </summary>
     public void SPImpluse(string attackName)
     {
-        switch(attackName)
+        switch (attackName)
         {
             case "sp11":
                 {
@@ -257,72 +259,19 @@ var squaredNumbers = numbers.Select(x => x * x);
     {
         if (weaponOwner is MainCharacter)
         {
-            //if(impulseSource.m_ImpulseDefinition.m_ImpulseShape != CinemachineImpulseDefinition.ImpulseShapes.Explosion)
-            //{
-            //    impulseSource.m_ImpulseDefinition.m_ImpulseShape = CinemachineImpulseDefinition.ImpulseShapes.Explosion;
-            //}
-            impulseSource.m_ImpulseDefinition.m_ImpulseShape = weaponData.ImpulseShapes;
-
-            if (weaponData.onlyUseVirticalShake)
+            WeaponNum weaponNum = new WeaponNum();
+            if (weaponData.weaponNumList.Count >= weaponOwner.HitStrength + 1 && weaponData.weaponNumList[weaponOwner.HitStrength] != null)
             {
-                //这样代表只上下方向的震动
-                //这是需要修改当前的weaponDirection=>
-                WeaponDirection = Vector3.Project(WeaponDirection, Vector3.up).normalized;
+                weaponNum = weaponData.weaponNumList[weaponOwner.HitStrength];
             }
-
-            switch (weaponOwner.HitStrength)
+            else
             {
-                case 0:
-                    {
-                       
-                        impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.durationValue0;
-                        impulseSource.GenerateImpulse(weaponData.impulseValue0 * WeaponDirection);
-                        if (weaponData.PrintHit)
-                        {
-                            Debug.Log($"当前的攻击类型是{weaponOwner.HitStrength},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue0}");
-                        }
-                        break;
-                    }
-                case 1:
-                    {
-                        impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.durationValue1;
-                        impulseSource.GenerateImpulse(weaponData.impulseValue1 * WeaponDirection);
-                        if (weaponData.PrintHit)
-                        {
-                            Debug.Log($"当前的攻击类型是{weaponOwner.HitStrength},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue1}");
-                        }
-                        break;
-                    }
-                case 2:
-                    {
-                        impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.durationValue2;
-                        impulseSource.GenerateImpulse(weaponData.impulseValue2 * WeaponDirection);
-                        if (weaponData.PrintHit)
-                        {
-                            Debug.Log($"当前的攻击类型是{weaponOwner.HitStrength},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue2}");
-                        }
-                        break;
-                    }
-                case 3:
-                    {
-                        impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.durationValue3;
-                        impulseSource.GenerateImpulse(weaponData.impulseValue3 * WeaponDirection);
-                        if (weaponData.PrintHit)
-                        {
-                            Debug.Log($"当前的攻击类型是{weaponOwner.HitStrength},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue3}");
-                        }
-                        break;
-                    }
-                case 4:
-                    {
-                        impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.durationValue4;
-                        impulseSource.GenerateImpulse(weaponData.impulseValue4 * WeaponDirection);
-                        if (weaponData.PrintHit)
-                        {
-                            Debug.Log($"当前的攻击类型是{weaponOwner.HitStrength},持续时间{impulseSource.m_ImpulseDefinition.m_ImpulseDuration},力度{weaponData.impulseValue4}");
-                        }
-                        break;
-                    }
+                Debug.LogError($"weaponNum索引[{weaponOwner.HitStrength}]缺少数据");
+            }
+            impulse.GenerateImpulse(WeaponDirection, weaponNum.Strength, weaponNum.Frequence, weaponNum.Duration, weaponData.onlyUseVirticalShake);
+            if (weaponData.PrintHit)
+            {
+                Debug.Log($"攻击力度：{weaponOwner.HitStrength}，震动力度{weaponNum.Strength}，震动频率{weaponNum.Frequence}，震动时间{weaponNum.Duration}");
             }
         }
         else
