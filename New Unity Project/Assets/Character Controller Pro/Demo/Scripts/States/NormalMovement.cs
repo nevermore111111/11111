@@ -29,7 +29,6 @@ namespace Lightbug.CharacterControllerPro.Demo
         private Attack attack;
         private WeaponManager[] weaponManager;
 
-       
 
 
 
@@ -340,7 +339,6 @@ namespace Lightbug.CharacterControllerPro.Demo
         protected virtual void ProcessPlanarMovement(float dt)
         {
             //SetMotionValues();
-
 
 
             PlayStop();
@@ -1127,6 +1125,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         private void Update()
         {
+            Debug.Log(CharacterActor.Velocity);
             if(CharacterActor.isPlayer)
             CanEvade();
         }

@@ -1,4 +1,5 @@
 using Lightbug.CharacterControllerPro.Implementation;
+using UnityEngine;
 
 [System.Serializable]
 public struct CharacterActions
