@@ -11,4 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/New Folder/3D Scene.unity
     guid: afc4a3a190bbee44a96dcd26e0e9e103
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: b048ecb7d98eaf94cbfd10ef6795c6b9,
+      type: 2}
