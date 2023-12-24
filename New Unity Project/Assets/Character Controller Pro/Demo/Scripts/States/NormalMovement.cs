@@ -1125,7 +1125,6 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         private void Update()
         {
-            Debug.Log(CharacterActor.Velocity);
             if(CharacterActor.isPlayer)
             CanEvade();
         }
