@@ -8,6 +8,11 @@ public class Impulse : MonoBehaviour
 {
     CinemachineImpulseSource impulseSource;
     static Camera cam;
+    enum SkakeAssetKind
+    {
+        normal,
+        special
+    }
     private void Awake()
     {
         impulseSource = GetComponent<CinemachineImpulseSource>();
@@ -31,6 +36,21 @@ public class Impulse : MonoBehaviour
             direction = ResetDir(direction);
         }
         impulseSource.GenerateImpulse(direction.normalized);
+    }
+
+    private void SetShakeKind(SkakeAssetKind shakeAssetKind)
+    {
+        switch (shakeAssetKind)
+        {
+            case (SkakeAssetKind.normal):
+                {
+                    break;
+                }
+            case (SkakeAssetKind.special):
+                {
+                    break;
+                }
+        }
     }
 
     private Vector3 ResetDir(Vector3 direction)

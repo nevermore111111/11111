@@ -14,6 +14,8 @@ public class AIAttack : CharacterState
 {
 
     public bool attackEnd;
+    public List<AIAttackData> attacks;
+    public bool isAttacking;
 
     public enum AttackMode
     {
@@ -62,4 +64,11 @@ public class AIAttack : CharacterState
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
     }
+}
+[Serializable]
+public class AIAttackData 
+{
+    public string attackName;
+    public int attackWeight;
+
 }

@@ -68,38 +68,27 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
 
 
-        [Header("Animation")]
 
-        [SerializeField]
         protected string groundedParameter = "Grounded";
 
-        [SerializeField]
         protected string stableParameter = "Stable";
 
-        [SerializeField]
         protected string verticalSpeedParameter = "VerticalSpeed";
 
-        [SerializeField]
         protected string planarSpeedParameter = "PlanarSpeed";
 
-        [SerializeField]
         protected string horizontalAxisParameter = "HorizontalAxis";
 
-        [SerializeField]
         protected string verticalAxisParameter = "VerticalAxis";
 
-        [SerializeField]
         protected string heightParameter = "Height";
 
-        [SerializeField]
         protected string GroundDistance = "GroundDistance";
 
-        [SerializeField]
         protected string evadeParameter = "evade";
 
-        [SerializeField]
         protected string spAttackParameter = "spAttack"; 
-        [SerializeField]
+
         public string stopParameter = "stop";
 
 

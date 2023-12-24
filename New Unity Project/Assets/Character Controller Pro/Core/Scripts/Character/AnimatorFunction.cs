@@ -139,13 +139,11 @@ public class AnimatorFunction : MonoBehaviour
     {
         Debug.LogError("开始攻击");
         Attack.CharacterActor.Animator.speed = 1.3f;
-        hitKind = CurrentAnimConfig.HitStrength[currentHitIndex];
-        activeWeaponDetect = CurrentAnimConfig.HitDetect[currentHitIndex];
-        //设置当前攻击类别
-        mainCharacter.HitStrength = hitKind;
+        SetStrengthAndDetector();
+
         //根据当前攻击类别来进行
         //根据当前的detections进行调整这个激活的detection;
-        currentHitIndex++;
+
         SetWeaponDirection();
         foreach (var manager in weaponManagers)
         {
@@ -158,29 +156,11 @@ public class AnimatorFunction : MonoBehaviour
                     manager.weaponFx = CurrentAnimConfig.HittedEffect;
                     ActiveDetectionByStringPar(activeWeaponDetect, manager);
 
-                    //switch (hitKind)
-                    //{
-                    //    case 0:
-                    //        manager.AdjustFrequencyAndAmplitude(1, 0.5f);
-                    //        break;
-                    //    case 1:
-                    //        manager.AdjustFrequencyAndAmplitude(1.5f, 0.4f);
-                    //        break;
-                    //    case 2:
-                    //        manager.AdjustFrequencyAndAmplitude(2f, 0.4f);
-                    //        break;
-                    //    case 4:
-                    //        manager.AdjustFrequencyAndAmplitude(3f, 0.4f);
-                    //        break;
-                    //    default:
-                    //        manager.AdjustFrequencyAndAmplitude(1f, 1f);
-                    //        break;
-                    //}
                 }
                 break;
             }
         }
-
+        currentHitIndex++;
     }
 
     /// <summary>
@@ -214,7 +194,7 @@ public class AnimatorFunction : MonoBehaviour
                     weaponManager = manager;
                     break;
                 }
-                    
+
             }
         }
         else
@@ -226,7 +206,7 @@ public class AnimatorFunction : MonoBehaviour
                 {
                     weaponManager = manager;
                     manager.isNeedUpdateDirection = false;
-                    Vector3 DirectionIncharacter = new Vector3(CurrentAnimConfig.AttackDirection[currentHitIndex * 3 - 3], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 - 2], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 - 1]);
+                    Vector3 DirectionIncharacter = new Vector3(CurrentAnimConfig.AttackDirection[currentHitIndex * 3 ], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 +1], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 + 2]);
                     //然后我需要把这个
                     manager.WeaponDirection = Attack.transform.TransformDirection(DirectionIncharacter);
                     break;
@@ -235,24 +215,13 @@ public class AnimatorFunction : MonoBehaviour
         }
     }
 
-    public void OnDrawGizmos()
-    {
-        Debug.Log("绘制");
-        if (weaponManager != null)
-        {
-            Debug.Log("开始绘制");
-            Debug.Log(weaponManager.WeaponDirection);
-            Gizmos.DrawLine(weaponManager.transform.position, weaponManager.transform.position + weaponManager.WeaponDirection);
-        }
-
-    }
 
 
     public void HitReStart()//int Hit = 1, string activeWeaponDetect = null
     {
-        currentHitIndex++;
         SetWeaponDirection();
-        mainCharacter.HitStrength = hitKind;
+
+        SetStrengthAndDetector();
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
@@ -266,6 +235,17 @@ public class AnimatorFunction : MonoBehaviour
                 break;
             }
         }
+        currentHitIndex++;
+    }
+
+    private void SetStrengthAndDetector()
+    {
+        if (CurrentAnimConfig.HitStrength.Length > currentHitIndex)
+            hitKind = CurrentAnimConfig.HitStrength[currentHitIndex];
+        if (CurrentAnimConfig.HitDetect.Length > currentHitIndex)
+            activeWeaponDetect = CurrentAnimConfig.HitDetect[currentHitIndex];
+
+        mainCharacter.HitStrength = hitKind;
     }
 
     /// <summary>
@@ -320,7 +300,7 @@ public class AnimatorFunction : MonoBehaviour
     /// </summary>
     private void ResetAttackRootAndrotate()
     {
-        
+
         if (mainCharacter.enemies.Count != 0)
         {
             //新语法
