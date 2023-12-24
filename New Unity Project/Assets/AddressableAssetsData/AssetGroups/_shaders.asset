@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: _shaders
+  m_EditorClassIdentifier: 
+  m_GroupName: _shaders
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 55f2c521606613a46ba8e39390806095
+  m_SerializeEntries:
+  - m_GUID: 025827eb16c202c45abc1fe8002be8b7
+    m_Address: Assets/SharkRes/FX/Shader/VFX_Add_Flow_MaskFlow.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cdb073a00ab82a54a818d476b57ab5fb
+    m_Address: Assets/SharkRes/FX/Shader/VFX_Add_Flow_Sphere.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 648e14b824eafdc4a8285400214fd57a
+    m_Address: Assets/SharkRes/FX/Shader/VFX_Alpha_Flow_MaskFlow.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4d40217de193e4042a5b5d13b61a26b4, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: c20a1b2f0536697458de44d317908ade, type: 2}
+    - {fileID: 11400000, guid: ef622b94c5590784fa6a06917072df40, type: 2}
