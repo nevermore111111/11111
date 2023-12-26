@@ -36,13 +36,13 @@ public class CapsuleDetection : Detection
                 Gizmos.DrawLine(startPoint.position + perpendicular * radius, endPoint.position + perpendicular * radius);
                 Gizmos.DrawLine(startPoint.position - perpendicular * radius, endPoint.position - perpendicular * radius);
 
-                perpendicular = Vector3.Cross(perpendicular,direction).normalized;
+                perpendicular = Vector3.Cross(perpendicular, direction).normalized;
                 Gizmos.DrawLine(startPoint.position + perpendicular * radius, endPoint.position + perpendicular * radius);
                 Gizmos.DrawLine(startPoint.position - perpendicular * radius, endPoint.position - perpendicular * radius);
             }
         }
     }
-  
+
     /// <summary>
     /// 这里返回的是这一帧击中的符合条件的物体
     /// </summary>
@@ -58,35 +58,47 @@ public class CapsuleDetection : Detection
         //求出来距离这个刀最近的地方
         foreach (var item in hits)
         {
-        
+
             AgetHitBox hitBox;
-            if(targetTags.Contains(item.tag)&&item.TryGetComponent (out AttackReceive receive)&&receive.isNormalReceive())
+            if (targetTags.Contains(item.tag) && item.TryGetComponent(out AttackReceive receive))
             {
-                hitBox = receive.CharacterInfo.hitBox;
-            if (hitBox && hitBox.agent && targetTags.Contains(hitBox.agent.tag) && !wasHit.Contains(hitBox.agent))//如果是可攻击对象，并且攻击对象中没有这个目标时
+                if (receive.isNormalReceive())
                 {
-                    wasHit.Add(hitBox.agent);
-                    result.Add(item);
-                    
-                    //这样去添加物体
-                    //这代表实际击中了，而且每击中一个人做一次的事件
-                    if (!Weapon.HittedCharacter.Contains(hitBox.characterInfoOwner))
+                    hitBox = receive.CharacterInfo.hitBox;
+                    if (hitBox && hitBox.agent && targetTags.Contains(hitBox.agent.tag) && !wasHit.Contains(hitBox.agent))//如果是可攻击对象，并且攻击对象中没有这个目标时
                     {
-                        //添加攻击事件
-                        HittedEvent?.Invoke(this, null);
-                        //记录攻击到的人
-                        Weapon.HittedCharacter.Add(hitBox.characterInfoOwner);
-                        //调用一次//调用一个添加特效
-                        //调用攻击到的人的受击方法
-                        hitBox.characterInfoOwner.GetDamage(1, Weapon.transform.position, Weapon,item, IAgent.HitKind.ground);
-                        //调用武器主人的攻击方法
-                        Weapon.weaponOwner.HitOther( Weapon);
+                        wasHit.Add(hitBox.agent);
+                        result.Add(item);
+
+                        //这样去添加物体
+                        //这代表实际击中了，而且每击中一个人做一次的事件
+                        if (!Weapon.HittedCharacter.Contains(hitBox.characterInfoOwner))
+                        {
+                            //添加攻击事件
+                            HittedEvent?.Invoke(this, null);
+                            //记录攻击到的人
+                            Weapon.HittedCharacter.Add(hitBox.characterInfoOwner);
+                            //调用一次//调用一个添加特效
+                            //调用攻击到的人的受击方法
+                            hitBox.characterInfoOwner.GetDamage(1, Weapon.transform.position, Weapon, item, IAgent.HitKind.ground);
+                            //调用武器主人的攻击方法
+                            Weapon.weaponOwner.HitOther(Weapon);
+                        }
                     }
                 }
+                else if (receive.isCriticalReceive())
+                {
+
+                }
+                else if (receive.isExtremeEvade())
+                {
+
+                }
+
             }
-         
+
         }
-        if(result.Count != 0)
+        if (result.Count != 0)
         {
             isHited = true;
         }

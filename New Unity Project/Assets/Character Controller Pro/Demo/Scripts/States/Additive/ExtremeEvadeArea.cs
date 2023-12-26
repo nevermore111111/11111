@@ -1,4 +1,5 @@
 using Lightbug.CharacterControllerPro.Implementation;
+using Rusk;
 using UnityEngine;
 public class ExtremeEvadeArea : MonoBehaviour
 {
@@ -7,6 +8,30 @@ public class ExtremeEvadeArea : MonoBehaviour
 
     private bool isActivated = false;
     private float activationTime = 0f;
+    //…¡±‹∑ΩœÚ
+    private Vector3 evadeDir;
+
+    public ExtremeEvadeArea(Evade evade)
+    {
+        ReSetEvadeArea(evade);
+    }
+
+    private void ReSetEvadeArea(Evade evade)
+    {
+        evade.OnEvadeStart += Evade_OnEvadeStart;
+        evade.OnEvadeEnd += Evade_OnEvadeEnd;
+        evadeDir = evade.evadeDirection;
+    }
+
+    private void Evade_OnEvadeEnd(Vector3 obj)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void Evade_OnEvadeStart(Vector3 obj)
+    {
+        throw new System.NotImplementedException();
+    }
 
     void Update()
     {

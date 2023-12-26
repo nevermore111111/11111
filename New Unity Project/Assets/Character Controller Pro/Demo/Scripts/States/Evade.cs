@@ -60,7 +60,7 @@ namespace Rusk
         protected int airDashesLeft;
         protected float dashCursor = 0;
 
-        protected Vector3 dashDirection = Vector2.right;
+        public Vector3 evadeDirection = Vector2.right;
 
         protected bool isDone = true;
 
@@ -81,14 +81,14 @@ namespace Rusk
         /// 
         /// The direction of the dash is passed as an argument.
         /// </summary>
-        public event System.Action<Vector3> OnDashStart;
+        public event System.Action<Vector3> OnEvadeStart;
 
         /// <summary>
         /// This event is called when the dash action has ended.
         /// 
         /// The direction of the dash is passed as an argument.
         /// </summary>
-        public event System.Action<Vector3> OnDashEnd;
+        public event System.Action<Vector3> OnEvadeEnd;
 
         #endregion
 
@@ -153,8 +153,8 @@ namespace Rusk
         {
             if (isDone)
             {
-                if (OnDashEnd != null)
-                    OnDashEnd(dashDirection);
+                if (OnEvadeEnd != null)
+                    OnEvadeEnd(evadeDirection);
                // characterActor.Animator.SetTrigger("");
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }
@@ -221,11 +221,11 @@ namespace Rusk
             //设置冲刺动画的参数
             if (NormalMovement.evadeVec2 == Vector2.zero)
             {
-                dashDirection = -CharacterActor.Forward;
+                evadeDirection = -CharacterActor.Forward;
             }
             else
             {
-                dashDirection = InputMovementReference;
+                evadeDirection = InputMovementReference;
             }
 
 
@@ -240,9 +240,9 @@ namespace Rusk
             SetEvadeFX(true);
 
             //Execute the event
-            if (OnDashStart != null)
+            if (OnEvadeStart != null)
             {
-                OnDashStart(dashDirection);
+                OnEvadeStart(evadeDirection);
                 //新增一个逻辑，在闪避的时候生成一个碰撞盒
                 //用他来判定碰撞。如果被击中进入极限闪避
 
@@ -319,7 +319,7 @@ namespace Rusk
 
         public override void UpdateBehaviour(float dt)
         {
-            Vector3 dashVelocity = initialVelocity * currentSpeedMultiplier * movementCurve.Evaluate(dashCursor) * dashDirection;
+            Vector3 dashVelocity = initialVelocity * currentSpeedMultiplier * movementCurve.Evaluate(dashCursor) * evadeDirection;
 
             CharacterActor.Velocity = dashVelocity;
 

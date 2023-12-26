@@ -125,11 +125,11 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public override void CheckExitTransition()
         {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                Debug.Log("jinlai ");
-                CharacterStateController.EnqueueTransition<Grap>();
-            }
+            //if (Input.GetKeyDown(KeyCode.M))
+            //{
+            //    Debug.Log("jinlai ");
+            //    CharacterStateController.EnqueueTransition<Grap>();
+            //}
             if (CharacterActions.attack.value)
             {
                 if (CharacterActor.IsGrounded)
