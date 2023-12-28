@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,6 @@ public class AttackReceive : MonoBehaviour
     public ReceiveHitType receive = ReceiveHitType.Normal;
 
 
-    public ExtremeEvadeArea evadeArea;
 
     public void Awake()
     {
@@ -21,6 +21,10 @@ public class AttackReceive : MonoBehaviour
     // 定义事件，根据不同的击中类型注册不同的方法
     public event HitHandler OnHit;
 
+    public void HitStart()
+    {
+        OnHit?.Invoke();
+    }
 
     // 定义枚举表示不同的击中类型
     public enum ReceiveHitType

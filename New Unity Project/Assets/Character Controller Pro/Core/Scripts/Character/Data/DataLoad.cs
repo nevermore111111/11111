@@ -6,7 +6,7 @@ using System.IO;
 
 public class DataLoad : MonoBehaviour
 {
-    public AnimationConfig animationConfig;
+    public static AnimationConfig animationConfig;
 
     private void Awake()
     {

@@ -50,7 +50,7 @@ public class AnimatorFunction : MonoBehaviour
     }
     private void Start()
     {
-        animationConfig = FindAnyObjectByType<DataLoad>().animationConfig;
+        animationConfig = DataLoad.animationConfig;
     }
     public void JumpStart()
     {

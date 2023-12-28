@@ -88,7 +88,7 @@ public class CapsuleDetection : Detection
                 }
                 else if (receive.isCriticalReceive())
                 {
-
+                    receive.HitStart();
                 }
                 else if (receive.isExtremeEvade())
                 {
