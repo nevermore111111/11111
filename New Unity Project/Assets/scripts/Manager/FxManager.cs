@@ -6,6 +6,11 @@ using UnityEngine;
 public class FxManager : MonoBehaviour
 {
     private static FxManager _instance; // Singleton instance
+    public FxHelper FxHelper;
+    public ParticleSystem[] particleSystems;
+    private float time;
+    private List<ParticleSystem> particleSystemTodestory;
+    float timeMaxDestory = 5f;
 
     public static FxManager Instance
     {
@@ -26,11 +31,7 @@ public class FxManager : MonoBehaviour
         }
     }
 
-    public FxHelper FxHelper;
-    public ParticleSystem[] particleSystem;
-    private float time;
-    private List<ParticleSystem> particleSystemTodestory;
-    float timeMaxDestory = 5f;
+   
 
     private void Awake()
     {
@@ -47,7 +48,7 @@ public class FxManager : MonoBehaviour
 
         }
         FxHelper = Resources.Load<FxHelper>("FxHelper");
-        particleSystem = FxHelper.AllFx;
+        particleSystems = FxHelper.AllFx;
         particleSystemTodestory = new List<ParticleSystem>();
     }
 
@@ -138,55 +139,18 @@ public class FxManager : MonoBehaviour
         }
         return clone;
     }
-    ///// <summary>
-    ///// parent和pos不能同时为null
-    ///// </summary>
-    ///// <param name="FxName"></param>
-    ///// <param name="scale"></param>
-    ///// <param name="pos"></param>
-    ///// <param name="isAutoDestory"></param>
-    ///// <param name="parent"></param>
-    ///// <param name="maxTimeDestory"></param>
-    ///// <returns></returns>
-    //public ParticleSystem PlayFx(string FxName, Vector3 scale, Transform pos = null, bool isAutoDestory = true, Transform parent = null, float maxTimeDestory = 5f)
-    //{
-    //    ParticleSystem clone;
-    //    if ((parent == null) && (pos != null))
-    //    {
-    //        clone = Instantiate(FindFxByName(FxName), pos.position, pos.rotation);
-    //    }
-    //    else if (parent != null)
-    //    {
-    //        clone = Instantiate(FindFxByName(FxName), parent);
-    //    }
-    //    else
-    //    {
-    //        clone = Instantiate(FindFxByName(FxName));
-    //    }
-    //    clone.Play(true);
-    //    clone.transform.localScale = scale;
-    //    if (isAutoDestory)
-    //    {
-    //        particleSystemTodestory.Add(clone);
-    //    }
-    //    if (maxTimeDestory != 5)
-    //    {
-    //        timeMaxDestory = time + maxTimeDestory;
-    //    }
-    //    return clone;
-    //}
-
+   
     private ParticleSystem FindFxByName(string name)
     {
-        if (particleSystem ==null)
+        if (particleSystems ==null)
         {
             return null;
         }
-        for (int i = 0; i < particleSystem.Length; i++)
+        for (int i = 0; i < particleSystems.Length; i++)
         {
-            if (particleSystem[i].name == name)
+            if (particleSystems[i].name == name)
             {
-                return particleSystem[i];
+                return particleSystems[i];
             }
         }
         Debug.LogError("没找到对应的特效");
