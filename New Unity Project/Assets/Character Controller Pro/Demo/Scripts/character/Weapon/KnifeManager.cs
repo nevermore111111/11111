@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -72,7 +71,17 @@ public class KnifeManager : MonoBehaviour
         previousTailPosition = knifeTail.position;
     }
 
-
+//    private void OnDrawGizmos()
+//    {
+//#if UNITY_EDITOR
+//        if (!Application.isPlaying) return;
+//#endif
+//        Debug.Log(half);
+//        Gizmos.matrix = Matrix4x4.TRS(boxCenter, quaternion, Vector3.one);
+//        Gizmos.color = Color.green;
+//        Gizmos.DrawWireCube(Vector3.zero, 2 * half);
+//        Gizmos.matrix = Matrix4x4.identity;
+//    }
 
 
 }

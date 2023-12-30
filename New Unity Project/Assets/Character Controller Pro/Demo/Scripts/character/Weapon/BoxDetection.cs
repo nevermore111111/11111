@@ -83,7 +83,7 @@ public class BoxDetection : Detection
 
 #endif
         Gizmos.matrix = Matrix4x4.TRS(boxCenter, orientation, Vector3.one);
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireCube(Vector3.zero, 2 * halfExtents);
         Gizmos.matrix = Matrix4x4.identity;
     }
