@@ -12,7 +12,7 @@ public abstract class Detection : MonoBehaviour
     public WeaponDetector WeaponDetector = WeaponDetector.sword;
 
 
-    public void Awake()
+    public virtual void Awake()
     {
         WeaponManager[] weapons = GetComponentsInParent<WeaponManager>();
         if ((int)WeaponDetector < 4)//这个是徒手的
@@ -25,6 +25,10 @@ public abstract class Detection : MonoBehaviour
         }
     }
 
+    public virtual void  ResetBeForeHit()
+    {
+       
+    }
 
     /// <summary>
     /// 攻击完成时清空击中列表，击中判定改为FALSE

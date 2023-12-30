@@ -185,9 +185,14 @@ var squaredNumbers = numbers.Select(x => x * x);
     /// <param name="value"></param>
     public void ToggleDetection(bool value)
     {
+
         isOnDetection = value;
         if (isOnDetection)
         {
+            foreach (Detection item in detections)
+            {
+                item.ResetBeForeHit();
+            }
             HandleDetection();
         }
         else
