@@ -201,18 +201,6 @@ public class Attack : CharacterState
             //按下攻击键位
             if (canInput)
             {
-                if (CharacterActor.IsGrounded)
-                {
-                    CharacterInfo character = CharacterActor.CharacterInfo.selectEnemy;
-                    if (character != null && character.canbeExecuted == true)
-                    {
-                        //CharacterActor.Animator.CrossFadeInFixedTime()
-                    }
-                }
-               
-
-                //增加一个处决的逻辑
-
                 isNextAttack = true;
                 canInput = false;
                 isNextAttack = true;

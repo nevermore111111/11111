@@ -21,8 +21,6 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
 
     public AgetHitBox hitBox;
     public int HitStrength;
-    //是否可以被处决
-    public bool canbeExecuted = false;
     /// <summary>
     /// 伤害，目标位置，武器方向，击中类型
     /// </summary>
