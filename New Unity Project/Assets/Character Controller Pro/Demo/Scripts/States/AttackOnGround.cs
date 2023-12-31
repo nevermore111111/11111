@@ -43,7 +43,7 @@ public class AttackOnGround :Attack
             Debug.Log("×Ô¶¯ÇÐ»»ÁË");
             if (CharacterActor.IsGrounded && SpAttack == 10)
             {
-                CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
+                CharacterActor.Animator.CrossFadeInFixedTime("AttackOnGround.sp01",0.05f,0);
                 canChangeState = false;
                 CharacterActor.ForceNotGrounded();
                 //CharacterActor.VerticalVelocity = CharacterActor.Up * 10f;
@@ -52,12 +52,12 @@ public class AttackOnGround :Attack
             {
                 combo = 1;
                 CharacterActor.Animator.SetInteger("combo", Attack.combo);
-                CharacterActor.Animator.Play("AttackOnGround.attack01_1", 0);
+                CharacterActor.Animator.CrossFadeInFixedTime("AttackOnGround.attack01_1",0.05f, 0);
                 canChangeState = false;
             }
             else
             {
-                CharacterActor.Animator.Play("GhostSamurai_Common_Idle_Inplace");
+                CharacterActor.Animator.CrossFadeInFixedTime("GhostSamurai_Common_Idle_Inplace",0.1f,0);
             }
         }
     }
