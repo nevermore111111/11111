@@ -16,12 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: f8b9d8f05ad505d499e434556007343c
-  m_SerializeEntries:
-  - m_GUID: b5ea69add3208d346b0d9eb23d83aaf1
-    m_Address: FX_Fish_Freeze_Hit
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4d40217de193e4042a5b5d13b61a26b4, type: 2}
   m_SchemaSet:
