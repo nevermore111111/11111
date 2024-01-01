@@ -35,8 +35,10 @@ public class Attack : CharacterState
     public static bool useGravity = false;
     public static float AttackGravity = 10f;
     public float executeDis = 3f;
-    public bool execute;
-
+    //技能攻击时，如果有敌人在面前时，最大转向角度。
+    public float maxAutoAnglerotate = 45f;
+    //攻击时，敌人不在前方，攻击时的最大转向角度
+    public float maxAttackAngleNoenemy = 20f;
     //10 地面普通攻击 剑
     //11 剑下落攻击 剑
     //12 地面击飞  拳

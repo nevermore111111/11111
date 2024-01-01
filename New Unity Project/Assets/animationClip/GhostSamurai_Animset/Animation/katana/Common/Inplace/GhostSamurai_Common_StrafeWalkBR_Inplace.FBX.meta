@@ -525,7 +525,9 @@ ModelImporter:
       will be discarded.\n\t'foot_l' has translation animation that will be discarded.\n\t'ball_l'
       has translation animation that will be discarded.\n\t'calf_r' has translation
       animation that will be discarded.\n\t'foot_r' has translation animation that
-      will be discarded.\n\t'ball_r' has translation animation that will be discarded.\n"
+      will be discarded.\n\t'ball_r' has translation animation that will be discarded.\nEvent
+      cusLog has a time (0.000000) outside the clip's valid range (0.000000..1.133334).
+      It will never be fired"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -562,7 +564,35 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: cusLog
+        data: 1
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.2784692
+        functionName: cusLog
+        data: 2
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5021645
+        functionName: cusLog
+        data: 3
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7077922
+        functionName: cusLog
+        data: 4
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

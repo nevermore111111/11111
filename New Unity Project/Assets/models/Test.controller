@@ -30,7 +30,19 @@ AnimatorController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Test
   serializedVersion: 5
-  m_AnimatorParameters: []
+  m_AnimatorParameters:
+  - m_Name: New Float
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: New Bool
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -79,13 +91,13 @@ AnimatorState:
   m_PrefabAsset: {fileID: 0}
   m_Name: GhostSamurai_Common_StrafeWalkBR_Inplace
   m_Speed: 1
-  m_CycleOffset: 0
+  m_CycleOffset: 0.5
   m_Transitions: []
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
-  m_Mirror: 0
+  m_Mirror: 1
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
@@ -93,9 +105,9 @@ AnimatorState:
   m_Motion: {fileID: 7400002, guid: cdbc3e6a03f2ae240bdbd34f3f16441b, type: 3}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: 
+  m_MirrorParameter: New Bool
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: New Float
 --- !u!1107 &6133655783432074507
 AnimatorStateMachine:
   serializedVersion: 6
@@ -110,7 +122,7 @@ AnimatorStateMachine:
     m_Position: {x: 1090, y: -690, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3110427558772400076}
-    m_Position: {x: 1121.1794, y: -479.96048, z: 0}
+    m_Position: {x: 1120, y: -500, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: -2870156943291371343}

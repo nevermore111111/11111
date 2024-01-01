@@ -162,6 +162,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// <summary>
         /// Gets a vector that is the product of the input axes (taken from the character actions) and the movement reference. 
         /// The magnitude of this vector is always less than or equal to 1.
+        /// 这个是我想移动的世界方向
         /// </summary>
         public Vector3 InputMovementReference => movementReferenceParameters.InputMovementReference;
 

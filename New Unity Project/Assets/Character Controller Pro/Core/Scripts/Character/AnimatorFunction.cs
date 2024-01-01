@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -31,6 +32,7 @@ public class AnimatorFunction : MonoBehaviour
     public string activeWeaponDetect;//现在激活的碰撞区域
     public string currentStateName;//当前正在播放的动画
     public WeaponData WeaponData;
+    CharacterActor characterActor;
 
     private TimelineManager timelineManager;
     //private Action<int> hitActionOfImpulse;
@@ -46,6 +48,7 @@ public class AnimatorFunction : MonoBehaviour
         //CameraEffects = CinemachineFreeLook.GetComponent<CameraEffects>();
         timelineManager = GetComponent<TimelineManager>();
         WeaponData = FindAnyObjectByType<WeaponData>();
+        characterActor = GetComponentInParent<CharacterActor>();
         //
     }
     private void Start()
@@ -55,48 +58,49 @@ public class AnimatorFunction : MonoBehaviour
     public void JumpStart()
     {
         //关闭动画机进入的条件
-        Attack.CharacterActor.Animator.SetBool("jump", false);
+        characterActor.Animator.SetBool("jump", false);
     }
 
     public void Idle()
     {
         Attack.isAttack = false;
-        Attack.CharacterActor.Animator.SetBool("attack", false);
+        characterActor.Animator.SetBool("attack", false);
         Attack.combo = 0;
-        Attack.CharacterActor.Animator.SetInteger("combo", Attack.combo);
+        Debug.Log(Attack.combo);
+        characterActor.Animator.SetInteger("combo", Attack.combo);
         Attack.canInput = true;
         Attack.canChangeState = true;
     }
 
     public void Fly()
     {
-        Attack.CharacterActor.alwaysNotGrounded = true;
+        characterActor.alwaysNotGrounded = true;
     }
     public void FlyEnd()
     {
-        Attack.CharacterActor.alwaysNotGrounded = false;
+        characterActor.alwaysNotGrounded = false;
     }
 
 
     public void NormalIdle()
     {
-        if (Attack.CharacterActor.Animator.IsInTransition(0) == false)
-            Attack.CharacterActor.SetUpRootMotion(false, false);
+        if (characterActor.Animator.IsInTransition(0) == false)
+            characterActor.SetUpRootMotion(false, false);
     }
     public void Stop()
     {
-        Attack.CharacterActor.Animator.SetBool(Attack.stopParameter, false);
+        characterActor.Animator.SetBool(Attack.stopParameter, false);
     }
 
     public void AttackEnd()
     {
-        Attack.CharacterActor.Animator.speed = 1f;
-        if (!Attack.CharacterActor.Animator.IsInTransition(0))
+        characterActor.Animator.speed = 1f;
+        if (!characterActor.Animator.IsInTransition(0))
         {
             if (CharacterStateController.CurrentState is Attack)
-                Attack.CharacterActor.SetUpRootMotion(true, true);
+                characterActor.SetUpRootMotion(true, true);
             Attack.isAttack = false;
-            Attack.CharacterActor.Animator.SetBool("attack", false);
+            characterActor.Animator.SetBool("attack", false);
 
             foreach (var manager in weaponManagers)
             {
@@ -110,8 +114,8 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void HitEnd()
     {
-        Attack.CharacterActor.Animator.speed = 1f;
-        if (!Attack.CharacterActor.Animator.IsInTransition(0))
+        characterActor.Animator.speed = 1f;
+        if (!characterActor.Animator.IsInTransition(0))
         {
             foreach (var manager in weaponManagers)
             {
@@ -138,7 +142,7 @@ public class AnimatorFunction : MonoBehaviour
     public void HitStart()//int hitKind, string activeWeaponDetect
     {
         Debug.LogError("开始攻击");
-        Attack.CharacterActor.Animator.speed = 1.3f;
+        characterActor.Animator.speed = 1.3f;
         SetStrengthAndDetector();
 
         //根据当前攻击类别来进行
@@ -206,7 +210,7 @@ public class AnimatorFunction : MonoBehaviour
                 {
                     weaponManager = manager;
                     manager.isNeedUpdateDirection = false;
-                    Vector3 DirectionIncharacter = new Vector3(CurrentAnimConfig.AttackDirection[currentHitIndex * 3 ], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 +1], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 + 2]);
+                    Vector3 DirectionIncharacter = new Vector3(CurrentAnimConfig.AttackDirection[currentHitIndex * 3], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 + 1], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 + 2]);
                     //然后我需要把这个
                     manager.WeaponDirection = Attack.transform.TransformDirection(DirectionIncharacter);
                     break;
@@ -275,23 +279,18 @@ public class AnimatorFunction : MonoBehaviour
     {
         //修正当前的攻击方向
 
-        Attack.CharacterActor.Animator.speed = 1f;
-        Attack.CharacterActor.UseRootMotion = true;
+        characterActor.Animator.speed = 1f;
+        characterActor.UseRootMotion = true;
         //更新攻击名称和配置表
         ResetCurrentInfo(attackName);
-        //foreach(var weapon in weaponManagers)
-        //{
-        //    //
-        //}
-        //SetWeaponDirection(true);
 
         //开始一次攻击
         Attack.isNextAttack = false;//这个代表已经执行了下一次攻击
         Attack.isAttack = true;
-        Attack.CharacterActor.Animator.SetBool("attack", true);
+        characterActor.Animator.SetBool("attack", true);
         Attack.canChangeState = false;
         Attack.OnceAttack = false;
-        Attack.CharacterActor.Animator.SetInteger("specialAttack", 0);
+        characterActor.Animator.SetInteger("specialAttack", 0);
         ResetAttackRootAndrotate();
     }
 
@@ -305,26 +304,65 @@ public class AnimatorFunction : MonoBehaviour
         {
             //新语法
             GameObject[] gamesEnemy = mainCharacter.enemies.Select(m => m.gameObject).ToArray();
-            mainCharacter.selectEnemy = HelpTools01.FindClosest(Attack.CharacterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
-            Vector3 Forward = (mainCharacter.selectEnemy.transform.position - Attack.CharacterActor.transform.position).normalized;
-            //Debug.Log(Attack.CharacterActor.Forward);
-            Attack.CharacterActor.Forward = new(Forward.x, 0, Forward.z);
-            Attack.CharacterActor.Up = Vector3.up;
+            SetActorForword(gamesEnemy);
             //Debug.Log(Attack.CharacterActor.Forward);
             if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
             {
 
                 if (Attack.SpAttack == -1)
                 {
-                    Attack.CharacterActor.SetUpRootMotion(false, false);
+                    characterActor.SetUpRootMotion(false, false);
                 }
-                Attack.CharacterActor.PlanarVelocity = Vector3.zero;
+                characterActor.PlanarVelocity = Vector3.zero;
             }
         }
         else
         {
             //没有单位就可以自由转向，但是只能在攻击开始的时候转向
-            Attack.CharacterActor.Forward = CharacterStateController.InputMovementReference;
+            characterActor.Forward = CharacterStateController.InputMovementReference;
+        }
+    }
+
+    /// <summary>
+    /// 设置人物正方向
+    /// </summary>
+    /// <param name="gamesEnemy"></param>
+    private void SetActorForword(GameObject[] gamesEnemy)
+    {
+    
+
+        mainCharacter.selectEnemy = HelpTools01.FindClosest(characterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
+        Vector3 Forward = (mainCharacter.selectEnemy.transform.position - characterActor.transform.position).normalized;
+        //当前面向目标，直接自动转
+        if (Vector3.Angle(characterActor.Forward, Forward) < Attack.maxAutoAnglerotate)
+        {
+            characterActor.Forward = new(Forward.x, 0, Forward.z);
+            characterActor.Up = Vector3.up;
+        }
+        else //当前没有面向攻击目标需要向输入目标的方向转
+        {
+            Vector3 target = CharacterStateController.InputMovementReference;
+            if (target!=Vector3.zero) 
+            {
+                target.z = 0;
+                target.Normalize();
+                //计算需要转动的角度
+                float angle = Vector3.Angle(target, characterActor.Forward)>Attack.maxAttackAngleNoenemy ? Attack.maxAttackAngleNoenemy : Vector3.Angle(target, characterActor.Forward);
+                characterActor.Forward = RotateVectorAroundAxis(characterActor.Forward,target,angle);
+                characterActor.Forward = Vector3.ProjectOnPlane(characterActor.Forward, Vector3.up);
+                characterActor.Up = Vector3.up;
+            }
+        }
+
+        Vector3 RotateVectorAroundAxis(Vector3 vector, Vector3 axis, float angle)
+        {
+            // 将向量和轴转换成四元数
+            Quaternion rotation = Quaternion.AngleAxis(angle, axis);
+
+            // 将向量绕轴旋转
+            Vector3 rotatedVector = rotation * vector;
+
+            return rotatedVector;
         }
     }
 
@@ -357,17 +395,17 @@ public class AnimatorFunction : MonoBehaviour
 
     public void CanGetInput()
     {
-        Attack.CharacterActor.Animator.SetInteger("specialAttack", 0);
+        characterActor.Animator.SetInteger("specialAttack", 0);
         Attack.canInput = true;
         Attack.SpAttack = -1;
     }
 
     public void Drop()
     {
-        Attack.CharacterActor.UseRootMotion = false;
+        characterActor.UseRootMotion = false;
         Attack.useGravity = true;
-        Attack.CharacterActor.VerticalVelocity -= 10f * Attack.CharacterActor.Up;
-        Attack.CharacterActor.alwaysNotGrounded = false;
+        characterActor.VerticalVelocity -= 10f * characterActor.Up;
+        characterActor.alwaysNotGrounded = false;
         //仅仅使用水平移动
     }
     public void CannotGetInput()
@@ -376,7 +414,7 @@ public class AnimatorFunction : MonoBehaviour
         {
             //这样在攻击中的时候，不会被上一次的CannotGetInput重置combo
             Attack.combo = 0;
-            Attack.CharacterActor.Animator.SetInteger("combo", 0);
+            characterActor.Animator.SetInteger("combo", 0);
         }
     }
     /// <summary>
@@ -401,15 +439,15 @@ public class AnimatorFunction : MonoBehaviour
     public void ComboStart(int num)
     {
         Attack.MaxCombo = num;
-        Attack.CharacterActor.Animator.SetInteger("specialAttack", 0);
+        characterActor.Animator.SetInteger("specialAttack", 0);
     }
     public void SpAtk(int kind)
     {
-        Attack.CharacterActor.Animator.SetInteger("specialAttack", kind);
+        characterActor.Animator.SetInteger("specialAttack", kind);
     }
     public void End()
     {
-        Attack.CharacterActor.Animator.SetTrigger("end");
+        characterActor.Animator.SetTrigger("end");
     }
 
 
@@ -448,10 +486,10 @@ public class AnimatorFunction : MonoBehaviour
 
     public void SlowDownAnimator(float slowDownFactor, float duration)
     {
-        originalSpeed = Attack.CharacterActor.Animator.speed; // 保存原始的播放速度
+        originalSpeed = characterActor.Animator.speed; // 保存原始的播放速度
         Debug.Log(originalSpeed);
 
-        Attack.CharacterActor.Animator.speed = originalSpeed * slowDownFactor; // 修改播放速度为当前的 slowDownFactor
+        characterActor.Animator.speed = originalSpeed * slowDownFactor; // 修改播放速度为当前的 slowDownFactor
 
         // 在指定的时间后恢复原始速度
         StartCoroutine(RestoreAnimatorSpeed(duration));
@@ -460,7 +498,7 @@ public class AnimatorFunction : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        Attack.CharacterActor.Animator.speed = originalSpeed; // 恢复原始播放速度
+        characterActor.Animator.speed = originalSpeed; // 恢复原始播放速度
     }
 
     private string GetPlayingClipName(Animator animator)
