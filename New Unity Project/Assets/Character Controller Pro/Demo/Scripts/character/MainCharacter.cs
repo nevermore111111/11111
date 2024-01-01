@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class MainCharacter : CharacterInfo
 {
-    public CharacterActor characterActor;
     public CharacterStateController CharacterStateController;
     public Hitted CharacterHitted;
     public WeaponKind WeaponKind;
@@ -24,7 +23,6 @@ public class MainCharacter : CharacterInfo
     protected override void Awake()
     {
         base.Awake();
-        characterActor = this.GetComponentInParent<CharacterActor>();
         CharacterStateController = this.transform.parent.GetComponentInChildren<CharacterStateController>();
         CharacterHitted = characterActor.GetComponentInChildren<Hitted>();
         hitData = FindObjectOfType<HitData>();
@@ -100,7 +98,7 @@ public class MainCharacter : CharacterInfo
         }
     }
 
-    public override void GetDamage(float damage, Vector3 attackDirection, float hitStrength)
+    public override void GetDamage(float damage, Vector3 attackDirection, float hitStrength,string targetAnim = null)
     {
         ChangeAnim(attackDirection);
         //得到关于自身的攻击方向

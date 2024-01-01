@@ -1,3 +1,4 @@
+using Lightbug.CharacterControllerPro.Core;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,6 +10,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
 
 
     //周围全部的敌人
+    public CharacterActor characterActor;
 
     [Tooltip("代表这个单位的敌人tag")]
     public string enemyTag;
@@ -21,6 +23,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
 
     public AgetHitBox hitBox;
     public int HitStrength;
+    public bool canBeExecuted = false;
     /// <summary>
     /// 伤害，目标位置，武器方向，击中类型
     /// </summary>
@@ -31,7 +34,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     /// <param name="hit"></param>
     abstract public void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground);
 
-    virtual public void GetDamage(float damage, Vector3 attackDirection, float hitStrength)
+    virtual public void GetDamage(float damage, Vector3 attackDirection, float hitStrength,string targetAnim = null)
     {
 
     }
@@ -43,7 +46,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     {
         enemies = new List<CharacterInfo>();
         hitBox = GetComponentInChildren<AgetHitBox>();
-
+        characterActor = GetComponentInParent<CharacterActor>();
     }
 
     abstract public void HitOther(WeaponManager weaponManager);

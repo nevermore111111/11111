@@ -8,11 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: body
-  m_Shader: {fileID: 4800000, guid: 96d05de60c5f7474491f9f94568cf623, type: 3}
+  m_Shader: {fileID: 4800000, guid: 4466465ffd73f3e42bae37fdf7e6ed2e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ValidKeywords:
+  - _LAMBERTIAN
+  m_InvalidKeywords:
+  - _IS_FILTER_LIGHTCOLOR_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -23,12 +25,36 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: f9c6074c5a78e71448f9efd3013cadda, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DiffuseRampMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveNoiseTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EnvMapSampler:
         m_Texture: {fileID: 2800000, guid: 763c5d30206d1d54a9b49b3309e37fe1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FalloffSampler:
         m_Texture: {fileID: 2800000, guid: cc8f70f2ec571e9478efa98c041cde7b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -43,16 +69,109 @@ Material:
         m_Texture: {fileID: 2800000, guid: a18067604964b5a4d8fd5552ed0d789e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SDFFaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ShadingMap01:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecularReflectionSampler:
         m_Texture: {fileID: 2800000, guid: 7ae1142e9b3a72048960dd9561e0e0d9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _BumpMapKeyword: 0
+    - _BumpScale: 1
+    - _CELLSmoothing: 0.001
+    - _CELLThreshold: 0.5
+    - _CasterShadow: 1
+    - _CellBandSoftness: 0.001
+    - _CellBands: 1
+    - _ClearShading: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DepthOffsetShadowReverseX: 0
+    - _DepthPrePass: 0
+    - _DepthShadowOffset: 0.15
+    - _DepthShadowSoftness: 0
+    - _DepthShadowThresoldOffset: 0
+    - _DissolveThreshold: 0
+    - _DstBlend: 0
     - _EdgeThickness: 0.5
+    - _EmissionColorAlbedoWeight: 0
     - _FalloffPower: 0.3
+    - _Is_Filter_LightColor: 1
+    - _Is_SDInPaint: 0
+    - _LightDirectionObliqueWeight: 0
+    - _LightIntensityClamp: 1
+    - _Metallic: 0
+    - _OcclusionStrength: 0
+    - _Outline: 0
+    - _OutlineWidth: 1
+    - _QueueOffset: 0
+    - _RECEIVE_SHADOWS_OFF: 1
+    - _RampMapUOffset: 0
+    - _RampMapVOffset: 0.5
+    - _RimDirectionLightContribution: 1
+    - _RimSoftness: 0.01
+    - _RimThreshold: 0.2
+    - _SDFDirectionReversal: 0
+    - _SDFFaceArea: 0
+    - _SDFShadingSoftness: 0.3
+    - _ScreenSpaceRimSoftness: 0.01
+    - _ScreenSpaceRimThreshold: 0.01
+    - _ScreenSpaceRimWidth: 0.01
+    - _Shininess: 1
+    - _Smoothness: 0.5
+    - _SpecularMask: 0
     - _SpecularPower: 20
+    - _SrcBlend: 1
+    - _StylizedSpecularAlbedoWeight: 0
+    - _StylizedSpecularSize: 0.1
+    - _StylizedSpecularSoftness: 0.05
+    - _Surface: 0
+    - _UseDepthShadow: 0
+    - _UseDissolveEffect: 0
+    - _UseEmissionTex: 0
+    - _UseHalfLambert: 0
+    - _UseRadianceOcclusion: 0
+    - _ZOffset: 0
+    - _ZWrite: 1
+    - _enum_diffuse: 3
+    - _enum_outline_color: 0
+    - _enum_outline_smoothed: 0
+    - _enum_outline_width: 0
+    - _enum_rim: 0
+    - _enum_specular: 0
+    - _group: 0
+    - _group1: 1
+    - _groupAI: 1
+    - _groupAdditionLight: 1
+    - _groupDissolveSetting: 0
+    - _groupEmission: 0
+    - _groupLightDirectionOffset: 0
+    - _groupOutline: 1
+    - _groupRim: 1
+    - _groupShadingMask: 0
+    - _groupShadowSetting: 1
+    - _groupSpecular: 1
+    - _groupSurface: 1
     m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DarkColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionChannel: {r: 0, g: 0, b: 1, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _HighColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 0}
+    - _PBRMetallicChannel: {r: 1, g: 0, b: 0, a: 0}
+    - _PBROcclusionChannel: {r: 0, g: 1, b: 0, a: 0}
+    - _PBRSmothnessChannel: {r: 0, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0.8, g: 0.8, b: 1, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecularIntensityChannel: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

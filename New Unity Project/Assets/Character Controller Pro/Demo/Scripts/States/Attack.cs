@@ -34,7 +34,9 @@ public class Attack : CharacterState
     protected WeaponManager[] weaponManagers;
     public static bool useGravity = false;
     public static float AttackGravity = 10f;
-   
+    public float executeDis = 3f;
+    public bool execute;
+
     //10 地面普通攻击 剑
     //11 剑下落攻击 剑
     //12 地面击飞  拳
@@ -53,7 +55,7 @@ public class Attack : CharacterState
     /// <param name="ExitAttack"></param>
     public void ChangeWeaponState(bool ExitAttack)
     {
-        if(ExitAttack == true)
+        if (ExitAttack == true)
         {
             foreach (var weapon in weaponManagers)
             {
@@ -125,7 +127,7 @@ public class Attack : CharacterState
     {
         base.Start();
         normalHeightAndWidth = CharacterActor.BodySize;
-       
+
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
@@ -140,10 +142,10 @@ public class Attack : CharacterState
             isJustEnter = true;
         CharacterActor.CheckAndSetSize(HeighAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
 
-       // //根据当前进入的类，去调整当前的timeline的数量
-       // string className = this.GetType().Name;
-       // //当进入对应模式的时候，去切换对应的timeline数组
-       //timelineManager.SwapTimelinesByAssetName(className);
+        // //根据当前进入的类，去调整当前的timeline的数量
+        // string className = this.GetType().Name;
+        // //当进入对应模式的时候，去切换对应的timeline数组
+        //timelineManager.SwapTimelinesByAssetName(className);
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
@@ -177,9 +179,9 @@ public class Attack : CharacterState
     /// <summary>
     /// 根据输入，来确认当前的combo
     /// </summary>
-    private void SetCombo()
+    protected void SetCombo()
     {
-       
+
         if (CharacterActions.spAttack.value)
         {
             if (CharacterActor.IsGrounded)
@@ -190,7 +192,7 @@ public class Attack : CharacterState
                     SpAttack = 10;
                 }
             }
-            else if(canAttackInair )//&& currentAttackMode == AttackMode.AttackOnGround)
+            else if (canAttackInair)//&& currentAttackMode == AttackMode.AttackOnGround)
             {
                 isNextAttack = true;
                 SpAttack = 11;
@@ -201,21 +203,54 @@ public class Attack : CharacterState
             //按下攻击键位
             if (canInput)
             {
-                isNextAttack = true;
-                canInput = false;
-                isNextAttack = true;
-                combo++;
-                if (combo > MaxCombo)
+                if(canExecute())
                 {
-                    combo = 1;
+                    //执行处决，先冲过去
+                    executeStart();
                 }
-                CharacterActor.Animator.SetInteger("combo", combo);
+                else
+                {
+                    canInput = false;
+                    isNextAttack = true;
+                    combo++;
+                    if (combo > MaxCombo)
+                    {
+                        combo = 1;
+                    }
+                    CharacterActor.Animator.SetInteger("combo", combo);
+                }
             }
         }
-     
+
     }
 
-    private void UseGravity(float dt)
+    protected virtual void executeStart()
+    {
+        canInput = false;
+        isNextAttack = true;
+        combo = 0;
+    }
+    private bool canExecute()
+    {
+        if (CharacterActor.CharacterInfo.selectEnemy != null && CharacterActor.CharacterInfo.selectEnemy.canBeExecuted == true)
+        {
+            //距离够近且自身在地面
+            if (CheckDis(attack.executeDis) && CharacterActor.IsGrounded)
+            {
+                //
+                return true;
+
+            }
+        }
+        return false;
+    }
+    
+    private bool CheckDis(float distance)
+    {
+        return (CharacterActor.CharacterInfo.transform.position - CharacterActor.CharacterInfo.selectEnemy.transform.position).magnitude < distance;
+    }
+
+    protected void UseGravity(float dt)
     {
         if (!CharacterActor.IsStable)
             CharacterActor.VerticalVelocity += CustomUtilities.Multiply(-CharacterActor.Up, AttackGravity, dt);

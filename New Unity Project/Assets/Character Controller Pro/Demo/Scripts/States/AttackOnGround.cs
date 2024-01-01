@@ -37,8 +37,8 @@ public class AttackOnGround :Attack
         yield return null;
         //yield return null;
         Type type = CharacterStateController.PreviousState.GetType();
-        bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("AttackOnGround");
-        if (CharacterStateController.CurrentState is AttackOnGround && (!isPlayMove))
+        bool isPlayAttack = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("AttackOnGround");
+        if (CharacterStateController.CurrentState is AttackOnGround && (!isPlayAttack))
         {
             Debug.Log("×Ô¶¯ÇÐ»»ÁË");
             if (CharacterActor.IsGrounded && SpAttack == 10)
@@ -67,15 +67,15 @@ public class AttackOnGround :Attack
 
     public override void UpdateBehaviour(float dt)
     {
-       
+
         base.UpdateBehaviour(dt);
-        if (!canPlayerControl)
-        {
-            return;
-        }
     }
-
-
+    protected override void executeStart()
+    {
+        base.executeStart();
+        CharacterActor.CharacterInfo.selectEnemy.GetDamage(0f, Vector3.one, 0f, "GhostSamurai_Ambushed01_Root");
+        CharacterActor.Animator.CrossFadeInFixedTime("Execeute01_back", 0.1f,0);
+    }
 
     public override void CheckExitTransition()
     {

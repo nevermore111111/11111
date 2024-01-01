@@ -851,7 +851,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100322558}
-  m_LocalRotation: {x: 0.07741541, y: -0.75428647, z: 0.0904396, w: 0.64566195}
+  m_LocalRotation: {x: 0.054549932, y: -0.75533277, z: 0.063391395, w: 0.64998335}
   m_LocalPosition: {x: 3.929512, y: 0.39202702, z: 6.6251297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -976,7 +976,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102522144}
-  m_LocalRotation: {x: 0.036143597, y: -0.120425, z: 0.004387453, w: 0.9920546}
+  m_LocalRotation: {x: 0.18032703, y: -0.118500344, z: 0.021889858, w: 0.97619706}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1725,12 +1725,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e485406aa2cd0e6439eb48662258bc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterActor: {fileID: 0}
   enemyTag: 
   enemies: []
   selectEnemy: {fileID: 0}
   cameraRadius: 0.5
   hitBox: {fileID: 0}
   HitStrength: 0
+  canBeExecuted: 0
   targetGroupSize: 2
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -4631,7 +4633,7 @@ MonoBehaviour:
   m_BindingMode: 5
   m_FollowOffset: {x: 0, y: 2.78, z: -4}
   m_XDamping: 1
-  m_YDamping: 5
+  m_YDamping: 1
   m_ZDamping: 1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
@@ -5440,7 +5442,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444161945}
-  m_LocalRotation: {x: 0.06403533, y: -0.7559969, z: 0.07480849, w: 0.6471259}
+  m_LocalRotation: {x: 0.041085295, y: -0.75648296, z: 0.047744405, w: 0.65097314}
   m_LocalPosition: {x: 3.929512, y: 0.39202702, z: 6.6251297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6026,6 +6028,11 @@ PrefabInstance:
     m_TransformParent: {fileID: 8805377711411893421}
     m_Modifications:
     - target: {fileID: 564754472, guid: 15963df9e6a96144bb9d8742a888bd7c, type: 3}
+      propertyPath: m_PlayableAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f998ca49e944374aaf9ef283a66636e,
+        type: 2}
+    - target: {fileID: 564754472, guid: 15963df9e6a96144bb9d8742a888bd7c, type: 3}
       propertyPath: m_SceneBindings.Array.data[10].value
       value: 
       objectReference: {fileID: 1162800281}
@@ -6212,6 +6219,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7174589064515782875, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      propertyPath: m_ImpulseDefinition.m_AmplitudeGain
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7174589064515782875, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      propertyPath: m_ImpulseDefinition.m_TimeEnvelope.m_DecayTime
+      value: 0.175
+      objectReference: {fileID: 0}
+    - target: {fileID: 7174589064515782875, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      propertyPath: m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 7181922487039540906, guid: 15963df9e6a96144bb9d8742a888bd7c,
         type: 3}
@@ -6899,7 +6921,7 @@ MonoBehaviour:
   m_BindingMode: 5
   m_FollowOffset: {x: 0, y: 2.78, z: -4}
   m_XDamping: 1
-  m_YDamping: 5
+  m_YDamping: 1
   m_ZDamping: 1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
@@ -7718,7 +7740,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: 0.036143556, y: -0.12042502, z: 0.0043874504, w: 0.9920546}
+  m_LocalRotation: {x: 0.18032703, y: -0.118500344, z: 0.021889858, w: 0.97619706}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7904,7 +7926,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605997566}
-  m_LocalRotation: {x: 0.023164071, y: -0.26986164, z: 0.0064939777, w: 0.96259856}
+  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10255,8 +10277,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811303954}
-  m_LocalRotation: {x: 0.18032704, y: -0.118500344, z: 0.021889858, w: 0.97619706}
-  m_LocalPosition: {x: -0.23484802, y: 1.166528, z: 0.95308685}
+  m_LocalRotation: {x: 0.18032703, y: -0.118500344, z: 0.021889858, w: 0.97619706}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10650,7 +10672,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866193864}
-  m_LocalRotation: {x: 0.023672033, y: -0.76080275, z: 0.02779473, w: 0.64795554}
+  m_LocalRotation: {x: 0.027649133, y: -0.7573069, z: 0.032130506, w: 0.6516821}
   m_LocalPosition: {x: 3.929512, y: 0.39202702, z: 6.6251297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10783,12 +10805,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e485406aa2cd0e6439eb48662258bc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterActor: {fileID: 0}
   enemyTag: 
   enemies: []
   selectEnemy: {fileID: 0}
   cameraRadius: 0.5
   hitBox: {fileID: 0}
   HitStrength: 0
+  canBeExecuted: 1
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -11326,8 +11350,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234784, y: 0.000007778405, z: -0.00000030361113, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.0620465, z: -5.874625}
+  m_LocalRotation: {x: 0.039234806, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.0620468, z: -5.874625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17211,6 +17235,8 @@ MonoBehaviour:
   stopParameter: stop
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
+  executeDis: 3
+  execute: 0
   gravity: 10
 --- !u!114 &1257029335
 MonoBehaviour:
@@ -17314,6 +17340,8 @@ MonoBehaviour:
   stopParameter: stop
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
+  executeDis: 3
+  execute: 0
 --- !u!114 &1257029339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17333,6 +17361,8 @@ MonoBehaviour:
   stopParameter: stop
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
+  executeDis: 3
+  execute: 0
   army:
   - {fileID: 0}
   gravity: 10
@@ -17374,6 +17404,8 @@ MonoBehaviour:
   stopParameter: stop
   HeighAndWidth: {x: 0, y: 0}
   attack: {fileID: 0}
+  executeDis: 3
+  execute: 0
   gravity: 10
 --- !u!4 &1270522007 stripped
 Transform:
@@ -19882,8 +19914,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498168725}
-  m_LocalRotation: {x: 0.0033781275, y: 0.7132423, z: 0.7009011, w: -0.003437608}
-  m_LocalPosition: {x: -121.70321, y: -6.821699, z: 95.49316}
+  m_LocalRotation: {x: -0.67959577, y: 0.0035617738, z: 0.0032997045, w: 0.73357075}
+  m_LocalPosition: {x: -121.69969, y: -6.8322344, z: 95.85162}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20926,7 +20958,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689691047}
-  m_LocalRotation: {x: 0.023164071, y: -0.26986164, z: 0.0064939777, w: 0.96259856}
+  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21234,7 +21266,7 @@ MonoBehaviour:
   m_BindingMode: 5
   m_FollowOffset: {x: 0, y: 2.78, z: -4}
   m_XDamping: 1
-  m_YDamping: 5
+  m_YDamping: 1
   m_ZDamping: 1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
@@ -21810,12 +21842,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e485406aa2cd0e6439eb48662258bc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterActor: {fileID: 0}
   enemyTag: 
   enemies: []
   selectEnemy: {fileID: 0}
   cameraRadius: 0.5
   hitBox: {fileID: 0}
   HitStrength: 0
+  canBeExecuted: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -21992,12 +22026,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e485406aa2cd0e6439eb48662258bc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterActor: {fileID: 0}
   enemyTag: 
   enemies: []
   selectEnemy: {fileID: 0}
   cameraRadius: 0.5
   hitBox: {fileID: 0}
   HitStrength: 0
+  canBeExecuted: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -23163,7 +23199,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890388382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -120.50813, y: -1.5017335, z: 90.983086}
+  m_LocalPosition: {x: -120.74298, y: -0.33520555, z: 91.93617}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24353,12 +24389,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e485406aa2cd0e6439eb48662258bc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterActor: {fileID: 0}
   enemyTag: 
   enemies: []
   selectEnemy: {fileID: 0}
   cameraRadius: 0.5
   hitBox: {fileID: 0}
   HitStrength: 0
+  canBeExecuted: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -25324,13 +25362,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b87879b365d4e488349e74a342ebf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterActor: {fileID: 0}
   enemyTag: 
   enemies: []
   selectEnemy: {fileID: 0}
   cameraRadius: 0.5
   hitBox: {fileID: 0}
   HitStrength: 0
-  characterActor: {fileID: 0}
+  canBeExecuted: 0
   CharacterStateController: {fileID: 0}
   CharacterHitted: {fileID: 0}
   WeaponKind: 0

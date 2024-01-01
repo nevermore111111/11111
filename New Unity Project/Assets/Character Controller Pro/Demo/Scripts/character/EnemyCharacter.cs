@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class EnemyCharacter : CharacterInfo
 {
-     CharacterActor characterActor;
     public float targetGroupSize = 1;
     public float targetHp = 10000;
     public Hitted CharacterHitted;
@@ -13,7 +12,7 @@ public class EnemyCharacter : CharacterInfo
     protected override  void Awake()
     {
         base.Awake();
-        characterActor = this.GetComponentInParent<CharacterActor>();
+        
         if(characterActor != null)
         CharacterHitted = characterActor.GetComponentInChildren<Hitted>();
     }
@@ -33,9 +32,13 @@ public class EnemyCharacter : CharacterInfo
         throw new System.NotImplementedException();
     }
 
-    public override void GetDamage(float damage, Vector3 attackDirection, float hitStrength)
+    public override void GetDamage(float damage, Vector3 attackDirection, float hitStrength, string targetAnim = null)
     {
         ChangeAnim(attackDirection);
+        if(!string.IsNullOrEmpty(targetAnim))
+        {
+            characterActor.Animator.CrossFadeInFixedTime(targetAnim, 0.1f);
+        }
         //得到关于自身的攻击方向
     }
     private void ChangeAnim(Vector3 attackDirection)
