@@ -226,6 +226,22 @@ namespace Lightbug.CharacterControllerPro.Implementation
         {
         }
 
+        public void SetIKPos(AvatarIKGoal targetAvatarIK,Transform targetTransform,float targetWeight)
+        {
+            CharacterActor.Animator.SetIKPosition(targetAvatarIK, targetTransform.position);
+            CharacterActor.Animator.SetIKPositionWeight(targetAvatarIK, targetWeight);
+        }
+        public void SetIKRotate(AvatarIKGoal targetAvatarIK, Transform targetTransform, float targetWeight)
+        {
+            CharacterActor.Animator.SetIKRotation(targetAvatarIK, transform.rotation);
+            CharacterActor.Animator.SetIKRotationWeight(targetAvatarIK, targetWeight);
+        }
+        public void SetIKbyTransform(AvatarIKGoal targetAvatarIK,Transform targetTransform,float tarPosWeight,float tarRotateWeight)
+        {
+            SetIKPos(targetAvatarIK, targetTransform, tarPosWeight);
+            SetIKRotate(targetAvatarIK,targetTransform, tarRotateWeight);
+        }
+
         public virtual string GetInfo()
         {
             return "";

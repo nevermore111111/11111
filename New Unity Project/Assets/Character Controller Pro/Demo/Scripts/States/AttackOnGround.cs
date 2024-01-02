@@ -61,7 +61,13 @@ public class AttackOnGround :Attack
             }
         }
     }
+    public override void UpdateIK(int layerIndex)
+    {
+        if(CharacterActor.CharacterInfo.selectEnemy != null)
+        {
 
+        }
+    }
 
 
 
