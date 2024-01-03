@@ -66,7 +66,6 @@ public class AnimatorFunction : MonoBehaviour
         Attack.isAttack = false;
         characterActor.Animator.SetBool("attack", false);
         Attack.combo = 0;
-        Debug.Log(Attack.combo);
         characterActor.Animator.SetInteger("combo", Attack.combo);
         Attack.canInput = true;
         Attack.canChangeState = true;

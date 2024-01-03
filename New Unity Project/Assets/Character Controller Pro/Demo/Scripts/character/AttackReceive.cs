@@ -7,7 +7,11 @@ public class AttackReceive : MonoBehaviour
 {
     public CharacterInfo CharacterInfo;
     public ReceiveHitType receive = ReceiveHitType.Normal;
+    // 定义一个委托类型，用于表示处理击中的方法
+    public delegate void HitHandler();
 
+    // 定义事件，根据不同的击中类型注册不同的方法
+    public event HitHandler OnHit;
 
 
     public void Awake()
@@ -15,11 +19,10 @@ public class AttackReceive : MonoBehaviour
         CharacterInfo = GetComponentInParent<CharacterInfo>();
         registerHit(receive);
     }
-    // 定义一个委托类型，用于表示处理击中的方法
-    public delegate void HitHandler();
-
-    // 定义事件，根据不同的击中类型注册不同的方法
-    public event HitHandler OnHit;
+    private void Start()
+    {
+        CharacterInfo.allReceives.Add(this);
+    }
 
     public void HitStart()
     {

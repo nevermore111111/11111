@@ -232,7 +232,7 @@ public class Attack : CharacterState
         isNextAttack = true;
         combo = 0;
     }
-    private bool canExecute()
+    protected bool canExecute()
     {
         if (CharacterActor.CharacterInfo.selectEnemy != null && CharacterActor.CharacterInfo.selectEnemy.canBeExecuted == true)
         {

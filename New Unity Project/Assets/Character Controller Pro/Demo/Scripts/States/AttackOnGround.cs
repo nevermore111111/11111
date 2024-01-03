@@ -41,7 +41,11 @@ public class AttackOnGround :Attack
         if (CharacterStateController.CurrentState is AttackOnGround && (!isPlayAttack))
         {
             Debug.Log("×Ô¶¯ÇÐ»»ÁË");
-            if (CharacterActor.IsGrounded && SpAttack == 10)
+            if(canExecute())
+            {
+                executeStart();
+            }
+            else if (CharacterActor.IsGrounded && SpAttack == 10)
             {
                 CharacterActor.Animator.Play("AttackOnGround.sp01", 0);
                 canChangeState = false;
