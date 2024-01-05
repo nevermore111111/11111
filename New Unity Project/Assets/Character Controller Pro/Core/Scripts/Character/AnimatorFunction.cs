@@ -1,5 +1,6 @@
 using Cinemachine;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using MagicaCloth2;
@@ -127,15 +128,7 @@ public class AnimatorFunction : MonoBehaviour
             }
         }
     }
-    private int[] ConvertStringToIntArray(string str)
-    {
-        int[] intArray = new int[str.Length];
-        for (int i = 0; i < str.Length; i++)
-        {
-            intArray[i] = int.Parse(str[i].ToString());
-        }
-        return intArray;
-    }
+  
 
 
     public void HitStart()//int hitKind, string activeWeaponDetect
@@ -241,27 +234,6 @@ public class AnimatorFunction : MonoBehaviour
         currentHitIndex++;
     }
 
-    private void SetStrengthAndDetector()
-    {
-        if (CurrentAnimConfig.HitStrength.Length > currentHitIndex)
-            hitKind = CurrentAnimConfig.HitStrength[currentHitIndex];
-        if (CurrentAnimConfig.HitDetect.Length > currentHitIndex)
-            activeWeaponDetect = CurrentAnimConfig.HitDetect[currentHitIndex];
-
-        mainCharacter.HitStrength = hitKind;
-    }
-
-    /// <summary>
-    ///根据动画时间传递的参数来确认当前应该激活的检测区域
-    /// </summary>
-    /// <param name="activeWeaponDetect"></param>
-    /// <param name="manager"></param>
-    private void ActiveDetectionByStringPar(string activeWeaponDetect, WeaponManager manager)
-    {
-        int[] weaponIndexes = ConvertStringToIntArray(activeWeaponDetect);
-        manager.ActiveWeaponDetectors = weaponIndexes.Select(index => (WeaponDetector)index).ToArray();
-    }
-
     public void SpAttackStart(string spAttackName)
     {
         AttackStart(spAttackName);
@@ -293,100 +265,7 @@ public class AnimatorFunction : MonoBehaviour
         ResetAttackRootAndrotate();
     }
 
-    /// <summary>
-    /// 如果没有敌人就正常攻击，有的话会转向敌人，并且会根据自身距离敌人的距离决定是否开启rootmotion
-    /// </summary>
-    private void ResetAttackRootAndrotate()
-    {
-
-        if (mainCharacter.enemies.Count != 0)
-        {
-            //新语法
-            GameObject[] gamesEnemy = mainCharacter.enemies.Select(m => m.gameObject).ToArray();
-            SetActorForword(gamesEnemy);
-            //Debug.Log(Attack.CharacterActor.Forward);
-            if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
-            {
-
-                if (Attack.SpAttack == -1)
-                {
-                    characterActor.SetUpRootMotion(false, false);
-                }
-                characterActor.PlanarVelocity = Vector3.zero;
-            }
-        }
-        else
-        {
-            //没有单位就可以自由转向，但是只能在攻击开始的时候转向
-            characterActor.Forward = CharacterStateController.InputMovementReference;
-        }
-    }
-
-    /// <summary>
-    /// 设置人物正方向
-    /// </summary>
-    /// <param name="gamesEnemy"></param>
-    private void SetActorForword(GameObject[] gamesEnemy)
-    {
-    
-
-        mainCharacter.selectEnemy = HelpTools01.FindClosest(characterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
-        Vector3 Forward = (mainCharacter.selectEnemy.transform.position - characterActor.transform.position).normalized;
-        //当前面向目标，直接自动转
-        if (Vector3.Angle(characterActor.Forward, Forward) < Attack.maxAutoAnglerotate)
-        {
-            characterActor.Forward = new(Forward.x, 0, Forward.z);
-            characterActor.Up = Vector3.up;
-        }
-        else //当前没有面向攻击目标需要向输入目标的方向转
-        {
-            Vector3 target = CharacterStateController.InputMovementReference;
-            if (target!=Vector3.zero) 
-            {
-                target.z = 0;
-                target.Normalize();
-                //计算需要转动的角度
-                float angle = Vector3.Angle(target, characterActor.Forward)>Attack.maxAttackAngleNoenemy ? Attack.maxAttackAngleNoenemy : Vector3.Angle(target, characterActor.Forward);
-                characterActor.Forward = RotateVectorAroundAxis(characterActor.Forward,target,angle);
-                characterActor.Forward = Vector3.ProjectOnPlane(characterActor.Forward, Vector3.up);
-                characterActor.Up = Vector3.up;
-            }
-        }
-
-        Vector3 RotateVectorAroundAxis(Vector3 vector, Vector3 axis, float angle)
-        {
-            // 将向量和轴转换成四元数
-            Quaternion rotation = Quaternion.AngleAxis(angle, axis);
-
-            // 将向量绕轴旋转
-            Vector3 rotatedVector = rotation * vector;
-
-            return rotatedVector;
-        }
-    }
-
-    /// <summary>
-    /// 重新根据动画名称更新配置信息
-    /// </summary>
-    /// <param name="attackName"></param>
-    private void ResetCurrentInfo(string attackName)
-    {
-        //如果名字一致不做任何事情
-        if (currentStateName == attackName)
-        {
-            currentStateName = attackName;
-            GetAnimationPar(currentStateName);//根据当前的动画传入的state去拿动画参数
-            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // 播放对应名称的Playable
-        }
-        else
-        {
-            currentStateName = attackName;
-            GetAnimationPar(currentStateName);//根据当前的动画传入的state去拿动画参数
-            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // 播放对应名称的Playable
-        }
-        currentHitIndex = 0;
-    }
-
+  
     public void PlayTimeline(string TimelineName)
     {
         timelineManager.PlayTimelineByName(TimelineName);
@@ -397,6 +276,16 @@ public class AnimatorFunction : MonoBehaviour
         characterActor.Animator.SetInteger("specialAttack", 0);
         Attack.canInput = true;
         Attack.SpAttack = -1;
+    }
+
+    public void LetSelectEnemyCloser(int requireSkillNum)
+    {
+        SkillReceiver skillReceiver = characterActor.CharacterInfo.GetSkillReceiver(requireSkillNum);
+        if(characterActor.CharacterInfo.selectEnemy != null)
+        {
+            CharacterActor enemyActor = characterActor.CharacterInfo.selectEnemy.characterActor;
+            DOTween.To(enemyActor.Position, () => { },)
+        }
     }
 
     public void Drop()
@@ -452,10 +341,138 @@ public class AnimatorFunction : MonoBehaviour
 
 
 
-
-
     //_______________________________________________非动画事件分割线_______________________________________________
+    //_______________________________________________非动画事件分割线_______________________________________________
+    //_______________________________________________非动画事件分割线_______________________________________________
+
+
     private float originalSpeed;
+
+
+    private void SetStrengthAndDetector()
+    {
+        if (CurrentAnimConfig.HitStrength.Length > currentHitIndex)
+            hitKind = CurrentAnimConfig.HitStrength[currentHitIndex];
+        if (CurrentAnimConfig.HitDetect.Length > currentHitIndex)
+            activeWeaponDetect = CurrentAnimConfig.HitDetect[currentHitIndex];
+
+        mainCharacter.HitStrength = hitKind;
+    }
+
+    /// <summary>
+    ///根据动画时间传递的参数来确认当前应该激活的检测区域
+    /// </summary>
+    /// <param name="activeWeaponDetect"></param>
+    /// <param name="manager"></param>
+    private void ActiveDetectionByStringPar(string activeWeaponDetect, WeaponManager manager)
+    {
+        int[] weaponIndexes = ConvertStringToIntArray(activeWeaponDetect);
+        manager.ActiveWeaponDetectors = weaponIndexes.Select(index => (WeaponDetector)index).ToArray();
+    }
+
+    private int[] ConvertStringToIntArray(string str)
+    {
+        int[] intArray = new int[str.Length];
+        for (int i = 0; i < str.Length; i++)
+        {
+            intArray[i] = int.Parse(str[i].ToString());
+        }
+        return intArray;
+    }
+    /// <summary>
+    /// 如果没有敌人就正常攻击，有的话会转向敌人，并且会根据自身距离敌人的距离决定是否开启rootmotion
+    /// </summary>
+    private void ResetAttackRootAndrotate()
+    {
+
+        if (mainCharacter.enemies.Count != 0)
+        {
+            //新语法
+            GameObject[] gamesEnemy = mainCharacter.enemies.Select(m => m.gameObject).ToArray();
+            SetActorForword(gamesEnemy);
+            //Debug.Log(Attack.CharacterActor.Forward);
+            if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
+            {
+
+                if (Attack.SpAttack == -1)
+                {
+                    characterActor.SetUpRootMotion(false, false);
+                }
+                characterActor.PlanarVelocity = Vector3.zero;
+            }
+        }
+        else
+        {
+            //没有单位就可以自由转向，但是只能在攻击开始的时候转向
+            characterActor.Forward = CharacterStateController.InputMovementReference;
+        }
+    }
+
+    /// <summary>
+    /// 设置人物正方向
+    /// </summary>
+    /// <param name="gamesEnemy"></param>
+    private void SetActorForword(GameObject[] gamesEnemy)
+    {
+
+
+        mainCharacter.selectEnemy = HelpTools01.FindClosest(characterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
+        Vector3 Forward = (mainCharacter.selectEnemy.transform.position - characterActor.transform.position).normalized;
+        //当前面向目标，直接自动转
+        if (Vector3.Angle(characterActor.Forward, Forward) < Attack.maxAutoAnglerotate)
+        {
+            characterActor.Forward = new(Forward.x, 0, Forward.z);
+            characterActor.Up = Vector3.up;
+        }
+        else //当前没有面向攻击目标需要向输入目标的方向转
+        {
+            Vector3 target = CharacterStateController.InputMovementReference;
+            if (target != Vector3.zero)
+            {
+                target.z = 0;
+                target.Normalize();
+                //计算需要转动的角度
+                float angle = Vector3.Angle(target, characterActor.Forward) > Attack.maxAttackAngleNoenemy ? Attack.maxAttackAngleNoenemy : Vector3.Angle(target, characterActor.Forward);
+                characterActor.Forward = RotateVectorAroundAxis(characterActor.Forward, target, angle);
+                characterActor.Forward = Vector3.ProjectOnPlane(characterActor.Forward, Vector3.up);
+                characterActor.Up = Vector3.up;
+            }
+        }
+
+        Vector3 RotateVectorAroundAxis(Vector3 vector, Vector3 axis, float angle)
+        {
+            // 将向量和轴转换成四元数
+            Quaternion rotation = Quaternion.AngleAxis(angle, axis);
+
+            // 将向量绕轴旋转
+            Vector3 rotatedVector = rotation * vector;
+
+            return rotatedVector;
+        }
+    }
+
+    /// <summary>
+    /// 重新根据动画名称更新配置信息
+    /// </summary>
+    /// <param name="attackName"></param>
+    private void ResetCurrentInfo(string attackName)
+    {
+        //如果名字一致不做任何事情
+        if (currentStateName == attackName)
+        {
+            currentStateName = attackName;
+            GetAnimationPar(currentStateName);//根据当前的动画传入的state去拿动画参数
+            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // 播放对应名称的Playable
+        }
+        else
+        {
+            currentStateName = attackName;
+            GetAnimationPar(currentStateName);//根据当前的动画传入的state去拿动画参数
+            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // 播放对应名称的Playable
+        }
+        currentHitIndex = 0;
+    }
+
 
     private void GetAnimationPar(string currentStateName)
     {

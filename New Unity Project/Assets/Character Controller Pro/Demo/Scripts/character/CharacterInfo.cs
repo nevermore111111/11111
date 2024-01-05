@@ -1,6 +1,7 @@
 using Lightbug.CharacterControllerPro.Core;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -27,6 +28,8 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
 
     [HideInInspector]
     public List<AttackReceive> allReceives;
+    [HideInInspector]
+    public List<SkillReceiver> allSkillReceivers;
     /// <summary>
     /// 伤害，目标位置，武器方向，击中类型
     /// </summary>
@@ -37,12 +40,15 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     /// <param name="hit"></param>
     abstract public void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground);
 
-    virtual public void GetDamage(float damage, Vector3 attackDirection, float hitStrength,string targetAnim = null)
+    virtual public void GetDamage(float damage, Vector3 attackDirection, float hitStrength, string targetAnim = null)
     {
 
     }
 
-
+    public SkillReceiver GetSkillReceiver(int requireSkillPointNum)
+    {
+        return allSkillReceivers.FirstOrDefault(_ => _.skillPoint == requireSkillPointNum);
+    }
 
 
     protected virtual void Awake()

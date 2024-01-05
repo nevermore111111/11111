@@ -12,9 +12,9 @@ using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
 /// <summary>
 /// 
 /// <summary>
-public class AttackOnGround :Attack
+public class AttackOnGround : Attack
 {
-    public  float gravity = 10;
+    public float gravity = 10;
     protected override void Awake()
     {
         base.Awake();
@@ -22,12 +22,12 @@ public class AttackOnGround :Attack
     protected override void Start()
     {
         base.Start();
-        
+
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         base.EnterBehaviour(dt, fromState);
-        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity,true,RootMotionRotationType.AddRotation);
+        CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.AddRotation);
         StartCoroutine(CheckAnim());
         ChangeWeaponState(false);
     }
@@ -41,7 +41,7 @@ public class AttackOnGround :Attack
         if (CharacterStateController.CurrentState is AttackOnGround && (!isPlayAttack))
         {
             Debug.Log("×Ô¶¯ÇÐ»»ÁË");
-            if(canExecute())
+            if (canExecute())
             {
                 executeStart();
             }
@@ -67,7 +67,7 @@ public class AttackOnGround :Attack
     }
     public override void UpdateIK(int layerIndex)
     {
-        if(CharacterActor.CharacterInfo.selectEnemy != null)
+        if (CharacterActor.CharacterInfo.selectEnemy != null)
         {
 
         }
@@ -83,8 +83,18 @@ public class AttackOnGround :Attack
     protected override void executeStart()
     {
         base.executeStart();
-        CharacterActor.CharacterInfo.selectEnemy.GetDamage(0f, Vector3.one, 0f, "GhostSamurai_Ambushed01_Root");
-        CharacterActor.Animator.CrossFadeInFixedTime("Execeute01_back", 0.1f,0);
+        switch (GetExecuteKind())
+        {
+            case 0:
+                CharacterActor.CharacterInfo.selectEnemy.GetDamage(0f, Vector3.one, 0f, "GhostSamurai_Ambushed01_Root");
+                CharacterActor.Animator.CrossFadeInFixedTime("Execeute01_back", 0.1f, 0);
+                break;
+            case 1:
+                break;
+            default:
+                break;
+        }
+       
     }
 
     public override void CheckExitTransition()
@@ -94,20 +104,20 @@ public class AttackOnGround :Attack
         {
             return;
         }
-        if(CharacterActor.IsGrounded)
+        if (CharacterActor.IsGrounded)
         {
             if (CharacterActions.movement.value != Vector2.zero && canChangeState == true && SpAttack == -1)
             {
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }
-            else if(currentAttackMode == AttackMode.AttackOnGround_fist)
+            else if (currentAttackMode == AttackMode.AttackOnGround_fist)
             {
                 CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
             }
         }
-        else if(!CharacterActor.IsGrounded&&!isAttack)//¿ÕÖÐ·Ç¹¥»÷²Å»áÇÐ»»
+        else if (!CharacterActor.IsGrounded && !isAttack)//¿ÕÖÐ·Ç¹¥»÷²Å»áÇÐ»»
         {
-            if(canAttackInair&&isNextAttack)
+            if (canAttackInair && isNextAttack)
             {
                 CharacterStateController.EnqueueTransition<AttackOffGround>();
             }
@@ -125,4 +135,12 @@ public class AttackOnGround :Attack
     }
 
 
+
+    //¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¶îÍâ·½·¨·Ö¸îÏß¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
+    //¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¶îÍâ·½·¨·Ö¸îÏß¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
+    //¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¶îÍâ·½·¨·Ö¸îÏß¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
+    private int GetExecuteKind()
+    {
+        return 0;
+    }
 }
