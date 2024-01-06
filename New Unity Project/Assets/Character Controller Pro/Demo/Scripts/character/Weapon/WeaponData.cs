@@ -16,39 +16,6 @@ public class WeaponData : MonoBehaviour
     public int ChangeCurrentHitNum = -1;
 
 
-    //[Header("这个脚本会运行时保存")]
-    //[SerializeField]
-    //[Range(0f, 1f)] // 使用Range属性来定义可编辑范围
-    //public float impulseValue0 = 1.0f; // 初始值
-    //[SerializeField]
-    //[Range(0f, 1f)] // 使用Range属性来定义可编辑范围
-    //public float impulseValue1 = 1.0f; // 初始值
-    //[SerializeField]
-    //[Range(0f, 1f)] // 使用Range属性来定义可编辑范围
-    //public float impulseValue2 = 1.0f; // 初始值
-    //[SerializeField]
-    //[Range(0f, 1f)] // 使用Range属性来定义可编辑范围
-    //public float impulseValue3 = 1.0f; // 初始值
-    //[SerializeField]
-    //[Range(0f, 1f)] // 使用Range属性来定义可编辑范围
-    //public float impulseValue4 = 1.0f; // 初始值
-
-    //[SerializeField]
-    //[Range(0f, 1f)]
-    //public float durationValue0 = 1.0f; // 初始值
-    //[SerializeField]
-    //[Range(0f, 1f)]
-    //public float durationValue1 = 1.0f; // 初始值
-    //[SerializeField]
-    //[Range(0f, 1f)]
-    //public float durationValue2 = 1.0f; // 初始值
-    //[SerializeField]
-    //[Range(0f, 1f)]
-    //public float durationValue3 = 1.0f; // 初始值
-    //[SerializeField]
-    //[Range(0f, 1f)]
-    //public float durationValue4 = 1.0f; // 初始值
-
     [Header("特殊攻击配置")]
     [SerializeField]
     [Range(0f, 1f)]
@@ -73,3 +40,5 @@ public class WeaponNum
 
     // 可以添加构造函数和其他方法，根据需要进行扩展
 }
+
+

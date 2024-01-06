@@ -284,7 +284,7 @@ public class AnimatorFunction : MonoBehaviour
         if(characterActor.CharacterInfo.selectEnemy != null)
         {
             CharacterActor enemyActor = characterActor.CharacterInfo.selectEnemy.characterActor;
-            DOTween.To(enemyActor.Position, () => { },skillReceiver.transform.position,)
+            DOTween.To(() =>  enemyActor.Position , (Value) => { enemyActor.Position = Value; }, skillReceiver.transform.position, 0.1f);
         }
     }
 
