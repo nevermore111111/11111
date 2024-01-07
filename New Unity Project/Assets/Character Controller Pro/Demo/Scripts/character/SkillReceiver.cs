@@ -10,7 +10,7 @@ public class SkillReceiver : MonoBehaviour
     private CharacterInfo characterInfo;
     private void Awake()
     {
-        characterInfo = GetComponent<CharacterInfo>();
+        characterInfo = GetComponentInParent<CharacterInfo>();
         characterInfo.allSkillReceivers.Add(this);
     }
 }

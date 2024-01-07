@@ -197,17 +197,17 @@ namespace Lightbug.CharacterControllerPro.Demo
                             //CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
                         }
                     }
-                    else if ( canAttackInair)
+                    else if (canAttackInair)
                     {
                         SpAttack = 11;
                         CharacterStateController.EnqueueTransition<AttackOffGround>();
                     }
 
                 }
-                else if(CharacterActions.test.value)
+                else if (CharacterActions.test.value)
                 {
                     CharacterStateController.EnqueueTransition<Grap>();
-                }    
+                }
                 else if (CharacterActions.jetPack.value)
                 {
                     CharacterStateController.EnqueueTransition<JetPack>();
@@ -436,9 +436,9 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         private float startTime; // 移动开始时间
 
-        void MoveTime()
+        float MoveTime()
         {
-            if (CharacterActions.movement.value.sqrMagnitude != 0) // 检测移动
+            if (CharacterActions.movement.value.sqrMagnitude != 0 && CharacterActor.Velocity.magnitude > 0.5f) // 检测移动
             {
                 if (startTime == 0f)
                 {
@@ -451,12 +451,14 @@ namespace Lightbug.CharacterControllerPro.Demo
                     moving = true;
 
                 }
+                return Time.time - startTime;
             }
             else if (!CharacterActor.IsStable)
             {
                 moving = false;
                 startTime = 0f; // 如果停止移动，则将开始时间重置为0
             }
+            return 0f;
         }
         private bool movementInputIdle;
         private float movementInputIdleTime;
@@ -501,10 +503,10 @@ namespace Lightbug.CharacterControllerPro.Demo
                 this.planarMovementParameters.stableGroundedDeceleration = 10f;
                 planarMovementParameters.stableGroundedDeceleration = _stableGroundedDeceleration;
                 // 如果上一帧速度大小大于10，则播放停止动画
-                if (lastVelocityMagnitude > 0.7f * planarMovementParameters.boostSpeedLimit)
+                if (lastVelocityMagnitude > 0.7f * planarMovementParameters.boostSpeedLimit )
                 {
                     CharacterActor.Animator.SetFloat("running", 1);
-                    this.planarMovementParameters.stableGroundedDeceleration = planarMovementParameters.stableGroundedDeceleration_Dash;
+                    planarMovementParameters.stableGroundedDeceleration = planarMovementParameters.stableGroundedDeceleration_Dash;
                     CharacterActor.Animator.SetBool(stopParameter, true);
                 }
                 else if (lastVelocityMagnitude > 0.5f * planarMovementParameters.boostSpeedLimit)
@@ -786,9 +788,9 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public override void EnterBehaviour(float dt, CharacterState fromState)
         {
-         
-            
-            if(CharacterActor.isPlayer)
+
+
+            if (CharacterActor.isPlayer)
             {
                 StartCoroutine(CheckAnim());
                 SpAttack = -1;
@@ -816,11 +818,11 @@ namespace Lightbug.CharacterControllerPro.Demo
             yield return null;
             //yield return null;
             bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("NormalMovement");
-            if (CharacterStateController.CurrentState is NormalMovement&& (!isPlayMove))
+            if (CharacterStateController.CurrentState is NormalMovement && (!isPlayMove))
             {
                 if (CharacterActor.IsGrounded)
                 {
-                    CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.StableGrounded",0.2f);
+                    CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.StableGrounded", 0.2f);
                 }
                 else
                 {
@@ -1037,7 +1039,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             base.PreCharacterSimulation(dt);
             // Pre/PostCharacterSimulation methods are useful to update all the Animator parameters. 
             // Why? Because the CharacterActor component will end up modifying the velocity of the actor.
-           
+
         }
 
         public override void PostCharacterSimulation(float dt)
@@ -1125,8 +1127,8 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         private void Update()
         {
-            if(CharacterActor.isPlayer)
-            CanEvade();
+            if (CharacterActor.isPlayer)
+                CanEvade();
         }
 
         public bool CanEvade()

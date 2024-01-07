@@ -6,6 +6,7 @@ using Lightbug.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Authentication.ExtendedProtection;
 
 using UnityEngine;
@@ -17,7 +18,7 @@ using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
 public class AttackOnGround : Attack
 {
     public float gravity = 10;
-   
+
     protected override void Awake()
     {
         base.Awake();
@@ -72,7 +73,11 @@ public class AttackOnGround : Attack
     {
         if (CharacterActor.CharacterInfo.selectEnemy != null)
         {
-
+            foreach (var iKParChild in IKPar)
+            {
+                if (iKParChild.targetTransform && (iKParChild.ikRotateWeight != 0 || iKParChild.ikPosWeight != 0))
+                    SetIKbyIKPar(iKParChild);
+            }
         }
     }
 
@@ -82,7 +87,7 @@ public class AttackOnGround : Attack
     {
         base.UpdateBehaviour(dt);
     }
-   
+
 
     public override void CheckExitTransition()
     {
@@ -138,6 +143,7 @@ public class AttackOnGround : Attack
             case 0:
                 CharacterActor.CharacterInfo.selectEnemy.GetDamage(0f, Vector3.one, 0f, "GhostSamurai_Ambushed01_Root");
                 CharacterActor.Animator.CrossFadeInFixedTime("Execeute01_back", 0.1f, 0);
+                LetSelectEnemyCloser(0, 0.1f);
                 break;
             case 1:
                 break;
@@ -146,18 +152,24 @@ public class AttackOnGround : Attack
         }
 
     }
-    public void LetSelectEnemyCloser(int requireSkillNum,float TimeDuration)
+    //关闭所有的碰撞盒，并且把他拉过来，并且开启ik
+    public void LetSelectEnemyCloser(int requireSkillNum, float TimeDuration)
     {
         SkillReceiver skillReceiver = CharacterActor.CharacterInfo.GetSkillReceiver(requireSkillNum);
         if (CharacterActor.CharacterInfo.selectEnemy != null)
         {
             CharacterActor enemyActor = CharacterActor.CharacterInfo.selectEnemy.characterActor;
+            Debug.Log(CharacterActor.CharacterInfo.selectEnemy.allSkillReceivers.FirstOrDefault(_ => _.skillPoint == 1001));
+            IKPar[0].targetTransform = CharacterActor.CharacterInfo.selectEnemy.allSkillReceivers.FirstOrDefault(_ => _.skillPoint == 1001)?.transform;
+            foreach (var receiver in CharacterActor.CharacterInfo.allReceives)
+            {
+                receiver.enabled = false;
+            }
             DOTween.To(() => enemyActor.Position, (Value) => { enemyActor.Position = Value; }, skillReceiver.transform.position, TimeDuration);
-            
         }
     }
-    
-    
+
+
     private int GetExecuteKind()
     {
         return 0;

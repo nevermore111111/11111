@@ -45,14 +45,8 @@ public class Attack : CharacterState
     //13 空中sp  拳
     public static bool isNextAttack = false;
 
-    public TimeLinePar timeLinePar;
-    [System.Serializable]
-    public class TimeLinePar
-    {
-        //这个类会在timeline中变化值，来满足一些动画的需要，比如ik权重，或者是技能挂点位置等，暂时没有想好
-        public float ikweight01;
-    }
-
+    public List<IKPar> IKPar;
+   
     public enum AttackMode
     {
         AttackOnGround,
