@@ -87,7 +87,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
         protected string evadeParameter = "evade";
 
-        protected string spAttackParameter = "spAttack"; 
+        protected string spAttackParameter = "spAttack";
 
         public string stopParameter = "stop";
 
@@ -98,13 +98,14 @@ namespace Lightbug.CharacterControllerPro.Implementation
         public static float HightCanAttackInAir = 0.8f;
 
         public int SpAttack
-        { get
+        {
+            get
             {
                 return spAttack;
             }
             set
             {
-                if(CharacterActor.isPlayer)
+                if (CharacterActor.isPlayer)
                 {
                     spAttack = value;
                     CharacterActor.Animator.SetInteger(spAttackParameter, value);
@@ -127,7 +128,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// <summary>
         /// 是否能进行空中攻击，如果可以，才会进行
         /// </summary>
-        public bool canAttackInair => (!CharacterActor.IsGrounded)&&(CharacterActor.PredictedGroundDistance > HightCanAttackInAir);
+        public bool canAttackInair => (!CharacterActor.IsGrounded) && (CharacterActor.PredictedGroundDistance > HightCanAttackInAir);
 
         protected virtual void Start()
         {
@@ -143,8 +144,8 @@ namespace Lightbug.CharacterControllerPro.Implementation
         {
             string className = this.GetType().Name;
             //当进入对应模式的时候，去切换对应的timeline数组
-            if(timelineManager != null)
-            timelineManager.SwapTimelinesByAssetName(className);
+            if (timelineManager != null)
+                timelineManager.SwapTimelinesByAssetName(className);
         }
 
         /// <summary>
@@ -159,7 +160,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// </summary>
         public virtual void UpdateBehaviour(float dt)
         {
-           
+
         }
 
         /// <summary>
@@ -169,7 +170,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         {
         }
 
-        
+
 
         /// <summary>
         /// This methods runs just before the character physics simulation.
@@ -184,8 +185,8 @@ namespace Lightbug.CharacterControllerPro.Implementation
             CharacterStateController.Animator.SetFloat(horizontalAxisParameter, CharacterActions.movement.value.x);
             CharacterStateController.Animator.SetFloat(verticalAxisParameter, CharacterActions.movement.value.y);
             CharacterStateController.Animator.SetFloat(heightParameter, CharacterActor.BodySize.y);
-            if(CharacterActor.isPlayer)
-            CharacterStateController.Animator.SetFloat(GroundDistance, CharacterActor.PredictedGroundDistance);
+            if (CharacterActor.isPlayer)
+                CharacterStateController.Animator.SetFloat(GroundDistance, CharacterActor.PredictedGroundDistance);
         }
 
         /// <summary>
@@ -208,7 +209,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// </summary>
         public virtual void CheckExitTransition()
         {
-           
+
         }
 
         /// <summary>
@@ -226,7 +227,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         {
         }
 
-        public void SetIKPos(AvatarIKGoal targetAvatarIK,Transform targetTransform,float targetWeight)
+        public void SetIKPos(AvatarIKGoal targetAvatarIK, Transform targetTransform, float targetWeight)
         {
             CharacterActor.Animator.SetIKPosition(targetAvatarIK, targetTransform.position);
             CharacterActor.Animator.SetIKPositionWeight(targetAvatarIK, targetWeight);
@@ -236,10 +237,28 @@ namespace Lightbug.CharacterControllerPro.Implementation
             CharacterActor.Animator.SetIKRotation(targetAvatarIK, transform.rotation);
             CharacterActor.Animator.SetIKRotationWeight(targetAvatarIK, targetWeight);
         }
-        public void SetIKbyTransform(AvatarIKGoal targetAvatarIK,Transform targetTransform,float tarPosWeight,float tarRotateWeight)
+        public void SetIKbyTransform(AvatarIKGoal targetAvatarIK, Transform targetTransform, float tarPosWeight, float tarRotateWeight)
         {
             SetIKPos(targetAvatarIK, targetTransform, tarPosWeight);
-            SetIKRotate(targetAvatarIK,targetTransform, tarRotateWeight);
+            SetIKRotate(targetAvatarIK, targetTransform, tarRotateWeight);
+        }
+        public void SetIKbyIKPar(IKPar iKPar)
+        {
+            switch (iKPar.targetIKPos)
+            {
+                case AvatarIKGoal.LeftHand:
+                    SetIKbyTransform(AvatarIKGoal.LeftHand, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
+                    break;
+                case AvatarIKGoal.RightHand:
+                    SetIKbyTransform(AvatarIKGoal.RightHand, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
+                    break;
+                case AvatarIKGoal.LeftFoot:
+                    SetIKbyTransform(AvatarIKGoal.LeftFoot, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
+                    break;
+                case AvatarIKGoal.RightFoot:
+                    SetIKbyTransform(AvatarIKGoal.RightFoot, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
+                    break;
+            }
         }
 
         public virtual string GetInfo()
@@ -266,5 +285,20 @@ namespace Lightbug.CharacterControllerPro.Implementation
         //    CharacterActor.SetUpRootMotion(startRootMovtion, false);
         //}
     }
+    [System.Serializable]
+    public class IKPar
+    {
+        public AvatarIKGoal targetIKPos;
+        //这个类会在timeline中变化值，来满足一些动画的需要，比如ik权重，或者是技能挂点位置等，暂时没有想好
+        public float ikPosWeight;
+        public float ikRotateWeight;
+        public Transform targetTransform;
 
+        public void Initialize()
+        {
+            ikPosWeight = 0f;
+            ikRotateWeight = 0f;
+            targetTransform = null;
+        }
+    }
 }
