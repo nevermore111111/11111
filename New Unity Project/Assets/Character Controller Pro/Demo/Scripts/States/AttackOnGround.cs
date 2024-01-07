@@ -76,7 +76,10 @@ public class AttackOnGround : Attack
             foreach (var iKParChild in IKPar)
             {
                 if (iKParChild.targetTransform && (iKParChild.ikRotateWeight != 0 || iKParChild.ikPosWeight != 0))
+                {
                     SetIKbyIKPar(iKParChild);
+                    Debug.Log("Ik");
+                }
             }
         }
     }
@@ -158,17 +161,47 @@ public class AttackOnGround : Attack
         SkillReceiver skillReceiver = CharacterActor.CharacterInfo.GetSkillReceiver(requireSkillNum);
         if (CharacterActor.CharacterInfo.selectEnemy != null)
         {
+            CharacterActor.UseRootMotion = true;
+
+            //最小化敌人刚体，关闭敌人碰撞，开启ik
             CharacterActor enemyActor = CharacterActor.CharacterInfo.selectEnemy.characterActor;
-            Debug.Log(CharacterActor.CharacterInfo.selectEnemy.allSkillReceivers.FirstOrDefault(_ => _.skillPoint == 1001));
+            CharacterActor.CheckAndSetSize(new Vector2(0.5f, 1.58f));
+
             IKPar[0].targetTransform = CharacterActor.CharacterInfo.selectEnemy.allSkillReceivers.FirstOrDefault(_ => _.skillPoint == 1001)?.transform;
-            foreach (var receiver in CharacterActor.CharacterInfo.allReceives)
+            StopRigidBody(enemyActor);
+            DOTween.To(() => enemyActor.Position, (Value) =>
             {
-                receiver.enabled = false;
+                enemyActor.Position = Value;
+                CharacterActor.Velocity = Vector3.zero;
+                enemyActor.Velocity = Vector3.zero;
+                //Debug.Log((enemyActor.Position - skillReceiver.transform.position).magnitude);
+            }, skillReceiver.transform.position, TimeDuration).OnComplete(() =>
+            {
+                TestFun0001(enemyActor);
             }
-            DOTween.To(() => enemyActor.Position, (Value) => { enemyActor.Position = Value; }, skillReceiver.transform.position, TimeDuration);
+            );
+            DOTween.To(() => enemyActor.Forward,(value) => { enemyActor.Forward = value; },skillReceiver.transform.forward, TimeDuration);
         }
     }
 
+    private void TestFun0001(CharacterActor enemyActor)
+    {
+        Debug.Log("测试方法");
+        CharacterActor.Animator.speed = 0.1f;
+        enemyActor.Animator.speed = 0.1f;
+    }
+
+    //最小化敌人刚体，关闭敌人碰撞
+    private static void StopRigidBody(CharacterActor enemyActor)
+    {
+        enemyActor.SetSize(new Vector2(0.01f, 1.7f), CharacterActor.SizeReferenceType.Bottom);
+
+
+        foreach (var receiver in enemyActor.CharacterInfo.allReceives)
+        {
+            receiver.gameObject.SetActive(false);
+        }
+    }
 
     private int GetExecuteKind()
     {
