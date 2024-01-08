@@ -128,7 +128,7 @@ public class AnimatorFunction : MonoBehaviour
             }
         }
     }
-  
+
 
 
     public void HitStart()//int hitKind, string activeWeaponDetect
@@ -265,7 +265,7 @@ public class AnimatorFunction : MonoBehaviour
         ResetAttackRootAndrotate();
     }
 
-  
+
     public void PlayTimeline(string TimelineName)
     {
         timelineManager.PlayTimelineByName(TimelineName);
@@ -281,10 +281,10 @@ public class AnimatorFunction : MonoBehaviour
     public void LetSelectEnemyCloser(int requireSkillNum)
     {
         SkillReceiver skillReceiver = characterActor.CharacterInfo.GetSkillReceiver(requireSkillNum);
-        if(characterActor.CharacterInfo.selectEnemy != null)
+        if (characterActor.CharacterInfo.selectEnemy != null)
         {
             CharacterActor enemyActor = characterActor.CharacterInfo.selectEnemy.characterActor;
-            DOTween.To(() =>  enemyActor.Position , (Value) => { enemyActor.Position = Value; }, skillReceiver.transform.position, 0.1f);
+            DOTween.To(() => enemyActor.Position, (Value) => { enemyActor.Position = Value; }, skillReceiver.transform.position, 0.1f);
         }
     }
 
@@ -398,7 +398,8 @@ public class AnimatorFunction : MonoBehaviour
                 {
                     characterActor.SetUpRootMotion(false, false);
                 }
-                characterActor.PlanarVelocity = Vector3.zero;
+                if (characterActor.RigidbodyComponent.IsKinematic == false)
+                    characterActor.PlanarVelocity = Vector3.zero;
             }
         }
         else

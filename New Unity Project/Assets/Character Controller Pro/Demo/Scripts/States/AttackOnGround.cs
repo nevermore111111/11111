@@ -144,8 +144,7 @@ public class AttackOnGround : Attack
         switch (GetExecuteKind())
         {
             case 0:
-                CharacterActor.CharacterInfo.selectEnemy.GetDamage(0f, Vector3.one, 0f, "GhostSamurai_Ambushed01_Root");
-                CharacterActor.Animator.CrossFadeInFixedTime("Execeute01_back", 0.1f, 0);
+                
                 LetSelectEnemyCloser(0, 0.1f);
                 break;
             case 1:
@@ -165,22 +164,31 @@ public class AttackOnGround : Attack
 
             //最小化敌人刚体，关闭敌人碰撞，开启ik
             CharacterActor enemyActor = CharacterActor.CharacterInfo.selectEnemy.characterActor;
-            CharacterActor.CheckAndSetSize(new Vector2(0.5f, 1.58f));
-
+            CharacterActor.CheckAndSetSize(new Vector2(0.2f, 1.58f));
+            CharacterActor.UseRootMotion = true;
+            CharacterActor.Velocity = Vector3.zero;
+            enemyActor.UseRootMotion = true;
             IKPar[0].targetTransform = CharacterActor.CharacterInfo.selectEnemy.allSkillReceivers.FirstOrDefault(_ => _.skillPoint == 1001)?.transform;
             StopRigidBody(enemyActor);
+            CharacterActor.CharacterInfo.selectEnemy.GetDamage(0f, Vector3.one, 0f, "GhostSamurai_Ambushed01_Root");
+            CharacterActor.Animator.CrossFadeInFixedTime("Execeute01_back", 0.1f, 0);
             DOTween.To(() => enemyActor.Position, (Value) =>
             {
                 enemyActor.Position = Value;
-                CharacterActor.Velocity = Vector3.zero;
                 enemyActor.Velocity = Vector3.zero;
+                CharacterActor.Velocity = Vector3.zero;
                 //Debug.Log((enemyActor.Position - skillReceiver.transform.position).magnitude);
             }, skillReceiver.transform.position, TimeDuration).OnComplete(() =>
             {
-                TestFun0001(enemyActor);
+                enemyActor.Position = skillReceiver.transform.position;
+                CharacterActor.Velocity = Vector3.zero;
             }
             );
-            DOTween.To(() => enemyActor.Forward,(value) => { enemyActor.Forward = value; },skillReceiver.transform.forward, TimeDuration);
+            DOTween.To(() => enemyActor.Forward,(value) => { enemyActor.Forward = value; },skillReceiver.transform.forward, TimeDuration).
+                OnComplete(() => 
+            {
+                enemyActor.Forward = skillReceiver.transform.forward;
+            });
         }
     }
 

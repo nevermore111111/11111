@@ -424,6 +424,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
         void OnAnimatorIK(int layerIndex)
         {
+            Debug.Log("测试ik");
             if (CurrentState == null)
                 return;
 
