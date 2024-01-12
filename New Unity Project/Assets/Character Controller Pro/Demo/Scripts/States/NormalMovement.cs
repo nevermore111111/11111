@@ -23,6 +23,8 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public CrouchParameters crouchParameters = new CrouchParameters();
 
+        public DefenseParameters defenseParameters = new DefenseParameters();
+
         public LookingDirectionParameters lookingDirectionParameters = new LookingDirectionParameters();
 
         //自己加
@@ -70,7 +72,9 @@ namespace Lightbug.CharacterControllerPro.Demo
         protected float targetHeight = 1f;
 
         protected bool wantToCrouch = false;
+        protected bool wantTodenfense = false;
         protected bool isCrouched = false;
+        protected bool isdenfense = false;
 
         public PlanarMovementParameters.PlanarMovementProperties currentMotion = new PlanarMovementParameters.PlanarMovementProperties();
         bool reducedAirControlFlag = false;
@@ -389,6 +393,15 @@ namespace Lightbug.CharacterControllerPro.Demo
                     {
                         currentPlanarSpeedLimit = wantToRun ? planarMovementParameters.boostSpeedLimit : planarMovementParameters.baseSpeedLimit;
                     }
+                    if (isdenfense)
+                    {
+                        currentPlanarSpeedLimit = planarMovementParameters.baseSpeedLimit * defenseParameters.speedMultiplier;
+                    }
+                    else
+                    {
+                        currentPlanarSpeedLimit = wantToRun ? planarMovementParameters.boostSpeedLimit : planarMovementParameters.baseSpeedLimit;
+                    }
+
 
                     targetPlanarVelocity = CustomUtilities.Multiply(CharacterStateController.InputMovementReference, speedMultiplier, currentPlanarSpeedLimit);
 
@@ -503,7 +516,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 this.planarMovementParameters.stableGroundedDeceleration = 10f;
                 planarMovementParameters.stableGroundedDeceleration = _stableGroundedDeceleration;
                 // 如果上一帧速度大小大于10，则播放停止动画
-                if (lastVelocityMagnitude > 0.7f * planarMovementParameters.boostSpeedLimit )
+                if (lastVelocityMagnitude > 0.7f * planarMovementParameters.boostSpeedLimit)
                 {
                     CharacterActor.Animator.SetFloat("running", 1);
                     planarMovementParameters.stableGroundedDeceleration = planarMovementParameters.stableGroundedDeceleration_Dash;
@@ -898,8 +911,14 @@ namespace Lightbug.CharacterControllerPro.Demo
                     break;
             }
 
+            float targetRoteteSpeed = lookingDirectionParameters.speed;
+            if (isdenfense)
+            {
+                targetRoteteSpeed *= defenseParameters.DefendLookDirecionLerpSpeed;
+            }
+
             Quaternion targetDeltaRotation = Quaternion.FromToRotation(CharacterActor.Forward, targetLookingDirection);
-            Quaternion currentDeltaRotation = Quaternion.Slerp(Quaternion.identity, targetDeltaRotation, lookingDirectionParameters.speed * dt);
+            Quaternion currentDeltaRotation = Quaternion.Slerp(Quaternion.identity, targetDeltaRotation, targetRoteteSpeed * dt);
 
             if (CharacterActor.CharacterBody.Is2D)
                 CharacterActor.SetYaw(targetLookingDirection);
@@ -935,104 +954,104 @@ namespace Lightbug.CharacterControllerPro.Demo
         public override void PostUpdateBehaviour(float dt)
         {
             base.PostUpdateBehaviour(dt);
-            if (IsPlayer)
-            {
-                LaterGrap();
-            }
+            //if (IsPlayer)
+            //{
+            //    LaterGrap();
+            //}
         }
 
-        [Header("References")]
-        public Transform cam;
-        public Transform gunTip;
-        public LayerMask whatIsGrapplable;
+        //[Header("References")]
+        //public Transform cam;
+        //public Transform gunTip;
+        //public LayerMask whatIsGrapplable;
 
-        [Header("Grapping")]
-        public float maxGrappleDistance;
-        public float grappleDelayTime;
-        public LineRenderer Lr;
+        //[Header("Grapping")]
+        //public float maxGrappleDistance;
+        //public float grappleDelayTime;
+        //public LineRenderer Lr;
 
-        private Vector3 grapplePoint;
+        //private Vector3 grapplePoint;
 
-        [Header("Cooldown")]
-        public float grapplingCd;
-        private float grappleTimer;
-        [Space(10)]
-        [Header("Input")]
-        public KeyCode grappleKey = KeyCode.Mouse1;
+        //[Header("Cooldown")]
+        //public float grapplingCd;
+        //private float grappleTimer;
+        //[Space(10)]
+        //[Header("Input")]
+        //public KeyCode grappleKey = KeyCode.Mouse1;
 
-        public bool grappling;
+        //public bool grappling;
 
-        private void Grap()
-        {
-            if (Input.GetKeyDown(grappleKey))
-            {
-                StartGrapple();
-            }
-            if (grappleTimer > 0)
-            {
-                grappleTimer -= Time.deltaTime;
-            }
-        }
+        //private void Grap()
+        //{
+        //    if (Input.GetKeyDown(grappleKey))
+        //    {
+        //        StartGrapple();
+        //    }
+        //    if (grappleTimer > 0)
+        //    {
+        //        grappleTimer -= Time.deltaTime;
+        //    }
+        //}
 
-        /// <summary>
-        /// 这个方法用来设置线性渲染器的位置；
-        /// </summary>
-        private void LaterGrap()
-        {
-            if (grappling)
-            {
-                Lr.SetPosition(0, gunTip.position);
-            }
-        }
+        ///// <summary>
+        ///// 这个方法用来设置线性渲染器的位置；
+        ///// </summary>
+        //private void LaterGrap()
+        //{
+        //    if (grappling)
+        //    {
+        //        Lr.SetPosition(0, gunTip.position);
+        //    }
+        //}
 
-        private void StartGrapple()
-        {
-            if (grappleTimer > 0) return;
-            grappling = true;
+        //private void StartGrapple()
+        //{
+        //    if (grappleTimer > 0) return;
+        //    grappling = true;
 
-            RaycastHit Hit;
-            if (Physics.Raycast(cam.position, cam.forward, out Hit, maxGrappleDistance, whatIsGrapplable))
-            {
-                grapplePoint = Hit.point;
-                Invoke(nameof(ExecuteGrapple), grappleDelayTime);
-            }
-            else
-            {
-                grapplePoint = cam.position + cam.forward * maxGrappleDistance;
+        //    RaycastHit Hit;
+        //    if (Physics.Raycast(cam.position, cam.forward, out Hit, maxGrappleDistance, whatIsGrapplable))
+        //    {
+        //        grapplePoint = Hit.point;
+        //        Invoke(nameof(ExecuteGrapple), grappleDelayTime);
+        //    }
+        //    else
+        //    {
+        //        grapplePoint = cam.position + cam.forward * maxGrappleDistance;
 
-                Invoke(nameof(StopGrapple), grappleDelayTime);
-            }
-            Lr.enabled = true;
-            Lr.SetPosition(1, grapplePoint);
-        }
-        private void ExecuteGrapple()
-        {
-            Vector3 vecs = CalVocality(CharacterActor.Position, grapplePoint, UnityEngine.Random.Range(0f, 2f), 19.8f);
-            CharacterActor.Velocity = vecs;
-            Debug.Log("弹射");
-        }
-        private void StopGrapple()
-        {
-            grappling = false;
-            grappleTimer = grapplingCd;
-            Lr.enabled = false;
-        }
+        //        Invoke(nameof(StopGrapple), grappleDelayTime);
+        //    }
+        //    Lr.enabled = true;
+        //    Lr.SetPosition(1, grapplePoint);
+        //}
+        //private void ExecuteGrapple()
+        //{
+        //    Vector3 vecs = CalVocality(CharacterActor.Position, grapplePoint, UnityEngine.Random.Range(0f, 2f), 19.8f);
+        //    CharacterActor.Velocity = vecs;
+        //    Debug.Log("弹射");
+        //}
+        //private void StopGrapple()
+        //{
+        //    grappling = false;
+        //    grappleTimer = grapplingCd;
+        //    Lr.enabled = false;
+        //}
 
 
-        private Vector3 CalVocality(Vector3 start, Vector3 target, float spHeigh, float grivaty)
-        {
-            grivaty = Physics.gravity.magnitude;
-            //自己填写重力
-            float delY = target.y - start.y;
-            float delX = target.x - start.x;
-            float delZ = target.z - start.z;
+        //private Vector3 CalVocality(Vector3 start, Vector3 target, float spHeigh, float grivaty)
+        //{
+        //    grivaty = Physics.gravity.magnitude;
+        //    //自己填写重力
+        //    float delY = target.y - start.y;
+        //    float delX = target.x - start.x;
+        //    float delZ = target.z - start.z;
 
-            float vy = MathF.Sqrt(2f * ((delY) + spHeigh) * grivaty);
-            float vXZ = Mathf.Sqrt(((Mathf.Pow(delX, 2) + Mathf.Pow(delZ, 2)) * grivaty / (2 * delY + 4 * spHeigh)));
-            Vector3 med = new(delX, 0, delZ);
-            Vector3 end = med.normalized * vXZ + new Vector3(0, vy, 0);
-            return end;
-        }
+        //    float vy = MathF.Sqrt(2f * ((delY) + spHeigh) * grivaty);
+        //    float vXZ = Mathf.Sqrt(((Mathf.Pow(delX, 2) + Mathf.Pow(delZ, 2)) * grivaty / (2 * delY + 4 * spHeigh)));
+        //    Vector3 med = new(delX, 0, delZ);
+        //    Vector3 end = med.normalized * vXZ + new Vector3(0, vy, 0);
+        //    return end;
+        //}
 
         public override void PreCharacterSimulation(float dt)
         {
@@ -1056,6 +1075,52 @@ namespace Lightbug.CharacterControllerPro.Demo
         }
 
         protected virtual void HandleSize(float dt)
+        {
+            HandleCrouch(dt);
+            HandleDefend();
+        }
+        //描述相对运动，人物当前速度转化成人物坐标系，并且归一化，x是向右，y是向上，z是向前
+        Vector3 XYZMove;
+        private void HandleDefend()
+        {
+            //只有在地面的时候可以
+
+            wantTodenfense = CharacterActions.defend.value;
+            if (wantTodenfense && CanDefense())
+            {
+                isdenfense = true;
+            }
+            else
+            {
+                isdenfense = false;
+            }
+            if (isdenfense)
+            {
+                //更新动画机
+                if (CharacterActor.isPlayer)
+                {
+                    //xMove
+
+                    XYZMove = CharacterActor.transform.InverseTransformDirection(CharacterActor.Velocity).normalized * (CharacterActor.Velocity.magnitude / currentPlanarSpeedLimit);
+                    Debug.Log($"速度比例{XYZMove},当前速度{CharacterActor.Velocity.magnitude},速度限制{currentPlanarSpeedLimit}");
+
+                    CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
+                    CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
+                }
+            }
+        }
+
+        private bool CanDefense()
+        {
+            //只有地面才可以
+            if (CharacterActor.IsGrounded)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void HandleCrouch(float dt)
         {
             // Get the crouch input state 
             if (crouchParameters.enableCrouch)
@@ -1120,6 +1185,10 @@ namespace Lightbug.CharacterControllerPro.Demo
             ProcessVerticalMovement(dt);
             ProcessPlanarMovement(dt);
         }
+
+        //————————————————————————————————————————————————————————————玩家逻辑——————————————————————————————————————————————————————————————————
+        //————————————————————————————————————————————————————————————玩家逻辑——————————————————————————————————————————————————————————————————
+        //————————————————————————————————————————————————————————————玩家逻辑——————————————————————————————————————————————————————————————————
 
         private float buttonDownTime;
         public bool preEvade;

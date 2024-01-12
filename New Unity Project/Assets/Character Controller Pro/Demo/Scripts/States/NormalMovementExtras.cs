@@ -224,6 +224,19 @@ namespace Lightbug.CharacterControllerPro.Demo
     }
 
     [System.Serializable]
+    public class DefenseParameters
+    {
+        [Tooltip("How much the Ddfense action affects the movement speed?.")]
+        public float speedMultiplier = 0.3f;
+        [Tooltip("进入状态时的停止时间")]
+        public float DefendStopTime;
+        [Tooltip("")]
+        public float DefendSpeedChangeTimePar;
+        [Tooltip("影响防御时的转向速度")]
+        public float DefendLookDirecionLerpSpeed = 6f;
+    }
+
+    [System.Serializable]
     public class LookingDirectionParameters
     {
         public bool changeLookingDirection = true;

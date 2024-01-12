@@ -91,6 +91,8 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
         public string stopParameter = "stop";
 
+        protected string xMovePar = "xMove";
+        protected string yMovePar = "yMove";
 
         private static int spAttack = -1;
 
