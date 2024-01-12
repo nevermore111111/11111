@@ -74,7 +74,19 @@ namespace Lightbug.CharacterControllerPro.Demo
         protected bool wantToCrouch = false;
         protected bool wantTodenfense = false;
         protected bool isCrouched = false;
-        protected bool isdenfense = false;
+        protected bool isdenfense
+        {
+            get
+            {
+                return isdenfense;
+            }
+            set
+            {
+                CharacterActor.Animator?.SetBool(defensePar, value);
+                isdenfense = value;
+            }
+        }
+
 
         public PlanarMovementParameters.PlanarMovementProperties currentMotion = new PlanarMovementParameters.PlanarMovementProperties();
         bool reducedAirControlFlag = false;
@@ -1089,6 +1101,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             if (wantTodenfense && CanDefense())
             {
                 isdenfense = true;
+
             }
             else
             {
