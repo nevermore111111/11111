@@ -976,8 +976,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102522144}
-  m_LocalRotation: {x: 0.021003392, y: -0.12047925, z: 0.0025496194, w: 0.99249035}
-  m_LocalPosition: {x: 0.019241333, y: 0.214347, z: -0.07813263}
+  m_LocalRotation: {x: -0.13818929, y: -0.11933409, z: -0.016775077, w: 0.9830472}
+  m_LocalPosition: {x: 0.00060272217, y: -2.6779692, z: -0.0024337769}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4656,6 +4656,32 @@ MonoBehaviour:
     DefendStopTime: 0
     DefendSpeedChangeTimePar: 0
     DefendLookDirecionLerpSpeed: 6
+    DefendGroundedAcceleration: 50
+    DefendGroundedDeceleration: 40
+    DefendAngleAccelerationBoost:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 180
+        value: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -5104,6 +5130,32 @@ MonoBehaviour:
     DefendStopTime: 0
     DefendSpeedChangeTimePar: 0
     DefendLookDirecionLerpSpeed: 6
+    DefendGroundedAcceleration: 50
+    DefendGroundedDeceleration: 40
+    DefendAngleAccelerationBoost:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 180
+        value: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -5882,7 +5934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 0.1034997, z: -4.004323}
+  m_FollowOffset: {x: 0, y: 0.1020308, z: -4.002512}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -6918,6 +6970,32 @@ MonoBehaviour:
     DefendStopTime: 0
     DefendSpeedChangeTimePar: 0
     DefendLookDirecionLerpSpeed: 6
+    DefendGroundedAcceleration: 50
+    DefendGroundedDeceleration: 40
+    DefendAngleAccelerationBoost:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 180
+        value: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -9663,7 +9741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 0.1034997, z: -4.004323}
+  m_FollowOffset: {x: 0, y: 0.1020308, z: -4.002512}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -10548,8 +10626,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: 0.07334216, y: -0.12017716, z: 0.008903087, w: 0.9899996}
-  m_LocalPosition: {x: 0.027412415, y: 0.746585, z: -0.11128235}
+  m_LocalRotation: {x: -0.13818926, y: -0.119334094, z: -0.016775073, w: 0.9830472}
+  m_LocalPosition: {x: 0.00060272217, y: -2.6779692, z: -0.0024337769}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10734,7 +10812,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605997566}
-  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
+  m_LocalRotation: {x: 0.023164071, y: -0.26986164, z: 0.0064939777, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11923,8 +12001,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811303954}
-  m_LocalRotation: {x: -0.13796358, y: -0.11933802, z: -0.01674769, w: 0.98307884}
-  m_LocalPosition: {x: -0.20539856, y: -1.1414694, z: 0.8335495}
+  m_LocalRotation: {x: -0.13818929, y: -0.11933409, z: -0.016775077, w: 0.9830472}
+  m_LocalPosition: {x: 0.00060272217, y: -2.6779692, z: -0.0024337769}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12922,8 +13000,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234847, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.0620472, z: -5.874625}
+  m_LocalRotation: {x: 0.039234754, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.062047, z: -5.8746176}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18756,7 +18834,33 @@ MonoBehaviour:
     speedMultiplier: 0.3
     DefendStopTime: 0
     DefendSpeedChangeTimePar: 0
-    DefendLookDirecionLerpSpeed: 0.6
+    DefendLookDirecionLerpSpeed: 0.08
+    DefendGroundedAcceleration: 10
+    DefendGroundedDeceleration: 5
+    DefendAngleAccelerationBoost:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 180
+        value: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -20219,6 +20323,32 @@ MonoBehaviour:
     DefendStopTime: 0
     DefendSpeedChangeTimePar: 0
     DefendLookDirecionLerpSpeed: 6
+    DefendGroundedAcceleration: 50
+    DefendGroundedDeceleration: 40
+    DefendAngleAccelerationBoost:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 180
+        value: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -21259,6 +21389,32 @@ MonoBehaviour:
     DefendStopTime: 0
     DefendSpeedChangeTimePar: 0
     DefendLookDirecionLerpSpeed: 6
+    DefendGroundedAcceleration: 50
+    DefendGroundedDeceleration: 40
+    DefendAngleAccelerationBoost:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 180
+        value: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -21722,8 +21878,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498168725}
-  m_LocalRotation: {x: -0.6795961, y: 0.0036385478, z: 0.0033708357, w: 0.73356974}
-  m_LocalPosition: {x: -121.699684, y: -6.8322344, z: 95.85165}
+  m_LocalRotation: {x: 0.0033817887, y: 0.7132422, z: 0.70090115, w: -0.0034413335}
+  m_LocalPosition: {x: -121.7032, y: -6.8216915, z: 95.49315}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23132,6 +23288,32 @@ MonoBehaviour:
     DefendStopTime: 0
     DefendSpeedChangeTimePar: 0
     DefendLookDirecionLerpSpeed: 6
+    DefendGroundedAcceleration: 50
+    DefendGroundedDeceleration: 40
+    DefendAngleAccelerationBoost:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 180
+        value: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -23248,7 +23430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 0.1034997, z: -4.004323}
+  m_FollowOffset: {x: 0, y: 0.1020308, z: -4.002512}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -25208,7 +25390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890388382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -120.53653, y: -1.8702365, z: 91.09843}
+  m_LocalPosition: {x: -120.742966, y: -0.33520555, z: 91.93617}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

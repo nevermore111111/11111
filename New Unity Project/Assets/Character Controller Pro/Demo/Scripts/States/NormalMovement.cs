@@ -2,11 +2,8 @@ using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
 using Rusk;
-using System;
-using UnityEngine;
-using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
-using Cinemachine;
 using System.Collections;
+using UnityEngine;
 
 namespace Lightbug.CharacterControllerPro.Demo
 {
@@ -74,16 +71,17 @@ namespace Lightbug.CharacterControllerPro.Demo
         protected bool wantToCrouch = false;
         protected bool wantTodenfense = false;
         protected bool isCrouched = false;
-        protected bool isdenfense
+        private bool isDefense;
+        protected bool IsDefense
         {
             get
             {
-                return isdenfense;
+                return isDefense;
             }
             set
             {
                 CharacterActor.Animator?.SetBool(defensePar, value);
-                isdenfense = value;
+                isDefense = value;
             }
         }
 
@@ -279,9 +277,20 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 case CharacterActorState.StableGrounded:
 
-                    currentMotion.acceleration = planarMovementParameters.stableGroundedAcceleration;
-                    currentMotion.deceleration = planarMovementParameters.stableGroundedDeceleration;
-                    currentMotion.angleAccelerationMultiplier = planarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
+                    if(isDefense)
+                    {
+                        currentMotion.acceleration = defenseParameters.DefendGroundedAcceleration;//  planarMovementParameters.stableGroundedAcceleration;
+                        currentMotion.deceleration = defenseParameters.DefendGroundedAcceleration;// planarMovementParameters.stableGroundedDeceleration;
+                        currentMotion.angleAccelerationMultiplier = defenseParameters.DefendAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);  
+                        //planarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
+                    }
+                    else
+                    {
+                        currentMotion.acceleration = planarMovementParameters.stableGroundedAcceleration;
+                        currentMotion.deceleration = planarMovementParameters.stableGroundedDeceleration;
+                        currentMotion.angleAccelerationMultiplier = planarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
+                    }
+                 
 
                     break;
 
@@ -405,7 +414,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                     {
                         currentPlanarSpeedLimit = wantToRun ? planarMovementParameters.boostSpeedLimit : planarMovementParameters.baseSpeedLimit;
                     }
-                    if (isdenfense)
+                    if (IsDefense)
                     {
                         currentPlanarSpeedLimit = planarMovementParameters.baseSpeedLimit * defenseParameters.speedMultiplier;
                     }
@@ -924,7 +933,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
 
             float targetRoteteSpeed = lookingDirectionParameters.speed;
-            if (isdenfense)
+            if (IsDefense)
             {
                 targetRoteteSpeed *= defenseParameters.DefendLookDirecionLerpSpeed;
             }
@@ -1100,14 +1109,15 @@ namespace Lightbug.CharacterControllerPro.Demo
             wantTodenfense = CharacterActions.defend.value;
             if (wantTodenfense && CanDefense())
             {
-                isdenfense = true;
+                Debug.Log("防御");
+                IsDefense = true;
 
             }
             else
             {
-                isdenfense = false;
+                IsDefense = false;
             }
-            if (isdenfense)
+            if (IsDefense)
             {
                 //更新动画机
                 if (CharacterActor.isPlayer)

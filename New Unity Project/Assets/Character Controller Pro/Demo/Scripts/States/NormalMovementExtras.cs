@@ -234,6 +234,11 @@ namespace Lightbug.CharacterControllerPro.Demo
         public float DefendSpeedChangeTimePar;
         [Tooltip("影响防御时的转向速度")]
         public float DefendLookDirecionLerpSpeed = 6f;
+        [Tooltip("影响防御时的加速度")]
+        public float DefendGroundedAcceleration = 50f;
+        [Tooltip("影响防御时的减速度")]
+        public float DefendGroundedDeceleration = 40f;
+        public AnimationCurve DefendAngleAccelerationBoost = AnimationCurve.EaseInOut(0f, 1f, 180f, 2f);
     }
 
     [System.Serializable]
