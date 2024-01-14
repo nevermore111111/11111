@@ -89,7 +89,6 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void Stop()
     {
-        Debug.LogError("???");
         characterActor.Animator.SetBool(Attack.stopParameter, false);
     }
 

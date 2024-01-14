@@ -29,7 +29,8 @@ namespace Lightbug.CharacterControllerPro.Demo
         private WeaponManager[] weaponManager;
 
 
-
+        //描述相对运动，人物当前速度转化成人物坐标系，并且归一化，x是向右，y是向上，z是向前
+        Vector3 XYZMove;
 
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -72,7 +73,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         protected bool wantTodenfense = false;
         protected bool isCrouched = false;
         private bool isDefense;
-        protected bool IsDefense
+        public bool IsDefense
         {
             get
             {
@@ -81,6 +82,17 @@ namespace Lightbug.CharacterControllerPro.Demo
             set
             {
                 CharacterActor.Animator?.SetBool(defensePar, value);
+                CharacterActor.SetUpRootMotion(true, false);
+                CharacterActor.UseRootMotion = value;
+
+                if (value && !isDefense) //刚刚进入
+                {
+                    CharacterActor.Animator.SetTrigger(startDefensePar);
+                }
+                else if(!value&&isDefense)//刚刚出来
+                {
+                    CharacterActor.Animator.SetTrigger(endDefensePar);
+                }
                 isDefense = value;
             }
         }
@@ -280,7 +292,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                     if(isDefense)
                     {
                         currentMotion.acceleration = defenseParameters.DefendGroundedAcceleration;//  planarMovementParameters.stableGroundedAcceleration;
-                        currentMotion.deceleration = defenseParameters.DefendGroundedAcceleration;// planarMovementParameters.stableGroundedDeceleration;
+                        currentMotion.deceleration = defenseParameters.DefendGroundedDeceleration;// planarMovementParameters.stableGroundedDeceleration;
                         currentMotion.angleAccelerationMultiplier = defenseParameters.DefendAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);  
                         //planarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
                     }
@@ -350,6 +362,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         }
 
+        float currentAnimSpeed = 2.2f;
         /// <summary>
         /// Processes the lateral movement of the character (stable and unstable state), that is, walk, run, crouch, etc. 
         /// This movement is tied directly to the "movement" character action.
@@ -464,6 +477,18 @@ namespace Lightbug.CharacterControllerPro.Demo
                 targetPlanarVelocity,
                 acceleration * dt
             );
+
+            if(CharacterActor.UpdateRootPosition == true && CharacterActor.UseRootMotion ==true)
+            {
+                //这个是归一化的xyz
+                //这个是归一化的想要移动的方向
+                Vector3 targetVector3 = CharacterStateController.InputMovementReference;
+                targetVector3 = CharacterActor.transform.InverseTransformDirection(targetVector3).normalized;
+                //2.2f是防御的动画移动速度--只有一个防御，先用常数
+                XYZMove = Vector3.MoveTowards(XYZMove, targetVector3 , acceleration * dt / currentAnimSpeed);
+                CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
+                CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
+            }
         }
 
         public bool moving = false; // 初始状态为未移动
@@ -1100,8 +1125,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             HandleCrouch(dt);
             HandleDefend();
         }
-        //描述相对运动，人物当前速度转化成人物坐标系，并且归一化，x是向右，y是向上，z是向前
-        Vector3 XYZMove;
+       
         private void HandleDefend()
         {
             //只有在地面的时候可以
@@ -1109,9 +1133,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             wantTodenfense = CharacterActions.defend.value;
             if (wantTodenfense && CanDefense())
             {
-                Debug.Log("防御");
                 IsDefense = true;
-
             }
             else
             {
@@ -1119,24 +1141,41 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
             if (IsDefense)
             {
-                //更新动画机
-                if (CharacterActor.isPlayer)
+                //if(CharacterActor.UpdateRootPosition == true)
+                //{
+                //    if(CharacterActor.isPlayer)
+                //    {
+                //        //动画移速2.1.最大移速是人物模型倍数*动画速度
+                //        //把当前的动画的移动速度转化成动画参数就可以
+                //        Vector3 speed = CharacterActor.transform.InverseTransformDirection(CharacterActor.Velocity).normalized;
+
+
+
+                //        CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
+                //        CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
+                //    }
+                //}
+                //else
                 {
-                    //xMove
+                    if (CharacterActor.isPlayer && CharacterActor.UpdateRootPosition ==false)
+                    {
+                        //xMove
 
-                    XYZMove = CharacterActor.transform.InverseTransformDirection(CharacterActor.Velocity).normalized * (CharacterActor.Velocity.magnitude / currentPlanarSpeedLimit);
-                    Debug.Log($"速度比例{XYZMove},当前速度{CharacterActor.Velocity.magnitude},速度限制{currentPlanarSpeedLimit}");
+                        XYZMove = CharacterActor.transform.InverseTransformDirection(CharacterActor.Velocity).normalized * (CharacterActor.Velocity.magnitude / currentPlanarSpeedLimit);
+                        //Debug.Log($"速度比例{XYZMove},当前速度{CharacterActor.Velocity.magnitude},速度限制{currentPlanarSpeedLimit}");
 
-                    CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
-                    CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
+                        CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
+                        CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
+                    }
                 }
+                //更新动画机
             }
         }
 
         private bool CanDefense()
         {
             //只有地面才可以
-            if (CharacterActor.IsGrounded)
+            if (CharacterActor.IsGrounded && !CharacterActions.jump.value)
             {
                 return true;
             }

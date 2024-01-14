@@ -275,5 +275,10 @@ public class Attack : CharacterState
         {
             CharacterStateController.EnqueueTransition<Evade>();
         }
+        if(CharacterActor.IsStable&&CharacterActions.defend.value&& !isAttack )
+        {
+            Time.timeScale = 0.1f;
+            CharacterStateController.EnqueueTransition<NormalMovement>();
+        }
     }
 }

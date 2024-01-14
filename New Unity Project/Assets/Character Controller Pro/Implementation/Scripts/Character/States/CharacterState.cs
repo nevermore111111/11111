@@ -96,6 +96,10 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
         protected string defensePar = "defense";
 
+        protected string startDefensePar = "startDefense";
+        protected string endDefensePar = "endDefense";
+
+
         private static int spAttack = -1;
 
         //可以进入空中攻击的最低限度
