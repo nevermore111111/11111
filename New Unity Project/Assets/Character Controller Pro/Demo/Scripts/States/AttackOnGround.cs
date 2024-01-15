@@ -31,6 +31,7 @@ public class AttackOnGround : Attack
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         base.EnterBehaviour(dt, fromState);
+        CharacterActor.Animator.SetTrigger(AttackOnGroundPar);
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.AddRotation);
         StartCoroutine(CheckAnim());
         ChangeWeaponState(false);
@@ -126,6 +127,7 @@ public class AttackOnGround : Attack
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
         base.ExitBehaviour(dt, toState);
+        CharacterActor.Animator.ResetTrigger(AttackOnGroundPar);
         ChangeWeaponState(true);
     }
 

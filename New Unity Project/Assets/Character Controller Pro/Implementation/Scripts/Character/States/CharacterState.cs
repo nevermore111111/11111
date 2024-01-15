@@ -69,37 +69,38 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
 
 
-        protected string groundedParameter = "Grounded";
+        protected static string groundedParameter = "Grounded";
 
-        protected string stableParameter = "Stable";
+        protected static string stableParameter = "Stable";
 
-        protected string verticalSpeedParameter = "VerticalSpeed";
+        protected  static string verticalSpeedParameter = "VerticalSpeed";
 
-        protected string planarSpeedParameter = "PlanarSpeed";
+        protected  static string planarSpeedParameter = "PlanarSpeed";
 
-        protected string horizontalAxisParameter = "HorizontalAxis";
+        protected static string horizontalAxisParameter = "HorizontalAxis";
 
-        protected string verticalAxisParameter = "VerticalAxis";
+        protected static string verticalAxisParameter = "VerticalAxis";
 
-        protected string heightParameter = "Height";
+        protected static string heightParameter = "Height";
 
-        protected string GroundDistance = "GroundDistance";
+        protected static string GroundDistance = "GroundDistance";
 
-        protected string evadeParameter = "evade";
+        protected static string evadeParameter = "evade";
 
-        protected string spAttackParameter = "spAttack";
+        protected static string spAttackParameter = "spAttack";
 
-        public string stopParameter = "stop";
+        public static string stopParameter = "stop";
 
-        protected string xMovePar = "xMove";
-        protected string yMovePar = "yMove";
+        protected static string xMovePar = "xMove";
+        protected static string yMovePar = "yMove";
 
-        protected string defensePar = "defense";
+        protected static string defensePar = "defense";
 
-        protected string startDefensePar = "startDefense";
-        protected string endDefensePar = "endDefense";
+        protected static string startDefensePar = "startDefense";
+        protected static string endDefensePar = "endDefense";
 
-
+        protected static string NormalMovementPar = "NormalMovement";
+        protected static string AttackOnGroundPar = "AttackOnGround";
         private static int spAttack = -1;
 
         //可以进入空中攻击的最低限度

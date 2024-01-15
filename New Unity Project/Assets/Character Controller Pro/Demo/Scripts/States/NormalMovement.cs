@@ -260,12 +260,14 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         public override void ExitBehaviour(float dt, CharacterState toState)
         {
+            CharacterActor.Animator.ResetTrigger(NormalMovementPar);
             reducedAirControlFlag = false;
             moving = false;
             if (IsPlayer)
             {
                 CharacterActor.Animator.SetBool("jump", false);
             }
+
         }
 
 
@@ -848,7 +850,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         public override void EnterBehaviour(float dt, CharacterState fromState)
         {
 
-
+            CharacterActor.Animator.SetTrigger(NormalMovementPar);
             if (CharacterActor.isPlayer)
             {
                 StartCoroutine(CheckAnim());
@@ -879,6 +881,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             bool isPlayMove = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("NormalMovement");
             if (CharacterStateController.CurrentState is NormalMovement && (!isPlayMove))
             {
+                CharacterActor.Animator.ResetTrigger(NormalMovementPar);
                 if (CharacterActor.IsGrounded)
                 {
                     CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.StableGrounded", 0.2f);
