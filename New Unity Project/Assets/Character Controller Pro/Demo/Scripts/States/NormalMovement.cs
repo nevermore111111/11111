@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
@@ -88,10 +89,20 @@ namespace Lightbug.CharacterControllerPro.Demo
                 if (value && !isDefense) //刚刚进入
                 {
                     CharacterActor.Animator.SetTrigger(startDefensePar);
+                    DOTween.Kill("Defense");
+                    DOTween.To(() => CharacterActor.Animator.GetLayerWeight(2), value =>
+                    {
+                        CharacterActor.Animator.SetLayerWeight(2, value);
+                    }, 1f, 0.2f).SetId("Defense");
                 }
-                else if(!value&&isDefense)//刚刚出来
+                else if (!value && isDefense)//刚刚出来
                 {
                     CharacterActor.Animator.SetTrigger(endDefensePar);
+                    DOTween.Kill("Defense");
+                    DOTween.To(() => CharacterActor.Animator.GetLayerWeight(2), value =>
+                    {
+                        CharacterActor.Animator.SetLayerWeight(2, value);
+                    }, 0f, 0.5f).SetId("Defense");
                 }
                 isDefense = value;
             }
@@ -291,11 +302,11 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 case CharacterActorState.StableGrounded:
 
-                    if(isDefense)
+                    if (isDefense)
                     {
                         currentMotion.acceleration = defenseParameters.DefendGroundedAcceleration;//  planarMovementParameters.stableGroundedAcceleration;
                         currentMotion.deceleration = defenseParameters.DefendGroundedDeceleration;// planarMovementParameters.stableGroundedDeceleration;
-                        currentMotion.angleAccelerationMultiplier = defenseParameters.DefendAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);  
+                        currentMotion.angleAccelerationMultiplier = defenseParameters.DefendAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
                         //planarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
                     }
                     else
@@ -304,7 +315,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                         currentMotion.deceleration = planarMovementParameters.stableGroundedDeceleration;
                         currentMotion.angleAccelerationMultiplier = planarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
                     }
-                 
+
 
                     break;
 
@@ -480,14 +491,14 @@ namespace Lightbug.CharacterControllerPro.Demo
                 acceleration * dt
             );
 
-            if(CharacterActor.UpdateRootPosition == true && CharacterActor.UseRootMotion ==true)
+            if (CharacterActor.UpdateRootPosition == true && CharacterActor.UseRootMotion == true)
             {
                 //这个是归一化的xyz
                 //这个是归一化的想要移动的方向
                 Vector3 targetVector3 = CharacterStateController.InputMovementReference;
                 targetVector3 = CharacterActor.transform.InverseTransformDirection(targetVector3).normalized;
                 //2.2f是防御的动画移动速度--只有一个防御，先用常数
-                XYZMove = Vector3.MoveTowards(XYZMove, targetVector3 , acceleration * dt / currentAnimSpeed);
+                XYZMove = Vector3.MoveTowards(XYZMove, targetVector3, acceleration * dt / currentAnimSpeed);
                 CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
                 CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
             }
@@ -851,6 +862,8 @@ namespace Lightbug.CharacterControllerPro.Demo
         {
 
             CharacterActor.Animator.SetTrigger(NormalMovementPar);
+            if (CanDefense() && CharacterActions.defend.value)
+            { IsDefense = true; }
             if (CharacterActor.isPlayer)
             {
                 StartCoroutine(CheckAnim());
@@ -885,6 +898,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 if (CharacterActor.IsGrounded)
                 {
                     CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.StableGrounded", 0.2f);
+
                 }
                 else
                 {
@@ -1128,7 +1142,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             HandleCrouch(dt);
             HandleDefend();
         }
-       
+
         private void HandleDefend()
         {
             //只有在地面的时候可以
@@ -1160,7 +1174,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 //}
                 //else
                 {
-                    if (CharacterActor.isPlayer && CharacterActor.UpdateRootPosition ==false)
+                    if (CharacterActor.isPlayer && CharacterActor.UpdateRootPosition == false)
                     {
                         //xMove
 

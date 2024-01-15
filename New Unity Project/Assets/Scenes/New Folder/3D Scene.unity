@@ -976,7 +976,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102522144}
-  m_LocalRotation: {x: 0.18032683, y: -0.118502155, z: 0.021890176, w: 0.9761969}
+  m_LocalRotation: {x: 0.18032695, y: -0.11850419, z: 0.021890571, w: 0.9761966}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4536,7 +4536,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -5010,7 +5009,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -6746,7 +6744,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444161945}
-  m_LocalRotation: {x: 0.045958415, y: -0.7595363, z: 0.053986467, w: 0.64658946}
+  m_LocalRotation: {x: 0.045958415, y: -0.7595363, z: 0.05398647, w: 0.6465894}
   m_LocalPosition: {x: 3.929512, y: 0.39202702, z: 6.6251297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6850,7 +6848,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -10676,7 +10673,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: 0.18032683, y: -0.118502155, z: 0.021890176, w: 0.9761969}
+  m_LocalRotation: {x: 0.18032695, y: -0.11850419, z: 0.021890571, w: 0.9761966}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10862,7 +10859,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605997566}
-  m_LocalRotation: {x: 0.023164071, y: -0.26986164, z: 0.0064939777, w: 0.96259856}
+  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12051,7 +12048,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811303954}
-  m_LocalRotation: {x: 0.18032683, y: -0.118502155, z: 0.021890176, w: 0.9761969}
+  m_LocalRotation: {x: 0.18032695, y: -0.11850419, z: 0.021890571, w: 0.9761966}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13050,8 +13047,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234806, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.0620468, z: -5.874625}
+  m_LocalRotation: {x: 0.039234836, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.0620477, z: -5.874625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18649,7 +18646,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 449d61f761a3f224e9bd26732f0083e2,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   layerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -18683,7 +18679,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 3e01f914ef0edd349a9e2792bea8a20d,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   initialVelocity: 30
   duration: 0.5
   movementCurve:
@@ -18731,7 +18726,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: ca911fc8986930847a392d34ecdf91e3,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   useIKOffsetValues: 0
   rightFootOffset: {x: 0, y: 0, z: 0}
   leftFootOffset: {x: 0, y: 0, z: 0}
@@ -18765,7 +18759,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 4c77323136b9524478f3a5c86ed70c71,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   IsPlayer: 1
   planarMovementParameters:
     baseSpeedLimit: 8
@@ -18959,7 +18952,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 57934fe4f05349443be3ff02e5b20745,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   filterByTag: 1
   wallTag: WallSlide
   slideAcceleration: 10
@@ -18993,7 +18985,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: ac2694d39a73d6e4badd624717b0111d,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   climbSpeed: 3
   angularSpeed: 120
   jumpVelocity: 10
@@ -19017,7 +19008,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 4c77323136b9524478f3a5c86ed70c71,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
   executeDis: 3
@@ -19045,7 +19035,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 0764ec8ee685157409d02372dedb0249,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   cam: {fileID: 1162800279}
   gunTip: {fileID: 597766025}
   whatIsGrapplable:
@@ -19079,7 +19068,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 4c77323136b9524478f3a5c86ed70c71,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   initialVelocity: 12
   duration: 0.65
   movementCurve:
@@ -19128,7 +19116,6 @@ MonoBehaviour:
   overrideAnimatorController: 1
   runtimeAnimatorController: {fileID: 0}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
   executeDis: 3
@@ -19151,7 +19138,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 4c77323136b9524478f3a5c86ed70c71,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   HeighAndWidth: {x: 1, y: 1.58}
   attack: {fileID: 0}
   executeDis: 3
@@ -19178,7 +19164,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 4c77323136b9524478f3a5c86ed70c71,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   changeState: 0
 --- !u!114 &1257029341
 MonoBehaviour:
@@ -19196,7 +19181,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 4c77323136b9524478f3a5c86ed70c71,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   HeighAndWidth: {x: 0, y: 0}
   attack: {fileID: 0}
   executeDis: 3
@@ -20253,7 +20237,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 2
@@ -21319,7 +21302,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -21512,7 +21494,6 @@ MonoBehaviour:
   overrideAnimatorController: 1
   runtimeAnimatorController: {fileID: 0}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   attackEnd: 0
   attacks: []
   isAttacking: 0
@@ -21928,8 +21909,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498168725}
-  m_LocalRotation: {x: -0.67959684, y: 0.003604507, z: 0.0033393048, w: 0.7335694}
-  m_LocalPosition: {x: -121.699684, y: -6.8322353, z: 95.85166}
+  m_LocalRotation: {x: -0.6795957, y: 0.0035786855, z: 0.0033153712, w: 0.7335707}
+  m_LocalPosition: {x: -121.69969, y: -6.832235, z: 95.85164}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23154,7 +23135,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689691047}
-  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
+  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -23218,7 +23199,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -23940,7 +23920,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6
@@ -24079,7 +24058,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   debug: 0
   HittedForce: 10
   HittedDrag: 2
@@ -25440,7 +25418,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890388382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -120.742966, y: -0.33520555, z: 91.93617}
+  m_LocalPosition: {x: -120.74295, y: -0.33520555, z: 91.93618}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26083,7 +26061,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   debug: 0
   HittedForce: 10
   HittedDrag: 2
@@ -26104,7 +26081,6 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  stopParameter: stop
   IsPlayer: 0
   planarMovementParameters:
     baseSpeedLimit: 6

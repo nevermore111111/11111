@@ -277,7 +277,6 @@ public class Attack : CharacterState
         }
         if(CharacterActor.IsStable&&CharacterActions.defend.value&& !isAttack )
         {
-            Time.timeScale = 0.1f;
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
     }

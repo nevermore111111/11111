@@ -57,25 +57,25 @@ public class DefendMaskManager : StateMachineBehaviour
     {
         switch (Kind)
         {
-            //case 1:
-            //    animator.SetLayerWeight(2, 1f);
-            //    Debug.LogError("OnStateExit");
-            //    break;
-            //case 2:
-            //    //animator.SetLayerWeight(2, 0f);
-            //    break;
-            case 3:
-                if(normalMovement !=null && normalMovement.IsDefense)
-                {
-                    animator.SetLayerWeight(2, 1f);
-                    Debug.Log(stateInfo.IsName("GhostSamurai_APose2DefenseL_Root"));
-                }
-                else
-                {
-                    animator.SetLayerWeight(2, 0f);
+            ////case 1:
+            ////    animator.SetLayerWeight(2, 1f);
+            ////    Debug.LogError("OnStateExit");
+            ////    break;
+            ////case 2:
+            ////    //animator.SetLayerWeight(2, 0f);
+            ////    break;
+            //case 3:
+            //    if(normalMovement !=null && normalMovement.IsDefense)
+            //    {
+            //        animator.SetLayerWeight(2, 1f);
+            //        Debug.Log(stateInfo.IsName("GhostSamurai_APose2DefenseL_Root"));
+            //    }
+            //    else
+            //    {
+            //        animator.SetLayerWeight(2, 0f);
 
-                }
-                break;
+            //    }
+            //    break;
         }
    
     }
