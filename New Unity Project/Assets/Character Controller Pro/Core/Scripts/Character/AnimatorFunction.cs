@@ -89,7 +89,7 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void Stop()
     {
-        characterActor.Animator.SetBool(Attack.stopParameter, false);
+        //characterActor.Animator.SetBool(Attack.stopParameter, false);
     }
 
     public void AttackEnd()

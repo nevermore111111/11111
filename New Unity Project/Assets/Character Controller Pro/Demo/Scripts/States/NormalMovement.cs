@@ -2,6 +2,7 @@ using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
+using MathNet.Numerics.LinearAlgebra.Solvers;
 using Rusk;
 using System.Collections;
 using UnityEngine;
@@ -507,7 +508,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         public bool moving = false; // 初始状态为未移动
 
         private float startTime; // 移动开始时间
-
+        private bool canStop = false;
         float MoveTime()
         {
             if (CharacterActions.movement.value.sqrMagnitude != 0 && CharacterActor.Velocity.magnitude > 0.5f) // 检测移动
@@ -518,14 +519,14 @@ namespace Lightbug.CharacterControllerPro.Demo
                 }
 
                 // 如果移动时间超过1秒，则将 `moving` 设为 `true`，并打印提示信息
-                if (Time.time - startTime > 0.5f)
+                if (Time.time - startTime > 0.3f)
                 {
                     moving = true;
-
+                    canStop = true;
                 }
                 return Time.time - startTime;
             }
-            else if (!CharacterActor.IsStable)
+            else //if (!CharacterActor.IsStable)
             {
                 moving = false;
                 startTime = 0f; // 如果停止移动，则将开始时间重置为0
@@ -557,9 +558,13 @@ namespace Lightbug.CharacterControllerPro.Demo
         }
         private void PlayStop()
         {
-            if (CharacterActions.movement.value.sqrMagnitude != 0)
+            if (CharacterActions.movement.value.sqrMagnitude != 0 )
             {
-                CharacterActor.Animator.SetBool("inputMove", true);
+                CharacterActor.Animator.SetBool(inputMovePar, true);
+            }
+            else
+            {
+                CharacterActor.Animator.SetBool(inputMovePar, false);
             }
             MoveTime();
             // 获取当前速度大小
@@ -568,25 +573,25 @@ namespace Lightbug.CharacterControllerPro.Demo
             // 如果速度大小小于等于0，则表示已停止移动
             //把这个等于0改成都没有按下
 
-            if (CheckMovementInputIdle() & moving & CharacterActor.IsStable)
+            if (CheckMovementInputIdle() & canStop & CharacterActor.IsStable)
             {
-                moving = false;
                 CharacterActor.Animator.SetBool("inputMove", false);
                 this.planarMovementParameters.stableGroundedDeceleration = 10f;
                 planarMovementParameters.stableGroundedDeceleration = _stableGroundedDeceleration;
                 // 如果上一帧速度大小大于10，则播放停止动画
-                if (lastVelocityMagnitude > 0.7f * planarMovementParameters.boostSpeedLimit)
+                if (lastVelocityMagnitude > 0.7f * planarMovementParameters.boostSpeedLimit && canStop)
                 {
+                    canStop = false;
                     CharacterActor.Animator.SetFloat("running", 1);
                     planarMovementParameters.stableGroundedDeceleration = planarMovementParameters.stableGroundedDeceleration_Dash;
                     CharacterActor.Animator.SetBool(stopParameter, true);
                 }
-                else if (lastVelocityMagnitude > 0.5f * planarMovementParameters.boostSpeedLimit)
+                else if (lastVelocityMagnitude > 0.5f * planarMovementParameters.boostSpeedLimit && canStop)
                 {
+                    canStop = false;
                     CharacterActor.Animator.SetFloat("running", 0);
                     CharacterActor.Animator.SetBool(stopParameter, true);
                 }
-
                 // 更新状态
                 //isMoving = false;
             }

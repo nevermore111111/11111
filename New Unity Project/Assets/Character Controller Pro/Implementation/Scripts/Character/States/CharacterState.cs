@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using Lightbug.CharacterControllerPro.Core;
+﻿using Lightbug.CharacterControllerPro.Core;
 using Lightbug.Utilities;
+using UnityEngine;
 
 
 namespace Lightbug.CharacterControllerPro.Implementation
@@ -88,6 +87,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         protected static string evadeParameter = "evade";
 
         protected static string spAttackParameter = "spAttack";
+        protected static string inputMovePar = "inputMove";
 
         public static string stopParameter = "stop";
 
