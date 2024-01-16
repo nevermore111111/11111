@@ -2,7 +2,7 @@ using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
-using MathNet.Numerics.LinearAlgebra.Solvers;
+//using MathNet.Numerics.LinearAlgebra.Solvers;
 using Rusk;
 using System.Collections;
 using UnityEngine;
@@ -558,7 +558,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         }
         private void PlayStop()
         {
-            if (CharacterActions.movement.value.sqrMagnitude != 0 )
+            if (CharacterActions.movement.value.sqrMagnitude != 0)
             {
                 CharacterActor.Animator.SetBool(inputMovePar, true);
             }
@@ -1178,17 +1178,15 @@ namespace Lightbug.CharacterControllerPro.Demo
                 //    }
                 //}
                 //else
+                if (CharacterActor.isPlayer && CharacterActor.UpdateRootPosition == false)
                 {
-                    if (CharacterActor.isPlayer && CharacterActor.UpdateRootPosition == false)
-                    {
-                        //xMove
+                    //xMove
 
-                        XYZMove = CharacterActor.transform.InverseTransformDirection(CharacterActor.Velocity).normalized * (CharacterActor.Velocity.magnitude / currentPlanarSpeedLimit);
-                        //Debug.Log($"速度比例{XYZMove},当前速度{CharacterActor.Velocity.magnitude},速度限制{currentPlanarSpeedLimit}");
+                    XYZMove = CharacterActor.transform.InverseTransformDirection(CharacterActor.Velocity).normalized * (CharacterActor.Velocity.magnitude / currentPlanarSpeedLimit);
+                    //Debug.Log($"速度比例{XYZMove},当前速度{CharacterActor.Velocity.magnitude},速度限制{currentPlanarSpeedLimit}");
 
-                        CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
-                        CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
-                    }
+                    CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
+                    CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
                 }
                 //更新动画机
             }

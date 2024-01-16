@@ -239,6 +239,8 @@ namespace Lightbug.CharacterControllerPro.Demo
         [Tooltip("影响防御时的减速度")]
         public float DefendGroundedDeceleration = 10f;
         public AnimationCurve DefendAngleAccelerationBoost = AnimationCurve.EaseInOut(0f, 1f, 180f, 2f);
+        [Tooltip("完美格挡时间")]
+        public float perfectDefendTime = 0.4f;
     }
 
     [System.Serializable]
