@@ -541,12 +541,12 @@ namespace Lightbug.CharacterControllerPro.Demo
         /// <returns></returns>
         private bool CheckMovementInputIdle()
         {
-            if (Input.GetButton("Movement X") || Input.GetButton("Movement Y"))
+            if (Input.GetButton("Movement X") || Input.GetButton("Movement Y") || !CharacterActor.IsGrounded)
             {
                 movementInputIdle = false;
                 movementInputIdleTime = 0f;
             }
-            else
+            else 
             {
                 movementInputIdleTime += Time.deltaTime;
                 if (movementInputIdleTime > 0.1f)

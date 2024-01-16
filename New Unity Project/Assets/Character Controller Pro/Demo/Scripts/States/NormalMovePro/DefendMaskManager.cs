@@ -1,5 +1,6 @@
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Demo;
+using Lightbug.CharacterControllerPro.Implementation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,21 +19,7 @@ public class DefendMaskManager : StateMachineBehaviour
         {
             normalMovement = animator.transform.parent.parent.GetComponentInChildren<NormalMovement>();
         }
-        //if(actor == null)
-        //{
-        //    actor = animator.GetComponentInParent<CharacterActor>();
-        //}
-        //switch (Kind)
-        //{
-        //    case 1:
-        //        //animator.SetLayerWeight(2, 1f);
-        //        break;
-        //    case 2:
-        //        animator.SetLayerWeight(2, 0f);
-        //        break;
-        //    case 3:
-        //        break;
-        //}
+        animator.SetBool(CharacterState.stopParameter, false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
