@@ -7,6 +7,7 @@ using OfficeOpenXml;
 using System.IO;
 using System;
 using System.ComponentModel;
+using System.Linq;
 
 
 //我需要做的，做一个读表的工具 
@@ -37,6 +38,35 @@ public class ExcelReaderHelper : MonoBehaviour
     {
         string filePathTar = PathConverter.ConvertToDirectoryPath("Assets/Editor/Data.xlsx");
         return ExcelReader(workSheetNum, AttriName, filePathTar);
+    }
+    
+    public static int GetWorkSheetNum(string Name,string path = "Assets/Editor/Data.xlsx")
+    {
+        string[] names = GetWorkSheetNames();
+        for (int i = 0; i < names.Length; i++)
+        {
+            if (names[i] == Name)
+                return i;
+        }
+        return -1;
+    }
+    public static string[] GetWorkSheetNames( string path = "Assets/Editor/Data.xlsx")
+    {
+        try
+        {
+            using (var package = new ExcelPackage(new FileInfo(path)))
+            {
+                // 获取所有工作表的名字
+                var sheetNames = package.Workbook.Worksheets.Select(sheet => sheet.Name).ToArray();
+
+                return sheetNames;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error reading Excel file: {ex.Message}");
+            return null;
+        }
     }
 
     /// <summary>
