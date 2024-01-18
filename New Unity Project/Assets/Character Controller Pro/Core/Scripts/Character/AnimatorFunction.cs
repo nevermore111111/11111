@@ -24,14 +24,14 @@ public class AnimatorFunction : MonoBehaviour
     CharacterStateController CharacterStateController;
     public CinemachineFreeLook CinemachineFreeLook;
     CameraEffects CameraEffects;
-    private List<WeaponManager> weaponManagers;//Õâ¸öÊÇËùÓĞÎäÆ÷
-    private AnimationConfig animationConfig;//Õâ¸öÊÇ¶¯»­²ÎÊı
-    public SoloAnimaConfig CurrentAnimConfig;//Õâ¸öÊÇÓÃÀ´¼ÇÂ¼µ¥¸öÊ±¼äµÄ²ÎÊı
-    public int currentHitIndex;//µ±Ç°Õâ¸ö¹¥»÷µÄµÚn´Î¹¥»÷¼ì²â
+    private List<WeaponManager> weaponManagers;//è¿™ä¸ªæ˜¯æ‰€æœ‰æ­¦å™¨
+    private AnimationConfig animationConfig;//è¿™ä¸ªæ˜¯åŠ¨ç”»å‚æ•°
+    public SoloAnimaConfig CurrentAnimConfig;//è¿™ä¸ªæ˜¯ç”¨æ¥è®°å½•å•ä¸ªæ—¶é—´çš„å‚æ•°
+    public int currentHitIndex;//å½“å‰è¿™ä¸ªæ”»å‡»çš„ç¬¬næ¬¡æ”»å‡»æ£€æµ‹
     private int currentAnimPar;
-    public int hitKind;//ÏÖÔÚ¹¥»÷µÄÖÖÀà
-    public string activeWeaponDetect;//ÏÖÔÚ¼¤»îµÄÅö×²ÇøÓò
-    public string currentStateName;//µ±Ç°ÕıÔÚ²¥·ÅµÄ¶¯»­
+    public int hitKind;//ç°åœ¨æ”»å‡»çš„ç§ç±»
+    public string activeWeaponDetect;//ç°åœ¨æ¿€æ´»çš„ç¢°æ’åŒºåŸŸ
+    public string currentStateName;//å½“å‰æ­£åœ¨æ’­æ”¾çš„åŠ¨ç”»
     public WeaponData WeaponData;
     CharacterActor characterActor;
 
@@ -54,11 +54,11 @@ public class AnimatorFunction : MonoBehaviour
     }
     private void Start()
     {
-        animationConfig = DataLoad.animationConfig;
+        animationConfig = DataLoad.Instance.animationConfig;
     }
     public void JumpStart()
     {
-        //¹Ø±Õ¶¯»­»ú½øÈëµÄÌõ¼ş
+        //å…³é—­åŠ¨ç”»æœºè¿›å…¥çš„æ¡ä»¶
         characterActor.Animator.SetBool("jump", false);
     }
 
@@ -133,12 +133,12 @@ public class AnimatorFunction : MonoBehaviour
 
     public void HitStart()//int hitKind, string activeWeaponDetect
     {
-        Debug.LogError("¿ªÊ¼¹¥»÷");
+        Debug.LogError("å¼€å§‹æ”»å‡»");
         characterActor.Animator.speed = 1.3f;
         SetStrengthAndDetector();
 
-        //¸ù¾İµ±Ç°¹¥»÷Àà±ğÀ´½øĞĞ
-        //¸ù¾İµ±Ç°µÄdetections½øĞĞµ÷ÕûÕâ¸ö¼¤»îµÄdetection;
+        //æ ¹æ®å½“å‰æ”»å‡»ç±»åˆ«æ¥è¿›è¡Œ
+        //æ ¹æ®å½“å‰çš„detectionsè¿›è¡Œè°ƒæ•´è¿™ä¸ªæ¿€æ´»çš„detection;
 
         SetWeaponDirection();
         foreach (var manager in weaponManagers)
@@ -148,7 +148,7 @@ public class AnimatorFunction : MonoBehaviour
                 manager.ToggleDetection(true);
                 if (manager != null)
                 {
-                    //¸ù¾İ¶¯»­²ÎÊı¼¤»î¶ÔÓ¦µÄÅö×²ÇøÓò
+                    //æ ¹æ®åŠ¨ç”»å‚æ•°æ¿€æ´»å¯¹åº”çš„ç¢°æ’åŒºåŸŸ
                     manager.weaponFx = CurrentAnimConfig.HittedEffect;
                     ActiveDetectionByStringPar(activeWeaponDetect, manager);
 
@@ -160,7 +160,7 @@ public class AnimatorFunction : MonoBehaviour
     }
 
     /// <summary>
-    /// ÊÇ·ñÒª×Ô¶¯¸üĞÂÎäÆ÷·½Ïò£¬Èç¹û²»×Ô¶¯£¬»ØÈ¥¶Á±í¡£attack¿ªÊ¼Ê±Ò»¶¨È¥¿ª×Ô¶¯
+    /// æ˜¯å¦è¦è‡ªåŠ¨æ›´æ–°æ­¦å™¨æ–¹å‘ï¼Œå¦‚æœä¸è‡ªåŠ¨ï¼Œå›å»è¯»è¡¨ã€‚attackå¼€å§‹æ—¶ä¸€å®šå»å¼€è‡ªåŠ¨
     /// </summary>
     /// <param name="autoUpdate"></param>
     private void SetWeaponDirection(bool autoUpdate = false)
@@ -177,11 +177,11 @@ public class AnimatorFunction : MonoBehaviour
                 }
             }
         }
-        //ĞŞÕıµ±Ç°µÄ¹¥»÷·½Ïò
+        //ä¿®æ­£å½“å‰çš„æ”»å‡»æ–¹å‘
         if (CurrentAnimConfig.AttackDirection.Length < 3)
         {
-            //Õâ´ú±íÃ»ÌîĞ´
-            //Òª¼ÌĞø¸üĞÂ
+            //è¿™ä»£è¡¨æ²¡å¡«å†™
+            //è¦ç»§ç»­æ›´æ–°
             foreach (WeaponManager manager in weaponManagers)
             {
                 if (manager.isActiveAndEnabled)
@@ -195,7 +195,7 @@ public class AnimatorFunction : MonoBehaviour
         }
         else
         {
-            //»á¸ù¾İµ±Ç°´Ë´Î¹¥»÷µÄ´ÎÊıÈ¥Çø¶ÔÓ¦µÄ¹¥»÷
+            //ä¼šæ ¹æ®å½“å‰æ­¤æ¬¡æ”»å‡»çš„æ¬¡æ•°å»åŒºå¯¹åº”çš„æ”»å‡»
             foreach (WeaponManager manager in weaponManagers)
             {
                 if (manager.isActiveAndEnabled)
@@ -203,7 +203,7 @@ public class AnimatorFunction : MonoBehaviour
                     weaponManager = manager;
                     manager.isNeedUpdateDirection = false;
                     Vector3 DirectionIncharacter = new Vector3(CurrentAnimConfig.AttackDirection[currentHitIndex * 3], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 + 1], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 + 2]);
-                    //È»ºóÎÒĞèÒª°ÑÕâ¸ö
+                    //ç„¶åæˆ‘éœ€è¦æŠŠè¿™ä¸ª
                     manager.WeaponDirection = Attack.transform.TransformDirection(DirectionIncharacter);
                     break;
                 }
@@ -237,26 +237,26 @@ public class AnimatorFunction : MonoBehaviour
     public void SpAttackStart(string spAttackName)
     {
         AttackStart(spAttackName);
-        //ÕâÀï¿ªÊ¼sp¹¥»÷£¬¸ù¾İµ±Ç°sp¹¥»÷µÄÃû³Æ£¬ÉèÖÃµ±Ç°spattackĞÅÏ¢
+        //è¿™é‡Œå¼€å§‹spæ”»å‡»ï¼Œæ ¹æ®å½“å‰spæ”»å‡»çš„åç§°ï¼Œè®¾ç½®å½“å‰spattackä¿¡æ¯
         Attack.SpAttack = Mathf.RoundToInt(CurrentAnimConfig.SpAttackPar[0]);
-        //¸ù¾İµ±Ç°µÄ¶¯»­²ÎÊıÉèÖÃ
+        //æ ¹æ®å½“å‰çš„åŠ¨ç”»å‚æ•°è®¾ç½®
     }
 
     /// <summary>
-    /// ¹¥»÷¿ªÊ¼
+    /// æ”»å‡»å¼€å§‹
     /// </summary>
     /// <param name="attackName"></param>
     public void AttackStart(string attackName)
     {
-        //ĞŞÕıµ±Ç°µÄ¹¥»÷·½Ïò
+        //ä¿®æ­£å½“å‰çš„æ”»å‡»æ–¹å‘
 
         characterActor.Animator.speed = 1f;
         characterActor.UseRootMotion = true;
-        //¸üĞÂ¹¥»÷Ãû³ÆºÍÅäÖÃ±í
+        //æ›´æ–°æ”»å‡»åç§°å’Œé…ç½®è¡¨
         ResetCurrentInfo(attackName);
 
-        //¿ªÊ¼Ò»´Î¹¥»÷
-        Attack.isNextAttack = false;//Õâ¸ö´ú±íÒÑ¾­Ö´ĞĞÁËÏÂÒ»´Î¹¥»÷
+        //å¼€å§‹ä¸€æ¬¡æ”»å‡»
+        Attack.isNextAttack = false;//è¿™ä¸ªä»£è¡¨å·²ç»æ‰§è¡Œäº†ä¸‹ä¸€æ¬¡æ”»å‡»
         Attack.isAttack = true;
         characterActor.Animator.SetBool("attack", true);
         Attack.canChangeState = false;
@@ -294,23 +294,23 @@ public class AnimatorFunction : MonoBehaviour
         Attack.useGravity = true;
         characterActor.VerticalVelocity -= 10f * characterActor.Up;
         characterActor.alwaysNotGrounded = false;
-        //½ö½öÊ¹ÓÃË®Æ½ÒÆ¶¯
+        //ä»…ä»…ä½¿ç”¨æ°´å¹³ç§»åŠ¨
     }
     public void CannotGetInput()
     {
         if (!Attack.isAttack)
         {
-            //ÕâÑùÔÚ¹¥»÷ÖĞµÄÊ±ºò£¬²»»á±»ÉÏÒ»´ÎµÄCannotGetInputÖØÖÃcombo
+            //è¿™æ ·åœ¨æ”»å‡»ä¸­çš„æ—¶å€™ï¼Œä¸ä¼šè¢«ä¸Šä¸€æ¬¡çš„CannotGetInputé‡ç½®combo
             Attack.combo = 0;
             characterActor.Animator.SetInteger("combo", 0);
         }
     }
     /// <summary>
-    /// Íæ¼Ò¿ÉÒÔ¿ØÖÆ
+    /// ç©å®¶å¯ä»¥æ§åˆ¶
     /// </summary>
     public void CanPlayerControl()
     {
-        //Èç¹ûÖ®Ç°µÄÊÇ£¬ÄÇÃ´¾Í¿ªÊ¼²Ù×÷¡£
+        //å¦‚æœä¹‹å‰çš„æ˜¯ï¼Œé‚£ä¹ˆå°±å¼€å§‹æ“ä½œã€‚
         if (CharacterStateController.PreviousState is StartPlay)
         {
             CharacterState.canPlayerControl = true;
@@ -322,7 +322,7 @@ public class AnimatorFunction : MonoBehaviour
 
 
     /// <summary>
-    /// ÔÚÒ»¸öÁ¬ÕĞ¿ªÊ¼Ê±Ö´ĞĞ£¬¶¨ÒåÕâ¸öÁ¬ÕĞµÄ×î´óÁ¬»÷ÊıÁ¿¡£
+    /// åœ¨ä¸€ä¸ªè¿æ‹›å¼€å§‹æ—¶æ‰§è¡Œï¼Œå®šä¹‰è¿™ä¸ªè¿æ‹›çš„æœ€å¤§è¿å‡»æ•°é‡ã€‚
     /// </summary>
     public void ComboStart(int num)
     {
@@ -341,9 +341,9 @@ public class AnimatorFunction : MonoBehaviour
 
 
 
-    //_______________________________________________·Ç¶¯»­ÊÂ¼ş·Ö¸îÏß_______________________________________________
-    //_______________________________________________·Ç¶¯»­ÊÂ¼ş·Ö¸îÏß_______________________________________________
-    //_______________________________________________·Ç¶¯»­ÊÂ¼ş·Ö¸îÏß_______________________________________________
+    //_______________________________________________éåŠ¨ç”»äº‹ä»¶åˆ†å‰²çº¿_______________________________________________
+    //_______________________________________________éåŠ¨ç”»äº‹ä»¶åˆ†å‰²çº¿_______________________________________________
+    //_______________________________________________éåŠ¨ç”»äº‹ä»¶åˆ†å‰²çº¿_______________________________________________
 
 
     private float originalSpeed;
@@ -360,7 +360,7 @@ public class AnimatorFunction : MonoBehaviour
     }
 
     /// <summary>
-    ///¸ù¾İ¶¯»­Ê±¼ä´«µİµÄ²ÎÊıÀ´È·ÈÏµ±Ç°Ó¦¸Ã¼¤»îµÄ¼ì²âÇøÓò
+    ///æ ¹æ®åŠ¨ç”»æ—¶é—´ä¼ é€’çš„å‚æ•°æ¥ç¡®è®¤å½“å‰åº”è¯¥æ¿€æ´»çš„æ£€æµ‹åŒºåŸŸ
     /// </summary>
     /// <param name="activeWeaponDetect"></param>
     /// <param name="manager"></param>
@@ -380,14 +380,14 @@ public class AnimatorFunction : MonoBehaviour
         return intArray;
     }
     /// <summary>
-    /// Èç¹ûÃ»ÓĞµĞÈË¾ÍÕı³£¹¥»÷£¬ÓĞµÄ»°»á×ªÏòµĞÈË£¬²¢ÇÒ»á¸ù¾İ×ÔÉí¾àÀëµĞÈËµÄ¾àÀë¾ö¶¨ÊÇ·ñ¿ªÆôrootmotion
+    /// å¦‚æœæ²¡æœ‰æ•Œäººå°±æ­£å¸¸æ”»å‡»ï¼Œæœ‰çš„è¯ä¼šè½¬å‘æ•Œäººï¼Œå¹¶ä¸”ä¼šæ ¹æ®è‡ªèº«è·ç¦»æ•Œäººçš„è·ç¦»å†³å®šæ˜¯å¦å¼€å¯rootmotion
     /// </summary>
     private void ResetAttackRootAndrotate()
     {
 
         if (mainCharacter.enemies.Count != 0)
         {
-            //ĞÂÓï·¨
+            //æ–°è¯­æ³•
             GameObject[] gamesEnemy = mainCharacter.enemies.Select(m => m.gameObject).ToArray();
             SetActorForword(gamesEnemy);
             //Debug.Log(Attack.CharacterActor.Forward);
@@ -404,13 +404,13 @@ public class AnimatorFunction : MonoBehaviour
         }
         else
         {
-            //Ã»ÓĞµ¥Î»¾Í¿ÉÒÔ×ÔÓÉ×ªÏò£¬µ«ÊÇÖ»ÄÜÔÚ¹¥»÷¿ªÊ¼µÄÊ±ºò×ªÏò
+            //æ²¡æœ‰å•ä½å°±å¯ä»¥è‡ªç”±è½¬å‘ï¼Œä½†æ˜¯åªèƒ½åœ¨æ”»å‡»å¼€å§‹çš„æ—¶å€™è½¬å‘
             characterActor.Forward = CharacterStateController.InputMovementReference;
         }
     }
 
     /// <summary>
-    /// ÉèÖÃÈËÎïÕı·½Ïò
+    /// è®¾ç½®äººç‰©æ­£æ–¹å‘
     /// </summary>
     /// <param name="gamesEnemy"></param>
     private void SetActorForword(GameObject[] gamesEnemy)
@@ -419,20 +419,20 @@ public class AnimatorFunction : MonoBehaviour
 
         mainCharacter.selectEnemy = HelpTools01.FindClosest(characterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
         Vector3 Forward = (mainCharacter.selectEnemy.transform.position - characterActor.transform.position).normalized;
-        //µ±Ç°ÃæÏòÄ¿±ê£¬Ö±½Ó×Ô¶¯×ª
+        //å½“å‰é¢å‘ç›®æ ‡ï¼Œç›´æ¥è‡ªåŠ¨è½¬
         if (Vector3.Angle(characterActor.Forward, Forward) < Attack.maxAutoAnglerotate)
         {
             characterActor.Forward = new(Forward.x, 0, Forward.z);
             characterActor.Up = Vector3.up;
         }
-        else //µ±Ç°Ã»ÓĞÃæÏò¹¥»÷Ä¿±êĞèÒªÏòÊäÈëÄ¿±êµÄ·½Ïò×ª
+        else //å½“å‰æ²¡æœ‰é¢å‘æ”»å‡»ç›®æ ‡éœ€è¦å‘è¾“å…¥ç›®æ ‡çš„æ–¹å‘è½¬
         {
             Vector3 target = CharacterStateController.InputMovementReference;
             if (target != Vector3.zero)
             {
                 target.z = 0;
                 target.Normalize();
-                //¼ÆËãĞèÒª×ª¶¯µÄ½Ç¶È
+                //è®¡ç®—éœ€è¦è½¬åŠ¨çš„è§’åº¦
                 float angle = Vector3.Angle(target, characterActor.Forward) > Attack.maxAttackAngleNoenemy ? Attack.maxAttackAngleNoenemy : Vector3.Angle(target, characterActor.Forward);
                 characterActor.Forward = RotateVectorAroundAxis(characterActor.Forward, target, angle);
                 characterActor.Forward = Vector3.ProjectOnPlane(characterActor.Forward, Vector3.up);
@@ -442,10 +442,10 @@ public class AnimatorFunction : MonoBehaviour
 
         Vector3 RotateVectorAroundAxis(Vector3 vector, Vector3 axis, float angle)
         {
-            // ½«ÏòÁ¿ºÍÖá×ª»»³ÉËÄÔªÊı
+            // å°†å‘é‡å’Œè½´è½¬æ¢æˆå››å…ƒæ•°
             Quaternion rotation = Quaternion.AngleAxis(angle, axis);
 
-            // ½«ÏòÁ¿ÈÆÖáĞı×ª
+            // å°†å‘é‡ç»•è½´æ—‹è½¬
             Vector3 rotatedVector = rotation * vector;
 
             return rotatedVector;
@@ -453,23 +453,23 @@ public class AnimatorFunction : MonoBehaviour
     }
 
     /// <summary>
-    /// ÖØĞÂ¸ù¾İ¶¯»­Ãû³Æ¸üĞÂÅäÖÃĞÅÏ¢
+    /// é‡æ–°æ ¹æ®åŠ¨ç”»åç§°æ›´æ–°é…ç½®ä¿¡æ¯
     /// </summary>
     /// <param name="attackName"></param>
     private void ResetCurrentInfo(string attackName)
     {
-        //Èç¹ûÃû×ÖÒ»ÖÂ²»×öÈÎºÎÊÂÇé
+        //å¦‚æœåå­—ä¸€è‡´ä¸åšä»»ä½•äº‹æƒ…
         if (currentStateName == attackName)
         {
             currentStateName = attackName;
-            GetAnimationPar(currentStateName);//¸ù¾İµ±Ç°µÄ¶¯»­´«ÈëµÄstateÈ¥ÄÃ¶¯»­²ÎÊı
-            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // ²¥·Å¶ÔÓ¦Ãû³ÆµÄPlayable
+            GetAnimationPar(currentStateName);//æ ¹æ®å½“å‰çš„åŠ¨ç”»ä¼ å…¥çš„stateå»æ‹¿åŠ¨ç”»å‚æ•°
+            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // æ’­æ”¾å¯¹åº”åç§°çš„Playable
         }
         else
         {
             currentStateName = attackName;
-            GetAnimationPar(currentStateName);//¸ù¾İµ±Ç°µÄ¶¯»­´«ÈëµÄstateÈ¥ÄÃ¶¯»­²ÎÊı
-            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // ²¥·Å¶ÔÓ¦Ãû³ÆµÄPlayable
+            GetAnimationPar(currentStateName);//æ ¹æ®å½“å‰çš„åŠ¨ç”»ä¼ å…¥çš„stateå»æ‹¿åŠ¨ç”»å‚æ•°
+            timelineManager.PlayTimelineByName(CurrentAnimConfig.ClipName); // æ’­æ”¾å¯¹åº”åç§°çš„Playable
         }
         currentHitIndex = 0;
     }
@@ -478,7 +478,7 @@ public class AnimatorFunction : MonoBehaviour
     private void GetAnimationPar(string currentStateName)
     {
 
-        int index = FindStateIndexByName(currentStateName);//¸ù¾İµ±Ç°µÄ¶¯»­Ãû³ÆÀ´ĞŞ¸Ä
+        int index = FindStateIndexByName(currentStateName);//æ ¹æ®å½“å‰çš„åŠ¨ç”»åç§°æ¥ä¿®æ”¹
         if (index != -1)
         {
             CurrentAnimConfig = new SoloAnimaConfig(
@@ -496,26 +496,26 @@ public class AnimatorFunction : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"Ã»ÕÒµ½{currentStateName}");
+            Debug.LogError($"æ²¡æ‰¾åˆ°{currentStateName}");
         }
     }
 
 
     public void SlowDownAnimator(float slowDownFactor, float duration)
     {
-        originalSpeed = characterActor.Animator.speed; // ±£´æÔ­Ê¼µÄ²¥·ÅËÙ¶È
+        originalSpeed = characterActor.Animator.speed; // ä¿å­˜åŸå§‹çš„æ’­æ”¾é€Ÿåº¦
         Debug.Log(originalSpeed);
 
-        characterActor.Animator.speed = originalSpeed * slowDownFactor; // ĞŞ¸Ä²¥·ÅËÙ¶ÈÎªµ±Ç°µÄ slowDownFactor
+        characterActor.Animator.speed = originalSpeed * slowDownFactor; // ä¿®æ”¹æ’­æ”¾é€Ÿåº¦ä¸ºå½“å‰çš„ slowDownFactor
 
-        // ÔÚÖ¸¶¨µÄÊ±¼äºó»Ö¸´Ô­Ê¼ËÙ¶È
+        // åœ¨æŒ‡å®šçš„æ—¶é—´åæ¢å¤åŸå§‹é€Ÿåº¦
         StartCoroutine(RestoreAnimatorSpeed(duration));
     }
     private System.Collections.IEnumerator RestoreAnimatorSpeed(float delay)
     {
         yield return new WaitForSeconds(delay);
 
-        characterActor.Animator.speed = originalSpeed; // »Ö¸´Ô­Ê¼²¥·ÅËÙ¶È
+        characterActor.Animator.speed = originalSpeed; // æ¢å¤åŸå§‹æ’­æ”¾é€Ÿåº¦
     }
 
     private string GetPlayingClipName(Animator animator)
@@ -531,7 +531,7 @@ public class AnimatorFunction : MonoBehaviour
     {
         AnimatorTransitionInfo transitionInfo = animator.GetAnimatorTransitionInfo(0);
 
-        if (transitionInfo.anyState)//Èç¹ûÔÚ¹ı¶É
+        if (transitionInfo.anyState)//å¦‚æœåœ¨è¿‡æ¸¡
         {
             int targetStateHash = transitionInfo.nameHash;
             AnimatorStateInfo targetStateInfo = animator.GetNextAnimatorStateInfo(0);
@@ -577,7 +577,7 @@ public class AnimatorFunction : MonoBehaviour
 
 
     /// <summary>
-    /// »ñÈ¡µ±Ç°ÕıÔÚ²¥·ÅµÄ¶¯»­µÄAnimatorStateInfo£¬Èç¹ûÔÚ¹ı¶É£¬¾Í·µ»Ø¹ı¶ÉÄ¿±êµÄ¶¯»­
+    /// è·å–å½“å‰æ­£åœ¨æ’­æ”¾çš„åŠ¨ç”»çš„AnimatorStateInfoï¼Œå¦‚æœåœ¨è¿‡æ¸¡ï¼Œå°±è¿”å›è¿‡æ¸¡ç›®æ ‡çš„åŠ¨ç”»
     /// </summary>
     /// <returns></returns>
     static public AnimatorStateInfo GetStateInfo(Animator animator)
@@ -597,7 +597,7 @@ public class AnimatorFunction : MonoBehaviour
     }
 
     /// <summary>
-    ///  ¸ù¾İµ±Ç°µÄanimatorinfoµÃµ½¶¯»­ĞÅÏ¢
+    ///  æ ¹æ®å½“å‰çš„animatorinfoå¾—åˆ°åŠ¨ç”»ä¿¡æ¯
     /// </summary>
     /// <returns></returns>
     private int GetAnimConfig(AnimatorStateInfo stateInfo, List<string> Names)

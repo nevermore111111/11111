@@ -6,8 +6,29 @@ using System.IO;
 
 public class DataLoad : MonoBehaviour
 {
-    public static AnimationConfig animationConfig;
+    public AnimationConfig animationConfig;
+    public AiBehavior aiBehavior;
 
+    private static DataLoad _instance;
+
+
+    public static DataLoad Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<DataLoad>();
+
+                if (_instance == null)
+                {
+                    GameObject singletonObject = new GameObject("DataLoad");
+                    _instance = singletonObject.AddComponent<DataLoad>();
+                }
+            }
+            return _instance;
+        }
+    }
     private void Awake()
     {
         string filePath = Application.persistentDataPath + "/config.json";
@@ -15,11 +36,11 @@ public class DataLoad : MonoBehaviour
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
-            animationConfig = JsonConvert.DeserializeObject<AnimationConfig>(json); // 使用 JsonConvert 进行反序列化
+            animationConfig = JsonConvert.DeserializeObject<AnimationConfig>(json); // 浣跨敤 JsonConvert 杩涜鍙嶅簭鍒楀寲
         }
         else
         {
-            Debug.Log("没有这个文件");
+            Debug.Log("娌℃湁杩欎釜鏂囦欢");
         }
     }
 }
