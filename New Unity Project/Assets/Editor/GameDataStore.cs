@@ -67,85 +67,94 @@ public class GameDataStore // 添加继承自 MonoBehaviour
 
     }
 }
-public interface IGameConfigSave
-{
-    IGameConfigSave SaveDate();
-}
-public class AiBehavior : IGameConfigSave
-{
-    List<int> index;
-    List<int[]> test;
 
-    public IGameConfigSave SaveDate()
-    {
-        //通过reader得到当前这个类的数据，并且序列化之后储存起来
-        //1先得到数据，对每一个字段进行赋值
-        //序列化存储
-        AiBehavior aiBehavior = AutoGetData.Fun01<AiBehavior>();
-        Debug.Log(aiBehavior.index[0]);
 
-        return this;
-    }
-    [MenuItem("Assets/测试方法")]
-    public static void Save()
-    {
-        AiBehavior aiBehavior = AutoGetData.Fun01<AiBehavior>();
-        Debug.Log(aiBehavior.index.Count);
-    }
-}
-//对IGameConfigSave的自动进行赋值
 public class AutoGetData
 {
-    public static T Fun01<T>() where T : IGameConfigSave, new()
+
+    //这个类写一个方法，反射dataload里面的所有变量。并且转成json存储起来
+    //自己写的反射读表类，效率很低，不要在运行中使用！逻辑是开表-读一行-关表；循环后存储。读表不要超过1k行
+    [MenuItem("Assets/存储表格")]
+    private static void Fun01()
+    {
+        FieldInfo[] fields = typeof(DataLoad).GetFields(BindingFlags.Public | BindingFlags.Instance);
+        foreach (FieldInfo field in fields)
+        {
+            //判断是不是静态变量，如果不是静态变量，就把他转化成xxx存储起来。
+            //然后在dataload启动的时候，去加载每一个类
+            Type type = field.FieldType;
+            if (!type.IsStatic())
+            {
+                //非静态的就修改调用一个创建方法
+                ConstructorInfo constructorInfo = type.GetConstructor(Type.EmptyTypes);
+                object tar = null;
+                if (constructorInfo != null)
+                {
+                    ////构建了第一个空的字段
+                    //tar = constructorInfo.Invoke(null);
+                }
+                //我只需要调用根据type调用LoadDataReflection02
+                MethodInfo targetMethod = typeof(AutoGetData).GetMethod("LoadDataReflection02");
+                if (targetMethod != null)
+                {
+                    MethodInfo method = targetMethod.MakeGenericMethod(type);
+                    AutoGetData auto = new AutoGetData();
+                    //field.SetValue(tar, method.Invoke(auto, null));
+                    tar = method.Invoke(auto, null);
+                    SaveObject(tar);
+                }
+            }
+        }
+    }
+    public static void SaveObject<T>(T obj)
+    {
+        string className = obj.GetType().ToString(); // 获取类名
+        string filePath = Path.Combine(Application.persistentDataPath, $"{className}.json");
+
+        try
+        {
+            string json = JsonConvert.SerializeObject(obj);
+            File.WriteAllText(filePath, json);
+            Debug.Log($"Object of type {className} saved successfully at {filePath}");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Failed to save object of type {className}: {e.Message}");
+        }
+    }
+
+
+    /// <summary>
+    /// 这个更快
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static T LoadDataReflection02<T>() where T : IGameConfigSave, new()
     {
         T tar = new T();
         Type myType = tar.GetType();
         FieldInfo[] fields = myType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+        int workSheetNum = ExcelReaderHelper.GetWorkSheetNum(typeof(T).Name);
         for (int i = 0; i < fields.Length; i++)
         {
             // 获取字段的类型
             //这个字段一定是list<T>
             FieldInfo field = fields[i];
             string fieldName = field.Name;
-            Type genericArgumentType = null;
-            object fieldValue = null;
+            //Type genericArgumentType;
+            object fieldValue;
 
             if (field.FieldType.IsGenericType)//检查是否是通用泛型类
             {
-                //泛型变量的泛型种类
-                genericArgumentType = field.FieldType.GetGenericArguments()[0];
-                Debug.Log(genericArgumentType);
+                ////泛型变量的泛型种类
+                //genericArgumentType = field.FieldType.GetGenericArguments()[0];
+                //Debug.Log(genericArgumentType);
             }
             else
             {
                 Debug.LogError("非泛型,非list");
             }
-            int workSheetNum = ExcelReaderHelper.GetWorkSheetNum(typeof(T).Name);
-            if (genericArgumentType == typeof(int))
-            {
-                fieldValue = ExcelReaderHelper.ExcelReaderEZ<int>(workSheetNum, fieldName);
-            }
-            else if (genericArgumentType == typeof(float))
-            {
-                fieldValue = ExcelReaderHelper.ExcelReaderEZ<float>(workSheetNum, fieldName);
-            }
-            else if(genericArgumentType == typeof(string))
-            {
-                fieldValue = ExcelReaderHelper.ExcelReaderEZ<string>(workSheetNum, fieldName);
-            }
-            else if (genericArgumentType == typeof(int[]))
-            {
-                fieldValue = ExcelReaderHelper.ExcelReaderEZ<int[]>(workSheetNum, fieldName);
-            }
-            else if (genericArgumentType == typeof(float[]))
-            {
-                fieldValue = ExcelReaderHelper.ExcelReaderEZ<float[]>(workSheetNum, fieldName);
-            }
-            else if (genericArgumentType == typeof(string[]))
-            {
-                fieldValue = ExcelReaderHelper.ExcelReaderEZ<string[]>(workSheetNum, fieldName);
-            }
-
+            fieldValue = ExcelReaderHelper.ExcelReaderEZ(workSheetNum, fieldName);
             // 如果字段是值类型或者字符串，你可以设置一个默认值,这个方法返回一个list<T>
 
             // 设置字段值

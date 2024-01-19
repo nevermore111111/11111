@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using System.Reflection;
 
 /// <summary>
 /// 所有攻击的参数
 /// </summary>
-public class AnimationConfig
+public class AnimationConfig :IGameConfigSave
 {
     public List<int> Index;
     public List<string> ClipName;
@@ -31,8 +30,8 @@ public interface IGameConfigSave
 
 public class AiBehavior : IGameConfigSave
 {
-    List<int> index;
-    List<int[]> test;
+   public List<int> index;
+   public List<int[]> test;
   
 
 //#if(UNITY_EDITOR)

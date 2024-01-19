@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
@@ -15,8 +16,13 @@ public class MainCharacter : CharacterInfo
 
     public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground)
     {
-        //ĞèÒªÕÒµ½Ö÷½Çµ÷ÓÃ
+        //éœ€è¦æ‰¾åˆ°ä¸»è§’è°ƒç”¨
         CharacterHitted.GetHitted(weapon, hit);
+        if (CharacterStateController.CurrentState is NormalMovement) 
+        {
+
+        }
+
     }
 
 
@@ -28,7 +34,7 @@ public class MainCharacter : CharacterInfo
         hitData = FindObjectOfType<HitData>();
     }
 
-#warning(ÕâÀïÃ»×ö,ÉãÏñ»úÊ¹ÓÃµÄ)
+#warning(è¿™é‡Œæ²¡åš,æ‘„åƒæœºä½¿ç”¨çš„)
     internal bool GetIsAttacked()
     {
         return false;
@@ -52,33 +58,33 @@ public class MainCharacter : CharacterInfo
         {
             NormalMovement normalMovementState = CharacterStateController.CurrentState as NormalMovement;
 
-            // ·ÃÎÊ NormalMovement ÊµÀıµÄ±äÁ¿
+            // è®¿é—® NormalMovement å®ä¾‹çš„å˜é‡
             if (normalMovementState != null)
             {
 
                 return normalMovementState.moving;
-                // Ê¹ÓÃ normalMovementState ·ÃÎÊÊµÀıµÄ±äÁ¿
-                // ÀıÈç: normalMovementState.SomeVariable
+                // ä½¿ç”¨ normalMovementState è®¿é—®å®ä¾‹çš„å˜é‡
+                // ä¾‹å¦‚: normalMovementState.SomeVariable
             }
         }
         return false;
     }
     override public void HitOther(WeaponManager weapon)
     {
-        //Õâ¸öĞèÒªÒ»¸ö¶¯»­Ê±¼ä·½·¨£¬¶¯»­ÖĞÈ¥¸üĞÂÕâ´Î¹¥»÷µÄ²ÎÊı
-        //µ÷ÓÃ»÷ÖĞĞ§¹û
+        //è¿™ä¸ªéœ€è¦ä¸€ä¸ªåŠ¨ç”»æ—¶é—´æ–¹æ³•ï¼ŒåŠ¨ç”»ä¸­å»æ›´æ–°è¿™æ¬¡æ”»å‡»çš„å‚æ•°
+        //è°ƒç”¨å‡»ä¸­æ•ˆæœ
         HitParByHitKind(weapon);
     }
 
-    //Õâ¸öÊÇÎÒ´òµ½±ğÈËµÄ·½·¨
+    //è¿™ä¸ªæ˜¯æˆ‘æ‰“åˆ°åˆ«äººçš„æ–¹æ³•
     public void HitParByHitKind(WeaponManager weapon)
     {
 
 #if UNITY_EDITOR
-        // Ö»ÔÚUnity±à¼­Æ÷ÖĞÔËĞĞµÄ´úÂë
+        // åªåœ¨Unityç¼–è¾‘å™¨ä¸­è¿è¡Œçš„ä»£ç 
         if (hitData.ForceCurrentHit != -1)
         {
-            //Èç¹ûÇ¿ÖÆÊ¹ÓÃÕâ¸öÕğ¶¯£¬»á²¥·ÅÕâ¸öÕğ¶¯µÄÕğÆÁĞ§¹û
+            //å¦‚æœå¼ºåˆ¶ä½¿ç”¨è¿™ä¸ªéœ‡åŠ¨ï¼Œä¼šæ’­æ”¾è¿™ä¸ªéœ‡åŠ¨çš„éœ‡å±æ•ˆæœ
             HitStrength = hitData.ForceCurrentHit;
         }
 #endif
@@ -87,13 +93,13 @@ public class MainCharacter : CharacterInfo
     public void HitPlus(int currentHit, HitData hitData, WeaponManager weaponManager)
     {
         float fadeInDuration = hitData.GetFadeTime(hitData, currentHit);
-        float fadeOutDuration = hitData.GetFadeTime(hitData, currentHit); ; // Èç¹û½¥³öÊ±¼äºÍ½¥ÈëÊ±¼äÏàÍ¬
+        float fadeOutDuration = hitData.GetFadeTime(hitData, currentHit); ; // å¦‚æœæ¸å‡ºæ—¶é—´å’Œæ¸å…¥æ—¶é—´ç›¸åŒ
         float duration = hitData.GetStayTime(hitData, currentHit);
         float targetTimeScale = hitData.GetTimeScale(hitData, currentHit);
         TimeScaleManager.Instance.SetTimeScale(fadeInDuration, fadeOutDuration, duration, targetTimeScale);
         if (weaponManager.isActiveAndEnabled)
         {
-            //µ÷ÓÃÕğ¶¯ºÍÌØĞ§
+            //è°ƒç”¨éœ‡åŠ¨å’Œç‰¹æ•ˆ
             weaponManager.Impluse();
         }
     }
@@ -101,7 +107,7 @@ public class MainCharacter : CharacterInfo
     public override void GetDamage(float damage, Vector3 attackDirection, float hitStrength,string targetAnim = null)
     {
         ChangeAnim(attackDirection);
-        //µÃµ½¹ØÓÚ×ÔÉíµÄ¹¥»÷·½Ïò
+        //å¾—åˆ°å…³äºè‡ªèº«çš„æ”»å‡»æ–¹å‘
     }
 
     private void ChangeAnim(Vector3 attackDirection)

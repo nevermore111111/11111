@@ -6,6 +6,8 @@ using System.IO;
 
 public class DataLoad : MonoBehaviour
 {
+    //这个类查看AutoGetData这个类中的方法，去在游戏运行前存储数据
+
     public AnimationConfig animationConfig;
     public AiBehavior aiBehavior;
 

@@ -8,6 +8,7 @@ using System.IO;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 
 
 //我需要做的，做一个读表的工具 
@@ -33,7 +34,20 @@ public class ExcelReaderHelper : MonoBehaviour
     {
         return ExcelReaderEZ(workSheetNum,AttriName) as List<T>;
     }
+    public static object ExcelReaderEZReflection(int workSheetNum, string AttriName,Type genericArgumentType)
+    {
+        MethodInfo method = typeof(ExcelReaderHelper).GetMethods(BindingFlags.Static|BindingFlags.Public).FirstOrDefault(_=>_.Name == "ExcelReaderEZ"&& _.IsGenericMethod);
+        MethodInfo genericMethod = method.MakeGenericMethod(genericArgumentType);
+        object result = genericMethod.Invoke(null, new object[] { workSheetNum, AttriName });
+        return result;
+    }
 
+    /// <summary>
+    /// 这个方法不要再重写了ExcelReaderEZReflection会调用第一个泛型ExcelReaderEZ的方法
+    /// </summary>
+    /// <param name="workSheetNum"></param>
+    /// <param name="AttriName"></param>
+    /// <returns></returns>
     public static object ExcelReaderEZ(int workSheetNum, string AttriName)
     {
         string filePathTar = PathConverter.ConvertToDirectoryPath("Assets/Editor/Data.xlsx");
@@ -43,6 +57,7 @@ public class ExcelReaderHelper : MonoBehaviour
     public static int GetWorkSheetNum(string Name,string path = "Assets/Editor/Data.xlsx")
     {
         string[] names = GetWorkSheetNames();
+
         for (int i = 0; i < names.Length; i++)
         {
             if (names[i] == Name)
@@ -52,6 +67,7 @@ public class ExcelReaderHelper : MonoBehaviour
     }
     public static string[] GetWorkSheetNames( string path = "Assets/Editor/Data.xlsx")
     {
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         try
         {
             using (var package = new ExcelPackage(new FileInfo(path)))
