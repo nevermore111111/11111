@@ -5,11 +5,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class Hitted : CharacterState
 {
-    public bool debug = false;
+    public bool Check = false;
     [Space(10f)]
 
     public float HittedForce = 10f;
@@ -29,7 +30,7 @@ public class Hitted : CharacterState
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
-        Debug.Log("½øÈëÁËÊÜ»÷×´Ì¬");
+        Debug.Log("è¿›å…¥äº†å—å‡»çŠ¶æ€");
         if (CharacterStateController.CurrentState is AttackOnGround)
         {
 
@@ -39,19 +40,19 @@ public class Hitted : CharacterState
 
         }
     }
-    //¸ù¾İÄ¿±êµÄ·½Î»ºÍ¹¥»÷ÀàĞÍÀ´¾ö¶¨×ÔÉíµÄÊÜ»÷ÀàĞÍ¡£ĞèÒªÉèÖÃµ±Ç°µÄÊÜ»÷¶¯»­¡£
+    //æ ¹æ®ç›®æ ‡çš„æ–¹ä½å’Œæ”»å‡»ç±»å‹æ¥å†³å®šè‡ªèº«çš„å—å‡»ç±»å‹ã€‚éœ€è¦è®¾ç½®å½“å‰çš„å—å‡»åŠ¨ç”»ã€‚
     public void GetHitted(WeaponManager weapon, IAgent.HitKind hitKind, bool NeedChangeState = true)
     {
-        Debug.Log("ÊÜ»÷ÁË");
+        Debug.Log("å—å‡»äº†");
         int hitStrength = weapon.weaponOwner.HitStrength;
         HittedBack(weapon, true);
-        //»÷ÍË
+        //å‡»é€€
         CheckAnimator(weapon, hitKind, NeedChangeState);
-        //¶¯»­»ú´¦Àí
+        //åŠ¨ç”»æœºå¤„ç†
     }
     public void GetHitted(Vector3 attackDirection,Vector3 hittedForce  ,bool NeedChangeState = true)
     {
-        Debug.Log("ÊÜ»÷ÁË");
+        Debug.Log("å—å‡»äº†");
 
 
         CharacterActor.RigidbodyComponent.Velocity = Vector3.zero;
@@ -60,19 +61,21 @@ public class Hitted : CharacterState
 
     private void CheckAnimator(WeaponManager weapon, IAgent.HitKind hitKind, bool NeedChangeState)
     {
-        Vector3 HitWorldDir = weapon.weaponOwner.transform.TransformDirection(weapon.WeaponDirection);
-        if(debug)
+        //è¿™ä¸ªæ˜¯è½¬æ¢åˆ°ä¸–ç•Œåæ ‡ç³»ã€‚
+        Vector3 HitWorldDir = weapon.WeaponDirection;
+        Debug.Log($"{weapon.transform.position},{HitWorldDir},{weapon.transform.position + HitWorldDir}");
+        if(Check)
         {
-            Debug.DrawLine(weapon.transform.position, weapon.transform.position + HitWorldDir, Color.blue);
-            Time.timeScale = 0f;
+            Debug.DrawLine(weapon.transform.position, weapon.transform.position + HitWorldDir, Color.red,1f);
+            EditorApplication.isPaused = true;
         }
 
-        SetAnimationParameters(HitWorldDir, true);
-        //ÊÇ·ñĞèÒªÇĞ»»×´Ì¬µ½µ±Ç°×´Ì¬
+        SetAnimationParameters(weapon.WeaponDirection, true);
+        //æ˜¯å¦éœ€è¦åˆ‡æ¢çŠ¶æ€åˆ°å½“å‰çŠ¶æ€
         if (NeedChangeState)
         {
             CharacterStateController.EnqueueTransition<Hitted>();
-            CharacterActor.Animator.CrossFadeInFixedTime("Hitted.HittedOnGround", 0.1f, 0, 0.2f);
+            CharacterActor.Animator.CrossFadeInFixedTime("Hitted.HittedOnGround", 0.1f, 0,0.1f);
         }
         else
         {
@@ -83,11 +86,11 @@ public class Hitted : CharacterState
     }
 
     /// <summary>
-    /// Ö÷½ÇÌØÊâ·½·¨
+    /// ä¸»è§’ç‰¹æ®Šæ–¹æ³•
     /// </summary>
     private void PlayerSpecial()
     {
-        //ÊÇ·ñÊÇÖ÷½Ç
+        //æ˜¯å¦æ˜¯ä¸»è§’
         if (CharacterActor.isPlayer)
         {
 
@@ -99,7 +102,7 @@ public class Hitted : CharacterState
     }
 
     /// <summary>
-    /// »÷ÍË
+    /// å‡»é€€
     /// </summary>
     /// <param name="weapon"></param>
     /// <param name="resetVelocity"></param>
@@ -117,20 +120,21 @@ public class Hitted : CharacterState
 
 
     /// <summary>
-    /// ¸ù¾İ¶Ô·½ ÎäÆ÷µÄ·½ÏòÉèÖÃ×ÔÉíµÄÊÜ»÷·½Ïò
+    /// æ ¹æ®å¯¹æ–¹ æ­¦å™¨çš„æ–¹å‘è®¾ç½®è‡ªèº«çš„å—å‡»æ–¹å‘
     /// </summary>
     /// <param name="weapon"></param>
     /// <param name="IgnoreYAxis"></param>
     public void SetAnimationParameters(Vector3 WorldAttackDirection, bool IgnoreYAxis = true)
     {
-        Vector3 attackFrom = this.transform.InverseTransformDirection(WorldAttackDirection);
+        //ä¸–ç•Œè½¬æ¢åˆ°è‡ªèº«
+        Vector3 attackFrom = this.transform.InverseTransformDirection(-WorldAttackDirection);
         if (IgnoreYAxis)
         {
             attackFrom.y = 0f;
         }
         attackFrom.Normalize();
         CharacterActor.Animator.SetFloat("attackXFrom", attackFrom.x);
-        CharacterActor.Animator.SetFloat("attackYFrom", attackFrom.y);
-        CharacterActor.Animator.SetFloat("attackZFrom", attackFrom.z);
+        CharacterActor.Animator.SetFloat("attackYFrom", attackFrom.z);
+        CharacterActor.Animator.SetFloat("attackZFrom", attackFrom.y);
     }
 }

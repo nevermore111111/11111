@@ -33,7 +33,7 @@ public class GameDataStore // 添加继承自 MonoBehaviour
             AnimStateInfo = ExcelReaderHelper.ExcelReaderEZ<int>(0, "AnimStateInfo"),
             SpAttackPar = ExcelReaderHelper.ExcelReaderEZ<float[]>(0, "SpAttackPar"),
             AttackDirection = ExcelReaderHelper.ExcelReaderEZ<float[]>(0, "AttackDirection"),
-            HittedEffect = ExcelReaderHelper.ExcelReaderEZ<string[]>(0, "hittedEffect")
+            HittedEffect = ExcelReaderHelper.ExcelReaderEZ<string[]>(0, "HittedEffect")
         };
 
         string filePath = Application.persistentDataPath + "/config.json";

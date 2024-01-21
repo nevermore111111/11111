@@ -134,6 +134,7 @@ public class AnimatorFunction : MonoBehaviour
     public void HitStart()//int hitKind, string activeWeaponDetect
     {
         Debug.LogError("开始攻击");
+        Debug.Log(CurrentAnimConfig.AnmationStateName);
         characterActor.Animator.speed = 1.3f;
         SetStrengthAndDetector();
 
@@ -204,7 +205,7 @@ public class AnimatorFunction : MonoBehaviour
                     manager.isNeedUpdateDirection = false;
                     Vector3 DirectionIncharacter = new Vector3(CurrentAnimConfig.AttackDirection[currentHitIndex * 3], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 + 1], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 + 2]);
                     //然后我需要把这个
-                    manager.WeaponDirection = Attack.transform.TransformDirection(DirectionIncharacter);
+                    manager.WeaponDirection = Attack.transform.TransformDirection(DirectionIncharacter);//这个时候已经转化成世界方向了
                     break;
                 }
             }

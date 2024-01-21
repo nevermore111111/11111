@@ -27,12 +27,16 @@ public class WeaponManager : MonoBehaviour
     [Tooltip("这里配置要装载哪一段特效")]
     public string[] weaponFx;
     public List<CharacterInfo> HittedCharacter;
+    [Tooltip("这个配置CurrentAnimConfig.AttackDirection，配置相对于characteractor的local方向，在写入时已经转化成了世界坐标")]
+    /// <summary>
+    /// 这个配置CurrentAnimConfig.AttackDirection，配置相对于characteractor的local方向，在写入时已经转化成了世界坐标
+    /// </summary>
     public Vector3 WeaponDirection;
     private int frameCount = 0;
     private Vector3 previousWeaponPosition;
     public CharacterInfo weaponOwner;
     public WeaponData weaponData;
-    public bool isNeedUpdateDirection = true;
+    public bool isNeedUpdateDirection = false;
 
 
     private void Awake()
@@ -99,51 +103,46 @@ var squaredNumbers = numbers.Select(x => x * x);
     }
 
 
-    /// <summary>
-    ///  在激活中，就每三帧更新一次这个武器方向
-    /// </summary>
-    public void UpdateWeaponDirection()
-    {
-        if (isActiveAndEnabled && isNeedUpdateDirection)
-        {
-            if (frameCount == 1)
-            {
-                // 获取当前武器位置
-                Vector3 currentWeaponPosition = transform.position;
+    ///// <summary>
+    /////  在激活中，就每三帧更新一次这个武器方向
+    ///// </summary>
+    //public void UpdateWeaponDirection()
+    //{
+    //    if (isActiveAndEnabled && isNeedUpdateDirection)
+    //    {
+    //        if (frameCount == 1)
+    //        {
+    //            // 获取当前武器位置
+    //            Vector3 currentWeaponPosition = transform.position;
 
-                if (currentWeaponPosition - previousWeaponPosition != Vector3.zero)
-                // 计算武器方向
+    //            if (currentWeaponPosition - previousWeaponPosition != Vector3.zero)
+    //            // 计算武器方向
 
-                {
-                    WeaponDirection = currentWeaponPosition - previousWeaponPosition;
+    //            {
+    //                WeaponDirection = currentWeaponPosition - previousWeaponPosition;
 
 
-                    WeaponDirection.Normalize();
+    //                WeaponDirection.Normalize();
 
-                    previousWeaponPosition = currentWeaponPosition;
-                }
+    //                previousWeaponPosition = currentWeaponPosition;
+    //            }
 
-                // 更新上一帧的武器位置
-            }
+    //            // 更新上一帧的武器位置
+    //        }
 
-            // 增加帧计数
-            frameCount = (frameCount + 1) % 2;
-        }
-    }
+    //        // 增加帧计数
+    //        frameCount = (frameCount + 1) % 2;
+    //    }
+    //}
     public void Update()
     {
         HandleDetection();
-        UpdateWeaponDirection();
-        SetPos();
+        //UpdateWeaponDirection();
         //shake();
         // Debug.Log(Time.timeScale);
     }
 
-    private void SetPos()
-    {
-        weaponData.gameObject.transform.position = transform.position;
-        weaponData.transform.forward = transform.forward;
-    }
+  
 
     /// <summary>
     /// 检测碰撞，如果在检测
