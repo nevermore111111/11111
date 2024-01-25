@@ -10,12 +10,11 @@ public class CameraShakeManagerReDraw : Editor
     {
         base.OnInspectorGUI();
 
-        if (GUILayout.Button("震动"))
+        if (GUILayout.Button("闇囧姩"))
         {
-            CameraShakeManager shake = (CameraShakeManager)target;
-            shake.Shake();
+          CameraShakeManager.Instance.Shake();
 
-            // 强制刷新Inspector界面
+            // 寮哄埗鍒锋柊Inspector鐣岄潰
             Repaint();
         }
     }

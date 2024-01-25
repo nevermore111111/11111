@@ -1,54 +1,63 @@
-using DG.Tweening;
-using DG.Tweening.Core;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using DG.Tweening;
 
 public class CameraShakeManager : MonoBehaviour
 {
-    [Range(0, 1f)]
-    public float duration;
-    [Range(0, 1f)]
-    public float strength;
-    public Vector3 strengthDir = Vector3.up;
-    [Tooltip("归一化的方向")]
-    public Vector3 StrengthDir
+    // Singleton pattern
+    private static CameraShakeManager instance;
+    public static CameraShakeManager Instance
     {
-        get { return strengthDir; }
-        set { strengthDir = value.normalized; }
-    }
-    public int vibrato = 10;
-    public float randomness = 50;
-    public ShakeRandomnessMode shakeMode = ShakeRandomnessMode.Full;
-    public Ease targetEase = Ease.OutQuart;
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
+        get
         {
-            Debug.Log("调用shake");
-            Shake();
+            if (instance == null)
+            {
+                instance = FindObjectOfType<CameraShakeManager>();
+                if (instance == null)
+                {
+                    GameObject obj = new GameObject("CameraShakeManager");
+                    instance = obj.AddComponent<CameraShakeManager>();
+                }
+            }
+            return instance;
         }
     }
 
-    Vector3 targetShake = Vector3.zero;
-    Vector3 delVector = Vector3.zero;
-    int shakeNum = 0;
-    public Tween Shake()
+    // Start camera shake
+    public void Shake(float duration = 1f, float strength = 1, int vibrato = 10, float randomness = 90f)
     {
-        return DOTween.Shake(() => targetShake, (_) =>
-        {
-            delVector = _ - targetShake;
-            targetShake = _;
-        }, duration, strength * strengthDir, vibrato, randomness, true, shakeMode).OnStart(() => shakeNum += 1).OnComplete(() => shakeNum -= 1).SetEase(targetEase);
-
+        transform.DOShakePosition(duration, strength, vibrato, randomness, false, true);
     }
-    public void LateUpdate()
+
+    Vector3 shakeTarget = Vector3.zero;
+    Vector3 deltaTarget = Vector3.zero;
+    int currentShakeNum = 0;
+    /// <summary>
+    /// 浣跨敤dotween
+    /// </summary>
+    public void Shake(Vector3 shakeDirection, float strength, float frequencyGain, float durtion, bool needProject)
     {
-        if (shakeNum != 0)
+        currentShakeNum++;
+        Debug.Log("shake");
+        DOTween.Shake(() => shakeTarget, (value) =>
         {
-            transform.localPosition += delVector;
+            deltaTarget = value - shakeTarget;
+            shakeTarget = value;
+        }, durtion, strength * shakeDirection, (int)
+        frequencyGain * 10, 90, true/*鏄惁fadeout*/, ShakeRandomnessMode.Harmonic).OnComplete(() => 
+        {
+            currentShakeNum--;
+            if(currentShakeNum == 0) 
+            {
+                shakeTarget = Vector3.zero;
+                deltaTarget = Vector3.zero;
+            }
+        });
+    }
+    private void Update()
+    {
+        if(currentShakeNum != 0)
+        {
+            transform.position += deltaTarget;
         }
     }
 }

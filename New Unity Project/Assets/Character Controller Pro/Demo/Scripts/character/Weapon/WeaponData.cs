@@ -6,17 +6,19 @@ using UnityEngine;
 [SaveDuringPlay]
 public class WeaponData : MonoBehaviour
 {
-    [Header("ÊÇ·ñÖ»Ó¦ÓÃ´¹Ö±·½ÏòÕğ¶¯")]
+    [Header("æ˜¯å¦åªåº”ç”¨å‚ç›´æ–¹å‘éœ‡åŠ¨")]
     public bool onlyUseVirticalShake = false;
 
-    [Header("ÊÇ·ñ´òÓ¡¹¥»÷ÀàĞÍ")]
+    [Header("æ˜¯å¦æ‰“å°æ”»å‡»ç±»å‹")]
     public bool PrintHit = true;
 
     public bool isNeedChangeCurrentHit = false;
     public int ChangeCurrentHitNum = -1;
+    [Tooltip("æ˜¯å¦ä½¿ç”¨dotweençš„éœ‡åŠ¨")]
+    public bool isUseDotweenShake = false;
 
 
-    [Header("ÌØÊâ¹¥»÷ÅäÖÃ")]
+    [Header("ç‰¹æ®Šæ”»å‡»é…ç½®")]
     [SerializeField]
     [Range(0f, 1f)]
     public float sp11Duration = 1.0f;
@@ -38,7 +40,7 @@ public class WeaponNum
     public float Frequence = 1f;
     public float Duration = 0.3f;
 
-    // ¿ÉÒÔÌí¼Ó¹¹Ôìº¯ÊıºÍÆäËû·½·¨£¬¸ù¾İĞèÒª½øĞĞÀ©Õ¹
+    // å¯ä»¥æ·»åŠ æ„é€ å‡½æ•°å’Œå…¶ä»–æ–¹æ³•ï¼Œæ ¹æ®éœ€è¦è¿›è¡Œæ‰©å±•
 }
 
 

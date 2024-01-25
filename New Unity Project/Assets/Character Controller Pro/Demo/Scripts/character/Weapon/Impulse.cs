@@ -9,6 +9,7 @@ public class Impulse : MonoBehaviour
 {
     CinemachineImpulseSource impulseSource;
     static Camera cam;
+    //鏂板涓�涓娇鐢╠otween鏉ヨ缃渿鍔ㄧ殑鏂规硶锛屼紶鍏ョ殑鍙傛暟鐩稿悓浣嗘槸浣跨敤dotween杩欐牱鏂逛究鎿嶄綔
     enum SkakeAssetKind
     {
         normal,
@@ -47,15 +48,9 @@ public class Impulse : MonoBehaviour
         impulseSource.GenerateImpulse(direction.normalized);
     }
 
-    //public void Update()
-    //{
-    //    if(Input.GetKeyDown(KeyCode.V))
-    //    {
-    //        Debug.Log("调用了震动");
-    //        EditorApplication.isPaused = true;
-    //        GenerateImpulse(Vector3.right, 4f,2, 0.4f, false);
-    //    }
-    //}
+
+
+   
     private void SetShakeKind(SkakeAssetKind shakeAssetKind)
     {
         switch (shakeAssetKind)

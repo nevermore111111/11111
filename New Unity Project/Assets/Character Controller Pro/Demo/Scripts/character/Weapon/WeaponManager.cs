@@ -8,28 +8,28 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-//ÎÒĞèÒª×öµÄÒ»¸ö¹¦ÄÜ £¬ÔÚ¹¥»÷hitÊÂ¼şµÄÊ±ºòÅĞ¶¨µ±Ç°µÄÎäÆ÷ÊÇ·ñ¼¯ÖĞÁËµĞÈË£¬Èç¹û¼¯ÖĞÁËµĞÈË£¬ÄÇÃ´¾ÍÕğ¶¯ÉãÏñ»ú£¬¶øÇÒ½«ÎÒºÍÄ¿±êµÄ¶¯»­²¥·ÅËÙ¶È½µµÍ
+//æˆ‘éœ€è¦åšçš„ä¸€ä¸ªåŠŸèƒ½ ï¼Œåœ¨æ”»å‡»hitäº‹ä»¶çš„æ—¶å€™åˆ¤å®šå½“å‰çš„æ­¦å™¨æ˜¯å¦é›†ä¸­äº†æ•Œäººï¼Œå¦‚æœé›†ä¸­äº†æ•Œäººï¼Œé‚£ä¹ˆå°±éœ‡åŠ¨æ‘„åƒæœºï¼Œè€Œä¸”å°†æˆ‘å’Œç›®æ ‡çš„åŠ¨ç”»æ’­æ”¾é€Ÿåº¦é™ä½
 //[RequireComponent(typeof(CinemachineImpulseSource))]
 //[RequireComponent(typeof(Detection))]
 public class WeaponManager : MonoBehaviour
 {
 
 
-    public WeaponKind kind;//Õâ¸öÎäÆ÷µÄÖÖÀà£¬»á¸ù¾İÕâ¸öÎäÆ÷µÄÖÖÀàÈ¥ÄÇÓ¦¸ÃÓĞÄÄĞ©Ì½²âÆ÷
-    Detection[] detections;    //Õâ¸öÎäÆ÷µÄËùÓĞÌ½²âÆ÷
-    public WeaponDetector[] ActiveWeaponDetectors;//Õâ¸öÎäÆ÷µ±Ç°¼¤»îµÄÌ½²âÆ÷
-    public bool isOnDetection;  //ÊÇ·ñ¿ªÆô¼ì²â
+    public WeaponKind kind;//è¿™ä¸ªæ­¦å™¨çš„ç§ç±»ï¼Œä¼šæ ¹æ®è¿™ä¸ªæ­¦å™¨çš„ç§ç±»å»é‚£åº”è¯¥æœ‰å“ªäº›æ¢æµ‹å™¨
+    Detection[] detections;    //è¿™ä¸ªæ­¦å™¨çš„æ‰€æœ‰æ¢æµ‹å™¨
+    public WeaponDetector[] ActiveWeaponDetectors;//è¿™ä¸ªæ­¦å™¨å½“å‰æ¿€æ´»çš„æ¢æµ‹å™¨
+    public bool isOnDetection;  //æ˜¯å¦å¼€å¯æ£€æµ‹
     CharacterActor characterActor;
     public bool isHited;
     private CinemachineImpulseSource impulseSource;
     Impulse impulse;
     public float[] impulsePar;
-    [Tooltip("ÕâÀïÅäÖÃÒª×°ÔØÄÄÒ»¶ÎÌØĞ§")]
+    [Tooltip("è¿™é‡Œé…ç½®è¦è£…è½½å“ªä¸€æ®µç‰¹æ•ˆ")]
     public string[] weaponFx;
     public List<CharacterInfo> HittedCharacter;
-    [Tooltip("Õâ¸öÅäÖÃCurrentAnimConfig.AttackDirection£¬ÅäÖÃÏà¶ÔÓÚcharacteractorµÄlocal·½Ïò£¬ÔÚĞ´ÈëÊ±ÒÑ¾­×ª»¯³ÉÁËÊÀ½ç×ø±ê")]
+    [Tooltip("è¿™ä¸ªé…ç½®CurrentAnimConfig.AttackDirectionï¼Œé…ç½®ç›¸å¯¹äºcharacteractorçš„localæ–¹å‘ï¼Œåœ¨å†™å…¥æ—¶å·²ç»è½¬åŒ–æˆäº†ä¸–ç•Œåæ ‡")]
     /// <summary>
-    /// Õâ¸öÅäÖÃCurrentAnimConfig.AttackDirection£¬ÅäÖÃÏà¶ÔÓÚcharacteractorµÄlocal·½Ïò£¬ÔÚĞ´ÈëÊ±ÒÑ¾­×ª»¯³ÉÁËÊÀ½ç×ø±ê
+    /// è¿™ä¸ªé…ç½®CurrentAnimConfig.AttackDirectionï¼Œé…ç½®ç›¸å¯¹äºcharacteractorçš„localæ–¹å‘ï¼Œåœ¨å†™å…¥æ—¶å·²ç»è½¬åŒ–æˆäº†ä¸–ç•Œåæ ‡
     /// </summary>
     public Vector3 WeaponDirection;
     private int frameCount = 0;
@@ -51,37 +51,37 @@ public class WeaponManager : MonoBehaviour
         {
             default:
                 {
-                    Debug.LogError("Õâ¸öweaponÃ»ÓĞÑ¡ÔñÖÖÀà");
+                    Debug.LogError("è¿™ä¸ªweaponæ²¡æœ‰é€‰æ‹©ç§ç±»");
                     break;
                 }
             case WeaponKind.sword:
                 {
-                    #region(Ñ§Ï°)
+                    #region(å­¦ä¹ )
                     /*
                      * 
-Where ºÍ Select ÊÇ LINQ£¨ÓïÑÔ¼¯³É²éÑ¯£©ÖĞµÄÁ½¸ö³£ÓÃ²Ù×÷·û£¬ÓÃÓÚ¶Ô¼¯ºÏ£¨ÈçÊı×é¡¢ÁĞ±í¡¢²éÑ¯½á¹ûµÈ£©½øĞĞÉ¸Ñ¡ºÍ×ª»»¡£ËüÃÇµÄÓÃÍ¾ºÍ¹¦ÄÜÓĞËù²»Í¬£º
+Where å’Œ Select æ˜¯ LINQï¼ˆè¯­è¨€é›†æˆæŸ¥è¯¢ï¼‰ä¸­çš„ä¸¤ä¸ªå¸¸ç”¨æ“ä½œç¬¦ï¼Œç”¨äºå¯¹é›†åˆï¼ˆå¦‚æ•°ç»„ã€åˆ—è¡¨ã€æŸ¥è¯¢ç»“æœç­‰ï¼‰è¿›è¡Œç­›é€‰å’Œè½¬æ¢ã€‚å®ƒä»¬çš„ç”¨é€”å’ŒåŠŸèƒ½æœ‰æ‰€ä¸åŒï¼š
 
-Where£º
-Where ²Ù×÷·ûÓÃÓÚÉ¸Ñ¡¼¯ºÏÖĞµÄÔªËØ£¬·µ»ØÂú×ãÌØ¶¨Ìõ¼şµÄÔªËØ×Ó¼¯¡£Ëü½ÓÊÜÒ»¸öÌõ¼ş£¨Î½´Ê£©×÷Îª²ÎÊı£¬²¢·µ»ØÒ»¸öĞÂµÄ¼¯ºÏ£¬ÆäÖĞ°üº¬Âú×ãÌõ¼şµÄÔªËØ¡£
+Whereï¼š
+Where æ“ä½œç¬¦ç”¨äºç­›é€‰é›†åˆä¸­çš„å…ƒç´ ï¼Œè¿”å›æ»¡è¶³ç‰¹å®šæ¡ä»¶çš„å…ƒç´ å­é›†ã€‚å®ƒæ¥å—ä¸€ä¸ªæ¡ä»¶ï¼ˆè°“è¯ï¼‰ä½œä¸ºå‚æ•°ï¼Œå¹¶è¿”å›ä¸€ä¸ªæ–°çš„é›†åˆï¼Œå…¶ä¸­åŒ…å«æ»¡è¶³æ¡ä»¶çš„å…ƒç´ ã€‚
 
-Ê¾Àı£º
+ç¤ºä¾‹ï¼š
 
 csharp
 Copy code
 var evenNumbers = numbers.Where(x => x % 2 == 0);
-ÔÚÉÏÊöÊ¾ÀıÖĞ£¬numbers ÊÇÒ»¸öÕûÊı¼¯ºÏ£¬Where ²Ù×÷É¸Ñ¡³öÆäÖĞµÄÅ¼ÊıÔªËØ¡£
+åœ¨ä¸Šè¿°ç¤ºä¾‹ä¸­ï¼Œnumbers æ˜¯ä¸€ä¸ªæ•´æ•°é›†åˆï¼ŒWhere æ“ä½œç­›é€‰å‡ºå…¶ä¸­çš„å¶æ•°å…ƒç´ ã€‚
 
-Select£º
-Select ²Ù×÷·ûÓÃÓÚ½«¼¯ºÏÖĞµÄÃ¿¸öÔªËØ×ª»»³ÉÁíÒ»ÖÖÀàĞÍ£¬ĞÎ³ÉÒ»¸öĞÂµÄ¼¯ºÏ¡£Ëü½ÓÊÜÒ»¸ö×ª»»º¯Êı×÷Îª²ÎÊı£¬²¢·µ»ØÒ»¸öĞÂµÄ¼¯ºÏ£¬ÆäÖĞ°üº¬Ó¦ÓÃ×ª»»º¯ÊıºóµÄ½á¹û¡£
+Selectï¼š
+Select æ“ä½œç¬¦ç”¨äºå°†é›†åˆä¸­çš„æ¯ä¸ªå…ƒç´ è½¬æ¢æˆå¦ä¸€ç§ç±»å‹ï¼Œå½¢æˆä¸€ä¸ªæ–°çš„é›†åˆã€‚å®ƒæ¥å—ä¸€ä¸ªè½¬æ¢å‡½æ•°ä½œä¸ºå‚æ•°ï¼Œå¹¶è¿”å›ä¸€ä¸ªæ–°çš„é›†åˆï¼Œå…¶ä¸­åŒ…å«åº”ç”¨è½¬æ¢å‡½æ•°åçš„ç»“æœã€‚
 
-Ê¾Àı£º
+ç¤ºä¾‹ï¼š
 
 csharp
 Copy code
 var squaredNumbers = numbers.Select(x => x * x);
                      */
                     #endregion
-                    //¶ÔÓÚwhereÀ´Ëµ£¬Ñ¡ÔñµÄ»¹ÊÇÔ­±¾µÄÖµ£¬¶ÔÓÚselectÀ´Ëµ£¬·µ»ØµÄÊÇÒ»¸öĞÂµÄ¶ÔÏó¡£
+                    //å¯¹äºwhereæ¥è¯´ï¼Œé€‰æ‹©çš„è¿˜æ˜¯åŸæœ¬çš„å€¼ï¼Œå¯¹äºselectæ¥è¯´ï¼Œè¿”å›çš„æ˜¯ä¸€ä¸ªæ–°çš„å¯¹è±¡ã€‚
                     detections = GetComponentsInChildren<Detection>().Where(_ => _.WeaponDetector == WeaponDetector.sword).ToArray();
                     break;
                 }
@@ -96,44 +96,14 @@ var squaredNumbers = numbers.Select(x => x * x);
     {
         if (impulseSource != null)
         {
-            // ÉèÖÃÆµÂÊºÍÁ¦¶È
+            // è®¾ç½®é¢‘ç‡å’ŒåŠ›åº¦
             impulseSource.m_ImpulseDefinition.m_FrequencyGain = frequency;
             impulseSource.m_ImpulseDefinition.m_AmplitudeGain = amplitude;
         }
     }
 
 
-    ///// <summary>
-    /////  ÔÚ¼¤»îÖĞ£¬¾ÍÃ¿ÈıÖ¡¸üĞÂÒ»´ÎÕâ¸öÎäÆ÷·½Ïò
-    ///// </summary>
-    //public void UpdateWeaponDirection()
-    //{
-    //    if (isActiveAndEnabled && isNeedUpdateDirection)
-    //    {
-    //        if (frameCount == 1)
-    //        {
-    //            // »ñÈ¡µ±Ç°ÎäÆ÷Î»ÖÃ
-    //            Vector3 currentWeaponPosition = transform.position;
 
-    //            if (currentWeaponPosition - previousWeaponPosition != Vector3.zero)
-    //            // ¼ÆËãÎäÆ÷·½Ïò
-
-    //            {
-    //                WeaponDirection = currentWeaponPosition - previousWeaponPosition;
-
-
-    //                WeaponDirection.Normalize();
-
-    //                previousWeaponPosition = currentWeaponPosition;
-    //            }
-
-    //            // ¸üĞÂÉÏÒ»Ö¡µÄÎäÆ÷Î»ÖÃ
-    //        }
-
-    //        // Ôö¼ÓÖ¡¼ÆÊı
-    //        frameCount = (frameCount + 1) % 2;
-    //    }
-    //}
     public void Update()
     {
         HandleDetection();
@@ -145,7 +115,7 @@ var squaredNumbers = numbers.Select(x => x * x);
   
 
     /// <summary>
-    /// ¼ì²âÅö×²£¬Èç¹ûÔÚ¼ì²â
+    /// æ£€æµ‹ç¢°æ’ï¼Œå¦‚æœåœ¨æ£€æµ‹
     /// </summary>
     void HandleDetection()
     {
@@ -154,13 +124,13 @@ var squaredNumbers = numbers.Select(x => x * x);
         {
             foreach (Detection item in detections)
             {
-                //Èç¹ûµ±Ç°¼¤»îµÄÎïÌå²»Ó¦¸Ã°üÀ¨Õâ¸öÄÇÃ´Ö±½ÓÌø³ö½øÈëÏÂÒ»¸ö
+                //å¦‚æœå½“å‰æ¿€æ´»çš„ç‰©ä½“ä¸åº”è¯¥åŒ…æ‹¬è¿™ä¸ªé‚£ä¹ˆç›´æ¥è·³å‡ºè¿›å…¥ä¸‹ä¸€ä¸ª
                 if (!this.ActiveWeaponDetectors.Contains(item.WeaponDetector))
                 {
                     continue;
                 }
                 AttackReceive attack;
-                foreach (var hit in item.GetDetection(out item.isHited))//Ìí¼ÓÁË¹¥»÷¶ÔÏó
+                foreach (var hit in item.GetDetection(out item.isHited))//æ·»åŠ äº†æ”»å‡»å¯¹è±¡
                 {
 
                     if (hit.TryGetComponent(out attack) && attack.isNormalReceive())
@@ -169,17 +139,17 @@ var squaredNumbers = numbers.Select(x => x * x);
                         hitted.GetWeapon(this);
                     }
                 }
-                //Èç¹û´æÔÚµ±Ç°µÄdetection»÷ÖĞÄ¿±ê£¬ÄÇÃ´½«ÎäÆ÷ÊÇ·ñ»÷ÖĞÄ¿±êÒ²¸Ä³Étrue¡£
+                //å¦‚æœå­˜åœ¨å½“å‰çš„detectionå‡»ä¸­ç›®æ ‡ï¼Œé‚£ä¹ˆå°†æ­¦å™¨æ˜¯å¦å‡»ä¸­ç›®æ ‡ä¹Ÿæ”¹æˆtrueã€‚
                 if (item.isHited == true)
                 {
-                    //Impluse();//ÕâÀïµ÷ÓÃÎäÆ÷µÄ»òÕßÈËÎïµÄ·½·¨¡£
+                    //Impluse();//è¿™é‡Œè°ƒç”¨æ­¦å™¨çš„æˆ–è€…äººç‰©çš„æ–¹æ³•ã€‚
                     isHited = true;
                 }
             }
         }
     }
     /// <summary>
-    /// ¹Ø±Õ¼ì²âµÄ·½·¨
+    /// å…³é—­æ£€æµ‹çš„æ–¹æ³•
     /// </summary>
     /// <param name="value"></param>
     public void ToggleDetection(bool value)
@@ -199,14 +169,14 @@ var squaredNumbers = numbers.Select(x => x * x);
             foreach (var item in detections)
             {
                 item.ClaerWasHit();
-                //Çå¿ÕhitÁĞ±í£¬ËùÓĞÊÇ·ñ»÷ÖĞÒ²È«²¿Çå¿Õ
+                //æ¸…ç©ºhitåˆ—è¡¨ï¼Œæ‰€æœ‰æ˜¯å¦å‡»ä¸­ä¹Ÿå…¨éƒ¨æ¸…ç©º
 
             }
-            isHited = false;//ÎäÆ÷»÷ÖĞÅĞ¶¨Ò²Çå¿Õ
+            isHited = false;//æ­¦å™¨å‡»ä¸­åˆ¤å®šä¹Ÿæ¸…ç©º
         }
     }
     /// <summary>
-    /// µ÷Õû²¢Õğ¶¯
+    /// è°ƒæ•´å¹¶éœ‡åŠ¨
     /// </summary>
     /// <param name="impulseRank"></param>
     //public void ChangeDirection(float impulseRank)
@@ -220,26 +190,9 @@ var squaredNumbers = numbers.Select(x => x * x);
         impulseSource.GenerateImpulse(impulseRank * WeaponDirection);
     }
 
-    /// <summary>
-    /// ĞèÒª¸øtimelineÔö¼ÓÁ½ÁĞ£¬Ò»µ÷Õû·½Ïò ¶ş ¸ù¾İ·½Ïòµ÷Õû´óĞ¡£¬Èıµ÷ÕûÊ±¼ä
-    ///// </summary>
-    //public void ImplusePlus()
-    //{
-    //    //ĞÂµÄÕğ¶¯µÄ·½·¨£¬ĞŞ¸ÄÕğ¶¯´óĞ¡²¢ÇÒÕğ¶¯
-    //    Impluse(weaponData);
-    //}
-    //public void Impluse(WeaponData weaponData)
-    //{
-    //    weaponData.Duration = weaponData.Duration;
-    //    weaponData.ImpulseForce = weaponData.ImpulseForce;
-    //    // Debug.Log(impulseSource.m_ImpulseDefinition.m_ImpulseDuration);
-    //    impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.Duration;
-    //    impulseSource.GenerateImpulse(weaponData.ImpulseForce *brain.transform.InverseTransformDirection( weaponData.transform.TransformVector(weaponData.ImpulseDirection)));
-
-    //}
 
     /// <summary>
-    /// ²úÉúÕğ¶¯
+    /// äº§ç”Ÿéœ‡åŠ¨
     /// </summary>
     public void SPImpluse(string attackName)
     {
@@ -257,7 +210,7 @@ var squaredNumbers = numbers.Select(x => x * x);
 
 
     /// <summary>
-    /// ²úÉúÕğ¶¯
+    /// äº§ç”Ÿéœ‡åŠ¨
     /// </summary>
     public void Impluse(int i = 0)
     {
@@ -270,12 +223,23 @@ var squaredNumbers = numbers.Select(x => x * x);
             }
             else
             {
-                Debug.LogError($"weaponNumË÷Òı[{weaponOwner.HitStrength}]È±ÉÙÊı¾İ");
+                Debug.LogError($"weaponNumç´¢å¼•[{weaponOwner.HitStrength}]ç¼ºå°‘æ•°æ®");
             }
-            impulse.GenerateImpulse(WeaponDirection, weaponNum.Strength, weaponNum.Frequence, weaponNum.Duration, weaponData.onlyUseVirticalShake);
+            if(weaponData.isUseDotweenShake)
+            {
+                //ä½¿ç”¨dotweençš„shake
+                CameraShakeManager.Instance.Shake(WeaponDirection, weaponNum.Strength, weaponNum.Frequence, weaponNum.Duration, weaponData.onlyUseVirticalShake);
+            }
+            else
+            {
+                
+                //ä½¿ç”¨cinemachineçš„shake
+                impulse.GenerateImpulse(WeaponDirection, weaponNum.Strength, weaponNum.Frequence, weaponNum.Duration, weaponData.onlyUseVirticalShake);
+            }
+       
             if (weaponData.PrintHit)
             {
-                Debug.Log($"¹¥»÷Á¦¶È£º{weaponOwner.HitStrength}£¬Õğ¶¯Á¦¶È{weaponNum.Strength}£¬Õğ¶¯ÆµÂÊ{weaponNum.Frequence}£¬Õğ¶¯Ê±¼ä{weaponNum.Duration}");
+                Debug.Log($"æ”»å‡»åŠ›åº¦ï¼š{weaponOwner.HitStrength}ï¼Œéœ‡åŠ¨åŠ›åº¦{weaponNum.Strength}ï¼Œéœ‡åŠ¨é¢‘ç‡{weaponNum.Frequence}ï¼Œéœ‡åŠ¨æ—¶é—´{weaponNum.Duration}");
             }
         }
         else
@@ -285,12 +249,12 @@ var squaredNumbers = numbers.Select(x => x * x);
     }
 
     /// <summary>
-    /// ²¥·ÅÕâ¸öÎäÆ÷µÄ¹¥»÷ÌØĞ§
+    /// æ’­æ”¾è¿™ä¸ªæ­¦å™¨çš„æ”»å‡»ç‰¹æ•ˆ
     /// </summary>
     /// <param name="HitNum"></param>
     public void PlayHittedFx(int HitNum = 0)
     {
-        Debug.Log("²¥·Å»÷ÖĞÌØĞ§");
+        Debug.Log("æ’­æ”¾å‡»ä¸­ç‰¹æ•ˆ");
         //if (HittedFx[0]!=null)
         //{
         //    ParticleSystem particle = HittedFx[0];
@@ -299,7 +263,7 @@ var squaredNumbers = numbers.Select(x => x * x);
         //}
     }
     /// <summary>
-    /// ²¥·Å»÷ÖĞÌØĞ§
+    /// æ’­æ”¾å‡»ä¸­ç‰¹æ•ˆ
     /// </summary>
     public void PlayFX()
     {
@@ -307,7 +271,7 @@ var squaredNumbers = numbers.Select(x => x * x);
     }
 
     /// <summary>
-    /// Ò»¸öÊ±Í£¼ÓÕğ¶¯µÄ¸´ºÏ·½·¨¡£
+    /// ä¸€ä¸ªæ—¶åœåŠ éœ‡åŠ¨çš„å¤åˆæ–¹æ³•ã€‚
     /// </summary>
     /// <param name="fadeInDuration"></param>
     /// <param name="fadeOutDuration"></param>
@@ -317,7 +281,7 @@ var squaredNumbers = numbers.Select(x => x * x);
     /// <returns></returns>
 
     /// <summary>
-    /// Ïà¶ÔÓÚÈËÎï×ø±êÏµÎäÆ÷µÄÔË¶¯·½Ïò
+    /// ç›¸å¯¹äºäººç‰©åæ ‡ç³»æ­¦å™¨çš„è¿åŠ¨æ–¹å‘
     /// </summary>
     /// <returns></returns>
     public Vector3 GetWeaponDirectInverse(Transform HittedCharacterTransform)
