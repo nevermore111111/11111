@@ -134,7 +134,6 @@ public class AnimatorFunction : MonoBehaviour
     public void HitStart()//int hitKind, string activeWeaponDetect
     {
         Debug.LogError("开始攻击");
-        Debug.Log(CurrentAnimConfig.AnmationStateName);
         characterActor.Animator.speed = 1.3f;
         SetStrengthAndDetector();
 
