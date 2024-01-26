@@ -5,6 +5,7 @@ public class CameraShakeManager : MonoBehaviour
 {
     // Singleton pattern
     private static CameraShakeManager instance;
+    public int randomness = 60;
     public static CameraShakeManager Instance
     {
         get
@@ -30,23 +31,23 @@ public class CameraShakeManager : MonoBehaviour
 
     Vector3 shakeTarget = Vector3.zero;
     Vector3 deltaTarget = Vector3.zero;
+    //当前震动数量
     int currentShakeNum = 0;
     /// <summary>
     /// 使用dotween
     /// </summary>
-    public void Shake(Vector3 shakeDirection, float strength, float frequencyGain, float durtion, bool needProject)
+    public void Shake(Vector3 shakeDirection, float strength, float frequencyGain, float durtion)
     {
         currentShakeNum++;
-        Debug.Log("shake");
         DOTween.Shake(() => shakeTarget, (value) =>
         {
             deltaTarget = value - shakeTarget;
             shakeTarget = value;
         }, durtion, strength * shakeDirection, (int)
-        frequencyGain * 10, 90, true/*是否fadeout*/, ShakeRandomnessMode.Harmonic).OnComplete(() => 
+        frequencyGain * 10, randomness, true/*是否fadeout*/, ShakeRandomnessMode.Harmonic).OnComplete(() => 
         {
             currentShakeNum--;
-            if(currentShakeNum == 0) 
+            if(currentShakeNum == 0)
             {
                 shakeTarget = Vector3.zero;
                 deltaTarget = Vector3.zero;

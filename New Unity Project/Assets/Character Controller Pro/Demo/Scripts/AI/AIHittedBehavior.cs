@@ -5,18 +5,18 @@ using UnityEngine;
 
 public class AIHittedBehavior : CharacterAIBehaviour
 {
-    //Ò»¸öAIÊÜ»÷Àà
+    //ä¸€ä¸ªAIå—å‡»ç±»
 
-    //Ò»µ©ÊÜ»÷¾Í½øÈëÕâ¸ö·½·¨¡£
+    //ä¸€æ—¦å—å‡»å°±è¿›å…¥è¿™ä¸ªæ–¹æ³•ã€‚
 
-    //¸ù¾İ´«½øÀ´µÄÊıÖµÈ¥¼ÆËã¹¥»÷µÄÏà¶Ô·½Ïò£¬È»ºóÏàÓ¦µÄÈ¥ÉèÖÃÊÜ»÷µÄ·½Ïò£¬Ö®ºóÈ¥¸ù¾İÊÜ»÷µÄ·½ÏòÈ¥²¥·Å¶¯»­
+    //æ ¹æ®ä¼ è¿›æ¥çš„æ•°å€¼å»è®¡ç®—æ”»å‡»çš„ç›¸å¯¹æ–¹å‘ï¼Œç„¶åç›¸åº”çš„å»è®¾ç½®å—å‡»çš„æ–¹å‘ï¼Œä¹‹åå»æ ¹æ®å—å‡»çš„æ–¹å‘å»æ’­æ”¾åŠ¨ç”»
     // virtual (optional)
 
 
     public bool IsDraw = true;
 
 
-    //Ôö¼ÓÁ½ÖÖÊÜ»÷µÄ·½Ê½£¬Ò»ÖÖÊÇÈ«ÃæµÄ£¬Ò»ÖÖÊÇ²¿·ÖµÄ£¬²¿·ÖµÄÉèÖÃÔÚµÚ¶ş²ã·Ö²ã¶¯»­ÖĞ£¬È«ÃæµÄÈ¥ÉèÖÃµ±Ç°µÄ¶¯»­²ã
+    //å¢åŠ ä¸¤ç§å—å‡»çš„æ–¹å¼ï¼Œä¸€ç§æ˜¯å…¨é¢çš„ï¼Œä¸€ç§æ˜¯éƒ¨åˆ†çš„ï¼Œéƒ¨åˆ†çš„è®¾ç½®åœ¨ç¬¬äºŒå±‚åˆ†å±‚åŠ¨ç”»ä¸­ï¼Œå…¨é¢çš„å»è®¾ç½®å½“å‰çš„åŠ¨ç”»å±‚
     public override void EnterBehaviour(float dt)
     {
 
@@ -32,16 +32,16 @@ public class AIHittedBehavior : CharacterAIBehaviour
     {
     }
 
-    //Õâ¸ö·½·¨¸ù¾İ´«½øÀ´µÄ¹¥»÷·½ÏòÈ¥È·ÈÏµ±Ç°µÄ¹¥»÷·½ÏòºÍÎ»ÖÃ
+    //è¿™ä¸ªæ–¹æ³•æ ¹æ®ä¼ è¿›æ¥çš„æ”»å‡»æ–¹å‘å»ç¡®è®¤å½“å‰çš„æ”»å‡»æ–¹å‘å’Œä½ç½®
     private Vector3 GetWeaponDirection( WeaponManager weapon)
     {
-        //·µ»ØÎäÆ÷µÄÏà·´·½Ïò
-        return -TransformHelper.ConvertVector(weapon.WeaponDirection,weapon.transform,transform);
+        //è¿”å›æ­¦å™¨çš„ç›¸åæ–¹å‘
+        return -TransformHelper.ConvertVector(weapon.WeaponWorldDirection,weapon.transform,transform);
     }
     private Vector3 GetWeaponPos(WeaponManager weapon)
     {
 
-        //·µ»ØÎäÆ÷µÄÎ»ÖÃ
+        //è¿”å›æ­¦å™¨çš„ä½ç½®
         return transform.InverseTransformPoint(weapon.transform.position);
     }
     //private void OnDrawGizmos()

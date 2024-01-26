@@ -1,4 +1,5 @@
 using Cinemachine;
+using Cinemachine.Utility;
 using Lightbug.CharacterControllerPro.Core;
 using MagicaCloth2;
 using System.Collections;
@@ -14,7 +15,7 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
 
-
+    CinemachineBrain Brain;
     public WeaponKind kind;//这个武器的种类，会根据这个武器的种类去那应该有哪些探测器
     Detection[] detections;    //这个武器的所有探测器
     public WeaponDetector[] ActiveWeaponDetectors;//这个武器当前激活的探测器
@@ -31,7 +32,7 @@ public class WeaponManager : MonoBehaviour
     /// <summary>
     /// 这个配置CurrentAnimConfig.AttackDirection，配置相对于characteractor的local方向，在写入时已经转化成了世界坐标
     /// </summary>
-    public Vector3 WeaponDirection;
+    public Vector3 WeaponWorldDirection;
     private int frameCount = 0;
     private Vector3 previousWeaponPosition;
     public CharacterInfo weaponOwner;
@@ -46,7 +47,7 @@ public class WeaponManager : MonoBehaviour
         weaponOwner = GetComponentInParent<CharacterInfo>();
         weaponData = FindFirstObjectByType<WeaponData>();
         impulse = GetComponent<Impulse>();
-
+        Brain = FindObjectOfType<CinemachineBrain>();
         switch (kind)
         {
             default:
@@ -79,6 +80,11 @@ Select 操作符用于将集合中的每个元素转换成另一种类型，形�
 csharp
 Copy code
 var squaredNumbers = numbers.Select(x => x * x);
+
+                    还有firstordefaut
+                    first等方法。
+                    比如选择最近的，先orderby，然后first，直接可以选到最近的
+                    select ， where会选到多个
                      */
                     #endregion
                     //对于where来说，选择的还是原本的值，对于select来说，返回的是一个新的对象。
@@ -112,7 +118,7 @@ var squaredNumbers = numbers.Select(x => x * x);
         // Debug.Log(Time.timeScale);
     }
 
-  
+
 
     /// <summary>
     /// 检测碰撞，如果在检测
@@ -187,7 +193,7 @@ var squaredNumbers = numbers.Select(x => x * x);
 
     public void Shake(float impulseRank)
     {
-        impulseSource.GenerateImpulse(impulseRank * WeaponDirection);
+        impulseSource.GenerateImpulse(impulseRank * WeaponWorldDirection);
     }
 
 
@@ -202,12 +208,12 @@ var squaredNumbers = numbers.Select(x => x * x);
                 {
                     impulseSource.m_ImpulseDefinition.m_ImpulseShape = CinemachineImpulseDefinition.ImpulseShapes.Explosion;
                     impulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.sp11Duration;
-                    impulseSource.GenerateImpulse(WeaponDirection * weaponData.sp11Force);
+                    impulseSource.GenerateImpulse(WeaponWorldDirection * weaponData.sp11Force);
                     break;
                 }
         }
     }
-
+    Vector3 targetShakeDirection;//每次震动时使用的中间变量
 
     /// <summary>
     /// 产生震动
@@ -217,35 +223,78 @@ var squaredNumbers = numbers.Select(x => x * x);
         if (weaponOwner is MainCharacter)
         {
             WeaponNum weaponNum = new WeaponNum();
-            if (weaponData.weaponNumList.Count >= weaponOwner.HitStrength + 1 && weaponData.weaponNumList[weaponOwner.HitStrength] != null)
-            {
-                weaponNum = weaponData.weaponNumList[weaponOwner.HitStrength];
-            }
-            else
-            {
-                Debug.LogError($"weaponNum索引[{weaponOwner.HitStrength}]缺少数据");
-            }
-            if(weaponData.isUseDotweenShake)
+            //设置当前的攻击数据
+            weaponNum = SetCurrentWeaponNum(weaponNum);
+            Vector3 targetShakeDirection;//每次震动时使用的中间变量
+            ShakeChange(weaponNum,out targetShakeDirection);
+
+            if (weaponData.isUseDotweenShake)
             {
                 //使用dotween的shake
-                CameraShakeManager.Instance.Shake(WeaponDirection, weaponNum.Strength, weaponNum.Frequence, weaponNum.Duration, weaponData.onlyUseVirticalShake);
+                CameraShakeManager.Instance.Shake(targetShakeDirection, weaponNum.Strength, weaponNum.Frequence, weaponNum.Duration);
             }
             else
             {
-                
                 //使用cinemachine的shake
-                impulse.GenerateImpulse(WeaponDirection, weaponNum.Strength, weaponNum.Frequence, weaponNum.Duration, weaponData.onlyUseVirticalShake);
+                impulse.GenerateImpulse(targetShakeDirection, weaponNum.Strength, weaponNum.Frequence, weaponNum.Duration);
             }
-       
-            if (weaponData.PrintHit)
-            {
-                Debug.Log($"攻击力度：{weaponOwner.HitStrength}，震动力度{weaponNum.Strength}，震动频率{weaponNum.Frequence}，震动时间{weaponNum.Duration}");
-            }
+
+
         }
         else
         {
 
         }
+    }
+    /// <summary>
+    /// 根据选项，转换当前的震动信号，比如忽略z等
+    /// </summary>
+    private void ShakeChange(WeaponNum weaponNum, out Vector3 targetShakeDirection)
+    {
+        targetShakeDirection = Vector3.zero;
+        if (Brain == null)
+        {
+            Debug.LogError("没找到cinemachineBrain");
+            return;
+        }
+        if (weaponData.isIgnoreZshake)
+        {
+            //修改震动.//忽略在主摄像机z轴的震动
+            Debug.Log("当前忽略的z方向的震动");
+            targetShakeDirection = WeaponWorldDirection.ProjectOntoPlane(Brain.transform.forward).normalized;
+            //Debug.DrawLine(Brain.transform.position, Brain.transform.position + targetShakeDirection,Color.red,1f);
+        }
+        if (weaponData.onlyUseVirticalShake)
+        {
+            Debug.Log("当前只使用竖直方向的震动");
+            targetShakeDirection = Vector3.Project(WeaponWorldDirection,Brain.transform.up).normalized;
+            //Debug.DrawLine(Brain.transform.position, Brain.transform.position + targetShakeDirection, Color.blue, 1f);
+        }
+        if (weaponData.PrintHit)
+        {
+            Debug.Log($"攻击力度：{weaponOwner.HitStrength}，震动力度{weaponNum.Strength}，震动频率{weaponNum.Frequence}，震动时间{weaponNum.Duration}");
+        }
+        Debug.DrawLine(Brain.transform.position, Brain.transform.position+targetShakeDirection);
+
+    }
+
+    /// <summary>
+    /// 根据打击力度设置当前的weaponNum（影响震动）
+    /// </summary>
+    /// <param name="weaponNum"></param>
+    /// <returns></returns>
+    private WeaponNum SetCurrentWeaponNum(WeaponNum weaponNum)
+    {
+        if (weaponData.weaponNumList.Count >= weaponOwner.HitStrength + 1 && weaponData.weaponNumList[weaponOwner.HitStrength] != null)
+        {
+            weaponNum = weaponData.weaponNumList[weaponOwner.HitStrength];
+        }
+        else
+        {
+            Debug.LogError($"weaponNum索引[{weaponOwner.HitStrength}]缺少数据");
+        }
+
+        return weaponNum;
     }
 
     /// <summary>
@@ -286,7 +335,7 @@ var squaredNumbers = numbers.Select(x => x * x);
     /// <returns></returns>
     public Vector3 GetWeaponDirectInverse(Transform HittedCharacterTransform)
     {
-        return HittedCharacterTransform.InverseTransformDirection(WeaponDirection);
+        return HittedCharacterTransform.InverseTransformDirection(WeaponWorldDirection);
     }
 }
 public enum WeaponKind

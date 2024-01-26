@@ -205,7 +205,7 @@ public class AnimatorFunction : MonoBehaviour
                     manager.isNeedUpdateDirection = false;
                     Vector3 DirectionIncharacter = new Vector3(CurrentAnimConfig.AttackDirection[currentHitIndex * 3], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 + 1], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 + 2]);
                     //然后我需要把这个
-                    manager.WeaponDirection = Attack.transform.TransformDirection(DirectionIncharacter);//这个时候已经转化成世界方向了
+                    manager.WeaponWorldDirection = Attack.transform.TransformDirection(DirectionIncharacter);//这个时候已经转化成世界方向了
                     break;
                 }
             }

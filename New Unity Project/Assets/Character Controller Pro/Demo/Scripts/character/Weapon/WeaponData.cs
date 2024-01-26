@@ -6,16 +6,22 @@ using UnityEngine;
 [SaveDuringPlay]
 public class WeaponData : MonoBehaviour
 {
+    [Space(10)]
     [Header("是否只应用垂直方向震动")]
     public bool onlyUseVirticalShake = false;
+    [Space(10)]
+    [Tooltip("是否使用dotween的震动")]
+    public bool isUseDotweenShake = false;
+    [Space(10)]
+    [Tooltip("是否忽略z的震动")]
+    public bool isIgnoreZshake = true;
 
     [Header("是否打印攻击类型")]
     public bool PrintHit = true;
 
     public bool isNeedChangeCurrentHit = false;
     public int ChangeCurrentHitNum = -1;
-    [Tooltip("是否使用dotween的震动")]
-    public bool isUseDotweenShake = false;
+
 
 
     [Header("特殊攻击配置")]

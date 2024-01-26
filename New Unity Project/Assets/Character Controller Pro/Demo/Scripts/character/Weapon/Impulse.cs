@@ -31,7 +31,7 @@ public class Impulse : MonoBehaviour
     /// <param name="FrequencyGain"></param>
     /// <param name="durtion"></param>
     /// <param name="needProject"></param>
-    public void GenerateImpulse(Vector3 direction, float strength, float FrequencyGain, float durtion, bool needProject = false)
+    public void GenerateImpulse(Vector3 direction, float strength, float FrequencyGain, float durtion)
     {
         if (impulseSource.m_ImpulseDefinition.m_ImpulseType != CinemachineImpulseDefinition.ImpulseTypes.Legacy)
             impulseSource.m_ImpulseDefinition.m_ImpulseType = CinemachineImpulseDefinition.ImpulseTypes.Legacy;
@@ -41,10 +41,10 @@ public class Impulse : MonoBehaviour
         impulseSource.m_ImpulseDefinition.m_AmplitudeGain = FrequencyGain;
         impulseSource.m_ImpulseDefinition.m_AmplitudeGain = strength;
         impulseSource.m_ImpulseDefinition.m_Randomize = false;
-        if (needProject)
-        {
-            direction = ResetDir(direction);
-        }
+        //if (needProject)
+        //{
+        //    direction = ResetDir(direction);
+        //}
         impulseSource.GenerateImpulse(direction.normalized);
     }
 

@@ -62,7 +62,7 @@ public class Hitted : CharacterState
     private void CheckAnimator(WeaponManager weapon, IAgent.HitKind hitKind, bool NeedChangeState)
     {
         //这个是转换到世界坐标系。
-        Vector3 HitWorldDir = weapon.WeaponDirection;
+        Vector3 HitWorldDir = weapon.WeaponWorldDirection;
         Debug.Log($"{weapon.transform.position},{HitWorldDir},{weapon.transform.position + HitWorldDir}");
         if(Check)
         {
@@ -70,7 +70,7 @@ public class Hitted : CharacterState
             EditorApplication.isPaused = true;
         }
 
-        SetAnimationParameters(weapon.WeaponDirection, true);
+        SetAnimationParameters(weapon.WeaponWorldDirection, true);
         //是否需要切换状态到当前状态
         if (NeedChangeState)
         {
