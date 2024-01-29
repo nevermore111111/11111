@@ -197,7 +197,7 @@ public class ExcelReaderHelper : MonoBehaviour
         else
         {
             foreach (string str in stringList)
-            {
+            { 
                 T value = (T)Convert.ChangeType(str, typeof(T));
                 genericList.Add(value);
             }
