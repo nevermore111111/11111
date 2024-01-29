@@ -11074,8 +11074,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234743, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.062046, z: -5.8746176}
+  m_LocalRotation: {x: 0.039234754, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.062047, z: -5.8746176}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16112,7 +16112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ChannelMask: 1
   m_Gain: 1
-  m_Use2DDistance: 1
+  m_Use2DDistance: 0
   m_UseLocalSpace: 0
   m_ReactionSettings:
     m_SecondaryNoise: {fileID: 0}
@@ -16133,6 +16133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomness: 50
+  StrengthPara: 0.2
 --- !u!1 &1163041435
 GameObject:
   m_ObjectHideFlags: 0
@@ -17055,11 +17056,6 @@ MonoBehaviour:
   executeDis: 3
   maxAutoAnglerotate: 50
   maxAttackAngleNoenemy: 20
-  IKPar:
-  - targetIKPos: 2
-    ikPosWeight: 1
-    ikRotateWeight: 1
-    targetTransform: {fileID: 0}
   gravity: 10
 --- !u!114 &1257029335
 MonoBehaviour:
@@ -17163,7 +17159,6 @@ MonoBehaviour:
   executeDis: 3
   maxAutoAnglerotate: 50
   maxAttackAngleNoenemy: 20
-  IKPar: []
 --- !u!114 &1257029339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17185,7 +17180,6 @@ MonoBehaviour:
   executeDis: 3
   maxAutoAnglerotate: 50
   maxAttackAngleNoenemy: 20
-  IKPar: []
   army:
   - {fileID: 0}
   gravity: 10
@@ -17228,7 +17222,6 @@ MonoBehaviour:
   executeDis: 3
   maxAutoAnglerotate: 50
   maxAttackAngleNoenemy: 20
-  IKPar: []
   gravity: 10
 --- !u!4 &1270522007 stripped
 Transform:
@@ -19953,8 +19946,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498168725}
-  m_LocalRotation: {x: 0.0032979785, y: 0.71324265, z: 0.7009015, w: -0.003356047}
-  m_LocalPosition: {x: -121.70314, y: -6.8217025, z: 95.49316}
+  m_LocalRotation: {x: 0.67959434, y: -0.0036038803, z: -0.0033387006, w: -0.73357177}
+  m_LocalPosition: {x: -121.69969, y: -6.8322353, z: 95.85162}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21179,7 +21172,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689691047}
-  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
+  m_LocalRotation: {x: 0.023164071, y: -0.26986164, z: 0.0064939777, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -26082,7 +26075,7 @@ MonoBehaviour:
   CharacterStateController: {fileID: 0}
   CharacterHitted: {fileID: 0}
   WeaponKind: 0
-  hitData: {fileID: 0}
+  hitTimeData: {fileID: 0}
 --- !u!135 &8805377711411893424
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -26270,6 +26263,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4211985246802248730, guid: 3ed1412737bb5b14c8e7d8dfb95f4e76,
+        type: 3}
+      propertyPath: hits.Array.data[3].stayTime
+      value: 0.099
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273363903705841264, guid: 3ed1412737bb5b14c8e7d8dfb95f4e76,
+        type: 3}
+      propertyPath: isUseDotweenShake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5737975426329631883, guid: 3ed1412737bb5b14c8e7d8dfb95f4e76,
         type: 3}
       propertyPath: m_Name

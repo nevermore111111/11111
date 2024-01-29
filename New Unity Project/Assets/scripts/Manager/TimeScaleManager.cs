@@ -3,10 +3,12 @@ using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using System;
+using System.Collections.Generic;
 
 public class TimeScaleManager : MonoBehaviour
 {
     private static TimeScaleManager _instance;
+    private int currentPriority;
 
     public static TimeScaleManager Instance
     {
@@ -47,12 +49,12 @@ public class TimeScaleManager : MonoBehaviour
         originalTimeScale = Time.timeScale;
     }
 
-    // ÉèÖÃÊ±¼äËõ·Å
+    // è®¾ç½®æ—¶é—´ç¼©æ”¾
     public void SetTimeScale(float newTimeScale)
     {
         Time.timeScale = newTimeScale;
     }
-    //Èç¹ûÉèÖÃµÄµ±Ç°Ê±¼äËõ·ÅÓÅÏÈ¼¶´óÓÚµÈÓÚ£¬¾Í»áÉúĞ§
+    //å¦‚æœè®¾ç½®çš„å½“å‰æ—¶é—´ç¼©æ”¾ä¼˜å…ˆçº§å¤§äºç­‰äºï¼Œå°±ä¼šç”Ÿæ•ˆ
     public void SetTimeScaleByPriority(float newTimeScale, int priority)
     {
         if (priority >= currentPriority)
@@ -62,52 +64,52 @@ public class TimeScaleManager : MonoBehaviour
         }
     }
 
-    // ÖØÖÃÊ±¼äËõ·ÅÎª³õÊ¼Öµ
-    public void ResetTimeScale()
-    {
-        Time.timeScale = originalTimeScale;
-    }
+    //// é‡ç½®æ—¶é—´ç¼©æ”¾ä¸ºåˆå§‹å€¼
+    //public void ResetTimeScale()
+    //{
+    //    Time.timeScale = originalTimeScale;
+    //}
 
-    // »ñÈ¡µ±Ç°Ê±¼äËõ·ÅÖµ
-    public float GetCurrentTimeScale()
-    {
-        return Time.timeScale;
-    }
+    //// è·å–å½“å‰æ—¶é—´ç¼©æ”¾å€¼
+    //public float GetCurrentTimeScale()
+    //{
+    //    return Time.timeScale;
+    //}
 
-    // ÔİÍ£ÓÎÏ·
-    public void PauseGame()
-    {
-        SetTimeScale(0f);
-    }
+    //// æš‚åœæ¸¸æˆ
+    //public void PauseGame()
+    //{
+    //    SetTimeScale(0f);
+    //}
 
-    // »Ö¸´ÓÎÏ·
-    public void ResumeGame()
-    {
-        ResetTimeScale();
-    }
+    //// æ¢å¤æ¸¸æˆ
+    //public void ResumeGame()
+    //{
+    //    ResetTimeScale();
+    //}
 
-    // ¼ÓËÙÓÎÏ·Ê±¼ä
-    public void SpeedUpGame(float factor)
-    {
-        SetTimeScale(originalTimeScale * factor);
-    }
+    //// åŠ é€Ÿæ¸¸æˆæ—¶é—´
+    //public void SpeedUpGame(float factor)
+    //{
+    //    SetTimeScale(originalTimeScale * factor);
+    //}
 
-    // ¼õ»ºÓÎÏ·Ê±¼ä
-    public void SlowDownGame(float factor)
-    {
-        SetTimeScale(originalTimeScale / factor);
-    }
+    //// å‡ç¼“æ¸¸æˆæ—¶é—´
+    //public void SlowDownGame(float factor)
+    //{
+    //    SetTimeScale(originalTimeScale / factor);
+    //}
 
-    // »Ö¸´Õı³£ÓÎÏ·Ê±¼ä£¨È¡Ïû¼ÓËÙ»ò¼õ»ºĞ§¹û£©
-    public void ResumeNormalTime()
-    {
-        ResetTimeScale();
-    }
+    //// æ¢å¤æ­£å¸¸æ¸¸æˆæ—¶é—´ï¼ˆå–æ¶ˆåŠ é€Ÿæˆ–å‡ç¼“æ•ˆæœï¼‰
+    //public void ResumeNormalTime()
+    //{
+    //    ResetTimeScale();
+    //}
 
-    private int currentPriority;
+
 
     /// <summary>
-    /// ÕâÀïµÄËùÓĞÊ±¼ä¾ùÎªÎŞÊÓÊ±¼äËõ·ÅµÄ
+    /// è¿™é‡Œçš„æ‰€æœ‰æ—¶é—´å‡ä¸ºæ— è§†æ—¶é—´ç¼©æ”¾çš„
     /// </summary>
     /// <param name="fadeInTime"></param>
     /// <param name="fadeOutTime"></param>
@@ -119,43 +121,99 @@ public class TimeScaleManager : MonoBehaviour
     {
         float currentTimeScale = Time.timeScale;
 
-        // ½¥Èë
+        // æ¸å…¥
         await DOTween.To(() => Time.timeScale, value => SetTimeScaleByPriority(value, changePriority), targetTimeScale, fadeInTime)
-            .OnUpdate(() => { /* ¿ÉÔÚ¸üĞÂÊ±Ö´ĞĞÆäËû²Ù×÷ */ }).SetUpdate(true)
+            .OnUpdate(() => { /* å¯åœ¨æ›´æ–°æ—¶æ‰§è¡Œå…¶ä»–æ“ä½œ */ }).SetUpdate(true)
             .AsyncWaitForCompletion();
-        // ³ÖĞø
+        // æŒç»­
         await UniTask.Delay((int)(duration * 1000),true);
 
-        // ½¥³ö
+        // æ¸å‡º
         await DOTween.To(() => Time.timeScale, value => SetTimeScaleByPriority(value, changePriority), originalTimeScale, fadeOutTime)
-            .OnUpdate(() => { /* ¿ÉÔÚ¸üĞÂÊ±Ö´ĞĞÆäËû²Ù×÷ */ }).SetUpdate(true)
+            .OnUpdate(() => { /* å¯åœ¨æ›´æ–°æ—¶æ‰§è¡Œå…¶ä»–æ“ä½œ */ }).SetUpdate(true)
             .AsyncWaitForCompletion();
 
-        // »Ö¸´µ½³õÊ¼Ê±¼äËõ·Å
-        ResetTimeScale();
+        // æ¢å¤åˆ°åˆå§‹æ—¶é—´ç¼©æ”¾
+        Time.timeScale = originalTimeScale;
         currentPriority = 0;
     }
+    public async UniTask SetAnimatorSpeed(float fadeInTime, float fadeOutTime, float duration, float targetSpeed, List<Animator> animators, int changePriority = 0)
+    {
+        foreach (var animator in animators)
+        {
+            if (animator != null)
+            {
+                //float originalAnimatorSpeed = animator.speed;
 
+                // æ¸å…¥
+                await DOTween.To(() => animator.speed, value => SetAnimatorSpeedByPriority(value, changePriority, animator), targetSpeed, fadeInTime)
+                    .OnUpdate(() => { /* åœ¨æ›´æ–°æ—¶æ‰§è¡Œå…¶ä»–æ“ä½œ */ }).SetUpdate(true)
+                    .AsyncWaitForCompletion();
 
+                // æŒç»­
+                await DOTween.To(() => animator.speed, value => SetAnimatorSpeedByPriority(value, changePriority, animator), targetSpeed, duration)
+                    .OnUpdate(() => { /* åœ¨æ›´æ–°æ—¶æ‰§è¡Œå…¶ä»–æ“ä½œ */ }).SetUpdate(true)
+                    .AsyncWaitForCompletion();
+
+                // æ¸å‡º
+                await DOTween.To(() => animator.speed, value => SetAnimatorSpeedByPriority(value, changePriority, animator), 1, fadeOutTime)
+                    .OnUpdate(() => { /* åœ¨æ›´æ–°æ—¶æ‰§è¡Œå…¶ä»–æ“ä½œ */ }).SetUpdate(true)
+                    .AsyncWaitForCompletion();
+
+                // æ¢å¤åˆ°åˆå§‹åŠ¨ç”»æœºé€Ÿåº¦
+                SetAnimatorSpeedByPriority(1, 0, animator);
+            }
+        }
+    }
+    public async UniTask SetAnimatorSpeed(float fadeInTime, float fadeOutTime, float duration, float targetSpeed, Animator animator, int changePriority = 0)
+    {
+
+        if (animator != null)
+        {
+            //float originalAnimatorSpeed = animator.speed;
+
+            // æ¸å…¥
+            await DOTween.To(() => animator.speed, value => SetAnimatorSpeedByPriority(value, changePriority, animator), targetSpeed, fadeInTime)
+                .OnUpdate(() => { /* åœ¨æ›´æ–°æ—¶æ‰§è¡Œå…¶ä»–æ“ä½œ */ }).SetUpdate(true)
+                .AsyncWaitForCompletion();
+
+            // æŒç»­
+            await DOTween.To(() => animator.speed, value => SetAnimatorSpeedByPriority(value, changePriority, animator), targetSpeed, duration)
+                .OnUpdate(() => { /* åœ¨æ›´æ–°æ—¶æ‰§è¡Œå…¶ä»–æ“ä½œ */ }).SetUpdate(true)
+                .AsyncWaitForCompletion();
+
+            // æ¸å‡º
+            await DOTween.To(() => animator.speed, value => SetAnimatorSpeedByPriority(value, changePriority, animator), 1, fadeOutTime)
+                .OnUpdate(() => { /* åœ¨æ›´æ–°æ—¶æ‰§è¡Œå…¶ä»–æ“ä½œ */ }).SetUpdate(true)
+                .AsyncWaitForCompletion();
+
+            // æ¢å¤åˆ°åˆå§‹åŠ¨ç”»æœºé€Ÿåº¦
+            SetAnimatorSpeedByPriority(1, 0, animator);
+        }
+    }
+    private void SetAnimatorSpeedByPriority(float newSpeed, int priority, Animator animator)
+    {
+            animator.speed = newSpeed;
+    }
 
     //public async UniTask SetTimeScale(float fadeInTime, float fadeOutTime, float duration, float targetTimeScale)
     //{
     //    float currentTimeScale = Time.timeScale;
 
-    //    // ½¥Èë
+    //    // æ¸å…¥
     //    await DOTween.To(() => Time.timeScale, value => Time.timeScale = value, targetTimeScale, fadeInTime)
-    //        .OnUpdate(() => { /* ¿ÉÔÚ¸üĞÂÊ±Ö´ĞĞÆäËû²Ù×÷ */ })
+    //        .OnUpdate(() => { /* å¯åœ¨æ›´æ–°æ—¶æ‰§è¡Œå…¶ä»–æ“ä½œ */ })
     //        .AsyncWaitForCompletion();
 
-    //    // ³ÖĞø
+    //    // æŒç»­
     //    await UniTask.Delay((int)(duration * 1000));
 
-    //    // ½¥³ö
+    //    // æ¸å‡º
     //    await DOTween.To(() => Time.timeScale, value => Time.timeScale = value, originalTimeScale, fadeOutTime)
-    //        .OnUpdate(() => { /* ¿ÉÔÚ¸üĞÂÊ±Ö´ĞĞÆäËû²Ù×÷ */ })
+    //        .OnUpdate(() => { /* å¯åœ¨æ›´æ–°æ—¶æ‰§è¡Œå…¶ä»–æ“ä½œ */ })
     //        .AsyncWaitForCompletion();
 
-    //    // »Ö¸´µ½³õÊ¼Ê±¼äËõ·Å
+    //    // æ¢å¤åˆ°åˆå§‹æ—¶é—´ç¼©æ”¾
     //    ResetTimeScale();
     //}
 }
