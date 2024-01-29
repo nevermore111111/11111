@@ -424,11 +424,11 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
         void OnAnimatorIK(int layerIndex)
         {
-            Debug.Log("测试ik");
-            if (CurrentState == null)
-                return;
+            //Debug.Log("测试ik");
+            //if (CurrentState == null)
+            //    return;
 
-            CurrentState.UpdateIK(layerIndex);
+            //CurrentState.UpdateIK(layerIndex);
         }
 
         #endregion

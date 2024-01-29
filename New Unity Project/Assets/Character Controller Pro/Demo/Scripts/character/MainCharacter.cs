@@ -12,7 +12,8 @@ public class MainCharacter : CharacterInfo
     public CharacterStateController CharacterStateController;
     public Hitted CharacterHitted;
     public WeaponKind WeaponKind;
-    public HitData hitData;
+    //public HitData hitData;
+    public HitTimeData hitTimeData;
 
     public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground)
     {
@@ -31,7 +32,7 @@ public class MainCharacter : CharacterInfo
         base.Awake();
         CharacterStateController = this.transform.parent.GetComponentInChildren<CharacterStateController>();
         CharacterHitted = characterActor.GetComponentInChildren<Hitted>();
-        hitData = FindObjectOfType<HitData>();
+        hitTimeData = FindObjectOfType<HitTimeData>();
     }
 
 #warning(这里没做,摄像机使用的)
@@ -82,21 +83,24 @@ public class MainCharacter : CharacterInfo
 
 #if UNITY_EDITOR
         // 只在Unity编辑器中运行的代码
-        if (hitData.ForceCurrentHit != -1)
+        if (hitTimeData.ForceCurrent > -1)
         {
             //如果强制使用这个震动，会播放这个震动的震屏效果
-            HitStrength = hitData.ForceCurrentHit;
+            HitStrength = hitTimeData.ForceCurrent;
         }
 #endif
-        HitPlus(HitStrength, hitData, weapon);
+        HitPlus(HitStrength, hitTimeData, weapon);
     }
-    public void HitPlus(int currentHit, HitData hitData, WeaponManager weaponManager)
+    public void HitPlus(int currentHit, HitTimeData hitTimeData, WeaponManager weaponManager)
     {
-        float fadeInDuration = hitData.GetFadeTime(hitData, currentHit);
-        float fadeOutDuration = hitData.GetFadeTime(hitData, currentHit); ; // 如果渐出时间和渐入时间相同
-        float duration = hitData.GetStayTime(hitData, currentHit);
-        float targetTimeScale = hitData.GetTimeScale(hitData, currentHit);
-        TimeScaleManager.Instance.SetTimeScale(fadeInDuration, fadeOutDuration, duration, targetTimeScale);
+        hitTimeData.CurrentHit = currentHit;
+        float fadeInDuration = hitTimeData.currentHitTimePara.fadeTime;//hitData.GetFadeTime(hitData, currentHit);
+        float fadeOutDuration = hitTimeData.currentHitTimePara.fadeTime;// 如果渐出时间和渐入时间相同
+        float duration = hitTimeData.currentHitTimePara.stayTime;
+        float targetTimeScale = hitTimeData.currentHitTimePara.targetTimeScale;
+        //TimeScaleManager.Instance.SetTimeScale(fadeInDuration, fadeOutDuration, duration, targetTimeScale);
+        //减速自身和目标的速度。
+        TimeScaleManager.Instance.SetAnimatorSpeed(fadeInDuration, fadeOutDuration, duration, targetTimeScale,new List<Animator>{ characterActor.Animator,selectEnemy?.characterActor?.Animator});
         if (weaponManager.isActiveAndEnabled)
         {
             //调用震动和特效

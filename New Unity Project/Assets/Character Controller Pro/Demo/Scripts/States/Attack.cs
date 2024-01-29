@@ -21,9 +21,9 @@ public class Attack : CharacterState
     public static bool canChangeState;
     // protected  GameObject selectEnemy;
     public static int MaxCombo;
-    //Õâ¸öÊÇ·¶Î§ÄÚµÄµĞÈË£¬ÀûÓÃÒ»¸öÇòÅĞ¶¨½øÈë·¶Î§µÄµĞÈË£¬½øÈëÁË¾ÍÌí¼ÓÔÚÃûµ¥ÀïÃæ£»
+    //è¿™ä¸ªæ˜¯èŒƒå›´å†…çš„æ•Œäººï¼Œåˆ©ç”¨ä¸€ä¸ªçƒåˆ¤å®šè¿›å…¥èŒƒå›´çš„æ•Œäººï¼Œè¿›å…¥äº†å°±æ·»åŠ åœ¨åå•é‡Œé¢ï¼›
     // public static List<GameObject> enemys = new List<GameObject>();
-    //Õâ¸öonceAttackÊÇÓÃÀ´ÅĞ¶¨Ã¿´Î¹¥»÷Ö»Ö´ĞĞÒ»´Î¶¯»­¼õÂıĞ§¹û
+    //è¿™ä¸ªonceAttackæ˜¯ç”¨æ¥åˆ¤å®šæ¯æ¬¡æ”»å‡»åªæ‰§è¡Œä¸€æ¬¡åŠ¨ç”»å‡æ…¢æ•ˆæœ
     public static bool OnceAttack;
     private NormalMovement NormalMovement;
     public static AttackMode currentAttackMode = AttackMode.AttackOnGround;
@@ -35,17 +35,17 @@ public class Attack : CharacterState
     public static bool useGravity = false;
     public static float AttackGravity = 10f;
     public float executeDis = 3f;
-    //¼¼ÄÜ¹¥»÷Ê±£¬Èç¹ûÓĞµĞÈËÔÚÃæÇ°Ê±£¬×î´ó×ªÏò½Ç¶È¡£
+    //æŠ€èƒ½æ”»å‡»æ—¶ï¼Œå¦‚æœæœ‰æ•Œäººåœ¨é¢å‰æ—¶ï¼Œæœ€å¤§è½¬å‘è§’åº¦ã€‚
     public float maxAutoAnglerotate = 45f;
-    //¹¥»÷Ê±£¬µĞÈË²»ÔÚÇ°·½£¬¹¥»÷Ê±µÄ×î´ó×ªÏò½Ç¶È
+    //æ”»å‡»æ—¶ï¼Œæ•Œäººä¸åœ¨å‰æ–¹ï¼Œæ”»å‡»æ—¶çš„æœ€å¤§è½¬å‘è§’åº¦
     public float maxAttackAngleNoenemy = 20f;
-    //10 µØÃæÆÕÍ¨¹¥»÷ ½£
-    //11 ½£ÏÂÂä¹¥»÷ ½£
-    //12 µØÃæ»÷·É  È­
-    //13 ¿ÕÖĞsp  È­
+    //10 åœ°é¢æ™®é€šæ”»å‡» å‰‘
+    //11 å‰‘ä¸‹è½æ”»å‡» å‰‘
+    //12 åœ°é¢å‡»é£  æ‹³
+    //13 ç©ºä¸­sp  æ‹³
     public static bool isNextAttack = false;
 
-    public List<IKPar> IKPar;
+    //public List<IKPar> IKPar;
    
     public enum AttackMode
     {
@@ -54,7 +54,7 @@ public class Attack : CharacterState
         AttackOnGround_fist
     }
     /// <summary>
-    /// falseÊÇÕ¹Ê¾
+    /// falseæ˜¯å±•ç¤º
     /// </summary>
     /// <param name="ExitAttack"></param>
     public void ChangeWeaponState(bool ExitAttack)
@@ -72,9 +72,9 @@ public class Attack : CharacterState
             {
                 case AttackMode.AttackOnGround:
                     {
-                        #region(Ñ§Ï°)
+                        #region(å­¦ä¹ )
                         /*
-                         * list.foreach()//±éÀúÕâ¸öÁĞ±íÖĞµÄËùÓĞÎïÌå£¬²¢ÇÒ¶ÔÆä½øĞĞÄ³ÖÖ²Ù×÷
+                         * list.foreach()//éå†è¿™ä¸ªåˆ—è¡¨ä¸­çš„æ‰€æœ‰ç‰©ä½“ï¼Œå¹¶ä¸”å¯¹å…¶è¿›è¡ŒæŸç§æ“ä½œ
                          */
                         #endregion
                         foreach (var weapon in weaponManagers)
@@ -90,7 +90,7 @@ public class Attack : CharacterState
                         //{
                         //    weapon.gameObject.SetActive(true);
                         //}
-                        // //Èç¹ûÊÇÊ¹ÓÃfist¹¥»÷£¬ÄÇÃ´Ö»Òª¹Ø±Õµ±Ç°µÄweapon¼ì²â¾Í¿ÉÒÔÁË
+                        // //å¦‚æœæ˜¯ä½¿ç”¨fistæ”»å‡»ï¼Œé‚£ä¹ˆåªè¦å…³é—­å½“å‰çš„weaponæ£€æµ‹å°±å¯ä»¥äº†
                         weaponManagers.Where(_ => _.kind != WeaponKind.fist).ToList().ForEach(_ => _.gameObject.SetActive(false));
                         break;
                     }
@@ -135,8 +135,8 @@ public class Attack : CharacterState
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
-        //½øÈë¹¥»÷Ê±ĞŞ¸ÄÈËÎïµÄ¸ß¶ÈºÍ¿í
-        //¼¸ÂÊ²¢ÇÒĞŞ¸Ä
+        //è¿›å…¥æ”»å‡»æ—¶ä¿®æ”¹äººç‰©çš„é«˜åº¦å’Œå®½
+        //å‡ ç‡å¹¶ä¸”ä¿®æ”¹
         //HeighAndWidth = CharacterActor.BodySize;
         base.EnterBehaviour(dt, fromState);
         isAttack = true;
@@ -146,9 +146,9 @@ public class Attack : CharacterState
             isJustEnter = true;
         CharacterActor.CheckAndSetSize(HeighAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
 
-        // //¸ù¾İµ±Ç°½øÈëµÄÀà£¬È¥µ÷Õûµ±Ç°µÄtimelineµÄÊıÁ¿
+        // //æ ¹æ®å½“å‰è¿›å…¥çš„ç±»ï¼Œå»è°ƒæ•´å½“å‰çš„timelineçš„æ•°é‡
         // string className = this.GetType().Name;
-        // //µ±½øÈë¶ÔÓ¦Ä£Ê½µÄÊ±ºò£¬È¥ÇĞ»»¶ÔÓ¦µÄtimelineÊı×é
+        // //å½“è¿›å…¥å¯¹åº”æ¨¡å¼çš„æ—¶å€™ï¼Œå»åˆ‡æ¢å¯¹åº”çš„timelineæ•°ç»„
         //timelineManager.SwapTimelinesByAssetName(className);
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
@@ -181,7 +181,7 @@ public class Attack : CharacterState
         SetCombo();
     }
     /// <summary>
-    /// ¸ù¾İÊäÈë£¬À´È·ÈÏµ±Ç°µÄcombo
+    /// æ ¹æ®è¾“å…¥ï¼Œæ¥ç¡®è®¤å½“å‰çš„combo
     /// </summary>
     protected void SetCombo()
     {
@@ -204,12 +204,12 @@ public class Attack : CharacterState
         }
         if (CharacterActions.attack.value)
         {
-            //°´ÏÂ¹¥»÷¼üÎ»
+            //æŒ‰ä¸‹æ”»å‡»é”®ä½
             if (canInput)
             {
                 if(canExecute())
                 {
-                    //Ö´ĞĞ´¦¾ö£¬ÏÈ³å¹ıÈ¥
+                    //æ‰§è¡Œå¤„å†³ï¼Œå…ˆå†²è¿‡å»
                     executeStart();
                 }
                 else
@@ -238,7 +238,7 @@ public class Attack : CharacterState
     {
         if (CharacterActor.CharacterInfo.selectEnemy != null && CharacterActor.CharacterInfo.selectEnemy.canBeExecuted == true)
         {
-            //¾àÀë¹»½üÇÒ×ÔÉíÔÚµØÃæ
+            //è·ç¦»å¤Ÿè¿‘ä¸”è‡ªèº«åœ¨åœ°é¢
             if (CheckDis(attack.executeDis) && CharacterActor.IsGrounded)
             {
                 //

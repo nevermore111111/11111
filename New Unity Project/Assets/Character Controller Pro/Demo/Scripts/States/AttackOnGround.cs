@@ -45,7 +45,7 @@ public class AttackOnGround : Attack
         bool isPlayAttack = CharacterActor.Animator.GetNextAnimatorStateInfo(0).IsTag("AttackOnGround");
         if (CharacterStateController.CurrentState is AttackOnGround && (!isPlayAttack))
         {
-            Debug.Log("×Ô¶¯ÇĞ»»ÁË");
+            Debug.Log("è‡ªåŠ¨åˆ‡æ¢äº†");
             if (canExecute())
             {
                 executeStart();
@@ -70,20 +70,20 @@ public class AttackOnGround : Attack
             }
         }
     }
-    public override void UpdateIK(int layerIndex)
-    {
-        if (CharacterActor.CharacterInfo.selectEnemy != null)
-        {
-            foreach (var iKParChild in IKPar)
-            {
-                if (iKParChild.targetTransform && (iKParChild.ikRotateWeight != 0 || iKParChild.ikPosWeight != 0))
-                {
-                    SetIKbyIKPar(iKParChild);
-                    Debug.Log("Ik");
-                }
-            }
-        }
-    }
+    //public override void UpdateIK(int layerIndex)
+    //{
+    //    if (CharacterActor.CharacterInfo.selectEnemy != null)
+    //    {
+    //        foreach (var iKParChild in IKPar)
+    //        {
+    //            if (iKParChild.targetTransform && (iKParChild.ikRotateWeight != 0 || iKParChild.ikPosWeight != 0))
+    //            {
+    //                SetIKbyIKPar(iKParChild);
+    //                Debug.Log("Ik");
+    //            }
+    //        }
+    //    }
+    //}
 
 
 
@@ -111,7 +111,7 @@ public class AttackOnGround : Attack
                 CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
             }
         }
-        else if (!CharacterActor.IsGrounded && !isAttack)//¿ÕÖĞ·Ç¹¥»÷²Å»áÇĞ»»
+        else if (!CharacterActor.IsGrounded && !isAttack)//ç©ºä¸­éæ”»å‡»æ‰ä¼šåˆ‡æ¢
         {
             if (canAttackInair && isNextAttack)
             {
@@ -133,12 +133,12 @@ public class AttackOnGround : Attack
 
 
 
-    //¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¶îÍâ·½·¨·Ö¸îÏß¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
-    //¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¶îÍâ·½·¨·Ö¸îÏß¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
-    //¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¶îÍâ·½·¨·Ö¸îÏß¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
+    //â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”é¢å¤–æ–¹æ³•åˆ†å‰²çº¿â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
+    //â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”é¢å¤–æ–¹æ³•åˆ†å‰²çº¿â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
+    //â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”é¢å¤–æ–¹æ³•åˆ†å‰²çº¿â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 
     /// <summary>
-    /// ¿ªÊ¼Ö´ĞĞ´¦¾ö
+    /// å¼€å§‹æ‰§è¡Œå¤„å†³
     /// </summary>
     protected override void executeStart()
     {
@@ -156,7 +156,7 @@ public class AttackOnGround : Attack
         }
 
     }
-    //¹Ø±ÕËùÓĞµÄÅö×²ºĞ£¬²¢ÇÒ°ÑËûÀ­¹ıÀ´£¬²¢ÇÒ¿ªÆôik
+    //å…³é—­æ‰€æœ‰çš„ç¢°æ’ç›’ï¼Œå¹¶ä¸”æŠŠä»–æ‹‰è¿‡æ¥ï¼Œå¹¶ä¸”å¼€å¯ik
     public void LetSelectEnemyCloser(int requireSkillNum, float TimeDuration)
     {
         SkillReceiver skillReceiver = CharacterActor.CharacterInfo.GetSkillReceiver(requireSkillNum);
@@ -164,13 +164,13 @@ public class AttackOnGround : Attack
         {
             CharacterActor.UseRootMotion = true;
 
-            //×îĞ¡»¯µĞÈË¸ÕÌå£¬¹Ø±ÕµĞÈËÅö×²£¬¿ªÆôik
+            //æœ€å°åŒ–æ•Œäººåˆšä½“ï¼Œå…³é—­æ•Œäººç¢°æ’ï¼Œå¼€å¯ik
             CharacterActor enemyActor = CharacterActor.CharacterInfo.selectEnemy.characterActor;
             CharacterActor.CheckAndSetSize(new Vector2(0.2f, 1.58f));
             CharacterActor.UseRootMotion = true;
             CharacterActor.Velocity = Vector3.zero;
             enemyActor.UseRootMotion = true;
-            IKPar[0].targetTransform = CharacterActor.CharacterInfo.selectEnemy.allSkillReceivers.FirstOrDefault(_ => _.skillPoint == 1001)?.transform;
+            //IKPar[0].targetTransform = CharacterActor.CharacterInfo.selectEnemy.allSkillReceivers.FirstOrDefault(_ => _.skillPoint == 1001)?.transform;
             StopRigidBody(enemyActor);
             CharacterActor.CharacterInfo.selectEnemy.GetDamage(0f, Vector3.one, 0f, "GhostSamurai_Ambushed01_Root");
             CharacterActor.Animator.CrossFadeInFixedTime("Execeute01_back", 0.1f, 0);
@@ -196,12 +196,12 @@ public class AttackOnGround : Attack
 
     private void TestFun0001(CharacterActor enemyActor)
     {
-        Debug.Log("²âÊÔ·½·¨");
+        Debug.Log("æµ‹è¯•æ–¹æ³•");
         CharacterActor.Animator.speed = 0.1f;
         enemyActor.Animator.speed = 0.1f;
     }
 
-    //×îĞ¡»¯µĞÈË¸ÕÌå£¬¹Ø±ÕµĞÈËÅö×²
+    //æœ€å°åŒ–æ•Œäººåˆšä½“ï¼Œå…³é—­æ•Œäººç¢°æ’
     private static void StopRigidBody(CharacterActor enemyActor)
     {
         enemyActor.SetSize(new Vector2(0.01f, 1.7f), CharacterActor.SizeReferenceType.Bottom);

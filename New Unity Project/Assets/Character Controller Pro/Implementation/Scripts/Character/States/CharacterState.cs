@@ -236,39 +236,39 @@ namespace Lightbug.CharacterControllerPro.Implementation
         {
         }
 
-        public void SetIKPos(AvatarIKGoal targetAvatarIK, Transform targetTransform, float targetWeight)
-        {
-            CharacterActor.Animator.SetIKPosition(targetAvatarIK, targetTransform.position);
-            CharacterActor.Animator.SetIKPositionWeight(targetAvatarIK, targetWeight);
-        }
-        public void SetIKRotate(AvatarIKGoal targetAvatarIK, Transform targetTransform, float targetWeight)
-        {
-            CharacterActor.Animator.SetIKRotation(targetAvatarIK, transform.rotation);
-            CharacterActor.Animator.SetIKRotationWeight(targetAvatarIK, targetWeight);
-        }
-        public void SetIKbyTransform(AvatarIKGoal targetAvatarIK, Transform targetTransform, float tarPosWeight, float tarRotateWeight)
-        {
-            SetIKPos(targetAvatarIK, targetTransform, tarPosWeight);
-            SetIKRotate(targetAvatarIK, targetTransform, tarRotateWeight);
-        }
-        public void SetIKbyIKPar(IKPar iKPar)
-        {
-            switch (iKPar.targetIKPos)
-            {
-                case AvatarIKGoal.LeftHand:
-                    SetIKbyTransform(AvatarIKGoal.LeftHand, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
-                    break;
-                case AvatarIKGoal.RightHand:
-                    SetIKbyTransform(AvatarIKGoal.RightHand, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
-                    break;
-                case AvatarIKGoal.LeftFoot:
-                    SetIKbyTransform(AvatarIKGoal.LeftFoot, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
-                    break;
-                case AvatarIKGoal.RightFoot:
-                    SetIKbyTransform(AvatarIKGoal.RightFoot, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
-                    break;
-            }
-        }
+        //public void SetIKPos(AvatarIKGoal targetAvatarIK, Transform targetTransform, float targetWeight)
+        //{
+        //    CharacterActor.Animator.SetIKPosition(targetAvatarIK, targetTransform.position);
+        //    CharacterActor.Animator.SetIKPositionWeight(targetAvatarIK, targetWeight);
+        //}
+        //public void SetIKRotate(AvatarIKGoal targetAvatarIK, Transform targetTransform, float targetWeight)
+        //{
+        //    CharacterActor.Animator.SetIKRotation(targetAvatarIK, transform.rotation);
+        //    CharacterActor.Animator.SetIKRotationWeight(targetAvatarIK, targetWeight);
+        //}
+        //public void SetIKbyTransform(AvatarIKGoal targetAvatarIK, Transform targetTransform, float tarPosWeight, float tarRotateWeight)
+        //{
+        //    SetIKPos(targetAvatarIK, targetTransform, tarPosWeight);
+        //    SetIKRotate(targetAvatarIK, targetTransform, tarRotateWeight);
+        //}
+        //public void SetIKbyIKPar(IKPar iKPar)
+        //{
+        //    switch (iKPar.targetIKPos)
+        //    {
+        //        case AvatarIKGoal.LeftHand:
+        //            SetIKbyTransform(AvatarIKGoal.LeftHand, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
+        //            break;
+        //        case AvatarIKGoal.RightHand:
+        //            SetIKbyTransform(AvatarIKGoal.RightHand, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
+        //            break;
+        //        case AvatarIKGoal.LeftFoot:
+        //            SetIKbyTransform(AvatarIKGoal.LeftFoot, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
+        //            break;
+        //        case AvatarIKGoal.RightFoot:
+        //            SetIKbyTransform(AvatarIKGoal.RightFoot, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
+        //            break;
+        //    }
+        //}
 
         public virtual string GetInfo()
         {
@@ -294,20 +294,20 @@ namespace Lightbug.CharacterControllerPro.Implementation
         //    CharacterActor.SetUpRootMotion(startRootMovtion, false);
         //}
     }
-    [System.Serializable]
-    public class IKPar
-    {
-        public AvatarIKGoal targetIKPos;
-        //这个类会在timeline中变化值，来满足一些动画的需要，比如ik权重，或者是技能挂点位置等，暂时没有想好
-        public float ikPosWeight;
-        public float ikRotateWeight;
-        public Transform targetTransform;
+    //[System.Serializable]
+    //public class IKPar
+    //{
+    //    public AvatarIKGoal targetIKPos;
+    //    //这个类会在timeline中变化值，来满足一些动画的需要，比如ik权重，或者是技能挂点位置等，暂时没有想好
+    //    public float ikPosWeight;
+    //    public float ikRotateWeight;
+    //    public Transform targetTransform;
 
-        public void Initialize()
-        {
-            ikPosWeight = 0f;
-            ikRotateWeight = 0f;
-            targetTransform = null;
-        }
-    }
+    //    public void Initialize()
+    //    {
+    //        ikPosWeight = 0f;
+    //        ikRotateWeight = 0f;
+    //        targetTransform = null;
+    //    }
+    //}
 }

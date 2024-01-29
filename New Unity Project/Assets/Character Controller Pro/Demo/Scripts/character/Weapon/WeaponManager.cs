@@ -2,6 +2,7 @@ using Cinemachine;
 using Cinemachine.Utility;
 using Lightbug.CharacterControllerPro.Core;
 using MagicaCloth2;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -215,10 +216,11 @@ var squaredNumbers = numbers.Select(x => x * x);
     }
     Vector3 targetShakeDirection;//每次震动时使用的中间变量
 
+    [Button("震动")]
     /// <summary>
     /// 产生震动
     /// </summary>
-    public void Impluse(int i = 0)
+    public void Impluse()
     {
         if (weaponOwner is MainCharacter)
         {
@@ -236,6 +238,7 @@ var squaredNumbers = numbers.Select(x => x * x);
             else
             {
                 //使用cinemachine的shake
+
                 impulse.GenerateImpulse(targetShakeDirection, weaponNum.Strength, weaponNum.Frequence, weaponNum.Duration);
             }
 

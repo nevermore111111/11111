@@ -6,6 +6,7 @@ public class CameraShakeManager : MonoBehaviour
     // Singleton pattern
     private static CameraShakeManager instance;
     public int randomness = 60;
+    public float StrengthPara = 0.2f;
     public static CameraShakeManager Instance
     {
         get
@@ -24,10 +25,10 @@ public class CameraShakeManager : MonoBehaviour
     }
 
     // Start camera shake
-    public void Shake(float duration = 1f, float strength = 1, int vibrato = 10, float randomness = 90f)
-    {
-        transform.DOShakePosition(duration, strength, vibrato, randomness, false, true);
-    }
+    //public void Shake(float duration = 1f, float strength = 1, int vibrato = 10, float randomness = 90f)
+    //{
+    //    transform.DOShakePosition(duration, strength, vibrato, randomness, false, true);
+    //}
 
     Vector3 shakeTarget = Vector3.zero;
     Vector3 deltaTarget = Vector3.zero;
@@ -38,13 +39,14 @@ public class CameraShakeManager : MonoBehaviour
     /// </summary>
     public void Shake(Vector3 shakeDirection, float strength, float frequencyGain, float durtion)
     {
+        Debug.Log("震动了");
         currentShakeNum++;
         DOTween.Shake(() => shakeTarget, (value) =>
         {
             deltaTarget = value - shakeTarget;
             shakeTarget = value;
-        }, durtion, strength * shakeDirection, (int)
-        frequencyGain * 10, randomness, true/*是否fadeout*/, ShakeRandomnessMode.Harmonic).OnComplete(() => 
+        }, durtion, strength * shakeDirection* StrengthPara, (int)
+        frequencyGain * 10, randomness, true/*是否fadeout*/, ShakeRandomnessMode.Full).OnComplete(() => 
         {
             currentShakeNum--;
             if(currentShakeNum == 0)
@@ -53,8 +55,9 @@ public class CameraShakeManager : MonoBehaviour
                 deltaTarget = Vector3.zero;
             }
         });
+        //transform.DOShakePosition()
     }
-    private void Update()
+    private void LateUpdate()
     {
         if(currentShakeNum != 0)
         {
