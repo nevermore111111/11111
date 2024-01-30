@@ -22,11 +22,14 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: face
   m_Shader: {fileID: 4800000, guid: 4466465ffd73f3e42bae37fdf7e6ed2e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _OUTLINE
   - _RAMPSHADING
   m_InvalidKeywords:
   - _IS_FILTER_LIGHTCOLOR_ON
+  - _USEEMISSIONTEX
   - _USEHALFLAMBERT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -34,6 +37,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -142,7 +146,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DissolveThreshold: 0
     - _DstBlend: 0
-    - _EmissionColorAlbedoWeight: 0
+    - _EmissionColorAlbedoWeight: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -212,7 +216,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DarkColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionChannel: {r: 0, g: 0, b: 1, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 1, g: 0.6289308, b: 0.6289308, a: 1}
     - _HighColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 0.3994516, b: 0.044025064, a: 1}
     - _PBRMetallicChannel: {r: 1, g: 0, b: 0, a: 0}
