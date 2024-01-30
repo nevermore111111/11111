@@ -13,6 +13,6 @@ public class AssetHelper : ScriptableObject
     public PlayableAsset[] NormalMovement;
     public PlayableAsset[] AttackOffGround;
     public PlayableAsset[] Evade;
-
+    public PlayableAsset[] All;
 }
 

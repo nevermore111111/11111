@@ -7,105 +7,45 @@ using UnityEngine;
 using UnityEngine.Playables;
 
 /// <summary>
-/// Õâ¸ö·½·¨È¥¸üĞÂÃ¿¸ö¹¥»÷µÄÌØĞ§ºÍ¾µÍ·²ÎÊı
+/// è¿™ä¸ªæ–¹æ³•å»æ›´æ–°æ¯ä¸ªæ”»å‡»çš„ç‰¹æ•ˆå’Œé•œå¤´å‚æ•°
 /// </summary>
 public class TimelineManager : MonoBehaviour
 {
-    public Animator animator;
-    public List<PlayableAsset> timelines;
-    private string currentAnimName;
+    private List<PlayableAsset> timelines;
     private PlayableDirector director;
     public AssetHelper myAssetHelper;
-    public CharacterActor CharacterActor;
-    public CharacterStateController CharacterStateController;
-
-    PlayableAsset[] attackOnGround;
-    PlayableAsset[] attackOnGroundFist;
-    PlayableAsset[] attackOffGround;
-    PlayableAsset[] startPlay;
-    PlayableAsset[] normalMovement;
-    PlayableAsset[] evade;
-
-
 
 
     private void Start()
     {
-        // ¼ÓÔØÅäÖÃÎÄ¼ş
+        // åŠ è½½é…ç½®æ–‡ä»¶
         director = GetComponent<PlayableDirector>();
         LoadTimeLineAsset();
-
-        CharacterActor = GetComponentInParent<CharacterActor>();
-        CharacterStateController = CharacterActor.GetComponentInChildren<CharacterStateController>();
-
-
-        //currentAnimName = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name; // »ñÈ¡µ±Ç°¶¯»­Ãû³Æ
-        //PlayTimelineByName(currentAnimName); // ²¥·Å¶ÔÓ¦Ãû³ÆµÄPlayable
     }
 
     /// <summary>
-    /// ¼ÓÔØtimelineµÄÎÄ¼ş
+    /// åŠ è½½timelineçš„æ–‡ä»¶
     /// </summary>
     private void LoadTimeLineAsset()
     {
         myAssetHelper = Resources.Load<AssetHelper>("AssetHelper");
-        {
-            attackOnGround = myAssetHelper.AttackOnGround;
-            attackOnGroundFist = myAssetHelper.AttackOnGround_fist;
-            attackOffGround = myAssetHelper.AttackOffGround;
-            evade = myAssetHelper.Evade;
-            startPlay = myAssetHelper.StartPlay;
-            normalMovement = myAssetHelper.NormalMovement;
-        }
+        timelines = myAssetHelper.All.ToList();
     }
 
     
 
     public void PlayTimelineByName(string name)
     {
-        //if(CharacterStateController.CurrentState is Attack)
-        //{
-        //    Debug.Log("ÔİÊ±ÆÁ±ÎÁËtimelineµÄ²¥·Å");
-        //    return;
-        //}
         foreach (PlayableAsset playable in timelines)
         {
-            if (playable.name == name) // ÕÒµ½Ãû³ÆÆ¥ÅäµÄPlayable
+            if (playable?.name == name) // æ‰¾åˆ°åç§°åŒ¹é…çš„Playable
             {
-                director.playableAsset = playable; // ÉèÖÃPlayable
-                director.Play(); // ²¥·ÅPlayable
+                director.playableAsset = playable; // è®¾ç½®Playable
+                director.Play(); // æ’­æ”¾Playable
                 return;
             }
         }
-        Debug.Log("Ã»ÕÒµ½¶ÔÓ¦µÄtimeline");
+        Debug.Log("æ²¡æ‰¾åˆ°å¯¹åº”çš„timeline");
     }
-    public void SwapTimelinesByAssetName(string name)
-    {
-        PlayableAsset[] assets = null;
-        switch (name) 
-        {
-            case "AttackOnGround":
-                assets = attackOnGround;
-                break;
-            case "AttackOnGround_fist":
-                assets = attackOnGroundFist;
-                break;
-            case "AttackOffGround":
-                assets = attackOffGround;
-                break;
-            case "NormalMovement":
-                assets = normalMovement;
-                break;
-            case "Evade":
-                assets = evade;
-                break;
-            case "StartPlay":
-                assets = startPlay;
-                break;
-        }
-        if (assets != null)
-        {
-            timelines = assets.ToList();
-        }
-    }
+  
 }
