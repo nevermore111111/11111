@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5737975426329631883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8900903061809672895}
+  - component: {fileID: 5273363903705841264}
+  - component: {fileID: 4211985246802248730}
+  m_Layer: 9
+  m_Name: weaponData 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8900903061809672895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5737975426329631883}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -121.7, y: -3.1152055, z: 95.82}
+  m_LocalScale: {x: 1.73, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &5273363903705841264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5737975426329631883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45065d6ca11be8a418c66280c3af6f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onlyUseVirticalShake: 0
+  isUseDotweenShake: 1
+  isIgnoreZshake: 1
+  PrintHit: 1
+  isNeedChangeCurrentHit: 0
+  ChangeCurrentHitNum: -1
+  sp11Duration: 0.059
+  sp11Force: 2.2
+  ImpulseShapes: 3
+  DropSpeed: 10
+  weaponNumList:
+  - Strength: 0.41
+    Frequence: 1.09
+    Duration: 0.15
+  - Strength: 0.6
+    Frequence: 1.09
+    Duration: 0.2
+  - Strength: 0.8
+    Frequence: 1.09
+    Duration: 0.25
+  - Strength: 1.6
+    Frequence: 1.24
+    Duration: 0.43
+--- !u!114 &4211985246802248730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5737975426329631883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3736f4621d051794abbf95a12be20237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForceCurrent: -1
+  currentHit: 0
+  currentHitTimePara:
+    fadeTime: 0.011
+    stayTime: 0.024
+    targetTimeScale: 1
+  hits:
+  - fadeTime: 0.011
+    stayTime: 0.024
+    targetTimeScale: 1
+  - fadeTime: 0.012
+    stayTime: 0.021
+    targetTimeScale: 1
+  - fadeTime: 0.0189
+    stayTime: 0.041
+    targetTimeScale: 0.098
+  - fadeTime: 0.041
+    stayTime: 0.099
+    targetTimeScale: 0.257

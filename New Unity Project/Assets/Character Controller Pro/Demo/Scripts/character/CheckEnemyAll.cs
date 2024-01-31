@@ -12,11 +12,14 @@ public class CheckEnemyAll : MonoBehaviour
     public string EnemyTag = "custom";
     public float TargetGroupWeight = 1.0f;
     public float ChangeTargetWeightDuration = 0.5f;
-
+    public CinemachineVirtualCamera VirtualCamera;
+    public CinemachineBrain brain;
     private void Awake()
     {
         CharacterActor = GetComponentInParent<CharacterActor>();
         ResetEnemyTag();
+        VirtualCamera = GameObject.Find("subCamera").GetComponent<CinemachineVirtualCamera>();
+        brain = FindFirstObjectByType<CinemachineBrain>();
     }
 
     /// <summary>
@@ -30,8 +33,13 @@ public class CheckEnemyAll : MonoBehaviour
         {
             CheckTarget(attackReceive, TargetGroupWeight);
         }
+        if (brain?.ActiveVirtualCamera != VirtualCamera)
+        {
+            Debug.Log("重置位置");
+            VirtualCamera.ForceCameraPosition(brain.transform.position, brain.transform.rotation);
+        }
     }
-   
+
     /// <summary>
     /// 出去的目标被移除
     /// </summary>

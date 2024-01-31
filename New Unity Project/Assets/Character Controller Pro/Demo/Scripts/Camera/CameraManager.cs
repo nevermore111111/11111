@@ -10,7 +10,7 @@ public class CameraManager : MonoBehaviour
     MainCharacter mainCharacter;
    
     public float tooCloseDis = 2f;
-    public float tooFarDis = 5f;
+    public float tooFarDis = 6.5f;
     float distanceToEnemy;
 
     int LowCameraPriority = 0;
@@ -19,8 +19,8 @@ public class CameraManager : MonoBehaviour
     private CinemachineBrain cinemachineBrain;
     CheckCamera checkCamera;
 
-    private int prevMainCameraPriority; // ±£´æÉÏÒ»Ö¡¿ªÊ¼Ê±µÄÖ÷ÉãÏñ»úPriority
-    private int prevSubCameraPriority; // ±£´æÉÏÒ»Ö¡¿ªÊ¼Ê±µÄ¸±ÉãÏñ»úPriority
+    private int prevMainCameraPriority; // ä¿å­˜ä¸Šä¸€å¸§å¼€å§‹æ—¶çš„ä¸»æ‘„åƒæœºPriority
+    private int prevSubCameraPriority; // ä¿å­˜ä¸Šä¸€å¸§å¼€å§‹æ—¶çš„å‰¯æ‘„åƒæœºPriority
 
     Transform TrueCameraTransform;
 
@@ -62,7 +62,7 @@ public class CameraManager : MonoBehaviour
         }
     }
     /// <summary>
-    /// ·µ»ØÊó±êÒÆ¶¯ÊÇ·ñ³¬¹ıÁËÕâ¸öÊ±¼ä
+    /// è¿”å›é¼ æ ‡ç§»åŠ¨æ˜¯å¦è¶…è¿‡äº†è¿™ä¸ªæ—¶é—´
     /// </summary>
     /// <param name="MoveTime"></param>
     /// <returns></returns>
@@ -73,11 +73,11 @@ public class CameraManager : MonoBehaviour
 
     private void CheckCamera()
     {
-        // ÔÚÃ¿Ö¡¿ªÊ¼Ç°¼ÇÂ¼ÉãÏñ»úµÄPriority
+        // åœ¨æ¯å¸§å¼€å§‹å‰è®°å½•æ‘„åƒæœºçš„Priority
         int startMainCameraPriority = mainCamera.Priority;
         int startSubCameraPriority = subCamera.Priority;
 
-        // ¼ì²éÖ÷ÉãÏñ»úÇĞ»»µ½¸±ÉãÏñ»úµÄÌõ¼ş
+        // æ£€æŸ¥ä¸»æ‘„åƒæœºåˆ‡æ¢åˆ°å‰¯æ‘„åƒæœºçš„æ¡ä»¶
         bool switchToSubCamera = false;
         bool switchToMainCamera = false;
 
@@ -85,17 +85,17 @@ public class CameraManager : MonoBehaviour
 
         if (mainCharacter != null && mainCharacter.enemies.Count > 0)
         {
-            // Ìõ¼ş1£ºÊÜµ½¹¥»÷
+            // æ¡ä»¶1ï¼šå—åˆ°æ”»å‡»
             if (mainCharacter.GetIsAttacked() || mainCharacter.GetIsAttacking())
             {
                 switchToSubCamera = true;
                 switchToMainCamera = false;
             }
         }
-        // ¼ì²é¸±ÉãÏñ»úÇĞ»»µ½Ö÷ÉãÏñ»úµÄÌõ¼ş
+        // æ£€æŸ¥å‰¯æ‘„åƒæœºåˆ‡æ¢åˆ°ä¸»æ‘„åƒæœºçš„æ¡ä»¶
         if (mainCharacter != null)
         {
-            // Ìõ¼ş1£º¹¥»÷·¶Î§ÄÚµĞÈËÎª0
+            // æ¡ä»¶1ï¼šæ”»å‡»èŒƒå›´å†…æ•Œäººä¸º0
             if (mainCharacter.enemies.Count == 0 || IsSuitableDistance() || mainCharacter.ismoving() || (IsMoveMouse(0.3f)&& IsMoveTimeGreaterNum(0.1f)))
             {
                 switchToMainCamera = true;
@@ -104,18 +104,18 @@ public class CameraManager : MonoBehaviour
         }
         if (switchToSubCamera && !checkCamera.ShouldSwitchToSubCamera())
         {
-            Debug.Log("½Ç¶È²»ºÏ¸ñµ¼ÖÂ×ª»¯");
+            Debug.Log("è§’åº¦ä¸åˆæ ¼å¯¼è‡´è½¬åŒ–");
             switchToMainCamera = true;
         }
 
 
 
-        // ¸ù¾İÌõ¼şÇĞ»»ÉãÏñ»ú
+        // æ ¹æ®æ¡ä»¶åˆ‡æ¢æ‘„åƒæœº
         if (switchToSubCamera)
         {
             mainCamera.Priority = LowCameraPriority;
             subCamera.Priority = HighCameraPriority;
-            //ÇĞ»»µ½sub£¬ÕâÊ±ºòĞèÒª¸ù¾İ¸ù¾İµ±Ç°µÄÉãÏñ»úÈ¥ÉèÖÃsubcamera¡£
+            //åˆ‡æ¢åˆ°subï¼Œè¿™æ—¶å€™éœ€è¦æ ¹æ®æ ¹æ®å½“å‰çš„æ‘„åƒæœºå»è®¾ç½®subcameraã€‚
 
         }
         else if (switchToMainCamera)
@@ -125,20 +125,20 @@ public class CameraManager : MonoBehaviour
             subCamera.Priority = LowCameraPriority;
         }
 
-        // Èç¹û¿ªÊ¼Ê±µÄPriorityÓëÉÏÒ»Ö¡¿ªÊ¼Ê±²»Í¬£¬Ö´ĞĞChangeTransform·½·¨
+        // å¦‚æœå¼€å§‹æ—¶çš„Priorityä¸ä¸Šä¸€å¸§å¼€å§‹æ—¶ä¸åŒï¼Œæ‰§è¡ŒChangeTransformæ–¹æ³•
         if (IsChangeCameraPriority(startMainCameraPriority, startSubCameraPriority))
         {
             ChangeTransform();
         }
 
-        // ¸üĞÂ±£´æµÄPriority
+        // æ›´æ–°ä¿å­˜çš„Priority
         prevMainCameraPriority = startMainCameraPriority;
         prevSubCameraPriority = startSubCameraPriority;
 
     }
 
     /// <summary>
-    /// ÊÇ·ñĞŞ¸ÄÁËÉãÏñ»úµÄÓÅÏÈ¼¶
+    /// æ˜¯å¦ä¿®æ”¹äº†æ‘„åƒæœºçš„ä¼˜å…ˆçº§
     /// </summary>
     /// <param name="startMainCameraPriority"></param>
     /// <param name="startSubCameraPriority"></param>
@@ -154,7 +154,7 @@ public class CameraManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼ì²éÊÇ·ñÔÚºÏÊÊµÄ¾àÀë
+    /// æ£€æŸ¥æ˜¯å¦åœ¨åˆé€‚çš„è·ç¦»
     /// </summary>
     /// <returns></returns>
     private bool IsSuitableDistance()
@@ -172,7 +172,7 @@ public class CameraManager : MonoBehaviour
         return distanceToEnemy < tooCloseDis || distanceToEnemy > tooFarDis;
     }
     /// <summary>
-    /// Ç¿ÖÆÉãÏñ»ú¸üĞÂµ½µ±Ç°Ö÷ÉãÏñ»úµÄÎ»ÖÃ
+    /// å¼ºåˆ¶æ‘„åƒæœºæ›´æ–°åˆ°å½“å‰ä¸»æ‘„åƒæœºçš„ä½ç½®
     /// </summary>
     private void ChangeTransform()
     {
