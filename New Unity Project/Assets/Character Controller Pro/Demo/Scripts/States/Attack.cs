@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
@@ -28,7 +30,8 @@ public class Attack : CharacterState
     private NormalMovement NormalMovement;
     public static AttackMode currentAttackMode = AttackMode.AttackOnGround;
     [SerializeField]
-    private Vector2 HeighAndWidth;
+    //进入attack状态时的体型
+    public Vector2 targetAttackWidthAndHeigh;
     private Vector2 normalHeightAndWidth;
     public Attack attack;
     protected WeaponManager[] weaponManagers;
@@ -44,6 +47,7 @@ public class Attack : CharacterState
     //12 地面击飞  拳
     //13 空中sp  拳
     public static bool isNextAttack = false;
+    public float CharacterAttackDistance = 1.8f;
 
     //public List<IKPar> IKPar;
    
@@ -120,7 +124,8 @@ public class Attack : CharacterState
     protected override void Awake()
     {
         weaponManagers = this.transform.parent.GetComponentsInChildren<WeaponManager>();
-        HeighAndWidth = new(1f, 1.58f);
+        targetAttackWidthAndHeigh = new(1f, 1.58f);
+        //ResettargetAttackWidthAndHeigh(new Vector2(1.5f,1.58f));
         attack = GetComponent<Attack>();
         OnceAttack = false;
         base.Awake();
@@ -144,7 +149,16 @@ public class Attack : CharacterState
         canInput = false;
         if (CharacterStateController.PreviousState is not StartPlay)
             isJustEnter = true;
-        CharacterActor.CheckAndSetSize(HeighAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
+        //暂时记一下，在设置宽度为1.5f的时候
+        CharacterActor.CheckAndSetSize(targetAttackWidthAndHeigh);
+        //CharacterActor.CheckAndSetSize(targetAttackWidthAndHeigh);
+        //CharacterActor.CheckAndInterpolateSize(targetAttackWidthAndHeigh,Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
+        //DOTween.To(() => CharacterActor.BodySize, (value) =>
+        //{
+        //    if (CharacterStateController.CurrentState is Attack)
+        //        CharacterActor.CheckAndSetSize(value);
+        //}, targetAttackWidthAndHeigh, 0.5f
+        //).SetId("AttackSizeChange");
 
         // //根据当前进入的类，去调整当前的timeline的数量
         // string className = this.GetType().Name;
@@ -166,6 +180,7 @@ public class Attack : CharacterState
         CharacterActor.SetUpRootMotion(false, false);
         CharacterActor.CheckAndSetSize(normalHeightAndWidth, Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
         // CharacterActor.SetSize(HeighAndWidth,)
+        //DOTween.Kill("AttackSizeChange");
     }
 
     public override void UpdateBehaviour(float dt)
@@ -279,5 +294,14 @@ public class Attack : CharacterState
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
+    }
+    /// <summary>
+    /// 开局设置这个有问题不知道为什么
+    /// </summary>
+    private async void ResettargetAttackWidthAndHeigh(Vector2 target)
+    {
+        await UniTask.Delay(1000);
+        Debug.Log("设置了");
+        targetAttackWidthAndHeigh = target;
     }
 }

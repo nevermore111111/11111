@@ -57,7 +57,7 @@ public class FxManager : MonoBehaviour
 
     }
     /// <summary>
-    /// parentºÍpos²»ÄÜÍ¬Ê±ÊÇnull
+    /// parentå’Œposä¸èƒ½åŒæ—¶æ˜¯null
     /// </summary>
     /// <param name="FxName"></param>
     /// <param name="pos"></param>
@@ -95,17 +95,17 @@ public class FxManager : MonoBehaviour
     {
         if (FxName is string)
         {
-            // Èç¹ûÊÇµ¥¸ö×Ö·û´®£¬´´½¨µ¥¸öÌØĞ§
+            // å¦‚æœæ˜¯å•ä¸ªå­—ç¬¦ä¸²ï¼Œåˆ›å»ºå•ä¸ªç‰¹æ•ˆ
             return PlaySingleFx((string)(object)FxName, parent, maxTimeDestory);
         }
         else if (FxName is string[])
         {
-            // Èç¹ûÊÇ×Ö·û´®Êı×é£¬´´½¨¶à¸öÌØĞ§
+            // å¦‚æœæ˜¯å­—ç¬¦ä¸²æ•°ç»„ï¼Œåˆ›å»ºå¤šä¸ªç‰¹æ•ˆ
             return PlayMultipleFx((string[])(object)FxName, parent, maxTimeDestory);
         }
         else
         {
-            Debug.LogError("FxNameÀàĞÍ²»Ö§³Ö");
+            Debug.LogError("FxNameç±»å‹ä¸æ”¯æŒ");
             return null;
         }
     }
@@ -153,7 +153,7 @@ public class FxManager : MonoBehaviour
                 return particleSystems[i];
             }
         }
-        Debug.LogError("Ã»ÕÒµ½¶ÔÓ¦µÄÌØĞ§");
+        Debug.LogError("æ²¡æ‰¾åˆ°å¯¹åº”çš„ç‰¹æ•ˆ");
         return null;
     }
     public void Update()

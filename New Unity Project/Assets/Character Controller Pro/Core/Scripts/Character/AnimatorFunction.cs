@@ -97,11 +97,12 @@ public class AnimatorFunction : MonoBehaviour
         characterActor.Animator.speed = 1f;
         if (!characterActor.Animator.IsInTransition(0))
         {
-            if (CharacterStateController.CurrentState is Attack)
+            if (CharacterStateController.CurrentState is Attack && !DonotUseRootmovtion())
+            {
                 characterActor.SetUpRootMotion(true, true);
+            }
             Attack.isAttack = false;
             characterActor.Animator.SetBool("attack", false);
-
             foreach (var manager in weaponManagers)
             {
                 if (manager.isActiveAndEnabled)
@@ -391,13 +392,10 @@ public class AnimatorFunction : MonoBehaviour
             GameObject[] gamesEnemy = mainCharacter.enemies.Select(m => m.gameObject).ToArray();
             SetActorForword(gamesEnemy);
             //Debug.Log(Attack.CharacterActor.Forward);
-            if ((transform.position - mainCharacter.selectEnemy.transform.position).magnitude < 1.5f)
-            {
 
-                if (Attack.SpAttack == -1)
-                {
-                    characterActor.SetUpRootMotion(false, false);
-                }
+            if (DonotUseRootmovtion())
+            {
+                characterActor.SetUpRootMotion(false, false);
                 if (characterActor.RigidbodyComponent.IsKinematic == false)
                     characterActor.PlanarVelocity = Vector3.zero;
             }
@@ -407,6 +405,16 @@ public class AnimatorFunction : MonoBehaviour
             //没有单位就可以自由转向，但是只能在攻击开始的时候转向
             characterActor.Forward = CharacterStateController.InputMovementReference;
         }
+    }
+
+    private bool DonotUseRootmovtion()
+    {
+        //距离很近，并且非特殊攻击
+        if (mainCharacter.selectEnemy != null)
+            return ((Attack.SpAttack == -1) && (transform.position - mainCharacter.selectEnemy.transform.position).magnitude <  Attack.CharacterAttackDistance);
+        else
+            return (Attack.SpAttack == -1);
+
     }
 
     /// <summary>
