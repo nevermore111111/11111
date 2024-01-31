@@ -7,10 +7,10 @@ public class AttackReceive : MonoBehaviour
 {
     public CharacterInfo CharacterInfo;
     public ReceiveHitType receive = ReceiveHitType.Normal;
-    // ¶¨ÒåÒ»¸öÎ¯ÍĞÀàĞÍ£¬ÓÃÓÚ±íÊ¾´¦Àí»÷ÖĞµÄ·½·¨
+    // å®šä¹‰ä¸€ä¸ªå§”æ‰˜ç±»å‹ï¼Œç”¨äºè¡¨ç¤ºå¤„ç†å‡»ä¸­çš„æ–¹æ³•
     public delegate void HitHandler();
 
-    // ¶¨ÒåÊÂ¼ş£¬¸ù¾İ²»Í¬µÄ»÷ÖĞÀàĞÍ×¢²á²»Í¬µÄ·½·¨
+    // å®šä¹‰äº‹ä»¶ï¼Œæ ¹æ®ä¸åŒçš„å‡»ä¸­ç±»å‹æ³¨å†Œä¸åŒçš„æ–¹æ³•
     public event HitHandler OnHit;
 
 
@@ -29,11 +29,14 @@ public class AttackReceive : MonoBehaviour
         OnHit?.Invoke();
     }
 
-    // ¶¨ÒåÃ¶¾Ù±íÊ¾²»Í¬µÄ»÷ÖĞÀàĞÍ
+    // å®šä¹‰æšä¸¾è¡¨ç¤ºä¸åŒçš„å‡»ä¸­ç±»å‹
     public enum ReceiveHitType
     {
+        //æ­£å¸¸çš„å—å‡»ç¢°æ’ç›’
         Normal,
+        //æœªå®šä¹‰
         Critical,
+        //æé™é—ªé¿å—å‡»ç¢°æ’ç›’
         ExtremeEvade
     }
 
@@ -50,27 +53,27 @@ public class AttackReceive : MonoBehaviour
 
     }
 
-    // ½ÓÊÕ»÷ÖĞµÄ·½·¨£¬¸ù¾İ»÷ÖĞÀàĞÍµ÷ÓÃÏàÓ¦µÄÊÂ¼ş
+    // æ¥æ”¶å‡»ä¸­çš„æ–¹æ³•ï¼Œæ ¹æ®å‡»ä¸­ç±»å‹è°ƒç”¨ç›¸åº”çš„äº‹ä»¶
     public void registerHit(ReceiveHitType hitType)
     {
         switch (hitType)
         {
             case ReceiveHitType.Normal:
-                // ´¥·¢ÆÕÍ¨»÷ÖĞÊÂ¼ş
+                // è§¦å‘æ™®é€šå‡»ä¸­äº‹ä»¶
                 OnHit += onNormalHit;
                 break;
 
             case ReceiveHitType.Critical:
-                // ´¥·¢±©»÷ÊÂ¼ş
+                // è§¦å‘æš´å‡»äº‹ä»¶
                 OnHit += onCriticalHit;
                 break;
 
             case ReceiveHitType.ExtremeEvade:
-                // ´¥·¢¼«ÏŞÉÁ±ÜÊÂ¼ş
+                // è§¦å‘æé™é—ªé¿äº‹ä»¶
                 OnHit += onExtremeEvadeHit;
                 break;
 
-            // Ìí¼ÓÆäËû»÷ÖĞÀàĞÍµÄ´¦Àí
+            // æ·»åŠ å…¶ä»–å‡»ä¸­ç±»å‹çš„å¤„ç†
 
             default:
                 Debug.LogError("Unsupported HitType: " + hitType);

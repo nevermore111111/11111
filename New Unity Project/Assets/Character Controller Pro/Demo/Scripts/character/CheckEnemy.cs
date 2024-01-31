@@ -75,14 +75,14 @@ public class CheckEnemy : MonoBehaviour
                 }
                 indexNum = targetGroup.FindMember(characterInfo.transform);
                 StartCoroutine(AdjustTargetWeight(1f, 1f, indexNum));
-                //¸üĞÂÉãÏñ»ú
+                //æ›´æ–°æ‘„åƒæœº
                 FreshCamera();
             }
         }
     }
     private void  FreshCamera()
     {
-        CameraManager.subCamera.ForceCameraPosition(CameraManager.mainCamera.transform.position, CameraManager.mainCamera.transform.rotation);
+        //CameraManager.subCamera.ForceCameraPosition(CameraManager.mainCamera.transform.position, CameraManager.mainCamera.transform.rotation);
     }
 
 
@@ -94,7 +94,7 @@ public class CheckEnemy : MonoBehaviour
             mainCharacter.enemies.Remove(attackReceive.CharacterInfo);
             int targetIndex = targetGroup.FindMember(attackReceive.CharacterInfo.transform);
             //targetGroup.RemoveMember(enemyTransform);
-            // ÔÚµĞÈËÀë¿ª·¶Î§Ê±£¬ÑÓ³ÙÉ¾³ıÄ¿±ê²¢Öğ½¥¼õĞ¡È¨ÖØ
+            // åœ¨æ•Œäººç¦»å¼€èŒƒå›´æ—¶ï¼Œå»¶è¿Ÿåˆ é™¤ç›®æ ‡å¹¶é€æ¸å‡å°æƒé‡
             //StartCoroutine(DelayedRemoveMember(enemyTransform, 1f));
             StartCoroutine(AdjustTargetWeight(0f, 1f, targetIndex));
             FreshCamera();
@@ -105,14 +105,11 @@ public class CheckEnemy : MonoBehaviour
     {
         //
         MovePosition();
-
-        
-
     }
 
 
     /// <summary>
-    /// ĞŞ¸ÄÎïÌåµÄÎ»ÖÃºÍÈËÎïÖØºÏ
+    /// ä¿®æ”¹ç‰©ä½“çš„ä½ç½®å’Œäººç‰©é‡åˆ
     /// </summary>
     private void MovePosition()
     {
@@ -122,7 +119,7 @@ public class CheckEnemy : MonoBehaviour
 
 
 
-    //ÉãÏñ»úÔö¼Ó
+    //æ‘„åƒæœºå¢åŠ 
 
 
 

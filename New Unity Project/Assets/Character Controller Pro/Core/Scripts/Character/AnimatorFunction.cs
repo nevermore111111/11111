@@ -1,4 +1,5 @@
 using Cinemachine;
+using Cinemachine.Utility;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
@@ -389,8 +390,8 @@ public class AnimatorFunction : MonoBehaviour
         if (mainCharacter.enemies.Count != 0)
         {
             //新语法
-            GameObject[] gamesEnemy = mainCharacter.enemies.Select(m => m.gameObject).ToArray();
-            SetActorForword(gamesEnemy);
+            //GameObject[] gamesEnemy = mainCharacter.enemies.Select(m => m.gameObject).ToArray();
+            SetActorForword();
             //Debug.Log(Attack.CharacterActor.Forward);
 
             if (DonotUseRootmovtion())
@@ -411,7 +412,7 @@ public class AnimatorFunction : MonoBehaviour
     {
         //距离很近，并且非特殊攻击
         if (mainCharacter.selectEnemy != null)
-            return ((Attack.SpAttack == -1) && (transform.position - mainCharacter.selectEnemy.transform.position).magnitude <  Attack.CharacterAttackDistance);
+            return ((Attack.SpAttack == -1) && (transform.position - mainCharacter.selectEnemy.transform.position).magnitude < Attack.CharacterAttackDistance);
         else
             return (Attack.SpAttack == -1);
 
@@ -421,43 +422,69 @@ public class AnimatorFunction : MonoBehaviour
     /// 设置人物正方向
     /// </summary>
     /// <param name="gamesEnemy"></param>
-    private void SetActorForword(GameObject[] gamesEnemy)
+    private void SetActorForword()
     {
-
-
-        mainCharacter.selectEnemy = HelpTools01.FindClosest(characterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
-        Vector3 Forward = (mainCharacter.selectEnemy.transform.position - characterActor.transform.position).normalized;
-        //当前面向目标，直接自动转
-        if (Vector3.Angle(characterActor.Forward, Forward) < Attack.maxAutoAnglerotate)
+        bool needAutoRotate = false;
+        if (characterActor.CharacterInfo.enemies.Count > 0)
         {
-            characterActor.Forward = new(Forward.x, 0, Forward.z);
-            characterActor.Up = Vector3.up;
+            //选择的鱼类是最近的鱼类
+            mainCharacter.selectEnemy = characterActor.CharacterInfo.enemies.OrderBy((_) => (_.transform.position - mainCharacter.transform.position).sqrMagnitude).First();
+            needAutoRotate = true;
         }
-        else //当前没有面向攻击目标需要向输入目标的方向转
+        else if (CharacterStateController.InputMovementReference != Vector3.zero)
         {
-            Vector3 target = CharacterStateController.InputMovementReference;
-            if (target != Vector3.zero)
+            //否则去按输入转向，定义转向速度和时间。
+            Vector3 target = CharacterStateController.InputMovementReference.ProjectOntoPlane(Vector3.up).normalized;//我想转向的方向
+            Quaternion  targetQua = Quaternion.LookRotation(target, Vector3.up);
+            DOTween.To(()=>0f, value => 
             {
-                target.z = 0;
-                target.Normalize();
-                //计算需要转动的角度
-                float angle = Vector3.Angle(target, characterActor.Forward) > Attack.maxAttackAngleNoenemy ? Attack.maxAttackAngleNoenemy : Vector3.Angle(target, characterActor.Forward);
-                characterActor.Forward = RotateVectorAroundAxis(characterActor.Forward, target, angle);
-                characterActor.Forward = Vector3.ProjectOnPlane(characterActor.Forward, Vector3.up);
-                characterActor.Up = Vector3.up;
-            }
-        }
+                //旋转一定角度
+                Quaternion.RotateTowards(characterActor.transform.rotation,targetQua, 0.1f*Time.deltaTime);
+            }, 1f, 0.1f);
+            //DOTween.To();//执行
 
-        Vector3 RotateVectorAroundAxis(Vector3 vector, Vector3 axis, float angle)
+        }
+        //选择的敌人不为0，自动去选择攻击单位
+        if (needAutoRotate)
         {
-            // 将向量和轴转换成四元数
-            Quaternion rotation = Quaternion.AngleAxis(angle, axis);
-
-            // 将向量绕轴旋转
-            Vector3 rotatedVector = rotation * vector;
-
-            return rotatedVector;
+            //我应该面向的方向
+            Vector3 targetMainCharacterForward = (mainCharacter.selectEnemy.transform.position - mainCharacter.transform.position).ProjectOntoPlane(Vector3.up).normalized;
+            characterActor.transform.rotation = Quaternion.LookRotation(targetMainCharacterForward, Vector3.up);
         }
+
+        //mainCharacter.selectEnemy = HelpTools01.FindClosest(characterActor.gameObject, gamesEnemy).GetComponent<CharacterInfo>();
+        //Vector3 Forward = (mainCharacter.selectEnemy.transform.position - characterActor.transform.position).normalized;
+        ////当前面向目标，直接自动转
+        //if (Vector3.Angle(characterActor.Forward, Forward) < Attack.maxAutoAnglerotate)
+        //{
+        //    characterActor.Forward = new(Forward.x, 0, Forward.z);
+        //    characterActor.Up = Vector3.up;
+        //}
+        //else //当前没有面向攻击目标需要向输入目标的方向转
+        //{
+        //Vector3 target = CharacterStateController.InputMovementReference;
+        //    if (target != Vector3.zero)
+        //    {
+        //        target.z = 0;
+        //        target.Normalize();
+        //        //计算需要转动的角度
+        //        float angle = Vector3.Angle(target, characterActor.Forward) > Attack.maxAttackAngleNoenemy ? Attack.maxAttackAngleNoenemy : Vector3.Angle(target, characterActor.Forward);
+        //        characterActor.Forward = RotateVectorAroundAxis(characterActor.Forward, target, angle);
+        //        characterActor.Forward = Vector3.ProjectOnPlane(characterActor.Forward, Vector3.up);
+        //        characterActor.Up = Vector3.up;
+        //    }
+        //}
+
+        //Vector3 RotateVectorAroundAxis(Vector3 vector, Vector3 axis, float angle)
+        //{
+        //    // 将向量和轴转换成四元数
+        //    Quaternion rotation = Quaternion.AngleAxis(angle, axis);
+
+        //    // 将向量绕轴旋转
+        //    Vector3 rotatedVector = rotation * vector;
+
+        //    return rotatedVector;
+        //}
     }
 
     /// <summary>
