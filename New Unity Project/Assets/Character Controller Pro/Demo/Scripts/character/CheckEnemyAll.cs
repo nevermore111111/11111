@@ -32,10 +32,10 @@ public class CheckEnemyAll : MonoBehaviour
         if (other.gameObject.CompareTag(EnemyTag) && other.TryGetComponent(out attackReceive) == true && attackReceive.isNormalReceive() && !CharacterActor.CharacterInfo.enemies.Contains(attackReceive.CharacterInfo))
         {
             CheckTarget(attackReceive, TargetGroupWeight);
+            Debug.Log(attackReceive.CharacterInfo.name);
         }
-        if (brain?.ActiveVirtualCamera != VirtualCamera)
+        if (brain?.ActiveVirtualCamera != VirtualCamera && !brain.IsBlending)//在主摄像机不是他并且非混合状态下
         {
-            Debug.Log("重置位置");
             VirtualCamera.ForceCameraPosition(brain.transform.position, brain.transform.rotation);
         }
     }

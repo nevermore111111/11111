@@ -9,7 +9,7 @@ public class TimeScaleManager : MonoBehaviour
 {
     private static TimeScaleManager _instance;
     private int currentPriority;
-
+    //现在我不改时间缩放了，改成修改动画机播放速度了!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public static TimeScaleManager Instance
     {
         get
@@ -143,28 +143,34 @@ public class TimeScaleManager : MonoBehaviour
         {
             if (animator != null)
             {
-                //float originalAnimatorSpeed = animator.speed;
-
-                // 渐入
-                await DOTween.To(() => animator.speed, value => SetAnimatorSpeedByPriority(value, changePriority, animator), targetSpeed, fadeInTime)
-                    .OnUpdate(() => { /* 在更新时执行其他操作 */ }).SetUpdate(true)
-                    .AsyncWaitForCompletion();
-
-                // 持续
-                await DOTween.To(() => animator.speed, value => SetAnimatorSpeedByPriority(value, changePriority, animator), targetSpeed, duration)
-                    .OnUpdate(() => { /* 在更新时执行其他操作 */ }).SetUpdate(true)
-                    .AsyncWaitForCompletion();
-
-                // 渐出
-                await DOTween.To(() => animator.speed, value => SetAnimatorSpeedByPriority(value, changePriority, animator), 1, fadeOutTime)
-                    .OnUpdate(() => { /* 在更新时执行其他操作 */ }).SetUpdate(true)
-                    .AsyncWaitForCompletion();
-
-                // 恢复到初始动画机速度
-                SetAnimatorSpeedByPriority(1, 0, animator);
+                 SetAnimatorSpeed(fadeInTime, fadeOutTime, duration, targetSpeed, changePriority, animator).Forget();
             }
         }
     }
+
+    private async UniTask SetAnimatorSpeed(float fadeInTime, float fadeOutTime, float duration, float targetSpeed, int changePriority, Animator animator)
+    {
+        //float originalAnimatorSpeed = animator.speed;
+
+        // 渐入
+        await DOTween.To(() => animator.speed, value => SetAnimatorSpeedByPriority(value, changePriority, animator), targetSpeed, fadeInTime)
+            .OnUpdate(() => { /* 在更新时执行其他操作 */ }).SetUpdate(true)
+            .AsyncWaitForCompletion();
+
+        // 持续
+        await DOTween.To(() => animator.speed, value => SetAnimatorSpeedByPriority(value, changePriority, animator), targetSpeed, duration)
+            .OnUpdate(() => { /* 在更新时执行其他操作 */ }).SetUpdate(true)
+            .AsyncWaitForCompletion();
+
+        // 渐出
+        await DOTween.To(() => animator.speed, value => SetAnimatorSpeedByPriority(value, changePriority, animator), 1, fadeOutTime)
+            .OnUpdate(() => { /* 在更新时执行其他操作 */ }).SetUpdate(true)
+            .AsyncWaitForCompletion();
+
+        // 恢复到初始动画机速度
+        SetAnimatorSpeedByPriority(1, 0, animator);
+    }
+
     public async UniTask SetAnimatorSpeed(float fadeInTime, float fadeOutTime, float duration, float targetSpeed, Animator animator, int changePriority = 0)
     {
 

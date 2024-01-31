@@ -1,4 +1,3 @@
-using OfficeOpenXml.ConditionalFormatting.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +31,7 @@ public class BoxDetection : Detection
     public override List<Collider> GetDetection(out bool isHited)
     {
         List<Collider> result = new List<Collider>();
-        //更正当前帧的位置
+        //鏇存褰撳墠甯х殑浣嶇疆
         knifeManager.BeforeBoxUpdate();
 
         Collider[] hits = Physics.OverlapBox(boxCenter, halfExtents, orientation);

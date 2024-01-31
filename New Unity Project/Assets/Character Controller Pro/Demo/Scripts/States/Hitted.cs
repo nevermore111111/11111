@@ -1,6 +1,5 @@
 using Cinemachine.Utility;
 using Lightbug.CharacterControllerPro.Implementation;
-using OfficeOpenXml.Packaging;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
@@ -66,8 +65,8 @@ public class Hitted : CharacterState
         Debug.Log($"{weapon.transform.position},{HitWorldDir},{weapon.transform.position + HitWorldDir}");
         if(Check)
         {
-            Debug.DrawLine(weapon.transform.position, weapon.transform.position + HitWorldDir, Color.red,1f);
-            EditorApplication.isPaused = true;
+            //Debug.DrawLine(weapon.transform.position, weapon.transform.position + HitWorldDir, Color.red,1f);
+            //EditorApplication.isPaused = true;
         }
 
         SetAnimationParameters(weapon.WeaponWorldDirection, true);
