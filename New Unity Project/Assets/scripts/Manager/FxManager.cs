@@ -91,7 +91,7 @@ public class FxManager : MonoBehaviour
         }
         return clone;
     }
-    public ParticleSystem PlayFx<T>(T FxName, Transform parent = null, float maxTimeDestory = 5f)
+    public ParticleSystem PlayFx<T>(T FxName, Transform parent = null, float maxTimeDestory = 5f) 
     {
         if (FxName is string)
         {
