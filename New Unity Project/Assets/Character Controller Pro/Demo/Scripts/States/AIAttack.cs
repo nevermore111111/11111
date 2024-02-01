@@ -13,9 +13,14 @@ using UnityEngine;
 public class AIAttack : CharacterState
 {
 
-    public bool attackEnd;
     public List<AIAttackData> attacks;
     public bool isAttacking;
+    public enum AIAttackState 
+    {
+        chooseAttack,//选择攻击
+        attack,
+        attackEnd
+    }
 
     public enum AttackMode
     {
@@ -24,11 +29,6 @@ public class AIAttack : CharacterState
         AttackOnGround_fist
     }
 
-    private void Update()
-    {
-
-        
-    }
 
     protected override void Awake()
     {
@@ -43,14 +43,11 @@ public class AIAttack : CharacterState
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
-        Debug.Log("��ʼ");
+        Debug.Log("开始");
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
-        if(attackEnd)
-        {
 
-        }
     }
 
     public override void UpdateBehaviour(float dt)
@@ -59,7 +56,11 @@ public class AIAttack : CharacterState
     }
     public override void CheckExitTransition()
     {
-        if (attackEnd)
+        if(CharacterActor.IsGrounded) 
+        {
+
+        }
+        else//不在地面的时候直接进入normalmovement
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
@@ -69,6 +70,5 @@ public class AIAttack : CharacterState
 public class AIAttackData 
 {
     public string attackName;
-    public int attackWeight;
-
+    public int attackChooseWeight;
 }

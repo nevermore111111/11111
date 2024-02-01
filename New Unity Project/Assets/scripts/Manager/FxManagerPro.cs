@@ -12,10 +12,14 @@ public class FxManagerPro : MonoBehaviour
 {
     private static FxManagerPro instance;
 
-    // 使用字典存储特效，键是特效的名称，值是特效的预制体
+    /// <summary>
+    /// 使用字典存储特效，键是特效的名称，值是特效的预制体
+    /// </summary>
     private Dictionary<string, GameObject> fxDictionary = new Dictionary<string, GameObject>();
 
-    // 单例模式
+    /// <summary>
+    /// 单例模式
+    /// </summary>
     public static FxManagerPro Instance
     {
         get
@@ -41,6 +45,10 @@ public class FxManagerPro : MonoBehaviour
         handle2.Completed += LoadObjectFromAddressables_Completed;
         Handles.Add(handle2);
     }
+    /// <summary>
+    /// 加载特效
+    /// </summary>
+    /// <param name="target"></param>
     private void LoadObjectFromAddressables_Completed(AsyncOperationHandle<IList<GameObject>> target)
     {
         if (target.Status == AsyncOperationStatus.Succeeded)
@@ -49,14 +57,16 @@ public class FxManagerPro : MonoBehaviour
         }
         else
         {
-           
-                Debug.LogError($"Failed to load FX: {target.OperationException.Message}");
+            Debug.LogError($"Failed to load FX: {target.OperationException.Message}");
         }
+        
     }
-    // 加载特效
-  
-
-    // 播放特效
+    /// <summary>
+    /// 播放特效
+    /// </summary>
+    /// <param name="fxName"></param>
+    /// <param name="position"></param>
+    /// <param name="rotation"></param>
     public void PlayFx(string fxName, Vector3 position, Quaternion rotation)
     {
         if (fxDictionary.ContainsKey(fxName))
@@ -70,21 +80,28 @@ public class FxManagerPro : MonoBehaviour
         }
     }
 
-    // 停止特效
+    /// <summary>
+    /// 停止特效
+    /// </summary>
+    /// <param name="fxInstance"></param>
     public void StopFx(GameObject fxInstance)
     {
         Destroy(fxInstance);
     }
 
-    // 销毁特效
+    /// <summary>
+    /// 销毁特效
+    /// </summary>
+    /// <param name="fxInstance"></param>
+    /// <returns></returns>
     private async UniTask DestroyFxAfterPlay(GameObject fxInstance)
     {
         ParticleSystem particleSystem = fxInstance.GetComponent<ParticleSystem>();
-        
+
 
         if (particleSystem != null)
         {
-            await UniTask.Delay((int)((particleSystem.main.duration)*1000));
+            await UniTask.Delay((int)((particleSystem.main.duration) * 1000+5000));
         }
         else
         {
