@@ -32,7 +32,6 @@ public class CheckEnemyAll : MonoBehaviour
         if (other.gameObject.CompareTag(EnemyTag) && other.TryGetComponent(out attackReceive) == true && attackReceive.isNormalReceive() && !CharacterActor.CharacterInfo.enemies.Contains(attackReceive.CharacterInfo))
         {
             CheckTarget(attackReceive, TargetGroupWeight);
-            Debug.Log(attackReceive.CharacterInfo.name);
         }
         if (brain?.ActiveVirtualCamera != VirtualCamera && !brain.IsBlending)//在主摄像机不是他并且非混合状态下
         {
@@ -62,8 +61,10 @@ public class CheckEnemyAll : MonoBehaviour
 
     private void ResetEnemyTag()
     {
+        
         if (EnemyTag == "custom")
         {
+            Debug.Log("因为EnemyTag 还是custom，所以自动修改");
             if (CharacterActor.isPlayer)
                 EnemyTag = "enemy";
             else
