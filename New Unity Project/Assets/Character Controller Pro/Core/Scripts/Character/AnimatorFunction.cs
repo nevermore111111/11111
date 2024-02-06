@@ -4,7 +4,6 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
-using MagicaCloth2;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,16 +19,14 @@ public class AnimatorFunction : MonoBehaviour
 {
     [SerializeField]
     private MainCharacter mainCharacter;
-    private WeaponManager weaponManager;
+    private WeaponManager weaponManager;//
     private Attack Attack;
     CharacterStateController CharacterStateController;
     public CinemachineFreeLook CinemachineFreeLook;
-    CameraEffects CameraEffects;
     private List<WeaponManager> weaponManagers;//这个是所有武器
-    private AnimationConfig animationConfig;//这个是动画参数
+    private static AnimationConfig animationConfig;//这个是动画参数
     public SoloAnimaConfig CurrentAnimConfig;//这个是用来记录单个时间的参数
     public int currentHitIndex;//当前这个攻击的第n次攻击检测
-    private int currentAnimPar;
     public int hitKind;//现在攻击的种类
     public string activeWeaponDetect;//现在激活的碰撞区域
     public string currentStateName;//当前正在播放的动画
@@ -37,9 +34,6 @@ public class AnimatorFunction : MonoBehaviour
     CharacterActor characterActor;
 
     private TimelineManager timelineManager;
-    //private Action<int> hitActionOfImpulse;
-    //private Action<int> hitActionOfPlayFX;
-
 
 
     private void Awake()
@@ -47,11 +41,9 @@ public class AnimatorFunction : MonoBehaviour
         weaponManagers = GetComponentsInChildren<WeaponManager>().ToList();
         Attack = transform.parent.parent.GetComponentInChildren<Attack>();
         CharacterStateController = transform.parent.parent.GetComponentInChildren<CharacterStateController>();
-        //CameraEffects = CinemachineFreeLook.GetComponent<CameraEffects>();
         timelineManager = GetComponent<TimelineManager>();
         WeaponData = FindAnyObjectByType<WeaponData>();
         characterActor = GetComponentInParent<CharacterActor>();
-        //
     }
     private void Start()
     {

@@ -94,6 +94,7 @@ MonoBehaviour:
     - Packed Assets
     - aaaa
     - bbbb
+    - Fx
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 7fa6d8fcbdb63224a8d2dab6ce22fcf6, type: 2}
