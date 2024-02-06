@@ -9,17 +9,16 @@ using UnityEngine;
 public abstract class CharacterInfo : MonoBehaviour, IAgent
 {
 
-
-    //ÖÜÎ§È«²¿µÄµĞÈË
+    //å‘¨å›´å…¨éƒ¨çš„æ•Œäºº
     public CharacterActor characterActor;
 
-    [Tooltip("´ú±íÕâ¸öµ¥Î»µÄµĞÈËtag")]
+    [Tooltip("ä»£è¡¨è¿™ä¸ªå•ä½çš„æ•Œäººtag")]
     public string enemyTag;
-    [Tooltip("´ú±íÕâ¸öµ¥Î»µÄµĞÈËÁĞ±í")]
+    [Tooltip("ä»£è¡¨è¿™ä¸ªå•ä½çš„æ•Œäººåˆ—è¡¨")]
     public List<CharacterInfo> enemies;
-    [Tooltip("Õâ¸öµ¥Î»µÄÑ¡ÔñÄ¿±ê")]
+    [Tooltip("è¿™ä¸ªå•ä½çš„é€‰æ‹©ç›®æ ‡")]
     public CharacterInfo selectEnemy;
-    [Tooltip("Õâ¸öÈËÎïÔÚÉãÏñ»úÖĞµÄ´óĞ¡°ë¾¶£¬cinemachineµÄTargetGrounpÖĞµÄsize")]
+    [Tooltip("è¿™ä¸ªäººç‰©åœ¨æ‘„åƒæœºä¸­çš„å¤§å°åŠå¾„ï¼Œcinemachineçš„TargetGrounpä¸­çš„size")]
     public float cameraRadius = 0.5f;
 
     public AgetHitBox hitBox;
@@ -30,13 +29,18 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     public List<AttackReceive> allReceives;
     [HideInInspector]
     public List<SkillReceiver> allSkillReceivers;
+
+    public AttackInfo attackInfo = new AttackInfo();
+
+
+
     /// <summary>
-    /// ÉËº¦£¬Ä¿±êÎ»ÖÃ£¬ÎäÆ÷·½Ïò£¬»÷ÖĞÀàĞÍ
+    /// ä¼¤å®³ï¼Œç›®æ ‡ä½ç½®ï¼Œæ­¦å™¨æ–¹å‘ï¼Œå‡»ä¸­ç±»å‹
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="pos"></param>
     /// <param name="weapon"></param>
-    /// <param name="collider">ÊÜ»÷Î»ÖÃ</param>
+    /// <param name="collider">å—å‡»ä½ç½®</param>
     /// <param name="hit"></param>
     abstract public void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground);
 

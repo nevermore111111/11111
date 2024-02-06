@@ -196,11 +196,11 @@ namespace Lightbug.CharacterControllerPro.Demo
                 {
                     if (CharacterActor.IsGrounded)
                     {
-                        if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
+                        if (attack.currentAttackMode ==AttackMode.AttackOnGround)
                         {
                             CharacterStateController.EnqueueTransition<AttackOnGround>();
                         }
-                        else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                        else if (attack.currentAttackMode ==AttackMode.AttackOnGround_fist)
                         {
                             CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
                         }
@@ -208,11 +208,11 @@ namespace Lightbug.CharacterControllerPro.Demo
                     //在空中
                     else if (!CharacterActor.IsGrounded && canAttackInair)
                     {
-                        if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
+                        if (attack.currentAttackMode == AttackMode.AttackOnGround)
                         {
 
                         }
-                        else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                        else if (attack.currentAttackMode == AttackMode.AttackOnGround_fist)
                         {
 
                         }
@@ -223,13 +223,13 @@ namespace Lightbug.CharacterControllerPro.Demo
                 {
                     if (CharacterActor.IsGrounded)
                     {
-                        if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround)
+                        if (attack.currentAttackMode ==AttackMode.AttackOnGround)
                         {
                             //attack
                             SpAttack = 10;
                             CharacterStateController.EnqueueTransition<AttackOnGround>();
                         }
-                        else if (Attack.currentAttackMode == Attack.AttackMode.AttackOnGround_fist)
+                        else if (attack.currentAttackMode ==AttackMode.AttackOnGround_fist)
                         {
                             //SpAttack = 11;
                             //CharacterStateController.EnqueueTransition<AttackOnGround_fist>();

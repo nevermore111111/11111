@@ -110,11 +110,11 @@ public class AutoGetData
     {
         string className = obj.GetType().ToString(); // 获取类名
         string filePath = Path.Combine(Application.persistentDataPath, $"{className}.json");
-
         try
         {
             string json = JsonConvert.SerializeObject(obj);
             File.WriteAllText(filePath, json);
+            Debug.Log(filePath);
             Debug.Log($"Object of type {className} saved successfully at {filePath}");
         }
         catch (Exception e)

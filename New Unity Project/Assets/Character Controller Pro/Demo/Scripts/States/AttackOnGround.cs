@@ -60,7 +60,7 @@ public class AttackOnGround : Attack
             else if ((type != typeof(Attack)) && type != typeof(StartPlay) && CharacterActor.IsGrounded)
             {
                 combo = 1;
-                CharacterActor.Animator.SetInteger("combo", Attack.combo);
+                CharacterActor.Animator.SetInteger("combo", attack.combo);
                 CharacterActor.Animator.Play("AttackOnGround.attack01_1", 0);
                 canChangeState = false;
             }

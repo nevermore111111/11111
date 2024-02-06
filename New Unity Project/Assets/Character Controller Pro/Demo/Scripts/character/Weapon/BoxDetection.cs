@@ -53,6 +53,7 @@ public class BoxDetection : Detection
                         {
                             HittedEvent?.Invoke(this, null);
                             Weapon.HittedCharacter.Add(hitBox.characterInfoOwner);
+
                             hitBox.characterInfoOwner.GetDamage(1, Weapon.transform.position, Weapon, item, IAgent.HitKind.ground);
                             Weapon.weaponOwner.HitOther(Weapon);
                         }

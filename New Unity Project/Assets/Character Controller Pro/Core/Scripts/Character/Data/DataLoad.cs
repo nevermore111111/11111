@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
+using System.Reflection;
+using System;
 
 public class DataLoad : MonoBehaviour
 {
@@ -33,16 +35,34 @@ public class DataLoad : MonoBehaviour
     }
     private void Awake()
     {
-        string filePath = Application.persistentDataPath + "/config.json";
+        //string filePath = Application.persistentDataPath + "/config.json";
 
-        if (File.Exists(filePath))
+        FieldInfo[] fields = typeof(DataLoad).GetFields(BindingFlags.Public | BindingFlags.Instance);
+        for (int i = 0; i < fields.Length; i++) 
         {
-            string json = File.ReadAllText(filePath);
-            animationConfig = JsonConvert.DeserializeObject<AnimationConfig>(json); // 使用 JsonConvert 进行反序列化
+            FieldInfo field = fields[i];
+            string fieldType = field.FieldType.ToString();
+            string filePath = Path.Combine(Application.persistentDataPath, $"{fieldType}.json");
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                //为了加载速度，这里多写点
+                switch(fieldType)
+                {
+                    case "AnimationConfig":
+                        field.SetValue(Instance, JsonConvert.DeserializeObject<AnimationConfig>(json));
+                        break;
+                    case "AiBehavior":
+                        field.SetValue(Instance, JsonConvert.DeserializeObject<AiBehavior>(json));
+                        break;
+                }
+            }
+            else
+            {
+                Debug.Log("没有这个文件");
+            }
         }
-        else
-        {
-            Debug.Log("没有这个文件");
-        }
+
+       
     }
 }

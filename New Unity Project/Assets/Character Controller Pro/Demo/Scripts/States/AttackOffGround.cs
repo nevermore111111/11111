@@ -45,10 +45,10 @@ public class AttackOffGround : Attack
         canChangeState = false;
         if (CharacterStateController.CurrentState is AttackOffGround && (!isPlayMove))
         {
-            Debug.Log("×Ô¶¯ÇĞ»»ÁË");
+            Debug.Log("è‡ªåŠ¨åˆ‡æ¢äº†");
             if(CharacterActor.IsGrounded)
             {
-                Debug.LogError("ÎªÊ²Ã´ÔÚÂäµØ×´Ì¬½øÈë¿ÕÖĞ¹¥»÷£¿");
+                Debug.LogError("ä¸ºä»€ä¹ˆåœ¨è½åœ°çŠ¶æ€è¿›å…¥ç©ºä¸­æ”»å‡»ï¼Ÿ");
             }
             //if(isNextAttack)
             {
@@ -59,7 +59,7 @@ public class AttackOffGround : Attack
                 else
                 {
                     combo = 1;
-                    CharacterActor.Animator.SetInteger("combo", Attack.combo);
+                    CharacterActor.Animator.SetInteger("combo", attack.combo);
                     CharacterActor.Animator.CrossFade("AttackOffGround.air_attack01_1", 0.1f);
                 }
             }
@@ -79,12 +79,12 @@ public class AttackOffGround : Attack
     {
         if (CharacterActions.spAttack.value)
         {
-            //²¥·ÅÏÂÂäµÄ¶¯»­
-            switch (Attack.currentAttackMode)
+            //æ’­æ”¾ä¸‹è½çš„åŠ¨ç”»
+            switch (attack.currentAttackMode)
             {
                 case AttackMode.AttackOnGround:
                     CharacterActor.Animator.SetInteger("specialAttack", 10);
-                    //Õâ¸öÖ´ĞĞÒ»¸öÏÂÂä¹¥»÷
+                    //è¿™ä¸ªæ‰§è¡Œä¸€ä¸ªä¸‹è½æ”»å‡»
                     break;
                 case AttackMode.AttackOnGround_fist:
                     CharacterActor.Animator.SetInteger("specialAttack", 11);

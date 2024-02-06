@@ -22,7 +22,9 @@ public class EnemyCharacter : CharacterInfo
     {
         if(CharacterHitted != null)
         CharacterHitted.GetHitted(weapon, hit, true);
-        FxManager.Instance.PlayFx<string[]>(weapon.weaponFx, collider.transform);
+        //FxManager.Instance.PlayFx<string[]>(weapon.weaponFx, collider.transform);
+        FxManagerPro.Instance.PlayFx(weapon.weaponFx, collider.transform);
+        
     }
 
     
@@ -39,7 +41,7 @@ public class EnemyCharacter : CharacterInfo
         {
             characterActor.Animator.CrossFadeInFixedTime(targetAnim, 0.1f);
         }
-        //µÃµ½¹ØÓÚ×ÔÉíµÄ¹¥»÷·½Ïò
+        //å¾—åˆ°å…³äºè‡ªèº«çš„æ”»å‡»æ–¹å‘
     }
     private void ChangeAnim(Vector3 attackDirection)
     {

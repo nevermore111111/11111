@@ -14,11 +14,11 @@ using static Lightbug.CharacterControllerPro.Core.PhysicsActor;
 /// <summary>
 public class AttackOnGround_fist : Attack
 {
-    [Tooltip("½ÇÉ«µÄÎäÆ÷")]
+    [Tooltip("è§’è‰²çš„æ­¦å™¨")]
     public GameObject[] army = new GameObject[1];
    
     public float gravity = 10;
-    //Õâ¸öÊÇÊ¹ÓÃsp02¼¼ÄÜºóÆğÌøµÄËÙ¶È¡£
+    //è¿™ä¸ªæ˜¯ä½¿ç”¨sp02æŠ€èƒ½åèµ·è·³çš„é€Ÿåº¦ã€‚
     public float upVerticalVelocity = 10f;
 
     protected override void Awake()
@@ -48,7 +48,7 @@ public class AttackOnGround_fist : Attack
         {
             combo = 1;
             CharacterActor.Animator.Play("AttackOnGround_fist.attack01_1", 0);
-            CharacterActor.Animator.SetInteger("combo", Attack.combo);
+            CharacterActor.Animator.SetInteger("combo", attack.combo);
             canChangeState = false;
         }
         else
@@ -63,7 +63,7 @@ public class AttackOnGround_fist : Attack
     public override void UpdateBehaviour(float dt)
     {
         base.UpdateBehaviour(dt);
-        //ÔÚ·Ç¹¥»÷Ê±
+        //åœ¨éæ”»å‡»æ—¶
     }
     public override void CheckExitTransition()
     {

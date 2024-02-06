@@ -21,9 +21,10 @@ public class MainCharacter : CharacterInfo
         CharacterHitted.GetHitted(weapon, hit);
         if (CharacterStateController.CurrentState is NormalMovement) 
         {
-
+            NormalMovement actorNormalmovement = (NormalMovement)CharacterStateController.CurrentState;
+            //if (actorNormalmovement != null&&)
+            //{ }
         }
-
     }
 
 
@@ -46,7 +47,7 @@ public class MainCharacter : CharacterInfo
     {
         if (CharacterStateController.CurrentState is Attack)
         {
-            return Attack.isAttack;
+            return this.attackInfo.isAtttack;
         }
         return false;
     }

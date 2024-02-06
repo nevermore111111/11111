@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
@@ -15,27 +16,81 @@ using UnityEngine;
 /// <summary>
 public class Attack : CharacterState
 {
+    #region(攻击数据)
+    public bool isAttack 
+    {
+        get
+        { return CharacterActor.CharacterInfo.attackInfo.isAtttack; }
+        set
+        { CharacterActor.CharacterInfo.attackInfo.isAtttack = value; }
+    }
+    public int combo
+    {
+        get
+        { return CharacterActor.CharacterInfo.attackInfo.combo; }
+        set
+        { CharacterActor.CharacterInfo.attackInfo.combo = value; }
 
-    public static bool isAttack;
-    public static int combo;
-    public static bool canInput;
-    public static bool isJustEnter;
-    public static bool canChangeState;
+    }
+    public  bool canInput
+    {
+        get
+        { return CharacterActor.CharacterInfo.attackInfo.canInput; }
+        set
+        { CharacterActor.CharacterInfo.attackInfo.canInput = value; }
+
+    }
+    public  bool isJustEnter
+    {
+        get
+        { return CharacterActor.CharacterInfo.attackInfo.isJustEnter; }
+        set
+        { CharacterActor.CharacterInfo.attackInfo.isJustEnter = value; }
+
+    }
+    public  bool canChangeState
+    {
+        get
+        { return CharacterActor.CharacterInfo.attackInfo.canChangeState; }
+        set
+        { CharacterActor.CharacterInfo.attackInfo.canChangeState = value; }
+
+    }
     // protected  GameObject selectEnemy;
-    public static int MaxCombo;
+    public  int MaxCombo
+    {
+        get
+        { return CharacterActor.CharacterInfo.attackInfo.maxCombo; }
+        set
+        { CharacterActor.CharacterInfo.attackInfo.maxCombo = value; }
+
+    }
+    public AttackMode currentAttackMode
+    {
+        get
+        { return CharacterActor.CharacterInfo.attackInfo.attackMode; }
+        set
+        { CharacterActor.CharacterInfo.attackInfo.attackMode = value; }
+    }
+    #endregion
     //这个是范围内的敌人，利用一个球判定进入范围的敌人，进入了就添加在名单里面；
     // public static List<GameObject> enemys = new List<GameObject>();
     //这个onceAttack是用来判定每次攻击只执行一次动画减慢效果
-    public static bool OnceAttack;
     private NormalMovement NormalMovement;
-    public static AttackMode currentAttackMode = AttackMode.AttackOnGround;
+    
     [SerializeField]
     //进入attack状态时的体型
     public Vector2 targetAttackWidthAndHeigh;
     private Vector2 normalHeightAndWidth;
     public Attack attack;
     protected WeaponManager[] weaponManagers;
-    public static bool useGravity = false;
+    public  bool useGravity
+    {
+        get
+        { return CharacterActor.CharacterInfo.attackInfo.useGravity; }
+        set
+        { CharacterActor.CharacterInfo.attackInfo.useGravity = value; }
+    }
     public static float AttackGravity = 10f;
     public float executeDis = 3f;
     //技能攻击时，如果有敌人在面前时，最大转向角度。
@@ -50,13 +105,8 @@ public class Attack : CharacterState
     public float CharacterAttackDistance = 1.8f;
 
     //public List<IKPar> IKPar;
-   
-    public enum AttackMode
-    {
-        AttackOnGround,
-        //AttackOffGround,
-        AttackOnGround_fist
-    }
+
+
     /// <summary>
     /// false是展示
     /// </summary>
@@ -127,9 +177,8 @@ public class Attack : CharacterState
         targetAttackWidthAndHeigh = new(1f, 1.58f);
         //ResettargetAttackWidthAndHeigh(new Vector2(1.5f,1.58f));
         attack = GetComponent<Attack>();
-        OnceAttack = false;
+
         base.Awake();
-        MaxCombo = 1;
         NormalMovement = GetComponent<NormalMovement>();
     }
     protected override void Start()
@@ -151,19 +200,7 @@ public class Attack : CharacterState
             isJustEnter = true;
         //暂时记一下，在设置宽度为1.5f的时候
         CharacterActor.CheckAndSetSize(targetAttackWidthAndHeigh);
-        //CharacterActor.CheckAndSetSize(targetAttackWidthAndHeigh);
-        //CharacterActor.CheckAndInterpolateSize(targetAttackWidthAndHeigh,Lightbug.CharacterControllerPro.Core.CharacterActor.SizeReferenceType.Bottom);
-        //DOTween.To(() => CharacterActor.BodySize, (value) =>
-        //{
-        //    if (CharacterStateController.CurrentState is Attack)
-        //        CharacterActor.CheckAndSetSize(value);
-        //}, targetAttackWidthAndHeigh, 0.5f
-        //).SetId("AttackSizeChange");
 
-        // //根据当前进入的类，去调整当前的timeline的数量
-        // string className = this.GetType().Name;
-        // //当进入对应模式的时候，去切换对应的timeline数组
-        //timelineManager.SwapTimelinesByAssetName(className);
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
@@ -222,7 +259,7 @@ public class Attack : CharacterState
             //按下攻击键位
             if (canInput)
             {
-                if(canExecute())
+                if (canExecute())
                 {
                     //执行处决，先冲过去
                     executeStart();
@@ -263,7 +300,7 @@ public class Attack : CharacterState
         }
         return false;
     }
-    
+
     private bool CheckDis(float distance)
     {
         return (CharacterActor.CharacterInfo.transform.position - CharacterActor.CharacterInfo.selectEnemy.transform.position).magnitude < distance;
@@ -290,7 +327,7 @@ public class Attack : CharacterState
         {
             CharacterStateController.EnqueueTransition<Evade>();
         }
-        if(CharacterActor.IsStable&&CharacterActions.defend.value&& !isAttack )
+        if (CharacterActor.IsStable && CharacterActions.defend.value && !isAttack)
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
