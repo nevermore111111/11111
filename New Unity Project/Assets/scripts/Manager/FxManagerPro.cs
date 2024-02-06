@@ -79,6 +79,15 @@ public class FxManagerPro : MonoBehaviour
             Debug.LogError($"FX {fxName} not found in dictionary. Make sure to load it first.");
         }
     }
+    public void PlayFx(string fxName, Transform transform) => PlayFx(fxName, transform.position, transform.rotation);
+    public void PlayFx(string[] fxNames, Transform transform)
+    {
+        for(int i = 0; i < fxNames.Length; i++) 
+        {
+            PlayFx(fxNames[i], transform);
+        }
+    }
+
 
     /// <summary>
     /// 停止特效
