@@ -1,3 +1,4 @@
+using Cinemachine;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
@@ -5,8 +6,10 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+[SaveDuringPlay]
 public class HitTimeData : MonoBehaviour
 {
+    [Header("本文件会在运行时保存")]
     //一个记录时停参数的类
     public int ForceCurrent = -1;
     [SerializeField]

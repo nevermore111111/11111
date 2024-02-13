@@ -1,4 +1,5 @@
 using Cinemachine.Utility;
+using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,8 @@ using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static Lightbug.CharacterControllerPro.Demo.DefenseParameters;
 
 public class Hitted : CharacterState
 {
@@ -61,8 +64,6 @@ public class Hitted : CharacterState
     private void CheckAnimator(WeaponManager weapon, IAgent.HitKind hitKind, bool NeedChangeState)
     {
         //这个是转换到世界坐标系。
-        Vector3 HitWorldDir = weapon.WeaponWorldDirection;
-        Debug.Log($"{weapon.transform.position},{HitWorldDir},{weapon.transform.position + HitWorldDir}");
         if(Check)
         {
             //Debug.DrawLine(weapon.transform.position, weapon.transform.position + HitWorldDir, Color.red,1f);
@@ -136,4 +137,28 @@ public class Hitted : CharacterState
         CharacterActor.Animator.SetFloat("attackYFrom", attackFrom.z);
         CharacterActor.Animator.SetFloat("attackZFrom", attackFrom.y);
     }
+
+    /// <summary>
+    /// 返回
+    /// </summary>
+    /// <param name="angle"></param>
+    /// <param name="WeaponDirection"></param>
+    /// <returns></returns>
+    public bool IsDefend(out float angle,Vector3 WeaponDirection)
+    {
+        if(CharacterStateController.CurrentState is NormalMovement)
+        {
+            NormalMovement Move = CharacterStateController.CurrentState as  NormalMovement;
+            if(Move.defenseParameters.currentDenfendKind!=DefendKind.unDefend)
+            {
+                Vector3 ProjectDirection = WeaponDirection.ProjectOntoPlane(CharacterActor.Forward);
+                //获得的角度如果是顺时针的，就是正的，否则就是负的。
+                angle = Vector3.SignedAngle(Vector3.up, ProjectDirection, CharacterActor.Forward);
+                return true;
+            }
+        }
+        angle = 0f;
+        return false;
+    }
+
 }

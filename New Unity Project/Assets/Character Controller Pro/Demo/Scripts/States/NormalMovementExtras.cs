@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using Lightbug.Utilities;
 using Lightbug.CharacterControllerPro.Core;
+using Sirenix.OdinInspector;
+using Cysharp.Threading.Tasks;
+using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 
 namespace Lightbug.CharacterControllerPro.Demo
 {
@@ -239,8 +243,33 @@ namespace Lightbug.CharacterControllerPro.Demo
         [Tooltip("影响防御时的减速度")]
         public float DefendGroundedDeceleration = 10f;
         public AnimationCurve DefendAngleAccelerationBoost = AnimationCurve.EaseInOut(0f, 1f, 180f, 2f);
-        [Tooltip("完美格挡时间")]
-        public float perfectDefendTime = 0.4f;
+        [Tooltip("完美格挡时间,毫秒")]
+        public int perfectDefendTime = 400;
+        [Tooltip("开始格挡的时间")]
+        [ReadOnly]
+        public float defendStartTime = 0f;
+        public DefendKind currentDenfendKind = DefendKind.unDefend;
+
+         public enum DefendKind
+        {
+            perfectDefend,
+            normalDefend,
+            unholdDefend,
+            unDefend
+        }
+        public async void ChangeDefendFun()
+        {
+            float thisDefendStartTime = Time.time;
+            await UniTask.Delay(perfectDefendTime);
+            if(thisDefendStartTime == defendStartTime&&currentDenfendKind ==DefendKind.perfectDefend)
+            {
+                currentDenfendKind = DefendKind.normalDefend;
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 
     [System.Serializable]

@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
+using MagicaCloth2;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,18 +16,20 @@ using UnityEngine;
 /// <summary>
 /// 
 /// <summary>
-public class AnimatorFunction : MonoBehaviour
+public class AnimatorFunctionAI : MonoBehaviour
 {
     [SerializeField]
     private MainCharacter mainCharacter;
-    private WeaponManager weaponManager;//
+    private WeaponManager weaponManager;
     private Attack Attack;
     CharacterStateController CharacterStateController;
     public CinemachineFreeLook CinemachineFreeLook;
+    CameraEffects CameraEffects;
     private List<WeaponManager> weaponManagers;//这个是所有武器
     private static AnimationConfig animationConfig;//这个是动画参数
     public SoloAnimaConfig CurrentAnimConfig;//这个是用来记录单个时间的参数
     public int currentHitIndex;//当前这个攻击的第n次攻击检测
+    private int currentAnimPar;
     public int hitKind;//现在攻击的种类
     public string activeWeaponDetect;//现在激活的碰撞区域
     public string currentStateName;//当前正在播放的动画
@@ -34,6 +37,9 @@ public class AnimatorFunction : MonoBehaviour
     CharacterActor characterActor;
 
     private TimelineManager timelineManager;
+    //private Action<int> hitActionOfImpulse;
+    //private Action<int> hitActionOfPlayFX;
+
 
 
     private void Awake()
@@ -41,9 +47,11 @@ public class AnimatorFunction : MonoBehaviour
         weaponManagers = GetComponentsInChildren<WeaponManager>().ToList();
         Attack = transform.parent.parent.GetComponentInChildren<Attack>();
         CharacterStateController = transform.parent.parent.GetComponentInChildren<CharacterStateController>();
+        //CameraEffects = CinemachineFreeLook.GetComponent<CameraEffects>();
         timelineManager = GetComponent<TimelineManager>();
         WeaponData = FindAnyObjectByType<WeaponData>();
         characterActor = GetComponentInParent<CharacterActor>();
+        //
     }
     private void Start()
     {
@@ -51,38 +59,30 @@ public class AnimatorFunction : MonoBehaviour
     }
     public void JumpStart()
     {
-        //关闭动画机进入的条件
-        characterActor.Animator.SetBool("jump", false);
+      
     }
 
     public void Idle()
     {
-        Attack.isAttack = false;
-        characterActor.Animator.SetBool("attack", false);
-        Attack.combo = 0;
-        characterActor.Animator.SetInteger("combo", Attack.combo);
-        Attack.canInput = true;
-        Attack.canChangeState = true;
+       
     }
 
     public void Fly()
     {
-        characterActor.alwaysNotGrounded = true;
+        
     }
     public void FlyEnd()
     {
-        characterActor.alwaysNotGrounded = false;
+        
     }
 
 
     public void NormalIdle()
     {
-        if (characterActor.Animator.IsInTransition(0) == false)
-            characterActor.SetUpRootMotion(false, false);
+       
     }
     public void Stop()
     {
-        //characterActor.Animator.SetBool(Attack.stopParameter, false);
     }
 
     public void AttackEnd()
@@ -130,9 +130,6 @@ public class AnimatorFunction : MonoBehaviour
         Debug.LogError("开始攻击");
         characterActor.Animator.speed = 1.3f;
         SetStrengthAndDetector();
-
-        //根据当前攻击类别来进行
-        //根据当前的detections进行调整这个激活的detection;
 
         SetWeaponDirection();
         foreach (var manager in weaponManagers)
@@ -426,11 +423,11 @@ public class AnimatorFunction : MonoBehaviour
         {
             //否则去按输入转向，定义转向速度和时间。
             Vector3 target = CharacterStateController.InputMovementReference.ProjectOntoPlane(Vector3.up).normalized;//我想转向的方向
-            Quaternion  targetQua = Quaternion.LookRotation(target, Vector3.up);
-            DOTween.To(()=>0f, value => 
+            Quaternion targetQua = Quaternion.LookRotation(target, Vector3.up);
+            DOTween.To(() => 0f, value =>
             {
                 //旋转一定角度
-                Quaternion.RotateTowards(characterActor.transform.rotation,targetQua, 0.1f*Time.deltaTime);
+                Quaternion.RotateTowards(characterActor.transform.rotation, targetQua, 0.1f * Time.deltaTime);
             }, 1f, 0.1f);
             //DOTween.To();//执行
 

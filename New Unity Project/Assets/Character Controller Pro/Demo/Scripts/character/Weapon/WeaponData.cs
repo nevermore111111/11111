@@ -34,8 +34,6 @@ public class WeaponData : MonoBehaviour
 
     public CinemachineImpulseDefinition.ImpulseShapes ImpulseShapes = CinemachineImpulseDefinition.ImpulseShapes.Bump;
     public float DropSpeed = 10f;
-
-
     public List<WeaponNum> weaponNumList = new List<WeaponNum>();
 
 }

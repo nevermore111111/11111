@@ -19,7 +19,7 @@ public class MainCharacter : CharacterInfo
     {
         //需要找到主角调用
         CharacterHitted.GetHitted(weapon, hit);
-        if (CharacterStateController.CurrentState is NormalMovement) 
+        if (CharacterStateController.CurrentState is NormalMovement)
         {
             NormalMovement actorNormalmovement = (NormalMovement)CharacterStateController.CurrentState;
             //if (actorNormalmovement != null&&)
@@ -92,24 +92,28 @@ public class MainCharacter : CharacterInfo
 #endif
         HitPlus(HitStrength, hitTimeData, weapon);
     }
-    public void HitPlus(int currentHit, HitTimeData hitTimeData, WeaponManager weaponManager)
+    public async void HitPlus(int currentHit, HitTimeData hitTimeData, WeaponManager weaponManager)
     {
         hitTimeData.CurrentHit = currentHit;
         float fadeInDuration = hitTimeData.currentHitTimePara.fadeTime;//hitData.GetFadeTime(hitData, currentHit);
-        float fadeOutDuration = hitTimeData.currentHitTimePara.fadeTime;// 如果渐出时间和渐入时间相同
+        float fadeOutDuration = hitTimeData.currentHitTimePara.fadeTime/2f;// 渐出时间稍微短一些
         float duration = hitTimeData.currentHitTimePara.stayTime;
         float targetTimeScale = hitTimeData.currentHitTimePara.targetTimeScale;
         //TimeScaleManager.Instance.SetTimeScale(fadeInDuration, fadeOutDuration, duration, targetTimeScale);
         //减速自身和目标的速度。
-        TimeScaleManager.Instance.SetAnimatorSpeed(fadeInDuration, fadeOutDuration, duration, targetTimeScale,new List<Animator>{ characterActor.Animator,selectEnemy?.characterActor?.Animator});
-        if (weaponManager.isActiveAndEnabled)
+        if (currentHit == 3)
+            Debug.Log(Time.time);
+        await TimeScaleManager.Instance.SetAnimatorSpeed(fadeInDuration, fadeOutDuration, duration, targetTimeScale, new List<Animator> { characterActor.Animator, selectEnemy?.characterActor?.Animator });
+        if (currentHit == 3)
+            Debug.Log(Time.time);
+        if (weaponManager != null && weaponManager.isActiveAndEnabled)
         {
             //调用震动和特效
             weaponManager.Impluse();
         }
     }
 
-    public override void GetDamage(float damage, Vector3 attackDirection, float hitStrength,string targetAnim = null)
+    public override void GetDamage(float damage, Vector3 attackDirection, float hitStrength, string targetAnim = null)
     {
         ChangeAnim(attackDirection);
         //得到关于自身的攻击方向

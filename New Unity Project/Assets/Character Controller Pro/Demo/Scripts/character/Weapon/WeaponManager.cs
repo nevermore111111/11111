@@ -234,6 +234,7 @@ var squaredNumbers = numbers.Select(x => x * x);
             {
                 //使用dotween的shake
                 CameraShakeManager.Instance.Shake(targetShakeDirection, weaponNum.Strength, weaponNum.Frequence, weaponNum.Duration);
+
             }
             else
             {

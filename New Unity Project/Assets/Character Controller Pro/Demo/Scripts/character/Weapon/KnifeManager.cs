@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class KnifeManager : MonoBehaviour
 {
-    public float detectionWidth;      // ºĞĞÎ¼ì²âµÄ¿í¶È
-    public float detectionHeight = 0.1f;     // ºĞĞÎ¼ì²âµÄ¸ß¶È
-    public float detectionDepth;      // ºĞĞÎ¼ì²âµÄÉî¶È
+    public float detectionWidth;      // ç›’å½¢æ£€æµ‹çš„å®½åº¦
+    public float detectionHeight = 0.1f;     // ç›’å½¢æ£€æµ‹çš„é«˜åº¦
+    public float detectionDepth;      // ç›’å½¢æ£€æµ‹çš„æ·±åº¦
 
-    public Transform knifeTip;  // µ¶¼â
-    public Transform knifeTail; // µ¶Î²
+    public Transform knifeTip;  // åˆ€å°–
+    public Transform knifeTail; // åˆ€å°¾
 
-    private BoxDetection boxDetection;  // BoxDetectorÊµÀı
-    private Vector3 previousTipPosition;  // ÉÏÒ»Ö¡µ¶¼âµÄÎ»ÖÃ
-    private Vector3 previousTailPosition; // ÉÏÒ»Ö¡µ¶Î²µÄÎ»ÖÃ
+    private BoxDetection boxDetection;  // BoxDetectorå®ä¾‹
+    private Vector3 previousTipPosition;  // ä¸Šä¸€å¸§åˆ€å°–çš„ä½ç½®
+    private Vector3 previousTailPosition; // ä¸Šä¸€å¸§åˆ€å°¾çš„ä½ç½®
     Vector3 boxCenter;
     quaternion quaternion;
     Vector3 half;
@@ -26,7 +26,7 @@ public class KnifeManager : MonoBehaviour
     {
         detectionDepth = (knifeTail.transform.position - knifeTip.transform.position).magnitude;
 
-        // ³õÊ¼»¯ÉÏÒ»Ö¡µÄÎ»ÖÃ
+        // åˆå§‹åŒ–ä¸Šä¸€å¸§çš„ä½ç½®
         previousTipPosition = knifeTip.position;
         previousTailPosition = knifeTail.position;
     }
@@ -40,28 +40,28 @@ public class KnifeManager : MonoBehaviour
 
     public void BeforeBoxUpdate()
     {
-        // »ñÈ¡µ±Ç°boxµÄÖĞĞÄµã
+        // è·å–å½“å‰boxçš„ä¸­å¿ƒç‚¹
         boxCenter = (previousTipPosition + previousTailPosition + knifeTip.position + knifeTail.position) / 4f;
 
         Vector3 dis01 = (knifeTip.position - previousTipPosition);
         Vector3 dis02 = (knifeTail.position - previousTailPosition);
-        Vector3 X = (dis01 + dis02) / 2f;//½üËÆµÄx
+        Vector3 X = (dis01 + dis02) / 2f;//è¿‘ä¼¼çš„x
         if(X == Vector3.zero)
         {
-            //µÚÒ»Ö¡»¹Ã»¿ªÊ¼¶¯
+            //ç¬¬ä¸€å¸§è¿˜æ²¡å¼€å§‹åŠ¨
             X = knifeTip.forward;
         }
-        float disF = Mathf.Max(dis01.magnitude, dis02.magnitude);
+        float disF = (dis01.magnitude+ dis02.magnitude)*0.5f;
         Vector3 DISz01 = (previousTipPosition - previousTailPosition);
         Vector3 DISz02 = (knifeTip.position - knifeTail.position);
-        Vector3 z = (DISz01 + DISz02) / 2f;//½üËÆµÄz
-        //x·½Ïò²»ÄÜÌ«Ğ¡
+        Vector3 z = (DISz01 + DISz02) / 2f;//è¿‘ä¼¼çš„z
+        //xæ–¹å‘ä¸èƒ½å¤ªå°
         disF = disF > detectionDepth ? disF : detectionDepth;
         half = 0.5f * new Vector3(disF, detectionHeight, detectionDepth);
-        Vector3 Y = Vector3.Cross(z, X);//½üËÆµÄy
+        Vector3 Y = Vector3.Cross(z, X);//è¿‘ä¼¼çš„y
 
         quaternion = Quaternion.LookRotation(z, Y);
-        // ¸üĞÂÉÏÒ»Ö¡µÄÎ»ÖÃ
+        // æ›´æ–°ä¸Šä¸€å¸§çš„ä½ç½®
         boxDetection.boxCenter = boxCenter;
         boxDetection.halfExtents = half;
         boxDetection.orientation = quaternion;

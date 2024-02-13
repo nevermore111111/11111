@@ -4,6 +4,7 @@ using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
 //using MathNet.Numerics.LinearAlgebra.Solvers;
 using Rusk;
+using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
 
@@ -74,6 +75,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         protected bool wantToCrouch = false;
         protected bool wantTodenfense = false;
         protected bool isCrouched = false;
+
         private bool isDefense;
         public bool IsDefense
         {
@@ -86,6 +88,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 CharacterActor.Animator?.SetBool(defensePar, value);
                 CharacterActor.SetUpRootMotion(true, false);
                 CharacterActor.UseRootMotion = value;
+                defenseParameters.defendStartTime = Time.time;
 
                 if (value && !isDefense) //刚刚进入
                 {
@@ -95,6 +98,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                     {
                         CharacterActor.Animator.SetLayerWeight(2, value);
                     }, 1f, 0.2f).SetId("Defense");
+                    defenseParameters.ChangeDefendFun();
                 }
                 else if (!value && isDefense)//刚刚出来
                 {
