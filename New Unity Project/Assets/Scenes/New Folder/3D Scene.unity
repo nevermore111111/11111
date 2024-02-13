@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 65588616}
   - component: {fileID: 65588617}
   - component: {fileID: 65588618}
+  - component: {fileID: 65588619}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -794,6 +795,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d93c04709f91e4ebc45dd9f5a646f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &65588619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65588612}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cafe4a04953841e4fad9dd4f137ed22b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &79584524
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,7 +862,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100322558}
-  m_LocalRotation: {x: 0.059331276, y: -0.75825626, z: 0.06969532, w: 0.6454997}
+  m_LocalRotation: {x: 0.059331283, y: -0.75825626, z: 0.06969534, w: 0.64549977}
   m_LocalPosition: {x: 3.929512, y: 0.39202702, z: 6.6251297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -974,8 +987,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102522144}
-  m_LocalRotation: {x: 0.073834196, y: -0.120175675, z: 0.008963039, w: 0.98996264}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.11066527, y: -0.1197588, z: -0.013434174, w: 0.9865245}
+  m_LocalPosition: {x: 0, y: -0.00000023841858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1106,6 +1119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 516fe1783561baf4094cac545c4f886e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCharacter: {fileID: 0}
+  CinemachineFreeLook: {fileID: 0}
+  currentHitIndex: 0
+  hitKind: 0
+  activeWeaponDetect: 
+  currentStateName: 
+  WeaponData: {fileID: 0}
 --- !u!114 &111287891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1733,6 +1753,15 @@ MonoBehaviour:
   canBeExecuted: 0
   allReceives: []
   allSkillReceivers: []
+  attackInfo:
+    attackMode: 0
+    isAtttack: 0
+    combo: 0
+    canInput: 0
+    isJustEnter: 0
+    canChangeState: 0
+    maxCombo: 0
+    useGravity: 0
   targetGroupSize: 2
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -4419,6 +4448,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 516fe1783561baf4094cac545c4f886e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCharacter: {fileID: 0}
+  CinemachineFreeLook: {fileID: 0}
+  currentHitIndex: 0
+  hitKind: 0
+  activeWeaponDetect: 
+  currentStateName: 
+  WeaponData: {fileID: 0}
 --- !u!114 &244119043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4679,7 +4715,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0.4
+    perfectDefendTime: 0
+    defendStartTime: 0
+    currentDenfendKind: 3
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -5153,7 +5191,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0.4
+    perfectDefendTime: 0
+    defendStartTime: 0
+    currentDenfendKind: 3
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -6993,7 +7033,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0.4
+    perfectDefendTime: 0
+    defendStartTime: 0
+    currentDenfendKind: 3
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -8885,8 +8927,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: 0.073834196, y: -0.120175675, z: 0.008963039, w: 0.98996264}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.11066528, y: -0.11975881, z: -0.0134341745, w: 0.9865245}
+  m_LocalPosition: {x: 0, y: -0.00000023841858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9212,6 +9254,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 516fe1783561baf4094cac545c4f886e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCharacter: {fileID: 0}
+  CinemachineFreeLook: {fileID: 0}
+  currentHitIndex: 0
+  hitKind: 0
+  activeWeaponDetect: 
+  currentStateName: 
+  WeaponData: {fileID: 0}
 --- !u!1 &625747506
 GameObject:
   m_ObjectHideFlags: 3
@@ -10260,8 +10309,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811303954}
-  m_LocalRotation: {x: 0.073834196, y: -0.120175675, z: 0.008963039, w: 0.98996264}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.110665284, y: -0.119758815, z: -0.013434174, w: 0.9865245}
+  m_LocalPosition: {x: 0, y: -0.00000023841858, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10706,6 +10755,15 @@ MonoBehaviour:
   canBeExecuted: 0
   allReceives: []
   allSkillReceivers: []
+  attackInfo:
+    attackMode: 0
+    isAtttack: 0
+    combo: 0
+    canInput: 0
+    isJustEnter: 0
+    canChangeState: 0
+    maxCombo: 0
+    useGravity: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -11077,7 +11135,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 0.904
+  weight: 1
   sharedProfile: {fileID: 11400000, guid: 482c0367085219144906532a41091086, type: 2}
 --- !u!4 &900694546
 Transform:
@@ -11167,8 +11225,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234743, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.062046, z: -5.8746176}
+  m_LocalRotation: {x: 0.039234806, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.0620468, z: -5.874625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14413,6 +14471,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 516fe1783561baf4094cac545c4f886e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCharacter: {fileID: 0}
+  CinemachineFreeLook: {fileID: 0}
+  currentHitIndex: 0
+  hitKind: 0
+  activeWeaponDetect: 
+  currentStateName: 
+  WeaponData: {fileID: 0}
 --- !u!1 &1015850603
 GameObject:
   m_ObjectHideFlags: 0
@@ -16244,8 +16309,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 315da0abdb94b5140811f452f141e530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomness: 50
-  StrengthPara: 0.2
+  randomness: 10
+  StrengthPara: 0.1
+  frequencyGainPara: 25
+  TestStrength: 2
+  TestFrequence: 1
+  TestDuration: 0.4
 --- !u!1 &1163041435
 GameObject:
   m_ObjectHideFlags: 0
@@ -17058,7 +17127,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0.4
+    perfectDefendTime: 0
+    defendStartTime: 0
+    currentDenfendKind: 3
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -18533,7 +18604,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0.4
+    perfectDefendTime: 0
+    defendStartTime: 0
+    currentDenfendKind: 3
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -18886,6 +18959,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 516fe1783561baf4094cac545c4f886e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCharacter: {fileID: 0}
+  CinemachineFreeLook: {fileID: 0}
+  currentHitIndex: 0
+  hitKind: 0
+  activeWeaponDetect: 
+  currentStateName: 
+  WeaponData: {fileID: 0}
 --- !u!4 &1408576345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6622884724251497322, guid: 5e70356a31aebe04ba440243210c33db,
@@ -19599,7 +19679,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0.4
+    perfectDefendTime: 0
+    defendStartTime: 0
+    currentDenfendKind: 3
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -19997,6 +20079,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 516fe1783561baf4094cac545c4f886e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCharacter: {fileID: 0}
+  CinemachineFreeLook: {fileID: 0}
+  currentHitIndex: 0
+  hitKind: 0
+  activeWeaponDetect: 
+  currentStateName: 
+  WeaponData: {fileID: 0}
 --- !u!1 &1498168725
 GameObject:
   m_ObjectHideFlags: 0
@@ -20061,8 +20150,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498168725}
-  m_LocalRotation: {x: -0.6644266, y: -0.15416595, z: -0.14282258, w: 0.71719724}
-  m_LocalPosition: {x: -121.713, y: -6.8322315, z: 95.84886}
+  m_LocalRotation: {x: -0.060209375, y: 0.710614, z: 0.6983184, w: 0.061269503}
+  m_LocalPosition: {x: -121.64404, y: -6.8216753, z: 95.49794}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21496,7 +21585,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0.4
+    perfectDefendTime: 0
+    defendStartTime: 0
+    currentDenfendKind: 3
   lookingDirectionParameters:
     changeLookingDirection: 1
     speed: 10
@@ -21890,6 +21981,15 @@ MonoBehaviour:
   canBeExecuted: 1
   allReceives: []
   allSkillReceivers: []
+  attackInfo:
+    attackMode: 0
+    isAtttack: 0
+    combo: 0
+    canInput: 0
+    isJustEnter: 0
+    canChangeState: 0
+    maxCombo: 0
+    useGravity: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -22360,6 +22460,15 @@ MonoBehaviour:
   canBeExecuted: 0
   allReceives: []
   allSkillReceivers: []
+  attackInfo:
+    attackMode: 0
+    isAtttack: 0
+    combo: 0
+    canInput: 0
+    isJustEnter: 0
+    canChangeState: 0
+    maxCombo: 0
+    useGravity: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -22546,6 +22655,15 @@ MonoBehaviour:
   canBeExecuted: 0
   allReceives: []
   allSkillReceivers: []
+  attackInfo:
+    attackMode: 0
+    isAtttack: 0
+    combo: 0
+    canInput: 0
+    isJustEnter: 0
+    canChangeState: 0
+    maxCombo: 0
+    useGravity: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -23571,7 +23689,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890388382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -120.503685, y: -1.1152055, z: 90.965225}
+  m_LocalPosition: {x: -120.6974, y: -2.8173044, z: 91.75137}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24980,6 +25098,15 @@ MonoBehaviour:
   canBeExecuted: 0
   allReceives: []
   allSkillReceivers: []
+  attackInfo:
+    attackMode: 0
+    isAtttack: 0
+    combo: 0
+    canInput: 0
+    isJustEnter: 0
+    canChangeState: 0
+    maxCombo: 0
+    useGravity: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -25804,6 +25931,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 516fe1783561baf4094cac545c4f886e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCharacter: {fileID: 0}
+  CinemachineFreeLook: {fileID: 0}
+  currentHitIndex: 0
+  hitKind: 0
+  activeWeaponDetect: 
+  currentStateName: 
+  WeaponData: {fileID: 0}
 --- !u!1 &2126551962
 GameObject:
   m_ObjectHideFlags: 0
@@ -26122,6 +26256,7 @@ GameObject:
   - component: {fileID: 8805377711411893423}
   - component: {fileID: 8805377711411893424}
   - component: {fileID: 8805377711411893426}
+  - component: {fileID: 8805377711411893427}
   m_Layer: 9
   m_Name: Graphics
   m_TagString: Player
@@ -26187,6 +26322,15 @@ MonoBehaviour:
   canBeExecuted: 0
   allReceives: []
   allSkillReceivers: []
+  attackInfo:
+    attackMode: 0
+    isAtttack: 0
+    combo: 0
+    canInput: 0
+    isJustEnter: 0
+    canChangeState: 0
+    maxCombo: 0
+    useGravity: 0
   CharacterStateController: {fileID: 0}
   CharacterHitted: {fileID: 0}
   WeaponKind: 0
@@ -26227,6 +26371,102 @@ MonoBehaviour:
   agent: {fileID: 8805377711411893420}
   manager: []
   characterInfoOwner: {fileID: 0}
+--- !u!82 &8805377711411893427
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805377711411893420}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8805377712143352352
 GameObject:
   m_ObjectHideFlags: 0
@@ -26355,6 +26595,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4211985246802248730, guid: 3ed1412737bb5b14c8e7d8dfb95f4e76,
+        type: 3}
+      propertyPath: currentHitTimePara.fadeTime
+      value: 0.044
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211985246802248730, guid: 3ed1412737bb5b14c8e7d8dfb95f4e76,
+        type: 3}
+      propertyPath: currentHitTimePara.stayTime
+      value: 0.094
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211985246802248730, guid: 3ed1412737bb5b14c8e7d8dfb95f4e76,
+        type: 3}
+      propertyPath: hits.Array.data[2].stayTime
+      value: 0.071
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211985246802248730, guid: 3ed1412737bb5b14c8e7d8dfb95f4e76,
+        type: 3}
+      propertyPath: hits.Array.data[3].fadeTime
+      value: 0.044
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211985246802248730, guid: 3ed1412737bb5b14c8e7d8dfb95f4e76,
+        type: 3}
+      propertyPath: hits.Array.data[3].stayTime
+      value: 0.094
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211985246802248730, guid: 3ed1412737bb5b14c8e7d8dfb95f4e76,
+        type: 3}
+      propertyPath: currentHitTimePara.targetTimeScale
+      value: 0.148
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211985246802248730, guid: 3ed1412737bb5b14c8e7d8dfb95f4e76,
+        type: 3}
+      propertyPath: hits.Array.data[3].targetTimeScale
+      value: 0.148
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273363903705841264, guid: 3ed1412737bb5b14c8e7d8dfb95f4e76,
+        type: 3}
+      propertyPath: weaponNumList.Array.data[3].Duration
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 5737975426329631883, guid: 3ed1412737bb5b14c8e7d8dfb95f4e76,
         type: 3}
       propertyPath: m_Name

@@ -92,15 +92,7 @@ public class FxManagerPro : MonoBehaviour
             PlayFx(fxName[i], targetTransform.position, targetTransform.rotation);
         }
     }
-    public void PlayFx(string fxName, Transform transform) => PlayFx(fxName, transform.position, transform.rotation);
-    public void PlayFx(string[] fxNames, Transform transform)
-    {
-        for(int i = 0; i < fxNames.Length; i++) 
-        {
-            PlayFx(fxNames[i], transform);
-        }
-    }
-
+  
 
     /// <summary>
     /// 停止特效

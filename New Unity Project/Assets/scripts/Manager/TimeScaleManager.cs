@@ -146,6 +146,9 @@ public class TimeScaleManager : MonoBehaviour
                  SetAnimatorSpeed(fadeInTime, fadeOutTime, duration, targetSpeed, changePriority, animator).Forget();
             }
         }
+        Debug.Log(Time.time);
+        await UniTask.Delay((int)((duration + fadeInTime)*1000));
+        Debug.Log(Time.time);
     }
 
     private async UniTask SetAnimatorSpeed(float fadeInTime, float fadeOutTime, float duration, float targetSpeed, int changePriority, Animator animator)

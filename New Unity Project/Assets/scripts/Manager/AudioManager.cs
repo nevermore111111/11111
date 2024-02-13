@@ -35,6 +35,10 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+
+    }
+    private void Start()
+    {
         audioSource = gameObject.AddComponent<AudioSource>();
         AsyncOperationHandle<IList<AudioClip>> handle = Addressables.LoadAssetsAsync<AudioClip>(new List<string>() { "Sound" }, null, Addressables.MergeMode.Union);
         handle.Completed += LoadAudioClipFromAddressables_Completed;
