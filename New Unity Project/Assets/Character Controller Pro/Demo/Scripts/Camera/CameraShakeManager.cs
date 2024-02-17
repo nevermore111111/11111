@@ -41,8 +41,11 @@ public class CameraShakeManager : MonoBehaviour
     /// </summary>
     public void Shake(Vector3 shakeDirection, float strength, float frequencyGain, float durtion)
     {
-        Debug.Log("震动了");
-        Debug.Log($"震动强度{strength}，震动频率{frequencyGain}，震动时间{durtion}，注意这里频率和强度我都加了系数，自己去代码里看");
+        //需要在摄像机方向的震动
+        Vector3 targetDirectiion = instance.transform.InverseTransformDirection(shakeDirection);
+
+        Debug.Log($"震动强度{strength}，震动频率{frequencyGain}，震动时间{durtion}，摄像机方向的震动{targetDirectiion},模长{targetDirectiion.magnitude}注意这里频率和强度加了系数，去代码里看");
+
         currentShakeNum++;
         DOTween.Shake(() => shakeTarget, (value) =>
         {

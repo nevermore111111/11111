@@ -6,6 +6,7 @@ using UnityEngine;
 [SaveDuringPlay]
 public class WeaponData : MonoBehaviour
 {
+    [Header("开启cinemachine的saveduringPlay，本文件会在运行中保存")]
     [Space(10)]
     [Header("是否只应用垂直方向震动")]
     public bool onlyUseVirticalShake = false;
