@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class MainCharacter : CharacterInfo
 {
-    public CharacterStateController CharacterStateController;
+
     public Hitted CharacterHitted;
     public WeaponKind WeaponKind;
     //public HitData hitData;
@@ -20,6 +20,7 @@ public class MainCharacter : CharacterInfo
         //需要找到主角调用
         CharacterHitted.GetHitted(weapon, hit);
         if (CharacterStateController.CurrentState is NormalMovement)
+            
         {
             NormalMovement actorNormalmovement = (NormalMovement)CharacterStateController.CurrentState;
             //if (actorNormalmovement != null&&)
@@ -31,7 +32,7 @@ public class MainCharacter : CharacterInfo
     protected override void Awake()
     {
         base.Awake();
-        CharacterStateController = this.transform.parent.GetComponentInChildren<CharacterStateController>();
+       
         CharacterHitted = characterActor.GetComponentInChildren<Hitted>();
         hitTimeData = FindObjectOfType<HitTimeData>();
     }

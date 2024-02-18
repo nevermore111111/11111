@@ -9,6 +9,19 @@ using Lightbug.CharacterControllerPro.Core;
 namespace Lightbug.CharacterControllerPro.Demo
 {
 
+    //写一个行为树，用来设计这个人物的攻击模式
+    //1追踪
+    //2到了之后，等待1-3秒 ：{1徘徊，或者等待}。之后判断
+    //如果对方远离就靠近，否则开始攻击{期间对方攻击，就防御}
+    //攻击之后继续回到等待
+    //防御成功就会反击，反击分成两种，一种直接反击，一种等待反击。反击结束回到等待
+    //
+    //
+    //
+    //
+    //
+    //
+
     [AddComponentMenu("Character Controller Pro/Demo/Character/AI/Follow Behaviour")]
     public class AIFollowBehaviour : CharacterAIBehaviour
     {
@@ -43,7 +56,6 @@ namespace Lightbug.CharacterControllerPro.Demo
         void OnEnable()
         {
             navMeshPath = new NavMeshPath();
-            
         }
 
         public override void EnterBehaviour(float dt)
@@ -66,7 +78,6 @@ namespace Lightbug.CharacterControllerPro.Demo
         }
 
         // Follow Behaviour --------------------------------------------------------------------------------------------------
-
         /// <summary>
         /// Sets the target to follow (only for the follow behaviour).
         /// </summary>
@@ -96,14 +107,8 @@ namespace Lightbug.CharacterControllerPro.Demo
             if (isDirectPath && path.magnitude <= reachDistance)
                 return;
 
-
             if (navMeshPath.corners.Length > 1)
                 SetMovementAction(path);
-
         }
-
-
-
     }
-
 }

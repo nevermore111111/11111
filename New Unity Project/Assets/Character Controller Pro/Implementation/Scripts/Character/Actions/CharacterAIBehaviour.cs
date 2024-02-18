@@ -31,8 +31,11 @@ namespace Lightbug.CharacterControllerPro.Implementation
             inputXZ.Normalize();
             inputXZ.y = inputXZ.z;
             inputXZ.z = 0f;
-
             characterActions.movement.value = inputXZ;
+        }
+        protected void SetDefendAction(bool defendValue)
+        {
+            characterActions.defend.value = defendValue;
         }
     }
 

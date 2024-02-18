@@ -1,8 +1,8 @@
 using Lightbug.CharacterControllerPro.Core;
+using Lightbug.CharacterControllerPro.Implementation;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(AgetHitBox))]
@@ -11,6 +11,8 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
 
     //周围全部的敌人
     public CharacterActor characterActor;
+    public CharacterStateController CharacterStateController { get; private set; }
+
 
     [Tooltip("代表这个单位的敌人tag")]
     public string enemyTag;
@@ -60,6 +62,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
         enemies = new List<CharacterInfo>();
         hitBox = GetComponentInChildren<AgetHitBox>();
         characterActor = GetComponentInParent<CharacterActor>();
+        CharacterStateController = this.transform.parent.GetComponentInChildren<CharacterStateController>();
     }
 
     abstract public void HitOther(WeaponManager weaponManager);

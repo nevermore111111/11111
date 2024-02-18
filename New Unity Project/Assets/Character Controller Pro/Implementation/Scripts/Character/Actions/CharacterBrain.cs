@@ -76,6 +76,11 @@ namespace Lightbug.CharacterControllerPro.Implementation
             currentAIBehaviour.EnterBehaviour(Time.deltaTime);
         }
 
+        public void SetAIBehaviour<T>() where T : CharacterAIBehaviour
+        {
+            Debug.LogError("寻找状态的方法没写呢");
+        }
+
         public void UpdateBrainValues(float dt)
         {
             if (Time.timeScale == 0)

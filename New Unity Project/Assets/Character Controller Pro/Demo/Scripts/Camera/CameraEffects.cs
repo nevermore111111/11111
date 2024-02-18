@@ -60,29 +60,29 @@ public class CameraEffects : MonoBehaviour
 
 
     /// <summary>
-    /// ¸ù¾İ¼üÅÌÊäÈëµ÷Õûfov
+    /// æ ¹æ®é”®ç›˜è¾“å…¥è°ƒæ•´fov
     /// </summary>
     private void ChangeZoom()
     {
-        // »ñÈ¡¼üÅÌÊäÈë
+        // è·å–é”®ç›˜è¾“å…¥
         float zoomInput = Input.GetAxis("Mouse ScrollWheel");
 
-        // µ÷ÕûÊÓ½ÇÔ¶½ü
+        // è°ƒæ•´è§†è§’è¿œè¿‘
         freeLookCamera.m_Lens.FieldOfView += zoomInput * zoomSpeed;
 
-        // ÏŞÖÆÊÓ½Ç·¶Î§
+        // é™åˆ¶è§†è§’èŒƒå›´
         freeLookCamera.m_Lens.FieldOfView = Mathf.Clamp(freeLookCamera.m_Lens.FieldOfView, minFov, maxFov);
     }
 
     /// <summary>
-    /// ±ä»¯µÄÕğ¶¯·ù¶È£¬Öğ½¥½µµÍ
+    /// å˜åŒ–çš„éœ‡åŠ¨å¹…åº¦ï¼Œé€æ¸é™ä½
     /// </summary>
     private void Shake()
     {
         if (shakeElapsedTime > 0)
         {
-            float normalizedShakeTime = Mathf.Clamp01(shakeElapsedTime / shakeDuration); // ¼ÆËã¹éÒ»»¯µÄÕğ¶¯Ê±¼ä
-            float currentShakeAmplitude = shakeAmplitude * normalizedShakeTime; // ¸ù¾İ¹éÒ»»¯µÄÊ±¼ä¼ÆËãµ±Ç°µÄÕğ¶¯·ù¶È
+            float normalizedShakeTime = Mathf.Clamp01(shakeElapsedTime / shakeDuration); // è®¡ç®—å½’ä¸€åŒ–çš„éœ‡åŠ¨æ—¶é—´
+            float currentShakeAmplitude = shakeAmplitude * normalizedShakeTime; // æ ¹æ®å½’ä¸€åŒ–çš„æ—¶é—´è®¡ç®—å½“å‰çš„éœ‡åŠ¨å¹…åº¦
 
             foreach (CinemachineBasicMultiChannelPerlin noise in noises)
             {
@@ -112,18 +112,18 @@ public class CameraEffects : MonoBehaviour
 
     public void ShakeCamera()
     {
-        shakeElapsedTime = shakeDuration; // ÉèÖÃÕğ¶¯³ÖĞøÊ±¼ä
+        shakeElapsedTime = shakeDuration; // è®¾ç½®éœ‡åŠ¨æŒç»­æ—¶é—´
     }
 
     /// <summary>
-    /// ²»±äµÄÕğ¶¯·ù¶È
+    /// ä¸å˜çš„éœ‡åŠ¨å¹…åº¦
     /// </summary>
     /// <param name="shakeTime"></param>
     /// <param name="amplitude"></param>
     public void ShakeCamera(float shakeTime, float amplitude)
     {
-        shakeDuration = shakeTime; // ÉèÖÃÕğ¶¯³ÖĞøÊ±¼ä
-        shakeElapsedTime = shakeTime; // ¿ªÊ¼Õğ¶¯
+        shakeDuration = shakeTime; // è®¾ç½®éœ‡åŠ¨æŒç»­æ—¶é—´
+        shakeElapsedTime = shakeTime; // å¼€å§‹éœ‡åŠ¨
 
         foreach (CinemachineBasicMultiChannelPerlin noise in noises)
         {
@@ -135,15 +135,15 @@ public class CameraEffects : MonoBehaviour
         }
     }
     /// <summary>
-    /// ±ä»¯µÄÕñ·ù£¬Èı¸ö²ÎÊı×Ô¶¨Òå
+    /// å˜åŒ–çš„æŒ¯å¹…ï¼Œä¸‰ä¸ªå‚æ•°è‡ªå®šä¹‰
     /// </summary>
     /// <param name="shakeTime"></param>
     /// <param name="amplitude"></param>
     /// <param name="frequency"></param>
     public void ShakeCamera(float shakeTime, float amplitude,float frequency)
     {
-        shakeDuration = shakeTime; // ÉèÖÃÕğ¶¯³ÖĞøÊ±¼ä
-        shakeElapsedTime = shakeTime; // ¿ªÊ¼Õğ¶¯
+        shakeDuration = shakeTime; // è®¾ç½®éœ‡åŠ¨æŒç»­æ—¶é—´
+        shakeElapsedTime = shakeTime; // å¼€å§‹éœ‡åŠ¨
 
         foreach (CinemachineBasicMultiChannelPerlin noise in noises)
         {

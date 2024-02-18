@@ -13,7 +13,7 @@ namespace Lightbug.CharacterControllerPro.Demo
     [AddComponentMenu("Character Controller Pro/Demo/Character/States/Normal Movement")]
     public class NormalMovement : CharacterState
     {
-        public bool IsPlayer;
+        public bool IsPlayer => CharacterActor.isPlayer;
 
         [Space(10)]
 
@@ -192,86 +192,103 @@ namespace Lightbug.CharacterControllerPro.Demo
         {
             if (IsPlayer)
             {
-                if (CanEvade())
-                {
-                    CharacterStateController.EnqueueTransition<Evade>();
-                }
-                if (CharacterActions.attack.value)
-                {
-                    if (CharacterActor.IsGrounded)
-                    {
-                        if (attack.currentAttackMode ==AttackMode.AttackOnGround)
-                        {
-                            CharacterStateController.EnqueueTransition<AttackOnGround>();
-                        }
-                        else if (attack.currentAttackMode ==AttackMode.AttackOnGround_fist)
-                        {
-                            CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
-                        }
-                    }
-                    //在空中
-                    else if (!CharacterActor.IsGrounded && canAttackInair)
-                    {
-                        if (attack.currentAttackMode == AttackMode.AttackOnGround)
-                        {
-
-                        }
-                        else if (attack.currentAttackMode == AttackMode.AttackOnGround_fist)
-                        {
-
-                        }
-                    }
-
-                }
-                else if (CharacterActions.spAttack.value)//特殊攻击
-                {
-                    if (CharacterActor.IsGrounded)
-                    {
-                        if (attack.currentAttackMode ==AttackMode.AttackOnGround)
-                        {
-                            //attack
-                            SpAttack = 10;
-                            CharacterStateController.EnqueueTransition<AttackOnGround>();
-                        }
-                        else if (attack.currentAttackMode ==AttackMode.AttackOnGround_fist)
-                        {
-                            //SpAttack = 11;
-                            //CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
-                        }
-                    }
-                    else if (canAttackInair)
-                    {
-                        SpAttack = 11;
-                        CharacterStateController.EnqueueTransition<AttackOffGround>();
-                    }
-
-                }
-                else if (CharacterActions.test.value)
-                {
-                    CharacterStateController.EnqueueTransition<Grap>();
-                }
-                else if (CharacterActions.jetPack.value)
-                {
-                    CharacterStateController.EnqueueTransition<JetPack>();
-                }
-                else if (CharacterActions.dash.Started)
-                {
-                    CharacterStateController.EnqueueTransition<Dash>();
-                }
-                else if (CharacterActor.Triggers.Count >= 1)
-                {
-                    CharacterStateController.EnqueueTransition<LadderClimbing>();
-                    CharacterStateController.EnqueueTransition<RopeClimbing>();
-                }
-                else if (!CharacterActor.IsGrounded)
-                {
-                    if (!CharacterActions.crouch.value)
-                        CharacterStateController.EnqueueTransition<WallSlide>();
-
-                    CharacterStateController.EnqueueTransition<LedgeHanging>();
-                }
+                PlayerCheckTransition();
+            }
+            else
+            {
+                AICheckTransition();
             }
 
+
+        }
+
+        private void AICheckTransition()
+        {
+            if (CharacterActions.attack.value)
+            {
+
+            }
+        }
+        private void PlayerCheckTransition()
+        {
+            if (CanEvade())
+            {
+                CharacterStateController.EnqueueTransition<Evade>();
+            }
+            if (CharacterActions.attack.value)
+            {
+                if (CharacterActor.IsGrounded)
+                {
+                    if (attack.currentAttackMode == AttackMode.AttackOnGround)
+                    {
+                        CharacterStateController.EnqueueTransition<AttackOnGround>();
+                    }
+                    else if (attack.currentAttackMode == AttackMode.AttackOnGround_fist)
+                    {
+                        CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+                    }
+                }
+                //在空中
+                else if (!CharacterActor.IsGrounded && canAttackInair)
+                {
+                    if (attack.currentAttackMode == AttackMode.AttackOnGround)
+                    {
+
+                    }
+                    else if (attack.currentAttackMode == AttackMode.AttackOnGround_fist)
+                    {
+
+                    }
+                }
+
+            }
+            else if (CharacterActions.spAttack.value)//特殊攻击
+            {
+                if (CharacterActor.IsGrounded)
+                {
+                    if (attack.currentAttackMode == AttackMode.AttackOnGround)
+                    {
+                        //attack
+                        SpAttack = 10;
+                        CharacterStateController.EnqueueTransition<AttackOnGround>();
+                    }
+                    else if (attack.currentAttackMode == AttackMode.AttackOnGround_fist)
+                    {
+                        //SpAttack = 11;
+                        //CharacterStateController.EnqueueTransition<AttackOnGround_fist>();
+                    }
+                }
+                else if (canAttackInair)
+                {
+                    SpAttack = 11;
+                    CharacterStateController.EnqueueTransition<AttackOffGround>();
+                }
+
+            }
+            else if (CharacterActions.test.value)
+            {
+                CharacterStateController.EnqueueTransition<Grap>();
+            }
+            else if (CharacterActions.jetPack.value)
+            {
+                CharacterStateController.EnqueueTransition<JetPack>();
+            }
+            else if (CharacterActions.dash.Started)
+            {
+                CharacterStateController.EnqueueTransition<Dash>();
+            }
+            else if (CharacterActor.Triggers.Count >= 1)
+            {
+                CharacterStateController.EnqueueTransition<LadderClimbing>();
+                CharacterStateController.EnqueueTransition<RopeClimbing>();
+            }
+            else if (!CharacterActor.IsGrounded)
+            {
+                if (!CharacterActions.crouch.value)
+                    CharacterStateController.EnqueueTransition<WallSlide>();
+
+                CharacterStateController.EnqueueTransition<LedgeHanging>();
+            }
         }
 
         public override void ExitBehaviour(float dt, CharacterState toState)
@@ -550,7 +567,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 movementInputIdle = false;
                 movementInputIdleTime = 0f;
             }
-            else 
+            else
             {
                 movementInputIdleTime += Time.deltaTime;
                 if (movementInputIdleTime > 0.1f)
@@ -952,7 +969,6 @@ namespace Lightbug.CharacterControllerPro.Demo
                         case CharacterActorState.NotGrounded:
 
                             SetTargetLookingDirection(lookingDirectionParameters.notGroundedLookingDirectionMode);
-
                             break;
                         case CharacterActorState.StableGrounded:
 
@@ -1032,98 +1048,6 @@ namespace Lightbug.CharacterControllerPro.Demo
             //}
         }
 
-        //[Header("References")]
-        //public Transform cam;
-        //public Transform gunTip;
-        //public LayerMask whatIsGrapplable;
-
-        //[Header("Grapping")]
-        //public float maxGrappleDistance;
-        //public float grappleDelayTime;
-        //public LineRenderer Lr;
-
-        //private Vector3 grapplePoint;
-
-        //[Header("Cooldown")]
-        //public float grapplingCd;
-        //private float grappleTimer;
-        //[Space(10)]
-        //[Header("Input")]
-        //public KeyCode grappleKey = KeyCode.Mouse1;
-
-        //public bool grappling;
-
-        //private void Grap()
-        //{
-        //    if (Input.GetKeyDown(grappleKey))
-        //    {
-        //        StartGrapple();
-        //    }
-        //    if (grappleTimer > 0)
-        //    {
-        //        grappleTimer -= Time.deltaTime;
-        //    }
-        //}
-
-        ///// <summary>
-        ///// 这个方法用来设置线性渲染器的位置；
-        ///// </summary>
-        //private void LaterGrap()
-        //{
-        //    if (grappling)
-        //    {
-        //        Lr.SetPosition(0, gunTip.position);
-        //    }
-        //}
-
-        //private void StartGrapple()
-        //{
-        //    if (grappleTimer > 0) return;
-        //    grappling = true;
-
-        //    RaycastHit Hit;
-        //    if (Physics.Raycast(cam.position, cam.forward, out Hit, maxGrappleDistance, whatIsGrapplable))
-        //    {
-        //        grapplePoint = Hit.point;
-        //        Invoke(nameof(ExecuteGrapple), grappleDelayTime);
-        //    }
-        //    else
-        //    {
-        //        grapplePoint = cam.position + cam.forward * maxGrappleDistance;
-
-        //        Invoke(nameof(StopGrapple), grappleDelayTime);
-        //    }
-        //    Lr.enabled = true;
-        //    Lr.SetPosition(1, grapplePoint);
-        //}
-        //private void ExecuteGrapple()
-        //{
-        //    Vector3 vecs = CalVocality(CharacterActor.Position, grapplePoint, UnityEngine.Random.Range(0f, 2f), 19.8f);
-        //    CharacterActor.Velocity = vecs;
-        //    Debug.Log("弹射");
-        //}
-        //private void StopGrapple()
-        //{
-        //    grappling = false;
-        //    grappleTimer = grapplingCd;
-        //    Lr.enabled = false;
-        //}
-
-
-        //private Vector3 CalVocality(Vector3 start, Vector3 target, float spHeigh, float grivaty)
-        //{
-        //    grivaty = Physics.gravity.magnitude;
-        //    //自己填写重力
-        //    float delY = target.y - start.y;
-        //    float delX = target.x - start.x;
-        //    float delZ = target.z - start.z;
-
-        //    float vy = MathF.Sqrt(2f * ((delY) + spHeigh) * grivaty);
-        //    float vXZ = Mathf.Sqrt(((Mathf.Pow(delX, 2) + Mathf.Pow(delZ, 2)) * grivaty / (2 * delY + 4 * spHeigh)));
-        //    Vector3 med = new(delX, 0, delZ);
-        //    Vector3 end = med.normalized * vXZ + new Vector3(0, vy, 0);
-        //    return end;
-        //}
 
         public override void PreCharacterSimulation(float dt)
         {

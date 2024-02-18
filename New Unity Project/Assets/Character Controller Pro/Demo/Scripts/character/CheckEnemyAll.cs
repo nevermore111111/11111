@@ -61,7 +61,6 @@ public class CheckEnemyAll : MonoBehaviour
 
     private void ResetEnemyTag()
     {
-        
         if (EnemyTag == "custom")
         {
             Debug.Log("因为EnemyTag 还是custom，所以自动修改");

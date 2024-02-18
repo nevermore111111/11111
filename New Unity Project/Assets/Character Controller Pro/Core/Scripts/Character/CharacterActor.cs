@@ -672,6 +672,8 @@ namespace Lightbug.CharacterControllerPro.Core
         public CharacterCollisionInfo CharacterCollisionInfo => characterCollisionInfo;
 
 
+        public CharacterBrain brain => this.CharacterInfo.CharacterStateController.CharacterBrain;
+        public CharacterStateController stateController =>this.CharacterInfo.CharacterStateController;
 #if UNITY_TERRAIN_MODULE
         Dictionary<Transform, Terrain> terrains = new Dictionary<Transform, Terrain>();
 #endif
