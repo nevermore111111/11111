@@ -1,18 +1,35 @@
 using Lightbug.CharacterControllerPro.Core;
+using Lightbug.CharacterControllerPro.Demo;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AItransition : StateMachineBehaviour
 {
-     CharacterActor actor;
+    CharacterActor actor;
+    public string stateName;
+    private bool Once = false;
+
+
+
+
+    //暂时现在没用
+
+
+
+
+
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.LogError("进入了");
-        if (animator != null) 
+        GetActor(animator);
+        switch (stateName)
         {
-
+            case "normalMovement":
+                actor.CharacterInfo.CharacterStateController.EnqueueTransition<NormalMovement>();
+                break;
+            case "":
+                break;
         }
     }
 
@@ -51,4 +68,22 @@ public class AItransition : StateMachineBehaviour
     //{
     //    
     //}
+
+
+    //___________________________分隔线_______________________________________
+    //___________________________分隔线_______________________________________
+    //___________________________分隔线_______________________________________
+
+
+
+
+    private void GetActor(Animator animator)
+    {
+        if (!Once && actor == null)
+        {
+            Once = true;//只获取一次信息
+            actor = animator.GetComponentInParent<CharacterActor>();
+        }
+    }
+
 }

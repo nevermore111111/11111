@@ -20,10 +20,11 @@ public class AIAttackBehaviour : CharacterAIBehaviour
         doAttack,
     }
 
-    public float minAwaitTime = 1f;
-    public float maxAwaitTime = 3f;
+    public float minAwaitTime = 0.5f;
+    public float maxAwaitTime = 1.5f;
 
-
+    [SerializeField]
+    float reachDistance = 3f;
     AIAttackState currentAttackState;
 
     private float awaitTime;
@@ -44,28 +45,30 @@ public class AIAttackBehaviour : CharacterAIBehaviour
     {
         if (CharacterActor.CharacterInfo.selectEnemy != null)
         {
+            JudgeDistance();
             //这时需要去执行正常逻辑了
 
-            switch (currentAttackState)
-            {
-                case AIAttackState.awaitAttack:
-                    AwaitAttackUpdate(dt);
-                    break;
-                case AIAttackState.doAttack:
-                    doAttackUpdate(dt);
-                    break;
-                default:
-                    break;
-            }
+            AwaitAttackUpdate(dt);
+
+            doAttackUpdate(dt);
+
+
+        }
+    }
+    /// <summary>
+    /// 如果太远就切换当前的状态
+    /// </summary>
+    private void JudgeDistance()
+    {
+        if ((CharacterActor.CharacterInfo.selectEnemy.transform.position - transform.position).magnitude > reachDistance)
+        {
+            CharacterActor.brain.SetAIBehaviour<AIFollowBehaviour>();
         }
     }
 
     private void doAttackUpdate(float dt)
     {
-        if(CharacterActor.stateController.CurrentState is AINormalMovement)
-        {
-            characterActions.attack.value = true;
-        }
+        characterActions.attack.value = true;
     }
 
     private void AwaitAttackUpdate(float dt)
@@ -73,12 +76,12 @@ public class AIAttackBehaviour : CharacterAIBehaviour
         awaitTime -= dt;
         if (awaitTime < 0f)
         {
+            return;
             //开始进入攻击状态
-            currentAttackState = AIAttackState.doAttack;
         }
-        if (CharacterActor.stateController.CurrentState is Attack)
+        if(CharacterActor.CharacterInfo.selectEnemy.CharacterStateController.CurrentState is Attack)
         {
-            selectEnemyAttack = (Attack)(CharacterActor.stateController.CurrentState);
+            selectEnemyAttack = (Attack)(CharacterActor.CharacterInfo.selectEnemy.CharacterStateController.CurrentState);
             if (selectEnemyAttack.isAttack == true)
             {
                 SetDefendAction(true);

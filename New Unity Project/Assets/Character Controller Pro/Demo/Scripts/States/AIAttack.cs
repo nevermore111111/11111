@@ -43,7 +43,6 @@ public class AIAttack : CharacterState
             Debug.LogError("这里没写,下一行要播放对应动画层的攻击动画");
             string targetTotalAnimName =  targetAnim;
             CharacterActor.Animator.CrossFade(targetTotalAnimName,0.25f);
-
         }
     }
 
@@ -72,9 +71,6 @@ public class AIAttack : CharacterState
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-        //else//不在地面的时候直接进入normalmovement
-        //{
-        //}
     }
 
 

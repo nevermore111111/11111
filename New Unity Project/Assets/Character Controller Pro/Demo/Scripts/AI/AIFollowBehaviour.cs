@@ -5,6 +5,8 @@ using UnityEngine.AI;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
 using Lightbug.CharacterControllerPro.Core;
+using Unity.VisualScripting;
+using Sirenix.OdinInspector.Editor.Drawers;
 
 namespace Lightbug.CharacterControllerPro.Demo
 {
@@ -20,7 +22,7 @@ namespace Lightbug.CharacterControllerPro.Demo
     //
     //
     //
-    //
+    //进入这个状态后，有一定概率左右走走，然后再往前冲刺
 
     [AddComponentMenu("Character Controller Pro/Demo/Character/AI/Follow Behaviour")]
     public class AIFollowBehaviour : CharacterAIBehaviour
@@ -29,6 +31,13 @@ namespace Lightbug.CharacterControllerPro.Demo
         [Tooltip("The target transform used by the follow behaviour.")]
         [SerializeField]
         Transform followTarget = null;
+        [SerializeField]
+        int probabilityToIdle = 50;
+        bool toIdle = false;
+        float currentTimeToIdle;
+        public float minTimeIdle = 1f;
+        public float maxTimeIdle = 2f;
+        
 
         [Tooltip("Desired distance to the target. if the distance to the target is less than this value the character will not move.")]
         [SerializeField]
@@ -61,6 +70,11 @@ namespace Lightbug.CharacterControllerPro.Demo
         public override void EnterBehaviour(float dt)
         {
             timer = refreshTime;
+            if(probabilityToIdle >Random.Range(0,100))
+            {
+                toIdle = true;
+                currentTimeToIdle = Random.Range(minTimeIdle, maxTimeIdle);
+            }
         }
 
         public override void UpdateBehaviour(float dt)
@@ -68,13 +82,19 @@ namespace Lightbug.CharacterControllerPro.Demo
             if (timer >= refreshTime)
             {
                 timer = 0f;
-                UpdateFollowTargetBehaviour(dt);
+                if(currentTimeToIdle>0)
+                {
+                    currentTimeToIdle -= refreshTime;
+                }
+                else
+                {
+                    UpdateFollowTargetBehaviour(dt);
+                }
             }
             else
             {
                 timer += dt;
             }
-
         }
 
         // Follow Behaviour --------------------------------------------------------------------------------------------------
@@ -88,7 +108,6 @@ namespace Lightbug.CharacterControllerPro.Demo
             if (forceUpdate)
                 timer = refreshTime + Mathf.Epsilon;
         }
-
         void UpdateFollowTargetBehaviour(float dt)
         {
             if (followTarget == null)
@@ -105,10 +124,18 @@ namespace Lightbug.CharacterControllerPro.Demo
 
             bool isDirectPath = navMeshPath.corners.Length == 2;
             if (isDirectPath && path.magnitude <= reachDistance)
+            {
+                //进入攻击状态
+                CharacterActor.brain.SetAIBehaviour<AIAttackBehaviour>();
                 return;
-
+            }
             if (navMeshPath.corners.Length > 1)
                 SetMovementAction(path);
+        }
+        void UpdateIdleBehaviour(float dt)
+        {
+            //这里要左右走动
+            Debug.Log("左右走");
         }
     }
 }
