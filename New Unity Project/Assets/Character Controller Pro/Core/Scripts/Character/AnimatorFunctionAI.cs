@@ -75,11 +75,12 @@ public class AnimatorFunctionAI : MonoBehaviour
             SetWeaponDetection(false);
         }
     }
-    
+
     public void HitStart()//int hitKind, string activeWeaponDetect
     {
         SetStrengthAndDetector();
         SetWeaponDirection();
+        SetWeaponDetection(true);
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
@@ -126,7 +127,7 @@ public class AnimatorFunctionAI : MonoBehaviour
                 if (manager.isActiveAndEnabled)
                 {
                     manager.isNeedUpdateDirection = true;
-                    weaponManager = manager;
+                    //weaponManager = manager;
                     break;
                 }
 
@@ -139,11 +140,11 @@ public class AnimatorFunctionAI : MonoBehaviour
             {
                 if (manager.isActiveAndEnabled)
                 {
-                    weaponManager = manager;
+                    //weaponManager = manager;
                     manager.isNeedUpdateDirection = false;
                     Vector3 DirectionIncharacter = new Vector3(CurrentAnimConfig.AttackDirection[currentHitIndex * 3], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 + 1], CurrentAnimConfig.AttackDirection[currentHitIndex * 3 + 2]);
                     //然后我需要把这个
-                    manager.WeaponWorldDirection = Attack.transform.TransformDirection(DirectionIncharacter);//这个时候已经转化成世界方向了
+                    manager.WeaponWorldDirection = aIAttack.transform.TransformDirection(DirectionIncharacter);//这个时候已经转化成世界方向了
                     break;
                 }
             }
@@ -228,8 +229,6 @@ public class AnimatorFunctionAI : MonoBehaviour
             if (manager.isActiveAndEnabled)
             {
                 manager.ToggleDetection(false);
-
-                break;
             }
         }
     }
@@ -294,7 +293,7 @@ public class AnimatorFunctionAI : MonoBehaviour
 
     private bool DonotUseRootmovtion()
     {
-       return(transform.position - mainCharacter.selectEnemy.transform.position).magnitude<  aIAttack.CharacterAttackDistance;
+        return (transform.position - mainCharacter.selectEnemy.transform.position).magnitude < aIAttack.CharacterAttackDistance;
     }
 
     /// <summary>
@@ -399,5 +398,5 @@ public class AnimatorFunctionAI : MonoBehaviour
     }
 
 
-    
+
 }

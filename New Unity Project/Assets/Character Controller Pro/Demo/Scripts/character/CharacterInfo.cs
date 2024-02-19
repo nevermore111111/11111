@@ -56,13 +56,12 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
         return allSkillReceivers.FirstOrDefault(_ => _.skillPoint == requireSkillPointNum);
     }
 
-
     protected virtual void Awake()
     {
         enemies = new List<CharacterInfo>();
         hitBox = GetComponentInChildren<AgetHitBox>();
         characterActor = GetComponentInParent<CharacterActor>();
-        CharacterStateController = this.transform.parent.GetComponentInChildren<CharacterStateController>();
+        CharacterStateController = this.transform.parent?.GetComponentInChildren<CharacterStateController>();
     }
 
     abstract public void HitOther(WeaponManager weaponManager);

@@ -140,11 +140,10 @@ public class Attack : CharacterState
                     }
                 case AttackMode.AttackOnGround_fist:
                     {
-                        //foreach (var weapon in weaponManagers)
-                        //{
-                        //    weapon.gameObject.SetActive(true);
-                        //}
-                        // //如果是使用fist攻击，那么只要关闭当前的weapon检测就可以了
+                        foreach (var weapon in weaponManagers)
+                        {
+                            weapon.gameObject.SetActive(true);
+                        }
                         weaponManagers.Where(_ => _.kind != WeaponKind.fist).ToList().ForEach(_ => _.gameObject.SetActive(false));
                         break;
                     }

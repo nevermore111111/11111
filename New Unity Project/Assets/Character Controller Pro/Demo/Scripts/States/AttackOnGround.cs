@@ -31,6 +31,7 @@ public class AttackOnGround : Attack
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         base.EnterBehaviour(dt, fromState);
+
         CharacterActor.Animator.SetTrigger(AttackOnGroundPar);
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.AddRotation);
         StartCoroutine(CheckAnim());
