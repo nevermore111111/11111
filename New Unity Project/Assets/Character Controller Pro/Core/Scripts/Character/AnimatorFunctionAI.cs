@@ -4,13 +4,10 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
-using MagicaCloth2;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -78,26 +75,93 @@ public class AnimatorFunctionAI : MonoBehaviour
 
     public void HitStart()//int hitKind, string activeWeaponDetect
     {
-        SetStrengthAndDetector();
         SetWeaponDirection();
-        SetWeaponDetection(true);
+        SetStrengthAndDetector();
+        //开启武器检测，并且开启对应的碰撞区域
+        ActiveDetectionByStringPar(activeWeaponDetect, SetWeaponDetection(true));
+        //foreach (var manager in weaponManagers)
+        //{
+        //    if (manager.isActiveAndEnabled)
+        //    {
+        //        manager.ToggleDetection(true);
+        //        if (manager != null)
+        //        {
+        //            //根据动画参数激活对应的碰撞区域
+        //            manager.weaponFx = CurrentAnimConfig.HittedEffect;
+        //            ActiveDetectionByStringPar(activeWeaponDetect, manager);
+
+        //        }
+        //        break;
+        //    }
+        //}
+        currentHitIndex++;
+    }
+
+    
+
+
+    public void HitReStart()//int Hit = 1, string activeWeaponDetect = null
+    {
+        SetWeaponDirection();
+
+        SetStrengthAndDetector();
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
             {
-                manager.ToggleDetection(true);
-                if (manager != null)
+                if (activeWeaponDetect != null)
                 {
-                    //根据动画参数激活对应的碰撞区域
-                    manager.weaponFx = CurrentAnimConfig.HittedEffect;
                     ActiveDetectionByStringPar(activeWeaponDetect, manager);
-
                 }
+                manager.ToggleDetection(false);
+                manager.ToggleDetection(true);
                 break;
             }
         }
         currentHitIndex++;
     }
+
+
+    /// <summary>
+    /// 攻击开始
+    /// </summary>
+    /// <param name="attackName"></param>
+    public void AttackStart(string attackName)
+    {
+        //修正当前的攻击方向
+        characterActor.Animator.speed = 1f;
+        characterActor.UseRootMotion = true;
+        //更新攻击名称和配置表
+        ResetCurrentInfo(attackName);
+
+        //开始一次攻击
+        //Attack.isNextAttack = false;//这个代表已经执行了下一次攻击
+        aIAttack.isAttack = true;
+        //characterActor.Animator.SetBool("attack", true);
+        aIAttack.canChangeState = false;
+        //characterActor.Animator.SetInteger("specialAttack", 0);
+        ResetAttackRootAndrotate();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //_______________________________________________非动画事件分割线_______________________________________________
+    //_______________________________________________非动画事件分割线_______________________________________________
+    //_______________________________________________非动画事件分割线_______________________________________________
 
     /// <summary>
     /// 是否要自动更新武器方向，如果不自动，回去读表。attack开始时一定去开自动
@@ -151,86 +215,22 @@ public class AnimatorFunctionAI : MonoBehaviour
         }
     }
 
-
-
-    public void HitReStart()//int Hit = 1, string activeWeaponDetect = null
-    {
-        SetWeaponDirection();
-
-        SetStrengthAndDetector();
-        foreach (var manager in weaponManagers)
-        {
-            if (manager.isActiveAndEnabled)
-            {
-                if (activeWeaponDetect != null)
-                {
-                    ActiveDetectionByStringPar(activeWeaponDetect, manager);
-                }
-                manager.ToggleDetection(false);
-                manager.ToggleDetection(true);
-                break;
-            }
-        }
-        currentHitIndex++;
-    }
-
-
-    /// <summary>
-    /// 攻击开始
-    /// </summary>
-    /// <param name="attackName"></param>
-    public void AttackStart(string attackName)
-    {
-        //修正当前的攻击方向
-        characterActor.Animator.speed = 1f;
-        characterActor.UseRootMotion = true;
-        //更新攻击名称和配置表
-        ResetCurrentInfo(attackName);
-
-        //开始一次攻击
-        Attack.isNextAttack = false;//这个代表已经执行了下一次攻击
-        Attack.isAttack = true;
-        characterActor.Animator.SetBool("attack", true);
-        Attack.canChangeState = false;
-        characterActor.Animator.SetInteger("specialAttack", 0);
-        ResetAttackRootAndrotate();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //_______________________________________________非动画事件分割线_______________________________________________
-    //_______________________________________________非动画事件分割线_______________________________________________
-    //_______________________________________________非动画事件分割线_______________________________________________
-
-
     private float originalSpeed;
     /// <summary>
-    /// 开启或者关闭当前武器的检测
+    /// 开启或者关闭当前武器的检测,一般情况下，只有一个开启，否则就是错了！
     /// </summary>
     /// <param name="IsOpenManagerToggle"></param>
-    private void SetWeaponDetection(bool IsOpenManagerToggle)
+    private WeaponManager SetWeaponDetection(bool IsOpenManagerToggle)
     {
         foreach (var manager in weaponManagers)
         {
             if (manager.isActiveAndEnabled)
             {
                 manager.ToggleDetection(false);
+                return manager;
             }
         }
+        return null;
     }
     /// <summary>
     /// 写入当前的攻击力度和开启的攻击区域
@@ -241,7 +241,7 @@ public class AnimatorFunctionAI : MonoBehaviour
             hitKind = CurrentAnimConfig.HitStrength[currentHitIndex];
         if (CurrentAnimConfig.HitDetect.Length > currentHitIndex)
             activeWeaponDetect = CurrentAnimConfig.HitDetect[currentHitIndex];
-        mainCharacter.HitStrength = hitKind;
+        _characterInfo.HitStrength = hitKind;
     }
 
     /// <summary>
@@ -270,7 +270,7 @@ public class AnimatorFunctionAI : MonoBehaviour
     private void ResetAttackRootAndrotate()
     {
 
-        if (mainCharacter.enemies.Count != 0)
+        if (_characterInfo.enemies.Count != 0)
         {
             //新语法
             //GameObject[] gamesEnemy = mainCharacter.enemies.Select(m => m.gameObject).ToArray();
@@ -293,7 +293,7 @@ public class AnimatorFunctionAI : MonoBehaviour
 
     private bool DonotUseRootmovtion()
     {
-        return (transform.position - mainCharacter.selectEnemy.transform.position).magnitude < aIAttack.CharacterAttackDistance;
+        return (transform.position - _characterInfo.selectEnemy.transform.position).magnitude < aIAttack.CharacterAttackDistance;
     }
 
     /// <summary>
@@ -306,7 +306,7 @@ public class AnimatorFunctionAI : MonoBehaviour
         if (characterActor.CharacterInfo.enemies.Count > 0)
         {
             //选择的鱼类是最近的鱼类
-            mainCharacter.selectEnemy = characterActor.CharacterInfo.enemies.OrderBy((_) => (_.transform.position - mainCharacter.transform.position).sqrMagnitude).First();
+            _characterInfo.selectEnemy = characterActor.CharacterInfo.enemies.OrderBy((_) => (_.transform.position - _characterInfo.transform.position).sqrMagnitude).First();
             needAutoRotate = true;
         }
         else if (CharacterStateController.InputMovementReference != Vector3.zero)
@@ -326,7 +326,7 @@ public class AnimatorFunctionAI : MonoBehaviour
         if (needAutoRotate)
         {
             //我应该面向的方向
-            Vector3 targetMainCharacterForward = (mainCharacter.selectEnemy.transform.position - mainCharacter.transform.position).ProjectOntoPlane(Vector3.up).normalized;
+            Vector3 targetMainCharacterForward = (_characterInfo.selectEnemy.transform.position - _characterInfo.transform.position).ProjectOntoPlane(Vector3.up).normalized;
             characterActor.transform.rotation = Quaternion.LookRotation(targetMainCharacterForward, Vector3.up);
         }
 
