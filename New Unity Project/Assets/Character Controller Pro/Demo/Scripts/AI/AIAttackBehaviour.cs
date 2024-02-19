@@ -47,12 +47,8 @@ public class AIAttackBehaviour : CharacterAIBehaviour
         {
             JudgeDistance();
             //这时需要去执行正常逻辑了
-
             AwaitAttackUpdate(dt);
-
             doAttackUpdate(dt);
-
-
         }
     }
     /// <summary>

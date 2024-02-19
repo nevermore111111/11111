@@ -49,7 +49,6 @@ public class AIAttack : CharacterState
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
         
-        
     }
 
     public override void UpdateBehaviour(float dt)

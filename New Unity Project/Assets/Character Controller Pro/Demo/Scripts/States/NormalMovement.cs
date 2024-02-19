@@ -206,7 +206,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         {
             if (CharacterActions.attack.value)
             {
-
+                CharacterStateController.EnqueueTransition<AIAttack>();
             }
         }
         private void PlayerCheckTransition()
@@ -240,7 +240,6 @@ namespace Lightbug.CharacterControllerPro.Demo
 
                     }
                 }
-
             }
             else if (CharacterActions.spAttack.value)//特殊攻击
             {
@@ -1112,7 +1111,6 @@ namespace Lightbug.CharacterControllerPro.Demo
 
                     XYZMove = CharacterActor.transform.InverseTransformDirection(CharacterActor.Velocity).normalized * (CharacterActor.Velocity.magnitude / currentPlanarSpeedLimit);
                     //Debug.Log($"速度比例{XYZMove},当前速度{CharacterActor.Velocity.magnitude},速度限制{currentPlanarSpeedLimit}");
-
                     CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
                     CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
                 }
