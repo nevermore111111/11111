@@ -523,6 +523,16 @@ namespace Lightbug.CharacterControllerPro.Demo
                 CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
                 CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
             }
+            //更新AI的行走方向——这个是更新动画用的
+            if(!CharacterActor.isPlayer)
+            {
+                //去更新AI动画机
+                Vector3 characterLocalVecolity = CharacterActor.LocalPlanarVelocity;
+                Vector3 characterLocalVecolityNormalize = characterLocalVecolity * characterLocalVecolity.magnitude/ planarMovementParameters.baseSpeedLimit;
+                CharacterActor.Animator.SetFloat(xMovePar, characterLocalVecolityNormalize.x);
+                CharacterActor.Animator.SetFloat(yMovePar, characterLocalVecolityNormalize.z);
+            }
+           
         }
 
         public bool moving = false; // 初始状态为未移动

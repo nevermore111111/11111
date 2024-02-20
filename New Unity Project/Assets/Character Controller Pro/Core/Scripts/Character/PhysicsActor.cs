@@ -131,6 +131,8 @@ namespace Lightbug.CharacterControllerPro.Core
             get => RigidbodyComponent.Velocity;
             set => RigidbodyComponent.Velocity = value;
         }
+       
+
 
         /// <summary>
         /// Gets/Sets the rigidbody velocity projected onto a plane formed by its up direction.

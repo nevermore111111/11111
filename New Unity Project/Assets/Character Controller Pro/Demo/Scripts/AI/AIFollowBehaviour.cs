@@ -37,7 +37,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         float currentTimeToIdle;
         public float minTimeIdle = 1f;
         public float maxTimeIdle = 2f;
-        
+
 
         [Tooltip("Desired distance to the target. if the distance to the target is less than this value the character will not move.")]
         [SerializeField]
@@ -70,11 +70,12 @@ namespace Lightbug.CharacterControllerPro.Demo
         public override void EnterBehaviour(float dt)
         {
             timer = refreshTime;
-            if(probabilityToIdle >Random.Range(0,100))
+            if (probabilityToIdle > Random.Range(0, 100))
             {
                 toIdle = true;
                 currentTimeToIdle = Random.Range(minTimeIdle, maxTimeIdle);
             }
+
         }
 
         public override void UpdateBehaviour(float dt)
@@ -82,9 +83,10 @@ namespace Lightbug.CharacterControllerPro.Demo
             if (timer >= refreshTime)
             {
                 timer = 0f;
-                if(currentTimeToIdle>0)
+                if (currentTimeToIdle > 0)
                 {
                     currentTimeToIdle -= refreshTime;
+                    UpdateIdleBehaviour(dt);
                 }
                 else
                 {
@@ -136,6 +138,15 @@ namespace Lightbug.CharacterControllerPro.Demo
         {
             //这里要左右走动
             Debug.Log("左右走");
+            if (followTarget == null)
+                return;
+
+            characterActions.Reset();
+            if ((CharacterActor.transform.position - CharacterActor.CharacterInfo.selectEnemy.transform.position).magnitude < reachDistance)
+            {
+                CharacterActor.brain.SetAIBehaviour<AIAttackBehaviour>();
+            }
+            SetMovementAction(CharacterActor.transform.right);
         }
     }
 }

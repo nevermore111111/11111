@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Lightbug.Utilities;
 using Lightbug.CharacterControllerPro.Core;
+using System.Collections.Generic;
 
 namespace Lightbug.CharacterControllerPro.Implementation
 {
@@ -48,6 +49,10 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// </summary>
         public void SetAction(CharacterActions characterActions) => this.characterActions = characterActions;
 
+        /// <summary>
+        /// 所有的AI行为
+        /// </summary>
+        public Dictionary<string, CharacterAIBehaviour> allAIBehaviours;
 
         /// <summary>
         /// Sets the type of brain.
@@ -78,7 +83,9 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
         public void SetAIBehaviour<T>() where T : CharacterAIBehaviour
         {
-            Debug.LogError("寻找状态的方法没写呢");
+            string stateName = typeof(T).Name;
+            allAIBehaviours.TryGetValue(stateName, out CharacterAIBehaviour behaviour);
+            SetAIBehaviour(behaviour);
         }
 
         public void UpdateBrainValues(float dt)
@@ -111,6 +118,19 @@ namespace Lightbug.CharacterControllerPro.Implementation
         {
             characterActions.InitializeActions();
             inputHandlerSettings.Initialize(gameObject);
+            //写入
+            //allAIBehaviours
+            WriteToDictionary();
+        }
+
+        private void WriteToDictionary()
+        {
+            CharacterAIBehaviour[] characterAIBehaviours = GetComponentsInChildren<CharacterAIBehaviour>();
+            foreach (CharacterAIBehaviour behaviour in characterAIBehaviours)
+            {
+                string className = behaviour.GetType().Name;
+                allAIBehaviours[className] = behaviour;
+            }
         }
 
         protected virtual void OnEnable()
