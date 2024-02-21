@@ -143,7 +143,7 @@ public class AnimatorFunction : MonoBehaviour
                 if (manager != null)
                 {
                     //根据动画参数激活对应的碰撞区域
-                    manager.weaponFx = CurrentAnimConfig.HittedEffect;
+                    manager.weaponHitFx = CurrentAnimConfig.HittedEffect;
                     ActiveDetectionByStringPar(activeWeaponDetect, manager);
 
                 }

@@ -1,5 +1,6 @@
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
+using Lightbug.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
 
     public AttackInfo attackInfo = new AttackInfo();
 
-
+    private Hitted Hitted;
 
     /// <summary>
     /// 伤害，目标位置，武器方向，击中类型
@@ -44,11 +45,19 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     /// <param name="weapon"></param>
     /// <param name="collider">受击位置</param>
     /// <param name="hit"></param>
-    abstract public void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground);
-
-    virtual public void GetDamage(float damage, Vector3 attackDirection, float hitStrength, string targetAnim = null)
+    virtual public void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground)
     {
-
+        if (Hitted != null)
+            Hitted.GetHitted(weapon, hit, true);
+        FxManagerPro.Instance.PlayFx(weapon.weaponHitFx, collider.transform);
+    }
+    virtual public void GetDamage(float damage, Vector3 attackDirection, float hitStrength, string targetAnimToPlay = null)
+    {
+        Debug.Log("这个方法没写完，现在只会播放动作");
+        if (!targetAnimToPlay.IsNullOrEmpty())
+        {
+            characterActor.Animator.CrossFadeInFixedTime(targetAnimToPlay, 0.1f);
+        }
     }
 
     public SkillReceiver GetSkillReceiver(int requireSkillPointNum)
@@ -62,6 +71,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
         hitBox = GetComponentInChildren<AgetHitBox>();
         characterActor = GetComponentInParent<CharacterActor>();
         CharacterStateController = this.transform.parent?.GetComponentInChildren<CharacterStateController>();
+        Hitted = characterActor.stateController.GetState<Hitted>() as Hitted;
     }
 
     abstract public void HitOther(WeaponManager weaponManager);

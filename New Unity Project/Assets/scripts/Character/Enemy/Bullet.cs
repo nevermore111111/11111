@@ -19,24 +19,24 @@ public class Bullet : Projectile
 
     protected override void CheckTrigger()
     {
-        // ¼ÆËãÉäÏß·½Ïò
+        // è®¡ç®—å°„çº¿æ–¹å‘
         Vector3 direction = transform.position - lastFramePosition;
 
-        // ·¢ÉäÉäÏß
+        // å‘å°„å°„çº¿
         RaycastHit hit;
         if (Physics.Raycast(lastFramePosition, direction, out hit, direction.magnitude))
         {
-            // ¼ì²éÅö×²ÌåÉÏÊÇ·ñÓĞ AttackReceive ×é¼ş
+            // æ£€æŸ¥ç¢°æ’ä½“ä¸Šæ˜¯å¦æœ‰ AttackReceive ç»„ä»¶
             AttackReceive attackReceiver;
             
-            // Èç¹û´æÔÚ AttackReceive ×é¼ş£¬Ö´ĞĞÏà¹ØÂß¼­
+            // å¦‚æœå­˜åœ¨ AttackReceive ç»„ä»¶ï¼Œæ‰§è¡Œç›¸å…³é€»è¾‘
             if (hit.collider.TryGetComponent(out attackReceiver)&& attackReceiver.isNormalReceive())
             {
-                // ´¦Àí¹¥»÷Âß¼­£¬¿ÉÒÔ´«µİÉËº¦µÈĞÅÏ¢¸ø AttackReceive ×é¼ş
-                attackReceiver.CharacterInfo.GetDamage(damage, this.transform.forward, -1f);
+                // å¤„ç†æ”»å‡»é€»è¾‘ï¼Œå¯ä»¥ä¼ é€’ä¼¤å®³ç­‰ä¿¡æ¯ç»™ AttackReceive ç»„ä»¶
+                //attackReceiver.CharacterInfo.GetDamage(damage, this.transform.forward, -1f);
             }
         }
     }
 
-    // ... ÆäËû·½·¨ºÍÊôĞÔ
+    // ... å…¶ä»–æ–¹æ³•å’Œå±æ€§
 }

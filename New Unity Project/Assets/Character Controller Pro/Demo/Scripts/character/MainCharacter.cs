@@ -15,24 +15,24 @@ public class MainCharacter : CharacterInfo
     //public HitData hitData;
     public HitTimeData hitTimeData;
 
-    public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground)
-    {
-        //需要找到主角调用
-        CharacterHitted.GetHitted(weapon, hit);
-        if (CharacterStateController.CurrentState is NormalMovement)
-            
-        {
-            NormalMovement actorNormalmovement = (NormalMovement)CharacterStateController.CurrentState;
-            //if (actorNormalmovement != null&&)
-            //{ }
-        }
-    }
+    //public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground)
+    //{
+    //    //需要找到主角调用
+    //    CharacterHitted.GetHitted(weapon, hit);
+    //    if (CharacterStateController.CurrentState is NormalMovement)
+
+    //    {
+    //        NormalMovement actorNormalmovement = (NormalMovement)CharacterStateController.CurrentState;
+    //        //if (actorNormalmovement != null&&)
+    //        //{ }
+    //    }
+    //}
 
 
     protected override void Awake()
     {
         base.Awake();
-       
+
         CharacterHitted = characterActor.GetComponentInChildren<Hitted>();
         hitTimeData = FindObjectOfType<HitTimeData>();
     }
@@ -97,7 +97,7 @@ public class MainCharacter : CharacterInfo
     {
         hitTimeData.CurrentHit = currentHit;
         float fadeInDuration = hitTimeData.currentHitTimePara.fadeTime;//hitData.GetFadeTime(hitData, currentHit);
-        float fadeOutDuration = hitTimeData.currentHitTimePara.fadeTime/2f;// 渐出时间稍微短一些
+        float fadeOutDuration = hitTimeData.currentHitTimePara.fadeTime / 2f;// 渐出时间稍微短一些
         float duration = hitTimeData.currentHitTimePara.stayTime;
         float targetTimeScale = hitTimeData.currentHitTimePara.targetTimeScale;
         //TimeScaleManager.Instance.SetTimeScale(fadeInDuration, fadeOutDuration, duration, targetTimeScale);
@@ -113,18 +113,5 @@ public class MainCharacter : CharacterInfo
             weaponManager.Impluse();
         }
     }
-
-    public override void GetDamage(float damage, Vector3 attackDirection, float hitStrength, string targetAnim = null)
-    {
-        ChangeAnim(attackDirection);
-        //得到关于自身的攻击方向
-    }
-
-    private void ChangeAnim(Vector3 attackDirection)
-    {
-        Vector3 attackDirecFrom = transform.InverseTransformDirection(attackDirection);
-        characterActor.Animator.SetFloat("attackXFrom", attackDirecFrom.x);
-        characterActor.Animator.SetFloat("attackYFrom", attackDirecFrom.y);
-        characterActor.Animator.SetFloat("attackZFrom", attackDirecFrom.z);
-    }
 }
+

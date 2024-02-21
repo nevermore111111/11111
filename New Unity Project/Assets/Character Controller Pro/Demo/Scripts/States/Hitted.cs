@@ -12,7 +12,7 @@ using static Lightbug.CharacterControllerPro.Demo.DefenseParameters;
 
 public class Hitted : CharacterState
 {
-    public bool Check = false;
+    public bool CheckDrawToDebug = false;
     [Space(10f)]
 
     public float HittedForce = 10f;
@@ -33,72 +33,41 @@ public class Hitted : CharacterState
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         Debug.Log("进入了受击状态");
-        if (CharacterStateController.CurrentState is AttackOnGround)
-        {
-
-        }
-        if (CharacterActor.isPlayer)
-        {
-
-        }
+        
     }
     //根据目标的方位和攻击类型来决定自身的受击类型。需要设置当前的受击动画。
     public void GetHitted(WeaponManager weapon, IAgent.HitKind hitKind, bool NeedChangeState = true)
     {
-        Debug.Log("受击了");
-        int hitStrength = weapon.weaponOwner.HitStrength;
         HittedBack(weapon, true);
+        Debug.Log("击退？");
+        SetAnimationParameters(weapon.WeaponWorldDirection, true);
+        if (CharacterActor.stateController.CurrentState is NormalMovement)
+        {
+             NormalMovement targetNormalMovement = CharacterActor.stateController.GetState<NormalMovement>() as NormalMovement;
+            if(targetNormalMovement != null && targetNormalMovement.IsDefense == true) //正在防御
+            {
+                if(targetNormalMovement.defenseParameters.currentDenfendKind == DefendKind.perfectDefend) 
+                {
+                    //完美
+
+                }
+                else if(targetNormalMovement.defenseParameters.currentDenfendKind == DefendKind.normalDefend)
+                {
+                    //普通
+
+                }
+                return;
+            }
+        }
         //击退
-        CheckAnimator(weapon, hitKind, NeedChangeState);
+        CheckState(weapon, hitKind, NeedChangeState);
         //动画机处理
     }
-    public void GetHitted(Vector3 attackDirection,Vector3 hittedForce  ,bool NeedChangeState = true)
+
+    private void CheckState(WeaponManager weapon, IAgent.HitKind hitKind, bool NeedChangeState)
     {
-        Debug.Log("受击了");
-
-
-        CharacterActor.RigidbodyComponent.Velocity = Vector3.zero;
-        CharacterActor.RigidbodyComponent.AddForce(hittedForce);
-    }
-
-    private void CheckAnimator(WeaponManager weapon, IAgent.HitKind hitKind, bool NeedChangeState)
-    {
-        //这个是转换到世界坐标系。
-        if(Check)
-        {
-            //Debug.DrawLine(weapon.transform.position, weapon.transform.position + HitWorldDir, Color.red,1f);
-            //EditorApplication.isPaused = true;
-        }
-
-        SetAnimationParameters(weapon.WeaponWorldDirection, true);
-        //是否需要切换状态到当前状态
-        if (NeedChangeState)
-        {
-            CharacterStateController.EnqueueTransition<Hitted>();
-            CharacterActor.Animator.CrossFadeInFixedTime("Hitted.HittedOnGround", 0.1f, 0,0.1f);
-        }
-        else
-        {
-            CharacterActor.Animator.Play("MixHitted", 1, 0.3f);
-            CharacterActor.Animator.SetLayerWeight(1, HittedMixWeight);
-        }
-        PlayerSpecial();
-    }
-
-    /// <summary>
-    /// 主角特殊方法
-    /// </summary>
-    private void PlayerSpecial()
-    {
-        //是否是主角
-        if (CharacterActor.isPlayer)
-        {
-
-        }
-        else
-        {
-
-        }
+        CharacterStateController.EnqueueTransition<Hitted>();
+        CharacterActor.Animator.CrossFadeInFixedTime("Hitted.HittedOnGround", 0.1f, 0, 0.1f);
     }
 
     /// <summary>

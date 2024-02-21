@@ -27,7 +27,7 @@ public class WeaponManager : MonoBehaviour
     Impulse impulse;
     public float[] impulsePar;
     [Tooltip("这里配置要装载哪一段特效")]
-    public string[] weaponFx;
+    public string[] weaponHitFx;
     public List<CharacterInfo> HittedCharacter;
     [Tooltip("这个配置CurrentAnimConfig.AttackDirection，配置相对于characteractor的local方向，在写入时已经转化成了世界坐标")]
     /// <summary>

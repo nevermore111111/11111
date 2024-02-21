@@ -1,7 +1,9 @@
 using JetBrains.Annotations;
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
+using Lightbug.Utilities;
 using Rusk;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +15,7 @@ using UnityEngine;
 /// <summary>
 public class AIAttack : CharacterState
 {
+    [OnCollectionChanged("AttacksRename")]
     public List<AIAttackData> attacks;
     public float CharacterAttackDistance;
     public bool isAttack;
@@ -76,6 +79,20 @@ public class AIAttack : CharacterState
     //_________________________________分割线_____________________________________________
     //_________________________________分割线_____________________________________________
     //_________________________________分割线_____________________________________________
+
+    /// <summary>
+    /// 给attacks自动命名的方法
+    /// </summary>
+    public void AttacksRename()
+    {
+        foreach (var attack in attacks) 
+        {
+            if(attack != null&&attack.attackName.IsNullOrEmpty())
+            {
+                attack.attackName = "BaseLayer.AIAttack.Attack" + (attacks.IndexOf(attack)+1).ToString();
+            }
+        }
+    }
 
     public string ChooseAttack(List<AIAttackData> attacks)
     {
