@@ -142,11 +142,16 @@ namespace Lightbug.CharacterControllerPro.Demo
                 return;
 
             characterActions.Reset();
-            if ((CharacterActor.transform.position - CharacterActor.CharacterInfo.selectEnemy.transform.position).magnitude < reachDistance)
+            if(CharacterActor.CharacterInfo.selectEnemy !=null)
             {
-                CharacterActor.brain.SetAIBehaviour<AIAttackBehaviour>();
+                if ((CharacterActor.transform.position - CharacterActor.CharacterInfo.selectEnemy.transform.position).magnitude < reachDistance)
+                {
+                    CharacterActor.brain.SetAIBehaviour<AIAttackBehaviour>();
+                }
+                Vector3 MoveDirection;
+                SetMovementAction(CharacterActor.transform.right);
             }
-            SetMovementAction(CharacterActor.transform.right);
+            
         }
     }
 }

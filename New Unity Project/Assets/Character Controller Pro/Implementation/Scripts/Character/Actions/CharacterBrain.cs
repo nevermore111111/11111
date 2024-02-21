@@ -52,7 +52,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// <summary>
         /// 所有的AI行为
         /// </summary>
-        public Dictionary<string, CharacterAIBehaviour> allAIBehaviours;
+        public Dictionary<string, CharacterAIBehaviour> allAIBehaviours = new Dictionary<string, CharacterAIBehaviour>();
 
         /// <summary>
         /// Sets the type of brain.
