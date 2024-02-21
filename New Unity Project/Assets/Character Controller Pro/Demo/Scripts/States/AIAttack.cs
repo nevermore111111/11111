@@ -13,7 +13,6 @@ using UnityEngine;
 /// <summary>
 public class AIAttack : CharacterState
 {
-
     public List<AIAttackData> attacks;
     public float CharacterAttackDistance;
     public bool isAttack;
