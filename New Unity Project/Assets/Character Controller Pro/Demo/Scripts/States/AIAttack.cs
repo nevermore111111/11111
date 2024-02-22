@@ -56,6 +56,7 @@ public class AIAttack : CharacterState
     public override void UpdateBehaviour(float dt)
     {
         GetSelectAttack();
+        BaseProcessVelocity(dt);
     }
 
     private void GetSelectAttack()

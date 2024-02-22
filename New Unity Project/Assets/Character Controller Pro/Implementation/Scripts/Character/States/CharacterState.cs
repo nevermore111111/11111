@@ -74,9 +74,9 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
         protected static string stableParameter = "Stable";
 
-        protected  static string verticalSpeedParameter = "VerticalSpeed";
+        protected static string verticalSpeedParameter = "VerticalSpeed";
 
-        protected  static string planarSpeedParameter = "PlanarSpeed";
+        protected static string planarSpeedParameter = "PlanarSpeed";
 
         protected static string horizontalAxisParameter = "HorizontalAxis";
 
@@ -129,6 +129,10 @@ namespace Lightbug.CharacterControllerPro.Implementation
             CharacterActor = this.GetComponentInBranch<CharacterActor>();
             CharacterStateController = this.GetComponentInBranch<CharacterActor, CharacterStateController>();
             CharacterBrain = this.GetComponentInBranch<CharacterActor, CharacterBrain>();
+            if (isActiveAutoHandleVelocity)
+            {
+                Debug.Log($"{CharacterActor.name}的这个状态{GetType().Name}启用了自动调整位置");
+            }
         }
 
         public virtual void CanPlayerControl(bool canControl)
@@ -171,7 +175,6 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// </summary>
         public virtual void UpdateBehaviour(float dt)
         {
-
         }
 
         /// <summary>
@@ -238,7 +241,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         {
         }
 
-   
+
 
         public virtual string GetInfo()
         {
@@ -251,7 +254,18 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// <returns>True if the Animator is valid, false otherwise.</returns>
         public bool IsAnimatorValid() => CharacterActor.IsAnimatorValid();
 
-
+        /// <summary>
+        /// 一个基础的设置速度的方法，如果需要就调用一下，需要开启isActiveAutoHandleVelocity。NormalMovement不需要调用这个
+        /// </summary>
+        /// <param name="dt"></param>
+        public void BaseProcessVelocity(float dt)
+        {
+            if (isActiveAutoHandleVelocity)
+            {
+                ProcessVerticalMovement(dt);
+                ProcessPlanarMovement(dt);
+            }
+        }
         //————————————————————————————————————————写一个通用方法—————————————handleVelocity——————调节每个状态的速度——————————————————————————————
         //————————————————————————————————————————写一个通用方法—————————————handleVelocity——————调节每个状态的速度——————————————————————————————
         //————————————————————————————————————————写一个通用方法—————————————handleVelocity——————调节每个状态的速度——————————————————————————————
@@ -259,6 +273,8 @@ namespace Lightbug.CharacterControllerPro.Implementation
         public bool isActiveAutoHandleVelocity = false;
         [ShowIf("isActiveAutoHandleVelocity")]
         public PlanarMovementParameters PlanarMovementParameters;
+        [ShowIf("isActiveAutoHandleVelocity")]
+        public PlanarMovementParameters.PlanarMovementProperties PlanarMovementProperties;
         [ShowIf("isActiveAutoHandleVelocity")]
         public VerticalMovementParameters VerticalMovementParameters;
 
@@ -268,139 +284,46 @@ namespace Lightbug.CharacterControllerPro.Implementation
         }
         protected virtual void ProcessPlanarMovement(float dt)
         {
-
-
-            bool needToAccelerate = false;//CustomUtilities.Multiply(CharacterStateController.InputMovementReference, currentPlanarSpeedLimit).sqrMagnitude >= CharacterActor.PlanarVelocity.sqrMagnitude;
-
             Vector3 targetPlanarVelocity = default;
-
 
             SetMotionValues(targetPlanarVelocity);
 
-
-            float acceleration = currentMotion.acceleration;
-            if (needToAccelerate)
-            {
-                acceleration *= currentMotion.angleAccelerationMultiplier;
-
-                // Affect acceleration based on the angle between target velocity and current velocity
-                //float angleCurrentTargetVelocity = Vector3.Angle(CharacterActor.PlanarVelocity, targetPlanarVelocity);
-                //float accelerationBoost = 20f * (angleCurrentTargetVelocity / 180f);
-                //acceleration += accelerationBoost;
-            }
-            else
-            {
-                acceleration = currentMotion.deceleration;
-            }
+            float acceleration;
+            acceleration = PlanarMovementProperties.deceleration;
 
             CharacterActor.PlanarVelocity = Vector3.MoveTowards(
                 CharacterActor.PlanarVelocity,
                 targetPlanarVelocity,
                 acceleration * dt
             );
-
-            //if (CharacterActor.UpdateRootPosition == true && CharacterActor.UseRootMotion == true)
-            //{
-            //    //这个是归一化的xyz
-            //    //这个是归一化的想要移动的方向
-            //    Vector3 targetVector3 = CharacterStateController.InputMovementReference;
-            //    targetVector3 = CharacterActor.transform.InverseTransformDirection(targetVector3).normalized;
-            //    //2.2f是防御的动画移动速度--只有一个防御，先用常数
-            //    XYZMove = Vector3.MoveTowards(XYZMove, targetVector3, acceleration * dt / currentAnimSpeed);
-            //    CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
-            //    CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
-            //}
-            ////更新AI的行走方向——这个是更新动画用的
-            //if (!CharacterActor.isPlayer)
-            //{
-            //    //去更新AI动画机
-            //    Vector3 characterLocalVecolity = CharacterActor.LocalPlanarVelocity;
-            //    Vector3 characterLocalVecolityNormalize = characterLocalVecolity * characterLocalVecolity.magnitude / planarMovementParameters.baseSpeedLimit;
-            //    CharacterActor.Animator.SetFloat(xMovePar, characterLocalVecolityNormalize.x);
-            //    CharacterActor.Animator.SetFloat(yMovePar, characterLocalVecolityNormalize.z);
-            //}
         }
 
 
         void SetMotionValues(Vector3 targetPlanarVelocity)
         {
+            //返回当前的移动速度和想要加速的方向，当前这个方法会返回0度
             float angleCurrentTargetVelocity = Vector3.Angle(CharacterActor.PlanarVelocity, targetPlanarVelocity);
 
             switch (CharacterActor.CurrentState)
             {
                 case CharacterActorState.StableGrounded:
-
-                    if (isDefense)
-                    {
-                        currentMotion.acceleration = defenseParameters.DefendGroundedAcceleration;//  planarMovementParameters.stableGroundedAcceleration;
-                        currentMotion.deceleration = defenseParameters.DefendGroundedDeceleration;// planarMovementParameters.stableGroundedDeceleration;
-                        currentMotion.angleAccelerationMultiplier = defenseParameters.DefendAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
-                        //planarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
-                    }
-                    else
-                    {
-                        currentMotion.acceleration = planarMovementParameters.stableGroundedAcceleration;
-                        currentMotion.deceleration = planarMovementParameters.stableGroundedDeceleration;
-                        currentMotion.angleAccelerationMultiplier = planarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
-                    }
-
+                    PlanarMovementProperties.acceleration = PlanarMovementParameters.stableGroundedAcceleration;
+                    PlanarMovementProperties.deceleration = PlanarMovementParameters.stableGroundedDeceleration;
+                    PlanarMovementProperties.angleAccelerationMultiplier = PlanarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
 
                     break;
-
                 case CharacterActorState.UnstableGrounded:
-                    currentMotion.acceleration = planarMovementParameters.unstableGroundedAcceleration;
-                    currentMotion.deceleration = planarMovementParameters.unstableGroundedDeceleration;
-                    currentMotion.angleAccelerationMultiplier = planarMovementParameters.unstableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
-
+                    PlanarMovementProperties.acceleration = PlanarMovementParameters.unstableGroundedAcceleration;
+                    PlanarMovementProperties.deceleration = PlanarMovementParameters.unstableGroundedDeceleration;
+                    PlanarMovementProperties.angleAccelerationMultiplier = PlanarMovementParameters.unstableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
                     break;
-
                 case CharacterActorState.NotGrounded:
-
-                    if (reducedAirControlFlag)
-                    {
-                        float time = Time.time - reducedAirControlInitialTime;
-                        if (time <= reductionDuration)
-                        {
-                            currentMotion.acceleration = (planarMovementParameters.notGroundedAcceleration / reductionDuration) * time;
-                            currentMotion.deceleration = (planarMovementParameters.notGroundedDeceleration / reductionDuration) * time;
-                        }
-                        else
-                        {
-                            reducedAirControlFlag = false;
-
-                            currentMotion.acceleration = planarMovementParameters.notGroundedAcceleration;
-                            currentMotion.deceleration = planarMovementParameters.notGroundedDeceleration;
-                        }
-
-                    }
-                    else
-                    {
-                        currentMotion.acceleration = planarMovementParameters.notGroundedAcceleration;
-                        currentMotion.deceleration = planarMovementParameters.notGroundedDeceleration;
-                    }
-
-                    currentMotion.angleAccelerationMultiplier = planarMovementParameters.notGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
-
+                    PlanarMovementProperties.acceleration = PlanarMovementParameters.notGroundedAcceleration;
+                    PlanarMovementProperties.deceleration = PlanarMovementParameters.notGroundedDeceleration;
+                    PlanarMovementProperties.angleAccelerationMultiplier = PlanarMovementParameters.notGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
                     break;
 
             }
-
-
-            // Material values
-            if (materialController != null)
-            {
-                if (CharacterActor.IsGrounded)
-                {
-                    currentMotion.acceleration *= materialController.CurrentSurface.accelerationMultiplier * materialController.CurrentVolume.accelerationMultiplier;
-                    currentMotion.deceleration *= materialController.CurrentSurface.decelerationMultiplier * materialController.CurrentVolume.decelerationMultiplier;
-                }
-                else
-                {
-                    currentMotion.acceleration *= materialController.CurrentVolume.accelerationMultiplier;
-                    currentMotion.deceleration *= materialController.CurrentVolume.decelerationMultiplier;
-                }
-            }
-
         }
 
         protected virtual void ProcessGravity(float dt)

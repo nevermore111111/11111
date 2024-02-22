@@ -490,7 +490,6 @@ namespace Lightbug.CharacterControllerPro.Demo
 
             SetMotionValues(targetPlanarVelocity);
 
-
             float acceleration = currentMotion.acceleration;
             if (needToAccelerate)
             {
