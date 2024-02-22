@@ -408,12 +408,12 @@ namespace Lightbug.CharacterControllerPro.Demo
         /// 最后，根据是否需要加速来计算角色的加速度喵，如果需要加速，根据角度差来计算加速度的增益喵；否则就使用当前动作的减速度喵。最后，使用MoveTowards方法，根据当前速度、目标速度和加速度来更新角色的平面速度喵。
 
         /// </summary>
-        protected virtual void ProcessPlanarMovement(float dt)
+        protected override void ProcessPlanarMovement(float dt)
         {
             //SetMotionValues();
 
-
-            PlayStop();
+            if (CharacterActor.isPlayer)
+                PlayStop();
 
             float speedMultiplier = materialController != null ?
             materialController.CurrentSurface.speedMultiplier * materialController.CurrentVolume.speedMultiplier : 1f;
@@ -524,15 +524,15 @@ namespace Lightbug.CharacterControllerPro.Demo
                 CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
             }
             //更新AI的行走方向——这个是更新动画用的
-            if(!CharacterActor.isPlayer)
+            if (!CharacterActor.isPlayer)
             {
                 //去更新AI动画机
                 Vector3 characterLocalVecolity = CharacterActor.LocalPlanarVelocity;
-                Vector3 characterLocalVecolityNormalize = characterLocalVecolity * characterLocalVecolity.magnitude/ planarMovementParameters.baseSpeedLimit;
+                Vector3 characterLocalVecolityNormalize = characterLocalVecolity * characterLocalVecolity.magnitude / planarMovementParameters.baseSpeedLimit;
                 CharacterActor.Animator.SetFloat(xMovePar, characterLocalVecolityNormalize.x);
                 CharacterActor.Animator.SetFloat(yMovePar, characterLocalVecolityNormalize.z);
             }
-           
+
         }
 
         public bool moving = false; // 初始状态为未移动
@@ -625,17 +625,11 @@ namespace Lightbug.CharacterControllerPro.Demo
                 // 更新状态
                 //isMoving = false;
             }
-            //else
-            //{
-            //    // 更新状态
-            //    isMoving = true;
-            //}
 
-            // 保存当前速度大小，用于下一帧判断
             lastVelocityMagnitude = currentVelocityMagnitude;
         }
 
-        protected virtual void ProcessGravity(float dt)
+        protected override void ProcessGravity(float dt)
         {
             if (!verticalMovementParameters.useGravity)
                 return;
@@ -886,7 +880,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         #endregion
 
 
-        void ProcessVerticalMovement(float dt)
+        protected override void ProcessVerticalMovement(float dt)
         {
             ProcessGravity(dt);
             ProcessJump(dt);

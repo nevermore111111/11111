@@ -1,5 +1,7 @@
 ﻿using Lightbug.CharacterControllerPro.Core;
+using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.Utilities;
+using RootMotion;
 using UnityEngine;
 
 
@@ -236,39 +238,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         {
         }
 
-        //public void SetIKPos(AvatarIKGoal targetAvatarIK, Transform targetTransform, float targetWeight)
-        //{
-        //    CharacterActor.Animator.SetIKPosition(targetAvatarIK, targetTransform.position);
-        //    CharacterActor.Animator.SetIKPositionWeight(targetAvatarIK, targetWeight);
-        //}
-        //public void SetIKRotate(AvatarIKGoal targetAvatarIK, Transform targetTransform, float targetWeight)
-        //{
-        //    CharacterActor.Animator.SetIKRotation(targetAvatarIK, transform.rotation);
-        //    CharacterActor.Animator.SetIKRotationWeight(targetAvatarIK, targetWeight);
-        //}
-        //public void SetIKbyTransform(AvatarIKGoal targetAvatarIK, Transform targetTransform, float tarPosWeight, float tarRotateWeight)
-        //{
-        //    SetIKPos(targetAvatarIK, targetTransform, tarPosWeight);
-        //    SetIKRotate(targetAvatarIK, targetTransform, tarRotateWeight);
-        //}
-        //public void SetIKbyIKPar(IKPar iKPar)
-        //{
-        //    switch (iKPar.targetIKPos)
-        //    {
-        //        case AvatarIKGoal.LeftHand:
-        //            SetIKbyTransform(AvatarIKGoal.LeftHand, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
-        //            break;
-        //        case AvatarIKGoal.RightHand:
-        //            SetIKbyTransform(AvatarIKGoal.RightHand, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
-        //            break;
-        //        case AvatarIKGoal.LeftFoot:
-        //            SetIKbyTransform(AvatarIKGoal.LeftFoot, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
-        //            break;
-        //        case AvatarIKGoal.RightFoot:
-        //            SetIKbyTransform(AvatarIKGoal.RightFoot, iKPar.targetTransform, iKPar.ikPosWeight, iKPar.ikRotateWeight);
-        //            break;
-        //    }
-        //}
+   
 
         public virtual string GetInfo()
         {
@@ -282,32 +252,170 @@ namespace Lightbug.CharacterControllerPro.Implementation
         public bool IsAnimatorValid() => CharacterActor.IsAnimatorValid();
 
 
-        /// <summary>
-        /// 这个方法让使用timeline播放的动画实现rootMovtion的效果
-        /// 必须先开启characteractor的rootmotion
-        /// 如果有多个动画，只会播放最后一个动画的rootmovtion
-        /// 第二行个人情况开启或者关闭
-        /// </summary>
-        //public void SetTimeLineAnimationRootMotion(bool startRootMovtion)
-        //{
-        //    isTimelineAnimation = startRootMovtion;
-        //    CharacterActor.SetUpRootMotion(startRootMovtion, false);
-        //}
-    }
-    //[System.Serializable]
-    //public class IKPar
-    //{
-    //    public AvatarIKGoal targetIKPos;
-    //    //这个类会在timeline中变化值，来满足一些动画的需要，比如ik权重，或者是技能挂点位置等，暂时没有想好
-    //    public float ikPosWeight;
-    //    public float ikRotateWeight;
-    //    public Transform targetTransform;
+        //————————————————————————————————————————写一个通用方法—————————————handleVelocity——————调节每个状态的速度——————————————————————————————
+        //————————————————————————————————————————写一个通用方法—————————————handleVelocity——————调节每个状态的速度——————————————————————————————
+        //————————————————————————————————————————写一个通用方法—————————————handleVelocity——————调节每个状态的速度——————————————————————————————
+        [Header("开启显示自动调节速度的参数，只是显示，还要去代码里调用具体的方法")]
+        public bool isActiveAutoHandleVelocity = false;
+        [ShowIf("isActiveAutoHandleVelocity")]
+        public PlanarMovementParameters PlanarMovementParameters;
+        [ShowIf("isActiveAutoHandleVelocity")]
+        public VerticalMovementParameters VerticalMovementParameters;
 
-    //    public void Initialize()
-    //    {
-    //        ikPosWeight = 0f;
-    //        ikRotateWeight = 0f;
-    //        targetTransform = null;
-    //    }
-    //}
+        protected virtual void ProcessVerticalMovement(float dt)
+        {
+            ProcessGravity(dt);
+        }
+        protected virtual void ProcessPlanarMovement(float dt)
+        {
+
+
+            bool needToAccelerate = false;//CustomUtilities.Multiply(CharacterStateController.InputMovementReference, currentPlanarSpeedLimit).sqrMagnitude >= CharacterActor.PlanarVelocity.sqrMagnitude;
+
+            Vector3 targetPlanarVelocity = default;
+
+
+            SetMotionValues(targetPlanarVelocity);
+
+
+            float acceleration = currentMotion.acceleration;
+            if (needToAccelerate)
+            {
+                acceleration *= currentMotion.angleAccelerationMultiplier;
+
+                // Affect acceleration based on the angle between target velocity and current velocity
+                //float angleCurrentTargetVelocity = Vector3.Angle(CharacterActor.PlanarVelocity, targetPlanarVelocity);
+                //float accelerationBoost = 20f * (angleCurrentTargetVelocity / 180f);
+                //acceleration += accelerationBoost;
+            }
+            else
+            {
+                acceleration = currentMotion.deceleration;
+            }
+
+            CharacterActor.PlanarVelocity = Vector3.MoveTowards(
+                CharacterActor.PlanarVelocity,
+                targetPlanarVelocity,
+                acceleration * dt
+            );
+
+            //if (CharacterActor.UpdateRootPosition == true && CharacterActor.UseRootMotion == true)
+            //{
+            //    //这个是归一化的xyz
+            //    //这个是归一化的想要移动的方向
+            //    Vector3 targetVector3 = CharacterStateController.InputMovementReference;
+            //    targetVector3 = CharacterActor.transform.InverseTransformDirection(targetVector3).normalized;
+            //    //2.2f是防御的动画移动速度--只有一个防御，先用常数
+            //    XYZMove = Vector3.MoveTowards(XYZMove, targetVector3, acceleration * dt / currentAnimSpeed);
+            //    CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
+            //    CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
+            //}
+            ////更新AI的行走方向——这个是更新动画用的
+            //if (!CharacterActor.isPlayer)
+            //{
+            //    //去更新AI动画机
+            //    Vector3 characterLocalVecolity = CharacterActor.LocalPlanarVelocity;
+            //    Vector3 characterLocalVecolityNormalize = characterLocalVecolity * characterLocalVecolity.magnitude / planarMovementParameters.baseSpeedLimit;
+            //    CharacterActor.Animator.SetFloat(xMovePar, characterLocalVecolityNormalize.x);
+            //    CharacterActor.Animator.SetFloat(yMovePar, characterLocalVecolityNormalize.z);
+            //}
+        }
+
+
+        void SetMotionValues(Vector3 targetPlanarVelocity)
+        {
+            float angleCurrentTargetVelocity = Vector3.Angle(CharacterActor.PlanarVelocity, targetPlanarVelocity);
+
+            switch (CharacterActor.CurrentState)
+            {
+                case CharacterActorState.StableGrounded:
+
+                    if (isDefense)
+                    {
+                        currentMotion.acceleration = defenseParameters.DefendGroundedAcceleration;//  planarMovementParameters.stableGroundedAcceleration;
+                        currentMotion.deceleration = defenseParameters.DefendGroundedDeceleration;// planarMovementParameters.stableGroundedDeceleration;
+                        currentMotion.angleAccelerationMultiplier = defenseParameters.DefendAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
+                        //planarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
+                    }
+                    else
+                    {
+                        currentMotion.acceleration = planarMovementParameters.stableGroundedAcceleration;
+                        currentMotion.deceleration = planarMovementParameters.stableGroundedDeceleration;
+                        currentMotion.angleAccelerationMultiplier = planarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
+                    }
+
+
+                    break;
+
+                case CharacterActorState.UnstableGrounded:
+                    currentMotion.acceleration = planarMovementParameters.unstableGroundedAcceleration;
+                    currentMotion.deceleration = planarMovementParameters.unstableGroundedDeceleration;
+                    currentMotion.angleAccelerationMultiplier = planarMovementParameters.unstableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
+
+                    break;
+
+                case CharacterActorState.NotGrounded:
+
+                    if (reducedAirControlFlag)
+                    {
+                        float time = Time.time - reducedAirControlInitialTime;
+                        if (time <= reductionDuration)
+                        {
+                            currentMotion.acceleration = (planarMovementParameters.notGroundedAcceleration / reductionDuration) * time;
+                            currentMotion.deceleration = (planarMovementParameters.notGroundedDeceleration / reductionDuration) * time;
+                        }
+                        else
+                        {
+                            reducedAirControlFlag = false;
+
+                            currentMotion.acceleration = planarMovementParameters.notGroundedAcceleration;
+                            currentMotion.deceleration = planarMovementParameters.notGroundedDeceleration;
+                        }
+
+                    }
+                    else
+                    {
+                        currentMotion.acceleration = planarMovementParameters.notGroundedAcceleration;
+                        currentMotion.deceleration = planarMovementParameters.notGroundedDeceleration;
+                    }
+
+                    currentMotion.angleAccelerationMultiplier = planarMovementParameters.notGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
+
+                    break;
+
+            }
+
+
+            // Material values
+            if (materialController != null)
+            {
+                if (CharacterActor.IsGrounded)
+                {
+                    currentMotion.acceleration *= materialController.CurrentSurface.accelerationMultiplier * materialController.CurrentVolume.accelerationMultiplier;
+                    currentMotion.deceleration *= materialController.CurrentSurface.decelerationMultiplier * materialController.CurrentVolume.decelerationMultiplier;
+                }
+                else
+                {
+                    currentMotion.acceleration *= materialController.CurrentVolume.accelerationMultiplier;
+                    currentMotion.deceleration *= materialController.CurrentVolume.decelerationMultiplier;
+                }
+            }
+
+        }
+
+        protected virtual void ProcessGravity(float dt)
+        {
+            if (!VerticalMovementParameters.useGravity)
+                return;
+            VerticalMovementParameters.UpdateParameters();
+
+
+            float gravityMultiplier = 1f;
+
+            float gravity = gravityMultiplier * VerticalMovementParameters.gravity;
+
+            if (!CharacterActor.IsStable)
+                CharacterActor.VerticalVelocity += CustomUtilities.Multiply(-CharacterActor.Up, gravity, dt);
+        }
+    }
 }
