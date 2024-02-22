@@ -42,9 +42,8 @@ public class AIAttack : CharacterState
     {
         if (CharacterActor != null)
         {
-            Debug.LogError("这里没写,下一行要播放对应动画层的攻击动画");
-            string targetTotalAnimName =  targetAnim;
-            CharacterActor.Animator.CrossFade(targetTotalAnimName,0.25f);
+            CharacterActor.Animator.CrossFade(targetAnim, 0.25f);
+            Debug.Log(targetAnim);
         }
     }
 
@@ -90,7 +89,7 @@ public class AIAttack : CharacterState
         {
             if(attack != null&&attack.attackName.IsNullOrEmpty())
             {
-                attack.attackName = "BaseLayer.AIAttack.Attack" + (attacks.IndexOf(attack)+1).ToString();
+                attack.attackName = "Base Layer.AIAttack.Attack" + (attacks.IndexOf(attack)+1).ToString();
             }
         }
     }

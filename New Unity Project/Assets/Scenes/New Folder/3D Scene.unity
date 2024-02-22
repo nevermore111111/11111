@@ -862,7 +862,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100322558}
-  m_LocalRotation: {x: 0.059331276, y: -0.75825626, z: 0.06969532, w: 0.6454997}
+  m_LocalRotation: {x: 0.059331283, y: -0.75825626, z: 0.06969534, w: 0.64549977}
   m_LocalPosition: {x: 3.929512, y: 0.39202702, z: 6.6251297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -987,7 +987,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102522144}
-  m_LocalRotation: {x: -0.13850154, y: -0.11933042, z: -0.016813219, w: 0.983003}
+  m_LocalRotation: {x: 0.073834196, y: -0.120175675, z: 0.008963039, w: 0.98996264}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5940,7 +5940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 2, z: -5}
+  m_FollowOffset: {x: 0, y: 0.8628036, z: -4.597832}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -6752,7 +6752,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444161945}
-  m_LocalRotation: {x: 0.045958415, y: -0.7595363, z: 0.05398647, w: 0.6465894}
+  m_LocalRotation: {x: 0.045958415, y: -0.7595363, z: 0.053986467, w: 0.64658946}
   m_LocalPosition: {x: 3.929512, y: 0.39202702, z: 6.6251297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8119,7 +8119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 2, z: -5}
+  m_FollowOffset: {x: 0, y: 0.8628036, z: -4.597832}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -9004,8 +9004,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: -0.13850147, y: -0.11933138, z: -0.016813353, w: 0.9830029}
-  m_LocalPosition: {x: 0.0000076293945, y: 0, z: 0}
+  m_LocalRotation: {x: -0.0416889, y: -0.12040334, z: -0.0050607976, w: 0.9918364}
+  m_LocalPosition: {x: -0.096221924, y: -1.1371963, z: 0.39048767}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9190,7 +9190,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605997566}
-  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
+  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10383,8 +10383,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811303954}
-  m_LocalRotation: {x: -0.13850145, y: -0.11933135, z: -0.016813347, w: 0.98300296}
-  m_LocalPosition: {x: 0.0000076293945, y: 0, z: 0}
+  m_LocalRotation: {x: -0.0416889, y: -0.12040334, z: -0.0050607976, w: 0.9918364}
+  m_LocalPosition: {x: -0.096221924, y: -1.1371963, z: 0.39048767}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11299,8 +11299,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234806, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.0620468, z: -5.874625}
+  m_LocalRotation: {x: 0.039234813, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.062047, z: -5.874625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21987,8 +21987,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498168725}
-  m_LocalRotation: {x: -0.6795967, y: 0.0036301105, z: 0.003363024, w: 0.73356926}
-  m_LocalPosition: {x: -121.699684, y: -6.832235, z: 95.851654}
+  m_LocalRotation: {x: -0.67959577, y: 0.0035617738, z: 0.0032997045, w: 0.73357075}
+  m_LocalPosition: {x: -121.69969, y: -6.8322344, z: 95.85162}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23213,7 +23213,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689691047}
-  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
+  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -23650,7 +23650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 2, z: -5}
+  m_FollowOffset: {x: 0, y: 0.8628036, z: -4.597832}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -24360,8 +24360,10 @@ MonoBehaviour:
     jumpDownDistance: 0.05
     jumpDownVerticalVelocity: 0.5
   attacks:
-  - attackName: BaseLayer.AIAttack.attack01
-    attackChooseWeight: 1
+  - attackName: Base Layer.AIAttack.Attack1
+    attackChooseWeight: 2
+  - attackName: Base Layer.AIAttack.Attack2
+    attackChooseWeight: 0
   CharacterAttackDistance: 2
   isAttack: 0
   isReadyToAttack: 0
@@ -26027,7 +26029,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890388382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -120.74295, y: -3.0152056, z: 91.93618}
+  m_LocalPosition: {x: -120.503685, y: -1.1152055, z: 90.965225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26784,246 +26786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7110d9649b2358d47bbb10a9b56ab64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overrideAnimatorController: 1
-  runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
-    type: 2}
-  <StateNameHash>k__BackingField: 0
-  timelineManager: {fileID: 0}
-  <CharacterActor>k__BackingField: {fileID: 0}
-  CharacterBrain: {fileID: 0}
-  <CharacterStateController>k__BackingField: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
-    baseSpeedLimit: 6
-    canRun: 1
-    runInputMode: 1
-    boostSpeedLimit: 10
-    stableGroundedAcceleration: 50
-    stableGroundedDeceleration: 40
-    stableGroundedDeceleration_Dash: 10
-    stableGroundedAngleAccelerationBoost:
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - time: 180
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    unstableGroundedAcceleration: 10
-    unstableGroundedDeceleration: 2
-    unstableGroundedAngleAccelerationBoost:
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    notGroundedAcceleration: 20
-    notGroundedDeceleration: 5
-    notGroundedAngleAccelerationBoost:
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
-    useGravity: 1
-    canJump: 1
-    autoCalculate: 1
-    jumpApexHeight: 2.25
-    jumpApexDuration: 0.5
-    jumpSpeed: 10
-    gravity: 10
-    cancelJumpOnRelease: 1
-    cancelJumpMultiplier: 0.5
-    cancelJumpMinTime: 0.1
-    cancelJumpMaxTime: 0.3
-    preGroundedJumpTime: 0.2
-    postGroundedJumpTime: 0.1
-    availableNotGroundedJumps: 1
-    canJumpOnUnstableGround: 0
-    canJumpDown: 1
-    filterByTag: 0
-    jumpDownTag: JumpDown
-    jumpDownDistance: 0.05
-    jumpDownVerticalVelocity: 0.5
-  IsPlayer: 0
-  planarMovementParameters:
-    baseSpeedLimit: 6
-    canRun: 1
-    runInputMode: 1
-    boostSpeedLimit: 10
-    stableGroundedAcceleration: 50
-    stableGroundedDeceleration: 40
-    stableGroundedDeceleration_Dash: 15
-    stableGroundedAngleAccelerationBoost:
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - time: 180
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    unstableGroundedAcceleration: 10
-    unstableGroundedDeceleration: 2
-    unstableGroundedAngleAccelerationBoost:
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    notGroundedAcceleration: 20
-    notGroundedDeceleration: 5
-    notGroundedAngleAccelerationBoost:
-      m_Curve:
-      - time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  verticalMovementParameters:
-    useGravity: 1
-    canJump: 1
-    autoCalculate: 1
-    jumpApexHeight: 2.25
-    jumpApexDuration: 0.5
-    jumpSpeed: 9
-    gravity: 18
-    cancelJumpOnRelease: 1
-    cancelJumpMultiplier: 0.5
-    cancelJumpMinTime: 0.1
-    cancelJumpMaxTime: 0.3
-    preGroundedJumpTime: 0.2
-    postGroundedJumpTime: 0.1
-    availableNotGroundedJumps: 1
-    canJumpOnUnstableGround: 0
-    canJumpDown: 1
-    filterByTag: 0
-    jumpDownTag: JumpDown
-    jumpDownDistance: 0.05
-    jumpDownVerticalVelocity: 0.5
-  crouchParameters:
-    enableCrouch: 1
-    notGroundedCrouch: 0
-    heightRatio: 0.75
-    speedMultiplier: 0.3
-    inputMode: 1
-    notGroundedReference: 0
-    sizeLerpSpeed: 8
-  lookingDirectionParameters:
-    changeLookingDirection: 1
-    speed: 10
-    lookingDirectionMode: 0
-    target: {fileID: 0}
-    stableGroundedLookingDirectionMode: 1
-    unstableGroundedLookingDirectionMode: 0
-    notGroundedLookingDirectionMode: 1
-  materialController: {fileID: 0}
-  notGroundedJumpsLeft: 0
-  isAllowedToCancelJump: 0
-  wantToRun: 0
-  currentPlanarSpeedLimit: 0
-  groundedJumpAvailable: 1
-  jumpDirection: {x: 0, y: 0, z: 0}
-  targetLookingDirection: {x: 0, y: 0, z: 0}
-  targetHeight: 1
-  wantToCrouch: 0
-  isCrouched: 0
-  currentMotion:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  reducedAirControlFlag: 0
-  reducedAirControlInitialTime: 0
-  reductionDuration: 0.5
 --- !u!114 &1983870474
 MonoBehaviour:
   m_ObjectHideFlags: 0

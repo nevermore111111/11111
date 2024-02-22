@@ -44,7 +44,6 @@ public class StartPlay : CharacterState
             actorOnlyOnce = false;  
         }
         BaseProcessVelocity(dt);
-        Debug.Log(CharacterActor.Velocity);
    }
     public void ChangeState()
     {
