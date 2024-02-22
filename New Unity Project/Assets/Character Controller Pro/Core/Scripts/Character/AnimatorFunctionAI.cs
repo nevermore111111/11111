@@ -50,7 +50,10 @@ public class AnimatorFunctionAI : MonoBehaviour
         animationConfig = DataLoad.Instance.animationConfig;
     }
 
+    public void NormalIdle()
+    {
 
+    }
     public void AttackEnd()
     {
         characterActor.Animator.speed = 1f;

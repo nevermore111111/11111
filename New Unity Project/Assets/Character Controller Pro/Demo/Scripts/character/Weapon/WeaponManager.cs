@@ -21,7 +21,7 @@ public class WeaponManager : MonoBehaviour
     Detection[] detections;    //这个武器的所有探测器
     public WeaponDetector[] ActiveWeaponDetectors;//这个武器当前激活的探测器
     public bool isOnDetection;  //是否开启检测
-    CharacterActor characterActor;
+    //CharacterActor characterActor;
     public bool isHited;
     private CinemachineImpulseSource impulseSource;
     Impulse impulse;
@@ -34,8 +34,6 @@ public class WeaponManager : MonoBehaviour
     /// 这个配置CurrentAnimConfig.AttackDirection，配置相对于characteractor的local方向，在写入时已经转化成了世界坐标
     /// </summary>
     public Vector3 WeaponWorldDirection;
-    private int frameCount = 0;
-    private Vector3 previousWeaponPosition;
     public CharacterInfo weaponOwner;
     public WeaponData weaponData;
     public bool isNeedUpdateDirection = false;
@@ -44,7 +42,7 @@ public class WeaponManager : MonoBehaviour
     private void Awake()
     {
         impulseSource = GetComponent<CinemachineImpulseSource>();
-        characterActor = GetComponentInParent<CharacterActor>();
+        //characterActor = GetComponentInParent<CharacterActor>();
         weaponOwner = GetComponentInParent<CharacterInfo>();
         weaponData = FindFirstObjectByType<WeaponData>();
         impulse = GetComponent<Impulse>();
@@ -222,6 +220,8 @@ var squaredNumbers = numbers.Select(x => x * x);
     /// </summary>
     public void Impluse()
     {
+        Debug.Log("暂时不播放震动");  
+        return;
         if (weaponOwner is MainCharacter)
         {
             WeaponNum weaponNum = new WeaponNum();
@@ -234,7 +234,6 @@ var squaredNumbers = numbers.Select(x => x * x);
             {
                 //使用dotween的shake
                 CameraShakeManager.Instance.Shake(targetShakeDirection, weaponNum.Strength, weaponNum.Frequence, weaponNum.Duration);
-
             }
             else
             {

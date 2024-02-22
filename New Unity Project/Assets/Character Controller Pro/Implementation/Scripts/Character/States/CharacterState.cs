@@ -1,7 +1,8 @@
 ﻿using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.Utilities;
-using RootMotion;
+using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -287,6 +288,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
             Vector3 targetPlanarVelocity = default;
 
             SetMotionValues(targetPlanarVelocity);
+
 
             float acceleration;
             acceleration = PlanarMovementProperties.deceleration;

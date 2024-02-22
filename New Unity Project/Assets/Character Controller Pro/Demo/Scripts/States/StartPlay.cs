@@ -24,7 +24,6 @@ public class StartPlay : CharacterState
     }
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
-       
 
     }
     override public void CheckExitTransition()
@@ -44,7 +43,9 @@ public class StartPlay : CharacterState
             CharacterActor.Animator.Play("GhostSamurai_APose_Equip02_Root");
             actorOnlyOnce = false;  
         }
-    }
+        BaseProcessVelocity(dt);
+        Debug.Log(CharacterActor.Velocity);
+   }
     public void ChangeState()
     {
         changeState = true;

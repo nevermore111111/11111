@@ -103,7 +103,6 @@ public class MainCharacter : CharacterInfo
         //TimeScaleManager.Instance.SetTimeScale(fadeInDuration, fadeOutDuration, duration, targetTimeScale);
         //减速自身和目标的速度。
         if (currentHit == 3)
-            Debug.Log(Time.time);
         await TimeScaleManager.Instance.SetAnimatorSpeed(fadeInDuration, fadeOutDuration, duration, targetTimeScale, new List<Animator> { characterActor.Animator, selectEnemy?.characterActor?.Animator });
         if (currentHit == 3)
             Debug.Log(Time.time);

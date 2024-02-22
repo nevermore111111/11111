@@ -139,6 +139,8 @@ public class TimeScaleManager : MonoBehaviour
     }
     public async UniTask SetAnimatorSpeed(float fadeInTime, float fadeOutTime, float duration, float targetSpeed, List<Animator> animators, int changePriority = 0)
     {
+        Debug.Log("暂时不做时停");
+        return;
         foreach (var animator in animators)
         {
             if (animator != null)

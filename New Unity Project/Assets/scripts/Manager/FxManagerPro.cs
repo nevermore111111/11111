@@ -69,6 +69,8 @@ public class FxManagerPro : MonoBehaviour
     /// <param name="rotation"></param>
     public void PlayFx(string fxName, Vector3 position, Quaternion rotation)
     {
+        Debug.Log("暂时不播放特效");
+        return;
         if (fxDictionary.ContainsKey(fxName))
         {
             GameObject fxInstance = Instantiate(fxDictionary[fxName], position, rotation);

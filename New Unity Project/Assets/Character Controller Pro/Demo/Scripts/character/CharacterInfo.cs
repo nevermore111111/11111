@@ -71,7 +71,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
         hitBox = GetComponentInChildren<AgetHitBox>();
         characterActor = GetComponentInParent<CharacterActor>();
         CharacterStateController = this.transform.parent?.GetComponentInChildren<CharacterStateController>();
-        Hitted = characterActor.stateController.GetState<Hitted>() as Hitted;
+        Hitted = characterActor?.stateController.GetState<Hitted>() as Hitted;
     }
 
     abstract public void HitOther(WeaponManager weaponManager);
