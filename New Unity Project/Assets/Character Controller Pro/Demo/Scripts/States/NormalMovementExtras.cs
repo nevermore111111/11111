@@ -8,7 +8,6 @@ using Unity.VisualScripting;
 
 namespace Lightbug.CharacterControllerPro.Demo
 {
-
     [System.Serializable]
     public class PlanarMovementParameters
     {
@@ -277,7 +276,6 @@ namespace Lightbug.CharacterControllerPro.Demo
     {
         public bool changeLookingDirection = true;
 
-
         [Header("Lerp properties")]
 
         public float speed = 10f;
@@ -314,8 +312,6 @@ namespace Lightbug.CharacterControllerPro.Demo
             Velocity,
             Input
         }
-
-
 
     }
 

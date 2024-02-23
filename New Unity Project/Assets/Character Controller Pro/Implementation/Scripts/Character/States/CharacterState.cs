@@ -1,4 +1,5 @@
-﻿using Lightbug.CharacterControllerPro.Core;
+﻿using JetBrains.Annotations;
+using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.Utilities;
 using Sirenix.OdinInspector;
@@ -8,9 +9,6 @@ using UnityEngine;
 
 namespace Lightbug.CharacterControllerPro.Implementation
 {
-
-
-
     /// <summary>
     /// This class represents a state, that is, a basic element used by the character state controller (finite state machine).
     /// </summary>
@@ -130,7 +128,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
             CharacterActor = this.GetComponentInBranch<CharacterActor>();
             CharacterStateController = this.GetComponentInBranch<CharacterActor, CharacterStateController>();
             CharacterBrain = this.GetComponentInBranch<CharacterActor, CharacterBrain>();
-            if (isActiveAutoHandleVelocity)
+            if (isActiveBaseAutoHandleVelocity)
             {
                 Debug.Log($"{CharacterActor.name}的这个状态{GetType().Name}启用了自动调整位置");
             }
@@ -261,23 +259,134 @@ namespace Lightbug.CharacterControllerPro.Implementation
         /// <param name="dt"></param>
         public void BaseProcessVelocity(float dt)
         {
-            if (isActiveAutoHandleVelocity)
+            if (isActiveBaseAutoHandleVelocity)
             {
                 ProcessVerticalMovement(dt);
                 ProcessPlanarMovement(dt);
             }
         }
+
+
+        public void BaseProcessRotation(float dt)
+        {
+            if (isActiveAutoBaseHandleRotation)
+            {
+
+            }
+        }
+        [ShowIf("IsShowBaseToggle")]
+        public bool isActiveAutoBaseHandleRotation = false;
+        [ShowIf("IsShowRotatePara")]
+        public LookingDirectionParameters lookingDirectionParameters;
+
+        protected Vector3 targetLookingDirection;
+        public bool IsShowBaseToggle()
+        {
+            return this is not NormalMovement;
+        }
+        public bool IsShowRotatePara()
+        {
+            return isActiveAutoBaseHandleRotation || (this is NormalMovement);
+        }
+
+        protected virtual void HandleLookingDirection(float dt)
+        {
+            /*这段代码实现了角色的朝向控制功能，包括三种模式：Movement、ExternalReference、Target。
+
+              在Movement模式下，根据角色的状态（NotGrounded、StableGrounded、UnstableGrounded）设置目标朝向。在ExternalReference模式下，将角色的目标朝向设置为MovementReferenceForward，即角色应朝向的参考方向。在Target模式下，将角色的目标朝向设置为目标位置与角色位置的向量。
+
+              在代码中，使用SetTargetLookingDirection()函数设置目标朝向，并通过Quaternion计算出角色当前帧应该旋转的角度。最后，根据角色是否为2D游戏，使用不同的方式设置角色的朝向。如果是2D游戏，则直接设置角色的Yaw值为目标朝向的X值；如果是3D游戏，则将当前帧旋转的角度应用到角色的Forward向量上。*/
+            if (!lookingDirectionParameters.changeLookingDirection)
+                return;
+
+            switch (lookingDirectionParameters.lookingDirectionMode)
+            {
+                case LookingDirectionParameters.LookingDirectionMode.Movement:
+
+                    switch (CharacterActor.CurrentState)
+                    {
+                        case CharacterActorState.NotGrounded:
+
+                            SetTargetLookingDirection(lookingDirectionParameters.notGroundedLookingDirectionMode);
+                            break;
+                        case CharacterActorState.StableGrounded:
+
+                            SetTargetLookingDirection(lookingDirectionParameters.stableGroundedLookingDirectionMode);
+
+                            break;
+                        case CharacterActorState.UnstableGrounded:
+
+                            SetTargetLookingDirection(lookingDirectionParameters.unstableGroundedLookingDirectionMode);
+
+                            break;
+                    }
+
+                    break;
+
+                case LookingDirectionParameters.LookingDirectionMode.ExternalReference:
+
+                    if (!CharacterActor.CharacterBody.Is2D)
+                        targetLookingDirection = CharacterStateController.MovementReferenceForward;
+
+                    break;
+
+                case LookingDirectionParameters.LookingDirectionMode.Target:
+
+                    targetLookingDirection = (lookingDirectionParameters.target.position - CharacterActor.Position);
+                    targetLookingDirection.Normalize();
+
+                    break;
+            }
+
+            float targetRoteteSpeed = lookingDirectionParameters.speed;
+            //if (IsDefense)
+            //{
+            //    targetRoteteSpeed *= defenseParameters.DefendLookDirecionLerpSpeed;
+            //}
+
+            Quaternion targetDeltaRotation = Quaternion.FromToRotation(CharacterActor.Forward, targetLookingDirection);
+            Quaternion currentDeltaRotation = Quaternion.Slerp(Quaternion.identity, targetDeltaRotation, targetRoteteSpeed * dt);
+
+            if (CharacterActor.CharacterBody.Is2D)
+                CharacterActor.SetYaw(targetLookingDirection);
+            else
+                CharacterActor.SetYaw(currentDeltaRotation * CharacterActor.Forward);
+        }
+
+        void SetTargetLookingDirection(LookingDirectionParameters.LookingDirectionMovementSource lookingDirectionMode)
+        {
+            if (lookingDirectionMode == LookingDirectionParameters.LookingDirectionMovementSource.Input)
+            {
+                if (CharacterStateController.InputMovementReference != Vector3.zero)
+                    targetLookingDirection = CharacterStateController.InputMovementReference;
+                else
+                    targetLookingDirection = CharacterActor.Forward;
+            }
+            else
+            {
+                if (CharacterActor.PlanarVelocity != Vector3.zero)
+                    targetLookingDirection = Vector3.ProjectOnPlane(CharacterActor.PlanarVelocity, CharacterActor.Up);
+                else
+                    targetLookingDirection = CharacterActor.Forward;
+            }
+        }
+
         //————————————————————————————————————————写一个通用方法—————————————handleVelocity——————调节每个状态的速度——————————————————————————————
         //————————————————————————————————————————写一个通用方法—————————————handleVelocity——————调节每个状态的速度——————————————————————————————
         //————————————————————————————————————————写一个通用方法—————————————handleVelocity——————调节每个状态的速度——————————————————————————————
-        [Header("开启显示自动调节速度的参数，只是显示，还要去代码里调用具体的方法")]
-        public bool isActiveAutoHandleVelocity = false;
-        [ShowIf("isActiveAutoHandleVelocity")]
-        public PlanarMovementParameters PlanarMovementParameters;
-        [ShowIf("isActiveAutoHandleVelocity")]
-        public PlanarMovementParameters.PlanarMovementProperties PlanarMovementProperties;
-        [ShowIf("isActiveAutoHandleVelocity")]
-        public VerticalMovementParameters VerticalMovementParameters;
+        [ShowIf("IsShowBaseToggle")]
+        public bool isActiveBaseAutoHandleVelocity = false;
+        [ShowIf("IsShowMovePara")]
+        public PlanarMovementParameters planarMovementParameters;
+        [HideInInspector]
+        protected PlanarMovementParameters.PlanarMovementProperties currentMotion;
+        [ShowIf("IsShowMovePara")]
+        public VerticalMovementParameters verticalMovementParameters;
+
+        public bool IsShowMovePara()
+        {
+            return isActiveBaseAutoHandleVelocity||(this is NormalMovement);
+        }
 
         protected virtual void ProcessVerticalMovement(float dt)
         {
@@ -291,7 +400,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
 
             float acceleration;
-            acceleration = PlanarMovementProperties.deceleration;
+            acceleration = currentMotion.deceleration;
 
             CharacterActor.PlanarVelocity = Vector3.MoveTowards(
                 CharacterActor.PlanarVelocity,
@@ -309,20 +418,20 @@ namespace Lightbug.CharacterControllerPro.Implementation
             switch (CharacterActor.CurrentState)
             {
                 case CharacterActorState.StableGrounded:
-                    PlanarMovementProperties.acceleration = PlanarMovementParameters.stableGroundedAcceleration;
-                    PlanarMovementProperties.deceleration = PlanarMovementParameters.stableGroundedDeceleration;
-                    PlanarMovementProperties.angleAccelerationMultiplier = PlanarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
+                    currentMotion.acceleration = planarMovementParameters.stableGroundedAcceleration;
+                    currentMotion.deceleration = planarMovementParameters.stableGroundedDeceleration;
+                    currentMotion.angleAccelerationMultiplier = planarMovementParameters.stableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
 
                     break;
                 case CharacterActorState.UnstableGrounded:
-                    PlanarMovementProperties.acceleration = PlanarMovementParameters.unstableGroundedAcceleration;
-                    PlanarMovementProperties.deceleration = PlanarMovementParameters.unstableGroundedDeceleration;
-                    PlanarMovementProperties.angleAccelerationMultiplier = PlanarMovementParameters.unstableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
+                    currentMotion.acceleration = planarMovementParameters.unstableGroundedAcceleration;
+                    currentMotion.deceleration = planarMovementParameters.unstableGroundedDeceleration;
+                    currentMotion.angleAccelerationMultiplier = planarMovementParameters.unstableGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
                     break;
                 case CharacterActorState.NotGrounded:
-                    PlanarMovementProperties.acceleration = PlanarMovementParameters.notGroundedAcceleration;
-                    PlanarMovementProperties.deceleration = PlanarMovementParameters.notGroundedDeceleration;
-                    PlanarMovementProperties.angleAccelerationMultiplier = PlanarMovementParameters.notGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
+                    currentMotion.acceleration = planarMovementParameters.notGroundedAcceleration;
+                    currentMotion.deceleration = planarMovementParameters.notGroundedDeceleration;
+                    currentMotion.angleAccelerationMultiplier = planarMovementParameters.notGroundedAngleAccelerationBoost.Evaluate(angleCurrentTargetVelocity);
                     break;
 
             }
@@ -330,14 +439,14 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
         protected virtual void ProcessGravity(float dt)
         {
-            if (!VerticalMovementParameters.useGravity)
+            if (!verticalMovementParameters.useGravity)
                 return;
-            VerticalMovementParameters.UpdateParameters();
+            verticalMovementParameters.UpdateParameters();
 
 
             float gravityMultiplier = 1f;
 
-            float gravity = gravityMultiplier * VerticalMovementParameters.gravity;
+            float gravity = gravityMultiplier * verticalMovementParameters.gravity;
 
             if (!CharacterActor.IsStable)
                 CharacterActor.VerticalVelocity += CustomUtilities.Multiply(-CharacterActor.Up, gravity, dt);

@@ -17,15 +17,15 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         [Space(10)]
 
-        public PlanarMovementParameters planarMovementParameters = new PlanarMovementParameters();
+        //public PlanarMovementParameters planarMovementParameters = new PlanarMovementParameters();
 
-        public VerticalMovementParameters verticalMovementParameters = new VerticalMovementParameters();
+        //public VerticalMovementParameters verticalMovementParameters = new VerticalMovementParameters();
 
         public CrouchParameters crouchParameters = new CrouchParameters();
 
         public DefenseParameters defenseParameters = new DefenseParameters();
 
-        public LookingDirectionParameters lookingDirectionParameters = new LookingDirectionParameters();
+        //public LookingDirectionParameters lookingDirectionParameters = new LookingDirectionParameters();
 
         //自己加
         private Attack attack;
@@ -69,7 +69,6 @@ namespace Lightbug.CharacterControllerPro.Demo
         protected bool groundedJumpAvailable = true;
         protected Vector3 jumpDirection = default(Vector3);
 
-        protected Vector3 targetLookingDirection = default(Vector3);
         protected float targetHeight = 1f;
 
         protected bool wantToCrouch = false;
@@ -114,7 +113,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         }
 
 
-        public PlanarMovementParameters.PlanarMovementProperties currentMotion = new PlanarMovementParameters.PlanarMovementProperties();
+        //public PlanarMovementParameters.PlanarMovementProperties currentMotion = new PlanarMovementParameters.PlanarMovementProperties();
         bool reducedAirControlFlag = false;
         float reducedAirControlInitialTime = 0f;
         float reductionDuration = 0.5f;
@@ -533,7 +532,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
 
         }
-
+        [HideInInspector]
         public bool moving = false; // 初始状态为未移动
 
         private float startTime; // 移动开始时间
@@ -952,7 +951,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             HandleLookingDirection(dt);
         }
 
-        void HandleLookingDirection(float dt)
+        protected  void HandleLookingDirection(float dt)
         {
             /*这段代码实现了角色的朝向控制功能，包括三种模式：Movement、ExternalReference、Target。
 
@@ -1202,7 +1201,9 @@ namespace Lightbug.CharacterControllerPro.Demo
         //————————————————————————————————————————————————————————————玩家逻辑——————————————————————————————————————————————————————————————————
 
         private float buttonDownTime;
+        [HideInInspector]
         public bool preEvade;
+        [HideInInspector]
         public Vector2 evadeVec2;
 
         private void Update()
