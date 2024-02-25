@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
@@ -290,22 +291,13 @@ namespace Rusk
                 characterActor.Animator.SetFloat("xInput", input.x);
                 characterActor.Animator.SetFloat("yInput", input.y);
             }
-            
-            //就在这里修改 闪避的时间 
-            float addTime = 0f;
-            if(Mathf.Abs(input.y)>0.3)
-            {
-                if(input.y>0)
-                {
-                    addTime = 0.1f*input.y;
-                }
-                else
-                {
-                    addTime = 0.4f * Mathf.Abs(input.y);
-                }
-            }
+            Vector3 LocalDirection = characterActor.transform.InverseTransformDirection(evadeDirection).ProjectOntoPlane(Vector3.up);
+            //Debug.Log(LocalDirection);
+            //就在这里修改 闪避的时间 ,后退的时候，时间稍微长一点
+            float addTime =  LocalDirection.z < 0? Mathf.Abs(-0.15f * LocalDirection.z) :  0f;
 
             duration += addTime;
+            //Debug.Log(duration);
         }
 
         public override void ExitBehaviour(float dt, CharacterState toState)
@@ -319,7 +311,7 @@ namespace Rusk
 
         public override void UpdateBehaviour(float dt)
         {
-            Vector3 dashVelocity = initialVelocity * currentSpeedMultiplier * movementCurve.Evaluate(dashCursor) * evadeDirection;
+            Vector3 dashVelocity = initialVelocity * currentSpeedMultiplier * movementCurve.Evaluate(dashCursor*0.8f) * evadeDirection;
 
             CharacterActor.Velocity = dashVelocity;
 
