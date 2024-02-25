@@ -862,7 +862,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100322558}
-  m_LocalRotation: {x: 0.059331283, y: -0.75825626, z: 0.06969534, w: 0.64549977}
+  m_LocalRotation: {x: 0.059331276, y: -0.75825626, z: 0.06969532, w: 0.6454997}
   m_LocalPosition: {x: 3.929512, y: 0.39202702, z: 6.6251297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -987,7 +987,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102522144}
-  m_LocalRotation: {x: 0.073834196, y: -0.120175675, z: 0.008963039, w: 0.98996264}
+  m_LocalRotation: {x: 0.07383415, y: -0.1201764, z: 0.0089630885, w: 0.9899626}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1503,7 +1503,7 @@ MonoBehaviour:
   canBeExecuted: 0
   allReceives: []
   allSkillReceivers: []
-  attackInfo:
+  attackAndDefendInfo:
     attackMode: 0
     isAtttack: 0
     combo: 0
@@ -1512,6 +1512,10 @@ MonoBehaviour:
     canChangeState: 0
     maxCombo: 0
     useGravity: 0
+    weaponManagers: []
+    defendStartTime: 0
+    perfectDefendTime: 400
+    currentDenfendKind: 0
   targetGroupSize: 2
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -2836,6 +2840,8 @@ MonoBehaviour:
     spAttack:
       value: 0
     defend:
+      value: 0
+    evade:
       value: 0
     pitch:
       value: 0
@@ -4320,116 +4326,16 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
-    baseSpeedLimit: 6
-    canRun: 1
-    runInputMode: 1
-    boostSpeedLimit: 10
-    stableGroundedAcceleration: 50
-    stableGroundedDeceleration: 40
-    stableGroundedDeceleration_Dash: 10
-    stableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    unstableGroundedAcceleration: 10
-    unstableGroundedDeceleration: 2
-    unstableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    notGroundedAcceleration: 20
-    notGroundedDeceleration: 5
-    notGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
-    useGravity: 1
-    canJump: 1
-    autoCalculate: 1
-    jumpApexHeight: 2.25
-    jumpApexDuration: 0.5
-    jumpSpeed: 10
-    gravity: 10
-    cancelJumpOnRelease: 1
-    cancelJumpMultiplier: 0.5
-    cancelJumpMinTime: 0.1
-    cancelJumpMaxTime: 0.3
-    preGroundedJumpTime: 0.2
-    postGroundedJumpTime: 0.1
-    availableNotGroundedJumps: 1
-    canJumpOnUnstableGround: 0
-    canJumpDown: 1
-    filterByTag: 0
-    jumpDownTag: JumpDown
-    jumpDownDistance: 0.05
-    jumpDownVerticalVelocity: 0.5
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 0
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
   planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
@@ -4574,21 +4480,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0
-    defendStartTime: 0
-    currentDenfendKind: 3
-  lookingDirectionParameters:
-    changeLookingDirection: 1
-    speed: 10
-    lookingDirectionMode: 0
-    target: {fileID: 0}
-    stableGroundedLookingDirectionMode: 0
-    unstableGroundedLookingDirectionMode: 0
-    notGroundedLookingDirectionMode: 1
-  currentMotion:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
   moving: 0
   preEvade: 0
   evadeVec2: {x: 0, y: 0}
@@ -4905,116 +4796,16 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
-    baseSpeedLimit: 6
-    canRun: 1
-    runInputMode: 1
-    boostSpeedLimit: 10
-    stableGroundedAcceleration: 50
-    stableGroundedDeceleration: 40
-    stableGroundedDeceleration_Dash: 10
-    stableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    unstableGroundedAcceleration: 10
-    unstableGroundedDeceleration: 2
-    unstableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    notGroundedAcceleration: 20
-    notGroundedDeceleration: 5
-    notGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
-    useGravity: 1
-    canJump: 1
-    autoCalculate: 1
-    jumpApexHeight: 2.25
-    jumpApexDuration: 0.5
-    jumpSpeed: 10
-    gravity: 10
-    cancelJumpOnRelease: 1
-    cancelJumpMultiplier: 0.5
-    cancelJumpMinTime: 0.1
-    cancelJumpMaxTime: 0.3
-    preGroundedJumpTime: 0.2
-    postGroundedJumpTime: 0.1
-    availableNotGroundedJumps: 1
-    canJumpOnUnstableGround: 0
-    canJumpDown: 1
-    filterByTag: 0
-    jumpDownTag: JumpDown
-    jumpDownDistance: 0.05
-    jumpDownVerticalVelocity: 0.5
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 0
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
   planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
@@ -5159,21 +4950,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0
-    defendStartTime: 0
-    currentDenfendKind: 3
-  lookingDirectionParameters:
-    changeLookingDirection: 1
-    speed: 10
-    lookingDirectionMode: 0
-    target: {fileID: 0}
-    stableGroundedLookingDirectionMode: 0
-    unstableGroundedLookingDirectionMode: 0
-    notGroundedLookingDirectionMode: 1
-  currentMotion:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
   moving: 0
   preEvade: 0
   evadeVec2: {x: 0, y: 0}
@@ -5262,6 +5038,8 @@ MonoBehaviour:
       value: 0
     defend:
       value: 0
+    evade:
+      value: 0
     pitch:
       value: 0
     roll:
@@ -5294,6 +5072,8 @@ MonoBehaviour:
         value: 0
       defend:
         value: 0
+      evade:
+        value: 0
       pitch:
         value: 0
       roll:
@@ -5324,6 +5104,8 @@ MonoBehaviour:
       spAttack:
         value: 0
       defend:
+        value: 0
+      evade:
         value: 0
       pitch:
         value: 0
@@ -5370,6 +5152,8 @@ MonoBehaviour:
     spAttack:
       value: 0
     defend:
+      value: 0
+    evade:
       value: 0
     pitch:
       value: 0
@@ -5940,7 +5724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 0.8628036, z: -4.597832}
+  m_FollowOffset: {x: 0, y: 0.1, z: -4}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -6752,7 +6536,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 444161945}
-  m_LocalRotation: {x: 0.045958415, y: -0.7595363, z: 0.053986467, w: 0.64658946}
+  m_LocalRotation: {x: 0.045958415, y: -0.7595363, z: 0.05398647, w: 0.6465894}
   m_LocalPosition: {x: 3.929512, y: 0.39202702, z: 6.6251297}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6856,116 +6640,16 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
-    baseSpeedLimit: 6
-    canRun: 1
-    runInputMode: 1
-    boostSpeedLimit: 10
-    stableGroundedAcceleration: 50
-    stableGroundedDeceleration: 40
-    stableGroundedDeceleration_Dash: 10
-    stableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    unstableGroundedAcceleration: 10
-    unstableGroundedDeceleration: 2
-    unstableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    notGroundedAcceleration: 20
-    notGroundedDeceleration: 5
-    notGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
-    useGravity: 1
-    canJump: 1
-    autoCalculate: 1
-    jumpApexHeight: 2.25
-    jumpApexDuration: 0.5
-    jumpSpeed: 10
-    gravity: 10
-    cancelJumpOnRelease: 1
-    cancelJumpMultiplier: 0.5
-    cancelJumpMinTime: 0.1
-    cancelJumpMaxTime: 0.3
-    preGroundedJumpTime: 0.2
-    postGroundedJumpTime: 0.1
-    availableNotGroundedJumps: 1
-    canJumpOnUnstableGround: 0
-    canJumpDown: 1
-    filterByTag: 0
-    jumpDownTag: JumpDown
-    jumpDownDistance: 0.05
-    jumpDownVerticalVelocity: 0.5
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 0
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
   planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
@@ -7110,21 +6794,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0
-    defendStartTime: 0
-    currentDenfendKind: 3
-  lookingDirectionParameters:
-    changeLookingDirection: 1
-    speed: 10
-    lookingDirectionMode: 0
-    target: {fileID: 0}
-    stableGroundedLookingDirectionMode: 0
-    unstableGroundedLookingDirectionMode: 0
-    notGroundedLookingDirectionMode: 1
-  currentMotion:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
   moving: 0
   preEvade: 0
   evadeVec2: {x: 0, y: 0}
@@ -8119,7 +7788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 0.8628036, z: -4.597832}
+  m_FollowOffset: {x: 0, y: 0.1, z: -4}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -8491,6 +8160,8 @@ MonoBehaviour:
       value: 0
     defend:
       value: 0
+    evade:
+      value: 0
     pitch:
       value: 0
     roll:
@@ -8541,6 +8212,8 @@ MonoBehaviour:
     spAttack:
       value: 0
     defend:
+      value: 0
+    evade:
       value: 0
     pitch:
       value: 0
@@ -9004,8 +8677,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: -0.0416889, y: -0.12040334, z: -0.0050607976, w: 0.9918364}
-  m_LocalPosition: {x: -0.096221924, y: -1.1371963, z: 0.39048767}
+  m_LocalRotation: {x: -0.13850148, y: -0.11933135, z: -0.016813345, w: 0.9830029}
+  m_LocalPosition: {x: -0.23926544, y: -1.9000001, z: 0.9709549}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9190,7 +8863,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605997566}
-  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
+  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10188,6 +9861,8 @@ MonoBehaviour:
       value: 0
     defend:
       value: 0
+    evade:
+      value: 0
     pitch:
       value: 0
     roll:
@@ -10239,6 +9914,8 @@ MonoBehaviour:
     spAttack:
       value: 0
     defend:
+      value: 0
+    evade:
       value: 0
     pitch:
       value: 0
@@ -10383,8 +10060,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811303954}
-  m_LocalRotation: {x: -0.0416889, y: -0.12040334, z: -0.0050607976, w: 0.9918364}
-  m_LocalPosition: {x: -0.096221924, y: -1.1371963, z: 0.39048767}
+  m_LocalRotation: {x: -0.13850148, y: -0.11933135, z: -0.016813345, w: 0.9830029}
+  m_LocalPosition: {x: -0.23926544, y: -1.9000001, z: 0.9709549}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10829,7 +10506,7 @@ MonoBehaviour:
   canBeExecuted: 0
   allReceives: []
   allSkillReceivers: []
-  attackInfo:
+  attackAndDefendInfo:
     attackMode: 0
     isAtttack: 0
     combo: 0
@@ -10838,6 +10515,10 @@ MonoBehaviour:
     canChangeState: 0
     maxCombo: 0
     useGravity: 0
+    weaponManagers: []
+    defendStartTime: 0
+    perfectDefendTime: 400
+    currentDenfendKind: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -11299,8 +10980,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234813, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.062047, z: -5.874625}
+  m_LocalRotation: {x: 0.039234836, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.0620477, z: -5.874625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12040,6 +11721,8 @@ MonoBehaviour:
       value: 0
     defend:
       value: 0
+    evade:
+      value: 0
     pitch:
       value: 0
     roll:
@@ -12072,6 +11755,8 @@ MonoBehaviour:
         value: 0
       defend:
         value: 0
+      evade:
+        value: 0
       pitch:
         value: 0
       roll:
@@ -12102,6 +11787,8 @@ MonoBehaviour:
       spAttack:
         value: 0
       defend:
+        value: 0
+      evade:
         value: 0
       pitch:
         value: 0
@@ -12134,6 +11821,8 @@ MonoBehaviour:
         value: 0
       defend:
         value: 0
+      evade:
+        value: 0
       pitch:
         value: 0
       roll:
@@ -12165,6 +11854,8 @@ MonoBehaviour:
         value: 0
       defend:
         value: 0
+      evade:
+        value: 0
       pitch:
         value: 0
       roll:
@@ -12195,6 +11886,8 @@ MonoBehaviour:
       spAttack:
         value: 0
       defend:
+        value: 0
+      evade:
         value: 0
       pitch:
         value: 0
@@ -12227,6 +11920,8 @@ MonoBehaviour:
         value: 0
       defend:
         value: 0
+      evade:
+        value: 0
       pitch:
         value: 0
       roll:
@@ -12258,6 +11953,8 @@ MonoBehaviour:
         value: 0
       defend:
         value: 0
+      evade:
+        value: 0
       pitch:
         value: 0
       roll:
@@ -12288,6 +11985,8 @@ MonoBehaviour:
       spAttack:
         value: 0
       defend:
+        value: 0
+      evade:
         value: 0
       pitch:
         value: 0
@@ -12334,6 +12033,8 @@ MonoBehaviour:
     spAttack:
       value: 0
     defend:
+      value: 0
+    evade:
       value: 0
     pitch:
       value: 0
@@ -15315,6 +15016,8 @@ MonoBehaviour:
       value: 0
     defend:
       value: 0
+    evade:
+      value: 0
     pitch:
       value: 0
     roll:
@@ -15347,6 +15050,8 @@ MonoBehaviour:
         value: 0
       defend:
         value: 0
+      evade:
+        value: 0
       pitch:
         value: 0
       roll:
@@ -15377,6 +15082,8 @@ MonoBehaviour:
       spAttack:
         value: 0
       defend:
+        value: 0
+      evade:
         value: 0
       pitch:
         value: 0
@@ -15423,6 +15130,8 @@ MonoBehaviour:
     spAttack:
       value: 0
     defend:
+      value: 0
+    evade:
       value: 0
     pitch:
       value: 0
@@ -16943,8 +16652,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 449d61f761a3f224e9bd26732f0083e2,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -17028,11 +16746,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -17086,8 +16800,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 3e01f914ef0edd349a9e2792bea8a20d,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -17171,11 +16894,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -17243,8 +16962,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: ca911fc8986930847a392d34ecdf91e3,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -17328,11 +17056,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -17386,116 +17110,16 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 4c77323136b9524478f3a5c86ed70c71,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
-    baseSpeedLimit: 6
-    canRun: 1
-    runInputMode: 1
-    boostSpeedLimit: 10
-    stableGroundedAcceleration: 50
-    stableGroundedDeceleration: 40
-    stableGroundedDeceleration_Dash: 10
-    stableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    unstableGroundedAcceleration: 10
-    unstableGroundedDeceleration: 2
-    unstableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    notGroundedAcceleration: 20
-    notGroundedDeceleration: 5
-    notGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
-    useGravity: 1
-    canJump: 1
-    autoCalculate: 1
-    jumpApexHeight: 2.25
-    jumpApexDuration: 0.5
-    jumpSpeed: 10
-    gravity: 10
-    cancelJumpOnRelease: 1
-    cancelJumpMultiplier: 0.5
-    cancelJumpMinTime: 0.1
-    cancelJumpMaxTime: 0.3
-    preGroundedJumpTime: 0.2
-    postGroundedJumpTime: 0.1
-    availableNotGroundedJumps: 1
-    canJumpOnUnstableGround: 0
-    canJumpDown: 1
-    filterByTag: 0
-    jumpDownTag: JumpDown
-    jumpDownDistance: 0.05
-    jumpDownVerticalVelocity: 0.5
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
   planarMovementParameters:
     baseSpeedLimit: 8
     canRun: 1
@@ -17613,7 +17237,7 @@ MonoBehaviour:
     speedMultiplier: 0.3
     DefendStopTime: 0
     DefendSpeedChangeTimePar: 0
-    DefendLookDirecionLerpSpeed: 0.08
+    DefendLookDirecionLerpSpeed: 0.8
     DefendGroundedAcceleration: 10
     DefendGroundedDeceleration: 10
     DefendAngleAccelerationBoost:
@@ -17640,21 +17264,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0
-    defendStartTime: 0
-    currentDenfendKind: 3
-  lookingDirectionParameters:
-    changeLookingDirection: 1
-    speed: 10
-    lookingDirectionMode: 0
-    target: {fileID: 0}
-    stableGroundedLookingDirectionMode: 1
-    unstableGroundedLookingDirectionMode: 0
-    notGroundedLookingDirectionMode: 1
-  currentMotion:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
   moving: 0
   preEvade: 0
   evadeVec2: {x: 0, y: 0}
@@ -17691,8 +17300,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 57934fe4f05349443be3ff02e5b20745,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -17776,11 +17394,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -17834,8 +17448,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: ac2694d39a73d6e4badd624717b0111d,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -17919,11 +17542,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -17967,8 +17586,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 4c77323136b9524478f3a5c86ed70c71,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 1
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -18052,11 +17680,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -18100,8 +17724,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 0764ec8ee685157409d02372dedb0249,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -18185,11 +17818,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -18243,8 +17872,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 4c77323136b9524478f3a5c86ed70c71,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -18328,11 +17966,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -18401,8 +18035,17 @@ MonoBehaviour:
   overrideAnimatorController: 1
   runtimeAnimatorController: {fileID: 0}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -18486,11 +18129,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -18533,8 +18172,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 4c77323136b9524478f3a5c86ed70c71,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -18618,11 +18266,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -18669,8 +18313,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 4c77323136b9524478f3a5c86ed70c71,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 1
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -18754,11 +18407,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -18796,8 +18445,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 4c77323136b9524478f3a5c86ed70c71,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -18881,11 +18539,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -19075,7 +18729,7 @@ MonoBehaviour:
   allowCharactersAsStableSurfaces: 0
   slopeLimit: 55
   useStableEdgeWhenLanding: 1
-  stepUpDistance: 0.35
+  stepUpDistance: 0.6
   stepDownDistance: 0.5
   edgeCompensation: 0
   detectGroundWhileAscending: 0
@@ -19123,7 +18777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is2D: 0
-  bodySize: {x: 0.05, y: 1.9}
+  bodySize: {x: 1, y: 1.9}
   mass: 50
 --- !u!4 &1292161159
 Transform:
@@ -19213,6 +18867,8 @@ MonoBehaviour:
       value: 0
     defend:
       value: 0
+    evade:
+      value: 0
     pitch:
       value: 0
     roll:
@@ -19245,6 +18901,8 @@ MonoBehaviour:
         value: 0
       defend:
         value: 0
+      evade:
+        value: 0
       pitch:
         value: 0
       roll:
@@ -19275,6 +18933,8 @@ MonoBehaviour:
       spAttack:
         value: 0
       defend:
+        value: 0
+      evade:
         value: 0
       pitch:
         value: 0
@@ -19321,6 +18981,8 @@ MonoBehaviour:
     spAttack:
       value: 0
     defend:
+      value: 0
+    evade:
       value: 0
     pitch:
       value: 0
@@ -19476,6 +19138,8 @@ MonoBehaviour:
       value: 0
     defend:
       value: 0
+    evade:
+      value: 0
     pitch:
       value: 0
     roll:
@@ -19527,6 +19191,8 @@ MonoBehaviour:
     spAttack:
       value: 0
     defend:
+      value: 0
+    evade:
       value: 0
     pitch:
       value: 0
@@ -19965,116 +19631,16 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
-    baseSpeedLimit: 6
-    canRun: 1
-    runInputMode: 1
-    boostSpeedLimit: 10
-    stableGroundedAcceleration: 50
-    stableGroundedDeceleration: 40
-    stableGroundedDeceleration_Dash: 10
-    stableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    unstableGroundedAcceleration: 10
-    unstableGroundedDeceleration: 2
-    unstableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    notGroundedAcceleration: 20
-    notGroundedDeceleration: 5
-    notGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
-    useGravity: 1
-    canJump: 1
-    autoCalculate: 1
-    jumpApexHeight: 2.25
-    jumpApexDuration: 0.5
-    jumpSpeed: 10
-    gravity: 10
-    cancelJumpOnRelease: 1
-    cancelJumpMultiplier: 0.5
-    cancelJumpMinTime: 0.1
-    cancelJumpMaxTime: 0.3
-    preGroundedJumpTime: 0.2
-    postGroundedJumpTime: 0.1
-    availableNotGroundedJumps: 1
-    canJumpOnUnstableGround: 0
-    canJumpDown: 1
-    filterByTag: 0
-    jumpDownTag: JumpDown
-    jumpDownDistance: 0.05
-    jumpDownVerticalVelocity: 0.5
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 0
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
   planarMovementParameters:
     baseSpeedLimit: 2
     canRun: 1
@@ -20219,21 +19785,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0
-    defendStartTime: 0
-    currentDenfendKind: 3
-  lookingDirectionParameters:
-    changeLookingDirection: 1
-    speed: 10
-    lookingDirectionMode: 0
-    target: {fileID: 0}
-    stableGroundedLookingDirectionMode: 0
-    unstableGroundedLookingDirectionMode: 0
-    notGroundedLookingDirectionMode: 1
-  currentMotion:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
   moving: 0
   preEvade: 0
   evadeVec2: {x: 0, y: 0}
@@ -21149,116 +20700,16 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
-    baseSpeedLimit: 6
-    canRun: 1
-    runInputMode: 1
-    boostSpeedLimit: 10
-    stableGroundedAcceleration: 50
-    stableGroundedDeceleration: 40
-    stableGroundedDeceleration_Dash: 10
-    stableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    unstableGroundedAcceleration: 10
-    unstableGroundedDeceleration: 2
-    unstableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    notGroundedAcceleration: 20
-    notGroundedDeceleration: 5
-    notGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
-    useGravity: 1
-    canJump: 1
-    autoCalculate: 1
-    jumpApexHeight: 2.25
-    jumpApexDuration: 0.5
-    jumpSpeed: 10
-    gravity: 10
-    cancelJumpOnRelease: 1
-    cancelJumpMultiplier: 0.5
-    cancelJumpMinTime: 0.1
-    cancelJumpMaxTime: 0.3
-    preGroundedJumpTime: 0.2
-    postGroundedJumpTime: 0.1
-    availableNotGroundedJumps: 1
-    canJumpOnUnstableGround: 0
-    canJumpDown: 1
-    filterByTag: 0
-    jumpDownTag: JumpDown
-    jumpDownDistance: 0.05
-    jumpDownVerticalVelocity: 0.5
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 0
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
   planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
@@ -21403,21 +20854,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0
-    defendStartTime: 0
-    currentDenfendKind: 3
-  lookingDirectionParameters:
-    changeLookingDirection: 1
-    speed: 10
-    lookingDirectionMode: 0
-    target: {fileID: 0}
-    stableGroundedLookingDirectionMode: 0
-    unstableGroundedLookingDirectionMode: 0
-    notGroundedLookingDirectionMode: 1
-  currentMotion:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
   moving: 0
   preEvade: 0
   evadeVec2: {x: 0, y: 0}
@@ -21453,8 +20889,17 @@ MonoBehaviour:
   overrideAnimatorController: 1
   runtimeAnimatorController: {fileID: 0}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -21538,11 +20983,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -21987,8 +21428,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498168725}
-  m_LocalRotation: {x: -0.67959577, y: 0.0035617738, z: 0.0032997045, w: 0.73357075}
-  m_LocalPosition: {x: -121.69969, y: -6.8322344, z: 95.85162}
+  m_LocalRotation: {x: -0.67959476, y: 0.0036472757, z: 0.0033789095, w: 0.73357093}
+  m_LocalPosition: {x: -121.699684, y: -6.832235, z: 95.85162}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23213,7 +22654,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689691047}
-  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
+  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -23277,116 +22718,16 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
-    baseSpeedLimit: 6
-    canRun: 1
-    runInputMode: 1
-    boostSpeedLimit: 10
-    stableGroundedAcceleration: 50
-    stableGroundedDeceleration: 40
-    stableGroundedDeceleration_Dash: 10
-    stableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    unstableGroundedAcceleration: 10
-    unstableGroundedDeceleration: 2
-    unstableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    notGroundedAcceleration: 20
-    notGroundedDeceleration: 5
-    notGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
-    useGravity: 1
-    canJump: 1
-    autoCalculate: 1
-    jumpApexHeight: 2.25
-    jumpApexDuration: 0.5
-    jumpSpeed: 10
-    gravity: 10
-    cancelJumpOnRelease: 1
-    cancelJumpMultiplier: 0.5
-    cancelJumpMinTime: 0.1
-    cancelJumpMaxTime: 0.3
-    preGroundedJumpTime: 0.2
-    postGroundedJumpTime: 0.1
-    availableNotGroundedJumps: 1
-    canJumpOnUnstableGround: 0
-    canJumpDown: 1
-    filterByTag: 0
-    jumpDownTag: JumpDown
-    jumpDownDistance: 0.05
-    jumpDownVerticalVelocity: 0.5
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 0
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
   planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
@@ -23531,21 +22872,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 0
-    defendStartTime: 0
-    currentDenfendKind: 3
-  lookingDirectionParameters:
-    changeLookingDirection: 1
-    speed: 10
-    lookingDirectionMode: 0
-    target: {fileID: 0}
-    stableGroundedLookingDirectionMode: 0
-    unstableGroundedLookingDirectionMode: 0
-    notGroundedLookingDirectionMode: 1
-  currentMotion:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
   moving: 0
   preEvade: 0
   evadeVec2: {x: 0, y: 0}
@@ -23650,7 +22976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 0.8628036, z: -4.597832}
+  m_FollowOffset: {x: 0, y: 0.1, z: -4}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -23927,7 +23253,7 @@ MonoBehaviour:
   canBeExecuted: 1
   allReceives: []
   allSkillReceivers: []
-  attackInfo:
+  attackAndDefendInfo:
     attackMode: 0
     isAtttack: 0
     combo: 0
@@ -23936,6 +23262,10 @@ MonoBehaviour:
     canChangeState: 0
     maxCombo: 0
     useGravity: 0
+    weaponManagers: []
+    defendStartTime: 0
+    perfectDefendTime: 400
+    currentDenfendKind: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -24120,8 +23450,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -24205,11 +23544,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -24230,6 +23565,7 @@ MonoBehaviour:
     jumpDownTag: JumpDown
     jumpDownDistance: 0.05
     jumpDownVerticalVelocity: 0.5
+  recoveryTime: 0.3
   CheckDrawToDebug: 0
   HittedForce: 10
   HittedDrag: 2
@@ -24249,8 +23585,17 @@ MonoBehaviour:
   overrideAnimatorController: 1
   runtimeAnimatorController: {fileID: 0}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 1
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 1
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 1
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 1
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -24334,11 +23679,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -24383,116 +23724,16 @@ MonoBehaviour:
   overrideAnimatorController: 1
   runtimeAnimatorController: {fileID: 0}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
-    baseSpeedLimit: 6
-    canRun: 1
-    runInputMode: 1
-    boostSpeedLimit: 10
-    stableGroundedAcceleration: 50
-    stableGroundedDeceleration: 40
-    stableGroundedDeceleration_Dash: 10
-    stableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 2
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    unstableGroundedAcceleration: 10
-    unstableGroundedDeceleration: 2
-    unstableGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    notGroundedAcceleration: 20
-    notGroundedDeceleration: 5
-    notGroundedAngleAccelerationBoost:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 180
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
-    useGravity: 1
-    canJump: 1
-    autoCalculate: 1
-    jumpApexHeight: 2.25
-    jumpApexDuration: 0.5
-    jumpSpeed: 10
-    gravity: 10
-    cancelJumpOnRelease: 1
-    cancelJumpMultiplier: 0.5
-    cancelJumpMinTime: 0.1
-    cancelJumpMaxTime: 0.3
-    preGroundedJumpTime: 0.2
-    postGroundedJumpTime: 0.1
-    availableNotGroundedJumps: 1
-    canJumpOnUnstableGround: 0
-    canJumpDown: 1
-    filterByTag: 0
-    jumpDownTag: JumpDown
-    jumpDownDistance: 0.05
-    jumpDownVerticalVelocity: 0.5
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
   planarMovementParameters:
     baseSpeedLimit: 3
     canRun: 1
@@ -24637,21 +23878,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    perfectDefendTime: 400
-    defendStartTime: 0
-    currentDenfendKind: 3
-  lookingDirectionParameters:
-    changeLookingDirection: 1
-    speed: 10
-    lookingDirectionMode: 0
-    target: {fileID: 0}
-    stableGroundedLookingDirectionMode: 1
-    unstableGroundedLookingDirectionMode: 0
-    notGroundedLookingDirectionMode: 1
-  currentMotion:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
   moving: 0
   preEvade: 0
   evadeVec2: {x: 0, y: 0}
@@ -24800,7 +24026,7 @@ MonoBehaviour:
   canBeExecuted: 0
   allReceives: []
   allSkillReceivers: []
-  attackInfo:
+  attackAndDefendInfo:
     attackMode: 0
     isAtttack: 0
     combo: 0
@@ -24809,6 +24035,10 @@ MonoBehaviour:
     canChangeState: 0
     maxCombo: 0
     useGravity: 0
+    weaponManagers: []
+    defendStartTime: 0
+    perfectDefendTime: 400
+    currentDenfendKind: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -24995,7 +24225,7 @@ MonoBehaviour:
   canBeExecuted: 0
   allReceives: []
   allSkillReceivers: []
-  attackInfo:
+  attackAndDefendInfo:
     attackMode: 0
     isAtttack: 0
     combo: 0
@@ -25004,6 +24234,10 @@ MonoBehaviour:
     canChangeState: 0
     maxCombo: 0
     useGravity: 0
+    weaponManagers: []
+    defendStartTime: 0
+    perfectDefendTime: 400
+    currentDenfendKind: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -26029,7 +25263,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890388382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -120.503685, y: -1.1152055, z: 90.965225}
+  m_LocalPosition: {x: -120.50368, y: -1.1152055, z: 90.965225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26367,6 +25601,8 @@ MonoBehaviour:
       value: 0
     defend:
       value: 0
+    evade:
+      value: 0
     pitch:
       value: 0
     roll:
@@ -26407,6 +25643,8 @@ MonoBehaviour:
     spAttack:
       value: 0
     defend:
+      value: 0
+    evade:
       value: 0
     pitch:
       value: 0
@@ -26451,6 +25689,8 @@ MonoBehaviour:
     spAttack:
       value: 0
     defend:
+      value: 0
+    evade:
       value: 0
     pitch:
       value: 0
@@ -26660,8 +25900,17 @@ MonoBehaviour:
   runtimeAnimatorController: {fileID: 9100000, guid: 87b7400e1cb9b104ba5598813850850c,
     type: 2}
   timelineManager: {fileID: 0}
-  isActiveAutoHandleVelocity: 0
-  PlanarMovementParameters:
+  isActiveAutoBaseHandleRotation: 0
+  lookingDirectionParameters:
+    changeLookingDirection: 1
+    speed: 10
+    lookingDirectionMode: 0
+    target: {fileID: 0}
+    stableGroundedLookingDirectionMode: 1
+    unstableGroundedLookingDirectionMode: 0
+    notGroundedLookingDirectionMode: 1
+  isActiveBaseAutoHandleVelocity: 0
+  planarMovementParameters:
     baseSpeedLimit: 6
     canRun: 1
     runInputMode: 1
@@ -26745,11 +25994,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  PlanarMovementProperties:
-    acceleration: 0
-    deceleration: 0
-    angleAccelerationMultiplier: 0
-  VerticalMovementParameters:
+  verticalMovementParameters:
     useGravity: 1
     canJump: 1
     autoCalculate: 1
@@ -26770,6 +26015,7 @@ MonoBehaviour:
     jumpDownTag: JumpDown
     jumpDownDistance: 0.05
     jumpDownVerticalVelocity: 0.5
+  recoveryTime: 0.3
   CheckDrawToDebug: 0
   HittedForce: 10
   HittedDrag: 2
@@ -27410,7 +26656,7 @@ MonoBehaviour:
   canBeExecuted: 0
   allReceives: []
   allSkillReceivers: []
-  attackInfo:
+  attackAndDefendInfo:
     attackMode: 0
     isAtttack: 0
     combo: 0
@@ -27419,6 +26665,10 @@ MonoBehaviour:
     canChangeState: 0
     maxCombo: 0
     useGravity: 0
+    weaponManagers: []
+    defendStartTime: 0
+    perfectDefendTime: 400
+    currentDenfendKind: 0
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -28634,7 +27884,7 @@ MonoBehaviour:
   canBeExecuted: 0
   allReceives: []
   allSkillReceivers: []
-  attackInfo:
+  attackAndDefendInfo:
     attackMode: 0
     isAtttack: 0
     combo: 0
@@ -28643,6 +27893,10 @@ MonoBehaviour:
     canChangeState: 0
     maxCombo: 0
     useGravity: 0
+    weaponManagers: []
+    defendStartTime: 0
+    perfectDefendTime: 400
+    currentDenfendKind: 0
   CharacterHitted: {fileID: 0}
   WeaponKind: 0
   hitTimeData: {fileID: 0}
@@ -28809,7 +28063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is2D: 0
-  bodySize: {x: 0.6, y: 1.58}
+  bodySize: {x: 1, y: 1.58}
   mass: 40
 --- !u!4 &8805377712143352378
 Transform:

@@ -9,24 +9,10 @@ using UnityEngine;
 
 public class MainCharacter : CharacterInfo
 {
-
     public Hitted CharacterHitted;
     public WeaponKind WeaponKind;
     //public HitData hitData;
     public HitTimeData hitTimeData;
-
-    //public override void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground)
-    //{
-    //    //需要找到主角调用
-    //    CharacterHitted.GetHitted(weapon, hit);
-    //    if (CharacterStateController.CurrentState is NormalMovement)
-
-    //    {
-    //        NormalMovement actorNormalmovement = (NormalMovement)CharacterStateController.CurrentState;
-    //        //if (actorNormalmovement != null&&)
-    //        //{ }
-    //    }
-    //}
 
 
     protected override void Awake()
@@ -48,7 +34,7 @@ public class MainCharacter : CharacterInfo
     {
         if (CharacterStateController.CurrentState is Attack)
         {
-            return this.attackInfo.isAtttack;
+            return this.attackAndDefendInfo.isAtttack;
         }
         return false;
     }
@@ -105,7 +91,6 @@ public class MainCharacter : CharacterInfo
         if (currentHit == 3)
         await TimeScaleManager.Instance.SetAnimatorSpeed(fadeInDuration, fadeOutDuration, duration, targetTimeScale, new List<Animator> { characterActor.Animator, selectEnemy?.characterActor?.Animator });
         if (currentHit == 3)
-            Debug.Log(Time.time);
         if (weaponManager != null && weaponManager.isActiveAndEnabled)
         {
             //调用震动和特效

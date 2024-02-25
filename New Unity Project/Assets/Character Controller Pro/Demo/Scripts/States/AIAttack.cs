@@ -36,6 +36,12 @@ public class AIAttack : CharacterState
         string targetAttack = ChooseAttack(attacks);
         AnimFun(targetAttack);
         canChangeState = false;
+        isAttack = false;
+        if (CharacterActor.CharacterInfo.selectEnemy != null)
+        {
+            lookingDirectionParameters.lookingDirectionMode = LookingDirectionParameters.LookingDirectionMode.Target;
+            lookingDirectionParameters.target = CharacterActor.CharacterInfo.selectEnemy.transform;
+        }
     }
 
     private void AnimFun(string targetAnim)
@@ -56,6 +62,11 @@ public class AIAttack : CharacterState
     {
         GetSelectAttack();
         BaseProcessVelocity(dt);
+        BaseProcessRotation(dt);
+        if(isAttack ==false)
+        {
+            BaseProcessRotation(dt);
+        }
     }
 
     private void GetSelectAttack()

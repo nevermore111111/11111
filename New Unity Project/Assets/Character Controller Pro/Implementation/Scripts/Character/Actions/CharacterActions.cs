@@ -1,4 +1,5 @@
 using Lightbug.CharacterControllerPro.Implementation;
+using Rusk;
 using UnityEngine;
 
 [System.Serializable]
@@ -17,10 +18,12 @@ public struct CharacterActions
     public BoolAction @test;
     public BoolAction @spAttack;
     public BoolAction @defend;
+    public BoolAction @evade;
 
     // Float actions
     public FloatAction @pitch;
     public FloatAction @roll;
+    //public FloatAction @evadeTime;//这里写一个特殊的floatAction，这个值是按下的时间
 
     // Vector2 actions
     public Vector2Action @movement;
@@ -41,6 +44,7 @@ public struct CharacterActions
         @test.Reset();
         @spAttack.Reset();
         @defend.Reset();
+        @evade.Reset();
 
 
         @pitch.Reset();
@@ -78,6 +82,9 @@ public struct CharacterActions
         @defend = new BoolAction();
         @defend.Initialize();
 
+        @evade = new BoolAction();
+        @evade.Initialize();
+
         @grap = new BoolAction();
         @grap.Initialize();
 
@@ -89,6 +96,7 @@ public struct CharacterActions
 
         @pitch = new FloatAction();
         @roll = new FloatAction();
+        
 
         @movement = new Vector2Action();
     }
@@ -110,8 +118,9 @@ public struct CharacterActions
         @attack.value = inputHandler.GetBool("attack");
         @grap.value = inputHandler.GetBool("grap");
         @spAttack.value = inputHandler.GetBool("spAttack");
-        @test.value = inputHandler.GetBool("Test");//̧��
+        @test.value = inputHandler.GetBool("Test");//抬起
         @defend.value = inputHandler.GetBool("Defend");
+        @evade.value = inputHandler.GetBool ("Evade");
 
         @pitch.value = inputHandler.GetFloat("Pitch");
         @roll.value = inputHandler.GetFloat("Roll");
@@ -135,6 +144,7 @@ public struct CharacterActions
         @test.value = characterActions.test.value;
         @spAttack.value = characterActions.spAttack.value;
         @defend.value = characterActions.defend.value;
+        evade.value = characterActions.evade.value;
 
 
         @pitch.value = characterActions.pitch.value;

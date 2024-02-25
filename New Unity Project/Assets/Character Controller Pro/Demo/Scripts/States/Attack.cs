@@ -5,6 +5,7 @@ using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
 using Rusk;
+using Sirenix.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,79 +18,82 @@ using UnityEngine;
 public class Attack : CharacterState
 {
     #region(攻击数据)
-    public bool isAttack 
+    public bool isAttack
     {
         get
-        { return CharacterActor.CharacterInfo.attackInfo.isAtttack; }
+        { return CharacterActor.CharacterInfo.attackAndDefendInfo.isAtttack; }
         set
-        { CharacterActor.CharacterInfo.attackInfo.isAtttack = value; }
+        { CharacterActor.CharacterInfo.attackAndDefendInfo.isAtttack = value; }
     }
     public int combo
     {
         get
-        { return CharacterActor.CharacterInfo.attackInfo.combo; }
+        { return CharacterActor.CharacterInfo.attackAndDefendInfo.combo; }
         set
-        { CharacterActor.CharacterInfo.attackInfo.combo = value; }
+        { CharacterActor.CharacterInfo.attackAndDefendInfo.combo = value; }
 
     }
-    public  bool canInput
+    public bool canInput
     {
         get
-        { return CharacterActor.CharacterInfo.attackInfo.canInput; }
+        { return CharacterActor.CharacterInfo.attackAndDefendInfo.canInput; }
         set
-        { CharacterActor.CharacterInfo.attackInfo.canInput = value; }
+        { CharacterActor.CharacterInfo.attackAndDefendInfo.canInput = value; }
 
     }
-    public  bool isJustEnter
+    public bool isJustEnter
     {
         get
-        { return CharacterActor.CharacterInfo.attackInfo.isJustEnter; }
+        { return CharacterActor.CharacterInfo.attackAndDefendInfo.isJustEnter; }
         set
-        { CharacterActor.CharacterInfo.attackInfo.isJustEnter = value; }
+        { CharacterActor.CharacterInfo.attackAndDefendInfo.isJustEnter = value; }
 
     }
-    public  bool canChangeState
+    public bool canChangeState
     {
         get
-        { return CharacterActor.CharacterInfo.attackInfo.canChangeState; }
+        { return CharacterActor.CharacterInfo.attackAndDefendInfo.canChangeState; }
         set
-        { CharacterActor.CharacterInfo.attackInfo.canChangeState = value; }
+        { CharacterActor.CharacterInfo.attackAndDefendInfo.canChangeState = value; }
 
     }
     // protected  GameObject selectEnemy;
-    public  int MaxCombo
+    public int MaxCombo
     {
         get
-        { return CharacterActor.CharacterInfo.attackInfo.maxCombo; }
+        { return CharacterActor.CharacterInfo.attackAndDefendInfo.maxCombo; }
         set
-        { CharacterActor.CharacterInfo.attackInfo.maxCombo = value; }
+        { CharacterActor.CharacterInfo.attackAndDefendInfo.maxCombo = value; }
 
     }
     public AttackMode currentAttackMode
     {
         get
-        { return CharacterActor.CharacterInfo.attackInfo.attackMode; }
+        { return CharacterActor.CharacterInfo.attackAndDefendInfo.attackMode; }
         set
-        { CharacterActor.CharacterInfo.attackInfo.attackMode = value; }
+        { CharacterActor.CharacterInfo.attackAndDefendInfo.attackMode = value; }
     }
     #endregion
     //这个是范围内的敌人，利用一个球判定进入范围的敌人，进入了就添加在名单里面；
     // public static List<GameObject> enemys = new List<GameObject>();
     //这个onceAttack是用来判定每次攻击只执行一次动画减慢效果
     private NormalMovement NormalMovement;
-    
+
     [SerializeField]
     //进入attack状态时的体型
     public Vector2 targetAttackWidthAndHeigh;
     private Vector2 normalHeightAndWidth;
     public Attack attack;
-    protected WeaponManager[] weaponManagers;
-    public  bool useGravity
+    protected WeaponManager[] weaponManagers 
+    {
+        get => CharacterActor.CharacterInfo.attackAndDefendInfo.weaponManagers;
+    }
+    public bool useGravity
     {
         get
-        { return CharacterActor.CharacterInfo.attackInfo.useGravity; }
+        { return CharacterActor.CharacterInfo.attackAndDefendInfo.useGravity; }
         set
-        { CharacterActor.CharacterInfo.attackInfo.useGravity = value; }
+        { CharacterActor.CharacterInfo.attackAndDefendInfo.useGravity = value; }
     }
     public static float AttackGravity = 10f;
     public float executeDis = 3f;
@@ -172,7 +176,6 @@ public class Attack : CharacterState
 
     protected override void Awake()
     {
-        weaponManagers = this.transform.parent.GetComponentsInChildren<WeaponManager>();
         targetAttackWidthAndHeigh = new(1f, 1.58f);
         //ResettargetAttackWidthAndHeigh(new Vector2(1.5f,1.58f));
         attack = GetComponent<Attack>();
@@ -225,9 +228,9 @@ public class Attack : CharacterState
         {
             return;
         }
-        if (useGravity)
+        if (isActiveBaseAutoHandleVelocity)
         {
-            UseGravity(dt);
+            BaseProcessVelocity(dt);
         }
         SetCombo();
     }
@@ -317,16 +320,16 @@ public class Attack : CharacterState
         {
             return;
         }
-        if (CharacterActions.jump.value)
+        else if (CharacterActions.jump.value)
         {
             CharacterActor.ForceNotGrounded();
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }
-        if (NormalMovement.CanEvade())
+        else if (CharacterActor.CharacterInfo.ToEvade)
         {
             CharacterStateController.EnqueueTransition<Evade>();
         }
-        if (CharacterActor.IsStable && CharacterActions.defend.value && !isAttack)
+        else if (CharacterActor.IsStable && CharacterActions.defend.value && !isAttack)
         {
             CharacterStateController.EnqueueTransition<NormalMovement>();
         }

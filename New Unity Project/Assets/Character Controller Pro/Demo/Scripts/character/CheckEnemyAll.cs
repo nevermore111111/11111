@@ -33,7 +33,7 @@ public class CheckEnemyAll : MonoBehaviour
         {
             CheckTarget(attackReceive, TargetGroupWeight);
         }
-        if (brain?.ActiveVirtualCamera != VirtualCamera && !brain.IsBlending)//在主摄像机不是他并且非混合状态下
+        if (brain?.ActiveVirtualCamera != (ICinemachineCamera)VirtualCamera && !brain.IsBlending)//在主摄像机不是他并且非混合状态下
         {
             VirtualCamera.ForceCameraPosition(brain.transform.position, brain.transform.rotation);
         }

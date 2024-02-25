@@ -84,10 +84,15 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
             set
             {
+                if (CharacterActor.isPlayer)
+                {
+                    CharacterActor.SetUpRootMotion(true, false);
+                    CharacterActor.UseRootMotion = value;
+                    CharacterActor.CharacterInfo.attackAndDefendInfo.defendStartTime = Time.time;
+                    SetWeapon(value);
+                }
                 CharacterActor.Animator?.SetBool(defensePar, value);
-                CharacterActor.SetUpRootMotion(true, false);
-                CharacterActor.UseRootMotion = value;
-                defenseParameters.defendStartTime = Time.time;
+
 
                 if (value && !isDefense) //刚刚进入
                 {
@@ -97,7 +102,9 @@ namespace Lightbug.CharacterControllerPro.Demo
                     {
                         CharacterActor.Animator.SetLayerWeight(2, value);
                     }, 1f, 0.2f).SetId("Defense");
-                    defenseParameters.ChangeDefendFun();
+
+                    //设置武器
+                    CharacterActor.CharacterInfo.attackAndDefendInfo.ChangeDefendFun();
                 }
                 else if (!value && isDefense)//刚刚出来
                 {
@@ -111,6 +118,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 isDefense = value;
             }
         }
+
 
 
         //public PlanarMovementParameters.PlanarMovementProperties currentMotion = new PlanarMovementParameters.PlanarMovementProperties();
@@ -210,7 +218,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         }
         private void PlayerCheckTransition()
         {
-            if (CanEvade())
+            if (CharacterActor.CharacterInfo.ToEvade)
             {
                 CharacterStateController.EnqueueTransition<Evade>();
             }
@@ -298,7 +306,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 CharacterActor.Animator.SetBool("jump", false);
             }
-
+            CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind = DefendKind.unDefend;
         }
 
 
@@ -951,7 +959,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             HandleLookingDirection(dt);
         }
 
-        protected  void HandleLookingDirection(float dt)
+        protected void HandleLookingDirection(float dt)
         {
             /*这段代码实现了角色的朝向控制功能，包括三种模式：Movement、ExternalReference、Target。
 
@@ -1200,34 +1208,46 @@ namespace Lightbug.CharacterControllerPro.Demo
         //————————————————————————————————————————————————————————————玩家逻辑——————————————————————————————————————————————————————————————————
         //————————————————————————————————————————————————————————————玩家逻辑——————————————————————————————————————————————————————————————————
 
+        /// <summary>
+        /// 调整武器的开关
+        /// </summary>
+        /// <param name="value"></param>
+        private void SetWeapon(bool value)
+        {
+            if (attack.currentAttackMode == AttackMode.AttackOnGround)
+            {
+                foreach (var weapon in CharacterActor.CharacterInfo.attackAndDefendInfo.weaponManagers)
+                {
+                    weapon.gameObject.SetActive(value);
+                }
+            }
+        }
+
         private float buttonDownTime;
         [HideInInspector]
         public bool preEvade;
         [HideInInspector]
         public Vector2 evadeVec2;
+       
 
         private void Update()
         {
             if (CharacterActor.isPlayer)
-                CanEvade();
+                JudgeEvade();
         }
 
-        public bool CanEvade()
+        public void JudgeEvade()
         {
             if (CharacterStateController.CurrentState is Evade)
             {
-                return false;
+                buttonDownTime = Time.time;
+                return;
             }
-            if (preEvade)
-            {
-                return true;
-            }
-            if (Input.GetButtonDown("Run"))
+            else if (Input.GetButtonDown("Run"))
             {
                 // 虚拟按键Run被按下，记录按下时间
                 buttonDownTime = Time.time;
                 evadeVec2 = CharacterActions.movement.value;
-
             }
             else if (Input.GetButtonUp("Run"))
             {
@@ -1235,12 +1255,11 @@ namespace Lightbug.CharacterControllerPro.Demo
                 if (Time.time - buttonDownTime < 0.35f)
                 {
                     // 按下时间小于0.1秒，返回true
-                    preEvade = true;
+                    CharacterActor.CharacterInfo.ToEvade = true;
                 }
             }
 
             // 返回false
-            return false;
         }
     }
 }

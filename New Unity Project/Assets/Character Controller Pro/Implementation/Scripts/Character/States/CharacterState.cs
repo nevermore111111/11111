@@ -271,7 +271,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         {
             if (isActiveAutoBaseHandleRotation)
             {
-
+                HandleLookingDirection(dt);
             }
         }
         [ShowIf("IsShowBaseToggle")]

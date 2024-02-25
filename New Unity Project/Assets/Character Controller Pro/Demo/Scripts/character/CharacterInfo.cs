@@ -1,6 +1,9 @@
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +12,9 @@ using UnityEngine;
 [RequireComponent(typeof(AgetHitBox))]
 public abstract class CharacterInfo : MonoBehaviour, IAgent
 {
+
+    private static int uniqueID = 1;
+    public int Id { get; private set; }
 
     //周围全部的敌人
     public CharacterActor characterActor;
@@ -33,9 +39,35 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     [HideInInspector]
     public List<SkillReceiver> allSkillReceivers;
 
-    public AttackInfo attackInfo = new AttackInfo();
+    public AttackAndDefendInfo attackAndDefendInfo = new AttackAndDefendInfo();
 
     private Hitted Hitted;
+
+    //判断是否去闪避，如果update里判定true，就去闪避
+    public bool ToEvade
+    {
+        get
+        {
+            return toEvade;
+        }
+        set
+        {
+            toEvade = value;
+            if(value)//进行闪避时
+            {
+                UniTask.Delay(150).ContinueWith(() =>
+                {
+                    if (Time.time - lastTimeToEvade > 0.12f/*大于0.12就认为是一次*/)
+                    {
+                        toEvade = false;
+                    };
+                });
+                lastTimeToEvade = Time.time;
+            }
+        }
+    }
+    private float lastTimeToEvade;
+    private bool toEvade = false;
 
     /// <summary>
     /// 伤害，目标位置，武器方向，击中类型
@@ -71,9 +103,30 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
         hitBox = GetComponentInChildren<AgetHitBox>();
         characterActor = GetComponentInParent<CharacterActor>();
         CharacterStateController = this.transform.parent?.GetComponentInChildren<CharacterStateController>();
+        attackAndDefendInfo.weaponManagers = GetComponentsInChildren<WeaponManager>();
+        SetUniqueID();
+    }
+
+
+
+    protected virtual void Start()
+    {
         Hitted = characterActor?.stateController.GetState<Hitted>() as Hitted;
     }
 
     abstract public void HitOther(WeaponManager weaponManager);
+
+
+    //_______________________________________________________子方法分隔线_______________________________________________________________
+    //_______________________________________________________子方法分隔线_______________________________________________________________
+    //_______________________________________________________子方法分隔线_______________________________________________________________
+    /// <summary>
+    /// 设置每个characterInfo实例都有一个唯一ID。
+    /// </summary>
+    private void SetUniqueID()
+    {
+        Id = uniqueID;
+        uniqueID++;
+    }
 
 }
