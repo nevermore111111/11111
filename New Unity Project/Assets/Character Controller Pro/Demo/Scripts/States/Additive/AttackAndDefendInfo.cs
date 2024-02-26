@@ -46,5 +46,6 @@ public enum DefendKind
 {
     perfectDefend,
     normalDefend,
-    unDefend
+    unDefend,//无防御
+    OnlyDamege//霸体状态，只受伤害但是不打断
 }

@@ -64,7 +64,7 @@ public class CheckEnemyAll : MonoBehaviour
         if (EnemyTag == "custom")
         {
             Debug.Log("因为EnemyTag 还是custom，所以自动修改");
-            if (CharacterActor.isPlayer)
+            if (CharacterActor.IsPlayer)
                 EnemyTag = "enemy";
             else
                 EnemyTag = "Player";
@@ -80,13 +80,13 @@ public class CheckEnemyAll : MonoBehaviour
         //目标是0，这代表要把这个对象移动出去
         if (targetWeight <= 0f)
         {
-            if(!CharacterActor.isPlayer)//非主角
+            if(!CharacterActor.IsPlayer)//非主角
             {
                 //非主角移除这个人
                 CharacterActor.CharacterInfo.enemies.Remove(attackReceive.CharacterInfo);
             }
             //如果是主角需要去逐渐修改权重，到达0的时候去移除
-            else if (CharacterActor.isPlayer && Group != null)
+            else if (CharacterActor.IsPlayer && Group != null)
             {
                 //我发现如果这个地方只在第一帧确认了targetTransform，但是如果Group的成员发生了变化，对应索引的目标也就变了，这时候应该每帧都去确认targetTransform
                 //为了避免每帧都去确认对应的targetTransform，所以我现在不做删除，只是在每次进行权重操作完成的时候，检测如果没有权重正在执行，这时候再去移除目标
@@ -110,7 +110,7 @@ public class CheckEnemyAll : MonoBehaviour
             if (!CharacterActor.CharacterInfo.enemies.Contains(attackReceive.CharacterInfo))
                 CharacterActor.CharacterInfo.enemies.Add(attackReceive.CharacterInfo);
             //如果是主角需要去修改摄像机
-            if (CharacterActor.isPlayer && Group != null)
+            if (CharacterActor.IsPlayer && Group != null)
             {
                 //我发现如果这个地方只在第一帧确认了targetTransform，但是如果Group的成员发生了变化，对应索引的目标也就变了，这时候应该每帧都去确认targetTransform
                 //为了避免每帧都去确认对应的targetTransform，所以我现在不做删除，只是在每次进行权重操作完成的时候，检测如果没有权重正在执行，这时候再去移除目标

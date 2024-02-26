@@ -11,18 +11,7 @@ using Sirenix.OdinInspector.Editor.Drawers;
 namespace Lightbug.CharacterControllerPro.Demo
 {
 
-    //写一个行为树，用来设计这个人物的攻击模式
-    //1追踪
-    //2到了之后，等待1-3秒 ：{1徘徊，或者等待}。之后判断
-    //如果对方远离就靠近，否则开始攻击{期间对方攻击，就防御}
-    //攻击之后继续回到等待
-    //防御成功就会反击，反击分成两种，一种直接反击，一种等待反击。反击结束回到等待
-    //
-    //
-    //
-    //
-    //
-    //进入这个状态后，有一定概率左右走走，然后再往前冲刺
+    //这是一个AI行为模式，当进入这个AI后，等待1-2s后，如果存在目标，就去追，如果目标和自身距离小于reachDistance，就进入新的AI行为模式
 
     [AddComponentMenu("Character Controller Pro/Demo/Character/AI/Follow Behaviour")]
     public class AIFollowBehaviour : CharacterAIBehaviour
@@ -85,7 +74,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 timer = 0f;
                 if (currentTimeToIdle > 0)
                 {
-                    currentTimeToIdle -= refreshTime;
+                    currentTimeToIdle -= dt;
                     UpdateIdleBehaviour(dt);
                 }
                 else
@@ -137,12 +126,11 @@ namespace Lightbug.CharacterControllerPro.Demo
         void UpdateIdleBehaviour(float dt)
         {
             //这里要左右走动
-            Debug.Log("左右走");
             if (followTarget == null)
                 return;
-
+            Debug.Log("待机时间");
             characterActions.Reset();
-            if(CharacterActor.CharacterInfo.selectEnemy !=null)
+            if (CharacterActor.CharacterInfo.selectEnemy != null)
             {
                 if ((CharacterActor.transform.position - CharacterActor.CharacterInfo.selectEnemy.transform.position).magnitude < reachDistance)
                 {
@@ -151,7 +139,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 Vector3 MoveDirection;
                 SetMovementAction(CharacterActor.transform.right);
             }
-            
+
         }
     }
 }

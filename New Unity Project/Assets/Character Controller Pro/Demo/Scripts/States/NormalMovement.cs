@@ -13,7 +13,7 @@ namespace Lightbug.CharacterControllerPro.Demo
     [AddComponentMenu("Character Controller Pro/Demo/Character/States/Normal Movement")]
     public class NormalMovement : CharacterState
     {
-        public bool IsPlayer => CharacterActor.isPlayer;
+        public bool IsPlayer => CharacterActor.IsPlayer;
 
         [Space(10)]
 
@@ -84,7 +84,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
             set
             {
-                if (CharacterActor.isPlayer)
+                if (CharacterActor.IsPlayer)
                 {
                     CharacterActor.SetUpRootMotion(true, false);
                     CharacterActor.UseRootMotion = value;
@@ -419,7 +419,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         {
             //SetMotionValues();
 
-            if (CharacterActor.isPlayer)
+            if (CharacterActor.IsPlayer)
                 PlayStop();
 
             float speedMultiplier = materialController != null ?
@@ -530,7 +530,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
             }
             //更新AI的行走方向——这个是更新动画用的
-            if (!CharacterActor.isPlayer)
+            if (!CharacterActor.IsPlayer)
             {
                 //去更新AI动画机
                 Vector3 characterLocalVecolity = CharacterActor.LocalPlanarVelocity;
@@ -899,7 +899,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             CharacterActor.Animator.SetTrigger(NormalMovementPar);
             if (CanDefense() && CharacterActions.defend.value)
             { IsDefense = true; }
-            if (CharacterActor.isPlayer)
+            if (CharacterActor.IsPlayer)
             {
                 StartCoroutine(CheckAnim());
                 SpAttack = -1;
@@ -1115,7 +1115,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                 //    }
                 //}
                 //else
-                if (CharacterActor.isPlayer && CharacterActor.UpdateRootPosition == false)
+                if (CharacterActor.IsPlayer && CharacterActor.UpdateRootPosition == false)
                 {
                     //xMove
 
@@ -1232,7 +1232,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         private void Update()
         {
-            if (CharacterActor.isPlayer)
+            if (CharacterActor.IsPlayer)
                 JudgeEvade();
         }
 

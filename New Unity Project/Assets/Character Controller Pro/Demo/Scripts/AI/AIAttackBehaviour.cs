@@ -6,20 +6,20 @@ using UnityEngine;
 
 public class AIAttackBehaviour : CharacterAIBehaviour
 {
-    //写一个行为树，用来设计这个人物的攻击模式
-    //1追踪
-    //2到了之后，等待1-3秒 ：{1徘徊，或者等待}。之后判断
-    //如果对方远离就靠近，否则开始攻击{期间对方攻击，就防御}
-    //攻击之后继续回到等待
-    //防御成功就会反击，反击分成两种，一种直接反击，一种等待反击。反击结束回到等待
-    // virtual (optional)
+    //这是一个AI攻击模式，如果先检查自身和目标的距离，如果自身和目标的距离小于最大允许的距离，则继续，否则进入追踪的AI追踪模式。
+    //在这个模式中，当进入这个状态的时候，先决定位置调整策略，并等待一段时间，在这段时间内，如果有人进行攻击，立即防御，并且重置等待时间，进入防御后，1s内的防御全部是完美防御，并且在下个判定时间并进行反击或者其他攻击，如果并没有完美防御，那么进行其他攻击
+    //完成攻击后，看距离进入追踪或者攻击模式
+
+    //ps：再写一个AI防御模式，在进入攻击之后，立刻进入防御模式。
 
     enum AIAttackState
     {
         awaitAttack,//这时随时防御攻击
         doAttack,
     }
-
+    float refreshTime = 0.5f;
+    float timer = 0;
+    public bool ForceUpdate = false;
     public float minAwaitTime = 0.5f;
     public float maxAwaitTime = 1.5f;
 
@@ -33,57 +33,85 @@ public class AIAttackBehaviour : CharacterAIBehaviour
 
     public override void EnterBehaviour(float dt)
     {
-        if (CharacterActor.CharacterInfo.selectEnemy == null)
-            CharacterActor.brain.SetAIBehaviour<AIFollowBehaviour>();
+        CanAttackOrChangeState();
         //重置时间
-        awaitTime = UnityEngine.Random.Range(minAwaitTime, maxAwaitTime);
+        awaitTime = UnityEngine.Random.Range(minAwaitTime, maxAwaitTime) + refreshTime;
         currentAttackState = AIAttackState.awaitAttack;
+        timer = refreshTime;
     }
 
     // abstract (mandatory)
     public override void UpdateBehaviour(float dt)
     {
-        if (CharacterActor.CharacterInfo.selectEnemy != null)
+        if (timer >= refreshTime)
         {
-            JudgeDistance();
+            timer = 0;
+            //执行一次逻辑
+            if (CanAttackOrChangeState())
+            {
+                AwaitAttackDeltaTime(timer);
+                doAttackDeltaTime(timer);
+            }
             //这时需要去执行正常逻辑了
-            AwaitAttackUpdate(dt);
-            doAttackUpdate(dt);
         }
-    }
-    /// <summary>
-    /// 如果太远就切换当前的状态
-    /// </summary>
-    private void JudgeDistance()
-    {
-        if ((CharacterActor.CharacterInfo.selectEnemy.transform.position - transform.position).magnitude > reachDistance)
+        timer += dt;
+        if (ForceUpdate)
         {
-            CharacterActor.brain.SetAIBehaviour<AIFollowBehaviour>();
+            timer += refreshTime;
         }
     }
 
-    private void doAttackUpdate(float dt)
+    private bool CanAttackOrChangeState()
+    {
+        if (!CanAttack())
+        {
+            CharacterActor.brain.SetAIBehaviour<AIFollowBehaviour>();
+            return false;
+        }
+        return true;
+        bool CanAttack()
+        {
+            //没人，或人太远
+            if (CharacterActor.CharacterInfo.selectEnemy == null || (CharacterActor.CharacterInfo.selectEnemy.transform.position - CharacterActor.transform.position).magnitude > reachDistance)
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    private void doAttackDeltaTime(float timer)
     {
         characterActions.attack.value = true;
     }
 
-    private void AwaitAttackUpdate(float dt)
+    private void AwaitAttackDeltaTime(float timer)
     {
-        awaitTime -= dt;
+        awaitTime -= timer;
         if (awaitTime < 0f)
         {
             return;
             //开始进入攻击状态
         }
-        if(CharacterActor.CharacterInfo.selectEnemy.CharacterStateController.CurrentState is Attack)
+        else if (GetIsEnemyAtttack())
         {
-            selectEnemyAttack = (Attack)(CharacterActor.CharacterInfo.selectEnemy.CharacterStateController.CurrentState);
-            if (selectEnemyAttack.isAttack == true)
-            {
-                SetDefendAction(true);
-            }
+            SetDefendAction(true);
         }
+        bool GetIsEnemyAtttack()
+        {
+            return CharacterActor.CharacterInfo.selectEnemy.characterActor.CharacterInfo.attackAndDefendInfo.isAtttack;
+        }
+        //if (CharacterActor.CharacterInfo.selectEnemy.CharacterStateController.CurrentState is Attack)
+        //{
+        //    selectEnemyAttack = (Attack)(CharacterActor.CharacterInfo.selectEnemy.CharacterStateController.CurrentState);
+        //    if (selectEnemyAttack.isAttack == true)
+        //    {
+        //        SetDefendAction(true);
+        //    }
+        //}
     }
+
+
 
     // virtual (optional)
     public override void ExitBehaviour(float dt)

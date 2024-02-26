@@ -115,7 +115,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
             }
             set
             {
-                if (CharacterActor.isPlayer)
+                if (CharacterActor.IsPlayer)
                 {
                     spAttack = value;
                     CharacterActor.Animator.SetInteger(spAttackParameter, value);
@@ -198,7 +198,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
             CharacterStateController.Animator.SetFloat(horizontalAxisParameter, CharacterActions.movement.value.x);
             CharacterStateController.Animator.SetFloat(verticalAxisParameter, CharacterActions.movement.value.y);
             CharacterStateController.Animator.SetFloat(heightParameter, CharacterActor.BodySize.y);
-            if (CharacterActor.isPlayer)
+            if (CharacterActor.IsPlayer)
                 CharacterStateController.Animator.SetFloat(GroundDistance, CharacterActor.PredictedGroundDistance);
         }
 
