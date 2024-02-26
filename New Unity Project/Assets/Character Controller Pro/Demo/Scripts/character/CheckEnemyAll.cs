@@ -17,9 +17,12 @@ public class CheckEnemyAll : MonoBehaviour
     private void Awake()
     {
         CharacterActor = GetComponentInParent<CharacterActor>();
-        ResetEnemyTag();
         VirtualCamera = GameObject.Find("subCamera").GetComponent<CinemachineVirtualCamera>();
         brain = FindFirstObjectByType<CinemachineBrain>();
+    }
+    private void Start()
+    {
+        ResetEnemyTag();
     }
 
     /// <summary>
@@ -80,7 +83,7 @@ public class CheckEnemyAll : MonoBehaviour
         //目标是0，这代表要把这个对象移动出去
         if (targetWeight <= 0f)
         {
-            if(!CharacterActor.IsPlayer)//非主角
+            if (!CharacterActor.IsPlayer)//非主角
             {
                 //非主角移除这个人
                 CharacterActor.CharacterInfo.enemies.Remove(attackReceive.CharacterInfo);

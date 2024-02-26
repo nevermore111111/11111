@@ -1100,21 +1100,6 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
             if (IsDefense)
             {
-                //if(CharacterActor.UpdateRootPosition == true)
-                //{
-                //    if(CharacterActor.isPlayer)
-                //    {
-                //        //动画移速2.1.最大移速是人物模型倍数*动画速度
-                //        //把当前的动画的移动速度转化成动画参数就可以
-                //        Vector3 speed = CharacterActor.transform.InverseTransformDirection(CharacterActor.Velocity).normalized;
-
-
-
-                //        CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
-                //        CharacterActor.Animator.SetFloat(yMovePar, XYZMove.z);
-                //    }
-                //}
-                //else
                 if (CharacterActor.IsPlayer && CharacterActor.UpdateRootPosition == false)
                 {
                     //xMove

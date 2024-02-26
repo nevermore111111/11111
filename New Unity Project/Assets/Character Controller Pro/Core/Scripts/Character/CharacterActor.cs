@@ -26,7 +26,7 @@ namespace Lightbug.CharacterControllerPro.Core
     [DefaultExecutionOrder(ExecutionOrder.CharacterActorOrder)]
     public class CharacterActor : PhysicsActor
     {
-        public bool IsPlayer => brain.IsAI;
+        public bool IsPlayer => !brain.IsAI;
         [Header("Collision")]
 
         [Tooltip("One way platforms are objects that can be contacted by the character feet (bottom sphere) while descending.")]
