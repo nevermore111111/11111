@@ -1210,8 +1210,6 @@ namespace Lightbug.CharacterControllerPro.Demo
 
         private float buttonDownTime;
         [HideInInspector]
-        public bool preEvade;
-        [HideInInspector]
         public Vector2 evadeVec2;
 
 

@@ -67,7 +67,6 @@ namespace Rusk
 
         protected float currentSpeedMultiplier = 1f;
 
-        protected NormalMovement NormalMovement;
         private Attack attack;
 
 
@@ -133,7 +132,6 @@ namespace Rusk
             attack = this.GetComponent<Attack>();
             materialController = this.GetComponentInBranch<CharacterActor, MaterialController>();
             airDashesLeft = availableNotGroundedDashes;
-            NormalMovement = GetComponent<NormalMovement>();
             characterActor = this.transform.parent.GetComponentInBranch<CharacterActor>();
             body = characterActor.transform;
             UnChangedDuration = duration;
@@ -188,7 +186,6 @@ namespace Rusk
             base.EnterBehaviour(dt, fromState);
             characterActor.Animator.SetBool(evadeParameter, true);
             duration = UnChangedDuration;
-            NormalMovement.preEvade = false;
             if (forceNotGrounded)
                 CharacterActor.alwaysNotGrounded = true;
             characterActor.Animator.CrossFade("Evade", 0.05f);
@@ -215,12 +212,12 @@ namespace Rusk
 
 
             }
-            UpdateData(NormalMovement.evadeVec2);
+            UpdateData(evadeDirection.normalized);
 
 
             //这里修改冲刺的方向
             //设置冲刺动画的参数
-            if (NormalMovement.evadeVec2 == Vector2.zero)
+            if (CharacterActions.movement.value == Vector2.zero)
             {
                 evadeDirection = -CharacterActor.Forward;
             }
@@ -267,9 +264,7 @@ namespace Rusk
 
         private void SetAnimatorPar()
         {
-            Vector2 input = NormalMovement.evadeVec2;
-            
-            
+            Vector2 input = CharacterActions.movement.value;
             {
                 input.Normalize();
             }
@@ -366,35 +361,19 @@ namespace Rusk
         public void UpdateData(Vector2 movementInput)
         {
             UpdateMovementReferenceData();
-            //if (movementInput == Vector2.zero)
-            //{
-            //    movementInput = new Vector2(0, -1);
-            //}
-
             {
 
                 Vector3 inputMovementReference = CustomUtilities.Multiply(MovementReferenceRight, movementInput.x) +
                     CustomUtilities.Multiply(MovementReferenceForward, movementInput.y);
-
                 InputMovementReference = Vector3.ClampMagnitude(inputMovementReference, 1f);
             }
-
-            // Debug ---------------------------------------------
-            // Debug.DrawRay( characterActor.Position , MovementReferenceForward * 2f , Color.blue );
-            // Debug.DrawRay( characterActor.Position , MovementReferenceRight * 2f , Color.red );
         }
 
         void UpdateMovementReferenceData()
         {
             // Forward
-
-
-
-
             if (externalReference != null)
             {
-                // MovementReferenceForward = CustomUtilities.ProjectOnTangent( externalReference.forward , characterActor.GroundStableNormal , characterActor.Up );
-                // MovementReferenceRight = CustomUtilities.ProjectOnTangent( externalReference.right , characterActor.GroundStableNormal , characterActor.Up );
                 MovementReferenceForward = Vector3.Normalize(Vector3.ProjectOnPlane(externalReference.forward, characterActor.Up));
                 MovementReferenceRight = Vector3.Normalize(Vector3.ProjectOnPlane(externalReference.right, characterActor.Up));
             }

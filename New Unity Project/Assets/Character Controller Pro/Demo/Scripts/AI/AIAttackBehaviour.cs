@@ -15,13 +15,15 @@ public class AIAttackBehaviour : CharacterAIBehaviour
     enum AIAttackState
     {
         awaitAttack,//这时随时防御攻击
-        doAttack,
+        onAttack,
+        doneAttack,
     }
-    float refreshTime = 0.5f;
+    float refreshTime = 0.1f;
     float timer = 0;
     public bool ForceUpdate = false;
     public float minAwaitTime = 0.5f;
     public float maxAwaitTime = 1.5f;
+    private bool isAdjustPos = false;
 
     [SerializeField]
     float reachDistance = 3f;
@@ -38,6 +40,8 @@ public class AIAttackBehaviour : CharacterAIBehaviour
         awaitTime = UnityEngine.Random.Range(minAwaitTime, maxAwaitTime) + refreshTime;
         currentAttackState = AIAttackState.awaitAttack;
         timer = refreshTime;
+        characterActions.Reset();
+        isAdjustPos = false;
     }
 
     // abstract (mandatory)
@@ -49,8 +53,13 @@ public class AIAttackBehaviour : CharacterAIBehaviour
             //执行一次逻辑
             if (CanAttackOrChangeState())
             {
-                AwaitAttackDeltaTime(timer);
-                doAttackDeltaTime(timer);
+                if (!AwaitAttackDeltaTime(timer)/*这个是当前是否防御*/)
+                {
+                    if (currentAttackState != AIAttackState.doneAttack)//当前的攻击没有进行完成
+                    {
+                        doAttackDeltaTime(timer);
+                    }
+                }
             }
             //这时需要去执行正常逻辑了
         }
@@ -82,21 +91,33 @@ public class AIAttackBehaviour : CharacterAIBehaviour
 
     private void doAttackDeltaTime(float timer)
     {
+        characterActions.Reset();
         characterActions.attack.value = true;
     }
 
-    private void AwaitAttackDeltaTime(float timer)
+    private bool AwaitAttackDeltaTime(float timer)
     {
         awaitTime -= timer;
         if (awaitTime < 0f)
         {
-            return;
+            return false;
             //开始进入攻击状态
+        }
+        else if (!isAdjustPos && CharacterActor.CharacterInfo.selectEnemy != null)
+        {
+            //进行调整
+            isAdjustPos = true;
+            characterActions.Reset();
+            //这个重置之后，要进入冲刺
+            characterActions.evade.value = true;
+            SetMovementAction(Quaternion.AngleAxis(UnityEngine.Random.Range(-45f, 45f), Vector3.up) *(-CharacterActor.Forward));
         }
         else if (GetIsEnemyAtttack())
         {
+            characterActions.Reset();
             SetDefendAction(true);
         }
+        return true;//这个是return防御时间成功。
         bool GetIsEnemyAtttack()
         {
             return CharacterActor.CharacterInfo.selectEnemy.characterActor.CharacterInfo.attackAndDefendInfo.isAtttack;
