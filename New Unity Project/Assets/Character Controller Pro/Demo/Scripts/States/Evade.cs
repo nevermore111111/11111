@@ -379,9 +379,6 @@ namespace Rusk
             }
             else
                 Debug.Log("CharacterStateController: the external reference is null! assign a Transform.");
-
-
-
         }
     }
 }
