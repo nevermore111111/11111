@@ -22,6 +22,10 @@ public class AttackAndDefendInfo
     public int perfectDefendTime = 400;
     public DefendKind currentDenfendKind;
 
+    public Action defendStartAction;
+    public Action OnHit;
+    public Action defendEndAction;
+
     public async void ChangeDefendFun()
     {
         float thisDefendStartTime = Time.time;

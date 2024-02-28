@@ -38,8 +38,11 @@ public class Hitted : CharacterState
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
-
         HandleRecoverTimeTween();
+        if(!CharacterActor.IsPlayer)
+        {
+            CharacterActor.brain.SetAIBehaviour<AIDefendBehaviour>();
+        }
     }
 
 

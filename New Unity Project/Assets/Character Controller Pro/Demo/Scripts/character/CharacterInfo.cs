@@ -7,12 +7,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(AgetHitBox))]
 public abstract class CharacterInfo : MonoBehaviour, IAgent
 {
-
     private static int uniqueID = 1;
     public int Id { get; private set; }
 
@@ -81,6 +81,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     {
         if (Hitted != null)
             Hitted.GetHitted(weapon, hit, true);
+        attackAndDefendInfo.OnHit?.Invoke();
         FxManagerPro.Instance.PlayFx(weapon.weaponHitFx, collider.transform);
     }
     virtual public void GetDamage(float damage, Vector3 attackDirection, float hitStrength, string targetAnimToPlay = null)

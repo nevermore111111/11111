@@ -91,9 +91,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                     CharacterActor.CharacterInfo.attackAndDefendInfo.defendStartTime = Time.time;
                     SetWeapon(value);
                 }
-                CharacterActor.Animator?.SetBool(defensePar, value);
-
-
+                CharacterActor.Animator.SetBool(defensePar, value);
                 if (value && !isDefense) //刚刚进入
                 {
                     CharacterActor.Animator.SetTrigger(startDefensePar);
@@ -105,6 +103,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
                     //设置武器
                     CharacterActor.CharacterInfo.attackAndDefendInfo.ChangeDefendFun();
+                    CharacterActor.CharacterInfo.attackAndDefendInfo.defendStartAction?.Invoke();
                 }
                 else if (!value && isDefense)//刚刚出来
                 {
@@ -114,6 +113,7 @@ namespace Lightbug.CharacterControllerPro.Demo
                     {
                         CharacterActor.Animator.SetLayerWeight(2, value);
                     }, 0f, 0.5f).SetId("Defense");
+                    CharacterActor.CharacterInfo.attackAndDefendInfo.defendEndAction?.Invoke();
                 }
                 isDefense = value;
             }
@@ -1213,7 +1213,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         public bool preEvade;
         [HideInInspector]
         public Vector2 evadeVec2;
-       
+
 
         private void Update()
         {
