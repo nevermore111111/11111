@@ -67,6 +67,7 @@ namespace Rusk
 
         protected float currentSpeedMultiplier = 1f;
 
+        protected NormalMovement NormalMovement;
         private Attack attack;
 
 
@@ -132,6 +133,7 @@ namespace Rusk
             attack = this.GetComponent<Attack>();
             materialController = this.GetComponentInBranch<CharacterActor, MaterialController>();
             airDashesLeft = availableNotGroundedDashes;
+            NormalMovement = GetComponent<NormalMovement>();
             characterActor = this.transform.parent.GetComponentInBranch<CharacterActor>();
             body = characterActor.transform;
             UnChangedDuration = duration;
@@ -154,10 +156,10 @@ namespace Rusk
             {
                 if (OnEvadeEnd != null)
                     OnEvadeEnd(evadeDirection);
-               // characterActor.Animator.SetTrigger("");
+                // characterActor.Animator.SetTrigger("");
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }
-            if(characterActor.IsGrounded)
+            if (characterActor.IsGrounded)
             {
                 if (dashCursor >= 0.85f && CharacterActions.attack.value == true)
                 {
@@ -165,16 +167,16 @@ namespace Rusk
                     {
                         CharacterStateController.EnqueueTransition<AttackOnGround>(); ResetDash();
                     }
-                    
-                    if(attack.currentAttackMode == AttackMode.AttackOnGround_fist)
+
+                    if (attack.currentAttackMode == AttackMode.AttackOnGround_fist)
                     {
                         CharacterStateController.EnqueueTransition<AttackOnGround_fist>(); ResetDash();
                     }
                 }
             }
 
-            
-            if(CharacterActions.jump.value == true)
+
+            if (CharacterActions.jump.value == true)
             {
                 CharacterStateController.EnqueueTransition<NormalMovement>();
             }
@@ -212,19 +214,21 @@ namespace Rusk
 
 
             }
-            UpdateData(evadeDirection.normalized);
-
-
-            //这里修改冲刺的方向
-            //设置冲刺动画的参数
-            if (CharacterActions.movement.value == Vector2.zero)
+            if (NormalMovement != null && CharacterActor.IsPlayer)
             {
-                evadeDirection = -CharacterActor.Forward;
+                UpdateData(NormalMovement.evadeVec2);
             }
             else
             {
-                evadeDirection = InputMovementReference;
+                UpdateData(CharacterActions.movement.value);
             }
+
+
+
+            //这里修改冲刺的方向
+            //设置冲刺动画的参数k
+            GetDirection( out evadeDirection);
+
 
 
             //需要根据闪避的方向去增加evade 的时间 
@@ -246,6 +250,33 @@ namespace Rusk
 
             }
         }
+
+        private void GetDirection(out Vector3 direction )
+        {
+            if (NormalMovement != null && CharacterActor.IsPlayer)
+            {
+                if (NormalMovement.evadeVec2 == Vector2.zero)
+                {
+                    direction = -CharacterActor.Forward;
+                }
+                else
+                {
+                    direction = InputMovementReference;
+                }
+            }
+            else
+            {
+                if (CharacterActions.movement.value == Vector2.zero)
+                {
+                    direction = -CharacterActor.Forward;
+                }
+                else
+                {
+                    direction = InputMovementReference;
+                }
+            }
+        }
+
         /// <summary>
         /// 是否显示拖尾特效
         /// </summary>
@@ -264,16 +295,14 @@ namespace Rusk
 
         private void SetAnimatorPar()
         {
-            Vector2 input = CharacterActions.movement.value;
-            {
-                input.Normalize();
-            }
+            Vector2 input = NormalMovement.evadeVec2 ;
+          
             Vector3 camera = new Vector3(input.x, 0, input.y);
             Vector3 mid = externalReference.TransformDirection(camera);
             mid = body.InverseTransformDirection(mid);
 
             input = new Vector2(mid.x, mid.z);
-            
+
             input = input.normalized;
 
             if (input == Vector2.zero)
@@ -289,7 +318,7 @@ namespace Rusk
             Vector3 LocalDirection = characterActor.transform.InverseTransformDirection(evadeDirection).ProjectOntoPlane(Vector3.up);
             //Debug.Log(LocalDirection);
             //就在这里修改 闪避的时间 ,后退的时候，时间稍微长一点
-            float addTime =  LocalDirection.z < 0? Mathf.Abs(-0.15f * LocalDirection.z) :  0f;
+            float addTime = LocalDirection.z < 0 ? Mathf.Abs(-0.15f * LocalDirection.z) : 0f;
 
             duration += addTime;
             //Debug.Log(duration);
@@ -306,7 +335,7 @@ namespace Rusk
 
         public override void UpdateBehaviour(float dt)
         {
-            Vector3 dashVelocity = initialVelocity * currentSpeedMultiplier * movementCurve.Evaluate(dashCursor*0.8f) * evadeDirection;
+            Vector3 dashVelocity = initialVelocity * currentSpeedMultiplier * movementCurve.Evaluate(dashCursor * 0.8f) * evadeDirection;
 
             CharacterActor.Velocity = dashVelocity;
 
@@ -362,7 +391,6 @@ namespace Rusk
         {
             UpdateMovementReferenceData();
             {
-
                 Vector3 inputMovementReference = CustomUtilities.Multiply(MovementReferenceRight, movementInput.x) +
                     CustomUtilities.Multiply(MovementReferenceForward, movementInput.y);
                 InputMovementReference = Vector3.ClampMagnitude(inputMovementReference, 1f);
