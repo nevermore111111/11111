@@ -3,13 +3,10 @@ using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TrailsFX;
 using UnityEngine;
-using UnityEngine.Windows;
-using static Lightbug.CharacterControllerPro.Implementation.MovementReferenceParameters;
 
 namespace Rusk
 {

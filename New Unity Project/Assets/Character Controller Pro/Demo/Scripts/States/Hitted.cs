@@ -3,21 +3,19 @@ using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
-using Unity.VisualScripting;
-using UnityEditor;
+using OfficeOpenXml.Drawing.Style.Fill;
+using Rusk;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static Lightbug.CharacterControllerPro.Demo.DefenseParameters;
 
 public class Hitted : CharacterState
 {
     //进入hitted状态之后，增加一个不可以格挡的时间，如果不特殊说明，就是默认的时间，在这个时间内，不可以做任何的动作，超过这个时间之后，可以进入移动等状态
     public float recoveryTime = 0.3f;//从受击中回复的时间。这个时间内，不可以切换状态
+    public float AutoChangeTime = 1.1f;
     float curRecoverTime = 0f;
+    float curAutoChangeTime = 0f;
     Tween tweenToChangeRecover;
+    Tween TweenToChangeAuto;
     public bool CheckDrawToDebug = false;
     [Space(10f)]
 
@@ -38,6 +36,7 @@ public class Hitted : CharacterState
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
+        HandleAutoRecoverTimeTween();
         HandleRecoverTimeTween();
         if (!CharacterActor.IsPlayer)
         {
@@ -45,6 +44,11 @@ public class Hitted : CharacterState
         }
     }
 
+    private void HandleAutoRecoverTimeTween()
+    {
+        TweenToChangeAuto?.Kill();
+        TweenToChangeAuto = DOTween.To(() => AutoChangeTime, (_) => { curAutoChangeTime = _; }, 0, AutoChangeTime);
+    }
 
 
     public override void CheckExitTransition()
@@ -52,10 +56,16 @@ public class Hitted : CharacterState
         //这个时候需要检查硬直时间
         if (curRecoverTime > 0)
             return;
+        else if (curAutoChangeTime > 0)//还不会自动切换
+        {
+            if (CharacterActions.defend.value || CharacterActions.jump.value)
+                CharacterStateController.EnqueueTransition<NormalMovement>();
+            if (CharacterActions.evade.value)
+                CharacterStateController.EnqueueTransition<Evade>();
+        }
         else
         {
-            if (CharacterActions.defend.value)
-                CharacterStateController.EnqueueTransition<NormalMovement>();
+            CharacterStateController.EnqueueTransition<NormalMovement>();
         }
     }
 
