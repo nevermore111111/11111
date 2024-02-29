@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.Utilities;
+using Lightbug.CharacterControllerPro.Demo;
 
 namespace Lightbug.CharacterControllerPro.Implementation
 {
@@ -24,6 +25,10 @@ namespace Lightbug.CharacterControllerPro.Implementation
         {
             CharacterActor = this.GetComponentInBranch<CharacterActor>();
         }
+        protected virtual void Start()
+        {
+            normalMovement = CharacterActor.stateController.GetState<NormalMovement>() as NormalMovement;
+        }
 
         protected void SetMovementAction(Vector3 direction)
         {
@@ -36,6 +41,20 @@ namespace Lightbug.CharacterControllerPro.Implementation
         protected void SetDefendAction(bool defendValue)
         {
             characterActions.defend.value = defendValue;
+        }
+        NormalMovement normalMovement;
+        protected void SetEvade(Vector3 direction)
+        {
+            SetMovementAction(direction);
+            characterActions.evade.value = true;
+            if (normalMovement != null)
+            {
+                normalMovement.evadeVec2 = characterActions.movement.value;
+            }
+            else
+            {
+                Debug.LogError("没有移动状态");
+            }
         }
     }
 

@@ -22,6 +22,9 @@ public class AIAttack : CharacterState
     public bool isReadyToAttack;
     public bool canChangeState =false;
 
+    public Action onAttackStart;
+    public Action onAttackEnd;
+
     protected override void Awake()
     {
         base.Awake();
@@ -42,6 +45,7 @@ public class AIAttack : CharacterState
             lookingDirectionParameters.lookingDirectionMode = LookingDirectionParameters.LookingDirectionMode.Target;
             lookingDirectionParameters.target = CharacterActor.CharacterInfo.selectEnemy.transform;
         }
+        onAttackStart?.Invoke();
     }
 
     private void AnimFun(string targetAnim)

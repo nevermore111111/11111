@@ -39,7 +39,7 @@ public class Hitted : CharacterState
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
         HandleRecoverTimeTween();
-        if(!CharacterActor.IsPlayer)
+        if (!CharacterActor.IsPlayer)
         {
             CharacterActor.brain.SetAIBehaviour<AIDefendBehaviour>();
         }
@@ -69,19 +69,25 @@ public class Hitted : CharacterState
         switch (CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind)
         {
             case DefendKind.unDefend:
-                CheckState(weapon, hitKind, NeedChangeState);
-                //动画机处理
-                return;
+                CheckAndEnterState(weapon, hitKind, NeedChangeState);
+                //未防御
+                break;
             case DefendKind.normalDefend:
                 //普通
-                return;
+                break;
             case DefendKind.perfectDefend:
                 //完美
-                return;
+                break;
+            case DefendKind.OnlyDamage:
+                //霸体
+                break;
+            case DefendKind.noDamage:
+                //无敌
+                break;
         }
     }
 
-    private void CheckState(WeaponManager weapon, IAgent.HitKind hitKind, bool NeedChangeState)
+    private void CheckAndEnterState(WeaponManager weapon, IAgent.HitKind hitKind, bool NeedChangeState)
     {
         Debug.Log("受击了，这时应该修改当前状态到hit");
         CharacterStateController.EnqueueTransition<Hitted>();

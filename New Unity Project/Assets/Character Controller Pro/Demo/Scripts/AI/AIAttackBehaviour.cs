@@ -1,5 +1,6 @@
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
+using Rusk;
 using System;
 using Unity.Mathematics;
 using UnityEngine;
@@ -30,8 +31,13 @@ public class AIAttackBehaviour : CharacterAIBehaviour
     AIAttackState currentAttackState;
 
     private float awaitTime;
-    private Attack selectEnemyAttack;
 
+
+
+    protected override void Start()
+    {
+        base.Start();
+    }
 
     public override void EnterBehaviour(float dt)
     {
@@ -101,16 +107,17 @@ public class AIAttackBehaviour : CharacterAIBehaviour
         if (awaitTime < 0f)
         {
             return false;
-            //开始进入攻击状态
         }
         else if (!isAdjustPos && CharacterActor.CharacterInfo.selectEnemy != null)
         {
+            Vector3 targetEvadeDirection = Quaternion.AngleAxis(UnityEngine.Random.Range(-45f, 45f), Vector3.up) * (-CharacterActor.Forward);
             //进行调整
             isAdjustPos = true;
+            Evade evadeState = CharacterActor.stateController.GetState<Evade>() as Evade;
+            evadeState.OnEvadeStart += (_) => { isAdjustPos = true; };
             characterActions.Reset();
             //这个重置之后，要进入冲刺
-            characterActions.evade.value = true;
-            SetMovementAction(Quaternion.AngleAxis(UnityEngine.Random.Range(-45f, 45f), Vector3.up) *(-CharacterActor.Forward));
+            SetEvade(targetEvadeDirection);
         }
         else if (GetIsEnemyAtttack())
         {
@@ -122,17 +129,8 @@ public class AIAttackBehaviour : CharacterAIBehaviour
         {
             return CharacterActor.CharacterInfo.selectEnemy.characterActor.CharacterInfo.attackAndDefendInfo.isAtttack;
         }
-        //if (CharacterActor.CharacterInfo.selectEnemy.CharacterStateController.CurrentState is Attack)
-        //{
-        //    selectEnemyAttack = (Attack)(CharacterActor.CharacterInfo.selectEnemy.CharacterStateController.CurrentState);
-        //    if (selectEnemyAttack.isAttack == true)
-        //    {
-        //        SetDefendAction(true);
-        //    }
-        //}
+      
     }
-
-
 
     // virtual (optional)
     public override void ExitBehaviour(float dt)
