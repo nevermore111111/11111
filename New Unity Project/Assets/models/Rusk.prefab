@@ -265,142 +265,6 @@ Transform:
   m_Father: {fileID: 1722175126063070038}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &376657753809557049
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8415619627080739192}
-  - component: {fileID: 5826657556199878865}
-  m_Layer: 9
-  m_Name: Grap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8415619627080739192
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376657753809557049}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4048304301005211384}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!120 &5826657556199878865
-LineRenderer:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376657753809557049}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 0
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: aa158ddc9f645c8409b4f4816c683cb3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  m_Parameters:
-    serializedVersion: 3
-    widthMultiplier: 0.1
-    widthCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    colorGradient:
-      serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
-      key5: {r: 0, g: 0, b: 0, a: 0}
-      key6: {r: 0, g: 0, b: 0, a: 0}
-      key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
-      ctime1: 65535
-      ctime2: 0
-      ctime3: 0
-      ctime4: 0
-      ctime5: 0
-      ctime6: 0
-      ctime7: 0
-      atime0: 0
-      atime1: 65535
-      atime2: 0
-      atime3: 0
-      atime4: 0
-      atime5: 0
-      atime6: 0
-      atime7: 0
-      m_Mode: 0
-      m_ColorSpace: -1
-      m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 0
-    alignment: 0
-    textureMode: 0
-    textureScale: {x: 1, y: 1}
-    shadowBias: 0.5
-    generateLightingData: 0
-  m_MaskInteraction: 0
-  m_UseWorldSpace: 1
-  m_Loop: 0
-  m_ApplyActiveColorSpace: 1
 --- !u!1 &398212839114277673
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,37 +2023,6 @@ Transform:
   m_Father: {fileID: 7662166116966246314}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1607053781653168509
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5516171188693146580}
-  m_Layer: 9
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5516171188693146580
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607053781653168509}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 121257441966121330}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1773098872068365639
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,142 +2451,6 @@ Transform:
   m_Father: {fileID: 7944847076708070069}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2543333867547891952
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5710770099219598114}
-  - component: {fileID: 808519169693894761}
-  m_Layer: 9
-  m_Name: Grap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5710770099219598114
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2543333867547891952}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4048304301005211384}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!120 &808519169693894761
-LineRenderer:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2543333867547891952}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 0
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: aa158ddc9f645c8409b4f4816c683cb3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  m_Parameters:
-    serializedVersion: 3
-    widthMultiplier: 0.1
-    widthCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    colorGradient:
-      serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
-      key5: {r: 0, g: 0, b: 0, a: 0}
-      key6: {r: 0, g: 0, b: 0, a: 0}
-      key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
-      ctime1: 65535
-      ctime2: 0
-      ctime3: 0
-      ctime4: 0
-      ctime5: 0
-      ctime6: 0
-      ctime7: 0
-      atime0: 0
-      atime1: 65535
-      atime2: 0
-      atime3: 0
-      atime4: 0
-      atime5: 0
-      atime6: 0
-      atime7: 0
-      m_Mode: 0
-      m_ColorSpace: -1
-      m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 0
-    alignment: 0
-    textureMode: 0
-    textureScale: {x: 1, y: 1}
-    shadowBias: 0.5
-    generateLightingData: 0
-  m_MaskInteraction: 0
-  m_UseWorldSpace: 1
-  m_Loop: 0
-  m_ApplyActiveColorSpace: 1
 --- !u!1 &2588491917992271312
 GameObject:
   m_ObjectHideFlags: 0
@@ -4211,8 +3908,6 @@ Transform:
   - {fileID: 4254240825579628915}
   - {fileID: 121257441966121330}
   - {fileID: 6420088722361751394}
-  - {fileID: 8415619627080739192}
-  - {fileID: 5710770099219598114}
   m_Father: {fileID: 4104643511617951134}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8029,7 +7724,7 @@ Transform:
   - {fileID: 881779363401420632}
   - {fileID: 825395085768634989}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1500985851
 Animator:
@@ -8047,7 +7742,12 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'LeftRingDistal'\n\tTransform 'LeftIndexProximal'\n\tTransform
+    'LeftMiddleProximal'\n\tTransform 'RightHand'\n\tTransform 'LeftShoulder'\n\tTransform
+    'RightThumbIntermediate'\n\tTransform 'LeftLowerLeg'\n\tTransform 'Neck'\n\tTransform
+    'RightThumbProximal'\n\tTransform 'LeftUpperArm'\n\tand more ..."
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -8693,19 +8393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10a85cb7642d2f448e02d343dc68dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1500985851}
-  timelines:
-  - {fileID: 11400000, guid: 778857d587b4d6c428499c58f293a373, type: 2}
-  - {fileID: 11400000, guid: 930e4615c7fc6434fa51fd56248ac8ed, type: 2}
-  - {fileID: 11400000, guid: 1c3e84399152c724e9e41f000c93aaf4, type: 2}
-  - {fileID: 11400000, guid: 1e56e5f5018b4474e8adb9a6644c03b0, type: 2}
-  - {fileID: 11400000, guid: 3f998ca49e944374aaf9ef283a66636e, type: 2}
-  - {fileID: 11400000, guid: 28d08308ee35cf8458278c1a980673bf, type: 2}
-  - {fileID: 11400000, guid: 72e159649a051914ebf6a5748a2ccf57, type: 2}
-  - {fileID: 11400000, guid: 6f7348f38306a6c488f04eb4a01d4060, type: 2}
   myAssetHelper: {fileID: 0}
-  CharacterActor: {fileID: 0}
-  CharacterStateController: {fileID: 0}
 --- !u!114 &6713888299540318131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9005,27 +8693,27 @@ MonoBehaviour:
   serializeData2:
     selectionData:
       positions:
-      - x: 0.06732941
-        y: 0.56142294
-        z: -0.04534912
-      - x: 0.10823059
+      - x: 0.06733018
+        y: 0.561423
+        z: -0.04534763
+      - x: 0.108234525
         y: 0.50231826
-        z: -0.07006836
-      - x: 0.11550903
-        y: 0.40011907
-        z: -0.07363129
-      - x: 0.098976135
-        y: 0.3145864
-        z: -0.06264496
-      - x: 0.097846985
-        y: 0.22626066
-        z: -0.061157227
-      - x: 0.1359787
-        y: 0.16285157
-        z: -0.084121704
-      - x: 0.20658112
-        y: 0.12159991
-        z: -0.1273346
+        z: -0.07006496
+      - x: 0.115508854
+        y: 0.4001191
+        z: -0.073631644
+      - x: 0.09897566
+        y: 0.31458634
+        z: -0.06265187
+      - x: 0.09784788
+        y: 0.22626075
+        z: -0.061157163
+      - x: 0.13597772
+        y: 0.16285162
+        z: -0.0841227
+      - x: 0.2065795
+        y: 0.121599965
+        z: -0.12733456
       attributes:
       - Value: 1
       - Value: 2
@@ -9034,7 +8722,7 @@ MonoBehaviour:
       - Value: 2
       - Value: 2
       - Value: 2
-      maxConnectionDistance: 0.10251998
+      maxConnectionDistance: 0.10251979
       userEdit: 0
   gizmoSerializeData:
     always: 0
@@ -9351,24 +9039,24 @@ MonoBehaviour:
   serializeData2:
     selectionData:
       positions:
-      - x: 0.047714233
+      - x: 0.047713757
         y: 0.9143734
-        z: 0.14725494
-      - x: 0.030883789
-        y: 0.86948264
-        z: 0.11374664
-      - x: 0.0014419556
+        z: 0.14725512
+      - x: 0.030883491
+        y: 0.8694826
+        z: 0.11374044
+      - x: 0.0014460087
         y: 0.83946025
-        z: 0.0796814
-      - x: -0.15036774
-        y: 0.9160987
-        z: 0.12158966
-      - x: -0.12632751
-        y: 0.8708519
-        z: 0.09337616
-      - x: -0.08969879
+        z: 0.07967948
+      - x: -0.1503681
+        y: 0.91609865
+        z: 0.12159085
+      - x: -0.12632447
+        y: 0.8708518
+        z: 0.09337193
+      - x: -0.08969784
         y: 0.8402542
-        z: 0.067871094
+        z: 0.0678705
       attributes:
       - Value: 1
       - Value: 2
@@ -9376,7 +9064,7 @@ MonoBehaviour:
       - Value: 1
       - Value: 2
       - Value: 2
-      maxConnectionDistance: 0.058491457
+      maxConnectionDistance: 0.05849513
       userEdit: 0
   gizmoSerializeData:
     always: 0
@@ -9695,35 +9383,35 @@ MonoBehaviour:
     selectionData:
       positions:
       - x: -0.04888153
-        y: 0.93193877
-        z: 0.1166687
-      - x: 0.046546936
+        y: 0.9319387
+        z: 0.116670065
+      - x: 0.046545863
         y: 0.9375454
-        z: 0.08067322
-      - x: 0.021751404
+        z: 0.080672085
+      - x: 0.0217551
         y: 0.8671404
-        z: 0.05253601
-      - x: -0.13187408
+        z: 0.052538153
+      - x: -0.1318745
         y: 0.93909943
-        z: 0.057556152
-      - x: -0.10194397
-        y: 0.8682178
-        z: 0.036514282
-      - x: -0.03694153
-        y: 0.97622705
-        z: 0.027519226
-      - x: -0.03478241
-        y: 0.88194513
-        z: 0.0044784546
-      - x: -0.06298828
+        z: 0.0575552
+      - x: -0.10194272
+        y: 0.86821777
+        z: 0.03651136
+      - x: -0.036945105
+        y: 0.9762271
+        z: 0.027519763
+      - x: -0.03478086
+        y: 0.8819451
+        z: 0.00447762
+      - x: -0.06298947
         y: 0.9261999
-        z: 0.22517395
-      - x: -0.059783936
-        y: 0.88793933
-        z: 0.19787598
-      - x: -0.056800842
-        y: 0.86391354
-        z: 0.17320251
+        z: 0.22517198
+      - x: -0.059786618
+        y: 0.8879393
+        z: 0.19787954
+      - x: -0.056798816
+        y: 0.8639135
+        z: 0.1732037
       attributes:
       - Value: 1
       - Value: 2
@@ -9735,7 +9423,7 @@ MonoBehaviour:
       - Value: 1
       - Value: 2
       - Value: 2
-      maxConnectionDistance: 0.10214549
+      maxConnectionDistance: 0.102145374
       userEdit: 0
   gizmoSerializeData:
     always: 0
@@ -10053,24 +9741,24 @@ MonoBehaviour:
   serializeData2:
     selectionData:
       positions:
-      - x: 0.019355774
+      - x: 0.019355357
         y: 1.0216792
-        z: 0.14905548
-      - x: 0.04359436
+        z: 0.14905751
+      - x: 0.043592095
         y: 1.0344272
-        z: 0.18121338
-      - x: 0.060897827
+        z: 0.18120933
+      - x: 0.060902476
         y: 1.0454363
-        z: 0.21645355
-      - x: -0.1215744
+        z: 0.21645439
+      - x: -0.12157118
         y: 1.0229065
-        z: 0.13079834
-      - x: -0.15298462
+        z: 0.13079852
+      - x: -0.1529789
         y: 1.0361394
-        z: 0.15573883
-      - x: -0.17851257
+        z: 0.15574074
+      - x: -0.17850816
         y: 1.0475217
-        z: 0.18544006
+        z: 0.1854353
       attributes:
       - Value: 1
       - Value: 2
@@ -10078,7 +9766,7 @@ MonoBehaviour:
       - Value: 1
       - Value: 2
       - Value: 2
-      maxConnectionDistance: 0.04223921
+      maxConnectionDistance: 0.042233523
       userEdit: 0
   gizmoSerializeData:
     always: 0
@@ -11435,9 +11123,9 @@ MonoBehaviour:
   isOnDetection: 0
   isHited: 0
   impulsePar: []
-  weaponFx: []
+  weaponHitFx: []
   HittedCharacter: []
-  WeaponDirection: {x: 0, y: 0, z: 0}
+  WeaponWorldDirection: {x: 0, y: 0, z: 0}
   weaponOwner: {fileID: 0}
   weaponData: {fileID: 0}
   isNeedUpdateDirection: 1
@@ -11828,10 +11516,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3184941477821605872}
-    - targetCorrespondingSourceObject: {fileID: 6894020132132534744, guid: 32dd1f740091f0d498d6937a35160e46,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5516171188693146580}
     - targetCorrespondingSourceObject: {fileID: 7353512227576625319, guid: 32dd1f740091f0d498d6937a35160e46,
         type: 3}
       insertIndex: -1
@@ -11934,9 +11618,9 @@ MonoBehaviour:
   isOnDetection: 0
   isHited: 0
   impulsePar: []
-  weaponFx: []
+  weaponHitFx: []
   HittedCharacter: []
-  WeaponDirection: {x: 0, y: 0, z: 0}
+  WeaponWorldDirection: {x: 0, y: 0, z: 0}
   weaponOwner: {fileID: 0}
   weaponData: {fileID: 0}
   isNeedUpdateDirection: 1

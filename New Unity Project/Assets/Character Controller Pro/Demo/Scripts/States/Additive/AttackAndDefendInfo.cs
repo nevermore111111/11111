@@ -20,7 +20,7 @@ public class AttackAndDefendInfo
 
     public float defendStartTime = 0f;
     public int perfectDefendTime = 400;
-    public DefendKind currentDenfendKind;
+    public DefendKind currentDenfendKind = DefendKind.unDefend;
 
     public Action defendStartAction;
     public Action OnHit;

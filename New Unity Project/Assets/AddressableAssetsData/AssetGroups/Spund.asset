@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Spund
+  m_EditorClassIdentifier: 
+  m_GroupName: Spund
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 2d69cb531c22c574eb4be82853288f66
+  m_SerializeEntries:
+  - m_GUID: a3d87eb0dc187694ba93df1eb3a95a54
+    m_Address: normal
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8a575854bb5e29489e15e84b6b277ad
+    m_Address: perfect
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sound
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4d40217de193e4042a5b5d13b61a26b4, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: fc430ef17afe79f448c09e4d0e95e96b, type: 2}
+    - {fileID: 11400000, guid: 179dff86eccaaac409b48b1c141b345f, type: 2}
