@@ -70,38 +70,41 @@ public class Hitted : CharacterState
     }
 
     //根据目标的方位和攻击类型来决定自身的受击类型。需要设置当前的受击动画。
-    public void GetHitted(WeaponManager weapon, IAgent.HitKind hitKind, bool NeedChangeState = true)
+    public void GetHitted(WeaponManager weapon, IAgent.HitKind hitKind)
     {
         HittedBack(weapon, true);
         Debug.Log("击退？");
-        SetAnimationParameters(weapon.WeaponWorldDirection, true);
+        SetAnimationParameters(weapon.WeaponWorldDirection, CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind);//动画参数
+        CheckAndEnterState(weapon, hitKind, CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind);
+    }
 
-        switch (CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind)
+    private void CheckAndEnterState(WeaponManager weapon, IAgent.HitKind hitKind,DefendKind defend)
+    {
+        switch (defend)
         {
             case DefendKind.unDefend:
-                CheckAndEnterState(weapon, hitKind, NeedChangeState);
+                CharacterStateController.EnqueueTransition<Hitted>();
+                CharacterActor.Animator.CrossFadeInFixedTime("Hitted.HittedOnGround", 0.1f, 0, 0.1f);
                 //未防御
                 break;
             case DefendKind.normalDefend:
                 //普通
+                CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.Defend.normalDefend", 0.1f, 0, 0.1f);
                 break;
             case DefendKind.perfectDefend:
+                CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.Defend.perfectDefend", 0.1f, 0, 0.1f);
                 //完美
                 break;
             case DefendKind.OnlyDamage:
+                Debug.LogError("这个地方需要覆写动画");//这个是小受击
+                //CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.Defend.perfectDefend", 0.1f, 0, 0.1f);
                 //霸体
                 break;
             case DefendKind.noDamage:
+                Debug.Log("现在处于无敌");
                 //无敌
                 break;
         }
-    }
-
-    private void CheckAndEnterState(WeaponManager weapon, IAgent.HitKind hitKind, bool NeedChangeState)
-    {
-        Debug.Log("受击了，这时应该修改当前状态到hit");
-        CharacterStateController.EnqueueTransition<Hitted>();
-        CharacterActor.Animator.CrossFadeInFixedTime("Hitted.HittedOnGround", 0.1f, 0, 0.1f);
     }
 
     /// <summary>
@@ -121,25 +124,44 @@ public class Hitted : CharacterState
     }
 
 
-    public void SetAnimationParameters(Vector3 WorldAttackDirection, DefendKind defendKind)
-    {
-        switch (defendKind)
-        {
-            case DefendKind.unDefend:
-                SetAnimationParameters(WorldAttackDirection, true, false);
-                break;
-            default:
-                SetAnimationParameters(WorldAttackDirection, false, true);
-                break;
-        }
-    }
+    //public void SetAnimationParameters(Vector3 WorldAttackDirection, DefendKind defendKind)
+    //{
+    //    switch (defendKind)
+    //    {
+    //        case DefendKind.unDefend:
+    //            SetAnimationParameters(WorldAttackDirection, true, false);
+    //            break;
+    //        default:
+    //            SetAnimationParameters(WorldAttackDirection, false, true);
+    //            break;
+    //    }
+    //}
     /// <summary>
     /// 根据对方 武器的方向设置自身的受击方向
     /// </summary>
     /// <param name="weapon"></param>
     /// <param name="IgnoreYAxis"></param>
-    public void SetAnimationParameters(Vector3 WorldAttackDirection, bool IgnoreYAxis = true, bool IgnoreZAxis = false)
+    public void SetAnimationParameters(Vector3 WorldAttackDirection, DefendKind CurrentDefendKind)
     {
+        //防御住的忽略z，未防御住的忽略y
+        bool IgnoreYAxis = false;
+        bool IgnoreZAxis = false;
+        switch (CurrentDefendKind)
+        {
+            case DefendKind.perfectDefend:
+                IgnoreZAxis = true;
+                break;
+            case DefendKind.normalDefend:
+                IgnoreZAxis = true;
+                break;
+            case DefendKind.unDefend:
+                IgnoreYAxis = true;
+                break;
+            case DefendKind.OnlyDamage:
+                break;
+            case DefendKind.noDamage:
+                break;
+        }
         //世界转换到自身
         Vector3 attackFrom = this.transform.InverseTransformDirection(-WorldAttackDirection);
         if (IgnoreYAxis)

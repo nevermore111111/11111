@@ -80,7 +80,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     virtual public void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground)
     {
         if (Hitted != null)
-            Hitted.GetHitted(weapon, hit, true);
+            Hitted.GetHitted(weapon, hit);
         attackAndDefendInfo.OnHit?.Invoke();
         FxManagerPro.Instance.PlayFx(weapon.weaponHitFx, collider.transform);
     }

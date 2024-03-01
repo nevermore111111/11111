@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
-
+[RequireComponent(typeof(KnifeManager))]
 public class BoxDetection : Detection
 {
     public Vector3 boxCenter;
     public Vector3 halfExtents;
     public Quaternion orientation;
     public bool debug;
-
     public event EventHandler HittedEvent;
 
     KnifeManager knifeManager;
