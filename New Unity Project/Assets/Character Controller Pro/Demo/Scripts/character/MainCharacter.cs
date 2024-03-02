@@ -12,7 +12,7 @@ public class MainCharacter : CharacterInfo
     public Hitted CharacterHitted;
     public WeaponKind WeaponKind;
     //public HitData hitData;
-    public HitTimeData hitTimeData;
+  
 
 
     protected override void Awake()
@@ -20,7 +20,7 @@ public class MainCharacter : CharacterInfo
         base.Awake();
 
         CharacterHitted = characterActor.GetComponentInChildren<Hitted>();
-        hitTimeData = FindObjectOfType<HitTimeData>();
+       
     }
 
 #warning(这里没做,摄像机使用的)
@@ -58,44 +58,7 @@ public class MainCharacter : CharacterInfo
         }
         return false;
     }
-    override public void HitOther(WeaponManager weapon)
-    {
-        //这个需要一个动画时间方法，动画中去更新这次攻击的参数
-        //调用击中效果
-        HitParByHitKind(weapon);
-    }
 
-    //这个是我打到别人的方法
-    public void HitParByHitKind(WeaponManager weapon)
-    {
-
-#if UNITY_EDITOR
-        // 只在Unity编辑器中运行的代码
-        if (hitTimeData.ForceCurrent > -1)
-        {
-            //如果强制使用这个震动，会播放这个震动的震屏效果
-            HitStrength = hitTimeData.ForceCurrent;
-        }
-#endif
-        HitPlus(HitStrength, hitTimeData, weapon);
-    }
-    public async void HitPlus(int currentHit, HitTimeData hitTimeData, WeaponManager weaponManager)
-    {
-        hitTimeData.CurrentHit = currentHit;
-        float fadeInDuration = hitTimeData.currentHitTimePara.fadeTime;//hitData.GetFadeTime(hitData, currentHit);
-        float fadeOutDuration = hitTimeData.currentHitTimePara.fadeTime / 2f;// 渐出时间稍微短一些
-        float duration = hitTimeData.currentHitTimePara.stayTime;
-        float targetTimeScale = hitTimeData.currentHitTimePara.targetTimeScale;
-        //TimeScaleManager.Instance.SetTimeScale(fadeInDuration, fadeOutDuration, duration, targetTimeScale);
-        //减速自身和目标的速度。
-        if (currentHit == 3)
-        await TimeScaleManager.Instance.SetAnimatorSpeed(fadeInDuration, fadeOutDuration, duration, targetTimeScale, new List<Animator> { characterActor.Animator, selectEnemy?.characterActor?.Animator });
-        if (currentHit == 3)
-        if (weaponManager != null && weaponManager.isActiveAndEnabled)
-        {
-            //调用震动和特效
-            weaponManager.Impluse();
-        }
-    }
+    
 }
 

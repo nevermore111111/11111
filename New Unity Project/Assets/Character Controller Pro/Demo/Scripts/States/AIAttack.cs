@@ -52,7 +52,7 @@ public class AIAttack : CharacterState
     {
         if (CharacterActor != null)
         {
-            CharacterActor.Animator.CrossFade(targetAnim, 0.25f);
+            CharacterActor.Animator.CrossFadeInFixedTime(targetAnim, 0.1f);
             Debug.Log(targetAnim);
         }
     }

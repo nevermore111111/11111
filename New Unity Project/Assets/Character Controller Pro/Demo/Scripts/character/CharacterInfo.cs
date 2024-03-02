@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
 using UnityEngine;
+using static HitTimeData;
 
 [RequireComponent(typeof(AgetHitBox))]
 public abstract class CharacterInfo : MonoBehaviour, IAgent
@@ -113,10 +114,45 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     protected virtual void Start()
     {
         Hitted = characterActor?.stateController.GetState<Hitted>() as Hitted;
+        hitTimeData = FindObjectOfType<HitTimeData>();
     }
+    public HitTimeData hitTimeData;
+    virtual public void HitOther(WeaponManager weaponManager)
+    {
+        HitParByHitKind(weaponManager);
+    }
+    //这个是我打到别人的方法
+    public void HitParByHitKind(WeaponManager weapon)
+    {
 
-    abstract public void HitOther(WeaponManager weaponManager);
-
+#if UNITY_EDITOR
+        // 只在Unity编辑器中运行的代码
+        if (hitTimeData.ForceCurrent > -1)
+        {
+            //如果强制使用这个震动，会播放这个震动的震屏效果
+            HitStrength = hitTimeData.ForceCurrent;
+        }
+#endif
+        HitPlus(HitStrength, hitTimeData, weapon);
+    }
+    public async void HitPlus(int currentHit, HitTimeData hitTimeData, WeaponManager weaponManager)
+    {
+        hitTimeData.CurrentHit = currentHit;
+        float fadeInDuration = hitTimeData.currentHitTimePara.fadeTime;//hitData.GetFadeTime(hitData, currentHit);
+        float fadeOutDuration = hitTimeData.currentHitTimePara.fadeTime / 2f;// 渐出时间稍微短一些
+        float duration = hitTimeData.currentHitTimePara.stayTime;
+        float targetTimeScale = hitTimeData.currentHitTimePara.targetTimeScale;
+        //TimeScaleManager.Instance.SetTimeScale(fadeInDuration, fadeOutDuration, duration, targetTimeScale);
+        //减速自身和目标的速度。
+        if (currentHit == 3)
+            await TimeScaleManager.Instance.SetAnimatorSpeed(fadeInDuration, fadeOutDuration, duration, targetTimeScale, new List<Animator> { characterActor.Animator, selectEnemy?.characterActor?.Animator });
+        if (currentHit == 3)
+            if (weaponManager != null && weaponManager.isActiveAndEnabled)
+            {
+                //调用震动和特效
+                weaponManager.Impluse();
+            }
+    }
 
     //_______________________________________________________子方法分隔线_______________________________________________________________
     //_______________________________________________________子方法分隔线_______________________________________________________________

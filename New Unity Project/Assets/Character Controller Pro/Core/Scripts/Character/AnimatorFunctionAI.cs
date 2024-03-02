@@ -80,25 +80,9 @@ public class AnimatorFunctionAI : MonoBehaviour
 
     public void HitStart()//int hitKind, string activeWeaponDetect
     {
+        SetStrengthAndDetector();//确认攻击力度，和这次要用的检测区域
         SetWeaponDirection();
-        SetStrengthAndDetector();
-        //开启武器检测，并且开启对应的碰撞区域
         ActiveDetectionByStringPar(activeWeaponDetect, SetWeaponDetection(true));
-        //foreach (var manager in weaponManagers)
-        //{
-        //    if (manager.isActiveAndEnabled)
-        //    {
-        //        manager.ToggleDetection(true);
-        //        if (manager != null)
-        //        {
-        //            //根据动画参数激活对应的碰撞区域
-        //            manager.weaponFx = CurrentAnimConfig.HittedEffect;
-        //            ActiveDetectionByStringPar(activeWeaponDetect, manager);
-
-        //        }
-        //        break;
-        //    }
-        //}
         currentHitIndex++;
     }
 
@@ -231,7 +215,7 @@ public class AnimatorFunctionAI : MonoBehaviour
         {
             if (manager.isActiveAndEnabled)
             {
-                manager.ToggleDetection(false);
+                manager.ToggleDetection(IsOpenManagerToggle);
                 return manager;
             }
         }

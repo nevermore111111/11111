@@ -975,7 +975,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102522144}
-  m_LocalRotation: {x: 0.07866685, y: -0.12013196, z: 0.009549815, w: 0.98959017}
+  m_LocalRotation: {x: 0.07866687, y: -0.120131925, z: 0.009549815, w: 0.98959017}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6742,6 +6742,41 @@ PrefabInstance:
       propertyPath: mainCharacter
       value: 
       objectReference: {fileID: 8805377711411893423}
+    - target: {fileID: 2312740966242877224, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3232636
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312740966242877224, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3232636
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312740966242877224, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3232636
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312740966242877224, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312740966242877224, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.035
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312740966242877224, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.045
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312740966242877224, guid: 15963df9e6a96144bb9d8742a888bd7c,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6159700207672757853, guid: 15963df9e6a96144bb9d8742a888bd7c,
         type: 3}
       propertyPath: m_Name
@@ -8164,7 +8199,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582922921}
-  m_LocalRotation: {x: 0.09781942, y: -0.11992445, z: 0.011874853, w: 0.9878808}
+  m_LocalRotation: {x: 0.09781942, y: -0.11992442, z: 0.011874851, w: 0.9878808}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8344,7 +8379,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605997566}
-  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
+  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9988,6 +10023,7 @@ MonoBehaviour:
     defendStartTime: 0
     perfectDefendTime: 400
     currentDenfendKind: 2
+  hitTimeData: {fileID: 0}
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -10480,8 +10516,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914094569}
-  m_LocalRotation: {x: 0.039234743, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
-  m_LocalPosition: {x: -0.00009107589, y: 2.062046, z: -5.8746176}
+  m_LocalRotation: {x: 0.039234847, y: 0.000007778405, z: -0.00000030174849, w: 0.99923}
+  m_LocalPosition: {x: -0.00009107589, y: 2.0620472, z: -5.874625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13355,7 +13391,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158502189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -1.22, z: 0.034}
+  m_LocalPosition: {x: 0, y: -1.337, z: 0.034}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18939,8 +18975,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498168725}
-  m_LocalRotation: {x: -0.6795961, y: 0.0036385478, z: 0.0033708357, w: 0.73356974}
-  m_LocalPosition: {x: -121.699684, y: -6.8322344, z: 95.85165}
+  m_LocalRotation: {x: 0.0032979785, y: 0.71324265, z: 0.7009015, w: -0.003356047}
+  m_LocalPosition: {x: -121.70314, y: -6.8217025, z: 95.49316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20159,7 +20195,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689691047}
-  m_LocalRotation: {x: 0.02316407, y: -0.26986164, z: 0.006493977, w: 0.9625986}
+  m_LocalRotation: {x: 0.023164073, y: -0.26986167, z: 0.00649398, w: 0.96259856}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -20752,6 +20788,7 @@ MonoBehaviour:
     defendStartTime: 0
     perfectDefendTime: 400
     currentDenfendKind: 0
+  hitTimeData: {fileID: 0}
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -21689,6 +21726,7 @@ MonoBehaviour:
     defendStartTime: 0
     perfectDefendTime: 400
     currentDenfendKind: 0
+  hitTimeData: {fileID: 0}
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -21971,7 +22009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTags:
-  - player
+  - Player
   wasHit: []
   isHited: 0
   Weapon: {fileID: 0}
@@ -22073,6 +22111,7 @@ MonoBehaviour:
     defendStartTime: 0
     perfectDefendTime: 400
     currentDenfendKind: 0
+  hitTimeData: {fileID: 0}
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -24450,6 +24489,7 @@ MonoBehaviour:
     defendStartTime: 0
     perfectDefendTime: 400
     currentDenfendKind: 0
+  hitTimeData: {fileID: 0}
   targetGroupSize: 1
   targetHp: 10000
   CharacterHitted: {fileID: 0}
@@ -25628,9 +25668,9 @@ MonoBehaviour:
     defendStartTime: 0
     perfectDefendTime: 400
     currentDenfendKind: 0
+  hitTimeData: {fileID: 0}
   CharacterHitted: {fileID: 0}
   WeaponKind: 0
-  hitTimeData: {fileID: 0}
 --- !u!135 &8805377711411893424
 SphereCollider:
   m_ObjectHideFlags: 0

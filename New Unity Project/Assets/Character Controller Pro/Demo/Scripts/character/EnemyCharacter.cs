@@ -25,9 +25,6 @@ public class EnemyCharacter : CharacterInfo
 
     
 
-    public override void HitOther(WeaponManager weaponManager)
-    {
-        throw new System.NotImplementedException();
-    }
+   
 
 }

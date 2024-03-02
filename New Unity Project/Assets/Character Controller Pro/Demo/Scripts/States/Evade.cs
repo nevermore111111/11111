@@ -160,14 +160,21 @@ namespace Rusk
             {
                 if (dashCursor >= 0.85f && CharacterActions.attack.value == true)
                 {
-                    if (attack.currentAttackMode == AttackMode.AttackOnGround)
+                    if(characterActor.IsPlayer)
                     {
-                        CharacterStateController.EnqueueTransition<AttackOnGround>(); ResetDash();
-                    }
+                        if (attack.currentAttackMode == AttackMode.AttackOnGround)
+                        {
+                            CharacterStateController.EnqueueTransition<AttackOnGround>(); ResetDash();
+                        }
 
-                    if (attack.currentAttackMode == AttackMode.AttackOnGround_fist)
+                        if (attack.currentAttackMode == AttackMode.AttackOnGround_fist)
+                        {
+                            CharacterStateController.EnqueueTransition<AttackOnGround_fist>(); ResetDash();
+                        }
+                    }
+                    else
                     {
-                        CharacterStateController.EnqueueTransition<AttackOnGround_fist>(); ResetDash();
+                        CharacterStateController.EnqueueTransition<AIAttack>(); ResetDash();
                     }
                 }
             }
@@ -353,7 +360,6 @@ namespace Rusk
 
         public virtual void ResetDash()
         {
-
             CharacterActor.Velocity = Vector3.zero;
             isDone = false;
             dashCursor = 0;

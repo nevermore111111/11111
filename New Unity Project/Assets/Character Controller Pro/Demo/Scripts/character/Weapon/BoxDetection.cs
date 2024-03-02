@@ -43,6 +43,10 @@ public class BoxDetection : Detection
                 if (receive.isNormalReceive())
                 {
                     hitBox = receive.CharacterInfo.hitBox;
+                    if (hitBox.characterInfoOwner.characterActor.IsPlayer == true)
+                    {
+                        Debug.LogError("击中了主角");
+                    }
                     if (hitBox && hitBox.agent && targetTags.Contains(hitBox.agent.tag) && !wasHit.Contains(hitBox.agent))
                     {
                         wasHit.Add(hitBox.agent);
