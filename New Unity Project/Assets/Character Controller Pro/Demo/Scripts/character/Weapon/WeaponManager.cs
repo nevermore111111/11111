@@ -25,7 +25,6 @@ public class WeaponManager : MonoBehaviour
     public bool isHited;
     private CinemachineImpulseSource impulseSource;
     Impulse impulse;
-    public float[] impulsePar;
     [Tooltip("这里配置要装载哪一段特效")]
     public string[] weaponHitFx;
     public List<CharacterInfo> HittedCharacter;
@@ -35,7 +34,7 @@ public class WeaponManager : MonoBehaviour
     /// </summary>
     public Vector3 WeaponWorldDirection;
     public CharacterInfo weaponOwner;
-    public WeaponData weaponData;
+    WeaponData weaponData;
     public bool isNeedUpdateDirection = false;
 
 

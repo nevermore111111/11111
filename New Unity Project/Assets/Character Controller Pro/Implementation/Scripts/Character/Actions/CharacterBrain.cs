@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.AI;
-using Lightbug.Utilities;
-using Lightbug.CharacterControllerPro.Core;
+﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Lightbug.CharacterControllerPro.Implementation
 {
@@ -18,19 +15,18 @@ namespace Lightbug.CharacterControllerPro.Implementation
     {
         [SerializeField]
         bool isAI = false;
-
+        [ShowIf("isAI")]
         [SerializeField]
         InputHandlerSettings inputHandlerSettings = new InputHandlerSettings();
 
         [SerializeField]
-        CharacterAIBehaviour aiBehaviour = null;
+        CharacterAIBehaviour StartAIBehaviour = null;
 
-        [SerializeField]
         CharacterActions characterActions = new CharacterActions();
 
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
         // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-        
+        [SerializeField]
         CharacterAIBehaviour currentAIBehaviour = null;
         bool firstUpdateFlag = false;
 
@@ -62,7 +58,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
             characterActions.Reset();
 
             if (isAI)
-                SetAIBehaviour(aiBehaviour);
+                SetAIBehaviour(StartAIBehaviour);
 
             this.isAI = isAI;
         }
@@ -97,6 +93,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
                 UpdateAIBrainValues(dt);
             else
                 UpdateHumanBrainValues(dt);
+
         }
 
         void UpdateHumanBrainValues(float dt)

@@ -7,6 +7,7 @@ using Lightbug.Utilities;
 using Lightbug.CharacterControllerPro.Core;
 using Unity.VisualScripting;
 using Sirenix.OdinInspector.Editor.Drawers;
+using UnityEditor.Build.Pipeline;
 
 namespace Lightbug.CharacterControllerPro.Demo
 {
@@ -74,12 +75,12 @@ namespace Lightbug.CharacterControllerPro.Demo
                 timer = 0f;
                 if (currentTimeToIdle > 0)
                 {
-                    currentTimeToIdle -= dt;
-                    UpdateIdleBehaviour(dt);
+                    currentTimeToIdle -= refreshTime;
+                    UpdateIdleBehaviour(refreshTime);
                 }
                 else
                 {
-                    UpdateFollowTargetBehaviour(dt);
+                    UpdateFollowTargetBehaviour(refreshTime);
                 }
             }
             else
@@ -121,7 +122,11 @@ namespace Lightbug.CharacterControllerPro.Demo
                 return;
             }
             if (navMeshPath.corners.Length > 1)
+            {
                 SetMovementAction(path);
+                Debug.DrawLine(CharacterActor.transform.position, CharacterActor.transform.position + path,Color.red,0.5f);
+            }
+               
         }
         void UpdateIdleBehaviour(float dt)
         {

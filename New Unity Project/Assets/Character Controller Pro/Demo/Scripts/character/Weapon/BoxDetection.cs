@@ -50,6 +50,10 @@ public class BoxDetection : Detection
 
                         if (!Weapon.HittedCharacter.Contains(hitBox.characterInfoOwner))
                         {
+                            if (hitBox.characterInfoOwner.characterActor.IsPlayer == true)
+                            {
+                                Debug.LogError("击中了主角");
+                            }
                             HittedEvent?.Invoke(this, null);
                             Weapon.HittedCharacter.Add(hitBox.characterInfoOwner);
 

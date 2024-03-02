@@ -72,6 +72,8 @@ public class Hitted : CharacterState
     //根据目标的方位和攻击类型来决定自身的受击类型。需要设置当前的受击动画。
     public void GetHitted(WeaponManager weapon, IAgent.HitKind hitKind)
     {
+        if (CharacterActor.IsPlayer)
+            Debug.LogError("主角受击了");
         HittedBack(weapon, true);
         Debug.Log("击退？");
         SetAnimationParameters(weapon.WeaponWorldDirection, CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind);//动画参数

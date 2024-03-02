@@ -55,7 +55,6 @@ public class AIAttackBehaviour : CharacterAIBehaviour
     {
         if (timer >= refreshTime)
         {
-            timer = 0;
             //执行一次逻辑
             if (CanAttackOrChangeState())
             {
@@ -67,6 +66,7 @@ public class AIAttackBehaviour : CharacterAIBehaviour
                     }
                 }
             }
+            timer = 0;
             //这时需要去执行正常逻辑了
         }
         timer += dt;
@@ -108,7 +108,7 @@ public class AIAttackBehaviour : CharacterAIBehaviour
         {
             return false;
         }
-        else if (!isAdjustPos && CharacterActor.CharacterInfo.selectEnemy != null)
+        else if (isAdjustPos == false && CharacterActor.CharacterInfo.selectEnemy != null)
         {
             Vector3 targetEvadeDirection = Quaternion.AngleAxis(UnityEngine.Random.Range(-45f, 45f), Vector3.up) * (-CharacterActor.Forward);
             //进行调整

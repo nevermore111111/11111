@@ -231,7 +231,7 @@ namespace Rusk
             //需要根据闪避的方向去增加evade 的时间 
 
             //我需要 1根据当前闪避的方向和人物后方向归一化的的点乘 的 数值去计算.直接使用input。y就行了
-
+            if(CharacterActor.IsPlayer) 
             SetAnimatorPar();
 
             ResetDash();

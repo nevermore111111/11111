@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
+using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,7 @@ public class AnimatorFunctionAI : MonoBehaviour
         timelineManager = GetComponent<TimelineManager>();
         WeaponData = FindAnyObjectByType<WeaponData>();
         characterActor = GetComponentInParent<CharacterActor>();
+        _characterInfo = characterActor.CharacterInfo;
         //
     }
     private void Start()
@@ -256,6 +258,7 @@ public class AnimatorFunctionAI : MonoBehaviour
     {
         int[] weaponIndexes = ConvertStringToIntArray(activeWeaponDetect);
         manager.ActiveWeaponDetectors = weaponIndexes.Select(index => (WeaponDetector)index).ToArray();
+        Debug.Log(manager.ActiveWeaponDetectors.Length);
     }
 
     private int[] ConvertStringToIntArray(string str)
