@@ -318,15 +318,25 @@ namespace XftWeapon {
             }
         }
 
-        void RefreshSpline() {
-            for (int i = 0; i < mSnapshotList.Count; i++) {
+        void RefreshSpline()
+        {
+            // Ensure mSnapshotList has MaxFrame elements
+            while (mSnapshotList.Count < MaxFrame)
+            {
+                Element newElement = new Element(PointStart.position, PointEnd.position);
+                mSnapshotList.Add(newElement);
+            }
+
+            // Update control points using mSnapshotList
+            for (int i = 0; i < MaxFrame; i++)
+            {
                 mSpline.ControlPoints[i].Position = mSnapshotList[i].Pos;
                 mSpline.ControlPoints[i].Normal = mSnapshotList[i].PointEnd - mSnapshotList[i].PointStart;
             }
 
             mSpline.RefreshSpline();
         }
-
+      
         void UpdateVertex() {
 
             VertexPool pool = mVertexSegment.Pool;
