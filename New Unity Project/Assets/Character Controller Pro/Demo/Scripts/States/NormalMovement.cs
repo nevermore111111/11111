@@ -86,9 +86,8 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 if (CharacterActor.IsPlayer)
                 {
-                    CharacterActor.SetUpRootMotion(true, false);
+                    CharacterActor.SetUpRootMotion(value, false);
                     CharacterActor.UseRootMotion = value;
-                    CharacterActor.CharacterInfo.attackAndDefendInfo.defendStartTime = Time.time;
                     SetWeapon(value);
                 }
                 CharacterActor.Animator.SetBool(defensePar, value);
@@ -103,6 +102,7 @@ namespace Lightbug.CharacterControllerPro.Demo
 
                     //设置武器
                     CharacterActor.CharacterInfo.attackAndDefendInfo.ChangeDefendFun();
+                    CharacterActor.CharacterInfo.attackAndDefendInfo.defendStartTime = Time.time;//写入当前防御的时间戳
                     CharacterActor.CharacterInfo.attackAndDefendInfo.defendStartAction?.Invoke();
                 }
                 else if (!value && isDefense)//刚刚出来
@@ -1103,7 +1103,6 @@ namespace Lightbug.CharacterControllerPro.Demo
                 if (CharacterActor.IsPlayer && CharacterActor.UpdateRootPosition == false)
                 {
                     //xMove
-
                     XYZMove = CharacterActor.transform.InverseTransformDirection(CharacterActor.Velocity).normalized * (CharacterActor.Velocity.magnitude / currentPlanarSpeedLimit);
                     //Debug.Log($"速度比例{XYZMove},当前速度{CharacterActor.Velocity.magnitude},速度限制{currentPlanarSpeedLimit}");
                     CharacterActor.Animator.SetFloat(xMovePar, XYZMove.x);
