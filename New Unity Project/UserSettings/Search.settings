@@ -10,7 +10,7 @@ showStatusBar = false
 scopes = {
 	"last_search.310DEAF1" = ""
 	"OpenInspectorPreview.310DEAF1" = "0"
-	"currentGroup.310DEAF1" = "all"
+	"currentGroup.310DEAF1" = "asset"
 }
 providers = {
 	adb = {
