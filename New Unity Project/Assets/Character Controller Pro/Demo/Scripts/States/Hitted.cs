@@ -90,11 +90,14 @@ public class Hitted : CharacterState
                 //未防御
                 break;
             case DefendKind.normalDefend:
+                CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.StableGrounded", 0.05f, 0, 0f);
                 //普通
-                CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.Defend.normalDefend", 0.1f, 0, 0.1f);
                 break;
             case DefendKind.perfectDefend:
-                CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.Defend.perfectDefend", 0.1f, 0, 0.1f);
+                Debug.Log("bofang");
+                CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.PerfectDefend", 0.15f, 0, 0f);
+                CharacterActor.Animator.ResetTrigger(defendOnce);
+                //CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.Defend.PerfectDefend 1", 0.1f, 0, 0.1f);
                 //完美
                 break;
             case DefendKind.OnlyDamage:
@@ -145,6 +148,9 @@ public class Hitted : CharacterState
     /// <param name="IgnoreYAxis"></param>
     public void SetAnimationParameters(Vector3 WorldAttackDirection, DefendKind CurrentDefendKind)
     {
+        CharacterActor.Animator.SetFloat(perfectDefendKind, 0);
+        CharacterActor.Animator.SetTrigger(defendOnce);
+
         //防御住的忽略z，未防御住的忽略y
         bool IgnoreYAxis = false;
         bool IgnoreZAxis = false;
@@ -186,27 +192,28 @@ public class Hitted : CharacterState
         CharacterActor.Animator.SetFloat("attackZFrom", attackFrom.y);
         if (CurrentDefendKind == DefendKind.perfectDefend && CharacterActor.IsPlayer)
         {
+            Debugger.Log("进入了完美格挡");
             Vector2 defendVector = new Vector2(attackFrom.x, attackFrom.y);
             if (defendVector.x > 0f)//根据攻击方向象限防御
             {
                 if (defendVector.y > 0f)
                 {
-                    CharacterActor.Animator.SetInteger(perfectDefendKind, 1);
+                    CharacterActor.Animator.SetFloat(perfectDefendKind, 1);
                 }
                 else
                 {
-                    CharacterActor.Animator.SetInteger(perfectDefendKind, 4);
+                    CharacterActor.Animator.SetFloat(perfectDefendKind, 4);
                 }
             }
             else
             {
                 if(defendVector.y>0f)
                 {
-                    CharacterActor.Animator.SetInteger(perfectDefendKind, 2);
+                    CharacterActor.Animator.SetFloat(perfectDefendKind, 2);
                 }
                 else
                 {
-                    CharacterActor.Animator.SetInteger(perfectDefendKind, 3);
+                    CharacterActor.Animator.SetFloat(perfectDefendKind, 3);
                 }
             }
         }

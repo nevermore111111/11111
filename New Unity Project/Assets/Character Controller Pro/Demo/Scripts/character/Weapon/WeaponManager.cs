@@ -13,6 +13,7 @@ using UnityEngine;
 //我需要做的一个功能 ，在攻击hit事件的时候判定当前的武器是否集中了敌人，如果集中了敌人，那么就震动摄像机，而且将我和目标的动画播放速度降低
 //[RequireComponent(typeof(CinemachineImpulseSource))]
 //[RequireComponent(typeof(Detection))]
+[RequireComponent(typeof(AudioSource))]
 public class WeaponManager : MonoBehaviour
 {
 
@@ -36,7 +37,9 @@ public class WeaponManager : MonoBehaviour
     public CharacterInfo weaponOwner;
     WeaponData weaponData;
     public bool isNeedUpdateDirection = false;
-
+    public AudioSource weaponAudioSource;
+    
+   
 
     private void Awake()
     {
@@ -46,6 +49,7 @@ public class WeaponManager : MonoBehaviour
         weaponData = FindFirstObjectByType<WeaponData>();
         impulse = GetComponent<Impulse>();
         Brain = FindObjectOfType<CinemachineBrain>();
+        weaponAudioSource = GetComponent<AudioSource>();
         switch (kind)
         {
             default:
@@ -116,6 +120,12 @@ var squaredNumbers = numbers.Select(x => x * x);
         // Debug.Log(Time.timeScale);
     }
 
+    public void PlaySound(AudioClip audioClip)
+    {
+        weaponAudioSource.clip = audioClip;
+        weaponAudioSource.volume = AudioManager.Instance.worldvolume;
+        weaponAudioSource.Play();
+    }
 
 
     /// <summary>

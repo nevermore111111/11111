@@ -128,7 +128,7 @@ public class AttackOnGround : Attack
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
         base.ExitBehaviour(dt, toState);
-        CharacterActor.Animator.ResetTrigger(AttackOnGroundPar);
+        //CharacterActor.Animator.ResetTrigger(AttackOnGroundPar);
         ChangeWeaponState(true);
     }
 
