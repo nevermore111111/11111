@@ -5,6 +5,7 @@ using Lightbug.Utilities;
 //using MathNet.Numerics.LinearAlgebra.Solvers;
 using Rusk;
 using Sirenix.OdinInspector;
+using Sirenix.Reflection.Editor;
 using System.Collections;
 using UnityEngine;
 
@@ -75,6 +76,8 @@ namespace Lightbug.CharacterControllerPro.Demo
         protected bool wantTodenfense = false;
         protected bool isCrouched = false;
 
+        private Tween TweenToDefend;
+
         private bool isDefense;
         public bool IsDefense
         {
@@ -86,19 +89,22 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 if (CharacterActor.IsPlayer)
                 {
-                    CharacterActor.SetUpRootMotion(value, false);
-                    CharacterActor.UseRootMotion = value;
+                   
                     SetWeapon(value);
                 }
                 CharacterActor.Animator.SetBool(defensePar, value);
                 if (value && !isDefense) //刚刚进入
                 {
-                    CharacterActor.Animator.SetTrigger(startDefensePar);
-                    DOTween.Kill("Defense");
-                    DOTween.To(() => CharacterActor.Animator.GetLayerWeight(2), value =>
+                    TweenToDefend?.Kill();
+                    TweenToDefend = DOTween.To(() => CharacterActor.Animator.GetLayerWeight(2), value =>
                     {
                         CharacterActor.Animator.SetLayerWeight(2, value);
-                    }, 1f, 0.2f).SetId("Defense");
+                    }, 1f, 0.2f).SetId("Defense").OnComplete(() =>
+                    {
+                        CharacterActor.SetUpRootMotion(value,PhysicsActor.RootMotionVelocityType.SetVelocity,false);
+                        //CharacterActor.UseRootMotion = value;
+                        Debugger.Log($"{value}");
+                    });
 
                     //设置武器
                     CharacterActor.CharacterInfo.attackAndDefendInfo.ChangeDefendFun();
@@ -107,9 +113,8 @@ namespace Lightbug.CharacterControllerPro.Demo
                 }
                 else if (!value && isDefense)//刚刚出来
                 {
-                    CharacterActor.Animator.SetTrigger(endDefensePar);
-                    DOTween.Kill("Defense");
-                    DOTween.To(() => CharacterActor.Animator.GetLayerWeight(2), value =>
+                    TweenToDefend?.Kill();
+                    TweenToDefend = DOTween.To(() => CharacterActor.Animator.GetLayerWeight(2), value =>
                     {
                         CharacterActor.Animator.SetLayerWeight(2, value);
                     }, 0f, 0.5f).SetId("Defense");
@@ -1216,6 +1221,8 @@ namespace Lightbug.CharacterControllerPro.Demo
         {
             if (CharacterActor.IsPlayer)
                 JudgeEvade();
+            //if(CharacterActor.IsPlayer)
+            //Debug.Log(CharacterActor.UseRootMotion);
         }
 
         public void JudgeEvade()

@@ -80,7 +80,7 @@ public class Hitted : CharacterState
         CheckAndEnterState(weapon, hitKind, CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind);
     }
 
-    private void CheckAndEnterState(WeaponManager weapon, IAgent.HitKind hitKind,DefendKind defend)
+    private void CheckAndEnterState(WeaponManager weapon, IAgent.HitKind hitKind, DefendKind defend)
     {
         switch (defend)
         {
@@ -176,6 +176,11 @@ public class Hitted : CharacterState
             attackFrom.z = 0f;
         }
         attackFrom.Normalize();
+        if (CharacterActor.IsPlayer && CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind == DefendKind.unDefend)
+        {
+            Debugger.Log("动画幅度太大,修正下");
+            attackFrom *= 0.55f;
+        }
         CharacterActor.Animator.SetFloat("attackXFrom", attackFrom.x);
         CharacterActor.Animator.SetFloat("attackYFrom", attackFrom.z);
         CharacterActor.Animator.SetFloat("attackZFrom", attackFrom.y);

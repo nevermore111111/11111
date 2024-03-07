@@ -97,8 +97,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
         protected static string defensePar = "defense";
 
-        protected static string startDefensePar = "startDefense";
-        protected static string endDefensePar = "endDefense";
+       
 
         protected static string NormalMovementPar = "NormalMovement";
         protected static string AttackOnGroundPar = "AttackOnGround";

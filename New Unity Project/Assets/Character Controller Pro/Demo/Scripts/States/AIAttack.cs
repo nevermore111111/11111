@@ -46,6 +46,7 @@ public class AIAttack : CharacterState
             lookingDirectionParameters.target = CharacterActor.CharacterInfo.selectEnemy.transform;
         }
         onAttackStart?.Invoke();
+        CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind = DefendKind.OnlyDamage;//设置为霸体状态
     }
 
     private void AnimFun(string targetAnim)

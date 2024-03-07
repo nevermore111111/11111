@@ -58,6 +58,10 @@ public class AnimatorFunctionAI : MonoBehaviour
     }
     public void AttackEnd()
     {
+        if(characterActor.stateController.CurrentState is AIAttack) 
+        {
+            characterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind = DefendKind.unDefend;
+        }
         characterActor.Animator.speed = 1f;
         if (!characterActor.Animator.IsInTransition(0))
         {
@@ -85,10 +89,6 @@ public class AnimatorFunctionAI : MonoBehaviour
         ActiveDetectionByStringPar(activeWeaponDetect, SetWeaponDetection(true));
         currentHitIndex++;
     }
-
-    
-
-
     public void HitReStart()//int Hit = 1, string activeWeaponDetect = null
     {
         SetWeaponDirection();
