@@ -159,9 +159,9 @@ public class Hitted : CharacterState
             case DefendKind.unDefend:
                 IgnoreYAxis = true;
                 break;
-            case DefendKind.OnlyDamage:
+            case DefendKind.OnlyDamage://无所谓
                 break;
-            case DefendKind.noDamage:
+            case DefendKind.noDamage://无所谓
                 break;
         }
         //世界转换到自身
@@ -184,6 +184,32 @@ public class Hitted : CharacterState
         CharacterActor.Animator.SetFloat("attackXFrom", attackFrom.x);
         CharacterActor.Animator.SetFloat("attackYFrom", attackFrom.z);
         CharacterActor.Animator.SetFloat("attackZFrom", attackFrom.y);
+        if (CurrentDefendKind == DefendKind.perfectDefend && CharacterActor.IsPlayer)
+        {
+            Vector2 defendVector = new Vector2(attackFrom.x, attackFrom.y);
+            if (defendVector.x > 0f)//根据攻击方向象限防御
+            {
+                if (defendVector.y > 0f)
+                {
+                    CharacterActor.Animator.SetInteger(perfectDefendKind, 1);
+                }
+                else
+                {
+                    CharacterActor.Animator.SetInteger(perfectDefendKind, 4);
+                }
+            }
+            else
+            {
+                if(defendVector.y>0f)
+                {
+                    CharacterActor.Animator.SetInteger(perfectDefendKind, 2);
+                }
+                else
+                {
+                    CharacterActor.Animator.SetInteger(perfectDefendKind, 3);
+                }
+            }
+        }
     }
 
     /// <summary>
