@@ -39,7 +39,6 @@ public class AIAttack : CharacterState
         string targetAttack = ChooseAttack(attacks);
         AnimFun(targetAttack);
         canChangeState = false;
-        isAttack = false;
         if (CharacterActor.CharacterInfo.selectEnemy != null)
         {
             lookingDirectionParameters.lookingDirectionMode = LookingDirectionParameters.LookingDirectionMode.Target;
@@ -59,7 +58,7 @@ public class AIAttack : CharacterState
 
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
-        
+        isAttack = false;
     }
 
     public override void UpdateBehaviour(float dt)

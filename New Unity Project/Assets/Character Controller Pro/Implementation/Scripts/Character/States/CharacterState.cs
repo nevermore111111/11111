@@ -102,6 +102,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
         protected static string NormalMovementPar = "NormalMovement";
         protected static string AttackOnGroundPar = "AttackOnGround";
+        protected static string perfectDefendKind = "perfectDefendKind";//完美防御所用的防御状态
         private static int spAttack = -1;
 
         //可以进入空中攻击的最低限度
