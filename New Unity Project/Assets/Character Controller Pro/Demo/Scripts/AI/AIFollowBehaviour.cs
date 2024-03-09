@@ -22,7 +22,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         [SerializeField]
         Transform followTarget = null;
         [SerializeField]
-        int probabilityToIdle = 50;
+        int probabilityToIdle = 0;
         bool toIdle = false;
         float currentTimeToIdle;
         public float minTimeIdle = 1f;
@@ -64,6 +64,10 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 toIdle = true;
                 currentTimeToIdle = Random.Range(minTimeIdle, maxTimeIdle);
+            }
+            else
+            {
+                currentTimeToIdle = 0f;
             }
 
         }
@@ -117,6 +121,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             bool isDirectPath = navMeshPath.corners.Length == 2;
             if (isDirectPath && path.magnitude <= reachDistance)
             {
+                Debug.Log("进入攻击状态");
                 //进入攻击状态
                 CharacterActor.brain.SetAIBehaviour<AIAttackBehaviour>();
                 return;
@@ -124,7 +129,7 @@ namespace Lightbug.CharacterControllerPro.Demo
             if (navMeshPath.corners.Length > 1)
             {
                 SetMovementAction(path);
-                Debug.DrawLine(CharacterActor.transform.position, CharacterActor.transform.position + path,Color.red,0.5f);
+                //Debug.DrawLine(CharacterActor.transform.position, CharacterActor.transform.position + path,Color.red,0.5f);
             }
                
         }

@@ -285,7 +285,6 @@ namespace Lightbug.CharacterControllerPro.Core
             this.rootMotionVelocityType = rootMotionVelocityType;
             UpdateRootRotation = updateRootRotation;
             this.rootMotionRotationType = rootMotionRotationType;
-
         }
 
 

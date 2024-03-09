@@ -32,7 +32,6 @@ public class AttackOnGround : Attack
     {
         base.EnterBehaviour(dt, fromState);
 
-        CharacterActor.Animator.SetTrigger(AttackOnGroundPar);
         CharacterActor.SetUpRootMotion(true, RootMotionVelocityType.SetVelocity, true, RootMotionRotationType.AddRotation);
         StartCoroutine(CheckAnim());
         ChangeWeaponState(false);

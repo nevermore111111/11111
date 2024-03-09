@@ -2,6 +2,8 @@ using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
 using Rusk;
 using System;
+using System.Collections.Generic;
+using Unity.Burst;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -26,21 +28,25 @@ public class AIAttackBehaviour : CharacterAIBehaviour
     public float maxAwaitTime = 1.5f;
     private bool isAdjustPos = false;
 
+    [Tooltip("这个是这个策略的退出距离，如果大于这个距离，就退出攻击策略，进入追赶策略")]
     [SerializeField]
-    float reachDistance = 3f;
+    float reachDistance = 5f;
     AIAttackState currentAttackState;
+    public List<AIAttackData> aIAttackDatas;
 
     private float awaitTime;
-
+    private AIAttack AIAttack;
 
 
     protected override void Start()
     {
         base.Start();
+        AIAttack = CharacterActor.stateController.GetState<AIAttack>() as AIAttack;
     }
 
     public override void EnterBehaviour(float dt)
     {
+        Debug.Log("进入攻击状态");
         CanAttackOrChangeState();
         //重置时间
         awaitTime = UnityEngine.Random.Range(minAwaitTime, maxAwaitTime) + refreshTime;
@@ -48,6 +54,26 @@ public class AIAttackBehaviour : CharacterAIBehaviour
         timer = refreshTime;
         characterActions.Reset();
         isAdjustPos = false;
+        ChangeMoveLookTarget(true);
+    }
+
+    private void ChangeMoveLookTarget(bool isLookTarget)
+    {
+        if (CharacterActor.CharacterInfo.selectEnemy != null)
+        {
+            NormalMovement normalMovement = CharacterActor.stateController.GetState<NormalMovement>() as NormalMovement;
+            if (normalMovement != null)
+            {
+                if (isLookTarget)
+                {
+                    normalMovement.Looktarget(CharacterActor.CharacterInfo.selectEnemy.transform);
+                }
+                else
+                {
+                    normalMovement.LookMovementDirection();
+                }
+            }
+        }
     }
 
     // abstract (mandatory)
@@ -129,12 +155,12 @@ public class AIAttackBehaviour : CharacterAIBehaviour
         {
             return CharacterActor.CharacterInfo.selectEnemy.characterActor.CharacterInfo.attackAndDefendInfo.isAtttack;
         }
-      
+
     }
 
     // virtual (optional)
     public override void ExitBehaviour(float dt)
     {
-
+        ChangeMoveLookTarget(false);
     }
 }

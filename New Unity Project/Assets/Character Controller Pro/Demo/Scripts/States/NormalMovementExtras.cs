@@ -242,6 +242,8 @@ namespace Lightbug.CharacterControllerPro.Demo
         [Tooltip("影响防御时的减速度")]
         public float DefendGroundedDeceleration = 10f;
         public AnimationCurve DefendAngleAccelerationBoost = AnimationCurve.EaseInOut(0f, 1f, 180f, 2f);
+
+        public float DefendMinTime = 0.3f;
         
     }
 

@@ -150,7 +150,7 @@ namespace Lightbug.CharacterControllerPro.Implementation
         protected virtual void FixedUpdate()
         {
             float dt = Time.deltaTime;
-            UpdateBrainValues(0f);
+            //UpdateBrainValues(0f);
             firstUpdateFlag = true;
         }
 

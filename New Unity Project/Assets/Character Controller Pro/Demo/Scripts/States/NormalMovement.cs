@@ -89,7 +89,6 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 if (CharacterActor.IsPlayer)
                 {
-                   
                     SetWeapon(value);
                 }
                 CharacterActor.Animator.SetBool(defensePar, value);
@@ -99,11 +98,12 @@ namespace Lightbug.CharacterControllerPro.Demo
                     TweenToDefend = DOTween.To(() => CharacterActor.Animator.GetLayerWeight(2), value =>
                     {
                         CharacterActor.Animator.SetLayerWeight(2, value);
-                    }, 1f, 0.2f).SetId("Defense").OnComplete(() =>
+                    }, 1f, 0.2f).OnComplete(() =>
                     {
-                        CharacterActor.SetUpRootMotion(value,PhysicsActor.RootMotionVelocityType.SetVelocity,false);
-                        //CharacterActor.UseRootMotion = value;
-                        Debugger.Log($"{value}");
+                        if(CharacterActor.IsPlayer&&CharacterActor.stateController.CurrentState is NormalMovement)
+                        {
+                            CharacterActor.SetUpRootMotion(value, PhysicsActor.RootMotionVelocityType.SetVelocity, false);
+                        }
                     });
 
                     //设置武器
@@ -114,10 +114,18 @@ namespace Lightbug.CharacterControllerPro.Demo
                 else if (!value && isDefense)//刚刚出来
                 {
                     TweenToDefend?.Kill();
+                    CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind = DefendKind.unDefend;
+                    if (CharacterActor.IsPlayer && CharacterActor.stateController.CurrentState is NormalMovement)
+                    {
+                        CharacterActor.UseRootMotion = false;
+                    }
                     TweenToDefend = DOTween.To(() => CharacterActor.Animator.GetLayerWeight(2), value =>
                     {
                         CharacterActor.Animator.SetLayerWeight(2, value);
-                    }, 0f, 0.5f).SetId("Defense");
+                    }, 0f, 0.4f).OnComplete(() => 
+                    {
+                       
+                    });
                     CharacterActor.CharacterInfo.attackAndDefendInfo.defendEndAction?.Invoke();
                 }
                 isDefense = value;
@@ -1056,10 +1064,6 @@ namespace Lightbug.CharacterControllerPro.Demo
         public override void PostUpdateBehaviour(float dt)
         {
             base.PostUpdateBehaviour(dt);
-            //if (IsPlayer)
-            //{
-            //    LaterGrap();
-            //}
         }
 
 
@@ -1093,16 +1097,21 @@ namespace Lightbug.CharacterControllerPro.Demo
         private void HandleDefend()
         {
             //只有在地面的时候可以
-
+            
             wantTodenfense = CharacterActions.defend.value;
             if (wantTodenfense && CanDefense())
             {
                 IsDefense = true;
+                
+            }
+            else if(Time.time - CharacterActor.CharacterInfo.attackAndDefendInfo.defendStartTime < defenseParameters.DefendMinTime)//正常的防御最短持续时间
+            {
+                IsDefense = true;
+                //IsDefense = false;
             }
             else
             {
                 IsDefense = false;
-                //IsDefense = false;
             }
             if (IsDefense)
             {
@@ -1158,6 +1167,16 @@ namespace Lightbug.CharacterControllerPro.Demo
                 Crouch(dt);
             else
                 StandUp(dt);
+        }
+
+        public void Looktarget(Transform target)
+        {
+            lookingDirectionParameters.lookingDirectionMode = LookingDirectionParameters.LookingDirectionMode.Target;
+            lookingDirectionParameters.target = target;
+        }
+        public void LookMovementDirection()
+        {
+            lookingDirectionParameters.lookingDirectionMode = LookingDirectionParameters.LookingDirectionMode.Movement;
         }
 
         void Crouch(float dt)

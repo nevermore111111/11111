@@ -21,6 +21,13 @@ public class AIAttack : CharacterState
     public bool isAttack;
     public bool isReadyToAttack;
     public bool canChangeState =false;
+    [Tooltip("下一次攻击")]
+    /// <summary>
+    /// 设置这个属性，下次进入攻击时必然是这个攻击
+    /// </summary>
+    public string NextAttack;
+
+
 
     public Action onAttackStart;
     public Action onAttackEnd;
@@ -35,9 +42,11 @@ public class AIAttack : CharacterState
     }
     public override void EnterBehaviour(float dt, CharacterState fromState)
     {
-        Debug.Log("开始");
-        string targetAttack = ChooseAttack(attacks);
-        AnimFun(targetAttack);
+        if(NextAttack.IsNullOrEmpty())
+        {
+            NextAttack = ChooseAttack(attacks);
+        }
+        AnimFun(NextAttack);
         canChangeState = false;
         if (CharacterActor.CharacterInfo.selectEnemy != null)
         {
@@ -60,11 +69,11 @@ public class AIAttack : CharacterState
     public override void ExitBehaviour(float dt, CharacterState toState)
     {
         isAttack = false;
+        NextAttack = null;
     }
 
     public override void UpdateBehaviour(float dt)
     {
-        GetSelectAttack();
         BaseProcessVelocity(dt);
         BaseProcessRotation(dt);
         if(isAttack ==false)
@@ -72,15 +81,6 @@ public class AIAttack : CharacterState
             BaseProcessRotation(dt);
         }
     }
-
-    private void GetSelectAttack()
-    {
-        if (isReadyToAttack)
-        {
-            CharacterStateController.EnqueueTransition<AIAttack>();
-        }
-    }
-
     public override void CheckExitTransition()
     {
         if (canChangeState)
@@ -142,4 +142,5 @@ public class AIAttackData
 {
     public string attackName;
     public int attackChooseWeight;
+    public float attackDistance;
 }

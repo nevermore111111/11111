@@ -378,7 +378,6 @@ namespace Lightbug.CharacterControllerPro.Implementation
 
                 if (CanCurrentStateOverrideAnimatorController)
                     Animator.runtimeAnimatorController = CurrentState.RuntimeAnimatorController;
-
             }
 
             if (CharacterActor == null)
