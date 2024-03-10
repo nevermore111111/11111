@@ -569,6 +569,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.12591687
+        functionName: AttackPre
+        data: Attack1
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.16595136
         functionName: HitStart
         data: Attack1
@@ -578,6 +585,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.17882688
         functionName: HitEnd
+        data: Attack1
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.33940262
+        functionName: AttackPre
         data: Attack1
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -597,22 +611,36 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5951359
+      - time: 0.56658435
+        functionName: AttackPre
+        data: Attack1
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.60577416
         functionName: HitStart
         data: Attack1
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.61659515
+      - time: 0.629893
         functionName: HitEnd
         data: Attack1
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.78397715
+      - time: 0.65709543
         functionName: AttackEnd
+        data: Attack1
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9488609
+        functionName: AutoEnd
         data: Attack1
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
