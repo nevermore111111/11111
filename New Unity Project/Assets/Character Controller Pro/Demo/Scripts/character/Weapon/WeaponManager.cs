@@ -38,8 +38,8 @@ public class WeaponManager : MonoBehaviour
     WeaponData weaponData;
     public bool isNeedUpdateDirection = false;
     public AudioSource weaponAudioSource;
-    
-   
+
+
 
     private void Awake()
     {
@@ -122,6 +122,15 @@ var squaredNumbers = numbers.Select(x => x * x);
 
     public void PlaySound(AudioClip audioClip)
     {
+        weaponAudioSource.clip = audioClip;
+        weaponAudioSource.volume = AudioManager.Instance.worldvolume;
+        weaponAudioSource.Play();
+    }
+
+    public void PlaySound(string clipName)
+    {
+        AudioClip audioClip;
+        AudioManager.Instance.audioClips.TryGetValue(clipName, out audioClip);
         weaponAudioSource.clip = audioClip;
         weaponAudioSource.volume = AudioManager.Instance.worldvolume;
         weaponAudioSource.Play();
@@ -229,7 +238,7 @@ var squaredNumbers = numbers.Select(x => x * x);
     /// </summary>
     public void Impluse()
     {
-        Debug.Log("暂时不播放震动");  
+        Debug.Log("暂时不播放震动");
         return;
         if (weaponOwner is MainCharacter)
         {
@@ -237,7 +246,7 @@ var squaredNumbers = numbers.Select(x => x * x);
             //设置当前的攻击数据
             weaponNum = SetCurrentWeaponNum(weaponNum);
             Vector3 targetShakeDirection;//每次震动时使用的中间变量
-            ShakeChange(weaponNum,out targetShakeDirection);
+            ShakeChange(weaponNum, out targetShakeDirection);
 
             if (weaponData.isUseDotweenShake)
             {
@@ -279,14 +288,14 @@ var squaredNumbers = numbers.Select(x => x * x);
         if (weaponData.onlyUseVirticalShake)
         {
             Debug.Log("当前只使用竖直方向的震动");
-            targetShakeDirection = Vector3.Project(WeaponWorldDirection,Brain.transform.up).normalized;
+            targetShakeDirection = Vector3.Project(WeaponWorldDirection, Brain.transform.up).normalized;
             //Debug.DrawLine(Brain.transform.position, Brain.transform.position + targetShakeDirection, Color.blue, 1f);
         }
         if (weaponData.PrintHit)
         {
             Debug.Log($"攻击力度：{weaponOwner.HitStrength}，震动力度{weaponNum.Strength}，震动频率{weaponNum.Frequence}，震动时间{weaponNum.Duration}");
         }
-        Debug.DrawLine(Brain.transform.position, Brain.transform.position+targetShakeDirection);
+        Debug.DrawLine(Brain.transform.position, Brain.transform.position + targetShakeDirection);
 
     }
 

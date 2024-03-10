@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource audioSource;
 
-    private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
+    public Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 
     [Range(0,1f)]
     public float worldvolume = 1f;

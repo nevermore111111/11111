@@ -75,7 +75,7 @@ public abstract class CharacterInfo : MonoBehaviour, IAgent
     /// </summary>
     /// <param name="damage"></param>
     /// <param name="pos"></param>
-    /// <param name="weapon"></param>
+    /// <param name="weapon">这个是别人的武器</param>
     /// <param name="collider">受击位置</param>
     /// <param name="hit"></param>
     virtual public void GetDamage(float damage, Vector3 pos, WeaponManager weapon, Collider collider, IAgent.HitKind hit = IAgent.HitKind.ground)

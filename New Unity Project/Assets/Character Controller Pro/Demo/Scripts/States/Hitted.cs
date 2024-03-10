@@ -22,7 +22,7 @@ public class Hitted : CharacterState
     public float HittedForce = 10f;
     public float HittedDrag = 2f;
     public float HittedMixWeight = 0.5f;
-    public bool AlwaysPerfectDefend = false;
+    //public bool AlwaysPerfectDefend = false;
 
     override protected void Start()
     {
@@ -77,16 +77,9 @@ public class Hitted : CharacterState
         if (CharacterActor.IsPlayer)
             HittedBack(weapon, true);
         Debug.Log("击退？");
-        if (!AlwaysPerfectDefend)
-        {
-            SetAnimationParameters(weapon.WeaponWorldDirection, CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind);//动画参数
-            CheckAndEnterState(weapon, hitKind, CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind);
-        }
-        else
-        {
-            SetAnimationParameters(weapon.WeaponWorldDirection, DefendKind.perfectDefend);
-            CheckAndEnterState(weapon, hitKind, DefendKind.perfectDefend);
-        }
+
+        SetAnimationParameters(weapon.WeaponWorldDirection, DefendKind.perfectDefend);
+        CheckAndEnterState(weapon, hitKind, DefendKind.perfectDefend);
 
     }
 
@@ -97,15 +90,18 @@ public class Hitted : CharacterState
             case DefendKind.unDefend:
                 CharacterStateController.EnqueueTransition<Hitted>();
                 CharacterActor.Animator.CrossFadeInFixedTime("Hitted.HittedOnGround", 0.1f, 0, 0.1f);
+
                 //未防御
                 break;
             case DefendKind.normalDefend:
                 CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.StableGrounded", 0.05f, 0, 0f);
+                weapon.PlaySound("normal");
                 //普通
                 break;
             case DefendKind.perfectDefend:
                 CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.PerfectDefend", 0.1f, 0, 0.08f);
                 CharacterActor.Animator.ResetTrigger(defendOnce);
+                weapon.PlaySound("perfect");
                 //完美
                 break;
             case DefendKind.OnlyDamage:
