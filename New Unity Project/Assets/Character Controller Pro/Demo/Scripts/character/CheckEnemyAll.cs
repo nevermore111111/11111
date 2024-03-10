@@ -23,6 +23,7 @@ public class CheckEnemyAll : MonoBehaviour
     private void Start()
     {
         ResetEnemyTag();
+        Group = CharacterActor.GetComponentInChildren<CinemachineTargetGroup>();
     }
 
     /// <summary>
@@ -32,6 +33,13 @@ public class CheckEnemyAll : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         AttackReceive attackReceive;
+        if (other.gameObject.CompareTag(EnemyTag) && EnemyTag == "enemy")
+        {
+            Debug.Log("");
+            Debug.Log(other.TryGetComponent(out attackReceive));
+            if (other.TryGetComponent(out attackReceive))
+                Debug.Log(attackReceive.isNormalReceive());
+        }
         if (other.gameObject.CompareTag(EnemyTag) && other.TryGetComponent(out attackReceive) == true && attackReceive.isNormalReceive() && !CharacterActor.CharacterInfo.enemies.Contains(attackReceive.CharacterInfo))
         {
             CheckTarget(attackReceive, TargetGroupWeight);
@@ -129,16 +137,30 @@ public class CheckEnemyAll : MonoBehaviour
                         RemoveTargetWeightEqualZero();
                     });
                 }
+                else
+                {
+                    Group.AddMember(attackReceive.CharacterInfo.transform, 0, 0.5f);
+                    targetTransform = Group.FindMember(attackReceive.CharacterInfo.transform);
+                    DOTween.To(() => Group.m_Targets[targetTransform].weight, value =>
+                    {
+                        Group.m_Targets[targetTransform].weight = value;
+                    }, targetWeight, ChangeTargetWeightDuration)
+                    .SetId("CinemachineTargetGroup").OnComplete(() =>
+                    {
+                        RemoveTargetWeightEqualZero();
+                    });
+                }
             }
         }
 
     }
 
     /// <summary>
-    /// 移除权重等于0的物体
+    /// 移除权重等于0的物体,暂时不移除
     /// </summary>
     private void RemoveTargetWeightEqualZero()
     {
+        return;
         //检测是否正在调整，如果正在调整，那我就不再去删除，如果没有在调整的，我去检查空的成员或者权重为零的成员，把他们移除
         if (!DOTween.IsTweening("CinemachineTargetGroup"))
         {

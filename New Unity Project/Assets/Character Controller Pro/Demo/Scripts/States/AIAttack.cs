@@ -26,6 +26,7 @@ public class AIAttack : CharacterState
     /// 设置这个属性，下次进入攻击时必然是这个攻击
     /// </summary>
     public string NextAttack;
+    public Action attackPre;
 
 
 
@@ -70,6 +71,7 @@ public class AIAttack : CharacterState
     {
         isAttack = false;
         NextAttack = null;
+        canChangeState = false;
     }
 
     public override void UpdateBehaviour(float dt)
@@ -85,7 +87,7 @@ public class AIAttack : CharacterState
     {
         if (canChangeState)
         {
-            CharacterStateController.EnqueueTransition<NormalMovement>();
+            CharacterStateController.EnqueueTransition<AIAttack>();
         }
     }
 

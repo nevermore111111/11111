@@ -45,7 +45,6 @@ public class AnimatorFunctionAI : MonoBehaviour
         WeaponData = FindAnyObjectByType<WeaponData>();
         characterActor = GetComponentInParent<CharacterActor>();
         _characterInfo = characterActor.CharacterInfo;
-        //
     }
     private void Start()
     {
@@ -122,20 +121,22 @@ public class AnimatorFunctionAI : MonoBehaviour
         characterActor.UseRootMotion = true;
         //更新攻击名称和配置表
         ResetCurrentInfo(attackName);
-
-        //开始一次攻击
-        //Attack.isNextAttack = false;//这个代表已经执行了下一次攻击
         aIAttack.isAttack = true;
-        //characterActor.Animator.SetBool("attack", true);
-        aIAttack.canChangeState = false;
-        //characterActor.Animator.SetInteger("specialAttack", 0);
         ResetAttackRootAndrotate();
     }
 
+    /// <summary>
+    /// 要开始打击的前几帧
+    /// </summary>
+    public void AttackPre()
+    {
+        aIAttack.attackPre?.Invoke();
+    }
 
-
-
-
+    public void AutoEnd()
+    {
+        aIAttack.canChangeState = true;
+    }
 
 
 

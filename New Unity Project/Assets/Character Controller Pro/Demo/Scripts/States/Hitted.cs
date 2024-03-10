@@ -22,6 +22,8 @@ public class Hitted : CharacterState
     public float HittedForce = 10f;
     public float HittedDrag = 2f;
     public float HittedMixWeight = 0.5f;
+    public bool AlwaysPerfectDefend = false;
+
     override protected void Start()
     {
         base.Start();
@@ -73,11 +75,19 @@ public class Hitted : CharacterState
     public void GetHitted(WeaponManager weapon, IAgent.HitKind hitKind)
     {
         if (CharacterActor.IsPlayer)
-            Debug.LogError("主角受击了");
-        HittedBack(weapon, true);
+            HittedBack(weapon, true);
         Debug.Log("击退？");
-        SetAnimationParameters(weapon.WeaponWorldDirection, CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind);//动画参数
-        CheckAndEnterState(weapon, hitKind, CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind);
+        if (!AlwaysPerfectDefend)
+        {
+            SetAnimationParameters(weapon.WeaponWorldDirection, CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind);//动画参数
+            CheckAndEnterState(weapon, hitKind, CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind);
+        }
+        else
+        {
+            SetAnimationParameters(weapon.WeaponWorldDirection, DefendKind.perfectDefend);
+            CheckAndEnterState(weapon, hitKind, DefendKind.perfectDefend);
+        }
+
     }
 
     private void CheckAndEnterState(WeaponManager weapon, IAgent.HitKind hitKind, DefendKind defend)
@@ -94,15 +104,12 @@ public class Hitted : CharacterState
                 //普通
                 break;
             case DefendKind.perfectDefend:
-                Debug.Log("bofang");
-                CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.PerfectDefend", 0.15f, 0, 0f);
+                CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.PerfectDefend", 0.1f, 0, 0.08f);
                 CharacterActor.Animator.ResetTrigger(defendOnce);
-                //CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.Defend.PerfectDefend 1", 0.1f, 0, 0.1f);
                 //完美
                 break;
             case DefendKind.OnlyDamage:
                 Debug.LogError("这个地方需要覆写动画");//这个是小受击
-                //CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.Defend.perfectDefend", 0.1f, 0, 0.1f);
                 //霸体
                 break;
             case DefendKind.noDamage:
@@ -184,8 +191,7 @@ public class Hitted : CharacterState
         attackFrom.Normalize();
         if (CharacterActor.IsPlayer && CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind == DefendKind.unDefend)
         {
-            Debugger.Log("动画幅度太大,修正下");
-            attackFrom *= 0.55f;
+            attackFrom *= 0.55f;//修正动画
         }
         CharacterActor.Animator.SetFloat("attackXFrom", attackFrom.x);
         CharacterActor.Animator.SetFloat("attackYFrom", attackFrom.z);
@@ -198,22 +204,22 @@ public class Hitted : CharacterState
             {
                 if (defendVector.y > 0f)
                 {
-                    CharacterActor.Animator.SetFloat(perfectDefendKind, 1);
+                    CharacterActor.Animator.SetFloat(perfectDefendKind, 0.85f);//不是整数是因为动画不适合
                 }
                 else
                 {
-                    CharacterActor.Animator.SetFloat(perfectDefendKind, 4);
+                    CharacterActor.Animator.SetFloat(perfectDefendKind, 4f);
                 }
             }
             else
             {
-                if(defendVector.y>0f)
+                if (defendVector.y > 0f)
                 {
-                    CharacterActor.Animator.SetFloat(perfectDefendKind, 2);
+                    CharacterActor.Animator.SetFloat(perfectDefendKind, 2.25f);
                 }
                 else
                 {
-                    CharacterActor.Animator.SetFloat(perfectDefendKind, 3);
+                    CharacterActor.Animator.SetFloat(perfectDefendKind, 3f);
                 }
             }
         }

@@ -6,8 +6,10 @@ using Lightbug.Utilities;
 using Rusk;
 using Sirenix.OdinInspector;
 using Sirenix.Reflection.Editor;
+using System;
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Lightbug.CharacterControllerPro.Demo
 {
@@ -89,18 +91,32 @@ namespace Lightbug.CharacterControllerPro.Demo
             {
                 if (CharacterActor.IsPlayer)
                 {
-                    SetWeapon(value);
+                    //SetWeapon(value);
                 }
                 CharacterActor.Animator.SetBool(defensePar, value);
                 if (value && !isDefense) //刚刚进入
                 {
+
+                    if (CharacterActor.IsPlayer)
+                    {
+                        SetWeapon(value);
+                        AIAttack enemyAttack = CharacterActor.CharacterInfo.selectEnemy?.characterActor.stateController.GetState<AIAttack>() as AIAttack;
+                        if (enemyAttack != null)
+                        {
+                            enemyAttack.attackPre += EnemyPreAttack;
+                        }
+                    }
                     TweenToDefend?.Kill();
+                    if (CharacterActor.CharacterInfo.selectEnemy != null)
+                    {
+                        Looktarget(CharacterActor.CharacterInfo.selectEnemy.transform);
+                    }
                     TweenToDefend = DOTween.To(() => CharacterActor.Animator.GetLayerWeight(2), value =>
                     {
                         CharacterActor.Animator.SetLayerWeight(2, value);
                     }, 1f, 0.2f).OnComplete(() =>
                     {
-                        if(CharacterActor.IsPlayer&&CharacterActor.stateController.CurrentState is NormalMovement)
+                        if (CharacterActor.IsPlayer && CharacterActor.stateController.CurrentState is NormalMovement)
                         {
                             CharacterActor.SetUpRootMotion(value, PhysicsActor.RootMotionVelocityType.SetVelocity, false);
                         }
@@ -113,8 +129,17 @@ namespace Lightbug.CharacterControllerPro.Demo
                 }
                 else if (!value && isDefense)//刚刚出来
                 {
+                    if (CharacterActor.IsPlayer)
+                    {
+                        AIAttack enemyAttack = CharacterActor.CharacterInfo.selectEnemy?.characterActor.stateController.GetState<AIAttack>() as AIAttack;
+                        if (enemyAttack != null)
+                        {
+                            enemyAttack.attackPre -= EnemyPreAttack;
+                        }
+                    }
                     TweenToDefend?.Kill();
                     CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind = DefendKind.unDefend;
+                    LookMovementDirection();
                     if (CharacterActor.IsPlayer && CharacterActor.stateController.CurrentState is NormalMovement)
                     {
                         CharacterActor.UseRootMotion = false;
@@ -122,9 +147,9 @@ namespace Lightbug.CharacterControllerPro.Demo
                     TweenToDefend = DOTween.To(() => CharacterActor.Animator.GetLayerWeight(2), value =>
                     {
                         CharacterActor.Animator.SetLayerWeight(2, value);
-                    }, 0f, 0.4f).OnComplete(() => 
+                    }, 0f, 0.4f).OnComplete(() =>
                     {
-                       
+
                     });
                     CharacterActor.CharacterInfo.attackAndDefendInfo.defendEndAction?.Invoke();
                 }
@@ -132,7 +157,13 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
         }
 
-
+        private void EnemyPreAttack()
+        {
+            if (IsDefense)
+            {
+                CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.StableGrounded", 0.1f);
+            }
+        }
 
         //public PlanarMovementParameters.PlanarMovementProperties currentMotion = new PlanarMovementParameters.PlanarMovementProperties();
         bool reducedAirControlFlag = false;
@@ -1059,6 +1090,15 @@ namespace Lightbug.CharacterControllerPro.Demo
             HandleSize(dt);
             HandleVelocity(dt);
             HandleRotation(dt);
+            HandleWeapon(dt);
+        }
+
+        private void HandleWeapon(float dt)
+        {
+            if (CharacterActor.IsPlayer && !isCrouched && !isDefense && CharacterActor.IsGrounded && CharacterActions.movement.value != Vector2.zero)//没有下蹲，也没有防御，并且想要正常移动
+            {
+                SetWeapon(false);
+            }
         }
 
         public override void PostUpdateBehaviour(float dt)
@@ -1072,7 +1112,6 @@ namespace Lightbug.CharacterControllerPro.Demo
             base.PreCharacterSimulation(dt);
             // Pre/PostCharacterSimulation methods are useful to update all the Animator parameters. 
             // Why? Because the CharacterActor component will end up modifying the velocity of the actor.
-
         }
 
         public override void PostCharacterSimulation(float dt)
@@ -1093,21 +1132,31 @@ namespace Lightbug.CharacterControllerPro.Demo
             HandleCrouch(dt);
             HandleDefend();
         }
-
+        private bool previousDefendState = false;
         private void HandleDefend()
         {
             //只有在地面的时候可以
-            
+            //我需要他再次按下的时候，刷新进入防御的时间
             wantTodenfense = CharacterActions.defend.value;
-            if (wantTodenfense && CanDefense())
+            if (CanDefense())
             {
-                IsDefense = true;
-                
-            }
-            else if(Time.time - CharacterActor.CharacterInfo.attackAndDefendInfo.defendStartTime < defenseParameters.DefendMinTime)//正常的防御最短持续时间
-            {
-                IsDefense = true;
-                //IsDefense = false;
+                if (wantTodenfense)
+                {
+                    IsDefense = true;
+                    if (previousDefendState == false)
+                    {
+                        //上一帧的防御状态
+                        CharacterActor.CharacterInfo.attackAndDefendInfo.defendStartTime = Time.time;//上一帧没防御
+                    }
+                }
+                else if (Time.time - CharacterActor.CharacterInfo.attackAndDefendInfo.defendStartTime < defenseParameters.DefendMinTime)//正常的防御最短持续时间
+                {
+                    IsDefense = true;
+                }
+                else
+                {
+                    IsDefense = false;
+                }
             }
             else
             {
@@ -1229,6 +1278,14 @@ namespace Lightbug.CharacterControllerPro.Demo
                 {
                     weapon.gameObject.SetActive(value);
                 }
+            }
+            if (value)
+            {
+                CharacterActor.Animator.SetFloat(takeWeapon, 1f);
+            }
+            else
+            {
+                CharacterActor.Animator.SetFloat(takeWeapon, 0f);
             }
         }
 
