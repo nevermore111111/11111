@@ -28,8 +28,9 @@ public class AttackAndDefendInfo
 
     public async void ChangeDefendFun()
     {
+        return;
         float thisDefendStartTime = Time.time;
-        currentDenfendKind = DefendKind.perfectDefend;//把这个当前防御状态改成完美状态
+        //currentDenfendKind = DefendKind.perfectDefend;//把这个当前防御状态改成完美状态
         await UniTask.Delay(perfectDefendTime);
         if (thisDefendStartTime == defendStartTime && currentDenfendKind == DefendKind.perfectDefend)
         {

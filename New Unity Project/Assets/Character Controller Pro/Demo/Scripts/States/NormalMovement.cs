@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Implementation;
@@ -79,6 +80,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         protected bool isCrouched = false;
 
         private Tween TweenToDefend;
+        bool EnterPerFectDefend = false;
 
         private bool isDefense;
         public bool IsDefense
@@ -157,22 +159,47 @@ namespace Lightbug.CharacterControllerPro.Demo
             }
         }
 
-        private void EnemyPreAttack()
+        async void EnemyPreAttack(Vector3 WorldAttackDirection)
         {
-            if (IsDefense)
-            {
-                switch (CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind)
-                {
-                    case DefendKind.perfectDefend:
-                        //这里播放完美防御
-                        Debug.Log("//这里播放完美防御");
-                        break;
-                    case DefendKind.normalDefend:
-                        CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.StableGrounded", 0.1f);
-                        break;
-                }
+            //我在那个人快要攻击的时候增加一个状态，这个状态后，进入的防御都会是完美防御
+            //并且在一段时间后移除这个buff
+            //接下来进入的所有都是完美
+          
+            Vector3 attackFrom = this.transform.InverseTransformDirection(-WorldAttackDirection);
+            attackFrom.z = 0f;
+      
+            //我这里直接计算出来，如果后面用到了完美防御，那么我会直接
+            //修改一下整体逻辑。只有在这个之后进入的防御，才会是完美防御。
+            attackFrom.Normalize();
 
+            Vector2 defendVector = (Vector2)attackFrom;
+            float targetNum;
+            if (defendVector.x > 0f)//根据攻击方向象限防御
+            {
+                if (defendVector.y > 0f)
+                {
+                    targetNum = 1f;
+                }
+                else
+                {
+                    targetNum = 4f;
+                }
             }
+            else
+            {
+                if (defendVector.y > 0f)
+                {
+                    targetNum = 2f;
+                }
+                else
+                {
+                    targetNum = 3f;
+                }
+            }
+            CharacterActor.Animator.CrossFadeInFixedTime("Base Layer.NormalMovement.PerfectDefend.perfectDefend_" + targetNum, 0.15f, 0, 0f);
+            EnterPerFectDefend = true;
+            await UniTask.Delay(200);
+            EnterPerFectDefend = false;
         }
 
         //public PlanarMovementParameters.PlanarMovementProperties currentMotion = new PlanarMovementParameters.PlanarMovementProperties();

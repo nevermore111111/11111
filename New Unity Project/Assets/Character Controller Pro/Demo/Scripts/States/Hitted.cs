@@ -98,9 +98,8 @@ public class Hitted : CharacterState
                 //普通
                 break;
             case DefendKind.perfectDefend:
-                //CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.PerfectDefend", 0.1f, 0, 0.08f);
                 float targetNum = CharacterActor.Animator.GetFloat(perfectDefendKind);
-                CharacterActor.Animator.CrossFadeInFixedTime("Base Layer.NormalMovement.PerfectDefend.perfectDefend_" + targetNum, 0.1f, 0, 0.08f);
+                //CharacterActor.Animator.CrossFadeInFixedTime("Base Layer.NormalMovement.PerfectDefend.perfectDefend_" + targetNum, 0.1f, 0, 0.08f);
                 CharacterActor.Animator.ResetTrigger(defendOnce);
                 weapon.PlaySound("perfect");
                 //完美

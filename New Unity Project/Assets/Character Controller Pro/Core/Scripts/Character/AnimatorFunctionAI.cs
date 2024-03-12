@@ -130,8 +130,12 @@ public class AnimatorFunctionAI : MonoBehaviour
     /// </summary>
     public void AttackPre()
     {
+        SetWeaponDirection();
         Debug.LogError(aIAttack.attackPre == null);
-        aIAttack.attackPre?.Invoke();
+        aIAttack.attackPre?.Invoke(weaponManagers.FirstOrDefault(manager => { return manager.isActiveAndEnabled == true; }).WeaponWorldDirection);//传入武器世界坐标
+
+        //我这里直接计算出来，如果后面用到了完美防御，那么我会直接
+        //修改一下整体逻辑。只有在这个之后进入的防御，才会是完美防御。
     }
 
     public void AutoEnd()

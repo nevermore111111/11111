@@ -26,7 +26,7 @@ public class AIAttack : CharacterState
     /// 设置这个属性，下次进入攻击时必然是这个攻击
     /// </summary>
     public string NextAttack;
-    public Action attackPre;
+    public Action<Vector3> attackPre;
 
 
 
