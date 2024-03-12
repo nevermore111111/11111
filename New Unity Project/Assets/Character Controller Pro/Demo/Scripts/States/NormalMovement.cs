@@ -161,7 +161,17 @@ namespace Lightbug.CharacterControllerPro.Demo
         {
             if (IsDefense)
             {
-                CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.StableGrounded", 0.1f);
+                switch (CharacterActor.CharacterInfo.attackAndDefendInfo.currentDenfendKind)
+                {
+                    case DefendKind.perfectDefend:
+                        //这里播放完美防御
+                        Debug.Log("//这里播放完美防御");
+                        break;
+                    case DefendKind.normalDefend:
+                        CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.StableGrounded", 0.1f);
+                        break;
+                }
+
             }
         }
 

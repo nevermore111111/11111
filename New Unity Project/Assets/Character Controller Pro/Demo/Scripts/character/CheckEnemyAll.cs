@@ -3,6 +3,7 @@ using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CheckEnemyAll : MonoBehaviour
@@ -33,13 +34,13 @@ public class CheckEnemyAll : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         AttackReceive attackReceive;
-        if (other.gameObject.CompareTag(EnemyTag) && EnemyTag == "enemy")
-        {
-            Debug.Log("");
-            Debug.Log(other.TryGetComponent(out attackReceive));
-            if (other.TryGetComponent(out attackReceive))
-                Debug.Log(attackReceive.isNormalReceive());
-        }
+        //if (other.gameObject.CompareTag(EnemyTag) && EnemyTag == "enemy")
+        //{
+        //    Debug.Log("");
+        //    Debug.Log(other.TryGetComponent(out attackReceive));
+        //    if (other.TryGetComponent(out attackReceive))
+        //        Debug.Log(attackReceive.isNormalReceive());
+        //}
         if (other.gameObject.CompareTag(EnemyTag) && other.TryGetComponent(out attackReceive) == true && attackReceive.isNormalReceive() && !CharacterActor.CharacterInfo.enemies.Contains(attackReceive.CharacterInfo))
         {
             CheckTarget(attackReceive, TargetGroupWeight);
@@ -95,6 +96,18 @@ public class CheckEnemyAll : MonoBehaviour
             {
                 //非主角移除这个人
                 CharacterActor.CharacterInfo.enemies.Remove(attackReceive.CharacterInfo);
+                if (CharacterActor.CharacterInfo.selectEnemy == attackReceive.CharacterInfo) //是这个人
+                {
+                    if (CharacterActor.CharacterInfo.enemies.Count > 0)
+                    {
+                        CharacterActor.CharacterInfo.selectEnemy = CharacterActor.CharacterInfo.enemies.OrderBy
+                            ((_) => { return (_.characterActor.transform.position - CharacterActor.transform.position).sqrMagnitude; }).FirstOrDefault();
+                    }
+                    else
+                    {
+                        CharacterActor.CharacterInfo.selectEnemy = null;
+                    }
+                }
             }
             //如果是主角需要去逐渐修改权重，到达0的时候去移除
             else if (CharacterActor.IsPlayer && Group != null)
@@ -119,7 +132,14 @@ public class CheckEnemyAll : MonoBehaviour
         {
             //把目标增加到自身敌人列表中
             if (!CharacterActor.CharacterInfo.enemies.Contains(attackReceive.CharacterInfo))
+            {
                 CharacterActor.CharacterInfo.enemies.Add(attackReceive.CharacterInfo);
+                if (CharacterActor.CharacterInfo.selectEnemy == null)
+                {
+                    CharacterActor.CharacterInfo.selectEnemy = attackReceive.CharacterInfo;
+                }
+            }
+
             //如果是主角需要去修改摄像机
             if (CharacterActor.IsPlayer && Group != null)
             {
