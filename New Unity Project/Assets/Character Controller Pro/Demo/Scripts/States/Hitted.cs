@@ -3,7 +3,6 @@ using DG.Tweening;
 using Lightbug.CharacterControllerPro.Core;
 using Lightbug.CharacterControllerPro.Demo;
 using Lightbug.CharacterControllerPro.Implementation;
-using OfficeOpenXml.Drawing.Style.Fill;
 using Rusk;
 using UnityEngine;
 
@@ -99,7 +98,9 @@ public class Hitted : CharacterState
                 //普通
                 break;
             case DefendKind.perfectDefend:
-                CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.PerfectDefend", 0.1f, 0, 0.08f);
+                //CharacterActor.Animator.CrossFadeInFixedTime("NormalMovement.PerfectDefend", 0.1f, 0, 0.08f);
+                float targetNum = CharacterActor.Animator.GetFloat(perfectDefendKind);
+                CharacterActor.Animator.CrossFadeInFixedTime("Base Layer.NormalMovement.PerfectDefend.perfectDefend_" + targetNum, 0.1f, 0, 0.08f);
                 CharacterActor.Animator.ResetTrigger(defendOnce);
                 weapon.PlaySound("perfect");
                 //完美
@@ -200,7 +201,7 @@ public class Hitted : CharacterState
             {
                 if (defendVector.y > 0f)
                 {
-                    CharacterActor.Animator.SetFloat(perfectDefendKind, 0.85f);//不是整数是因为动画不适合
+                    CharacterActor.Animator.SetFloat(perfectDefendKind, 1f);//不是整数是因为动画不适合
                 }
                 else
                 {
@@ -211,7 +212,7 @@ public class Hitted : CharacterState
             {
                 if (defendVector.y > 0f)
                 {
-                    CharacterActor.Animator.SetFloat(perfectDefendKind, 2.25f);
+                    CharacterActor.Animator.SetFloat(perfectDefendKind, 2f);
                 }
                 else
                 {

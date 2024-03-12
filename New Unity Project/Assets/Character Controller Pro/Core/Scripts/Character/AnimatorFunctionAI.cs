@@ -130,6 +130,7 @@ public class AnimatorFunctionAI : MonoBehaviour
     /// </summary>
     public void AttackPre()
     {
+        Debug.LogError(aIAttack.attackPre == null);
         aIAttack.attackPre?.Invoke();
     }
 

@@ -5,9 +5,7 @@ using UnityEngine.AI;
 using Lightbug.CharacterControllerPro.Implementation;
 using Lightbug.Utilities;
 using Lightbug.CharacterControllerPro.Core;
-using Unity.VisualScripting;
-using Sirenix.OdinInspector.Editor.Drawers;
-using UnityEditor.Build.Pipeline;
+
 
 namespace Lightbug.CharacterControllerPro.Demo
 {
