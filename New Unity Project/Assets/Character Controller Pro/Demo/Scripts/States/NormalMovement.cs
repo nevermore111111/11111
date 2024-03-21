@@ -102,7 +102,8 @@ namespace Lightbug.CharacterControllerPro.Demo
                     if (CharacterActor.IsPlayer)
                     {
                         SetWeapon(value);
-                        AIAttack enemyAttack = CharacterActor.CharacterInfo.selectEnemy?.characterActor.stateController.GetState<AIAttack>() as AIAttack;
+                        AIAttack enemyAttack = null; 
+                        CharacterActor.CharacterInfo.selectEnemy?.characterActor.stateController.TryState(out enemyAttack);
                         if (enemyAttack != null)
                         {
                             enemyAttack.attackPre += EnemyPreAttack;

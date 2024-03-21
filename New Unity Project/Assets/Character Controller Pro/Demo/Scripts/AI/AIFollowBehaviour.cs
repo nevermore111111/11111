@@ -25,6 +25,7 @@ namespace Lightbug.CharacterControllerPro.Demo
         float currentTimeToIdle;
         public float minTimeIdle = 1f;
         public float maxTimeIdle = 2f;
+        public bool  isEnterAttack = true;
 
 
         [Tooltip("Desired distance to the target. if the distance to the target is less than this value the character will not move.")]
@@ -119,8 +120,8 @@ namespace Lightbug.CharacterControllerPro.Demo
             bool isDirectPath = navMeshPath.corners.Length == 2;
             if (isDirectPath && path.magnitude <= reachDistance)
             {
-                Debug.Log("进入攻击状态");
                 //进入攻击状态
+                if(isEnterAttack)
                 CharacterActor.brain.SetAIBehaviour<AIAttackBehaviour>();
                 return;
             }

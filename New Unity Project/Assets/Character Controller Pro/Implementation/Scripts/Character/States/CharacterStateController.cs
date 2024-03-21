@@ -116,6 +116,10 @@ namespace Lightbug.CharacterControllerPro.Implementation
             return GetState(stateName);
         }
 
+        public void TryState<T1>(out T1 targetState) where T1 : CharacterState 
+        {
+            targetState = GetState<T1>() as T1;
+        }
         /// <summary>
         /// Adds a particular state to the transition state queue (as a potential transition). The state machine will eventually check if the transition is accepted or rejected 
         /// by the target state (CheckEnterTransition). Call this method from within the CheckExitTransition method. 
